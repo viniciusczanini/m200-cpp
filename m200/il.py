@@ -104,6 +104,10 @@ def validate(program):
         if cfg.kind != kind:
             fail("communication address/configuration kind mismatch")
     for index, t in program.timers.items():
+        if type(t.retentive) is not bool or type(t.dynamic_preset) is not bool:
+            fail("timer mode fields must be bool")
+        if t.kind == "TP" and t.retentive:
+            fail("retentive TP is unsupported in the Basic timer profile")
         if type(index) is not int or any(
             type(x) is not int for x in (t.milliseconds, t.base_ms)
         ):
@@ -316,7 +320,7 @@ class Machine:
     def write_number(self, target, value):
         timer = timer_reference(target, True)
         if timer:
-            self.timers[timer[0]].set_preset(value)
+            self.timers[timer[0]].set_preset(value, self.now)
             return
         if is_indexed(target):
             kind, index, error = resolve_indexed(

@@ -37,14 +37,25 @@ inline bool clock_ms(unsigned period) {
 }
 class TimerState {
     int kind, base=1, configured=0, active=0, current=0;
-    bool previous=false, result=false;
+    bool previous=false, result=false, retain=false, dynamic=false, completed=false;
     long long started=-1;
-    void begin(){started=(long long)detail::now_ms;active=configured;current=0;}
+    unsigned long long counted=0;
+    void finish(){completed=true;result=kind==0;if(kind!=0)started=-1;}
+    void begin(){
+        started=(long long)detail::now_ms;active=configured;counted=0;completed=false;
+        if(!retain)current=0;
+        if(current>=active)finish();
+    }
     void refresh(){
-        if(started>=0){
+        if(started>=0&&!completed){
             unsigned long long ticks=(detail::now_ms-(unsigned long long)started)/(unsigned)base;
-            current=ticks>(unsigned)active?active:(int)ticks;
-            if(ticks>=(unsigned)active){result=kind==0;if(kind!=0)started=-1;}
+            if(ticks>counted){
+                if(dynamic)active=configured;
+                unsigned long long delta=ticks-counted;
+                if(current<active)current+=(int)(delta>(unsigned)(active-current)?(unsigned)(active-current):delta);
+                counted=ticks;
+                if(current>=active)finish();
+            }
         }
         if(kind==2&&started<0&&!previous)current=0;
     }
@@ -57,25 +68,33 @@ public:
             if(ms<=(unsigned)candidate*9999U&&ms%(unsigned)candidate==0){base=candidate;configured=(int)(ms/(unsigned)base);found=true;break;}}
         if(!found)__builtin_trap();active=configured;
     }
-    TimerState(int index,int tb,int ticks,int k):kind(k),base(tb),configured(ticks),active(ticks){
+    TimerState(int index,int tb,int ticks,int k,bool ret=false,bool dyn=false):kind(k),base(tb),configured(ticks),active(ticks),retain(ret),dynamic(dyn){
         detail::claim_timer(index);
-        if((tb!=1&&tb!=10&&tb!=100&&tb!=1000&&tb!=60000)||(tb==1&&index>=6)||ticks<0||ticks>9999)__builtin_trap();
+        if((tb!=1&&tb!=10&&tb!=100&&tb!=1000&&tb!=60000)||(tb==1&&index>=6)||ticks<0||ticks>9999||(k==2&&ret))__builtin_trap();
     }
     i16 preset()const{return (i16)configured;}
     i16 value(){refresh();return (i16)current;}
     bool done(){refresh();return result;}
-    void set_preset(i16 ticks){if(ticks<0||ticks>9999)__builtin_trap();configured=ticks;}
+    void set_preset(i16 ticks){
+        if(ticks<0||ticks>9999)__builtin_trap();refresh();configured=ticks;
+        bool paused=kind==0?!previous:previous;
+        if(retain&&dynamic&&started<0&&paused&&ticks<current)current=0;
+    }
     bool update(bool enabled){
         refresh();
-        if(kind==0){if(!enabled){started=-1;current=0;result=false;}else if(started<0)begin();}
-        else if(kind==1){if(enabled){started=-1;current=0;result=true;}else if(previous)begin();}
-        else if(enabled&&!previous&&started<0){begin();result=true;}
+        if(kind==0){
+            if(!enabled){if(!retain||completed)current=0;started=-1;result=false;completed=false;}
+            else if(started<0)begin();
+        }else if(kind==1){
+            if(enabled){if(!retain||completed)current=0;started=-1;result=true;completed=false;}
+            else if(previous)begin();
+        }else if(enabled&&!previous&&started<0){result=true;begin();}
         previous=enabled;refresh();return result;
     }
 };
-struct Ton:TimerState{explicit Ton(unsigned ms):TimerState(ms,0){} Ton(int i,int b,int p):TimerState(i,b,p,0){}};
-struct Tof:TimerState{explicit Tof(unsigned ms):TimerState(ms,1){} Tof(int i,int b,int p):TimerState(i,b,p,1){}};
-struct Pulse:TimerState{explicit Pulse(unsigned ms):TimerState(ms,2){} Pulse(int i,int b,int p):TimerState(i,b,p,2){}};
+struct Ton:TimerState{explicit Ton(unsigned ms):TimerState(ms,0){} Ton(int i,int b,int p):TimerState(i,b,p,0){} Ton(int i,int b,int p,bool r,bool d):TimerState(i,b,p,0,r,d){}};
+struct Tof:TimerState{explicit Tof(unsigned ms):TimerState(ms,1){} Tof(int i,int b,int p):TimerState(i,b,p,1){} Tof(int i,int b,int p,bool r,bool d):TimerState(i,b,p,1,r,d){}};
+struct Pulse:TimerState{explicit Pulse(unsigned ms):TimerState(ms,2){} Pulse(int i,int b,int p):TimerState(i,b,p,2){} Pulse(int i,int b,int p,bool r,bool d):TimerState(i,b,p,2,r,d){}};
 class Clock {
     Ton turn_on, turn_off;
     bool value=false;
@@ -104,9 +123,9 @@ void write_m_indexed(int,int,bool);
 bool system(int);
 void clear_index_error();
 bool clock_ms(unsigned);
-struct Ton { explicit Ton(unsigned); Ton(int,int,int); bool update(bool); i16 preset()const; i16 value(); bool done(); void set_preset(i16); };
-struct Tof { explicit Tof(unsigned); Tof(int,int,int); bool update(bool); i16 preset()const; i16 value(); bool done(); void set_preset(i16); };
-struct Pulse { explicit Pulse(unsigned); Pulse(int,int,int); bool update(bool); i16 preset()const; i16 value(); bool done(); void set_preset(i16); };
+struct Ton { explicit Ton(unsigned); Ton(int,int,int); Ton(int,int,int,bool,bool); bool update(bool); i16 preset()const; i16 value(); bool done(); void set_preset(i16); };
+struct Tof { explicit Tof(unsigned); Tof(int,int,int); Tof(int,int,int,bool,bool); bool update(bool); i16 preset()const; i16 value(); bool done(); void set_preset(i16); };
+struct Pulse { explicit Pulse(unsigned); Pulse(int,int,int); Pulse(int,int,int,bool,bool); bool update(bool); i16 preset()const; i16 value(); bool done(); void set_preset(i16); };
 struct Clock { explicit Clock(unsigned); bool update(bool); };
 struct RisingEdge { RisingEdge(); bool update(bool); };
 struct FallingEdge { FallingEdge(); bool update(bool); };

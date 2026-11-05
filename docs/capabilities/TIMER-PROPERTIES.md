@@ -1,5 +1,9 @@
 # Propriedades e estado de timers: contrato da etapa
 
+Este documento registra a etapa `12ab05b`, anterior aos modos. A continuação
+`TIMER-MODES.md` implementa os caminhos locais retentivo/preset dinâmico;
+o gate de XML e a validação externa desses modos continuam pendentes.
+
 Pesquisa em2026-11-05. Fonte primária: [Generic Functions EIO0000003289.04](https://www.se.com/us/en/download/document/EIO0000003289/), pp107–118; PDF local SHA256 `d2c8af0598276e7a0bb4f30770e4529282962bc6ee3944dee0645cb9a3186595`. A página oficial continua oferecendo revisão04 de01/09/2025. O [Programming Guide M100/M200](https://www.se.com/id/en/download/document/EIO0000002019/) revisão06 associa esse guia ao M200. Perfil, editor e PLC disponíveis continuam pendentes.
 
 ## Contrato documental e escolhas locais

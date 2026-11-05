@@ -50,7 +50,7 @@ Também há `plc::clock_ms(10|100|1000|60000)`, que lê as bases globais `%S4..%
 - Executor IL com validação estrita, conversor IL/SMBP → C++ e comparação com a execução C++ nativa.
 - Projeto XML baseado em template, rungs Ladder de contatos em série, bobinas, timers e blocos numéricos Operation/Comparison, verificação local de coerência IL/gráfico e arquivo de vínculo fonte/rung.
 
-O protótipo **recusa** aritmética C++ com promoções implícitas (use as operações explícitas `plc::*`), unsigned, arrays multidimensionais, ponteiros, referências arbitrárias, classes da aplicação, exceções, threads, funções externas, headers com declarações fora do SDK e nós AST desconhecidos. Contadores nativos, retenção declarada, expansões, tarefas de evento, acesso imediato e PTO/PWM ainda não estão implementados. Modbus tem agora um subconjunto descrito abaixo; não representa a cobertura completa de comunicação do PLC. Não existe tentativa de compilar C++ geral e ignorar as partes difíceis.
+O protótipo **recusa** aritmética C++ com promoções implícitas (use as operações explícitas `plc::*`), unsigned, arrays multidimensionais, ponteiros, referências arbitrárias, classes da aplicação, exceções, threads, funções externas, headers com declarações fora do SDK e nós AST desconhecidos. Contadores nativos, retenção configurável de memória entre reinícios, expansões, tarefas de evento, acesso imediato e PTO/PWM ainda não estão implementados. Modbus tem agora um subconjunto descrito abaixo; não representa a cobertura completa de comunicação do PLC. Não existe tentativa de compilar C++ geral e ignorar as partes difíceis.
 
 Arrays de capacidade fixa de `bool`, `plc::i16`, `plc::i32` e `plc::f32` aceitam leitura/escrita com índice literal ou calculado em execução (`bool`, `i16` ou `i32`). Arrays com índice calculado usam grupos contíguos; os elementos de32bits têm stride2 words. Arrays globais persistem entre scans e recebem inicialização no primeiro RUN; locais são inicializados quando a declaração executa, inclusive dentro de um laço. Inicializadores parciais e `{}` zeram os elementos restantes. Arrays locais sem inicialização são recusados. O caminho reverso recupera os operandos/endereço reais, sem precisar preservar a sintaxe original de array. `examples/dynamic_arrays.cpp` percorre arrays numéricos com `for`.
 
@@ -85,10 +85,20 @@ esses três parâmetros. A escrita P usa o objeto nativo, sem variável sombra.
 V/Q são somente leitura. Com `IsDynamicPreset=false`, o novo P só afeta a
 próxima ativação, mesmo sendo lido imediatamente. Saltar o bloco deixa seu
 estado interno progredir, mas não reescreve a saída ligada ao bloco. A fase
-real dos ticks e o ciclo de vida precisam de validação externa. As opções
-retentiva e Dynamic Preset=true continuam recusadas. A base10ms continua
+real dos ticks e o ciclo de vida precisam de validação externa. A base10ms continua
 bloqueada no XML por falta de serialização comprovada. Exemplo:
 `examples/timer_properties.cpp`; contratos: `docs/capabilities/TIMER-PROPERTIES.md`.
+
+O construtor de 5 argumentos `Ton/Tof/Pulse{index,base,preset,retentive,dynamic_preset}`
+aceita flags bool literais. TON/TOF retentivos pausam e retomam V antes da
+conclusão; TP retentivo é recusado. Dynamic Preset permite alterar P enquanto
+roda, considerando-o na próxima atualização da base. Reduzir P abaixo de V
+conclui mantendo V. Com as duas opções, P menor que V enquanto pausado zera V.
+São modos implementados em C++/IL/configuração/VM/SDK/reversão, com os flags
+preservados no JSON. **SMBP com qualquer opção true continua bloqueado** até
+comprovar o mapeamento de nível funcional 3.3/12.0. Fase/fração dos ticks e
+fronteiras após conclusão permanecem políticas locais pendentes de ensaio.
+Exemplo `examples/timer_modes.cpp`; contrato `docs/capabilities/TIMER-MODES.md`.
 
 ## Números e inventário completo de pesquisa
 

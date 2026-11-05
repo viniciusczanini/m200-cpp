@@ -81,13 +81,16 @@ def to_cpp(program):
     ]
     for i, t in sorted(program.timers.items()):
         lines.append(
-            "plc::%s timer_%d{%d,%d,%d};"
+            "plc::%s timer_%d{%d,%d,%d%s};"
             % (
                 {"TON": "Ton", "TOF": "Tof", "TP": "Pulse"}[t.kind],
                 i,
                 i,
                 t.base_ms,
                 t.preset,
+                ("," + str(t.retentive).lower() + "," + str(t.dynamic_preset).lower())
+                if t.retentive or t.dynamic_preset
+                else "",
             )
         )
     if has_indexed(program):

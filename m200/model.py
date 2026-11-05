@@ -15,6 +15,8 @@ class Timer:
     kind: str
     milliseconds: int
     base_ms: int = 10
+    retentive: bool = False
+    dynamic_preset: bool = False
 
     @property
     def preset(self):

@@ -246,5 +246,42 @@ retentivos/DynamicPreset=true, XML de base10ms, demais famílias e validação
 oficial/física permanecem pendentes. Objetivo ativo/incompleto; tudo local,
 sem CI ou transmissão ao PLC.
 
+## Continuação do objetivo: modos retentivo e preset dinâmico
+
+Após `12ab05b`, TON/TOF retentivos e Dynamic Preset em TON/TOF/TP estão
+implementados em configuração/JSON, C++, SDK, IL/VM e reversão. O construtor
+de cinco argumentos conserva bools, índice e base. TP retentivo e bools
+malformados são recusados. Timers antigos continuam com flags false.
+
+O modelo retém V inteiro na pausa e retoma a contagem; P dinâmico é aplicado
+na próxima atualização da base. Redução de P abaixo de V conclui mantendo V,
+conforme os diagramas. Fase/fração dos ticks e crescimento de P após concluir
+continuam políticas locais sem prova física. O XML dos modos true é recusado
+antes de substituir destino por falta do mapeamento de nível funcional.
+
+Rodada final após pausa/retomada: **265 testes em 88,739 s**; exemplos, stress,
+ensaios públicos e lint/formatação/diff passaram. Os processos anteriores
+foram confirmados ausentes e os logs temporários não estavam disponíveis;
+a rodada final usa logs e códigos de saída persistidos no projeto. Não se
+somaram execuções anteriores à retomada nem reruns.
+
+O stress novo tem 36 casos, incluindo todas as cinco bases, com 18.432 scans
+e oráculo independente por eventos de tick. Stress total: 88.916 scans;
+públicos: 18.176; **107.092 scans na rodada**, sem multiplicar pelas etapas de
+comparação. O caso público retentivo usa somente a configuração real TM3 de
+`06-correto.smbp`/TM200CE24R, com harness construído; não foi encontrada execução
+de TM3 no original. Seus bytes/CPU não foram alterados e não se alegou
+importação integral. O suporte anterior a XML sem flags continua testado.
+
+A revisão independente não encontrou falhas e conferiu ainda igualdade P/V,
+próximo tick nas cinco bases, retenção/reset e rejeições de XML malformado ou
+duplicado. A CLI mantém `library.complete=false` e descreve o novo escopo.
+
+Resultados e hashes: `TIMER-MODE-LOCAL-RESULTS.json` e
+`TIMER-MODE-STRESS-RESULTS.json`; contrato: `../capabilities/TIMER-MODES.md`.
+Todos os sete relatórios atuais de stress/rodada conferem com os hashes do
+código. As demais famílias e a validação oficial/física permanecem abertas.
+O objetivo integral continua ativo. Tudo local, sem CI, publicação ou PLC.
+
 O objetivo integral continua ativo; Task2 do plano de indexação ainda está
 pendente e não foi substituída pela API de words explícitos.

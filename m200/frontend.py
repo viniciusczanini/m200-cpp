@@ -696,7 +696,7 @@ class Frontend:
                     self.error(node, "duplicate native timer index")
                 self.timer_indices.update(indices)
                 self.next_timer = max(self.next_timer, max(indices) + 1)
-                if len(args) == 3 and kind != "Clock":
+                if len(args) in (3, 5) and kind != "Clock":
                     base = self.const(args[1])
                     ticks = preset_value(self.const(args[2]))
                     if base not in (1, 10, 100, 1000, 60000) or (
@@ -704,7 +704,21 @@ class Frontend:
                     ):
                         self.error(node, "invalid timer time base")
                     duration = base * ticks
-                    config = Timer(timer_kind, duration, base)
+                    flags = []
+                    for argument in args[3:]:
+                        argument = strip(argument)
+                        if argument.get("kind") != "CXXBoolLiteralExpr":
+                            self.error(
+                                argument, "timer modes require literal bool flags"
+                            )
+                        flags.append(argument["value"])
+                    retentive, dynamic = flags or (False, False)
+                    if kind == "Pulse" and retentive:
+                        self.error(
+                            node,
+                            "retentive TP is unsupported in the Basic timer profile",
+                        )
+                    config = Timer(timer_kind, duration, base, retentive, dynamic)
                 elif len(args) == 1:
                     duration = self.const(args[0])
                     config = timer_config(timer_kind, duration, index)

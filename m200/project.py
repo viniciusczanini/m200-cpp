@@ -316,11 +316,12 @@ def load_project(path):
             for child in t:
                 if len(child):
                     fail("timer value must be scalar: " + child.tag)
-            if (
-                t.findtext("IsRetentive", "false").lower() != "false"
-                or t.findtext("IsDynamicPreset", "false").lower() != "false"
-            ):
-                fail("retentive/dynamic timers are unsupported")
+            flags = []
+            for tag in ("IsRetentive", "IsDynamicPreset"):
+                value = t.findtext(tag, "false")
+                if value not in ("true", "false"):
+                    fail("unsupported timer boolean: " + tag)
+                flags.append(value == "true")
             try:
                 index = int(t.findtext("Index", "-1"))
                 preset = int(t.findtext("Preset", "9999"))
@@ -333,7 +334,7 @@ def load_project(path):
                 fail("unsupported timer time base: " + base)
             base_ms = {v: k for k, v in BASES.items()}.get(base, 60000)
             p.timers[index] = Timer(
-                t.findtext("Type", "TON"), preset * base_ms, base_ms
+                t.findtext("Type", "TON"), preset * base_ms, base_ms, *flags
             )
     pous = sw.find("Pous")
     if pous is not None:
@@ -416,7 +417,13 @@ def load_project(path):
     return p
 
 
+def validate_timer_profile(program):
+    if any(t.retentive or t.dynamic_preset for t in program.timers.values()):
+        fail("timer-mode functional-level mapping is unverified for SMBP")
+
+
 def validate_allocations(sw, program):
+    validate_timer_profile(program)
     if has_indexed_bits(program):
         fail("indexed-bit functional-level mapping is unverified for SMBP")
     text = (
@@ -461,6 +468,7 @@ def validate_allocations(sw, program):
 
 def write_project(program, template, destination):
     validate(program)
+    validate_timer_profile(program)
     if has_indexed_bits(program):
         fail("indexed-bit functional-level mapping is unverified for SMBP")
     root = parse(template)
@@ -542,8 +550,8 @@ def write_project(program, template, destination):
         element(e, "Preset", t.preset)
         if t.base_ms != 60000:
             element(e, "Base", BASES[t.base_ms])
-        element(e, "IsRetentive", "false")
-        element(e, "IsDynamicPreset", "false")
+        element(e, "IsRetentive", str(t.retentive).lower())
+        element(e, "IsDynamicPreset", str(t.dynamic_preset).lower())
     bits = element(sw, "MemoryBits")
     numeric = {
         k: element(sw, k) for k in ("MemoryWords", "MemoryDoubleWords", "MemoryFloats")

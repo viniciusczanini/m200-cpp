@@ -1,0 +1,398 @@
+{
+  "seed": 20020261112,
+  "cases": [
+    {
+      "case": "Ton_1_0_1",
+      "kind": "Ton",
+      "base_ms": 1,
+      "retentive": true,
+      "dynamic_preset": false,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Ton_1_0_10",
+      "kind": "Ton",
+      "base_ms": 10,
+      "retentive": true,
+      "dynamic_preset": false,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Ton_1_0_100",
+      "kind": "Ton",
+      "base_ms": 100,
+      "retentive": true,
+      "dynamic_preset": false,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Ton_1_0_1000",
+      "kind": "Ton",
+      "base_ms": 1000,
+      "retentive": true,
+      "dynamic_preset": false,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Ton_1_0_60000",
+      "kind": "Ton",
+      "base_ms": 60000,
+      "retentive": true,
+      "dynamic_preset": false,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Ton_0_1_1",
+      "kind": "Ton",
+      "base_ms": 1,
+      "retentive": false,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Ton_0_1_10",
+      "kind": "Ton",
+      "base_ms": 10,
+      "retentive": false,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Ton_0_1_100",
+      "kind": "Ton",
+      "base_ms": 100,
+      "retentive": false,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Ton_0_1_1000",
+      "kind": "Ton",
+      "base_ms": 1000,
+      "retentive": false,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Ton_0_1_60000",
+      "kind": "Ton",
+      "base_ms": 60000,
+      "retentive": false,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Ton_1_1_1",
+      "kind": "Ton",
+      "base_ms": 1,
+      "retentive": true,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Ton_1_1_10",
+      "kind": "Ton",
+      "base_ms": 10,
+      "retentive": true,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Ton_1_1_100",
+      "kind": "Ton",
+      "base_ms": 100,
+      "retentive": true,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Ton_1_1_1000",
+      "kind": "Ton",
+      "base_ms": 1000,
+      "retentive": true,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Ton_1_1_60000",
+      "kind": "Ton",
+      "base_ms": 60000,
+      "retentive": true,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Tof_1_0_1",
+      "kind": "Tof",
+      "base_ms": 1,
+      "retentive": true,
+      "dynamic_preset": false,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Tof_1_0_10",
+      "kind": "Tof",
+      "base_ms": 10,
+      "retentive": true,
+      "dynamic_preset": false,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Tof_1_0_100",
+      "kind": "Tof",
+      "base_ms": 100,
+      "retentive": true,
+      "dynamic_preset": false,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Tof_1_0_1000",
+      "kind": "Tof",
+      "base_ms": 1000,
+      "retentive": true,
+      "dynamic_preset": false,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Tof_1_0_60000",
+      "kind": "Tof",
+      "base_ms": 60000,
+      "retentive": true,
+      "dynamic_preset": false,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Tof_0_1_1",
+      "kind": "Tof",
+      "base_ms": 1,
+      "retentive": false,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Tof_0_1_10",
+      "kind": "Tof",
+      "base_ms": 10,
+      "retentive": false,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Tof_0_1_100",
+      "kind": "Tof",
+      "base_ms": 100,
+      "retentive": false,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Tof_0_1_1000",
+      "kind": "Tof",
+      "base_ms": 1000,
+      "retentive": false,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Tof_0_1_60000",
+      "kind": "Tof",
+      "base_ms": 60000,
+      "retentive": false,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Tof_1_1_1",
+      "kind": "Tof",
+      "base_ms": 1,
+      "retentive": true,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Tof_1_1_10",
+      "kind": "Tof",
+      "base_ms": 10,
+      "retentive": true,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Tof_1_1_100",
+      "kind": "Tof",
+      "base_ms": 100,
+      "retentive": true,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Tof_1_1_1000",
+      "kind": "Tof",
+      "base_ms": 1000,
+      "retentive": true,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Tof_1_1_60000",
+      "kind": "Tof",
+      "base_ms": 60000,
+      "retentive": true,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Pulse_0_1_1",
+      "kind": "Pulse",
+      "base_ms": 1,
+      "retentive": false,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Pulse_0_1_10",
+      "kind": "Pulse",
+      "base_ms": 10,
+      "retentive": false,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Pulse_0_1_100",
+      "kind": "Pulse",
+      "base_ms": 100,
+      "retentive": false,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Pulse_0_1_1000",
+      "kind": "Pulse",
+      "base_ms": 1000,
+      "retentive": false,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "Pulse_0_1_60000",
+      "kind": "Pulse",
+      "base_ms": 60000,
+      "retentive": false,
+      "dynamic_preset": true,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified"
+    },
+    {
+      "case": "original_retained_tm3_config",
+      "kind": "Ton",
+      "base_ms": 1000,
+      "retentive": true,
+      "dynamic_preset": false,
+      "scans": 512,
+      "status": "pass",
+      "xml": "gated: functional-level mapping unverified",
+      "original_sha256": "1c6d07b606c595dc5a9e80590e2c589a948b55102887f6e12f4b3d8279c7d2b9",
+      "original_cpu": "TM200CE24R",
+      "scope": "actual isolated TimerTM configuration; constructed input/observation harness; no original executable TM3 use found, no whole-project import, no CPU rewrite"
+    }
+  ],
+  "scans": 18432,
+  "source_sha256": {
+    "m200/__init__.py": "77c5815a3596eebca3e939d1ad39abba46fa4edc4df148aaa7e47f13e5eda0ab",
+    "m200/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "m200/allocation.py": "d24a9dd813fa5129b27b2a553e395c39d17079d5f129b674d05ee2ae4505fcf7",
+    "m200/arrays.py": "d4574f6e48ab98f70feb3f474f30bbf387117f5db3ddde395525a21a77da42ed",
+    "m200/capabilities.py": "e94e59743ee0eae98c476938f8eafe04966c0823b825b1d070980d15d41348a0",
+    "m200/cli.py": "30eca5fbc9789f6c16527ba46399bab7581bb2896905cf7e05ecfb2fb285da0b",
+    "m200/communication.py": "105c1aef50e7ee00bc7c7142a5b6805d4ddf5f18fc04c5e60a52b78841a6b3b0",
+    "m200/communication_xml.py": "954e0fb861fef56381b204936c47f2f760dbcb3840dd018bb1d2a1b13bfc319f",
+    "m200/config.py": "3acbc41bf01d78576c34a5d716b559851fb13bb819fa14b149e4be9fd3dd5e52",
+    "m200/flow.py": "a61ed946937daa4e54002dc29664c0ef6c02617eb1abb8faa0d0169e06244dc6",
+    "m200/frontend.py": "1e85099e87802e18b4e2d55fbaa1c24cf810e3d04b71c13302d7790a3382c939",
+    "m200/il.py": "ecd8e8ac91b6c03e98b9a4f3860828ee4da0ddc7b0961f5b845cb40afb569b71",
+    "m200/indexed.py": "b716e924847b6cbf6aee98e2a2d3de9a68f20184e591d0def0872884e678be20",
+    "m200/jsonio.py": "c4d8447354b4f48205a8d5bfc58e1a3919656ba2073ecc5982b2f8fd6253fd70",
+    "m200/lower.py": "b8ccd5045ce5deed35230c7741c4e56a8f9a1ed28d00a9221e2d0c52fb046017",
+    "m200/modbus.py": "62e98577eba6e2de938bc2292dd6cb16f22f64e1101fabdf5ea0f33fd009e92c",
+    "m200/model.py": "1e7295339e98584a521fe4ba9c420334a5df2d176776de0049b3c75c8eb647b0",
+    "m200/native.py": "838a14f581bddde44c96510ed3237ed50863f6cb6b1cc8fc1b8eeadc52b8c2c0",
+    "m200/numeric.py": "4169b46f9a1f029efc025a564b8d4923344baea7d3a5b271e03426573f827315",
+    "m200/project.py": "009c1aa9a0fdc07328e806e982bf71e6a285d60f41ad60068333c75bb4ce31f1",
+    "m200/reverse.py": "c757c2267d284a2a5b82cf472089a5d5d146f08639bf40d12450431fc7b1f22d",
+    "m200/timers.py": "384e3c26facd76ed8da5449d001348fe1c1dd818a73532ab9c782e6a9b0fedf6",
+    "sdk/plc.hpp": "54fdb5d8df5ba994e5b6ed6343eface01e734091a61fdda572c9632c3c78474a",
+    "tests/stress/timer_modes.py": "e49f7526f0fec09d072721deeb33b4c0a5a098fc75151a7293644f24e4441baf"
+  },
+  "model": "activation/resume-relative ticks; integer retention; preset applies next tick; preserved V above reduced P; completion latched",
+  "official_editor": "pending",
+  "physical_plc": "pending"
+}
