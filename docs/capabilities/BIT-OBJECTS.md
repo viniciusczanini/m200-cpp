@@ -1,6 +1,6 @@
 # Bits de words e sequências de bits
 
-Etapa após `d8b3e 5a`, em 2026-11-05. Meta integral em `../PARITY.md`.
+Etapa após `d8b3e5a`, em 2026-11-05. Meta integral em `../PARITY.md`.
 Fonte primária: [Generic Functions EIO0000003289.04](https://www.se.com/us/en/download/document/EIO0000003289/), pp. 27/31/41/51–53. O PDF/hash é o já preservado no projeto.
 
 ## Contrato e escopo

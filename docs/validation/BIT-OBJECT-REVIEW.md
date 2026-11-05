@@ -1,6 +1,6 @@
 # Revisão de bits e sequências — 2026-11-05
 
-Diff após `d8b3e 5a`, revisão independente do código/contrato em modo read-only.
+Diff após `d8b3e5a`, revisão independente do código/contrato em modo read-only.
 Escopo: frontend, SDK, VM, reversão, normalização, XML, aliases, faixas, vida
 de temporários e imagem de saída no scan. Nenhuma ação remota/PLC.
 

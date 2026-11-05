@@ -6,7 +6,7 @@ existente não demonstra por si só a semântica de contatos LDR/LDF.
 
 Fonte primária lida: [EIO0000003289.04](https://www.se.com/us/en/download/document/EIO0000003289/),
 pp37–45 e 47–48. Mesmo PDF preservado em `INDEXED-SOURCES.json`, SHA256
-`d2c8af0598276e7a0bb4f30770e 4529282962bc6ee3944dee0645cb9a3186595`.
+`d2c8af0598276e7a0bb4f30770e4529282962bc6ee3944dee0645cb9a3186595`.
 Página40 foi renderizada e inspecionada, além do texto extraído.
 
 ## Contratos e cuidado de ciclo
