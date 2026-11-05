@@ -34,9 +34,7 @@
       "cpu": "TM221CE16R",
       "rungs": 2,
       "expected_full_import_error": "M200-E: source CPU TM221CE16R; template/project must target TM200CE40T",
-      "expected_il_errors": {
-        "1": "M200-E: unsupported IL instruction/order: AND( %I0.0"
-      },
+      "expected_il_errors": {},
       "expected_graph_errors": {
         "1": "M200-E: unsupported Ladder connections"
       },
@@ -144,8 +142,8 @@
         "29": "M200-E: unsupported numeric address: %IW1.1",
         "31": "M200-E: unsupported numeric address: %IW1.2",
         "33": "M200-E: unsupported numeric address: %IW1.3",
-        "35": "M200-E: unsupported or non-reversible timer block",
-        "36": "M200-E: unsupported or non-reversible timer block"
+        "35": "M200-E: undefined or multiply updated timer",
+        "36": "M200-E: undefined or multiply updated timer"
       },
       "expected_graph_errors": {
         "0": "M200-E: unsupported Ladder connections",
@@ -171,9 +169,7 @@
         "31": "M200-E: unsupported numeric address: %IW1.2",
         "32": "M200-E: unsupported Ladder connections",
         "33": "M200-E: unsupported numeric address: %IW1.3",
-        "34": "M200-E: unsupported Ladder connections",
-        "35": "M200-E: IL and Ladder graphics do not agree",
-        "36": "M200-E: unverified Timer graphical position"
+        "34": "M200-E: unsupported Ladder connections"
       },
       "expected_graph_absent": []
     },

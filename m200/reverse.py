@@ -2,6 +2,7 @@ from .il import validate
 from .model import address, fail
 from .timers import reference as timer_reference
 from .flow import JUMPS, split_label
+from .native_logic import decode, STORES, OPEN
 from .indexed import (
     is_indexed,
     parse as parse_indexed,
@@ -17,7 +18,6 @@ from .numeric import (
     cpp,
     WRITES,
     word_address,
-    is_operation,
     instruction_operation,
 )
 from .communication import (
@@ -104,6 +104,28 @@ def to_cpp(program):
     lines += ["", "void scan() {", "  bool accumulator = false;"]
     for i in sorted(program.timers):
         lines.append("  bool timer_%d_result = false;" % i)
+    max_saved = max_group = 0
+    for raw in program.rungs:
+        _, body = split_label(raw)
+        if (
+            body[0].startswith("BLK ")
+            and body[0].split(maxsplit=1)[1] in program.communications
+        ):
+            continue
+        saved_depth = group_depth = 0
+        for op, _ in decode(body):
+            if op == "MPS":
+                saved_depth += 1
+                max_saved = max(max_saved, saved_depth)
+            elif op == "MPP":
+                saved_depth -= 1
+            elif op in OPEN:
+                group_depth += 1
+                max_group = max(max_group, group_depth)
+            elif op == ")":
+                group_depth -= 1
+    lines += [f"  bool native_stack_{i} = false;" for i in range(max_saved)]
+    lines += [f"  bool native_group_{i} = false;" for i in range(max_group)]
     for index, raw_rung in enumerate(program.rungs):
         lines.append("  // Rung %d" % index)
         label, rung = split_label(raw_rung)
@@ -116,16 +138,11 @@ def to_cpp(program):
                 ab = ("!" if abort[0] == "LDN" else "") + read_cpp(abort[1])
                 lines.append("  " + cpp_name(key) + ".update(" + ex + "," + ab + ");")
                 continue
-            n = int(rung[0].split("%TM")[1])
-            op, arg = rung[1].split(maxsplit=1)
-            enable = ("!" if op == "LDN" else "") + read_cpp(arg)
-            lines += [
-                "  timer_%d_result = timer_%d.update(%s);" % (n, n, enable),
-                "  " + write_cpp(rung[5][3:], "timer_%d_result" % n),
-            ]
-            continue
-        for line in rung:
-            if is_operation(line):
+        saved = []
+        groups = []
+        for op, arg in decode(rung):
+            if op == "NUM":
+                line = arg
                 target, name, values = instruction_operation(line)
                 timer = timer_reference(target, True)
                 if timer:
@@ -158,7 +175,40 @@ def to_cpp(program):
                     arguments = str(index) + "," + str(index_word) + "," + expression
                 lines.append("  if (accumulator) { plc::%s(%s); }" % (fn, arguments))
                 continue
-            op, arg = line.split(maxsplit=1)
+            if op == "IN":
+                index = int(arg[3:])
+                lines.append(
+                    f"  timer_{index}_result = timer_{index}.update(accumulator);"
+                )
+                continue
+            if op == "N":
+                lines.append("  accumulator = !accumulator;")
+                continue
+            if op == "MPS":
+                name = f"native_stack_{len(saved)}"
+                saved.append(name)
+                lines.append("  " + name + " = accumulator;")
+                continue
+            if op in ("MRD", "MPP"):
+                lines.append("  accumulator = " + saved[-1] + ";")
+                if op == "MPP":
+                    saved.pop()
+                continue
+            if op in OPEN:
+                name = f"native_group_{len(groups)}"
+                groups.append((op, name))
+                lines.append("  " + name + " = accumulator;")
+                lines.append("  accumulator = " + read_cpp(arg) + ";")
+                continue
+            if op == ")":
+                operator, name = groups.pop()
+                lines.append(
+                    "  accumulator = "
+                    + name
+                    + (" && " if operator == "AND(" else " || ")
+                    + "accumulator;"
+                )
+                continue
             if op in JUMPS:
                 jump = "goto native_" + arg[1:] + ";"
                 lines.append(
@@ -173,16 +223,22 @@ def to_cpp(program):
                         + " }"
                     )
                 )
-            elif op in ("ST", "S", "R"):
+            elif op in STORES:
                 statement = write_cpp(
                     arg,
-                    "accumulator" if op == "ST" else "true" if op == "S" else "false",
+                    "!accumulator"
+                    if op == "STN"
+                    else "accumulator"
+                    if op == "ST"
+                    else "true"
+                    if op == "S"
+                    else "false",
                 )
                 lines.append(
                     "  "
                     + (
                         statement
-                        if op == "ST"
+                        if op in ("ST", "STN")
                         else "if (accumulator) { " + statement + " }"
                     )
                 )

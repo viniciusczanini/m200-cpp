@@ -121,22 +121,47 @@ def graphics(rung, timer_column=3, communication_contact_column=0):
                 ]
                 + [(typ, key, column)]
             )
-        op, arg = rung[1].split(maxsplit=1)
-        if arg.startswith("["):
-            if op != "LD":
-                fail("negated timer comparison graphics are unsupported")
-            typ, arg, width = "Comparison", arg[1:-1].strip(), 2
-        else:
-            typ, width = "NegatedContact" if op == "LDN" else "NormalContact", 1
-        if timer_column not in (2, 3):
+        from .native_logic import timer_body, STORES
+
+        body = timer_body(rung)
+        if body is None:
+            fail("unsupported function block graphics")
+        at = next(i for i, line in enumerate(body) if line.startswith("IN "))
+        inputs = body[:at]
+        outputs = body[at + 2 :]
+        if len(outputs) != 1 or outputs[0].split(maxsplit=1)[0] not in STORES:
+            fail("Timer graphics require one supported output action")
+        terminal, target = outputs[0].split(maxsplit=1)
+        if terminal == "STN":
+            fail("STN Timer graphics require native logic normalization")
+        items = []
+        width = 0
+        for i, line in enumerate(inputs):
+            parts = line.split(maxsplit=1)
+            if len(parts) != 2 or parts[0] not in (
+                ("LD", "LDN") if i == 0 else ("AND", "ANDN")
+            ):
+                fail("Timer input graphics require series contacts or normalization")
+            op, arg = parts
+            if arg.startswith("["):
+                if op not in ("LD", "AND"):
+                    fail("negated timer comparison graphics are unsupported")
+                typ, arg, span = "Comparison", arg[1:-1].strip(), 2
+            else:
+                typ, span = (
+                    ("NegatedContact" if op in ("LDN", "ANDN") else "NormalContact"),
+                    1,
+                )
+            items.append((typ, arg, width))
+            width += span
+        if timer_column not in (1, 2, 3) or width > timer_column:
             fail("unverified Timer graphical position")
-        items = [(typ, arg, 0), ("Timer", descriptor, timer_column)]
-        items += [
-            ("Line", "", i)
-            for i in range(width, 10)
-            if i not in (timer_column, timer_column + 1)
-        ]
-        items.append(("Coil", rung[5].split()[1], 10))
+        items += [("Line", "", i) for i in range(width, timer_column)]
+        items += [("Timer", descriptor, timer_column)]
+        items += [("Line", "", i) for i in range(timer_column + 2, 10)]
+        items.append(
+            ({"ST": "Coil", "S": "SetCoil", "R": "ResetCoil"}[terminal], target, 10)
+        )
     else:
         items = []
         column = 0
@@ -147,7 +172,10 @@ def graphics(rung, timer_column=3, communication_contact_column=0):
                 )
                 column += 2
                 continue
-            op, arg = line.split(maxsplit=1)
+            parts = line.split(maxsplit=1)
+            if len(parts) != 2:
+                fail("project graphics require native logic normalization")
+            op, arg = parts
             if op not in ("LD", "LDN", "AND", "ANDN"):
                 fail("project graphics for this IL operator are not supported")
             if arg.startswith("["):
@@ -471,6 +499,9 @@ def write_project(program, template, destination):
     validate_timer_profile(program)
     if has_indexed_bits(program):
         fail("indexed-bit functional-level mapping is unverified for SMBP")
+    from .ladder_lowering import normalize
+
+    program = normalize(program)
     root = parse(template)
     sw = configuration(root)
     check_template_channels(root, program.communications)

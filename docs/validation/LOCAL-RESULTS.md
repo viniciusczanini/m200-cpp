@@ -283,5 +283,42 @@ Todos os sete relatórios atuais de stress/rodada conferem com os hashes do
 código. As demais famílias e a validação oficial/física permanecem abertas.
 O objetivo integral continua ativo. Tudo local, sem CI, publicação ou PLC.
 
+## Continuação do objetivo: lógica nativa e Ladder normalizado
+
+Após `2facc4f`, STN/N, MPS/MRD/MPP e grupos AND(/OR( estão implementados em
+IL/VM e reversão. Timer com entrada composta e ST/STN/S/R também é convertido;
+IN direto é aceito quando seu acumulador posterior não é consumido. As outras
+sequências permanecem recusadas até resolver esse efeito, sem inventá-lo.
+
+O exportador traduz formas complexas para rungs série usando elementos Ladder
+existentes, sem modificar o programa original. Snapshots preservam valores antes
+das escritas; endereços/buffers e labels existentes ficam reservados. Guardas
+reais protegem comparações sob curto-circuito, inclusive NaN por alias MD/MF.
+Os modos/limites/gates anteriores permanecem, com overhead explícito da ferramenta.
+
+Rodada final: **282 testes em 93,628 s**, exemplos e todos os alvos locais
+passaram. O stress novo tem 10 casos/5.120 scans e oráculos separados. Stress
+total: 94.036; públicos: 18.176; **112.212 scans na rodada**, sem somar reruns,
+etapas de comparação ou os ensaios adicionais do revisor.
+
+Três casos novos exercitam IL autêntico isolado de parênteses, stack e STN;
+este último usa configuração TOF explícita original com harness construído.
+Os gráficos dos timers 35/36 de outro original conferem com a nova validação;
+seus defaults de tipo/base incompletos continuam sem runtime presumido.
+O manifesto promove somente resultados observados e mantém os erros restantes.
+Nenhuma CPU/arquivo original foi reescrita; nenhum projeto original inteiro
+foi apresentado como importado.
+
+A revisão reproduziu leitura adiantada em comparação inativa, erros internos
+para instrução vazia/tab/bloco desconhecido e seleção incompleta de normalização.
+Todos receberam RED/GREEN. A rechecagem passou 17 testes, 7.440 scans aleatórios
+e laço em C++/recompilação/XML, sem achados abertos. O conflito documental
+MPS 11/32, demais operadores, perfis e execução oficial continuam pendentes.
+
+Relatórios: `NATIVE-LOGIC-LOCAL-RESULTS.json` e `NATIVE-LOGIC-STRESS-RESULTS.json`;
+contrato: `../capabilities/NATIVE-LOGIC.md`. Os oito relatórios atuais conferem
+com os hashes do código. Objetivo integral ativo/incompleto; testes locais,
+sem CI, publicação, transferência ou atuação de PLC.
+
 O objetivo integral continua ativo; Task2 do plano de indexação ainda está
 pendente e não foi substituída pela API de words explícitos.

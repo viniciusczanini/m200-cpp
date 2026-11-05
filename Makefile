@@ -27,6 +27,7 @@ stress:
 	python3 tests/stress/dynamic_arrays.py
 	python3 tests/stress/timer_properties.py
 	python3 tests/stress/timer_modes.py
+	python3 tests/stress/native_logic.py
 public-fetch:
 	python3 tests/public/fetch.py
 public-check:

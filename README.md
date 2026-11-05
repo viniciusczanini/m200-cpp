@@ -159,6 +159,17 @@ Detalhes e limites: [docs/MODBUS.md](docs/MODBUS.md). Ensaios públicos: [docs/v
 
 ## Gerar o projeto que será testado no editor
 
+O caminho inverso também entende STN/N, MPS/MRD/MPP, grupos AND(/OR( com `)`,
+timers com entrada composta e saídas ST/STN/S/R, e `IN %TMn` terminal ou antes
+de outra carga. Valores salvos são snapshots, preservando a ordem das escritas.
+Na exportação, a lógica complexa é traduzida para rungs simples usando os
+elementos Ladder já conhecidos; o programa de entrada permanece intacto.
+Comparações em curto-circuito usam saltos para evitar leituras indevidas.
+O conflito documental de profundidade MPS 11/32, efeitos de IN observados por
+ações posteriores e demais modificadores ainda têm lacunas explícitas.
+Detalhes e ensaios: `docs/capabilities/NATIVE-LOGIC.md`. Isso amplia a cobertura
+local; a aceitação dos arquivos pelo editor oficial continua pendente.
+
 No Machine Expert Basic, criar e salvar um projeto **TM200CE40T** e trazer o arquivo para o Mac. Não basta trocar a referência de um projeto M221 ou de outro M200.
 
 ```sh

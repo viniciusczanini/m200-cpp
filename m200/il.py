@@ -10,6 +10,7 @@ from .timers import (
     preset_value,
 )
 from .flow import JUMPS, destinations, label_name, split_label
+from .native_logic import decode, STORES, OPEN, timer_index
 from .indexed import (
     ANY_INDEXED,
     is_indexed,
@@ -148,29 +149,9 @@ def validate(program):
                 bit_operand(execute[1])
                 bit_operand(abort[1])
                 continue
-            m = re.fullmatch(r"BLK %TM([0-9]+)", rung[0])
-            if (
-                not m
-                or len(rung) != 7
-                or rung[2:5] != ["IN", "OUT_BLK", "LD Q"]
-                or rung[-1] != "END_BLK"
-                or rung[1].split(maxsplit=1)[:1] not in (["LD"], ["LDN"])
-                or not rung[5].startswith("ST ")
-            ):
-                fail("unsupported or non-reversible timer block")
-            index = int(m.group(1))
-            if index not in program.timers or index in timer_uses:
-                fail("undefined or multiply updated timer")
-            timer_uses.add(index)
-            args = rung[1].split(maxsplit=1)
-            if len(args) != 2:
-                fail("timer input has no operand")
-            bit_operand(args[1])
-            address(rung[5][3:], True)
-            continue
-        for i, line in enumerate(rung):
-            if is_operation(line) and i > 0:
-                target, name, values = instruction_operation(line)
+        for op, arg in decode(rung):
+            if op == "NUM":
+                target, name, values = instruction_operation(arg)
                 if (
                     timer_reference(target, True)
                     and name == "copy"
@@ -178,31 +159,25 @@ def validate(program):
                 ):
                     preset_value(int(values[0].code))
                 continue
-            parts = line.split(maxsplit=1)
-            if len(parts) != 2:
-                fail("unsupported IL instruction: " + line)
-            op, arg = parts
-            allowed = (
-                ("LD", "LDN")
-                if i == 0
-                else ("ST", "S", "R", *JUMPS)
-                if i == len(rung) - 1
-                else ("AND", "ANDN", "OR", "ORN", "XOR", "XORN", "ST", "S", "R")
-            )
-            if op not in allowed:
-                fail("unsupported IL instruction/order: " + line)
-            if op in JUMPS:
+            if op in ("N", "MPS", "MRD", "MPP", ")"):
+                continue
+            if op == "IN":
+                index = timer_index(arg)
+                if index not in program.timers or index in timer_uses:
+                    fail("undefined or multiply updated timer")
+                timer_uses.add(index)
+            elif op in JUMPS:
                 jumps.append(label_name(arg))
             else:
-                if op in ("AND", "ANDN", "OR", "ORN") and ANY_INDEXED.search(arg):
+                if op in ("AND", "ANDN", "OR", "ORN", *OPEN) and ANY_INDEXED.search(
+                    arg
+                ):
                     fail(
                         "indexed contact short-circuit/error effects are unverified; use an explicit load and CFG"
                     )
-                if arg == "%S20" and op in ("S", "ST"):
+                if arg == "%S20" and op in ("S", "ST", "STN"):
                     fail("system index-error bit is writable only by R")
-                bit_operand(arg, op in ("ST", "S", "R") and arg != "%S20")
-        if len(rung) < 2:
-            fail("rung has no action")
+                bit_operand(arg, op in STORES and arg != "%S20")
     if set(jumps) - labels.keys():
         fail("jump references an undefined label")
     property_uses = {
@@ -232,6 +207,14 @@ class Machine:
         if type(instruction_limit) is not int or not 1 <= instruction_limit <= 10000000:
             fail("invalid local execution limit")
         self.program = program
+        self.decoded = []
+        for raw in program.rungs:
+            _, body = split_label(raw)
+            communication = (
+                body[0].startswith("BLK ")
+                and body[0].split(maxsplit=1)[1] in program.communications
+            )
+            self.decoded.append(None if communication else decode(body))
         self.labels = destinations(program)
         self.instruction_limit = instruction_limit
         self.memory = [False] * 1024
@@ -247,10 +230,11 @@ class Machine:
             if is_operation(line)
         }
         self.comparisons = {
-            line.split(maxsplit=1)[1]: comparison(line.split(maxsplit=1)[1])
+            parts[1]: comparison(parts[1])
             for rung in program.rungs
             for line in rung
-            if not is_operation(line) and " [" in line
+            for parts in [line.split(maxsplit=1)]
+            if not is_operation(line) and len(parts) == 2 and parts[1].startswith("[")
         }
         self.outputs = [False] * 16
         self.now = 0
@@ -372,18 +356,13 @@ class Machine:
                         self.words,
                     )
                     continue
-                index = int(rung[0].split("%TM")[1])
-                op, arg = rung[1].split(maxsplit=1)
-                enabled = self.read(arg, inputs)
-                if op == "LDN":
-                    enabled = not enabled
-                self.write(rung[5][3:], self.timer(index, enabled))
-                continue
             acc = False
-            for line in rung:
-                if is_operation(line):
+            saved = []
+            groups = []
+            for op, arg in self.decoded[pc - 1]:
+                if op == "NUM":
                     if acc:
-                        target, name, values = self.operations[line]
+                        target, name, values = self.operations[arg]
                         kind, _ = reference_address(target)
                         args = [
                             self.read_number(v) if not isinstance(v, int) else v
@@ -391,14 +370,36 @@ class Machine:
                         ]
                         self.write_number(target, evaluate(name, args, kind))
                     continue
-                op, arg = line.split(maxsplit=1)
+                if op == "IN":
+                    self.timer(timer_index(arg), acc)
+                    continue
+                if op == "N":
+                    acc = not acc
+                    continue
+                if op == "MPS":
+                    saved.append(acc)
+                    continue
+                if op == "MRD":
+                    acc = saved[-1]
+                    continue
+                if op == "MPP":
+                    acc = saved.pop()
+                    continue
+                if op in OPEN:
+                    groups.append((op, acc))
+                    acc = self.read(arg, inputs)
+                    continue
+                if op == ")":
+                    operator, outer = groups.pop()
+                    acc = (outer and acc) if operator == "AND(" else (outer or acc)
+                    continue
                 if op in JUMPS:
                     if op == "JMP" or (acc if op == "JMPC" else not acc):
                         pc = self.labels[arg]
                     continue
-                if op in ("ST", "S", "R"):
-                    if op == "ST":
-                        self.write(arg, acc)
+                if op in STORES:
+                    if op in ("ST", "STN"):
+                        self.write(arg, not acc if op == "STN" else acc)
                     elif acc:
                         self.write(arg, op == "S")
                     continue

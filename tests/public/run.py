@@ -34,7 +34,7 @@ SEED = 20020261105
 BASES = {"OneMilliSeconds": 1, "OneHundredMilliSeconds": 100, "OneSecond": 1000}
 WARNINGS = {
     1: [
-        "Parallel rung 1 contains parenthesized IL outside the executable subset; only rung 0 has a runtime oracle."
+        "Parenthesized rung 1 now validates; this legacy audit still executes only rung0. Native-logic stress has the new isolated runtime oracle; parallel graphics remain unverified."
     ],
     3: [
         "Filename says floats multiply, but original executable logic assigns integer MW0=1; no float multiplication coverage."
@@ -46,7 +46,7 @@ WARNINGS = {
         "Filename says Counters1, but only LD M0 / ST M0 exists. No native counter instruction was tested."
     ],
     6: [
-        "Original includes analog input words, parallel graphics and non-reversible/retentive timer forms outside this isolated runtime test."
+        "Analog input words/parallel graphics remain outside this extraction. Timer35/36 syntax and graphs are supported, but missing explicit type/base still prevent runtime claims here. Retentive configuration is tested separately."
     ],
     7: [
         "Runtime covers rungs 0..5. READ_VAR/WRITE_VAR blocks require communication configuration; checking an isolated rung without that context does not test or disprove configured Modbus support."
