@@ -3,6 +3,7 @@
 import hashlib
 import json
 import os
+import re
 import shutil
 import subprocess
 from pathlib import Path
@@ -32,6 +33,10 @@ def strip(node):
 def walk(node):
     yield node
     for child in node.get("inner", []):
+        yield from walk(child)
+    # Clang stores partially initialized arrays outside `inner`: the first
+    # entry is the implicit zero filler and the rest are explicit initializers.
+    for child in node.get("array_filler", []):
         yield from walk(child)
 
 
@@ -87,6 +92,7 @@ class Frontend:
                 self.top.append(node)
         self.functions = {n["id"]: n for n in self.top if n["kind"] == "FunctionDecl"}
         self.variables = {}
+        self.arrays = {}
         self.instances = {}
         self.calls = set()
         self.active = []
@@ -225,6 +231,15 @@ class Frontend:
             self.outputs[index] = self.lower.bit("output_%d_image" % index)
         return self.outputs[index]
 
+    def array_element(self, node):
+        base, subscript = node["inner"]
+        base = strip(base)
+        ref = base.get("referencedDecl", {}).get("id")
+        if base.get("kind") != "DeclRefExpr" or ref not in self.arrays:
+            self.error(node, "array access requires a declared fixed-capacity array")
+        elements = self.arrays[ref]
+        return elements[self.index(subscript, len(elements), node)]
+
     def expr(self, node, env=None, side_effect=False):
         env = env or {}
         node = strip(node)
@@ -247,6 +262,8 @@ class Frontend:
             if ref in self.variables:
                 return self.variables[ref]
             self.error(node, "unknown or unsupported variable")
+        if kind == "ArraySubscriptExpr":
+            return self.array_element(node)
         if kind == "UnaryOperator" and node.get("opcode") == "!":
             return self.lower.neg(self.expr(children[0], env))
         if kind == "UnaryOperator" and node.get("opcode") == "-":
@@ -445,6 +462,15 @@ class Frontend:
     def declaration(self, node, guard=None, global_scope=False):
         if node.get("kind") != "VarDecl":
             self.error(node, "unsupported declaration")
+        array = re.fullmatch(
+            r"(?:const )?(bool|plc::i16|plc::i32|plc::f32)\s*\[([0-9]+)\]",
+            node["type"]["qualType"],
+        )
+        if array:
+            self.array_declaration(
+                node, array.group(1), int(array.group(2)), guard, global_scope
+            )
+            return
         typ = (
             node["type"]
             .get("desugaredQualType", node["type"]["qualType"])
@@ -543,6 +569,50 @@ class Frontend:
                 target, self.expr(initial[0], side_effect=guard is None), guard
             )
 
+    def array_declaration(self, node, typ, count, guard, global_scope):
+        if node.get("storageClass") == "static" and not global_scope:
+            self.error(node, "local static arrays are not implemented")
+        kind = typ.removeprefix("plc::")
+        capacity = 1024 if kind == "bool" else 8000 // TYPES[kind][1]
+        if not 1 <= count <= capacity:
+            self.error(node, "array capacity exceeds target memory")
+        initial = node.get("inner", [])
+        if len(initial) > 1 or (initial and initial[0].get("kind") != "InitListExpr"):
+            self.error(node, "array requires a brace initializer")
+        if not initial and not global_scope:
+            self.error(node, "local arrays require initialization before use")
+        values = []
+        if initial:
+            init = initial[0]
+            values = init.get("inner", [])
+            if "array_filler" in init:
+                filler, *values = init["array_filler"]
+                if filler.get("kind") != "ImplicitValueInitExpr":
+                    self.error(init, "unknown array initialization filler")
+        if len(values) > count:
+            self.error(node, "too many array initializers")
+        elements = [
+            self.lower.bit(f"{node['name']}_{i}")
+            if kind == "bool"
+            else self.lower.word(kind, f"{node['name']}_{i}")
+            for i in range(count)
+        ]
+        self.arrays[node["id"]] = elements
+        for i, target in enumerate(elements):
+            value = (
+                self.expr(values[i])
+                if i < len(values)
+                else ("0" if kind == "bool" else literal(0, kind))
+            )
+            value = boolean(value) if kind == "bool" else expect(value, kind)
+            if global_scope:
+                code = value.code if isinstance(value, Number) else value
+                if code.startswith("%"):
+                    self.error(node, "global array initializers must be literals")
+                self.init.append((target, value))
+            else:
+                self.lower.assign(target, value, guard)
+
     def statement(self, node, guard=None):
         old = self.lower.origin
         old_guard = self.lower.guard
@@ -576,10 +646,14 @@ class Frontend:
         elif kind == "BinaryOperator" and node.get("opcode") == "=":
             lhs = strip(children[0])
             ref = lhs.get("referencedDecl", {}).get("id")
-            if lhs["kind"] != "DeclRefExpr" or ref not in self.variables:
+            if lhs["kind"] == "ArraySubscriptExpr":
+                target = self.array_element(lhs)
+            elif lhs["kind"] == "DeclRefExpr" and ref in self.variables:
+                target = self.variables[ref]
+            else:
                 self.error(node, "unsupported assignment target")
             self.lower.assign(
-                self.variables[ref],
+                target,
                 self.expr(children[1], side_effect=guard is None),
                 guard,
             )
