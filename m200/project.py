@@ -16,6 +16,7 @@ from .config import configuration, unique_tree
 from .model import Program, Timer, address, fail
 from .flow import split_label
 from .indexed import has_indexed, direct_word_limit, has_indexed_bits
+from .bits import memory_bits_used
 from .numeric import (
     word_address,
     comparison,
@@ -454,10 +455,7 @@ def validate_allocations(sw, program):
     validate_timer_profile(program)
     if has_indexed_bits(program):
         fail("indexed-bit functional-level mapping is unverified for SMBP")
-    text = (
-        " ".join(" ".join(r) for r in program.rungs) + " " + " ".join(program.symbols)
-    )
-    bits = [int(n) for n in re.findall(r"%M([0-9]+)", text)]
+    bits = memory_bits_used(program)
     requirements = {
         "MemoryWordsMemoryAllocation": (
             8000,

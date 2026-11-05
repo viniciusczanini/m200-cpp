@@ -16,7 +16,7 @@ from .numeric import Number, TYPES
 
 REFERENCE = re.compile(r"%M(?:W|D|F)?[0-9]+")
 ASSIGNMENT = re.compile(
-    r"(?:OPER\s+)?\[\s*(%M(?:W|D|F)[0-9]+|%TM[0-9]+\.P)(?:\[%MW[0-9]+\])?\s*:="
+    r"(?:OPER\s+)?\[\s*(%M(?:W|D|F)[0-9]+|%TM[0-9]+\.P|%(?:M[0-9]+|Q0\.[0-9]+):[0-9]+)(?:\[%MW[0-9]+\])?\s*:="
 )
 UNARY = re.compile(r"(?:OPER\s+)?\[\s*(?:INC|DEC)\s+(%M(?:W|D)[0-9]+)\s*\]")
 
@@ -78,7 +78,7 @@ def effects(rung, registers, constants, aliases=None):
         ):
             fail("unmodelled instruction effects in memory allocation: " + line)
         if op in ("ST", "S", "R"):
-            target = arg.split("[", 1)[0]
+            target = arg.split("[", 1)[0].split(":X", 1)[0]
             must = op == "ST" or acc is True
             if target in refs:
                 refs.remove(target)
@@ -102,7 +102,10 @@ def effects(rung, registers, constants, aliases=None):
                 else TYPES[registers[target].kind][1]
             )
             must = (
-                must and not indexed_target and registers[target].width == element_width
+                must
+                and ":X" not in arg
+                and not indexed_target
+                and registers[target].width == element_width
             )
         reads.update(ref for ref in refs if ref not in definitions)
         line_reads, line_definitions, line_writes = set(refs), set(), set()
@@ -247,6 +250,12 @@ class Storage:
         else:
             self.next_word += count * stride
         return values
+
+    def word_bit(self, value, bit):
+        root, offset = self.members[value.code]
+        alias = "%MW" + str(int(value.code[3:]) + bit // 16)
+        self.members[alias] = (root, offset + bit // 16)
+        return alias + ":X" + str(bit % 16)
 
     def finalize(self, program, constants):
         fixed = {bank: set(cells) for bank, cells in self.reserved.items()}

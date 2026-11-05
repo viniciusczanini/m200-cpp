@@ -12,6 +12,7 @@ from dataclasses import dataclass
 from .model import fail, CompileError
 from .communication import status_reference, NUM_FIELDS, NUM_REFERENCE, cpp_name
 from .indexed import WORD_PATTERN, is_indexed, parse as parse_indexed
+from .bits import STRING_PATTERN, is_string, bit_string
 from .timers import (
     NUMERIC_PATTERN as TIMER_PATTERN,
     reference as timer_reference,
@@ -184,10 +185,44 @@ def operation(line):
             ("add_" if token == "INC" else "sub_") + typ,
             [Number(typ, target), literal(1, typ)],
         )
-    m = re.fullmatch(r"\[\s*(" + VALUE_PATTERN + r")\s*:=\s*(.*?)\s*\]", line)
+    m = re.fullmatch(
+        r"\[\s*(" + VALUE_PATTERN + "|" + STRING_PATTERN + r")\s*:=\s*(.*?)\s*\]", line
+    )
     if not m:
         fail("unsupported numeric operation: " + line)
     target, expression = m.groups()
+    expression = expression.strip()
+    if is_string(target) or is_string(expression):
+        source_string = is_string(expression)
+        target_string = is_string(target)
+        if target_string:
+            tb, ts, tl = bit_string(target, True)
+            if source_string:
+                sb, ss, sl = bit_string(expression)
+                if tl != sl:
+                    fail("unequal native bit string lengths are unverified")
+                if tb == sb and ts != ss and max(ts, ss) < min(ts + tl, ss + sl):
+                    fail(
+                        "overlapping native bit string copy is unverified; use explicit packed snapshot"
+                    )
+                typ = "i16" if tl <= 16 else "i32"
+            elif expression.startswith("%"):
+                typ = reference_address(expression)[0]
+            else:
+                typ = "i16" if tl <= 16 else "i32"
+            if typ not in ("i16", "i32"):
+                fail("bit string carrier must be word/dword")
+            bit_string(target, True, 16 if typ == "i16" else 32)
+        else:
+            typ = reference_address(target, True)[0]
+            if typ not in ("i16", "i32"):
+                fail("bit string carrier must be word/dword")
+        if source_string:
+            bit_string(expression, width=16 if typ == "i16" else 32)
+            value = Number(typ, expression)
+        else:
+            value = operand(expression, typ)
+        return target, "copy", [value]
     typ, _ = reference_address(target, True)
     # Match longer names via exact token, not prefix. Arithmetic is one operator.
     for name, (out, args, token, shape) in OPS.items():
@@ -408,6 +443,10 @@ def compare(words, parsed, reader=None):
 
 
 def cpp(value):
+    if is_string(value.code):
+        bank, start, count = bit_string(value.code)
+        prefix = {"M": "m", "I0.": "input", "Q0.": "output"}[bank]
+        return f"plc::read_{prefix}_bits_{value.kind}({start},{count})"
     timer = timer_reference(value.code)
     if timer:
         return "timer_%d.%s()" % (timer[0], GETTERS[timer[1]])

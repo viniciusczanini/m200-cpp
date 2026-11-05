@@ -1,0 +1,330 @@
+{
+  "seed": 20020261115,
+  "target": "TM200CE40T",
+  "cases": [
+    {
+      "case": "route_0_inverted_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_1_inverted_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_2_inverted_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_3_inverted_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_4_inverted_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_5_inverted_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_6_inverted_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_7_inverted_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_8_inverted_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_9_inverted_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_10_inverted_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_11_inverted_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_12_inverted_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_13_inverted_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_14_inverted_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_15_inverted_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_16_inverted_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_17_inverted_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_18_inverted_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_19_inverted_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_20_inverted_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_21_inverted_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_22_inverted_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_23_inverted_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_0_inverted_1",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_1_inverted_1",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_2_inverted_1",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_3_inverted_1",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_4_inverted_1",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_5_inverted_1",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_6_inverted_1",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_7_inverted_1",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_8_inverted_1",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_9_inverted_1",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_10_inverted_1",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_11_inverted_1",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_12_inverted_1",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_13_inverted_1",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_14_inverted_1",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_15_inverted_1",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_16_inverted_1",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_17_inverted_1",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_18_inverted_1",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_19_inverted_1",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_20_inverted_1",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_21_inverted_1",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_22_inverted_1",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "route_23_inverted_1",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "conditional_image",
+      "scans": 512,
+      "status": "pass"
+    }
+  ],
+  "scans": 12800,
+  "input_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "output_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "distinct_input_output_polarity_bindings": 768,
+  "source_sha256": {
+    "m200/__init__.py": "77c5815a3596eebca3e939d1ad39abba46fa4edc4df148aaa7e47f13e5eda0ab",
+    "m200/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "m200/allocation.py": "e565f4df89801eb65cdae5a8af980d0222c4f6ec237b3c4b79c33736c4550d8b",
+    "m200/arrays.py": "d4574f6e48ab98f70feb3f474f30bbf387117f5db3ddde395525a21a77da42ed",
+    "m200/bits.py": "d76ca8b8bb587a6811cfb3e157c00385ba0a836b8eb669afdda9af4e635b6a61",
+    "m200/capabilities.py": "e94e59743ee0eae98c476938f8eafe04966c0823b825b1d070980d15d41348a0",
+    "m200/cli.py": "6e6047f3d91a91b6c803f02174e2b3cd94a4e1e1b7081dc0442086ae3b0ecee4",
+    "m200/communication.py": "105c1aef50e7ee00bc7c7142a5b6805d4ddf5f18fc04c5e60a52b78841a6b3b0",
+    "m200/communication_xml.py": "954e0fb861fef56381b204936c47f2f760dbcb3840dd018bb1d2a1b13bfc319f",
+    "m200/config.py": "3acbc41bf01d78576c34a5d716b559851fb13bb819fa14b149e4be9fd3dd5e52",
+    "m200/flow.py": "a61ed946937daa4e54002dc29664c0ef6c02617eb1abb8faa0d0169e06244dc6",
+    "m200/frontend.py": "24e91353960dae9ac6923fab634e5b9b6554de196f7f86e4d69429bfd351bffc",
+    "m200/il.py": "f92a899811acc088a689096d2861e06dbbbf0130e160cd5ab65eded8e39d4a55",
+    "m200/indexed.py": "0b8ca542e2be87392d8de2a75ef8ad0d48534b28d7f82d1e24fd1bf38fc8343b",
+    "m200/jsonio.py": "c4d8447354b4f48205a8d5bfc58e1a3919656ba2073ecc5982b2f8fd6253fd70",
+    "m200/ladder_lowering.py": "54dee9f8eaf608270b8c542b44f88ca30fc1b30337d627852897275d0ba5c1cc",
+    "m200/lower.py": "b8ccd5045ce5deed35230c7741c4e56a8f9a1ed28d00a9221e2d0c52fb046017",
+    "m200/modbus.py": "62e98577eba6e2de938bc2292dd6cb16f22f64e1101fabdf5ea0f33fd009e92c",
+    "m200/model.py": "ddf340d5f9aeab364d9d7b867bf217e25a449b965871ff78d8a2108ce0c6105f",
+    "m200/native.py": "838a14f581bddde44c96510ed3237ed50863f6cb6b1cc8fc1b8eeadc52b8c2c0",
+    "m200/native_logic.py": "d3bfd7f5069040e2f82cafa35cb14379a9331786013722fd8b35e6ee5373278f",
+    "m200/numeric.py": "5552aca3a838036b9e93ec9ad78c8da53d048fc60de0c3a4996198358915f1b6",
+    "m200/project.py": "bb7ada8f2a9cc785e1f65c44e284107380cd055ac1a1dde7acf6c007d4dac255",
+    "m200/reverse.py": "ff4df6baa1d3d315438bd3d424a7dd9e9646ea0671f76bd0811cb2c4797368cf",
+    "m200/timers.py": "384e3c26facd76ed8da5449d001348fe1c1dd818a73532ab9c782e6a9b0fedf6",
+    "sdk/plc.hpp": "a2c469bc7fa82a2e804f48c576383349519c4712fee2c658ff76f3a7fc4640f4",
+    "tests/stress/digital_io.py": "e9c5f30e351cebc403f5d4224c728b0813de2e6830b35a63ed0a81ed61c9ec09",
+    "tests/stress/bit_objects.py": "a39468f5ae36159b378cda34f2bfbe81abdf42fa1cb1fbf5cca0e6325b9c0489"
+  },
+  "official_editor": "pending",
+  "physical_plc": "pending",
+  "electrical_io": "not-tested-locally"
+}

@@ -61,15 +61,9 @@ def has_indexed_bits(program):
 
 
 def direct_bit_limit(program):
-    return max(
-        (
-            int(n) + 1
-            for rung in program.rungs
-            for line in rung
-            for n in re.findall(r"%M([0-9]+)", line)
-        ),
-        default=0,
-    )
+    from .bits import memory_bits_used
+
+    return max(memory_bits_used(program), default=-1) + 1
 
 
 def resolve_bit(text, words, limit):

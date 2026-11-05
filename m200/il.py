@@ -11,6 +11,7 @@ from .timers import (
 )
 from .flow import JUMPS, destinations, label_name, split_label
 from .native_logic import decode, STORES, OPEN, timer_index
+from .bits import is_string, references as bit_references, signed_pattern
 from .indexed import (
     ANY_INDEXED,
     is_indexed,
@@ -239,6 +240,7 @@ class Machine:
         self.outputs = [False] * 16
         self.now = 0
         self.first = True
+        self.current_inputs = {}
         self.timers = {i: TimerState(t) for i, t in program.timers.items()}
 
     def read(self, operand, inputs):
@@ -255,6 +257,8 @@ class Machine:
         if operand.startswith("["):
             return compare(self.words, self.comparisons[operand], self.read_number)
         kind, index = address(operand)
+        if kind == "MWbit":
+            return bool(self.words[index // 16] & (1 << (index % 16)))
         if kind == "constant":
             return bool(index)
         if kind == "M":
@@ -282,9 +286,20 @@ class Machine:
             self.memory[index] = bool(value)
             return
         kind, index = address(operand, True)
+        if kind == "MWbit":
+            mask = 1 << (index % 16)
+            old = self.words[index // 16]
+            self.words[index // 16] = (old | mask) if value else (old & (65535 ^ mask))
+            return
         (self.memory if kind == "M" else self.outputs)[index] = bool(value)
 
     def read_number(self, value):
+        if is_string(value.code):
+            raw = sum(
+                int(self.read(ref, self.current_inputs)) << i
+                for i, ref in enumerate(bit_references(value.code))
+            )
+            return signed_pattern(raw, value.kind)
         timer = timer_reference(value.code)
         if timer:
             return self.timers[timer[0]].read(timer[1], self.now)
@@ -302,6 +317,10 @@ class Machine:
         )
 
     def write_number(self, target, value):
+        if is_string(target):
+            for i, ref in enumerate(bit_references(target)):
+                self.write(ref, bool(value & (1 << i)))
+            return
         timer = timer_reference(target, True)
         if timer:
             self.timers[timer[0]].set_preset(value, self.now)
@@ -333,6 +352,7 @@ class Machine:
             ):
                 fail("invalid input trace")
         pc = 0
+        self.current_inputs = inputs
         executed = 0
         while pc < len(self.program.rungs):
             _, rung = split_label(self.program.rungs[pc])
@@ -363,7 +383,11 @@ class Machine:
                 if op == "NUM":
                     if acc:
                         target, name, values = self.operations[arg]
-                        kind, _ = reference_address(target)
+                        kind = (
+                            values[0].kind
+                            if is_string(target)
+                            else reference_address(target)[0]
+                        )
                         args = [
                             self.read_number(v) if not isinstance(v, int) else v
                             for v in values

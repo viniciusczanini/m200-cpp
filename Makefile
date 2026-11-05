@@ -1,4 +1,4 @@
-.PHONY: check examples stress public-fetch public-check public-flow-fetch public-flow-check
+.PHONY: check examples stress digital-io-stress public-fetch public-check public-flow-fetch public-flow-check public-indexed-fetch
 check:
 	python3 -m unittest discover -s tests -v
 examples:
@@ -20,6 +20,8 @@ examples:
 	python3 -m m200 check examples/timer_properties.cpp --trace examples/trace.json
 	python3 -m m200 compile examples/timer_modes.cpp -o output/timer-modes
 	python3 -m m200 check examples/timer_modes.cpp --trace examples/trace.json
+	python3 -m m200 compile examples/bit_objects.cpp -o output/bit-objects
+	python3 -m m200 check examples/bit_objects.cpp --trace examples/trace.json
 stress:
 	python3 tests/stress/run.py
 	python3 tests/stress/control_flow.py
@@ -28,6 +30,10 @@ stress:
 	python3 tests/stress/timer_properties.py
 	python3 tests/stress/timer_modes.py
 	python3 tests/stress/native_logic.py
+	python3 tests/stress/bit_objects.py
+	python3 tests/stress/digital_io.py
+digital-io-stress:
+	python3 tests/stress/digital_io.py
 public-fetch:
 	python3 tests/public/fetch.py
 public-check:
@@ -36,3 +42,5 @@ public-flow-fetch:
 	python3 tests/public/fetch.py --manifest tests/public/control-flow-manifest.json
 public-flow-check:
 	python3 tests/public/control_flow.py
+public-indexed-fetch:
+	python3 tests/public/fetch.py --manifest docs/capabilities/INDEXED-SOURCES.json --corpus research/downloads/indexed-sources

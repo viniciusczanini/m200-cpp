@@ -16,6 +16,18 @@ from .numeric import Number, OPS, READS, WRITES, TYPES, boolean, expect, literal
 from .modbus import ModbusConfig
 from .communication import KINDS, BOOL_FIELDS, NUM_FIELDS
 from .indexed import is_indexed, is_bit_indexed
+from .bits import bit_string
+
+PACK_READS = {
+    f"read_{bank}_bits_{kind}": (bank, kind)
+    for bank in ("m", "input", "output")
+    for kind in ("i16", "i32")
+}
+PACK_WRITES = {
+    f"write_{bank}_bits_{kind}": (bank, kind)
+    for bank in ("m", "output")
+    for kind in ("i16", "i32")
+}
 
 SDK = Path(__file__).resolve().parents[1] / "sdk"
 INDEXED_READS = {name + "_indexed": kind for name, kind in READS.items()}
@@ -176,6 +188,18 @@ class Frontend:
                     self.index(args[0], self.bit_count, n)
                     self.index(args[1], self.word_count, n)
                 key = name.removeprefix("plc::")
+                if key in ("read_word_bit", "write_word_bit"):
+                    reserved_words.add(self.index(args[0], self.word_count or 8000, n))
+                    self.index(args[1], 16, n)
+                if key in PACK_READS or key in PACK_WRITES:
+                    bank, typ = (PACK_READS | PACK_WRITES)[key]
+                    _, start, count = self.packed_reference(bank, args, n, typ)
+                    if bank == "m":
+                        reserved.update(range(start, start + count))
+                if key == "copy_m_bits":
+                    for source in (args[:1] + args[2:3], args[1:3]):
+                        _, start, count = self.packed_reference("m", source, n, "i32")
+                        reserved.update(range(start, start + count))
                 if key in READS or key in WRITES:
                     typ = (READS | WRITES)[key]
                     count = self.word_count or 8000
@@ -316,6 +340,16 @@ class Frontend:
             return array.elements[index]
         return array_reference(self, array, subscript, env)
 
+    def packed_reference(self, bank, args, owner, kind):
+        first = self.const(args[0])
+        count = self.const(args[1])
+        prefix = {"m": "M", "input": "I0.", "output": "Q0."}[bank]
+        text = f"%{prefix}{first}:{count}"
+        bit_string(text, width=16 if kind == "i16" else 32)
+        if bank == "m" and first + count > (self.bit_count or 1024):
+            self.error(owner, "bit string outside BitMemory image")
+        return text, first, count
+
     def indexed_reference(self, args, kind, owner):
         if self.word_count is None:
             self.error(owner, "indexed memory requires a global plc::WordMemory image")
@@ -432,6 +466,23 @@ class Frontend:
         if kind == "CallExpr":
             name, args = self.call(node)
             key = name.removeprefix("plc::")
+            if key == "read_word_bit":
+                index = self.index(args[0], self.word_count or 8000, node)
+                bit = self.index(args[1], 16, node)
+                return f"%MW{index}:X{bit}"
+            if key in PACK_READS:
+                bank, typ = PACK_READS[key]
+                text, start, count = self.packed_reference(bank, args, node, typ)
+                if bank == "output":
+                    result = self.lower.word(typ, "output_bits_snapshot")
+                    self.lower.numeric_assign(result, literal(0, typ))
+                    for i in range(count):
+                        self.lower.rung(
+                            "LD " + self.output(start + i),
+                            "ST " + self.lower.storage.word_bit(result, i),
+                        )
+                    return result
+                return self.lower.copy(Number(typ, text), "packed_bits_read")
             if key in INDEXED_READS:
                 return self.indexed_reference(args, INDEXED_READS[key], node)
             if name == "plc::read_m_indexed":
@@ -883,6 +934,38 @@ class Frontend:
         elif kind == "CallExpr":
             name, args = self.call(node)
             key = name.removeprefix("plc::")
+            if key == "write_word_bit":
+                index = self.index(args[0], self.word_count or 8000, node)
+                bit = self.index(args[1], 16, node)
+                self.lower.assign(
+                    f"%MW{index}:X{bit}", boolean(self.expr(args[2])), guard
+                )
+                return
+            if key in PACK_WRITES:
+                bank, typ = PACK_WRITES[key]
+                text, start, count = self.packed_reference(bank, args, node, typ)
+                value = self.lower.copy(
+                    expect(self.expr(args[2]), typ), "packed_assignment_snapshot"
+                )
+                if bank == "output":
+                    for i in range(count):
+                        self.lower.assign(
+                            self.output(start + i),
+                            self.lower.storage.word_bit(value, i),
+                            guard,
+                        )
+                else:
+                    self.lower.assign(Number(typ, text), value, guard)
+                return
+            if key == "copy_m_bits":
+                text, _, count = self.packed_reference(
+                    "m", args[:1] + args[2:3], node, "i32"
+                )
+                source, _, _ = self.packed_reference("m", args[1:3], node, "i32")
+                typ = "i16" if count <= 16 else "i32"
+                value = self.lower.copy(Number(typ, source), "bit_copy_snapshot")
+                self.lower.assign(Number(typ, text), value, guard)
+                return
             if name == "plc::clear_index_error":
                 self.lower.rung("LD " + (guard if guard is not None else "1"), "R %S20")
                 return

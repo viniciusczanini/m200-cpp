@@ -322,3 +322,51 @@ sem CI, publicação, transferência ou atuação de PLC.
 
 O objetivo integral continua ativo; Task2 do plano de indexação ainda está
 pendente e não foi substituída pela API de words explícitos.
+
+## Continuação do objetivo: bits de words, grupos e portas digitais
+
+Após `d8b3e5a`, MW:X0..15 e grupos contíguos M/I0/Q0 têm APIs tipadas 16/32,
+IL/VM, SDK, reversão e XML experimental. Escritas preservam vizinhos e aliases
+MW/MD/MF; leituras menores preenchem os bits altos com zero. A cópia explícita
+captura snapshot antes da escrita, inclusive com sobreposição. Q usa a imagem
+de saída existente e enxerga escritas anteriores do mesmo scan. Regiões M
+inteiras ficam reservadas, inclusive no limite de indexação e na normalização.
+
+Rodada final local: **296 testes em 102,631 s**, exemplos, stress, ensaios públicos,
+lint, formatação e diff passaram. O stress de bits tem 67 casos/17.152 scans,
+incluindo todos os 16 bits, comprimentos 1..32, variação independente no byte
+alto de 32 bits, aliases e dois trechos públicos com hashes conferidos. Um é
+o rung1 inteiro de `flow-original-loop.smbp`; outro é somente o segmento
+contíguo [2:8] do rung9 de D/`INDEXED-SOURCES.json`. A exclusão de MULTIFB/Timer
+desse segundo caso é explícita. Nenhum original/CPU foi alterado ou importado
+integralmente.
+
+A pedido do usuário, foi acrescentada uma matriz explícita das 24 entradas e 16
+saídas: 48 casos cobrem todas as 768 ligações entrada/saída/polaridade, com walking
+ones/zeros. Outro caso confere retenção, condições, inversão, leitura após
+escrita e encaminhamento packed no mesmo scan. São 49 casos/12.800 scans,
+confrontados com referência independente, C++, IL, JSON, normalização,
+reversão/recompilação e XML sintético. Rodou por `make digital-io-stress` depois
+de adicionado durante `make stress`; versões futuras do alvo `stress` já o incluem.
+Isso cobre a imagem lógica, sem validar eletrônica, filtros, fallback ou partida.
+
+O stress total nesta rodada foi 123.988 scans e os ensaios públicos 18.176:
+**142.164 scans**, sem somar reruns, frames dos testes unitários, etapas de
+comparação ou ensaios extras do revisor. Os testes de Modbus e os demais
+recursos existentes foram repetidos na suíte/rodada integral.
+
+A revisão encontrou limite 513 em vez de 544 para M512:32, causando S20 indevido
+em M543. O teste reproduziu a falha antes da correção e passou depois na VM,
+SDK e recompilação. Rechecagem independente e 70 programas aleatórios não
+deixaram achados importantes/críticos abertos. A matriz de portas recebeu
+revisão própria e 32 frames adicionais, também sem falhas; estes não foram
+adicionados ao total. Ver `BIT-OBJECT-REVIEW.md`.
+
+Resultados e hashes: `BIT-OBJECT-LOCAL-RESULTS.json`, `BIT-OBJECT-STRESS-RESULTS.json`
+e `DIGITAL-IO-STRESS-RESULTS.json`. As recusas de outros bancos, cópias nativas
+sobrepostas/desiguais e perfis ainda não comprovados permanecem explícitas.
+O catálogo não foi promovido a completo. Contatos de borda nativos têm pesquisa
+adicional em `../capabilities/NATIVE-EDGES-RESEARCH.md`, incluindo um conflito
+entre a restrição documental e RISING após AND em originais; continuam pendentes.
+Objetivo integral ativo/incompleto, editor e PLC pendentes. Tudo local, sem CI,
+publicação ou transferência/atuação no PLC.

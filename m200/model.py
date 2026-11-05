@@ -90,6 +90,11 @@ class Program:
 
 
 def address(text, writable=False):
+    if ":X" in text:
+        from .bits import word_bit
+
+        word, bit = word_bit(text)
+        return "MWbit", word * 16 + bit
     if text.startswith("%TM"):
         from .timers import reference
 

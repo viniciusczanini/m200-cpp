@@ -3,7 +3,6 @@
 import copy
 import hashlib
 import json
-import re
 
 from .flow import JUMPS, split_label, destinations
 from .lower import Lowerer
@@ -11,6 +10,7 @@ from .native_logic import decode, STORES, OPEN, timer_index
 from .numeric import memory_words_used
 from .indexed import has_indexed_bits
 from .model import fail
+from .bits import memory_bits_used
 
 
 def needed(program):
@@ -51,12 +51,7 @@ def normalize(program):
         return program
     if has_indexed_bits(program):
         fail("indexed-bit normalization bounds/profile are unverified")
-    text = (
-        " ".join(" ".join(rung) for rung in program.rungs)
-        + " "
-        + " ".join(program.symbols)
-    )
-    bits = {int(n) for n in re.findall(r"%M([0-9]+)", text)}
+    bits = memory_bits_used(program)
     lower = Lowerer(bits, memory_words_used(program))
     used_labels = set(destinations(program))
     free_labels = iter(f"%L{i}" for i in range(64) if f"%L{i}" not in used_labels)

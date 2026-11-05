@@ -143,6 +143,46 @@ inline i32 bits_i32(unsigned v){i32 out;__builtin_memcpy(&out,&v,4);return out;}
 }
 inline i16 read_word(int n){return detail::bits_i16(detail::words[n]);}
 inline void write_word(int n,i16 v){detail::words[n]=(unsigned short)v;}
+inline bool read_word_bit(int n,int bit){
+    if(n<0||n>=(detail::word_memory_limit?detail::word_memory_limit:8000)||bit<0||bit>=16)__builtin_trap();
+    return (detail::words[n]&(1U<<bit))!=0;
+}
+inline void write_word_bit(int n,int bit,bool value){
+    if(n<0||n>=(detail::word_memory_limit?detail::word_memory_limit:8000)||bit<0||bit>=16)__builtin_trap();
+    unsigned mask=1U<<bit;
+    detail::words[n]=(unsigned short)((detail::words[n]&~mask)|(value?mask:0U));
+}
+namespace detail {
+inline void check_bit_region(int bank,int first,int count,int width){
+    int limit=bank==0?(bit_memory_limit?bit_memory_limit:1024):bank==1?24:16;
+    if(first<0||first%8||count<1||count>width||count>32||first>limit-count)__builtin_trap();
+}
+inline unsigned read_bits(int bank,int first,int count,int width){
+    check_bit_region(bank,first,count,width);unsigned result=0;
+    const bool* source=bank==0?memory:bank==1?inputs:outputs;
+    for(int bit=0;bit<count;++bit)if(source[first+bit])result|=1U<<bit;
+    return result;
+}
+inline void write_bits(int bank,int first,int count,int width,unsigned value){
+    check_bit_region(bank,first,count,width);
+    bool* dest=bank==0?memory:outputs;
+    for(int bit=0;bit<count;++bit)dest[first+bit]=((value>>bit)&1U)!=0;
+}
+}
+inline i16 read_m_bits_i16(int first,int count){return detail::bits_i16(detail::read_bits(0,first,count,16));}
+inline i32 read_m_bits_i32(int first,int count){return detail::bits_i32(detail::read_bits(0,first,count,32));}
+inline i16 read_input_bits_i16(int first,int count){return detail::bits_i16(detail::read_bits(1,first,count,16));}
+inline i32 read_input_bits_i32(int first,int count){return detail::bits_i32(detail::read_bits(1,first,count,32));}
+inline i16 read_output_bits_i16(int first,int count){return detail::bits_i16(detail::read_bits(2,first,count,16));}
+inline i32 read_output_bits_i32(int first,int count){return detail::bits_i32(detail::read_bits(2,first,count,32));}
+inline void write_m_bits_i16(int first,int count,i16 value){detail::write_bits(0,first,count,16,(unsigned)value);}
+inline void write_m_bits_i32(int first,int count,i32 value){detail::write_bits(0,first,count,32,(unsigned)value);}
+inline void write_output_bits_i16(int first,int count,i16 value){detail::write_bits(2,first,count,16,(unsigned)value);}
+inline void write_output_bits_i32(int first,int count,i32 value){detail::write_bits(2,first,count,32,(unsigned)value);}
+inline void copy_m_bits(int dest,int source,int count){
+    unsigned snapshot=detail::read_bits(0,source,count,32);
+    detail::write_bits(0,dest,count,32,snapshot);
+}
 inline i32 read_dword(int n){return detail::bits_i32((unsigned)detail::words[n]|((unsigned)detail::words[n+1]<<16));}
 inline void write_dword(int n,i32 v){unsigned raw;__builtin_memcpy(&raw,&v,4);detail::words[n]=(unsigned short)raw;detail::words[n+1]=(unsigned short)(raw>>16);}
 inline f32 read_real(int n){i32 raw=read_dword(n);f32 out;__builtin_memcpy(&out,&raw,4);return detail::check_f32(out);}
@@ -225,6 +265,19 @@ inline i16 high_word(i32 a){return detail::bits_i16((unsigned)a>>16);}
 #else
 i16 read_word(int);
 void write_word(int,i16);
+bool read_word_bit(int,int);
+void write_word_bit(int,int,bool);
+i16 read_m_bits_i16(int,int);
+i32 read_m_bits_i32(int,int);
+i16 read_input_bits_i16(int,int);
+i32 read_input_bits_i32(int,int);
+i16 read_output_bits_i16(int,int);
+i32 read_output_bits_i32(int,int);
+void write_m_bits_i16(int,int,i16);
+void write_m_bits_i32(int,int,i32);
+void write_output_bits_i16(int,int,i16);
+void write_output_bits_i32(int,int,i32);
+void copy_m_bits(int,int,int);
 i32 read_dword(int);
 void write_dword(int,i32);
 f32 read_real(int);

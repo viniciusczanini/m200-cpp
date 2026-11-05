@@ -100,6 +100,16 @@ comprovar o mapeamento de nível funcional 3.3/12.0. Fase/fração dos ticks e
 fronteiras após conclusão permanecem políticas locais pendentes de ensaio.
 Exemplo `examples/timer_modes.cpp`; contrato `docs/capabilities/TIMER-MODES.md`.
 
+Bits individuais de MW são acessados com `read_word_bit(word,bit)` e
+`write_word_bit(word,bit,bool)`, preservando os outros bits e os aliases MD/MF.
+As APIs `read_m/input/output_bits_i16/i32` e `write_m/output_bits_i16/i32`
+transferem grupos contíguos com início múltiplo de8, comprimento1–32 limitado
+ao portador/banco e bit inicial no LSB. Leituras preenchem os bits altos com
+zero; escritas preservam vizinhos. `copy_m_bits(dest,source,count)` captura
+o grupo antes de escrever e admite sobreposição. Leituras de Q enxergam as
+escritas anteriores do mesmo scan. Exemplo `examples/bit_objects.cpp`;
+escopo e restrições: `docs/capabilities/BIT-OBJECTS.md`.
+
 ## Números e inventário completo de pesquisa
 
 ```cpp

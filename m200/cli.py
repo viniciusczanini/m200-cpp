@@ -2,7 +2,6 @@ import argparse
 import hashlib
 import json
 import os
-import re
 import sys
 import tempfile
 from pathlib import Path
@@ -17,6 +16,7 @@ from .reverse import to_cpp
 from .jsonio import loads
 from .capabilities import summary as capability_summary, catalogue, lookup
 from .numeric import OPS, READS, WRITES, TYPES, memory_words_used
+from .bits import memory_bits_used
 from .communication import KINDS
 
 ARTIFACTS = {
@@ -169,8 +169,7 @@ def read_program(path):
 
 
 def report(program):
-    text = "\n".join(" ".join(r) for r in program.rungs)
-    addresses = set(re.findall(r"%M\d+", text))
+    addresses = memory_bits_used(program)
     words = memory_words_used(program)
     return {
         "tool": "m200-cpp",
@@ -266,6 +265,21 @@ def main(argv=None):
                     "write_m_indexed",
                 ],
                 "memory_profile_types": ["WordMemory", "BitMemory"],
+                "word_bit_api": ["read_word_bit", "write_word_bit"],
+                "packed_bit_api": [
+                    "read_m_bits_i16",
+                    "read_m_bits_i32",
+                    "read_input_bits_i16",
+                    "read_input_bits_i32",
+                    "read_output_bits_i16",
+                    "read_output_bits_i32",
+                    "write_m_bits_i16",
+                    "write_m_bits_i32",
+                    "write_output_bits_i16",
+                    "write_output_bits_i32",
+                    "copy_m_bits",
+                ],
+                "packed_bit_scope": "MW:X0..15 and M/I0/Q0 byte-aligned regions, length 1..32 within carrier/bank. Typed snapshots preserve aliases, neighbors and same-scan output image. Other banks, unequal/overlapping native string assignments and official acceptance remain gated/pending.",
                 "array_indices": ["literal", "bool", "i16", "i32"],
                 "native_logic_ir": [
                     "STN",

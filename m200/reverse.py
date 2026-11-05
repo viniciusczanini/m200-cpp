@@ -3,6 +3,7 @@ from .model import address, fail
 from .timers import reference as timer_reference
 from .flow import JUMPS, split_label
 from .native_logic import decode, STORES, OPEN
+from .bits import word_bit, is_string, bit_string
 from .indexed import (
     is_indexed,
     parse as parse_indexed,
@@ -30,6 +31,9 @@ from .communication import (
 
 
 def read_cpp(arg):
+    if ":X" in arg:
+        word, bit = word_bit(arg)
+        return f"plc::read_word_bit({word},{bit})"
     timer = timer_reference(arg)
     if timer:
         return "timer_%d.done()" % timer[0]
@@ -60,6 +64,9 @@ def read_cpp(arg):
 
 
 def write_cpp(arg, value):
+    if ":X" in arg:
+        word, bit = word_bit(arg)
+        return f"plc::write_word_bit({word},{bit},{value});"
     if is_bit_indexed(arg):
         base, index = parse_bit(arg)
         return "plc::write_m_indexed(%d,%d,%s);" % (base, index, value)
@@ -144,6 +151,13 @@ def to_cpp(program):
             if op == "NUM":
                 line = arg
                 target, name, values = instruction_operation(line)
+                if is_string(target):
+                    bank, start, count = bit_string(target, True)
+                    prefix = "m" if bank == "M" else "output"
+                    lines.append(
+                        f"  if (accumulator) {{ plc::write_{prefix}_bits_{values[0].kind}({start},{count},{cpp(values[0])}); }}"
+                    )
+                    continue
                 timer = timer_reference(target, True)
                 if timer:
                     args = [str(v) if isinstance(v, int) else cpp(v) for v in values]
