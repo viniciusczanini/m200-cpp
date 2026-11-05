@@ -1,0 +1,166 @@
+{
+  "target": "TM200CE40T",
+  "status": "local-tests-passed-experimental",
+  "baseline_commit": "6159c4c1cf0dcb2a38634d930c9f555419574d1e",
+  "commands": [
+    {
+      "command": "make check",
+      "exit_code": 0,
+      "tests": 243,
+      "seconds": 132.263
+    },
+    {
+      "command": "make examples",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 tests/stress/run.py",
+      "exit_code": 0,
+      "scans": 37716,
+      "expected_feature_rejections": [
+        "sdk_macro_constructor_escape",
+        "helper_variadic",
+        "bool_aggregate_init"
+      ]
+    },
+    {
+      "command": "python3 tests/stress/control_flow.py",
+      "exit_code": 0,
+      "cases": 12,
+      "scans": 3072
+    },
+    {
+      "command": "python3 tests/stress/indexed.py",
+      "exit_code": 0,
+      "cases": 10,
+      "scans": 10240
+    },
+    {
+      "command": "python3 tests/stress/dynamic_arrays.py",
+      "exit_code": 0,
+      "cases": 11,
+      "scans": 11264
+    },
+    {
+      "command": "make public-check",
+      "exit_code": 0,
+      "cases": 19,
+      "scans": 16128,
+      "whole_projects_imported": 0
+    },
+    {
+      "command": "make public-flow-check",
+      "exit_code": 0,
+      "cases": 2,
+      "scans": 2048
+    },
+    {
+      "command": "python3 -m unittest discover -s tests -p test_numeric.py -k report -v",
+      "exit_code": 0,
+      "tests": 1,
+      "purpose": "CLI inventory follow-up after descriptive fields changed"
+    },
+    {
+      "command": "uvx ruff check m200 tests m200c",
+      "exit_code": 0
+    },
+    {
+      "command": "uvx ruff format --check m200 tests m200c",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "public_and_stress_scans": 80468,
+  "source_sha256": {
+    "m200/__init__.py": "77c5815a3596eebca3e939d1ad39abba46fa4edc4df148aaa7e47f13e5eda0ab",
+    "m200/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "m200/allocation.py": "72656191845c032f41391f8576e7c5468ad47af28ba88ef94ade400e832c8316",
+    "m200/arrays.py": "d4574f6e48ab98f70feb3f474f30bbf387117f5db3ddde395525a21a77da42ed",
+    "m200/capabilities.py": "e94e59743ee0eae98c476938f8eafe04966c0823b825b1d070980d15d41348a0",
+    "m200/cli.py": "47c5eb6cfee574540a47ebe4af762920910facee165526f056466cf090bd0636",
+    "m200/communication.py": "105c1aef50e7ee00bc7c7142a5b6805d4ddf5f18fc04c5e60a52b78841a6b3b0",
+    "m200/communication_xml.py": "954e0fb861fef56381b204936c47f2f760dbcb3840dd018bb1d2a1b13bfc319f",
+    "m200/config.py": "3acbc41bf01d78576c34a5d716b559851fb13bb819fa14b149e4be9fd3dd5e52",
+    "m200/flow.py": "a61ed946937daa4e54002dc29664c0ef6c02617eb1abb8faa0d0169e06244dc6",
+    "m200/frontend.py": "9d1eafcc10be0c3377cd2a77d31e0e77fb24cc833f2ee4e7308d56d7530ef6e3",
+    "m200/il.py": "89bcb614d22edb938a61d3bbd8424ed8bce265afbb96402d33ed82279e37f13e",
+    "m200/indexed.py": "b716e924847b6cbf6aee98e2a2d3de9a68f20184e591d0def0872884e678be20",
+    "m200/jsonio.py": "c4d8447354b4f48205a8d5bfc58e1a3919656ba2073ecc5982b2f8fd6253fd70",
+    "m200/lower.py": "b8ccd5045ce5deed35230c7741c4e56a8f9a1ed28d00a9221e2d0c52fb046017",
+    "m200/modbus.py": "62e98577eba6e2de938bc2292dd6cb16f22f64e1101fabdf5ea0f33fd009e92c",
+    "m200/model.py": "83ad89abbad562aca769a3bfacfd61e21849660aed374349f15d182d401a3569",
+    "m200/native.py": "6e782827bcfbd9201997a7466da3b78b6dde6b2298f7449f2f83d2c3a5806dd7",
+    "m200/numeric.py": "feb549952539d4a8c16b189b6eeeb5efc8846804dce8faaa2746db1638161c4e",
+    "m200/project.py": "2135b3df1ec97816f455a3c6d28ba29b2b9c4175ed559517455c5dce5acfabc9",
+    "m200/reverse.py": "87550cde692693a98390a0f2072eb91c0d3545f3128a8c4cf76f444faf3cffb1",
+    "tests/test_adversarial.py": "70697b896097c6c84093595d03fa244498aa9e1dd92b767654bf9683c752a2c7",
+    "tests/test_allocation.py": "840f03e2fadf0a1e001c94be7eba03122764a5fccca3c982b22e888b6ea08af5",
+    "tests/test_arrays.py": "e41d1d729a04fa7cea78c6511eb1f5c77908a022f02475b9b3d056984049efcd",
+    "tests/test_capabilities.py": "15d1fab381fb0aa052e4bd985cc077ebce402964071e1d66ca5d6b763b62716e",
+    "tests/test_communication_compiler.py": "07e10834d084472242e0043f60b3d8e687b628c2536ab89adb6b7c7c9607f209",
+    "tests/test_communication_project.py": "62c93e9bceffa04150a72c7527adb48e2c959799eb7218460dbbe6ac791785a6",
+    "tests/test_communication_xml.py": "ed30c81619345e2a7f2289087724df2d6efeb48a37ba5f1ef1504477b4411fee",
+    "tests/test_control_flow.py": "8c2ad3d223641ee562ad74236c9ec04429c5bb24a1755fcffdaa562a856509db",
+    "tests/test_dynamic_arrays.py": "6714bd13bd8b0b1bcb3443cfa713e3ddaa0045e5f4be3b9854f94c282d719cc2",
+    "tests/test_indexed.py": "e8e9d248f90c47197a982ca2410efcae37f070b1c11b41ce0d26145cc8e92589",
+    "tests/test_indexed_bits.py": "5e7c05ab57931ed15012a580adc3034a36ed6c78b3df0ddc59ad9b8a5aca6a6f",
+    "tests/test_modbus.py": "be200a1bdb1dfe4a8f03921af2e69650aa17fde3a78aea02df8e6ea8b6a4ea66",
+    "tests/test_numeric.py": "039fea429660de59cc435808fb34e835e4fd9739ed2b3bb9ab3451adec1ca63a",
+    "tests/test_numeric_stress.py": "6e1b286d9a1988591b37a7aa19f1327aaca2b1aaa5f28cb00905210d98e75f33",
+    "tests/test_public_regressions.py": "2dbedd883358b74d7c082ae750a107e3a57a889758eec1b61501b810b3dca532",
+    "tests/test_review_regressions.py": "458f5c6690fa7c9afc3035a27a9a40eb5167729d25e4faa53bd3c902dcffdd83",
+    "tests/test_toolchain.py": "45e4f0f08ec2c0feae7604bf07956fae4d615a5d5bb1a9a79bd9c3a804a14e10",
+    "tests/stress/boolean_audit.py": "ecd800fad5e3eb05948eb833f77a6098fb0e44aaecf8c0a81b60f1c529de146a",
+    "tests/stress/control_flow.py": "ad7814da8c24d58557b9f749252f624e86d71dd28f1873f8b84dcbf5dece6586",
+    "tests/stress/dynamic_arrays.py": "df53722713450024bfce76434e1e548ceabccde25b7b5654417d8a2a889566ac",
+    "tests/stress/il_properties.py": "f2269c4d4beb32ea1e9e014aea71b67f3a05839ec137d5f9be237fa833f25644",
+    "tests/stress/indexed.py": "d8937c58e751f515b6d65dcc4f3d1d1a2545d4dee9ed673f73e02fa4f77426a3",
+    "tests/stress/run.py": "f8a317eea4fa0e016ce3c5dd9de2ee534ee333c659cf51396e27ce386d91b7d7",
+    "tests/public/control_flow.py": "65f9d5f2aba359e6c316aa133c577496114e3981728cf5ce60ada5ecbad7ae72",
+    "tests/public/fetch.py": "196a8b6233a222fd1ebb86a89ced34dda368568bd0a82407cc792d45760af5ba",
+    "tests/public/run.py": "546d34f1c6d1661e4703d76d364498f5f93a088aa6fc14f810ed00fd4afcc31d",
+    "examples/blink.cpp": "8298b531155f8f8a552c03388645581ee4c771a46246932c24c5ecdb1294e16a",
+    "examples/dynamic_arrays.cpp": "1b856ff38fd734674b4d52779d8b1b47bb2ba76bb6facef3a8d2751acdf686b1",
+    "examples/dynamic_bits.cpp": "9535588b69655900fe8f7a481cbba0a71da800f67ac5416dbf6d68d8c93ada50",
+    "examples/indexed_words.cpp": "b7e23a747d2bc5bac4973b5d15cc9f35ed22d0bedbe0b6ca01af422f70cd4558",
+    "examples/latch.cpp": "254bd5a66054bf74c58827cc5f677a86e51645715dc0091b1a8c5230fbda44e7",
+    "examples/loops.cpp": "5cf27acce4bbb8dea98ed8fbc6c4b655ed1585ce8887bda5a22660c253078ea2",
+    "examples/modbus_read.cpp": "c8ed552b77d55be92c6acce8d48a417d32a50ffe049ca614e5d7df9be690dd79",
+    "examples/numeric_control.cpp": "ff2f3e5d4e1b5ecdba55d92cf8b386c370c785dc6559f3a9940a04e062837eb1",
+    "sdk/plc.hpp": "0791e0b0f936613f7a209ee747693520f06c2ce193588d794bd340c8e4513bef",
+    "Makefile": "e4b9f2844e60ff8bda15b4d89bf0d44a0d2371c26b80198a29ce255bf641e8fd",
+    "m200c": "dda4ffd05d83eb4e6656bead70f45d34fec369b9bfaa0b0e58b94489c6c215bd"
+  },
+  "log_sha256": {
+    "check": "6a2f99edb0761bc86a761633153c513222d1c4392bac467c8be794319f35e41b",
+    "examples": "2d963a6df4077be9e3677b63c990de833fad20e0c80e70afaa2e5de3305d21d7",
+    "dynamic_stress": "0a9b6f1974e71987ec7af0b937c418ec33f2bfc50c6c2102c46345c251eccf83",
+    "legacy_stress": "134053dbe83b7010def65192fc0eadb23b89d1a1214033b1e09d5bba2a1cd311",
+    "flow_stress": "1a0c7cd572ff78c80808f8bc0e2412fedff80bf2154c067954cabcd4cd0b8734",
+    "indexed_stress": "8711e338768ee3a9da143a9a9017ebd9a307cbf873183f5aef726a46882e3194",
+    "public": "d311f6bea60bad14f67d61a0583c5938b081f52fc76c7a3174adb38c0edc78f1",
+    "public_flow": "a97c6a2bffe5b5a89748a13e6e3cecfcb8a7c5dc6116c274da14e6106b1b3030",
+    "cli_after_inventory_update": "45bbeff0815e0072654c6339ba829789d3b69ba5ea20c6722402426088579761"
+  },
+  "review": {
+    "baseline": "6159c4c",
+    "independent": true,
+    "confirmed_findings": 0,
+    "scope": "computed array groups/aliases, partial writes, allocation bounds, index guards, C++ evaluation order, parser and reverse"
+  },
+  "model": "fixed-capacity contiguous arrays; bool/i16/i32 computed indices captured once; stride1/2; sticky S20 and first-element fallback for invalid runtime array indices; raw WordMemory/BitMemory images guarded",
+  "host_cpp_invalid_builtin_indices": "Not executed: undefined behavior. VM and safe reconstructed indexed API tested instead.",
+  "xml": {
+    "numeric": "synthetic export/import passed; official editor pending",
+    "indexed_bits": "refused before destination replacement; FL10.0 to project token mapping unverified"
+  },
+  "audit_repository_status_note": "boolean_audit observed repository_status_unchanged=false because documentation/report files were being updated concurrently. No claim of an unchanged tree during this run; source hashes bind the tested implementation.",
+  "official_editor": "pending",
+  "physical_plc": "pending",
+  "full_parity": "incomplete",
+  "goal_status": "active",
+  "remaining": "Indexed-bit project profile mapping; all other open resource/configuration families in docs/capabilities/README.md; conservative allocation and emission overhead; official editor and physical validation."
+}

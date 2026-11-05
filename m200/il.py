@@ -4,7 +4,15 @@ import re
 
 from .model import address, fail, timer_config
 from .flow import JUMPS, destinations, label_name, split_label
-from .indexed import INDEXED, is_indexed, resolve as resolve_indexed, direct_word_limit
+from .indexed import (
+    ANY_INDEXED,
+    is_indexed,
+    is_bit_indexed,
+    resolve as resolve_indexed,
+    resolve_bit,
+    direct_word_limit,
+    direct_bit_limit,
+)
 from .communication import (
     status_reference,
     BOOL_FIELDS,
@@ -170,7 +178,7 @@ def validate(program):
             if op in JUMPS:
                 jumps.append(label_name(arg))
             else:
-                if op in ("AND", "ANDN", "OR", "ORN") and INDEXED.search(arg):
+                if op in ("AND", "ANDN", "OR", "ORN") and ANY_INDEXED.search(arg):
                     fail(
                         "indexed contact short-circuit/error effects are unverified; use an explicit load and CFG"
                     )
@@ -206,6 +214,7 @@ class Machine:
         self.words = [0] * 8000
         self.index_error = False
         self.index_word_limit = direct_word_limit(program)
+        self.index_bit_limit = direct_bit_limit(program)
         self.communication = CommunicationEngine(communication_transport)
         self.operations = {
             line: instruction_operation(line)
@@ -227,6 +236,10 @@ class Machine:
         }
 
     def read(self, operand, inputs):
+        if is_bit_indexed(operand):
+            index, error = resolve_bit(operand, self.words, self.index_bit_limit)
+            self.index_error |= error
+            return self.memory[index]
         status = status_reference(operand)
         if status:
             return getattr(self.communication.status(status[0]), BOOL_FIELDS[status[1]])
@@ -253,6 +266,11 @@ class Machine:
             if value:
                 fail("system index-error bit can only be cleared")
             self.index_error = False
+            return
+        if is_bit_indexed(operand):
+            index, error = resolve_bit(operand, self.words, self.index_bit_limit)
+            self.index_error |= error
+            self.memory[index] = bool(value)
             return
         kind, index = address(operand, True)
         (self.memory if kind == "M" else self.outputs)[index] = bool(value)

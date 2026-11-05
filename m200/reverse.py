@@ -1,7 +1,16 @@
 from .il import validate
 from .model import address, fail
 from .flow import JUMPS, split_label
-from .indexed import is_indexed, parse as parse_indexed, direct_word_limit, has_indexed
+from .indexed import (
+    is_indexed,
+    parse as parse_indexed,
+    direct_word_limit,
+    has_indexed,
+    is_bit_indexed,
+    parse_bit,
+    has_indexed_bits,
+    direct_bit_limit,
+)
 from .numeric import (
     comparison,
     cpp,
@@ -20,6 +29,9 @@ from .communication import (
 
 
 def read_cpp(arg):
+    if is_bit_indexed(arg):
+        base, index = parse_bit(arg)
+        return "plc::read_m_indexed(%d,%d)" % (base, index)
     status = status_reference(arg)
     if status:
         return cpp_name(status[0]) + "." + BOOL_FIELDS[status[1]] + "()"
@@ -44,6 +56,9 @@ def read_cpp(arg):
 
 
 def write_cpp(arg, value):
+    if is_bit_indexed(arg):
+        base, index = parse_bit(arg)
+        return "plc::write_m_indexed(%d,%d,%s);" % (base, index, value)
     if arg == "%S20":
         if value != "false":
             fail("system index-error bit is writable only by reset")
@@ -69,6 +84,8 @@ def to_cpp(program):
         lines.append(
             "plc::WordMemory native_word_image{%d};" % direct_word_limit(program)
         )
+    if has_indexed_bits(program):
+        lines.append("plc::BitMemory native_bit_image{%d};" % direct_bit_limit(program))
     for key, cfg in sorted(program.communications.items()):
         lines.append(constructor_cpp(key, cfg))
     lines += ["", "void scan() {", "  bool accumulator = false;"]

@@ -9,11 +9,12 @@ import subprocess
 from pathlib import Path
 
 from .lower import Lowerer
-from .model import address, fail, timer_config
+from .model import address, fail, timer_config, CompileError
+from .arrays import Array, reference as array_reference
 from .numeric import Number, OPS, READS, WRITES, TYPES, boolean, expect, literal
 from .modbus import ModbusConfig
 from .communication import KINDS, BOOL_FIELDS, NUM_FIELDS
-from .indexed import is_indexed
+from .indexed import is_indexed, is_bit_indexed
 
 SDK = Path(__file__).resolve().parents[1] / "sdk"
 INDEXED_READS = {name + "_indexed": kind for name, kind in READS.items()}
@@ -96,6 +97,7 @@ class Frontend:
         self.functions = {n["id"]: n for n in self.top if n["kind"] == "FunctionDecl"}
         self.variables = {}
         self.arrays = {}
+        self.dynamic_arrays = set()
         self.instances = {}
         self.calls = set()
         self.active = []
@@ -112,13 +114,24 @@ class Frontend:
         reserved = set()
         reserved_words = set()
         self.word_count = None
+        self.bit_count = None
         for n in walk(tree):
             if (
-                n.get("kind") == "VarDecl"
-                and n.get("type", {}).get("qualType") == "plc::WordMemory"
+                n.get("kind") == "ArraySubscriptExpr"
+                and self.array_constant(n["inner"][1]) is None
             ):
-                if self.word_count is not None:
-                    self.error(n, "only one WordMemory image may be declared")
+                base = strip(n["inner"][0])
+                self.dynamic_arrays.add(base.get("referencedDecl", {}).get("id"))
+        for n in walk(tree):
+            if n.get("kind") == "VarDecl" and n.get("type", {}).get("qualType") in (
+                "plc::WordMemory",
+                "plc::BitMemory",
+            ):
+                is_word = n["type"]["qualType"] == "plc::WordMemory"
+                attribute = "word_count" if is_word else "bit_count"
+                image = "WordMemory" if is_word else "BitMemory"
+                if getattr(self, attribute) is not None:
+                    self.error(n, "only one " + image + " image may be declared")
                 ctor = next(
                     (
                         x
@@ -128,11 +141,13 @@ class Frontend:
                     None,
                 )
                 if ctor is None or len(ctor.get("inner", [])) != 1:
-                    self.error(n, "WordMemory requires one literal count")
-                self.word_count = self.const(ctor["inner"][0])
-                if not 1 <= self.word_count <= 8000:
-                    self.error(n, "WordMemory count outside 1..8000")
-                reserved_words.update(range(self.word_count))
+                    self.error(n, image + " requires one literal count")
+                count = self.const(ctor["inner"][0])
+                capacity = 8000 if is_word else 1024
+                if not 1 <= count <= capacity:
+                    self.error(n, image + " count outside 1.." + str(capacity))
+                setattr(self, attribute, count)
+                (reserved_words if is_word else reserved).update(range(count))
         for n in walk(tree):
             if n.get("kind") == "VarDecl" and n.get("type", {}).get(
                 "desugaredQualType", n.get("type", {}).get("qualType", "")
@@ -149,7 +164,15 @@ class Frontend:
             if n.get("kind") == "CallExpr":
                 name, args = self.call(n)
                 if name in ("plc::read_m", "plc::write_m"):
-                    reserved.add(self.index(args[0], 1024, n))
+                    reserved.add(self.index(args[0], self.bit_count or 1024, n))
+                if name in ("plc::read_m_indexed", "plc::write_m_indexed"):
+                    if self.bit_count is None or self.word_count is None:
+                        self.error(
+                            n,
+                            "raw indexed bits require global BitMemory and WordMemory images",
+                        )
+                    self.index(args[0], self.bit_count, n)
+                    self.index(args[1], self.word_count, n)
                 key = name.removeprefix("plc::")
                 if key in READS or key in WRITES:
                     typ = (READS | WRITES)[key]
@@ -267,14 +290,29 @@ class Frontend:
             self.outputs[index] = self.lower.bit("output_%d_image" % index)
         return self.outputs[index]
 
-    def array_element(self, node):
+    def array_constant(self, node):
+        if strip(node).get("kind") == "CXXBoolLiteralExpr":
+            return int(strip(node)["value"])
+        try:
+            return self.const(node)
+        except CompileError:
+            return None
+
+    def array_element(self, node, env=None):
         base, subscript = node["inner"]
         base = strip(base)
         ref = base.get("referencedDecl", {}).get("id")
         if base.get("kind") != "DeclRefExpr" or ref not in self.arrays:
             self.error(node, "array access requires a declared fixed-capacity array")
-        elements = self.arrays[ref]
-        return elements[self.index(subscript, len(elements), node)]
+        array = self.arrays[ref]
+        index = self.array_constant(subscript)
+        if index is not None:
+            if not 0 <= index < len(array.elements):
+                self.error(
+                    node, "array index outside 0..%d" % (len(array.elements) - 1)
+                )
+            return array.elements[index]
+        return array_reference(self, array, subscript, env)
 
     def indexed_reference(self, args, kind, owner):
         if self.word_count is None:
@@ -293,6 +331,24 @@ class Frontend:
             invalid = self.lower.neg(self.lower.binary("&&", low, high))
             self.lower.assign(offset, Number("literal", "-32768"), invalid)
         return Number(kind, "%" + TYPES[kind][0] + str(base) + "[" + offset.code + "]")
+
+    def indexed_bit_reference(self, args, owner):
+        if self.bit_count is None or self.word_count is None:
+            self.error(
+                owner, "raw indexed bits require global BitMemory and WordMemory images"
+            )
+        base = self.index(args[0], self.bit_count, owner)
+        index = self.index(args[1], self.word_count, owner)
+        offset = Number("i16", "%MW" + str(index))
+        if self.bit_count < 1024:
+            offset = self.lower.copy(offset, "indexed_bit_offset_snapshot")
+            low = self.lower.comparison(">=", offset, Number("literal", str(-base)))
+            high = self.lower.comparison(
+                "<", offset, Number("literal", str(self.bit_count - base))
+            )
+            invalid = self.lower.neg(self.lower.binary("&&", low, high))
+            self.lower.assign(offset, Number("literal", "-32768"), invalid)
+        return "%M" + str(base) + "[" + offset.code + "]"
 
     def expr(self, node, env=None, side_effect=False):
         env = env or {}
@@ -317,7 +373,12 @@ class Frontend:
                 return self.variables[ref]
             self.error(node, "unknown or unsupported variable")
         if kind == "ArraySubscriptExpr":
-            return self.array_element(node)
+            value = self.array_element(node, env)
+            if isinstance(value, Number) and is_indexed(value.code):
+                return self.lower.copy(value, "array_indexed_read")
+            if isinstance(value, str) and is_bit_indexed(value):
+                return self.lower.copy(value, "array_indexed_bit_read")
+            return value
         if kind == "UnaryOperator" and node.get("opcode") == "!":
             return self.lower.neg(self.expr(children[0], env))
         if kind == "UnaryOperator" and node.get("opcode") == "-":
@@ -371,6 +432,10 @@ class Frontend:
             key = name.removeprefix("plc::")
             if key in INDEXED_READS:
                 return self.indexed_reference(args, INDEXED_READS[key], node)
+            if name == "plc::read_m_indexed":
+                return self.lower.copy(
+                    self.indexed_bit_reference(args, node), "indexed_bit_read"
+                )
             if key in READS:
                 typ = READS[key]
                 index = self.index(args[0], 8000 - TYPES[typ][1] + 1, node)
@@ -520,9 +585,9 @@ class Frontend:
     def declaration(self, node, guard=None, global_scope=False):
         if node.get("kind") != "VarDecl":
             self.error(node, "unsupported declaration")
-        if node["type"]["qualType"] == "plc::WordMemory":
+        if node["type"]["qualType"] in ("plc::WordMemory", "plc::BitMemory"):
             if not global_scope:
-                self.error(node, "WordMemory must be a global declaration")
+                self.error(node, "memory image must be a global declaration")
             return
         array = re.fullmatch(
             r"(?:const )?(bool|plc::i16|plc::i32|plc::f32)\s*\[([0-9]+)\]",
@@ -657,13 +722,21 @@ class Frontend:
                     self.error(init, "unknown array initialization filler")
         if len(values) > count:
             self.error(node, "too many array initializers")
-        elements = [
-            self.lower.bit(f"{node['name']}_{i}", persistent=global_scope)
-            if kind == "bool"
-            else self.lower.word(kind, f"{node['name']}_{i}", persistent=global_scope)
-            for i in range(count)
-        ]
-        self.arrays[node["id"]] = elements
+        elements = (
+            self.lower.array(kind, count, node["name"], persistent=global_scope)
+            if node["id"] in self.dynamic_arrays
+            else [
+                self.lower.bit(f"{node['name']}_{i}", persistent=global_scope)
+                if kind == "bool"
+                else self.lower.word(
+                    kind, f"{node['name']}_{i}", persistent=global_scope
+                )
+                for i in range(count)
+            ]
+        )
+        self.arrays[node["id"]] = Array(
+            kind, elements, node["id"] in self.dynamic_arrays
+        )
         for i, target in enumerate(elements):
             value = (
                 self.expr(values[i])
@@ -750,6 +823,13 @@ class Frontend:
             key = name.removeprefix("plc::")
             if name == "plc::clear_index_error":
                 self.lower.rung("LD " + (guard if guard is not None else "1"), "R %S20")
+                return
+            if name == "plc::write_m_indexed":
+                value = boolean(self.expr(args[2]))
+                if value not in ("0", "1"):
+                    value = self.lower.copy(value, "indexed_bit_assignment_rhs")
+                target = self.indexed_bit_reference(args, node)
+                self.lower.assign(target, value, guard)
                 return
             if key in INDEXED_WRITES:
                 value = self.expr(args[2])
@@ -931,6 +1011,10 @@ class Frontend:
             anchor = self.lower.bit("explicit_word_image_extent")
             extent = max(self.lower.used_words, default=self.word_count - 1)
             prefix.append([f"LD [%MW{extent}=0]", "ST " + anchor])
+        if self.bit_count is not None:
+            anchor = self.lower.bit("explicit_bit_image_extent")
+            extent = max(self.lower.used, default=self.bit_count - 1)
+            prefix.append([f"LD %M{extent}", "ST " + anchor])
         for target, value in self.init:
             if isinstance(target, Number):
                 prefix.append(["LD %S13", "[" + target.code + ":=" + value.code + "]"])

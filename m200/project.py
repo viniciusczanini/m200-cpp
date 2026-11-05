@@ -15,7 +15,7 @@ from .il import validate
 from .config import configuration, unique_tree
 from .model import Program, Timer, address, fail
 from .flow import split_label
-from .indexed import has_indexed, direct_word_limit
+from .indexed import has_indexed, direct_word_limit, has_indexed_bits
 from .numeric import (
     word_address,
     comparison,
@@ -417,6 +417,8 @@ def load_project(path):
 
 
 def validate_allocations(sw, program):
+    if has_indexed_bits(program):
+        fail("indexed-bit functional-level mapping is unverified for SMBP")
     text = (
         " ".join(" ".join(r) for r in program.rungs) + " " + " ".join(program.symbols)
     )
@@ -459,6 +461,8 @@ def validate_allocations(sw, program):
 
 def write_project(program, template, destination):
     validate(program)
+    if has_indexed_bits(program):
+        fail("indexed-bit functional-level mapping is unverified for SMBP")
     root = parse(template)
     sw = configuration(root)
     check_template_channels(root, program.communications)

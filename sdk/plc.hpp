@@ -11,12 +11,14 @@ inline unsigned long long now_ms = 0;
 inline bool first_scan = true;
 inline bool index_error = false;
 inline int word_memory_limit = 0;
+inline int bit_memory_limit = 0;
 }
 inline bool input(int n) { return detail::inputs[n]; }
 inline void output(int n, bool v) { detail::outputs[n] = v; }
 inline bool output_state(int n) { return detail::outputs[n]; }
 inline bool read_m(int n) { return detail::memory[n]; }
 inline void write_m(int n,bool v) { detail::memory[n] = v; }
+struct BitMemory { explicit BitMemory(int count){if(count<1||count>1024)__builtin_trap();detail::bit_memory_limit=count;} };
 inline bool system(int n) {
     if(n==13) return detail::first_scan;
     if(n==20) return detail::index_error;
@@ -74,6 +76,9 @@ void output(int,bool);
 bool output_state(int);
 bool read_m(int);
 void write_m(int,bool);
+struct BitMemory { explicit BitMemory(int); };
+bool read_m_indexed(int,int);
+void write_m_indexed(int,int,bool);
 bool system(int);
 void clear_index_error();
 bool clock_ms(unsigned);
@@ -121,6 +126,16 @@ inline f32 read_real_indexed(int base,int index_word){return read_real(detail::i
 inline void write_word_indexed(int base,int index_word,i16 v){write_word(detail::indexed_word(base,index_word,1),v);}
 inline void write_dword_indexed(int base,int index_word,i32 v){write_dword(detail::indexed_word(base,index_word,2),v);}
 inline void write_real_indexed(int base,int index_word,f32 v){write_real(detail::indexed_word(base,index_word,2),v);}
+namespace detail {
+inline int indexed_bit(int base,int index_word){
+    if(bit_memory_limit<1||base<0||base>=bit_memory_limit||word_memory_limit<1||index_word<0||index_word>=word_memory_limit)__builtin_trap();
+    long position=(long)base+(long)read_word(index_word);
+    if(position<0||position>=bit_memory_limit){index_error=true;return base;}
+    return (int)position;
+}
+}
+inline bool read_m_indexed(int base,int index_word){return read_m(detail::indexed_bit(base,index_word));}
+inline void write_m_indexed(int base,int index_word,bool value){write_m(detail::indexed_bit(base,index_word),value);}
 
 inline i16 add_i16(i16 a, i16 b){return detail::check_i16((long long)a+(long long)b);}
 inline i16 sub_i16(i16 a, i16 b){return detail::check_i16((long long)a-(long long)b);}

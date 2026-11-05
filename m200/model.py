@@ -88,6 +88,11 @@ class Program:
 
 
 def address(text, writable=False):
+    if "[" in text:
+        from .indexed import parse_bit
+
+        base, _ = parse_bit(text)
+        return "M", base
     if text in ("0", "1") and not writable:
         return ("constant", int(text))
     m = re.fullmatch(r"%(I0\.|Q0\.|M|S)([0-9]+)", text)

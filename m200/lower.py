@@ -1,6 +1,6 @@
 from .model import Program, fail
 from .allocation import Storage
-from .indexed import is_indexed
+from .indexed import is_indexed, is_bit_indexed
 from .numeric import Number, TYPES, boolean, expect, OPS, evaluate, read as read_number
 
 
@@ -26,6 +26,14 @@ class Lowerer:
         result = self.storage.bit(symbol, persistent)
         self.program.symbols[result] = symbol
         return result
+
+    def array(self, kind, count, symbol, persistent=False):
+        values = self.storage.array(kind, count, symbol, persistent)
+        for i, value in enumerate(values):
+            self.program.symbols[value.code if isinstance(value, Number) else value] = (
+                f"{symbol}_{i}"
+            )
+        return values
 
     def rung(self, *lines):
         normalized = []
@@ -85,7 +93,14 @@ class Lowerer:
                 self.numeric_assign(out, value)
             return out
         out = self.bit(name)
-        self.rung("LD " + value, "ST " + out)
+        if is_bit_indexed(value) and self.guard is not None:
+            self.rung("LD 0", "ST " + out)
+            end = self.new_label()
+            self.jump(end, self.guard, negate=True)
+            self.rung("LD " + value, "ST " + out)
+            self.label(end)
+        else:
+            self.rung("LD " + value, "ST " + out)
         return out
 
     def neg(self, value):
@@ -122,11 +137,20 @@ class Lowerer:
         boolean(value)
         if guard is not None:
             boolean(guard)
-        # Capture before a SET can alter a value used by the RESET branch.
-        value = self.copy(value)
+        if is_bit_indexed(target) and guard is not None:
+            end = self.new_label()
+            self.jump(end, guard, negate=True)
+            self.assign(target, value)
+            self.label(end)
+            return
         if guard is None:
+            # LD captures the RHS before ST resolves/writes the destination.
             self.rung("LD " + value, "ST " + target)
+        elif value in ("0", "1"):
+            self.rung("LD " + guard, ("S " if value == "1" else "R ") + target)
         else:
+            # Capture before a SET can alter a value used by the RESET branch.
+            value = self.copy(value)
             self.rung("LD " + guard, "AND " + value, "S " + target)
             self.rung("LD " + guard, "ANDN " + value, "R " + target)
 

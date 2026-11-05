@@ -174,5 +174,42 @@ sete formatos de blocos ATV, não aceitação no CE40T nem cobertura runtime del
 Os instaladores verificados exigem cadastro; nenhum EXE/DLL foi baixado ou
 executado. Ver `../capabilities/VENDOR-STATIC-RESEARCH.md`.
 
+## Continuação do objetivo: arrays com índice calculado
+
+Rodada local após a base6159c4c: **243/243 testes**, em132.263s; exemplos,
+lint, formatação e diff passaram. Os três stress anteriores passaram novamente
+(37.716 +3.072 +10.240 scans), assim como os programas públicos isolados
+(16.128 +2.048 scans). O stress novo adicionou11.264 scans/11casos. Total da
+rodada: **80.468 scans públicos e de stress**, sem somar reruns nem unitários.
+Os quatro scripts de stress estão no alvo `make stress`; nesta rodada foram
+executados individualmente para não repetir o novo script já concluído.
+
+Arrays bool/i16/i32/f32 agora aceitam índices bool/i16/i32 calculados em
+execução, com grupos contíguos e stride correto. Grupos de4200words e900bits
+passaram; o booleano grande também foi revertido/recompilado após reduzir
+cópias desnecessárias nas atribuições. Testes cobrem RHS/lvalue, reexecução de
+declarações locais, inicialização parcial, membros anteriores, shadowing,
+curto-circuito, índices extremos e proteção de aliases/buffers Modbus.
+
+Bits indexados estão implementados em SDK/IL/VM/reversão, com BitMemory e
+WordMemory para a API raw. **SMBP de bits indexados continua recusado**, pois
+falta comprovar a correspondência entre nível funcional10.0 e token de projeto.
+O teste preserva um destino existente quando a exportação é recusada. O XML
+numérico passou ida/volta no perfil sintético; isso não comprova o editor.
+
+A revisão independente não encontrou falhas confirmadas e executou casos
+adicionais de aliases e ordem. O C++ original com `[]` inválido não foi
+executado (comportamento indefinido); a política S20/fallback foi exercitada
+na VM e no C++ reverso seguro. A auditoria antiga marcou
+`repository_status_unchanged=false` porque arquivos de documentação/relatórios
+mudaram em paralelo; não se afirma árvore imutável durante a bateria.
+
+Resultados/hashes: `DYNAMIC-ARRAY-LOCAL-RESULTS.json` e
+`DYNAMIC-ARRAY-STRESS-RESULTS.json`; contratos e limites em
+`../capabilities/DYNAMIC-ARRAYS.md`. O inventário CLI e exemplos foram
+atualizados. O objetivo integral continua ativo e incompleto; demais famílias,
+perfil de bits, overhead e validação oficial/física continuam pendentes. Tudo
+local, sem CI, publicação, conexão ou transmissão ao PLC.
+
 O objetivo integral continua ativo; Task2 do plano de indexação ainda está
 pendente e não foi substituída pela API de words explícitos.

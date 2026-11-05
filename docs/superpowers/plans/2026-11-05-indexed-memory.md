@@ -46,10 +46,10 @@
 
 **Interfaces:** manter arrays C++ existentes; adicionar grupos contíguos para os que têm acesso dinâmico, alias de membro→grupo no passe de vida e offset de stride1/2. Array booleano precisa de indexação bit e gate de perfil coerente.
 
-- [ ] Escrever/observar RED de leitura/escrita em laços, locais/globais, ordem RHS/lvalue, inicialização parcial, grupos sob pressão, curto-circuito e índices inválidos.
-- [ ] Implementar layout/grupos e uso/def conservadores por grupo, garantindo contiguidade sem alocar fora do banco.
-- [ ] Implementar índices i16/i32 válidos, conversão explícita de offset e fallback runtime; não multiplicar com overflow nem repetir avaliação do índice.
-- [ ] Testar equivalência C++/IL/reversão/XML, stress reproduzível e composição com comunicação/aliases. Registrar toda restrição pendente, sem reduzir o objetivo integral.
+- [x] Escrever/observar RED de leitura/escrita em laços, locais/globais, ordem RHS/lvalue, inicialização parcial, grupos sob pressão, curto-circuito e índices inválidos.
+- [x] Implementar layout/grupos e uso/def conservadores por grupo, garantindo contiguidade sem alocar fora do banco.
+- [x] Implementar índices i16/i32 válidos, conversão explícita de offset e fallback runtime; não multiplicar com overflow nem repetir avaliação do índice.
+- [x] Testar equivalência C++/IL/reversão/XML, stress reproduzível e composição com comunicação/aliases. XML numérico exercitado; XML de bits explicitamente recusado até prova do perfil FL10.0. Essa pendência continua no objetivo integral.
 
 ### Decisões para implementar Task 2
 

@@ -36,15 +36,20 @@ def known_bit(arg, constants):
     return constants.get(arg)
 
 
-def effects(rung, registers, constants):
+def effects(rung, registers, constants, aliases=None):
     """Return aggregate and per-instruction effects, plus the final accumulator."""
     reads, definitions, writes = set(), set(), set()
     steps = []
+    aliases = aliases or {}
+
+    def owner(ref):
+        return aliases.get(ref, (ref, 0))[0]
+
     acc = None
     for line in rung:
         parts = line.split(maxsplit=1)
         op, arg = parts[0], parts[1] if len(parts) == 2 else ""
-        refs = [r for r in REFERENCE.findall(line) if r in registers]
+        refs = [r for r in REFERENCE.findall(line) if owner(r) in registers]
         target = None
         must = False
         unary = UNARY.fullmatch(line)
@@ -71,7 +76,7 @@ def effects(rung, registers, constants):
         ):
             fail("unmodelled instruction effects in memory allocation: " + line)
         if op in ("ST", "S", "R"):
-            target = arg
+            target = arg.split("[", 1)[0]
             must = op == "ST" or acc is True
             if target in refs:
                 refs.remove(target)
@@ -80,20 +85,31 @@ def effects(rung, registers, constants):
             must = acc is True
             if assignment and target in refs:
                 refs.remove(target)
+        indexed_target = (
+            "[" in arg
+            if op in ("ST", "S", "R")
+            else bool(assignment and "[" in assignment[0].partition("[")[2])
+        )
+        if target is not None:
+            target = owner(target)
+        refs = [owner(ref) for ref in refs]
+        if target in registers:
+            element_width = (
+                1
+                if registers[target].kind == "bool"
+                else TYPES[registers[target].kind][1]
+            )
+            must = (
+                must and not indexed_target and registers[target].width == element_width
+            )
         reads.update(ref for ref in refs if ref not in definitions)
         line_reads, line_definitions, line_writes = set(refs), set(), set()
-        if target in registers and acc is not False:
+        if target in registers and (op == "ST" or acc is not False):
             writes.add(target)
             line_writes.add(target)
             if must:
                 definitions.add(target)
                 line_definitions.add(target)
-        elif target in registers and op == "ST":
-            # ST always writes even when the accumulator is false.
-            writes.add(target)
-            definitions.add(target)
-            line_writes.add(target)
-            line_definitions.add(target)
         steps.append((line_reads, line_definitions, line_writes))
         if op in ("LD", "LDN"):
             acc = known_bit(arg, constants)
@@ -122,7 +138,7 @@ def effects(rung, registers, constants):
     return reads, definitions, writes, acc, steps
 
 
-def interference(program, registers, constants):
+def interference(program, registers, constants, aliases=None):
     count = len(program.rungs)
     graph = {ref: set() for ref in registers}
     if not count:
@@ -131,7 +147,9 @@ def interference(program, registers, constants):
     uses, defs, steps, successors = [], [], [], []
     for index, raw in enumerate(program.rungs):
         _, rung = split_label(raw)
-        use, defined, _, acc, instructions = effects(rung, registers, constants)
+        use, defined, _, acc, instructions = effects(
+            rung, registers, constants, aliases
+        )
         uses.append(use)
         defs.append(defined)
         steps.append(instructions)
@@ -191,6 +209,8 @@ class Storage:
     def __init__(self, reserved_bits=(), reserved_words=()):
         self.reserved = {"bit": set(reserved_bits), "word": set(reserved_words)}
         self.registers = {}
+        self.members = {}
+        self.groups = set()
         self.next_bit = 100000
         self.next_word = 100000
 
@@ -198,6 +218,7 @@ class Storage:
         code = "%M" + str(self.next_bit)
         self.next_bit += 1
         self.registers[code] = Register("bool", 1, persistent)
+        self.members[code] = (code, 0)
         return code
 
     def word(self, kind, symbol, persistent=False):
@@ -205,7 +226,25 @@ class Storage:
         code = "%" + prefix + str(self.next_word)
         self.next_word += width
         self.registers[code] = Register(kind, width, persistent)
+        self.members[code] = (code, 0)
         return Number(kind, code)
+
+    def array(self, kind, count, symbol, persistent=False):
+        prefix, stride = ("M", 1) if kind == "bool" else TYPES[kind]
+        cursor = self.next_bit if kind == "bool" else self.next_word
+        root = "%" + prefix + str(cursor)
+        self.groups.add(root)
+        self.registers[root] = Register(kind, count * stride, persistent)
+        values = []
+        for i in range(count):
+            code = "%" + prefix + str(cursor + i * stride)
+            self.members[code] = (root, i * stride)
+            values.append(code if kind == "bool" else Number(kind, code))
+        if kind == "bool":
+            self.next_bit += count
+        else:
+            self.next_word += count * stride
+        return values
 
     def finalize(self, program, constants):
         fixed = {bank: set(cells) for bank, cells in self.reserved.items()}
@@ -215,7 +254,8 @@ class Storage:
             reg = self.registers[ref]
             preferred, capacity = (500, 1024) if reg.bank == "bit" else (4000, 8000)
             for base in chain(
-                range(preferred, capacity - reg.width + 1), range(preferred)
+                range(preferred, capacity - reg.width + 1),
+                range(max(0, min(preferred, capacity - reg.width + 1))),
             ):
                 if all(i not in forbidden for i in range(base, base + reg.width)):
                     return base
@@ -233,7 +273,10 @@ class Storage:
             ref: reg for ref, reg in self.registers.items() if not reg.persistent
         }
         graph = interference(
-            program, temporary, {v: k == "1" for k, v in constants.items()}
+            program,
+            temporary,
+            {v: k == "1" for k, v in constants.items()},
+            self.members,
         )
         ordinal = {ref: i for i, ref in enumerate(temporary)}
         for ref in sorted(
@@ -247,9 +290,8 @@ class Storage:
                     forbidden.update(range(base, base + temporary[other].width))
             mapping[ref] = choose(ref, forbidden)
         names = {
-            ref: ("%M" if reg.kind == "bool" else "%" + TYPES[reg.kind][0])
-            + str(mapping[ref])
-            for ref, reg in self.registers.items()
+            ref: ref.rstrip("0123456789") + str(mapping[root] + offset)
+            for ref, (root, offset) in self.members.items()
         }
 
         def rewrite(text):
@@ -272,7 +314,9 @@ class Storage:
         for ref, name in program.symbols.items():
             physical = names.get(ref, ref)
             symbols[physical] = (
-                "compiler_reused_" + physical[1:] if ref in reused else name
+                "compiler_reused_" + physical[1:]
+                if self.members.get(ref, (ref, 0))[0] in reused
+                else name
             )
         program.symbols = symbols
         program.metadata["allocation"] = {
@@ -283,7 +327,12 @@ class Storage:
                 r.width for r in self.registers.values() if r.bank == "word"
             ),
             "allocated_bits": len(
-                {mapping[k] for k, r in self.registers.items() if r.bank == "bit"}
+                {
+                    i
+                    for k, r in self.registers.items()
+                    if r.bank == "bit"
+                    for i in range(mapping[k], mapping[k] + r.width)
+                }
             ),
             "allocated_words": len(
                 {
@@ -295,6 +344,7 @@ class Storage:
             ),
             "reserved_bits": len(self.reserved["bit"]),
             "reserved_words": len(self.reserved["word"]),
+            "contiguous_groups": len(self.groups),
             "method": "conservative CFG liveness; globals unique; explicit addresses and communication buffers reserved",
         }
         return program
