@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Synthetic parser fixture; not created or validated by Schneider software. -->
+<ProjectDescriptor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectVersion>2.0.0.0</ProjectVersion><ManagementLevel>FunctLevelMan11_0</ManagementLevel>
+  <Name>SYNTHETIC_TEST_ONLY</Name><FullName>synthetic.smbp</FullName>
+  <SoftwareConfiguration><Pous/><Subroutines/><Timers/><Counters/><MemoryBits/>
+    <MastTask><UsePeriodScanMode>false</UsePeriodScanMode><PeriodScan>100</PeriodScan></MastTask>
+    <CpuBehavior><StartingMode>StartInStop</StartingMode><WatchdogPeriod>250</WatchdogPeriod></CpuBehavior>
+  </SoftwareConfiguration>
+  <HardwareConfiguration><Plc><Cpu><Index>0</Index><Reference>TM200CE40T</Reference><Name>SYNTHETIC_DO_NOT_DOWNLOAD</Name></Cpu></Plc></HardwareConfiguration>
+</ProjectDescriptor>
