@@ -11,6 +11,7 @@ from dataclasses import dataclass
 
 from .model import fail, CompileError
 from .communication import status_reference, NUM_FIELDS, NUM_REFERENCE, cpp_name
+from .indexed import WORD_PATTERN, is_indexed, parse as parse_indexed
 
 TYPES = {"i16": ("MW", 1), "i32": ("MD", 2), "f32": ("MF", 2)}
 READS = {"read_word": "i16", "read_dword": "i32", "read_real": "f32"}
@@ -131,13 +132,20 @@ def word_address(text):
     return kind, index
 
 
+def reference_address(text):
+    if is_indexed(text):
+        kind, base, _ = parse_indexed(text)
+        return kind, base
+    return word_address(text)
+
+
 def operand(text, kind):
     if text.startswith("%"):
         status = status_reference(text)
         actual = (
             NUM_FIELDS[status[1]][0]
             if status and status[1] in NUM_FIELDS
-            else word_address(text)[0]
+            else reference_address(text)[0]
         )
         if actual != kind:
             fail("mixed numeric IL types")
@@ -164,11 +172,11 @@ def operation(line):
             ("add_" if token == "INC" else "sub_") + typ,
             [Number(typ, target), literal(1, typ)],
         )
-    m = re.fullmatch(r"\[\s*(%(?:MW|MD|MF)[0-9]+)\s*:=\s*(.*?)\s*\]", line)
+    m = re.fullmatch(r"\[\s*(" + WORD_PATTERN + r")\s*:=\s*(.*?)\s*\]", line)
     if not m:
         fail("unsupported numeric operation: " + line)
     target, expression = m.groups()
-    typ, _ = word_address(target)
+    typ, _ = reference_address(target)
     # Match longer names via exact token, not prefix. Arithmetic is one operator.
     for name, (out, args, token, shape) in OPS.items():
         if out != typ:
@@ -177,7 +185,9 @@ def operation(line):
             atom = (
                 r"("
                 + NUM_REFERENCE
-                + r"|%(?:MW|MD|MF)[0-9]+|-?[0-9]+(?:\.[0-9]*)?(?:[eE][+-]?[0-9]+)?)"
+                + r"|"
+                + WORD_PATTERN
+                + r"|-?[0-9]+(?:\.[0-9]*)?(?:[eE][+-]?[0-9]+)?)"
             )
             pat = atom + r"\s*" + re.escape(token) + r"\s*" + atom
         else:
@@ -203,6 +213,13 @@ def operation(line):
                 parsed.append(operand(value, argkind))
         if shape == "function" and not parsed[0].code.startswith("%"):
             fail("numeric function requires an object operand")
+        if (
+            is_indexed(target)
+            or any(isinstance(v, Number) and is_indexed(v.code) for v in parsed)
+        ) and (typ != "i16" or shape != "binary"):
+            fail(
+                "indexed operands in this numeric instruction require a direct snapshot"
+            )
         return target, name, parsed
     return target, "copy", [operand(expression, typ)]
 
@@ -224,12 +241,16 @@ def comparison(text):
     m = re.fullmatch(
         r"\[\s*("
         + NUM_REFERENCE
-        + r"|%(?:MW|MD|MF)[0-9]+)\s*(>=|<=|<>|=|>|<)\s*(.+)\s*\]",
+        + r"|"
+        + WORD_PATTERN
+        + r")\s*(>=|<=|<>|=|>|<)\s*(.+)\s*\]",
         text,
     )
     if not m:
         fail("unsupported numeric comparison: " + text)
     first, op, second = m.groups()
+    if is_indexed(first):
+        fail("indexed comparison first operand requires a direct snapshot")
     status = status_reference(first)
     kind = (
         NUM_FIELDS[status[1]][0]
@@ -378,6 +399,10 @@ def cpp(value):
     status = status_reference(value.code)
     if status:
         return cpp_name(status[0]) + "." + NUM_FIELDS[status[1]][1] + "()"
+    if is_indexed(value.code):
+        kind, base, index = parse_indexed(value.code)
+        fn = {v: k for k, v in READS.items()}[kind]
+        return "plc::%s_indexed(%d,%d)" % (fn, base, index)
     if value.code.startswith("%"):
         kind, index = word_address(value.code)
         fn = {v: k for k, v in READS.items()}[kind]

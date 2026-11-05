@@ -13,8 +13,11 @@ from .model import address, fail, timer_config
 from .numeric import Number, OPS, READS, WRITES, TYPES, boolean, expect, literal
 from .modbus import ModbusConfig
 from .communication import KINDS, BOOL_FIELDS, NUM_FIELDS
+from .indexed import is_indexed
 
 SDK = Path(__file__).resolve().parents[1] / "sdk"
+INDEXED_READS = {name + "_indexed": kind for name, kind in READS.items()}
+INDEXED_WRITES = {name + "_indexed": kind for name, kind in WRITES.items()}
 WRAPPERS = {
     "ImplicitCastExpr",
     "ParenExpr",
@@ -108,6 +111,28 @@ class Frontend:
         self.comm_observed = set()
         reserved = set()
         reserved_words = set()
+        self.word_count = None
+        for n in walk(tree):
+            if (
+                n.get("kind") == "VarDecl"
+                and n.get("type", {}).get("qualType") == "plc::WordMemory"
+            ):
+                if self.word_count is not None:
+                    self.error(n, "only one WordMemory image may be declared")
+                ctor = next(
+                    (
+                        x
+                        for x in n.get("inner", [])
+                        if x.get("kind") == "CXXConstructExpr"
+                    ),
+                    None,
+                )
+                if ctor is None or len(ctor.get("inner", [])) != 1:
+                    self.error(n, "WordMemory requires one literal count")
+                self.word_count = self.const(ctor["inner"][0])
+                if not 1 <= self.word_count <= 8000:
+                    self.error(n, "WordMemory count outside 1..8000")
+                reserved_words.update(range(self.word_count))
         for n in walk(tree):
             if n.get("kind") == "VarDecl" and n.get("type", {}).get(
                 "desugaredQualType", n.get("type", {}).get("qualType", "")
@@ -128,8 +153,17 @@ class Frontend:
                 key = name.removeprefix("plc::")
                 if key in READS or key in WRITES:
                     typ = (READS | WRITES)[key]
-                    index = self.index(args[0], 8000 - TYPES[typ][1] + 1, n)
+                    count = self.word_count or 8000
+                    index = self.index(args[0], count - TYPES[typ][1] + 1, n)
                     reserved_words.update(range(index, index + TYPES[typ][1]))
+                if key in INDEXED_READS or key in INDEXED_WRITES:
+                    if self.word_count is None:
+                        self.error(
+                            n, "indexed memory requires a global plc::WordMemory image"
+                        )
+                    typ = (INDEXED_READS | INDEXED_WRITES)[key]
+                    self.index(args[0], self.word_count - TYPES[typ][1] + 1, n)
+                    self.index(args[1], self.word_count, n)
         self.lower = Lowerer(reserved, reserved_words)
         self.loops = []
         self.source_labels = {}
@@ -242,6 +276,24 @@ class Frontend:
         elements = self.arrays[ref]
         return elements[self.index(subscript, len(elements), node)]
 
+    def indexed_reference(self, args, kind, owner):
+        if self.word_count is None:
+            self.error(owner, "indexed memory requires a global plc::WordMemory image")
+        base = self.index(args[0], self.word_count - TYPES[kind][1] + 1, owner)
+        index = self.index(args[1], self.word_count, owner)
+        offset = Number("i16", "%MW" + str(index))
+        if self.word_count < 8000:
+            offset = self.lower.copy(offset, "indexed_offset_snapshot")
+            low = self.lower.comparison(">=", offset, Number("literal", str(-base)))
+            high = self.lower.comparison(
+                "<=",
+                offset,
+                Number("literal", str(self.word_count - TYPES[kind][1] - base)),
+            )
+            invalid = self.lower.neg(self.lower.binary("&&", low, high))
+            self.lower.assign(offset, Number("literal", "-32768"), invalid)
+        return Number(kind, "%" + TYPES[kind][0] + str(base) + "[" + offset.code + "]")
+
     def expr(self, node, env=None, side_effect=False):
         env = env or {}
         node = strip(node)
@@ -292,6 +344,8 @@ class Frontend:
             ">=",
         ):
             a = self.expr(children[0], env)
+            if not isinstance(a, Number):
+                a = self.lower.copy(boolean(a), "binary_left_snapshot")
             old_guard = self.lower.guard
             if node["opcode"] in ("&&", "||"):
                 boolean(a)
@@ -315,6 +369,8 @@ class Frontend:
         if kind == "CallExpr":
             name, args = self.call(node)
             key = name.removeprefix("plc::")
+            if key in INDEXED_READS:
+                return self.indexed_reference(args, INDEXED_READS[key], node)
             if key in READS:
                 typ = READS[key]
                 index = self.index(args[0], 8000 - TYPES[typ][1] + 1, node)
@@ -464,6 +520,10 @@ class Frontend:
     def declaration(self, node, guard=None, global_scope=False):
         if node.get("kind") != "VarDecl":
             self.error(node, "unsupported declaration")
+        if node["type"]["qualType"] == "plc::WordMemory":
+            if not global_scope:
+                self.error(node, "WordMemory must be a global declaration")
+            return
         array = re.fullmatch(
             r"(?:const )?(bool|plc::i16|plc::i32|plc::f32)\s*\[([0-9]+)\]",
             node["type"]["qualType"],
@@ -669,7 +729,12 @@ class Frontend:
         elif kind == "BinaryOperator" and node.get("opcode") == "=":
             lhs = strip(children[0])
             ref = lhs.get("referencedDecl", {}).get("id")
+            value = self.expr(children[1], side_effect=guard is None)
             if lhs["kind"] == "ArraySubscriptExpr":
+                if (isinstance(value, Number) and value.code.startswith("%")) or (
+                    isinstance(value, str) and value not in ("0", "1")
+                ):
+                    value = self.lower.copy(value, "array_assignment_rhs")
                 target = self.array_element(lhs)
             elif lhs["kind"] == "DeclRefExpr" and ref in self.variables:
                 target = self.variables[ref]
@@ -677,11 +742,22 @@ class Frontend:
                 self.error(node, "unsupported assignment target")
             self.lower.assign(
                 target,
-                self.expr(children[1], side_effect=guard is None),
+                value,
                 guard,
             )
         elif kind == "CallExpr":
             name, args = self.call(node)
+            key = name.removeprefix("plc::")
+            if name == "plc::clear_index_error":
+                self.lower.rung("LD " + (guard if guard is not None else "1"), "R %S20")
+                return
+            if key in INDEXED_WRITES:
+                value = self.expr(args[2])
+                if isinstance(value, Number) and is_indexed(value.code):
+                    value = self.lower.copy(value, "indexed_assignment_rhs")
+                target = self.indexed_reference(args, INDEXED_WRITES[key], node)
+                self.lower.assign(target, value, guard)
+                return
             if name == "plc::output":
                 target = self.output(self.index(args[0], 16, node))
             elif name == "plc::write_m":
@@ -851,6 +927,10 @@ class Frontend:
         ]
         prefix += [["LD %S13", "R " + v] for _, v in sorted(self.outputs.items())]
         prefix += self.lower.constant_rungs
+        if self.word_count is not None:
+            anchor = self.lower.bit("explicit_word_image_extent")
+            extent = max(self.lower.used_words, default=self.word_count - 1)
+            prefix.append([f"LD [%MW{extent}=0]", "ST " + anchor])
         for target, value in self.init:
             if isinstance(target, Number):
                 prefix.append(["LD %S13", "[" + target.code + ":=" + value.code + "]"])

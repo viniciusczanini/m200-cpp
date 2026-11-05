@@ -255,6 +255,16 @@ def main(argv=None):
                 "numeric_types": list(TYPES),
                 "numeric_intrinsics": sorted(OPS),
                 "numeric_memory_api": sorted(READS | WRITES),
+                "indexed_memory_api": [
+                    "read_word_indexed",
+                    "read_dword_indexed",
+                    "read_real_indexed",
+                    "write_word_indexed",
+                    "write_dword_indexed",
+                    "write_real_indexed",
+                ],
+                "memory_profile_types": ["WordMemory"],
+                "indexed_scope": "Explicit word image, signed MW offset in words, sticky S20/reset; Manual/default ambiguity and official validation remain gated/pending",
                 "boolean_api": [
                     "input",
                     "output",
@@ -263,6 +273,7 @@ def main(argv=None):
                     "write_m",
                     "system",
                     "clock_ms",
+                    "clear_index_error",
                 ],
                 "stateful_types": [
                     "Ton",

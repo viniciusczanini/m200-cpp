@@ -4,6 +4,7 @@ import re
 
 from .model import address, fail, timer_config
 from .flow import JUMPS, destinations, label_name, split_label
+from .indexed import INDEXED, is_indexed, resolve as resolve_indexed, direct_word_limit
 from .communication import (
     status_reference,
     BOOL_FIELDS,
@@ -20,6 +21,9 @@ from .numeric import (
     read as read_number,
     write as write_number,
     word_address,
+    reference_address,
+    Number,
+    TYPES,
     is_operation,
     instruction_operation,
 )
@@ -166,7 +170,13 @@ def validate(program):
             if op in JUMPS:
                 jumps.append(label_name(arg))
             else:
-                bit_operand(arg, op in ("ST", "S", "R"))
+                if op in ("AND", "ANDN", "OR", "ORN") and INDEXED.search(arg):
+                    fail(
+                        "indexed contact short-circuit/error effects are unverified; use an explicit load and CFG"
+                    )
+                if arg == "%S20" and op in ("S", "ST"):
+                    fail("system index-error bit is writable only by R")
+                bit_operand(arg, op in ("ST", "S", "R") and arg != "%S20")
         if len(rung) < 2:
             fail("rung has no action")
     if set(jumps) - labels.keys():
@@ -194,6 +204,8 @@ class Machine:
         self.instruction_limit = instruction_limit
         self.memory = [False] * 1024
         self.words = [0] * 8000
+        self.index_error = False
+        self.index_word_limit = direct_word_limit(program)
         self.communication = CommunicationEngine(communication_transport)
         self.operations = {
             line: instruction_operation(line)
@@ -231,20 +243,42 @@ class Machine:
             return self.outputs[index]
         if index == 13:
             return self.first
+        if index == 20:
+            return self.index_error
         period = {4: 10, 5: 100, 6: 1000, 7: 60000}[index]
         return bool((self.now // (period // 2)) % 2)
 
     def write(self, operand, value):
+        if operand == "%S20":
+            if value:
+                fail("system index-error bit can only be cleared")
+            self.index_error = False
+            return
         kind, index = address(operand, True)
         (self.memory if kind == "M" else self.outputs)[index] = bool(value)
 
     def read_number(self, value):
+        if is_indexed(value.code):
+            kind, index, error = resolve_indexed(
+                value.code, self.words, self.index_word_limit
+            )
+            self.index_error |= error
+            value = Number(kind, "%" + TYPES[kind][0] + str(index))
         status = status_reference(value.code)
         return (
             getattr(self.communication.status(status[0]), NUM_FIELDS[status[1]][1])
             if status
             else read_number(self.words, value)
         )
+
+    def write_number(self, target, value):
+        if is_indexed(target):
+            kind, index, error = resolve_indexed(
+                target, self.words, self.index_word_limit
+            )
+            self.index_error |= error
+            target = "%" + TYPES[kind][0] + str(index)
+        write_number(self.words, target, value)
 
     def timer(self, index, enabled):
         config = self.program.timers[index]
@@ -330,12 +364,12 @@ class Machine:
                 if is_operation(line):
                     if acc:
                         target, name, values = self.operations[line]
-                        kind, _ = word_address(target)
+                        kind, _ = reference_address(target)
                         args = [
                             self.read_number(v) if not isinstance(v, int) else v
                             for v in values
                         ]
-                        write_number(self.words, target, evaluate(name, args, kind))
+                        self.write_number(target, evaluate(name, args, kind))
                     continue
                 op, arg = line.split(maxsplit=1)
                 if op in JUMPS:

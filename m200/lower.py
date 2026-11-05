@@ -1,5 +1,6 @@
 from .model import Program, fail
 from .allocation import Storage
+from .indexed import is_indexed
 from .numeric import Number, TYPES, boolean, expect, OPS, evaluate, read as read_number
 
 
@@ -74,7 +75,14 @@ class Lowerer:
     def copy(self, value, name="temporary"):
         if isinstance(value, Number):
             out = self.word(value.kind, name)
-            self.numeric_assign(out, value)
+            if is_indexed(value.code) and self.guard is not None:
+                self.numeric_assign(out, Number("literal", "0"))
+                end = self.new_label()
+                self.jump(end, self.guard, negate=True)
+                self.numeric_assign(out, value)
+                self.label(end)
+            else:
+                self.numeric_assign(out, value)
             return out
         out = self.bit(name)
         self.rung("LD " + value, "ST " + out)
@@ -147,6 +155,12 @@ class Lowerer:
         value = expect(value, target.kind)
         if guard is not None:
             boolean(guard)
+        if guard is not None and (is_indexed(target.code) or is_indexed(value.code)):
+            end = self.new_label()
+            self.jump(end, guard, negate=True)
+            self.numeric_assign(target, value)
+            self.label(end)
+            return
         self.rung(
             "LD " + (guard if guard is not None else "1"),
             "[" + target.code + ":=" + value.code + "]",
@@ -166,6 +180,8 @@ class Lowerer:
                 prepared.append(str(value))
             else:
                 value = expect(value, argkind)
+                if is_indexed(value.code):
+                    value = self.copy(value, "indexed_operand_snapshot")
                 # Object operands are required by several native functions.
                 if not value.code.startswith("%"):
                     value = self.copy(value)
@@ -189,6 +205,10 @@ class Lowerer:
             a.kind if a.kind != "literal" else b.kind if b.kind != "literal" else "i32"
         )
         a, b = expect(a, kind), expect(b, kind)
+        if is_indexed(a.code):
+            a = self.copy(a, "indexed_comparison_snapshot")
+        if is_indexed(b.code):
+            b = self.copy(b, "indexed_comparison_snapshot")
         if not a.code.startswith("%"):
             a = self.copy(a)
         out = self.bit("numeric_comparison")

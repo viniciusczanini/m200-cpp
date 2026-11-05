@@ -97,7 +97,7 @@ def address(text, writable=False):
     limits = {"I0.": 24, "Q0.": 16, "M": 1024, "S": 160}
     if number >= limits[kind]:
         fail("address outside target range: " + text)
-    if kind == "S" and number not in (4, 5, 6, 7, 13):
+    if kind == "S" and number not in (4, 5, 6, 7, 13, 20):
         fail("unsupported system bit: " + text)
     if writable and kind not in ("M", "Q0."):
         fail("address is read-only: " + text)

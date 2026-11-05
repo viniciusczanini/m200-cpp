@@ -9,6 +9,8 @@ inline bool outputs[16] = {};
 inline bool memory[1024] = {};
 inline unsigned long long now_ms = 0;
 inline bool first_scan = true;
+inline bool index_error = false;
+inline int word_memory_limit = 0;
 }
 inline bool input(int n) { return detail::inputs[n]; }
 inline void output(int n, bool v) { detail::outputs[n] = v; }
@@ -17,9 +19,11 @@ inline bool read_m(int n) { return detail::memory[n]; }
 inline void write_m(int n,bool v) { detail::memory[n] = v; }
 inline bool system(int n) {
     if(n==13) return detail::first_scan;
+    if(n==20) return detail::index_error;
     unsigned period = n==4?10:n==5?100:n==6?1000:60000;
     return ((detail::now_ms / (period/2)) & 1) != 0;
 }
+inline void clear_index_error(){detail::index_error=false;}
 inline bool clock_ms(unsigned period) {
     return ((detail::now_ms / (period/2)) & 1) != 0;
 }
@@ -71,6 +75,7 @@ bool output_state(int);
 bool read_m(int);
 void write_m(int,bool);
 bool system(int);
+void clear_index_error();
 bool clock_ms(unsigned);
 struct Ton { explicit Ton(unsigned); bool update(bool); };
 struct Tof { explicit Tof(unsigned); bool update(bool); };
@@ -99,6 +104,23 @@ inline i32 read_dword(int n){return detail::bits_i32((unsigned)detail::words[n]|
 inline void write_dword(int n,i32 v){unsigned raw;__builtin_memcpy(&raw,&v,4);detail::words[n]=(unsigned short)raw;detail::words[n+1]=(unsigned short)(raw>>16);}
 inline f32 read_real(int n){i32 raw=read_dword(n);f32 out;__builtin_memcpy(&out,&raw,4);return detail::check_f32(out);}
 inline void write_real(int n,f32 v){i32 raw;__builtin_memcpy(&raw,&v,4);write_dword(n,raw);}
+struct WordMemory {
+    explicit WordMemory(int count){if(count<1||count>8000)__builtin_trap();detail::word_memory_limit=count;}
+};
+namespace detail {
+inline int indexed_word(int base,int index_word,int width){
+    if(word_memory_limit<1||base<0||base+width>word_memory_limit||index_word<0||index_word>=word_memory_limit)__builtin_trap();
+    long position=(long)base+(long)read_word(index_word);
+    if(position<0||position+width>word_memory_limit){index_error=true;return base;}
+    return (int)position;
+}
+}
+inline i16 read_word_indexed(int base,int index_word){return read_word(detail::indexed_word(base,index_word,1));}
+inline i32 read_dword_indexed(int base,int index_word){return read_dword(detail::indexed_word(base,index_word,2));}
+inline f32 read_real_indexed(int base,int index_word){return read_real(detail::indexed_word(base,index_word,2));}
+inline void write_word_indexed(int base,int index_word,i16 v){write_word(detail::indexed_word(base,index_word,1),v);}
+inline void write_dword_indexed(int base,int index_word,i32 v){write_dword(detail::indexed_word(base,index_word,2),v);}
+inline void write_real_indexed(int base,int index_word,f32 v){write_real(detail::indexed_word(base,index_word,2),v);}
 
 inline i16 add_i16(i16 a, i16 b){return detail::check_i16((long long)a+(long long)b);}
 inline i16 sub_i16(i16 a, i16 b){return detail::check_i16((long long)a-(long long)b);}
@@ -154,6 +176,13 @@ i32 read_dword(int);
 void write_dword(int,i32);
 f32 read_real(int);
 void write_real(int,f32);
+struct WordMemory { explicit WordMemory(int); };
+i16 read_word_indexed(int,int);
+i32 read_dword_indexed(int,int);
+f32 read_real_indexed(int,int);
+void write_word_indexed(int,int,i16);
+void write_dword_indexed(int,int,i32);
+void write_real_indexed(int,int,f32);
 i16 add_i16(i16,i16);
 i16 sub_i16(i16,i16);
 i16 mul_i16(i16,i16);

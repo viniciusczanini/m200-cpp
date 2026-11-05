@@ -16,7 +16,7 @@ de alocação ótima nem elimina todo overhead do compilador.
 | Grupo | Implementado no protótipo | Ainda falta |
 |---|---|---|
 | Digital e estado booleano | I/O embarcado, memória M, gates, if/else, bordas, clocks | filtros/latch/reflexos, alarm/fallback, I/O imediato, mapa completo S/SW, retenção configurável |
-| Numéricos | i16/i32/f32, 47 intrínsecos, INC/DEC em IL, comparações, memória MW/MD/MF compartilhada, arrays fixos com índice literal, XML Operation/Comparison, reversão | indexação dinâmica/multidimensional, demais operandos/constantes, flags e recuperação de erro, operações/casos ambíguos, BCD/ASCII/strings/tabelas |
+| Numéricos | i16/i32/f32, 47 intrínsecos, INC/DEC em IL, comparações, MW/MD/MF compartilhada, API nativa indexada por MW com WordMemory/S20/reset, arrays fixos com índice literal, XML Operation/Comparison, reversão | array C++ com índice calculado/multidimensional, indexação bit/constantes, flags numéricos e recuperação completa, demais operandos, operações/casos ambíguos, BCD/ASCII/strings/tabelas |
 | Blocos | TON/TOF/TP e classes de clock/borda | contadores C/FC/HSC, registradores, drum/SBR/SC, RTC/schedule, PID e seus parâmetros |
 | Hardware rápido | limites e conflitos de pinos documentados | configuração e execução de HSC, PWM/PLS/FREQGEN/PTO e blocos de movimento |
 | Comunicação | ReadVar/WriteVar/WriteReadVar em C++/IL e modelo assíncrono; FC1/2/3/4/5/6/15/16/23; MBAP; TCP local; XML de READ/WRITE word e perfis de porta comprovados | demais enums/configurações XML, propriedades dinâmicas dos blocos, IOScanner, EXCH/MSG, serial ASCII/RTU físico, mapas específicos de servidor e EtherNet/IP; validação oficial |

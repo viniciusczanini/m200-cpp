@@ -1,0 +1,299 @@
+{
+  "format": "m200-indexed-originals-v1",
+  "retrieved_utc": "2026-11-05",
+  "target": "TM200CE40T",
+  "all_sources_preserved_without_cpu_changes": true,
+  "git_blob_verification": "sha1(b\"blob \"+ascii_decimal_length+b\"\\0\"+raw_bytes) equals GitHub API .sha",
+  "sources": [
+    {
+      "repository": "didim99/TSTU",
+      "commit": "ea8c59ca97fc99d07cc979a2fcb78113c322cf2c",
+      "path": "labwork/mps/Lab-07-M221-autoOperator.smbp",
+      "file": "didim99__TSTU__425372b07a34.smbp",
+      "permalink": "https://github.com/didim99/TSTU/blob/ea8c59ca97fc99d07cc979a2fcb78113c322cf2c/labwork/mps/Lab-07-M221-autoOperator.smbp",
+      "raw_url": "https://raw.githubusercontent.com/didim99/TSTU/ea8c59ca97fc99d07cc979a2fcb78113c322cf2c/labwork/mps/Lab-07-M221-autoOperator.smbp",
+      "bytes": 114221,
+      "sha256": "a4307729f0864133e414517ef49c37e6648f29d7403a8f9737e2f7367461a738",
+      "git_blob": "425372b07a34946b6363b78bd15a5fbf8727cc98",
+      "git_blob_checked": true,
+      "cpu": "TM221ME16R/G",
+      "project_version": "2.6.0.0",
+      "management_level": "FunctLevelMan17_0",
+      "indexed": [
+        "%MW20[%MW10]"
+      ],
+      "s20_program_uses": [],
+      "indexed_program_uses": [
+        {
+          "rung": 15,
+          "name": "",
+          "comment": "Auto - start moving",
+          "ladder_selected": "false",
+          "il": [
+            "ELSE0",
+            "AND   %M6",
+            "MPS",
+            "[ %MW2 := %MW0 ]",
+            "[ %MW10 := LW ( ABS ( DWORD ( %MW2 - %MW1 ) ) ) ]",
+            "[ %C0.P := %MW10 ]",
+            "S     %C0",
+            "[ %MW10 := %MW2 - 2 ]",
+            "MRD",
+            "AND   [ %MW2 > %MW1 ]",
+            "[ %TM1.P := %MW20[%MW10] ]",
+            "S     %Q0.0",
+            "MPP",
+            "AND   [ %MW2 < %MW1 ]",
+            "[ INC %MW10 ]",
+            "[ %TM1.P := %MW20[%MW10] ]",
+            "S     %Q0.1"
+          ],
+          "ladder": []
+        }
+      ],
+      "metadata_scope": "cpu is Cpu/Reference; ManagementLevel is preserved literally, not mapped to semantic level",
+      "evidence_lines": {
+        "index": [
+          533,
+          553,
+          779
+        ],
+        "manual": [
+          791,
+          795
+        ],
+        "catalog_s20": [
+          953
+        ]
+      },
+      "id": "I1"
+    },
+    {
+      "repository": "didim99/TSTU",
+      "commit": "ea8c59ca97fc99d07cc979a2fcb78113c322cf2c",
+      "path": "labwork/mps/Lab-07-M221-autoOperator-2.smbp",
+      "file": "didim99__TSTU__75dec363d7b2.smbp",
+      "permalink": "https://github.com/didim99/TSTU/blob/ea8c59ca97fc99d07cc979a2fcb78113c322cf2c/labwork/mps/Lab-07-M221-autoOperator-2.smbp",
+      "raw_url": "https://raw.githubusercontent.com/didim99/TSTU/ea8c59ca97fc99d07cc979a2fcb78113c322cf2c/labwork/mps/Lab-07-M221-autoOperator-2.smbp",
+      "bytes": 113982,
+      "sha256": "948a843946d40458a7dbbeb31d7538019226c29c74230891b3adfb07282737ed",
+      "git_blob": "75dec363d7b21e24afd96ff0ad50e15395b5cb72",
+      "git_blob_checked": true,
+      "cpu": "TM221ME16R/G",
+      "project_version": "2.6.0.0",
+      "management_level": "FunctLevelMan17_0",
+      "indexed": [
+        "%MW20[%MW10]"
+      ],
+      "s20_program_uses": [],
+      "indexed_program_uses": [
+        {
+          "rung": 16,
+          "name": "",
+          "comment": "Auto - start moving",
+          "ladder_selected": "false",
+          "il": [
+            "ELSE0",
+            "AND   %M6",
+            "MPS",
+            "[ %MW2 := %MW0 ]",
+            "[ %MW10 := LW ( ABS ( DWORD ( %MW2 - %MW1 ) ) ) ]",
+            "[ %C0.P := %MW10 ]",
+            "S     %C0",
+            "[ %MW10 := %MW2 - 2 ]",
+            "MRD",
+            "AND   [ %MW2 > %MW1 ]",
+            "[ %TM1.P := %MW20[%MW10] ]",
+            "S     %Q0.0",
+            "MPP",
+            "AND   [ %MW2 < %MW1 ]",
+            "[ INC %MW10 ]",
+            "[ %TM1.P := %MW20[%MW10] ]",
+            "S     %Q0.1"
+          ],
+          "ladder": []
+        }
+      ],
+      "metadata_scope": "cpu is Cpu/Reference; ManagementLevel is preserved literally, not mapped to semantic level",
+      "evidence_lines": {
+        "index": [
+          518,
+          538
+        ],
+        "manual": [
+          781,
+          785
+        ],
+        "catalog_s20": [
+          943
+        ]
+      },
+      "id": "I2"
+    },
+    {
+      "repository": "afafirmansyah/automatic-tank-gauging",
+      "commit": "0a32c0f49051d84e5c341dbcf5d9cb7160446c62",
+      "path": "Program.smbp",
+      "file": "afafirmansyah__automatic-tank-gauging__86d5fdba3106.smbp",
+      "permalink": "https://github.com/afafirmansyah/automatic-tank-gauging/blob/0a32c0f49051d84e5c341dbcf5d9cb7160446c62/Program.smbp",
+      "raw_url": "https://raw.githubusercontent.com/afafirmansyah/automatic-tank-gauging/0a32c0f49051d84e5c341dbcf5d9cb7160446c62/Program.smbp",
+      "bytes": 152754,
+      "sha256": "659c71a7b01f29fcdc55b8c30d2e4a425ce71cafa97bd3aebf4a4006da2d8e6c",
+      "git_blob": "86d5fdba310676419efd636d7d3c8d0802e326e6",
+      "git_blob_checked": true,
+      "cpu": "TM221CE16R",
+      "project_version": "2.6.0.0",
+      "management_level": "FunctLevelMan17_0",
+      "indexed": [],
+      "s20_program_uses": [],
+      "indexed_program_uses": [],
+      "metadata_scope": "cpu is Cpu/Reference; ManagementLevel is preserved literally, not mapped to semantic level",
+      "evidence_lines": {
+        "mw_operation": [
+          18
+        ],
+        "mf_operation": [
+          79
+        ],
+        "mf_comparison": [
+          517
+        ],
+        "manual": [
+          872,
+          876
+        ],
+        "catalog_s20": [
+          1010
+        ]
+      },
+      "id": "F"
+    },
+    {
+      "repository": "juanaguirre09/SCADA-PICK-AND-PLACE-XYZ",
+      "commit": "4c70c82e9bbc12fcef15e90b603b3cd802c4dc01",
+      "path": "pick_place_SCADA.smbp",
+      "file": "juanaguirre09__SCADA-PICK-AND-PLACE-XYZ__431069dd14a7.smbp",
+      "permalink": "https://github.com/juanaguirre09/SCADA-PICK-AND-PLACE-XYZ/blob/4c70c82e9bbc12fcef15e90b603b3cd802c4dc01/pick_place_SCADA.smbp",
+      "raw_url": "https://raw.githubusercontent.com/juanaguirre09/SCADA-PICK-AND-PLACE-XYZ/4c70c82e9bbc12fcef15e90b603b3cd802c4dc01/pick_place_SCADA.smbp",
+      "bytes": 326939,
+      "sha256": "7431d3410ef71f2216b16b8c7cf086d21326abb289ff7191400128712a46fab9",
+      "git_blob": "431069dd14a7ff090d06cde10f2520426fe651b6",
+      "git_blob_checked": true,
+      "cpu": "TM221C16R",
+      "project_version": "2.7.0.0",
+      "management_level": "FunctLevelMan18_0",
+      "indexed": [],
+      "s20_program_uses": [],
+      "indexed_program_uses": [],
+      "metadata_scope": "cpu is Cpu/Reference; ManagementLevel is preserved literally, not mapped to semantic level",
+      "evidence_lines": {
+        "md_operation": [
+          973
+        ],
+        "md_comparison": [
+          1465
+        ],
+        "manual": [
+          6239,
+          6243
+        ],
+        "catalog_s20": [
+          6604
+        ]
+      },
+      "id": "D"
+    },
+    {
+      "repository": "ph0wn/writeups",
+      "commit": "40a9692518f7c4f367df3904c090f37641704069",
+      "path": "2026/ghost-ship-cannons/setup/CTF_Challenge_Cannon.smbp",
+      "file": "ph0wn__writeups__f24105319afa.smbp",
+      "permalink": "https://github.com/ph0wn/writeups/blob/40a9692518f7c4f367df3904c090f37641704069/2026/ghost-ship-cannons/setup/CTF_Challenge_Cannon.smbp",
+      "raw_url": "https://raw.githubusercontent.com/ph0wn/writeups/40a9692518f7c4f367df3904c090f37641704069/2026/ghost-ship-cannons/setup/CTF_Challenge_Cannon.smbp",
+      "bytes": 166429,
+      "sha256": "a7763020ea0a170963bdf75ef84d92e572bf90b4d8ed83acaa245f42ad434157",
+      "git_blob": "f24105319afa06de426bec86fde91323df9db5d4",
+      "git_blob_checked": true,
+      "cpu": "TM221CE16T",
+      "project_version": "2.9.0.0",
+      "management_level": "FunctLevelMan14_0",
+      "indexed": [],
+      "s20_program_uses": [],
+      "indexed_program_uses": [],
+      "metadata_scope": "cpu is Cpu/Reference; ManagementLevel is preserved literally, not mapped to semantic level",
+      "evidence_lines": {
+        "empty_words_allocation": [
+          2126
+        ],
+        "catalog_s20": [
+          2343
+        ]
+      },
+      "id": "A"
+    },
+    {
+      "repository": "hitmansniper90/portfolio",
+      "commit": "31ea348f51f88794940289f64dd149fe1ac08f4e",
+      "path": "station de pompage automatisée/3 Pompes permutation temporelle.smbp",
+      "file": "hitmansniper90__portfolio__6815b2794dfa.smbp",
+      "permalink": "https://github.com/hitmansniper90/portfolio/blob/31ea348f51f88794940289f64dd149fe1ac08f4e/station%20de%20pompage%20automatis%C3%A9e/3%20Pompes%20permutation%20temporelle.smbp",
+      "raw_url": "https://raw.githubusercontent.com/hitmansniper90/portfolio/31ea348f51f88794940289f64dd149fe1ac08f4e/station%20de%20pompage%20automatis%C3%A9e/3%20Pompes%20permutation%20temporelle.smbp",
+      "bytes": 231654,
+      "sha256": "3f30b1cabd03220c518afa4c0f5b800ca29f1d905e126ad421bffc8a2d5be3d7",
+      "git_blob": "6815b2794dfa9a6e91466bd46ea407bc40c711a7",
+      "git_blob_checked": true,
+      "cpu": "TM221CE40T",
+      "project_version": "2.8.0.0",
+      "management_level": "FunctLevelMan18_0",
+      "indexed": [],
+      "s20_program_uses": [],
+      "indexed_program_uses": [],
+      "metadata_scope": "cpu is Cpu/Reference; ManagementLevel is preserved literally, not mapped to semantic level",
+      "evidence_lines": {
+        "md_timer_operation": [
+          1400
+        ],
+        "manual": [
+          3555,
+          3559
+        ],
+        "catalog_s20": [
+          3700
+        ]
+      },
+      "id": "T"
+    }
+  ],
+  "documents": [
+    {
+      "file": "EIO0000003289.pdf",
+      "official_url": "https://www.se.com/us/en/download/document/EIO0000003289/",
+      "edition": "EIO0000003289.04, 09/2025",
+      "bytes": 2674700,
+      "sha256": "d2c8af0598276e7a0bb4f30770e4529282962bc6ee3944dee0645cb9a3186595",
+      "git_blob": null,
+      "git_blob_note": "Schneider PDF, not a GitHub blob",
+      "provenance": "unchanged local research copy; hash agrees with CONTROL-FLOW-RESEARCH.md"
+    },
+    {
+      "file": "EIO0000003281.pdf",
+      "official_url": "https://www.se.com/us/en/download/document/EIO0000003281/",
+      "edition": "EIO0000003281.04, 09/2025",
+      "bytes": 4485928,
+      "sha256": "2fb60e335bbe92342760471777abf256da7a434c61b98b464ae234aaa82c45e5",
+      "git_blob": null,
+      "git_blob_note": "Schneider PDF, not a GitHub blob",
+      "provenance": "unchanged local research copy; hash agrees with CONTROL-FLOW-RESEARCH.md"
+    },
+    {
+      "file": "EIO0000002019.pdf",
+      "official_url": "https://www.se.com/id/en/download/document/EIO0000002019/",
+      "edition": "EIO0000002019.06",
+      "bytes": 24872820,
+      "sha256": "fb4f684e7efbb46e3e38e61ed532d99bf623bedffe447b5c379dd3dd6c4434df",
+      "git_blob": null,
+      "git_blob_note": "Schneider PDF, not a GitHub blob",
+      "provenance": "unchanged local research copy; hash agrees with CONTROL-FLOW-RESEARCH.md"
+    }
+  ]
+}

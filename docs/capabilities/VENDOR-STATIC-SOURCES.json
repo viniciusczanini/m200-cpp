@@ -1,0 +1,31 @@
+{
+  "format": "m200-vendor-static-v1",
+  "target": "TM200CE40T",
+  "sources": [
+    {
+      "file": "official-atv-eth-direct.smbp",
+      "faq": "https://www.se.com/uk/en/faqs/FA361549/",
+      "url": "https://se.my.site.com/ckmContent/sfc/servlet.shepherd/document/download/069Kj00000TaGRLIA3",
+      "cpu": "TM221CE24R",
+      "bytes": 252402,
+      "sha256": "9c992fedd4ad6d0fdf73e85d5e05edbaa2536cfe6257261e2eb3d0d9c4493bf4"
+    }
+  ],
+  "other_files": {
+    "official-atv-evidence.json": {
+      "bytes": 17177,
+      "sha256": "f292ccdc6194838c8b5169fdfd48ee8b98955e9b466079c1c2ad4ccccd5481a1"
+    },
+    "official-atv-dotnet-types.txt": {
+      "bytes": 2199,
+      "sha256": "8f0f6da61edf14ea065d5c3bfed4796b77f5200d046aee0b533eaac1614a8e85"
+    },
+    "installer-page-metadata.json": {
+      "bytes": 2571,
+      "sha256": "cc5db3ab4c7ee675f021c9b7554e79cb2162625559dd7e519d990f6a98a04ace"
+    }
+  },
+  "installer_access": "registered; no package downloaded or requested from private endpoints",
+  "official_editor": "pending",
+  "physical_plc": "pending"
+}

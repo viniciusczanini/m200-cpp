@@ -1,6 +1,7 @@
 from .il import validate
-from .model import address
+from .model import address, fail
 from .flow import JUMPS, split_label
+from .indexed import is_indexed, parse as parse_indexed, direct_word_limit, has_indexed
 from .numeric import (
     comparison,
     cpp,
@@ -43,6 +44,10 @@ def read_cpp(arg):
 
 
 def write_cpp(arg, value):
+    if arg == "%S20":
+        if value != "false":
+            fail("system index-error bit is writable only by reset")
+        return "plc::clear_index_error();"
     kind, n = address(arg, True)
     return ("plc::write_m" if kind == "M" else "plc::output") + "(%d, %s);" % (n, value)
 
@@ -59,6 +64,10 @@ def to_cpp(program):
         lines.append(
             "plc::%s timer_%d{%d};"
             % ({"TON": "Ton", "TOF": "Tof", "TP": "Pulse"}[t.kind], i, t.milliseconds)
+        )
+    if has_indexed(program):
+        lines.append(
+            "plc::WordMemory native_word_image{%d};" % direct_word_limit(program)
         )
     for key, cfg in sorted(program.communications.items()):
         lines.append(constructor_cpp(key, cfg))
@@ -88,7 +97,11 @@ def to_cpp(program):
         for line in rung:
             if is_operation(line):
                 target, name, values = instruction_operation(line)
-                kind, index = word_address(target)
+                if is_indexed(target):
+                    kind, index, index_word = parse_indexed(target)
+                else:
+                    kind, index = word_address(target)
+                    index_word = None
                 args = [str(v) if isinstance(v, int) else cpp(v) for v in values]
                 expression = (
                     args[0]
@@ -96,9 +109,11 @@ def to_cpp(program):
                     else "plc::" + name + "(" + ",".join(args) + ")"
                 )
                 fn = {v: k for k, v in WRITES.items()}[kind]
-                lines.append(
-                    "  if (accumulator) { plc::%s(%d,%s); }" % (fn, index, expression)
-                )
+                arguments = str(index) + "," + expression
+                if index_word is not None:
+                    fn += "_indexed"
+                    arguments = str(index) + "," + str(index_word) + "," + expression
+                lines.append("  if (accumulator) { plc::%s(%s); }" % (fn, arguments))
                 continue
             op, arg = line.split(maxsplit=1)
             if op in JUMPS:

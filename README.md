@@ -54,6 +54,22 @@ O protótipo **recusa** aritmética C++ com promoções implícitas (use as oper
 
 Arrays de capacidade fixa de `bool`, `plc::i16`, `plc::i32` e `plc::f32` aceitam leitura/escrita com índice literal. Arrays globais persistem entre scans e recebem inicialização no primeiro RUN; locais são inicializados quando a declaração executa. Inicializadores parciais e `{}` zeram os elementos restantes. Arrays locais sem inicialização são recusados. O caminho reverso recupera os operandos/endereço reais, sem precisar preservar a sintaxe original de array. Indexação dinâmica e outras formas continuam no objetivo de equivalência.
 
+A API nativa indexada de words já aceita índices calculados em execução:
+
+```cpp
+plc::WordMemory image{64}; // reserva MW0..63 como imagem explícita da aplicação
+// Dentro de scan():
+plc::write_word(0, 3);
+plc::write_word_indexed(16, 0, 42); // endereço 16 + conteúdo de MW0 = MW19
+plc::i16 value = plc::read_word_indexed(16, 0);
+```
+
+O segundo argumento é o **endereço literal do MW de índice**, não o offset em si. Existem variantes `read/write_dword_indexed` e `read/write_real_indexed`; o offset é medido em words, inclusive para objetos de32bits, que ocupam duas células. O índice original não é alterado por erro. `%S20`, lido por `plc::system(20)`, persiste até `plc::clear_index_error()`; S/ST nesse bit são recusados. Em erro, a API usa o endereço base. Guardas preservam o limite lógico de `WordMemory` mesmo que os temporários ocupem endereços mais altos. A imagem inteira fica reservada, além de buffers de comunicação. `examples/indexed_words.cpp` percorre uma tabela com `for`.
+
+O modelo local usa maior referência direta para a indexação nativa e verifica ambas as células de MD/MF. Relação com sobrealocação Manual, default XML e símbolos isolados permanece sem prova externa: esses perfis são recusados na importação indexada. A emissão Operation/Comparison é experimental, baseada na sintaxe documentada; não foi encontrado original gráfico indexado nesta pesquisa. Perfil/word-offset32/fronteiras/flags precisam do editor e PLC. A sintaxe comum `array[indice_calculado]` e indexação bit continuam na tarefa seguinte; esta API não conclui a cobertura integral.
+
+AND/OR nativo com comparação indexada também é recusado enquanto a ordem de resolução/erro do contato não estiver comprovada. O C++ com `&&/||` continua suportado: o compilador captura o lado esquerdo e emite snapshot/desvio antes de acessar o endereço, preservando o curto-circuito definido pela linguagem.
+
 `while`, `for`, `do/while`, `break`, `continue`, labels e `goto` usam saltos nativos e executam no mesmo scan. Em `for`, use tipos `plc::*` e incremento explícito, por exemplo `i=plc::add_i16(i,1)`; operadores C++ de incremento/promoção ainda não foram ampliados. O caminho inverso reconstrói labels e `goto` a partir da IL real. São contabilizados os 64 labels nativos, incluindo os gerados pelo compilador. A VM tem limite local de execução, configurável por `Machine(..., instruction_limit=...)`: excedê-lo gera erro, sem encerrar o laço com sucesso nem simular o watchdog físico. O XML emitido usa a forma `Jump/JMPC` observada em original; gráficos diretos de `JMP/JMPCN` permanecem sem comprovação. O exemplo `examples/loops.cpp` exercita essa linguagem.
 
 `read_m`, `write_m` e `system` são primitivas de auditoria usadas no C++ reconstruído. `system` aceita somente as quatro bases de clock e o primeiro scan `%S13`. O significado da região retida e de estados iniciais de projetos externos precisa ser confrontado com sua configuração; não há simulação de falta de energia/retomada física.

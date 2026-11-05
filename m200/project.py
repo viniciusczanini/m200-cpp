@@ -15,6 +15,7 @@ from .il import validate
 from .config import configuration, unique_tree
 from .model import Program, Timer, address, fail
 from .flow import split_label
+from .indexed import has_indexed, direct_word_limit
 from .numeric import (
     word_address,
     comparison,
@@ -441,6 +442,19 @@ def validate_allocations(sw, program):
             count is None or int(count) < required
         ):
             fail(tag + " allocation does not cover all referenced memory/buffers")
+    if has_indexed(program):
+        bound = direct_word_limit(program)
+        words = sw.find("MemoryWordsMemoryAllocation")
+        forced = words.findtext("ForcedCount") if words is not None else None
+        mode = words.findtext("Allocation") if words is not None else None
+        if mode not in ("Automatic", "Manual"):
+            fail("indexed bound with an omitted/default allocation mode is unverified")
+        if max(memory_words_used(program), default=-1) + 1 > bound or (
+            mode == "Manual" and forced is not None and int(forced) != bound
+        ):
+            fail(
+                "indexed bound from excess Manual allocation or symbol-only extent is unverified"
+            )
 
 
 def write_project(program, template, destination):

@@ -1,0 +1,113 @@
+{
+  "seed": 20020261109,
+  "cases": [
+    {
+      "case": 0,
+      "kind": "MW",
+      "base": 8,
+      "observe": "low",
+      "scans": 1024,
+      "status": "pass"
+    },
+    {
+      "case": 1,
+      "kind": "MW",
+      "base": 8,
+      "observe": "flag",
+      "scans": 1024,
+      "status": "pass"
+    },
+    {
+      "case": 2,
+      "kind": "MW",
+      "base": 66,
+      "observe": "low",
+      "scans": 1024,
+      "status": "pass"
+    },
+    {
+      "case": 3,
+      "kind": "MW",
+      "base": 66,
+      "observe": "flag",
+      "scans": 1024,
+      "status": "pass"
+    },
+    {
+      "case": 4,
+      "kind": "MD",
+      "base": 32,
+      "observe": "low",
+      "scans": 1024,
+      "status": "pass"
+    },
+    {
+      "case": 5,
+      "kind": "MD",
+      "base": 32,
+      "observe": "high",
+      "scans": 1024,
+      "status": "pass"
+    },
+    {
+      "case": 6,
+      "kind": "MD",
+      "base": 32,
+      "observe": "flag",
+      "scans": 1024,
+      "status": "pass"
+    },
+    {
+      "case": 7,
+      "kind": "MF",
+      "base": 32,
+      "observe": "low",
+      "scans": 1024,
+      "status": "pass"
+    },
+    {
+      "case": 8,
+      "kind": "MF",
+      "base": 32,
+      "observe": "high",
+      "scans": 1024,
+      "status": "pass"
+    },
+    {
+      "case": 9,
+      "kind": "MF",
+      "base": 32,
+      "observe": "flag",
+      "scans": 1024,
+      "status": "pass"
+    }
+  ],
+  "scans": 10240,
+  "source_sha256": {
+    "m200/__init__.py": "77c5815a3596eebca3e939d1ad39abba46fa4edc4df148aaa7e47f13e5eda0ab",
+    "m200/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "m200/allocation.py": "701ff984d698be7553d66c44038eadeac9439813b089f4ae1ec65bd1f3d3d7b8",
+    "m200/capabilities.py": "e94e59743ee0eae98c476938f8eafe04966c0823b825b1d070980d15d41348a0",
+    "m200/cli.py": "6e242beffa1040d1bba39e7b522606f4914dfa90b1d4e832902dfea01b184e6e",
+    "m200/communication.py": "105c1aef50e7ee00bc7c7142a5b6805d4ddf5f18fc04c5e60a52b78841a6b3b0",
+    "m200/communication_xml.py": "954e0fb861fef56381b204936c47f2f760dbcb3840dd018bb1d2a1b13bfc319f",
+    "m200/config.py": "3acbc41bf01d78576c34a5d716b559851fb13bb819fa14b149e4be9fd3dd5e52",
+    "m200/flow.py": "a61ed946937daa4e54002dc29664c0ef6c02617eb1abb8faa0d0169e06244dc6",
+    "m200/frontend.py": "705fa5d9ee38bb346a45f1d6ac3fe42111b202a45e41fc7061ec3ca3a7705b1a",
+    "m200/il.py": "5aaf345a9672bf9a1112591bc7e46057c93dd6a2eba66d9d750e635a51a5a7f8",
+    "m200/indexed.py": "12a238ead485ffca2e5d33e1ef22dd1bfcebea784e7142666997f503f41aa604",
+    "m200/jsonio.py": "c4d8447354b4f48205a8d5bfc58e1a3919656ba2073ecc5982b2f8fd6253fd70",
+    "m200/lower.py": "b803e3e4523d5987d702a87c630d370bb0a738884dd033bed881ce8f78a20f43",
+    "m200/modbus.py": "62e98577eba6e2de938bc2292dd6cb16f22f64e1101fabdf5ea0f33fd009e92c",
+    "m200/model.py": "a6b422c2ce9f7df4e895383d99c38df6b765dcb776ff266bc8ee06b5bab0afd7",
+    "m200/native.py": "6e782827bcfbd9201997a7466da3b78b6dde6b2298f7449f2f83d2c3a5806dd7",
+    "m200/numeric.py": "feb549952539d4a8c16b189b6eeeb5efc8846804dce8faaa2746db1638161c4e",
+    "m200/project.py": "2ddbf79cd37d8f678011a782931297d4338a11843ee308eadae0e55aad1990dc",
+    "m200/reverse.py": "aba6e466c1b0d1b30edc5f59c61e98a554b7628998657698b94e63afa263ac25",
+    "sdk/plc.hpp": "901a85c6994ef447a931f711d9ca71870bb3f284f2881ff8f886b2f9722d42cb",
+    "tests/stress/indexed.py": "d8937c58e751f515b6d65dcc4f3d1d1a2545d4dee9ed673f73e02fa4f77426a3"
+  },
+  "model": "signed offset in words; direct extent80; two-word width check; sticky %S20; no Manual/default inference",
+  "official_editor": "pending",
+  "physical_plc": "pending"
+}

@@ -10,9 +10,12 @@ examples:
 	python3 -m m200 check examples/modbus_read.cpp --trace examples/trace.json
 	python3 -m m200 compile examples/loops.cpp -o output/loops
 	python3 -m m200 check examples/loops.cpp --trace examples/trace.json
+	python3 -m m200 compile examples/indexed_words.cpp -o output/indexed-words
+	python3 -m m200 check examples/indexed_words.cpp --trace examples/trace.json
 stress:
 	python3 tests/stress/run.py
 	python3 tests/stress/control_flow.py
+	python3 tests/stress/indexed.py
 public-fetch:
 	python3 tests/public/fetch.py
 public-check:

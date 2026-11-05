@@ -132,3 +132,47 @@ não são prova de alocação ótima. A segunda tradução ainda pode exceder o
 orçamento provisório de instruções ou memória, mesmo existindo uma solução
 nativa menor. Essas lacunas, indexação dinâmica e demais recursos do inventário
 continuam no objetivo ativo; editor e PLC permanecem pendentes.
+
+## Continuação do objetivo: indexação nativa de words
+
+`plc::WordMemory` e as seis operações read/write de MW/MD/MF indexadas por MW
+foram implementadas em frontend, IL, VM, SDK, reversão e XML experimental. A
+imagem inteira é reservada, incluindo limites e buffers; guardas preservam o
+limite lógico quando os temporários ficam mais altos. `%S20` é sticky e somente
+R/`clear_index_error()` pode limpá-lo. Índice inválido usa sentinel-32768 para
+provocar o erro/fallback no acesso nativo; não se emite S/ST%S20. Snapshots/CFG
+protegem ramos inativos, curto-circuito e a ordem de leitura do lado esquerdo.
+
+Verificação final em 2026-11-05: **221/221 testes em 99,096s**, exemplos incluindo
+`indexed_words.cpp`, lint/diff e todos os comandos locais com saída zero.
+`make stress` executou novamente 37.716 scans antigos,3.072 de laços e
+**10.240 scans em dez casos indexados** com oráculo independente de words,
+C++ nativo, IL recompilada, segunda reversão e SMBP. Foram conferidos dados,
+índice e flag da VM em cada frame. `make public-check` passou novamente
+19casos/16.128scans e `make public-flow-check`2casos/2.048scans. Total público
+e estresse desta rodada: **69.204scans**, sem somar rodadas repetidas.
+
+Regressões RED/GREEN cobrem o literal de atribuição de array após a mudança de
+ordem RHS/lvalue, flag à esquerda antes de RHS indexado, ST%S20 em saída de
+timer e alocação XML omitida/vazia burlando a recusa de limite desconhecido.
+Acesso indexado sob AND/OR bruto permanece explicitamente recusado, pois o
+efeito de erro mesmo sem energia não está documentado; o frontend C++ evita
+esse padrão. Revisão e rechecagem: `INDEXED-REVIEW.md`.
+
+O perfil de8000words foi exercitado com transferência MD7998 indexada,
+fallback e reversão, sem exigir temporário numérico adicional. Não se conclui
+daí que todo programa que cabe nativamente já cabe no compilador. Operações
+compostas, grupos/arrays C++ dinâmicos, bits indexados e overhead continuam
+trabalho aberto. Casos de maior referência direta/ForcedCount/defaults e
+fronteiras MD/MF precisam de comprovação externa; o teste local não a substitui.
+
+`INDEXED-STRESS-RESULTS.json` e `INDEXED-LOCAL-RESULTS.json` registram os bytes
+testados. `INDEXED-SEMANTICS.md`, `INDEXED-ORIGINALS.md` e os manifestos conservam
+fontes primárias e as lacunas. Um SMBP público adicional foi obtido diretamente
+da FAQ Schneider FA361549 e preservado sem alterar sua CPU TM221CE24R; comprova
+sete formatos de blocos ATV, não aceitação no CE40T nem cobertura runtime deles.
+Os instaladores verificados exigem cadastro; nenhum EXE/DLL foi baixado ou
+executado. Ver `../capabilities/VENDOR-STATIC-RESEARCH.md`.
+
+O objetivo integral continua ativo; Task2 do plano de indexação ainda está
+pendente e não foi substituída pela API de words explícitos.
