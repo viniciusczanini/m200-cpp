@@ -16,12 +16,13 @@ Fontes primárias: [Generic Functions EIO0000003289.04](https://www.se.com/us/en
   exportação elimina MPS, sem alegar que o perfil físico execute 32 pushes.
 - Timer estruturado admite lógica de entrada e saída Q com ST/STN/S/R. A
   chamada direta `IN %TMn` é implementada onde o acumulador posterior não é
-  observado: no fim do rung ou antes de outro LD/LDN. Efeito de IN sobre o
+  observado: no fim do rung ou antes de outro LD/LDN/LDR/LDF. Efeito de IN sobre o
   acumulador em outras sequências permanece sem prova e é recusado.
 - Short-circuit e erros de contato/comparação indexados AND/OR continuam
-  recusados onde já eram ambíguos. Modificadores de parênteses N/R/F e contatos
-  de borda nativos ainda exigem contrato próprio; não são interpretados por
-  analogia.
+  recusados onde já eram ambíguos. Modificadores de parênteses N/R/F ainda
+  exigem contrato próprio. Contatos de borda nativos têm implementação e
+  limites separados em `NATIVE-EDGE-CONTACTS.md`, sem equivaler aos blocos
+  RISINGn/FALLINGn ou presumir sua semântica por analogia.
 
 ## Arquitetura e evidência
 

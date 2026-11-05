@@ -4,6 +4,7 @@ from .timers import reference as timer_reference
 from .flow import JUMPS, split_label
 from .native_logic import decode, STORES, OPEN
 from .bits import word_bit, is_string, bit_string
+from .edges import OPS as EDGE_OPS, BASE as EDGE_BASE, cpp as edge_cpp
 from .indexed import (
     is_indexed,
     parse as parse_indexed,
@@ -257,7 +258,11 @@ def to_cpp(program):
                     )
                 )
             else:
-                value = read_cpp(arg)
+                if op in EDGE_OPS:
+                    value = edge_cpp(op, arg)
+                    op = EDGE_BASE[op]
+                else:
+                    value = read_cpp(arg)
                 if op in ("LDN", "ANDN", "ORN", "XORN"):
                     value = "!" + value
                 if op not in ("LD", "LDN"):

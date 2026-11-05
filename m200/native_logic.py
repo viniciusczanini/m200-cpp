@@ -5,9 +5,10 @@ import re
 from .model import fail
 from .numeric import is_operation
 from .flow import JUMPS
+from .edges import OPS as EDGE_OPS, LOADS
 
 STORES = ("ST", "STN", "S", "R")
-LOGIC = ("LD", "LDN", "AND", "ANDN", "OR", "ORN", "XOR", "XORN")
+LOGIC = ("LD", "LDN", "AND", "ANDN", "OR", "ORN", "XOR", "XORN", *EDGE_OPS)
 STACK = ("MPS", "MRD", "MPP")
 OPEN = ("AND(", "OR(")
 
@@ -64,7 +65,7 @@ def decode(rung):
             parts = line.split(maxsplit=1)
             op = parts[0]
             arg = parts[1] if len(parts) == 2 else ""
-        if i == 0 and op not in ("LD", "LDN") and not (len(rung) == 1 and op == "JMP"):
+        if i == 0 and op not in LOADS and not (len(rung) == 1 and op == "JMP"):
             fail("rung must begin with a supported load")
         if op in (*STACK, "N", ")"):
             if arg:
@@ -100,7 +101,7 @@ def decode(rung):
             if (
                 op == "IN"
                 and i + 1 < len(rung)
-                and rung[i + 1].split(maxsplit=1)[0] not in ("LD", "LDN")
+                and rung[i + 1].split(maxsplit=1)[0] not in LOADS
             ):
                 fail("IN accumulator effects before subsequent actions are unverified")
         elif op not in LOGIC:

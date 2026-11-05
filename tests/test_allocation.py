@@ -178,7 +178,9 @@ plc::output(2,real_lived==1.5f);}""")
     def test_allocator_refuses_instruction_effects_it_does_not_model(self):
         storage = Storage()
         value = storage.bit("value")
-        p = Program([["LD 1", "LDR %I0.0", "ST " + value]])
+        # LDR is modeled now; a still-unsupported accumulator edge block must
+        # retain the fail-closed behavior this test exercises.
+        p = Program([["LD 1", "RISING0", "ST " + value]])
         with self.assertRaisesRegex(CompileError, "unmodelled|unsupported"):
             storage.finalize(p, {})
 

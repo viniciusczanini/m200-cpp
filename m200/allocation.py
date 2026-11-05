@@ -13,6 +13,7 @@ from itertools import chain
 from .flow import JUMPS, destinations, split_label
 from .model import fail
 from .numeric import Number, TYPES
+from .edges import OPS as EDGE_OPS
 
 REFERENCE = re.compile(r"%M(?:W|D|F)?[0-9]+")
 ASSIGNMENT = re.compile(
@@ -65,6 +66,7 @@ def effects(rung, registers, constants, aliases=None):
             "ORN",
             "XOR",
             "XORN",
+            *EDGE_OPS,
             "ST",
             "S",
             "R",
@@ -116,7 +118,9 @@ def effects(rung, registers, constants, aliases=None):
                 definitions.add(target)
                 line_definitions.add(target)
         steps.append((line_reads, line_definitions, line_writes))
-        if op in ("LD", "LDN"):
+        if op in EDGE_OPS:
+            acc = None
+        elif op in ("LD", "LDN"):
             acc = known_bit(arg, constants)
             if op == "LDN" and acc is not None:
                 acc = not acc

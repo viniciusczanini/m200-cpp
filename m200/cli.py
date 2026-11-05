@@ -281,6 +281,11 @@ def main(argv=None):
                 ],
                 "packed_bit_scope": "MW:X0..15 and M/I0/Q0 byte-aligned regions, length 1..32 within carrier/bank. Typed snapshots preserve aliases, neighbors and same-scan output image. Other banks, unequal/overlapping native string assignments and official acceptance remain gated/pending.",
                 "array_indices": ["literal", "bool", "i16", "i32"],
+                "native_edge_contacts": {
+                    "api": ["input_rising", "input_falling", "m_rising", "m_falling"],
+                    "il": ["LDR", "LDF", "ANDR", "ANDF", "ORR", "ORF", "XORR", "XORF"],
+                    "scope": "Direct embedded I0/M; events sampled per address at scan start, unaffected by repeated/skipped contacts; M writes appear next scan. Input phase/startup/restart and official acceptance pending. RISINGn/FALLINGn blocks and R/F parenthesis modifiers remain separate gaps.",
+                },
                 "native_logic_ir": [
                     "STN",
                     "N",

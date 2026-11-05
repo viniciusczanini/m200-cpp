@@ -4,6 +4,10 @@
 Meta integral: `../PARITY.md`. O suporte a classes RisingEdge/FallingEdge já
 existente não demonstra por si só a semântica de contatos LDR/LDF.
 
+Atualização: a etapa seguinte implementa os oito contatos I0/M segundo
+`NATIVE-EDGE-CONTACTS.md`. Esta pesquisa preserva as evidências e conflitos;
+RISINGn/FALLINGn e validação externa continuam pendentes.
+
 Fonte primária lida: [EIO0000003289.04](https://www.se.com/us/en/download/document/EIO0000003289/),
 pp37–45 e 47–48. Mesmo PDF preservado em `INDEXED-SOURCES.json`, SHA256
 `d2c8af0598276e7a0bb4f30770e4529282962bc6ee3944dee0645cb9a3186595`.

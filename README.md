@@ -110,6 +110,16 @@ o grupo antes de escrever e admite sobreposição. Leituras de Q enxergam as
 escritas anteriores do mesmo scan. Exemplo `examples/bit_objects.cpp`;
 escopo e restrições: `docs/capabilities/BIT-OBJECTS.md`.
 
+Os contatos nativos LDR/LDF, ANDR/ANDF, ORR/ORF e XORR/XORF estão disponíveis
+na IL e reversão. Em C++, `input_rising/falling(index)` e `m_rising/falling(index)`
+retornam a borda amostrada no começo do ciclo. Leituras repetidas não consomem
+o evento e saltos não acumulam bordas antigas. Uma escrita em M no programa
+aparece na detecção do próximo ciclo; um pulso que sobe e desce dentro do ciclo
+não aparece. As classes RisingEdge/FallingEdge continuam detectores no ponto
+da chamada. Fase das entradas, partida/retomada e aceitação oficial aguardam
+validação externa. Exemplo `examples/native_edges.cpp`; contrato
+`docs/capabilities/NATIVE-EDGE-CONTACTS.md`.
+
 ## Números e inventário completo de pesquisa
 
 ```cpp

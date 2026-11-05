@@ -1,0 +1,425 @@
+{
+  "seed": 20020261116,
+  "target": "TM200CE40T",
+  "cases": [
+    {
+      "case": "memory_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_16",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_32",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_48",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_64",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_80",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_96",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_112",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_128",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_144",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_160",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_176",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_192",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_208",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_224",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_240",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_256",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_272",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_288",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_304",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_320",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_336",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_352",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_368",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_384",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_400",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_416",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_432",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_448",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_464",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_480",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_496",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_512",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_528",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_544",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_560",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_576",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_592",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_608",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_624",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_640",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_656",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_672",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_688",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_704",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_720",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_736",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_752",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_768",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_784",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_800",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_816",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_832",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_848",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_864",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_880",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_896",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_912",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_928",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_944",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_960",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_976",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_992",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "memory_1008",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "input_0",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "input_8",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "input_16",
+      "scans": 256,
+      "status": "pass"
+    },
+    {
+      "case": "operators_0",
+      "scans": 512,
+      "status": "pass"
+    },
+    {
+      "case": "operators_7",
+      "scans": 512,
+      "status": "pass"
+    },
+    {
+      "case": "operators_15",
+      "scans": 512,
+      "status": "pass"
+    },
+    {
+      "case": "operators_21",
+      "scans": 512,
+      "status": "pass"
+    },
+    {
+      "case": "public_memory_edge",
+      "scans": 512,
+      "status": "pass",
+      "original_sha256": "4ea44184fd796888498b39561f60ff8ae4c4458447b9328896376431c1afe110",
+      "rung": 2,
+      "scope": "complete isolated original rung; explicit M/word adapters; no CPU rewrite"
+    },
+    {
+      "case": "public_input_edges",
+      "scans": 512,
+      "status": "pass",
+      "original_sha256": "fa31ac8cba4424f3069b089f20b016935e75f314991efcd040e42ceea81bdd1f",
+      "rung": 1,
+      "scope": "exact contiguous [1:3] LDR/ORF slice with observation coil; original IW assignment excluded explicitly"
+    },
+    {
+      "case": "public_edge_groups",
+      "scans": 512,
+      "status": "pass",
+      "original_sha256": "3f30b1cabd03220c518afa4c0f5b800ca29f1d905e126ad421bffc8a2d5be3d7",
+      "rung": 6,
+      "scope": "complete isolated original rung with explicit M/Q/MD harness; original parallel graphic not claimed verified"
+    }
+  ],
+  "scans": 20736,
+  "memory_edge_addresses_tested": 1024,
+  "input_edge_addresses_tested": 24,
+  "source_sha256": {
+    "m200/__init__.py": "77c5815a3596eebca3e939d1ad39abba46fa4edc4df148aaa7e47f13e5eda0ab",
+    "m200/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "m200/allocation.py": "eaa4ecdd0c21377b1ef135c24325af2f3f1b266b8058662405f3bd55ed9e4970",
+    "m200/arrays.py": "d4574f6e48ab98f70feb3f474f30bbf387117f5db3ddde395525a21a77da42ed",
+    "m200/bits.py": "d76ca8b8bb587a6811cfb3e157c00385ba0a836b8eb669afdda9af4e635b6a61",
+    "m200/capabilities.py": "e94e59743ee0eae98c476938f8eafe04966c0823b825b1d070980d15d41348a0",
+    "m200/cli.py": "8a94a8a7aa78e3510ab5e189cb82198bea39a34e14775b7ec4fe3c990afca7d5",
+    "m200/communication.py": "105c1aef50e7ee00bc7c7142a5b6805d4ddf5f18fc04c5e60a52b78841a6b3b0",
+    "m200/communication_xml.py": "954e0fb861fef56381b204936c47f2f760dbcb3840dd018bb1d2a1b13bfc319f",
+    "m200/config.py": "3acbc41bf01d78576c34a5d716b559851fb13bb819fa14b149e4be9fd3dd5e52",
+    "m200/edges.py": "e590a801d00b94d20a2dd1f428635aa299e3bd59bcbfe2442f5ffa4fd3d64713",
+    "m200/flow.py": "a61ed946937daa4e54002dc29664c0ef6c02617eb1abb8faa0d0169e06244dc6",
+    "m200/frontend.py": "ffb46aa485719d6f7fb3aa99dd99f77fb1becb7eaf1eaf30656d2a93b0b11cb5",
+    "m200/il.py": "eceb92727eeb1f992bfef5b60d8f52970530f3e4dec50912b9c0738306c34ab7",
+    "m200/indexed.py": "0b8ca542e2be87392d8de2a75ef8ad0d48534b28d7f82d1e24fd1bf38fc8343b",
+    "m200/jsonio.py": "c4d8447354b4f48205a8d5bfc58e1a3919656ba2073ecc5982b2f8fd6253fd70",
+    "m200/ladder_lowering.py": "c41ff3bce49218ded1bf6869a16bb99139bcd2e9fbf3c0cf4250323b53720bb3",
+    "m200/lower.py": "b8ccd5045ce5deed35230c7741c4e56a8f9a1ed28d00a9221e2d0c52fb046017",
+    "m200/modbus.py": "62e98577eba6e2de938bc2292dd6cb16f22f64e1101fabdf5ea0f33fd009e92c",
+    "m200/model.py": "ddf340d5f9aeab364d9d7b867bf217e25a449b965871ff78d8a2108ce0c6105f",
+    "m200/native.py": "016a6af7d7f7b1de11dab9bee1477faa9f4d393f75bbf09e1b3bf5daa5e6ac4f",
+    "m200/native_logic.py": "3bf8f1447f5b644ff45eb09c2ded0376ea5ecd2360301e0893eb480d8b48425c",
+    "m200/numeric.py": "5552aca3a838036b9e93ec9ad78c8da53d048fc60de0c3a4996198358915f1b6",
+    "m200/project.py": "18b0178924b0332ef9fde19a963e0c6c4d0568be11da83007906e1dd7c4f3bf3",
+    "m200/reverse.py": "3649c55f20e9a660d51e371e25e7e40536a1e80951bbbf3fa337f4e022c3097b",
+    "m200/timers.py": "384e3c26facd76ed8da5449d001348fe1c1dd818a73532ab9c782e6a9b0fedf6",
+    "sdk/plc.hpp": "0c291cf3074e18b4c36a8902583e917f2f26b8003fbc7e7ddebd107ecc3cedbc",
+    "tests/stress/native_edges.py": "29bb2bcff1568a0e6adfacd46840dbd20f6f159043df4da86b4a5765a1c986da",
+    "tests/stress/bit_objects.py": "a39468f5ae36159b378cda34f2bfbe81abdf42fa1cb1fbf5cca0e6325b9c0489",
+    "tests/public/control-flow-manifest.json": "9c90f5da2e907305d50f8dbb6a5d64e77306a2b92b501d7f0a79e9380a2d07a9",
+    "docs/capabilities/INDEXED-SOURCES.json": "8d9e40c40a2ea1df365bed39b50321aae2370aa3e48f10dab496d7d3c143ad1a"
+  },
+  "whole_projects_imported": 0,
+  "official_editor": "pending",
+  "physical_plc": "pending",
+  "input_phase_and_startup": "local-model-pending-external-confirmation"
+}

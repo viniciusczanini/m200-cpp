@@ -12,6 +12,7 @@ from .timers import (
 from .flow import JUMPS, destinations, label_name, split_label
 from .native_logic import decode, STORES, OPEN, timer_index
 from .bits import is_string, references as bit_references, signed_pattern
+from .edges import OPS as EDGE_OPS, BASE as EDGE_BASE, LOADS, operand as edge_operand
 from .indexed import (
     ANY_INDEXED,
     is_indexed,
@@ -129,8 +130,7 @@ def validate(program):
         if not rung:
             fail("empty IL rung")
         if label is not None and rung[0].split(maxsplit=1)[0] not in (
-            "LD",
-            "LDN",
+            *LOADS,
             "BLK",
         ):
             fail("label must precede a supported load or block")
@@ -161,6 +161,9 @@ def validate(program):
                     preset_value(int(values[0].code))
                 continue
             if op in ("N", "MPS", "MRD", "MPP", ")"):
+                continue
+            if op in EDGE_OPS:
+                edge_operand(arg)
                 continue
             if op == "IN":
                 index = timer_index(arg)
@@ -241,6 +244,19 @@ class Machine:
         self.now = 0
         self.first = True
         self.current_inputs = {}
+        self.edge_previous = {
+            arg: False
+            for arg in sorted(
+                {
+                    arg
+                    for rung in self.decoded
+                    if rung is not None
+                    for op, arg in rung
+                    if op in EDGE_OPS
+                }
+            )
+        }
+        self.edge_events = {}
         self.timers = {i: TimerState(t) for i, t in program.timers.items()}
 
     def read(self, operand, inputs):
@@ -353,6 +369,10 @@ class Machine:
                 fail("invalid input trace")
         pc = 0
         self.current_inputs = inputs
+        for ref, previous in self.edge_previous.items():
+            current = self.read(ref, inputs)
+            self.edge_events[ref] = (current and not previous, previous and not current)
+            self.edge_previous[ref] = current
         executed = 0
         while pc < len(self.program.rungs):
             _, rung = split_label(self.program.rungs[pc])
@@ -431,7 +451,11 @@ class Machine:
                     continue
                 if op in ("OR", "ORN") and acc:
                     continue
-                value = self.read(arg, inputs)
+                if op in EDGE_OPS:
+                    value = self.edge_events[arg][op[-1] == "F"]
+                    op = EDGE_BASE[op]
+                else:
+                    value = self.read(arg, inputs)
                 if op in ("LDN", "ANDN", "ORN", "XORN"):
                     value = not value
                 if op in ("LD", "LDN"):

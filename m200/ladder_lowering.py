@@ -11,6 +11,7 @@ from .numeric import memory_words_used
 from .indexed import has_indexed_bits
 from .model import fail
 from .bits import memory_bits_used
+from .edges import OPS as EDGE_OPS, BASE as EDGE_BASE, SERIES, LOADS
 
 
 def needed(program):
@@ -25,7 +26,12 @@ def needed(program):
                 and input_parts[0] == "LDN"
                 and input_parts[1].startswith("[")
             )
-            if len(rung) == 7 and rung[5].startswith("ST ") and not negated_comparison:
+            if (
+                len(rung) == 7
+                and rung[5].startswith("ST ")
+                and not negated_comparison
+                and not any(line.split(maxsplit=1)[0] in EDGE_OPS for line in rung)
+            ):
                 continue
             return True
         instructions = decode(rung)
@@ -34,8 +40,8 @@ def needed(program):
         ):
             return True
         if any(
-            op not in ("LD", "LDN", "AND", "ANDN", "ST", "S", "R", "NUM", "JMPC")
-            or (i and op in ("LD", "LDN"))
+            op not in (*SERIES, "ST", "S", "R", "NUM", "JMPC")
+            or (i and op in LOADS)
             or (i < len(instructions) - 1 and op in (*STORES, "NUM"))
             for i, (op, _) in enumerate(instructions)
         ):
@@ -81,6 +87,12 @@ def normalize(program):
             saved = []
             groups = []
             for op, arg in decode(rung):
+                if op in EDGE_OPS:
+                    sample = lower.bit("native_edge_snapshot")
+                    lower.rung(
+                        ("LDR " if op[-1] == "R" else "LDF ") + arg, "ST " + sample
+                    )
+                    op, arg = EDGE_BASE[op], sample
                 if op == "NUM":
                     lower.rung("LD " + acc, arg)
                 elif op in ("LD", "LDN"):

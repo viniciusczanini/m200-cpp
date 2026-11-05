@@ -39,6 +39,7 @@ int main(){
   unsigned dt; unsigned value;
   while(_M200NativeHarness::read_unsigned(dt)){
     for(int i=0;i<24;++i){if(!_M200NativeHarness::read_unsigned(value))return 2;plc::detail::inputs[i]=value!=0;}
+    plc::detail::begin_scan();
     scan();
     for(int i=0;i<16;++i)_M200NativeHarness::putchar(plc::detail::outputs[i]?'1':'0');
     _M200NativeHarness::putchar('\\n');

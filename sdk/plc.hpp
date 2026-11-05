@@ -16,6 +16,12 @@ inline bool index_error = false;
 inline int word_memory_limit = 0;
 inline int bit_memory_limit = 0;
 inline int timer_next_index = 0;
+inline bool previous_inputs[24]={}, previous_memory[1024]={};
+inline bool input_rise[24]={}, input_fall[24]={}, memory_rise[1024]={}, memory_fall[1024]={};
+inline void begin_scan(){
+    for(int i=0;i<24;++i){input_rise[i]=inputs[i]&&!previous_inputs[i];input_fall[i]=previous_inputs[i]&&!inputs[i];previous_inputs[i]=inputs[i];}
+    for(int i=0;i<1024;++i){memory_rise[i]=memory[i]&&!previous_memory[i];memory_fall[i]=previous_memory[i]&&!memory[i];previous_memory[i]=memory[i];}
+}
 inline bool timer_used[255] = {};
 inline int claim_timer(int index){if(index<0||index>=255||timer_used[index])__builtin_trap();timer_used[index]=true;if(timer_next_index<=index)timer_next_index=index+1;return index;}
 }
@@ -23,6 +29,10 @@ inline bool input(int n) { return detail::inputs[n]; }
 inline void output(int n, bool v) { detail::outputs[n] = v; }
 inline bool output_state(int n) { return detail::outputs[n]; }
 inline bool read_m(int n) { return detail::memory[n]; }
+inline bool input_rising(int n){if(n<0||n>=24)__builtin_trap();return detail::input_rise[n];}
+inline bool input_falling(int n){if(n<0||n>=24)__builtin_trap();return detail::input_fall[n];}
+inline bool m_rising(int n){if(n<0||n>=(detail::bit_memory_limit?detail::bit_memory_limit:1024))__builtin_trap();return detail::memory_rise[n];}
+inline bool m_falling(int n){if(n<0||n>=(detail::bit_memory_limit?detail::bit_memory_limit:1024))__builtin_trap();return detail::memory_fall[n];}
 inline void write_m(int n,bool v) { detail::memory[n] = v; }
 struct BitMemory { explicit BitMemory(int count){if(count<1||count>1024)__builtin_trap();detail::bit_memory_limit=count;} };
 inline bool system(int n) {
@@ -116,6 +126,10 @@ bool input(int);
 void output(int,bool);
 bool output_state(int);
 bool read_m(int);
+bool input_rising(int);
+bool input_falling(int);
+bool m_rising(int);
+bool m_falling(int);
 void write_m(int,bool);
 struct BitMemory { explicit BitMemory(int); };
 bool read_m_indexed(int,int);

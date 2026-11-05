@@ -17,6 +17,7 @@ from .model import Program, Timer, address, fail
 from .flow import split_label
 from .indexed import has_indexed, direct_word_limit, has_indexed_bits
 from .bits import memory_bits_used
+from .edges import SERIES, contact_type
 from .numeric import (
     word_address,
     comparison,
@@ -177,7 +178,7 @@ def graphics(rung, timer_column=3, communication_contact_column=0):
             if len(parts) != 2:
                 fail("project graphics require native logic normalization")
             op, arg = parts
-            if op not in ("LD", "LDN", "AND", "ANDN"):
+            if op not in SERIES:
                 fail("project graphics for this IL operator are not supported")
             if arg.startswith("["):
                 if op not in ("LD", "AND"):
@@ -187,7 +188,7 @@ def graphics(rung, timer_column=3, communication_contact_column=0):
                 continue
             items.append(
                 (
-                    "NegatedContact" if op in ("LDN", "ANDN") else "NormalContact",
+                    contact_type(op),
                     arg,
                     column,
                 )

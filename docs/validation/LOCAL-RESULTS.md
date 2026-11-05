@@ -370,3 +370,49 @@ adicional em `../capabilities/NATIVE-EDGES-RESEARCH.md`, incluindo um conflito
 entre a restrição documental e RISING após AND em originais; continuam pendentes.
 Objetivo integral ativo/incompleto, editor e PLC pendentes. Tudo local, sem CI,
 publicação ou transferência/atuação no PLC.
+
+## Continuação do objetivo: contatos de borda nativos
+
+Após `292f5a2`, LDR/LDF, ANDR/ANDF, ORR/ORF e XORR/XORF têm suporte em
+I0/M diretos, com quatro APIs bool, IL/VM, SDK, reversão e XML experimental.
+Eventos são amostrados por endereço antes do CFG, independentemente de
+contatos pulados ou repetidos. M alterado no scan aparece no seguinte;
+pulsos internos entre amostragens não aparecem. Históricos locais começam
+false; a fase de entradas/partida/retomada ainda exige prova externa.
+
+O frontend reserva M explícito e emite snapshots de LDR/LDF. A normalização
+preserva o endereço, a ordem e labels, materializando combinações complexas
+com contatos e gates existentes. Timer com entrada de borda é normalizado.
+Os tokens de gráfico RisingEdge/FallingEdge são observados nos originais,
+sem alegar aceitação de um projeto inteiro ou validação oficial.
+
+Rodada final: **306 testes em 104,272 s**; exemplos, públicos, lint/formatação
+e diff passaram. Os dez scripts de stress foram executados localmente com
+quatro workers, logs/statuses/resultados separados, todos com saída zero.
+O stress novo tem **74 casos/20.736 scans**, todos os **24 endereços I0 e
+1.024 M**, referência temporal independente e C++/IL/JSON/normalização/
+reversão/recompilação/XML. A matriz digital de 768 ligações e os testes de
+Modbus/recursos anteriores passaram novamente.
+
+Três casos novos usam bytes autênticos isolados: rung2 inteiro de flow-loop,
+trecho contíguo [1:3] LDR/ORF de flow-jump com sua atribuição IW explicitamente
+excluída, e rung6 inteiro da fonte T de INDEXED-SOURCES com harness M/Q/MD
+explícito. Hashes são conferidos antes da extração; nenhum CPU/arquivo
+original foi alterado. O gráfico paralelo original de T6 não foi validado;
+nenhum projeto estrangeiro inteiro foi importado.
+
+Total final: **144.724 scans de stress +18.176 públicos =162.900**, sem somar
+reruns, frames unitários ou etapas de comparação. Os 45.600 scans adicionais
+do revisor também ficam fora desse total. A revisão não deixou achados de
+correção abertos e conferiu programas aleatórios e com saltos. Antes dela,
+colisão de helper homônimo foi reproduzida e corrigida em RED/GREEN. Um teste
+antigo do alocador usava LDR como opcode desconhecido; passou a usar RISING0,
+mantendo a rejeição de efeitos ainda não modelados após LDR ser implementado.
+
+Resultados e hashes: `NATIVE-EDGE-LOCAL-RESULTS.json` e
+`NATIVE-EDGE-STRESS-RESULTS.json`; revisão: `NATIVE-EDGE-REVIEW.md`.
+As classes de borda no ponto da chamada continuam distintas desses contatos.
+RISINGn/FALLINGn, modificadores de parênteses, ciclo de vida e demais recursos
+permanecem lacunas, sem reduzir a meta de equivalência integral. Editor e PLC
+físico pendentes; biblioteca incompleta e objetivo ativo. Tudo local, sem CI,
+publicação ou transferência/atuação no PLC.

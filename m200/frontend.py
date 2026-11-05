@@ -17,6 +17,7 @@ from .modbus import ModbusConfig
 from .communication import KINDS, BOOL_FIELDS, NUM_FIELDS
 from .indexed import is_indexed, is_bit_indexed
 from .bits import bit_string
+from .edges import API as EDGE_API
 
 PACK_READS = {
     f"read_{bank}_bits_{kind}": (bank, kind)
@@ -188,6 +189,13 @@ class Frontend:
                     self.index(args[0], self.bit_count, n)
                     self.index(args[1], self.word_count, n)
                 key = name.removeprefix("plc::")
+                if key in EDGE_API and name == "plc::" + key:
+                    bank, _ = EDGE_API[key]
+                    index = self.index(
+                        args[0], 24 if bank == "input" else self.bit_count or 1024, n
+                    )
+                    if bank == "m":
+                        reserved.add(index)
                 if key in ("read_word_bit", "write_word_bit"):
                     reserved_words.add(self.index(args[0], self.word_count or 8000, n))
                     self.index(args[1], 16, n)
@@ -466,6 +474,19 @@ class Frontend:
         if kind == "CallExpr":
             name, args = self.call(node)
             key = name.removeprefix("plc::")
+            if key in EDGE_API and name == "plc::" + key:
+                bank, edge = EDGE_API[key]
+                index = self.index(
+                    args[0], 24 if bank == "input" else self.bit_count or 1024, node
+                )
+                out = self.lower.bit("native_edge_snapshot")
+                self.lower.rung(
+                    ("LDR " if edge == "rising" else "LDF ")
+                    + ("%I0." if bank == "input" else "%M")
+                    + str(index),
+                    "ST " + out,
+                )
+                return out
             if key == "read_word_bit":
                 index = self.index(args[0], self.word_count or 8000, node)
                 bit = self.index(args[1], 16, node)
