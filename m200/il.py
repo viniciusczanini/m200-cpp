@@ -3,18 +3,33 @@
 import re
 
 from .model import address, fail, timer_config
+from .communication import (
+    status_reference,
+    BOOL_FIELDS,
+    NUM_FIELDS,
+    block_address,
+    parse_block,
+    REFERENCE,
+)
+from .modbus import CommunicationEngine, validate_config
 from .numeric import (
     comparison,
     compare,
-    operation,
     evaluate,
     read as read_number,
     write as write_number,
     word_address,
+    is_operation,
+    instruction_operation,
 )
 
 
 def bit_operand(text, writable=False):
+    status = status_reference(text)
+    if status:
+        if writable or status[1] not in BOOL_FIELDS:
+            fail("communication status is read-only BOOL")
+        return
     if text.startswith("[") and not writable:
         comparison(text)
     else:
@@ -36,7 +51,7 @@ def validate(program):
             fail("invalid symbol metadata")
         if symbol_address.startswith(("%MW", "%MD", "%MF")):
             word_address(symbol_address)
-        elif re.fullmatch(r"%M\d+", symbol_address):
+        elif re.fullmatch(r"%M[0-9]+", symbol_address):
             address(symbol_address, True)
         else:
             fail("unsupported symbol metadata address")
@@ -61,6 +76,14 @@ def validate(program):
     if sum(map(len, program.rungs)) > 10000:
         fail("instruction budget exceeded")
     timer_uses = set()
+    if not isinstance(program.communications, dict):
+        fail("invalid communication configuration map")
+    communication_uses = set()
+    for key, cfg in program.communications.items():
+        kind, _ = block_address(key)
+        validate_config(cfg)
+        if cfg.kind != kind:
+            fail("communication address/configuration kind mismatch")
     for index, t in program.timers.items():
         if type(index) is not int or any(
             type(x) is not int for x in (t.milliseconds, t.base_ms)
@@ -78,13 +101,25 @@ def validate(program):
         if not rung:
             fail("empty IL rung")
         if rung[0].startswith("BLK "):
-            m = re.fullmatch(r"BLK %TM(\d+)", rung[0])
+            if (
+                rung[0]
+                .split(maxsplit=1)[1]
+                .startswith(("%READ_VAR", "%WRITE_VAR", "%WRITE_READ_VAR"))
+            ):
+                key, execute, abort = parse_block(rung)
+                if key not in program.communications or key in communication_uses:
+                    fail("undefined or multiply updated communication block")
+                communication_uses.add(key)
+                bit_operand(execute[1])
+                bit_operand(abort[1])
+                continue
+            m = re.fullmatch(r"BLK %TM([0-9]+)", rung[0])
             if (
                 not m
                 or len(rung) != 7
                 or rung[2:5] != ["IN", "OUT_BLK", "LD Q"]
                 or rung[-1] != "END_BLK"
-                or not rung[1].startswith("LD ")
+                or rung[1].split(maxsplit=1)[:1] not in (["LD"], ["LDN"])
                 or not rung[5].startswith("ST ")
             ):
                 fail("unsupported or non-reversible timer block")
@@ -92,12 +127,15 @@ def validate(program):
             if index not in program.timers or index in timer_uses:
                 fail("undefined or multiply updated timer")
             timer_uses.add(index)
-            address(rung[1][3:])
+            args = rung[1].split(maxsplit=1)
+            if len(args) != 2:
+                fail("timer input has no operand")
+            bit_operand(args[1])
             address(rung[5][3:], True)
             continue
         for i, line in enumerate(rung):
-            if line.startswith("[") and i == len(rung) - 1 and i > 0:
-                operation(line)
+            if is_operation(line) and i > 0:
+                instruction_operation(line)
                 continue
             parts = line.split(maxsplit=1)
             if len(parts) != 2:
@@ -108,7 +146,7 @@ def validate(program):
                 if i == 0
                 else ("ST", "S", "R")
                 if i == len(rung) - 1
-                else ("AND", "ANDN", "OR", "ORN", "XOR", "XORN")
+                else ("AND", "ANDN", "OR", "ORN", "XOR", "XORN", "ST", "S", "R")
             )
             if op not in allowed:
                 fail("unsupported IL instruction/order: " + line)
@@ -117,25 +155,33 @@ def validate(program):
             fail("rung has no action")
     if set(program.timers) != timer_uses:
         fail("unused timer configuration is unsupported")
+    if set(program.communications) != communication_uses:
+        fail("unused communication configuration is unsupported")
+    for rung in program.rungs:
+        for line in rung:
+            for ref in re.findall(REFERENCE, line):
+                if status_reference(ref)[0] not in program.communications:
+                    fail("undefined communication status: " + ref)
 
 
 class Machine:
-    def __init__(self, program):
+    def __init__(self, program, communication_transport=None):
         validate(program)
         self.program = program
         self.memory = [False] * 1024
         self.words = [0] * 8000
+        self.communication = CommunicationEngine(communication_transport)
         self.operations = {
-            line: operation(line)
+            line: instruction_operation(line)
             for rung in program.rungs
             for line in rung
-            if line.startswith("[")
+            if is_operation(line)
         }
         self.comparisons = {
             line.split(maxsplit=1)[1]: comparison(line.split(maxsplit=1)[1])
             for rung in program.rungs
             for line in rung
-            if not line.startswith("[") and " [" in line
+            if not is_operation(line) and " [" in line
         }
         self.outputs = [False] * 16
         self.now = 0
@@ -145,8 +191,11 @@ class Machine:
         }
 
     def read(self, operand, inputs):
+        status = status_reference(operand)
+        if status:
+            return getattr(self.communication.status(status[0]), BOOL_FIELDS[status[1]])
         if operand.startswith("["):
-            return compare(self.words, self.comparisons[operand])
+            return compare(self.words, self.comparisons[operand], self.read_number)
         kind, index = address(operand)
         if kind == "constant":
             return bool(index)
@@ -164,6 +213,14 @@ class Machine:
     def write(self, operand, value):
         kind, index = address(operand, True)
         (self.memory if kind == "M" else self.outputs)[index] = bool(value)
+
+    def read_number(self, value):
+        status = status_reference(value.code)
+        return (
+            getattr(self.communication.status(status[0]), NUM_FIELDS[status[1]][1])
+            if status
+            else read_number(self.words, value)
+        )
 
     def timer(self, index, enabled):
         config = self.program.timers[index]
@@ -215,19 +272,34 @@ class Machine:
                 fail("invalid input trace")
         for rung in self.program.rungs:
             if rung[0].startswith("BLK "):
+                if rung[0].split(maxsplit=1)[1] in self.program.communications:
+                    key, execute, abort = parse_block(rung)
+                    enabled = self.read(execute[1], inputs)
+                    cancel = self.read(abort[1], inputs)
+                    self.communication.update(
+                        key,
+                        self.program.communications[key],
+                        not enabled if execute[0] == "LDN" else enabled,
+                        not cancel if abort[0] == "LDN" else cancel,
+                        self.now,
+                        self.words,
+                    )
+                    continue
                 index = int(rung[0].split("%TM")[1])
-                self.write(
-                    rung[5][3:], self.timer(index, self.read(rung[1][3:], inputs))
-                )
+                op, arg = rung[1].split(maxsplit=1)
+                enabled = self.read(arg, inputs)
+                if op == "LDN":
+                    enabled = not enabled
+                self.write(rung[5][3:], self.timer(index, enabled))
                 continue
             acc = False
             for line in rung:
-                if line.startswith("["):
+                if is_operation(line):
                     if acc:
                         target, name, values = self.operations[line]
                         kind, _ = word_address(target)
                         args = [
-                            read_number(self.words, v) if not isinstance(v, int) else v
+                            self.read_number(v) if not isinstance(v, int) else v
                             for v in values
                         ]
                         write_number(self.words, target, evaluate(name, args, kind))

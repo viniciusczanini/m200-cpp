@@ -1,0 +1,2152 @@
+{
+  "format": "m200-public-results-v1",
+  "status": "PASS",
+  "seed": 20020261105,
+  "target": "TM200CE40T",
+  "network_access": false,
+  "originals_modified": false,
+  "official_editor": "NOT TESTED",
+  "physical_plc": "NOT TESTED",
+  "failures": [],
+  "final_original_identity": [
+    {
+      "file": "00-XIC-XIO.smbp",
+      "status": "UNCHANGED",
+      "sha256": "2ee95d1e3a6fe34fa1042c37a011e851833ef6250d00f2d22953aa54bc41acf8"
+    },
+    {
+      "file": "01-XIC-XIO parallel.smbp",
+      "status": "UNCHANGED",
+      "sha256": "d9e93dce688a1133c8a0122bdbe03223669e734c0272dc0576d4cc4c48ac057e"
+    },
+    {
+      "file": "02-equations.smbp",
+      "status": "UNCHANGED",
+      "sha256": "5db8c0db70a22756468ac25ca43e2c1fecfcc1d0f623483d841e66253ca18d57"
+    },
+    {
+      "file": "03-memory floats multiply.smbp",
+      "status": "UNCHANGED",
+      "sha256": "791a3be7ac57283139ae773d88644483c3389bf50e5f5ca3cf744a0f31ad6c35"
+    },
+    {
+      "file": "04-timer test.smbp",
+      "status": "UNCHANGED",
+      "sha256": "9040653e1c0f93c589e6aa05318313da14faf48972e14ba91875e6ee48dd61fc"
+    },
+    {
+      "file": "05-Counters1.smbp",
+      "status": "UNCHANGED",
+      "sha256": "a957bfff041cef421b2b05eb21cd082230fda0dd3586dd3af8fbad6d23fe9946"
+    },
+    {
+      "file": "06-correto.smbp",
+      "status": "UNCHANGED",
+      "sha256": "1c6d07b606c595dc5a9e80590e2c589a948b55102887f6e12f4b3d8279c7d2b9"
+    },
+    {
+      "file": "07-Ladder_Code.smbp",
+      "status": "UNCHANGED",
+      "sha256": "fac44c53efcba56b5664d1cc59ce33d2fc230480a51351966066ed022b82eef7"
+    },
+    {
+      "file": "08-memory floats gt.smbp",
+      "status": "UNCHANGED",
+      "sha256": "1d6412d4052d11c2f7daba10428e16a53d22a663820188311859c17069b815f8"
+    },
+    {
+      "file": "09-S1new_192_168_10_72.smbp",
+      "status": "UNCHANGED",
+      "sha256": "703f024e9501375b639ae61048bdb3db7993d3673d90115d4c94fb60ad61c6c2"
+    }
+  ],
+  "frames_compared": 16128,
+  "whole_projects_imported": 0,
+  "whole_project_expected_import_refusals": 10,
+  "whole_project_foreign_cpus": 10,
+  "elapsed_seconds": 21.065,
+  "sources": [
+    {
+      "source": {
+        "id": 0,
+        "file": "00-XIC-XIO.smbp",
+        "repository": "ss56/somachine-basic-programs",
+        "commit": "c6e657a1759625d772fa01751259ff0cde6f0252",
+        "path": "XIC-XIO.smbp",
+        "permalink": "https://github.com/ss56/somachine-basic-programs/blob/c6e657a1759625d772fa01751259ff0cde6f0252/XIC-XIO.smbp",
+        "raw_url": "https://raw.githubusercontent.com/ss56/somachine-basic-programs/c6e657a1759625d772fa01751259ff0cde6f0252/XIC-XIO.smbp",
+        "bytes": 80678,
+        "sha256": "2ee95d1e3a6fe34fa1042c37a011e851833ef6250d00f2d22953aa54bc41acf8",
+        "git_blob": "f8aa492a1037d8a5b3a7344c54b27fc6cf8eb27d",
+        "cpu": "TM221CE16R",
+        "rungs": 2,
+        "expected_full_import_error": "M200-E: source CPU TM221CE16R; template/project must target TM200CE40T",
+        "expected_il_errors": {},
+        "expected_graph_errors": {},
+        "expected_graph_absent": []
+      },
+      "original_cpu": "TM221CE16R",
+      "whole_project_import": {
+        "status": "REFUSED",
+        "error": "M200-E: source CPU TM221CE16R; template/project must target TM200CE40T"
+      },
+      "extraction_method": "hash-verified original XML; IL whitespace only; no CPU/header replacement",
+      "timer_configurations_explicit": {},
+      "timer_configurations_unresolved": [],
+      "warnings": [],
+      "rung_checks": [
+        {
+          "rung": 0,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 1,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "id": 1,
+        "file": "01-XIC-XIO parallel.smbp",
+        "repository": "ss56/somachine-basic-programs",
+        "commit": "c6e657a1759625d772fa01751259ff0cde6f0252",
+        "path": "XIC-XIO parallel.smbp",
+        "permalink": "https://github.com/ss56/somachine-basic-programs/blob/c6e657a1759625d772fa01751259ff0cde6f0252/XIC-XIO%20parallel.smbp",
+        "raw_url": "https://raw.githubusercontent.com/ss56/somachine-basic-programs/c6e657a1759625d772fa01751259ff0cde6f0252/XIC-XIO%20parallel.smbp",
+        "bytes": 80281,
+        "sha256": "d9e93dce688a1133c8a0122bdbe03223669e734c0272dc0576d4cc4c48ac057e",
+        "git_blob": "5f432c37db08e8fd34ecaeda76ca2ec742e90dc7",
+        "cpu": "TM221CE16R",
+        "rungs": 2,
+        "expected_full_import_error": "M200-E: source CPU TM221CE16R; template/project must target TM200CE40T",
+        "expected_il_errors": {
+          "1": "M200-E: unsupported IL instruction/order: AND( %I0.0"
+        },
+        "expected_graph_errors": {
+          "1": "M200-E: unsupported Ladder connections"
+        },
+        "expected_graph_absent": []
+      },
+      "original_cpu": "TM221CE16R",
+      "whole_project_import": {
+        "status": "REFUSED",
+        "error": "M200-E: source CPU TM221CE16R; template/project must target TM200CE40T"
+      },
+      "extraction_method": "hash-verified original XML; IL whitespace only; no CPU/header replacement",
+      "timer_configurations_explicit": {},
+      "timer_configurations_unresolved": [],
+      "warnings": [
+        "Parallel rung 1 contains parenthesized IL outside the executable subset; only rung 0 has a runtime oracle."
+      ],
+      "rung_checks": [
+        {
+          "rung": 0,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 1,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported IL instruction/order: AND( %I0.0"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported Ladder connections"
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "id": 2,
+        "file": "02-equations.smbp",
+        "repository": "ss56/somachine-basic-programs",
+        "commit": "c6e657a1759625d772fa01751259ff0cde6f0252",
+        "path": "equations.smbp",
+        "permalink": "https://github.com/ss56/somachine-basic-programs/blob/c6e657a1759625d772fa01751259ff0cde6f0252/equations.smbp",
+        "raw_url": "https://raw.githubusercontent.com/ss56/somachine-basic-programs/c6e657a1759625d772fa01751259ff0cde6f0252/equations.smbp",
+        "bytes": 77487,
+        "sha256": "5db8c0db70a22756468ac25ca43e2c1fecfcc1d0f623483d841e66253ca18d57",
+        "git_blob": "37fa01c9c838fd180f0f7445138fbe6bc8163be3",
+        "cpu": "TM221CE16R",
+        "rungs": 2,
+        "expected_full_import_error": "M200-E: source CPU TM221CE16R; template/project must target TM200CE40T",
+        "expected_il_errors": {},
+        "expected_graph_errors": {},
+        "expected_graph_absent": []
+      },
+      "original_cpu": "TM221CE16R",
+      "whole_project_import": {
+        "status": "REFUSED",
+        "error": "M200-E: source CPU TM221CE16R; template/project must target TM200CE40T"
+      },
+      "extraction_method": "hash-verified original XML; IL whitespace only; no CPU/header replacement",
+      "timer_configurations_explicit": {},
+      "timer_configurations_unresolved": [],
+      "warnings": [],
+      "rung_checks": [
+        {
+          "rung": 0,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 1,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "id": 3,
+        "file": "03-memory floats multiply.smbp",
+        "repository": "ss56/somachine-basic-programs",
+        "commit": "c6e657a1759625d772fa01751259ff0cde6f0252",
+        "path": "memory floats multiply.smbp",
+        "permalink": "https://github.com/ss56/somachine-basic-programs/blob/c6e657a1759625d772fa01751259ff0cde6f0252/memory%20floats%20multiply.smbp",
+        "raw_url": "https://raw.githubusercontent.com/ss56/somachine-basic-programs/c6e657a1759625d772fa01751259ff0cde6f0252/memory%20floats%20multiply.smbp",
+        "bytes": 75754,
+        "sha256": "791a3be7ac57283139ae773d88644483c3389bf50e5f5ca3cf744a0f31ad6c35",
+        "git_blob": "d7e79634ab38022cd28eb3d82da7f1cadff6ca69",
+        "cpu": "TM221CE16R",
+        "rungs": 2,
+        "expected_full_import_error": "M200-E: source CPU TM221CE16R; template/project must target TM200CE40T",
+        "expected_il_errors": {},
+        "expected_graph_errors": {},
+        "expected_graph_absent": [
+          0,
+          1
+        ]
+      },
+      "original_cpu": "TM221CE16R",
+      "whole_project_import": {
+        "status": "REFUSED",
+        "error": "M200-E: source CPU TM221CE16R; template/project must target TM200CE40T"
+      },
+      "extraction_method": "hash-verified original XML; IL whitespace only; no CPU/header replacement",
+      "timer_configurations_explicit": {},
+      "timer_configurations_unresolved": [],
+      "warnings": [
+        "Filename says floats multiply, but original executable logic assigns integer MW0=1; no float multiplication coverage."
+      ],
+      "rung_checks": [
+        {
+          "rung": 0,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 1,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "id": 4,
+        "file": "04-timer test.smbp",
+        "repository": "ss56/somachine-basic-programs",
+        "commit": "c6e657a1759625d772fa01751259ff0cde6f0252",
+        "path": "timer test.smbp",
+        "permalink": "https://github.com/ss56/somachine-basic-programs/blob/c6e657a1759625d772fa01751259ff0cde6f0252/timer%20test.smbp",
+        "raw_url": "https://raw.githubusercontent.com/ss56/somachine-basic-programs/c6e657a1759625d772fa01751259ff0cde6f0252/timer%20test.smbp",
+        "bytes": 88355,
+        "sha256": "9040653e1c0f93c589e6aa05318313da14faf48972e14ba91875e6ee48dd61fc",
+        "git_blob": "496f0218a5c78c291d8dd8518c9a1e2b57fce23c",
+        "cpu": "TM221CE16R",
+        "rungs": 5,
+        "expected_full_import_error": "M200-E: source CPU TM221CE16R; template/project must target TM200CE40T",
+        "expected_il_errors": {
+          "0": "M200-E: undefined or multiply updated timer",
+          "1": "M200-E: undefined or multiply updated timer",
+          "2": "M200-E: undefined or multiply updated timer",
+          "3": "M200-E: undefined or multiply updated timer",
+          "4": "M200-E: undefined or multiply updated timer"
+        },
+        "expected_graph_errors": {},
+        "expected_graph_absent": []
+      },
+      "original_cpu": "TM221CE16R",
+      "whole_project_import": {
+        "status": "REFUSED",
+        "error": "M200-E: source CPU TM221CE16R; template/project must target TM200CE40T"
+      },
+      "extraction_method": "hash-verified original XML; IL whitespace only; no CPU/header replacement",
+      "timer_configurations_explicit": {},
+      "timer_configurations_unresolved": [],
+      "warnings": [
+        "Five original timer blocks reference TM0..4, but original Timers is empty. Defaults are unknown; no timer type/preset is invented and no runtime timer pass is claimed."
+      ],
+      "rung_checks": [
+        {
+          "rung": 0,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: undefined or multiply updated timer"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 1,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: undefined or multiply updated timer"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 2,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: undefined or multiply updated timer"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 3,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: undefined or multiply updated timer"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 4,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: undefined or multiply updated timer"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "id": 5,
+        "file": "05-Counters1.smbp",
+        "repository": "ss56/somachine-basic-programs",
+        "commit": "c6e657a1759625d772fa01751259ff0cde6f0252",
+        "path": "Counters1.smbp",
+        "permalink": "https://github.com/ss56/somachine-basic-programs/blob/c6e657a1759625d772fa01751259ff0cde6f0252/Counters1.smbp",
+        "raw_url": "https://raw.githubusercontent.com/ss56/somachine-basic-programs/c6e657a1759625d772fa01751259ff0cde6f0252/Counters1.smbp",
+        "bytes": 68412,
+        "sha256": "a957bfff041cef421b2b05eb21cd082230fda0dd3586dd3af8fbad6d23fe9946",
+        "git_blob": "2e20082fc53c9375ce67afabc206549484a250bf",
+        "cpu": "TM221CE16R",
+        "rungs": 1,
+        "expected_full_import_error": "M200-E: source CPU TM221CE16R; template/project must target TM200CE40T",
+        "expected_il_errors": {},
+        "expected_graph_errors": {},
+        "expected_graph_absent": [
+          0
+        ]
+      },
+      "original_cpu": "TM221CE16R",
+      "whole_project_import": {
+        "status": "REFUSED",
+        "error": "M200-E: source CPU TM221CE16R; template/project must target TM200CE40T"
+      },
+      "extraction_method": "hash-verified original XML; IL whitespace only; no CPU/header replacement",
+      "timer_configurations_explicit": {},
+      "timer_configurations_unresolved": [],
+      "warnings": [
+        "Filename says Counters1, but only LD M0 / ST M0 exists. No native counter instruction was tested."
+      ],
+      "rung_checks": [
+        {
+          "rung": 0,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "id": 6,
+        "file": "06-correto.smbp",
+        "repository": "GabriWar/ubec",
+        "commit": "cd7f4b009b53c19a9952173efbbcf29decc12087",
+        "path": "PROJETOS/UBEC/correto.smbp",
+        "permalink": "https://github.com/GabriWar/ubec/blob/cd7f4b009b53c19a9952173efbbcf29decc12087/PROJETOS/UBEC/correto.smbp",
+        "raw_url": "https://raw.githubusercontent.com/GabriWar/ubec/cd7f4b009b53c19a9952173efbbcf29decc12087/PROJETOS/UBEC/correto.smbp",
+        "bytes": 320132,
+        "sha256": "1c6d07b606c595dc5a9e80590e2c589a948b55102887f6e12f4b3d8279c7d2b9",
+        "git_blob": "7b2c03a5fddf2bfd3c3805d698622beed197b787",
+        "cpu": "TM200CE24R",
+        "rungs": 61,
+        "expected_full_import_error": "M200-E: source CPU TM200CE24R; template/project must target TM200CE40T",
+        "expected_il_errors": {
+          "27": "M200-E: unsupported numeric address: %IW1.0",
+          "29": "M200-E: unsupported numeric address: %IW1.1",
+          "31": "M200-E: unsupported numeric address: %IW1.2",
+          "33": "M200-E: unsupported numeric address: %IW1.3",
+          "35": "M200-E: unsupported or non-reversible timer block",
+          "36": "M200-E: unsupported or non-reversible timer block"
+        },
+        "expected_graph_errors": {
+          "0": "M200-E: unsupported Ladder connections",
+          "1": "M200-E: unsupported Ladder connections",
+          "2": "M200-E: unsupported Ladder connections",
+          "3": "M200-E: unsupported Ladder connections",
+          "4": "M200-E: unsupported Ladder connections",
+          "5": "M200-E: unsupported Ladder connections",
+          "9": "M200-E: unsupported Ladder connections",
+          "10": "M200-E: unsupported Ladder connections",
+          "19": "M200-E: unsupported Ladder connections",
+          "20": "M200-E: unsupported Ladder connections",
+          "21": "M200-E: unsupported Ladder connections",
+          "22": "M200-E: unsupported Ladder connections",
+          "23": "M200-E: unsupported Ladder connections",
+          "24": "M200-E: unsupported Ladder connections",
+          "25": "M200-E: unsupported Ladder connections",
+          "26": "M200-E: unsupported Ladder connections",
+          "27": "M200-E: unsupported numeric address: %IW1.0",
+          "28": "M200-E: unsupported Ladder connections",
+          "29": "M200-E: unsupported numeric address: %IW1.1",
+          "30": "M200-E: unsupported Ladder connections",
+          "31": "M200-E: unsupported numeric address: %IW1.2",
+          "32": "M200-E: unsupported Ladder connections",
+          "33": "M200-E: unsupported numeric address: %IW1.3",
+          "34": "M200-E: unsupported Ladder connections",
+          "35": "M200-E: IL and Ladder graphics do not agree",
+          "36": "M200-E: unverified Timer graphical position"
+        },
+        "expected_graph_absent": []
+      },
+      "original_cpu": "TM200CE24R",
+      "whole_project_import": {
+        "status": "REFUSED",
+        "error": "M200-E: source CPU TM200CE24R; template/project must target TM200CE40T"
+      },
+      "extraction_method": "hash-verified original XML; IL whitespace only; no CPU/header replacement",
+      "timer_configurations_explicit": {},
+      "timer_configurations_unresolved": [
+        {
+          "index": "0",
+          "reason": "implicit timer defaults not inferred"
+        },
+        {
+          "index": "1",
+          "reason": "implicit timer defaults not inferred"
+        },
+        {
+          "index": "2",
+          "reason": "implicit timer defaults not inferred"
+        },
+        {
+          "index": "3",
+          "reason": "implicit timer defaults not inferred"
+        }
+      ],
+      "warnings": [
+        "Original includes analog input words, parallel graphics and non-reversible/retentive timer forms outside this isolated runtime test."
+      ],
+      "rung_checks": [
+        {
+          "rung": 0,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported Ladder connections"
+          }
+        },
+        {
+          "rung": 1,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported Ladder connections"
+          }
+        },
+        {
+          "rung": 2,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported Ladder connections"
+          }
+        },
+        {
+          "rung": 3,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported Ladder connections"
+          }
+        },
+        {
+          "rung": 4,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported Ladder connections"
+          }
+        },
+        {
+          "rung": 5,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported Ladder connections"
+          }
+        },
+        {
+          "rung": 6,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 7,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 8,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 9,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported Ladder connections"
+          }
+        },
+        {
+          "rung": 10,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported Ladder connections"
+          }
+        },
+        {
+          "rung": 11,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 12,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 13,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 14,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 15,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 16,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 17,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 18,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 19,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported Ladder connections"
+          }
+        },
+        {
+          "rung": 20,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported Ladder connections"
+          }
+        },
+        {
+          "rung": 21,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported Ladder connections"
+          }
+        },
+        {
+          "rung": 22,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported Ladder connections"
+          }
+        },
+        {
+          "rung": 23,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported Ladder connections"
+          }
+        },
+        {
+          "rung": 24,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported Ladder connections"
+          }
+        },
+        {
+          "rung": 25,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported Ladder connections"
+          }
+        },
+        {
+          "rung": 26,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported Ladder connections"
+          }
+        },
+        {
+          "rung": 27,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported numeric address: %IW1.0"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported numeric address: %IW1.0"
+          }
+        },
+        {
+          "rung": 28,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported Ladder connections"
+          }
+        },
+        {
+          "rung": 29,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported numeric address: %IW1.1"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported numeric address: %IW1.1"
+          }
+        },
+        {
+          "rung": 30,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported Ladder connections"
+          }
+        },
+        {
+          "rung": 31,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported numeric address: %IW1.2"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported numeric address: %IW1.2"
+          }
+        },
+        {
+          "rung": 32,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported Ladder connections"
+          }
+        },
+        {
+          "rung": 33,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported numeric address: %IW1.3"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported numeric address: %IW1.3"
+          }
+        },
+        {
+          "rung": 34,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported Ladder connections"
+          }
+        },
+        {
+          "rung": 35,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported or non-reversible timer block"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: IL and Ladder graphics do not agree"
+          }
+        },
+        {
+          "rung": 36,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported or non-reversible timer block"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unverified Timer graphical position"
+          }
+        },
+        {
+          "rung": 37,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 38,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 39,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 40,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 41,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 42,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 43,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 44,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 45,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 46,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 47,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 48,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 49,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 50,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 51,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 52,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 53,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 54,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 55,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 56,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 57,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 58,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 59,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 60,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "id": 7,
+        "file": "07-Ladder_Code.smbp",
+        "repository": "Mohammed-Helal/GP26",
+        "commit": "0f68ca90f7fd51d44176b8bea01e73039c8e0641",
+        "path": "Ladder_Code.smbp",
+        "permalink": "https://github.com/Mohammed-Helal/GP26/blob/0f68ca90f7fd51d44176b8bea01e73039c8e0641/Ladder_Code.smbp",
+        "raw_url": "https://raw.githubusercontent.com/Mohammed-Helal/GP26/0f68ca90f7fd51d44176b8bea01e73039c8e0641/Ladder_Code.smbp",
+        "bytes": 125305,
+        "sha256": "fac44c53efcba56b5664d1cc59ce33d2fc230480a51351966066ed022b82eef7",
+        "git_blob": "2bed3b7e2aecc47d28adf0ca3d5e8d941bfd9cac",
+        "cpu": "TM200CE40R",
+        "rungs": 11,
+        "expected_full_import_error": "M200-E: source CPU TM200CE40R; template/project must target TM200CE40T",
+        "expected_il_errors": {
+          "7": "M200-E: undefined or multiply updated communication block",
+          "10": "M200-E: undefined or multiply updated communication block"
+        },
+        "expected_graph_errors": {
+          "0": "M200-E: unsupported Ladder connections",
+          "6": "M200-E: unverified Timer graphical position",
+          "8": "M200-E: IL and Ladder graphics do not agree",
+          "9": "M200-E: IL and Ladder graphics do not agree"
+        },
+        "expected_graph_absent": []
+      },
+      "original_cpu": "TM200CE40R",
+      "whole_project_import": {
+        "status": "REFUSED",
+        "error": "M200-E: source CPU TM200CE40R; template/project must target TM200CE40T"
+      },
+      "extraction_method": "hash-verified original XML; IL whitespace only; no CPU/header replacement",
+      "timer_configurations_explicit": {
+        "0": {
+          "kind": "TP",
+          "milliseconds": 100,
+          "base_ms": 100
+        },
+        "1": {
+          "kind": "TP",
+          "milliseconds": 100,
+          "base_ms": 100
+        }
+      },
+      "timer_configurations_unresolved": [],
+      "warnings": [
+        "Runtime covers rungs 0..5. READ_VAR/WRITE_VAR blocks require communication configuration; checking an isolated rung without that context does not test or disprove configured Modbus support."
+      ],
+      "rung_checks": [
+        {
+          "rung": 0,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported Ladder connections"
+          }
+        },
+        {
+          "rung": 1,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 2,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 3,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 4,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 5,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 6,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: unverified Timer graphical position"
+          }
+        },
+        {
+          "rung": 7,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: undefined or multiply updated communication block"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 8,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: IL and Ladder graphics do not agree"
+          }
+        },
+        {
+          "rung": 9,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: IL and Ladder graphics do not agree"
+          }
+        },
+        {
+          "rung": 10,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: undefined or multiply updated communication block"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "id": 8,
+        "file": "08-memory floats gt.smbp",
+        "repository": "ss56/somachine-basic-programs",
+        "commit": "c6e657a1759625d772fa01751259ff0cde6f0252",
+        "path": "memory floats gt.smbp",
+        "permalink": "https://github.com/ss56/somachine-basic-programs/blob/c6e657a1759625d772fa01751259ff0cde6f0252/memory%20floats%20gt.smbp",
+        "raw_url": "https://raw.githubusercontent.com/ss56/somachine-basic-programs/c6e657a1759625d772fa01751259ff0cde6f0252/memory%20floats%20gt.smbp",
+        "bytes": 88384,
+        "sha256": "1d6412d4052d11c2f7daba10428e16a53d22a663820188311859c17069b815f8",
+        "git_blob": "73e53fe2d6918152b712d1bfa7d4713d37566c01",
+        "cpu": "TM221M16R/G",
+        "rungs": 27,
+        "expected_full_import_error": "M200-E: source CPU TM221M16R/G; template/project must target TM200CE40T",
+        "expected_il_errors": {
+          "6": "M200-E: unsupported numeric address: %MF1 + %MF2",
+          "7": "M200-E: unsupported numeric address: %MF1 - %MF2",
+          "8": "M200-E: unsupported numeric address: %MF1 * %MF2",
+          "9": "M200-E: unsupported numeric address: %MF1 / %MF2",
+          "10": "M200-E: invalid numeric IL literal: 1.0 + %MF2",
+          "11": "M200-E: invalid numeric IL literal: 1.0 - %MF2",
+          "12": "M200-E: invalid numeric IL literal: 1.0 * %MF2",
+          "13": "M200-E: invalid numeric IL literal: 1.0 / %MF2",
+          "16": "M200-E: invalid numeric IL literal: ( 2.0 * 3.0 ) * ( %MF2 + %MF3 )",
+          "17": "M200-E: invalid numeric IL literal: 2.0 + 3.0",
+          "18": "M200-E: invalid numeric IL literal: 2.0 - 3.0",
+          "19": "M200-E: invalid numeric IL literal: 2.0 * 3.0",
+          "20": "M200-E: invalid numeric IL literal: 2.0 / 3.0"
+        },
+        "expected_graph_errors": {},
+        "expected_graph_absent": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ]
+      },
+      "original_cpu": "TM221M16R/G",
+      "whole_project_import": {
+        "status": "REFUSED",
+        "error": "M200-E: source CPU TM221M16R/G; template/project must target TM200CE40T"
+      },
+      "extraction_method": "hash-verified original XML; IL whitespace only; no CPU/header replacement",
+      "timer_configurations_explicit": {},
+      "timer_configurations_unresolved": [],
+      "warnings": [
+        "All original LadderElements are empty; simple IL comparisons pass without a graphical agreement claim. Compound comparison expressions are explicitly refused."
+      ],
+      "rung_checks": [
+        {
+          "rung": 0,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 1,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 2,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 3,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 4,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 5,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 6,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported numeric address: %MF1 + %MF2"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 7,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported numeric address: %MF1 - %MF2"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 8,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported numeric address: %MF1 * %MF2"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 9,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: unsupported numeric address: %MF1 / %MF2"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 10,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: invalid numeric IL literal: 1.0 + %MF2"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 11,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: invalid numeric IL literal: 1.0 - %MF2"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 12,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: invalid numeric IL literal: 1.0 * %MF2"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 13,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: invalid numeric IL literal: 1.0 / %MF2"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 14,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 15,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 16,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: invalid numeric IL literal: ( 2.0 * 3.0 ) * ( %MF2 + %MF3 )"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 17,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: invalid numeric IL literal: 2.0 + 3.0"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 18,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: invalid numeric IL literal: 2.0 - 3.0"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 19,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: invalid numeric IL literal: 2.0 * 3.0"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 20,
+          "il": {
+            "status": "REFUSED",
+            "error": "M200-E: invalid numeric IL literal: 2.0 / 3.0"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 21,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 22,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 23,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 24,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 25,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        },
+        {
+          "rung": 26,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "ABSENT",
+            "reason": "original contains no Ladder elements; no graphical agreement claimed"
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "id": 9,
+        "file": "09-S1new_192_168_10_72.smbp",
+        "repository": "LiuYuancheng/Power_Generator_Manager",
+        "commit": "75cf5666462cc2b5f4701209b8854d5c40ca6165",
+        "path": "src/S1new_192_168_10_72.smbp",
+        "permalink": "https://github.com/LiuYuancheng/Power_Generator_Manager/blob/75cf5666462cc2b5f4701209b8854d5c40ca6165/src/S1new_192_168_10_72.smbp",
+        "raw_url": "https://raw.githubusercontent.com/LiuYuancheng/Power_Generator_Manager/75cf5666462cc2b5f4701209b8854d5c40ca6165/src/S1new_192_168_10_72.smbp",
+        "bytes": 81667,
+        "sha256": "703f024e9501375b639ae61048bdb3db7993d3673d90115d4c94fb60ad61c6c2",
+        "git_blob": "2fbd8761bbffb3b4a5066efff56b6be78b324627",
+        "cpu": "TM221CE16R",
+        "rungs": 6,
+        "expected_full_import_error": "M200-E: source CPU TM221CE16R; template/project must target TM200CE40T",
+        "expected_il_errors": {},
+        "expected_graph_errors": {
+          "0": "M200-E: IL and Ladder graphics do not agree",
+          "1": "M200-E: IL and Ladder graphics do not agree"
+        },
+        "expected_graph_absent": []
+      },
+      "original_cpu": "TM221CE16R",
+      "whole_project_import": {
+        "status": "REFUSED",
+        "error": "M200-E: source CPU TM221CE16R; template/project must target TM200CE40T"
+      },
+      "extraction_method": "hash-verified original XML; IL whitespace only; no CPU/header replacement",
+      "timer_configurations_explicit": {
+        "0": {
+          "kind": "TOF",
+          "milliseconds": 25000,
+          "base_ms": 1000
+        }
+      },
+      "timer_configurations_unresolved": [],
+      "warnings": [
+        "All six logic rungs execute in isolation, including original explicit TOF configuration. Original graph mismatches in rungs 0/1 and foreign CPU still prevent whole-project compatibility claims."
+      ],
+      "rung_checks": [
+        {
+          "rung": 0,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: IL and Ladder graphics do not agree"
+          }
+        },
+        {
+          "rung": 1,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "REFUSED",
+            "error": "M200-E: IL and Ladder graphics do not agree"
+          }
+        },
+        {
+          "rung": 2,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 3,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 4,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        },
+        {
+          "rung": 5,
+          "il": {
+            "status": "PASS"
+          },
+          "graphics": {
+            "status": "PASS"
+          }
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "name": "xic_xio_series",
+      "source": 0,
+      "selected_rungs": [
+        0,
+        1
+      ],
+      "adapter_notes": [
+        "All 8 combinations of 3 inputs, repeated 64 times. Repeated contacts reduce to the stated Boolean equations."
+      ],
+      "status": "PASS",
+      "frames": 512,
+      "outputs_compared_per_frame": 16,
+      "engines": [
+        "oracle",
+        "original_il_vm",
+        "reversed_cpp_native",
+        "recompiled_il_vm"
+      ],
+      "first_mismatch": null,
+      "artifacts": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/m200-public-n8njif7x/xic_xio_series",
+      "meaning": "isolated original IL with explicit adapters; not whole-project/hardware validation"
+    },
+    {
+      "name": "parallel_series_rung_only",
+      "source": 1,
+      "selected_rungs": [
+        0
+      ],
+      "adapter_notes": [
+        "Only rung 0 executes. Original parenthesized parallel rung 1 is refused independently; no whole-project pass."
+      ],
+      "status": "PASS",
+      "frames": 512,
+      "outputs_compared_per_frame": 16,
+      "engines": [
+        "oracle",
+        "original_il_vm",
+        "reversed_cpp_native",
+        "recompiled_il_vm"
+      ],
+      "first_mismatch": null,
+      "artifacts": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/m200-public-n8njif7x/parallel_series_rung_only",
+      "meaning": "isolated original IL with explicit adapters; not whole-project/hardware validation"
+    },
+    {
+      "name": "duplicate_equations_increment_twice",
+      "source": 2,
+      "selected_rungs": [
+        0,
+        1
+      ],
+      "adapter_notes": [
+        "MW1 starts at zero; each enabled scan executes BOTH original increments. All 16 bits are exposed in Q0.0..15 via scratch MW200 after original rungs.",
+        "4096 frames keep arithmetic below signed16 overflow; no hardware overflow behavior is inferred."
+      ],
+      "status": "PASS",
+      "frames": 4096,
+      "outputs_compared_per_frame": 16,
+      "engines": [
+        "oracle",
+        "original_il_vm",
+        "reversed_cpp_native",
+        "recompiled_il_vm"
+      ],
+      "first_mismatch": null,
+      "artifacts": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/m200-public-n8njif7x/duplicate_equations_increment_twice",
+      "meaning": "isolated original IL with explicit adapters; not whole-project/hardware validation"
+    },
+    {
+      "name": "filename_multiply_actual_integer_assignment",
+      "source": 3,
+      "selected_rungs": [
+        0,
+        1
+      ],
+      "adapter_notes": [
+        "Despite its filename, the original contains integer MW0 := 1, not float multiplication. Inline OPER must preserve its true accumulator for Q0.1."
+      ],
+      "status": "PASS",
+      "frames": 128,
+      "outputs_compared_per_frame": 16,
+      "engines": [
+        "oracle",
+        "original_il_vm",
+        "reversed_cpp_native",
+        "recompiled_il_vm"
+      ],
+      "first_mismatch": null,
+      "artifacts": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/m200-public-n8njif7x/filename_multiply_actual_integer_assignment",
+      "meaning": "isolated original IL with explicit adapters; not whole-project/hardware validation"
+    },
+    {
+      "name": "filename_counters_actual_memory_identity",
+      "source": 5,
+      "selected_rungs": [
+        0
+      ],
+      "adapter_notes": [
+        "Adapter seeds M0 from input 0 each scan and observes it at Q0.15. Original is a self-copy; no counter instruction exists and no native counter claim is made."
+      ],
+      "status": "PASS",
+      "frames": 128,
+      "outputs_compared_per_frame": 16,
+      "engines": [
+        "oracle",
+        "original_il_vm",
+        "reversed_cpp_native",
+        "recompiled_il_vm"
+      ],
+      "first_mismatch": null,
+      "artifacts": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/m200-public-n8njif7x/filename_counters_actual_memory_identity",
+      "meaning": "isolated original IL with explicit adapters; not whole-project/hardware validation"
+    },
+    {
+      "name": "correto_action_after_or_coil",
+      "source": 6,
+      "selected_rungs": [
+        4
+      ],
+      "adapter_notes": [
+        "Adapter supplies external M4 through input 1 and observes persistent MW604 in Q0.15. Q0.4 = !I13 || I1. Original graphics for this rung are refused separately."
+      ],
+      "status": "PASS",
+      "frames": 2048,
+      "outputs_compared_per_frame": 16,
+      "engines": [
+        "oracle",
+        "original_il_vm",
+        "reversed_cpp_native",
+        "recompiled_il_vm"
+      ],
+      "first_mismatch": null,
+      "artifacts": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/m200-public-n8njif7x/correto_action_after_or_coil",
+      "meaning": "isolated original IL with explicit adapters; not whole-project/hardware validation"
+    },
+    {
+      "name": "ladder_code_latch_and_word_actions",
+      "source": 7,
+      "selected_rungs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "adapter_notes": [
+        "Executes original rungs 0..5 in scan order. Oracle propagates the latch through MW11 and M1 to Q0.0; observes persistent MW10 at Q0.15.",
+        "Other rungs include communication/timer configuration outside this isolated test; the entire project is not imported or executed."
+      ],
+      "status": "PASS",
+      "frames": 2048,
+      "outputs_compared_per_frame": 16,
+      "engines": [
+        "oracle",
+        "original_il_vm",
+        "reversed_cpp_native",
+        "recompiled_il_vm"
+      ],
+      "first_mismatch": null,
+      "artifacts": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/m200-public-n8njif7x/ladder_code_latch_and_word_actions",
+      "meaning": "isolated original IL with explicit adapters; not whole-project/hardware validation"
+    },
+    {
+      "name": "float_comparison_rung_01",
+      "source": 8,
+      "selected_rungs": [
+        1
+      ],
+      "adapter_notes": [
+        "Each scan adapter writes MF1=1.0 THEN MF2=1.0 at ORIGINAL word addresses. Shared word 2 makes MF1=0.0, MF2=1.0 (independent struct.pack/unpack oracle); Q0.15 observes that alias.",
+        "Only the selected simple comparison executes; compound expressions are checked and refused independently."
+      ],
+      "status": "PASS",
+      "frames": 512,
+      "outputs_compared_per_frame": 16,
+      "engines": [
+        "oracle",
+        "original_il_vm",
+        "reversed_cpp_native",
+        "recompiled_il_vm"
+      ],
+      "first_mismatch": null,
+      "artifacts": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/m200-public-n8njif7x/float_comparison_rung_01",
+      "meaning": "isolated original IL with explicit adapters; not whole-project/hardware validation"
+    },
+    {
+      "name": "float_comparison_rung_02",
+      "source": 8,
+      "selected_rungs": [
+        2
+      ],
+      "adapter_notes": [
+        "Each scan adapter writes MF1=1.0 THEN MF2=1.0 at ORIGINAL word addresses. Shared word 2 makes MF1=0.0, MF2=1.0 (independent struct.pack/unpack oracle); Q0.15 observes that alias.",
+        "Only the selected simple comparison executes; compound expressions are checked and refused independently."
+      ],
+      "status": "PASS",
+      "frames": 512,
+      "outputs_compared_per_frame": 16,
+      "engines": [
+        "oracle",
+        "original_il_vm",
+        "reversed_cpp_native",
+        "recompiled_il_vm"
+      ],
+      "first_mismatch": null,
+      "artifacts": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/m200-public-n8njif7x/float_comparison_rung_02",
+      "meaning": "isolated original IL with explicit adapters; not whole-project/hardware validation"
+    },
+    {
+      "name": "float_comparison_rung_03",
+      "source": 8,
+      "selected_rungs": [
+        3
+      ],
+      "adapter_notes": [
+        "Each scan adapter writes MF1=1.0 THEN MF2=1.0 at ORIGINAL word addresses. Shared word 2 makes MF1=0.0, MF2=1.0 (independent struct.pack/unpack oracle); Q0.15 observes that alias.",
+        "Only the selected simple comparison executes; compound expressions are checked and refused independently."
+      ],
+      "status": "PASS",
+      "frames": 512,
+      "outputs_compared_per_frame": 16,
+      "engines": [
+        "oracle",
+        "original_il_vm",
+        "reversed_cpp_native",
+        "recompiled_il_vm"
+      ],
+      "first_mismatch": null,
+      "artifacts": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/m200-public-n8njif7x/float_comparison_rung_03",
+      "meaning": "isolated original IL with explicit adapters; not whole-project/hardware validation"
+    },
+    {
+      "name": "float_comparison_rung_04",
+      "source": 8,
+      "selected_rungs": [
+        4
+      ],
+      "adapter_notes": [
+        "Each scan adapter writes MF1=1.0 THEN MF2=1.0 at ORIGINAL word addresses. Shared word 2 makes MF1=0.0, MF2=1.0 (independent struct.pack/unpack oracle); Q0.15 observes that alias.",
+        "Only the selected simple comparison executes; compound expressions are checked and refused independently."
+      ],
+      "status": "PASS",
+      "frames": 512,
+      "outputs_compared_per_frame": 16,
+      "engines": [
+        "oracle",
+        "original_il_vm",
+        "reversed_cpp_native",
+        "recompiled_il_vm"
+      ],
+      "first_mismatch": null,
+      "artifacts": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/m200-public-n8njif7x/float_comparison_rung_04",
+      "meaning": "isolated original IL with explicit adapters; not whole-project/hardware validation"
+    },
+    {
+      "name": "float_comparison_rung_05",
+      "source": 8,
+      "selected_rungs": [
+        5
+      ],
+      "adapter_notes": [
+        "Each scan adapter writes MF1=1.0 THEN MF2=1.0 at ORIGINAL word addresses. Shared word 2 makes MF1=0.0, MF2=1.0 (independent struct.pack/unpack oracle); Q0.15 observes that alias.",
+        "Only the selected simple comparison executes; compound expressions are checked and refused independently."
+      ],
+      "status": "PASS",
+      "frames": 512,
+      "outputs_compared_per_frame": 16,
+      "engines": [
+        "oracle",
+        "original_il_vm",
+        "reversed_cpp_native",
+        "recompiled_il_vm"
+      ],
+      "first_mismatch": null,
+      "artifacts": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/m200-public-n8njif7x/float_comparison_rung_05",
+      "meaning": "isolated original IL with explicit adapters; not whole-project/hardware validation"
+    },
+    {
+      "name": "float_comparison_rung_21",
+      "source": 8,
+      "selected_rungs": [
+        21
+      ],
+      "adapter_notes": [
+        "Each scan adapter writes MF1=1.0 THEN MF2=1.0 at ORIGINAL word addresses. Shared word 2 makes MF1=0.0, MF2=1.0 (independent struct.pack/unpack oracle); Q0.15 observes that alias.",
+        "Only the selected simple comparison executes; compound expressions are checked and refused independently."
+      ],
+      "status": "PASS",
+      "frames": 512,
+      "outputs_compared_per_frame": 16,
+      "engines": [
+        "oracle",
+        "original_il_vm",
+        "reversed_cpp_native",
+        "recompiled_il_vm"
+      ],
+      "first_mismatch": null,
+      "artifacts": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/m200-public-n8njif7x/float_comparison_rung_21",
+      "meaning": "isolated original IL with explicit adapters; not whole-project/hardware validation"
+    },
+    {
+      "name": "float_comparison_rung_22",
+      "source": 8,
+      "selected_rungs": [
+        22
+      ],
+      "adapter_notes": [
+        "Each scan adapter writes MF1=1.0 THEN MF2=1.0 at ORIGINAL word addresses. Shared word 2 makes MF1=0.0, MF2=1.0 (independent struct.pack/unpack oracle); Q0.15 observes that alias.",
+        "Only the selected simple comparison executes; compound expressions are checked and refused independently."
+      ],
+      "status": "PASS",
+      "frames": 512,
+      "outputs_compared_per_frame": 16,
+      "engines": [
+        "oracle",
+        "original_il_vm",
+        "reversed_cpp_native",
+        "recompiled_il_vm"
+      ],
+      "first_mismatch": null,
+      "artifacts": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/m200-public-n8njif7x/float_comparison_rung_22",
+      "meaning": "isolated original IL with explicit adapters; not whole-project/hardware validation"
+    },
+    {
+      "name": "float_comparison_rung_23",
+      "source": 8,
+      "selected_rungs": [
+        23
+      ],
+      "adapter_notes": [
+        "Each scan adapter writes MF1=1.0 THEN MF2=1.0 at ORIGINAL word addresses. Shared word 2 makes MF1=0.0, MF2=1.0 (independent struct.pack/unpack oracle); Q0.15 observes that alias.",
+        "Only the selected simple comparison executes; compound expressions are checked and refused independently."
+      ],
+      "status": "PASS",
+      "frames": 512,
+      "outputs_compared_per_frame": 16,
+      "engines": [
+        "oracle",
+        "original_il_vm",
+        "reversed_cpp_native",
+        "recompiled_il_vm"
+      ],
+      "first_mismatch": null,
+      "artifacts": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/m200-public-n8njif7x/float_comparison_rung_23",
+      "meaning": "isolated original IL with explicit adapters; not whole-project/hardware validation"
+    },
+    {
+      "name": "float_comparison_rung_24",
+      "source": 8,
+      "selected_rungs": [
+        24
+      ],
+      "adapter_notes": [
+        "Each scan adapter writes MF1=1.0 THEN MF2=1.0 at ORIGINAL word addresses. Shared word 2 makes MF1=0.0, MF2=1.0 (independent struct.pack/unpack oracle); Q0.15 observes that alias.",
+        "Only the selected simple comparison executes; compound expressions are checked and refused independently."
+      ],
+      "status": "PASS",
+      "frames": 512,
+      "outputs_compared_per_frame": 16,
+      "engines": [
+        "oracle",
+        "original_il_vm",
+        "reversed_cpp_native",
+        "recompiled_il_vm"
+      ],
+      "first_mismatch": null,
+      "artifacts": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/m200-public-n8njif7x/float_comparison_rung_24",
+      "meaning": "isolated original IL with explicit adapters; not whole-project/hardware validation"
+    },
+    {
+      "name": "float_comparison_rung_25",
+      "source": 8,
+      "selected_rungs": [
+        25
+      ],
+      "adapter_notes": [
+        "Each scan adapter writes MF1=1.0 THEN MF2=1.0 at ORIGINAL word addresses. Shared word 2 makes MF1=0.0, MF2=1.0 (independent struct.pack/unpack oracle); Q0.15 observes that alias.",
+        "Only the selected simple comparison executes; compound expressions are checked and refused independently."
+      ],
+      "status": "PASS",
+      "frames": 512,
+      "outputs_compared_per_frame": 16,
+      "engines": [
+        "oracle",
+        "original_il_vm",
+        "reversed_cpp_native",
+        "recompiled_il_vm"
+      ],
+      "first_mismatch": null,
+      "artifacts": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/m200-public-n8njif7x/float_comparison_rung_25",
+      "meaning": "isolated original IL with explicit adapters; not whole-project/hardware validation"
+    },
+    {
+      "name": "float_comparison_rung_26",
+      "source": 8,
+      "selected_rungs": [
+        26
+      ],
+      "adapter_notes": [
+        "Each scan adapter writes MF1=1.0 THEN MF2=1.0 at ORIGINAL word addresses. Shared word 2 makes MF1=0.0, MF2=1.0 (independent struct.pack/unpack oracle); Q0.15 observes that alias.",
+        "Only the selected simple comparison executes; compound expressions are checked and refused independently."
+      ],
+      "status": "PASS",
+      "frames": 512,
+      "outputs_compared_per_frame": 16,
+      "engines": [
+        "oracle",
+        "original_il_vm",
+        "reversed_cpp_native",
+        "recompiled_il_vm"
+      ],
+      "first_mismatch": null,
+      "artifacts": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/m200-public-n8njif7x/float_comparison_rung_26",
+      "meaning": "isolated original IL with explicit adapters; not whole-project/hardware validation"
+    },
+    {
+      "name": "power_generator_original_six_rungs_tof",
+      "source": 9,
+      "selected_rungs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "adapter_notes": [
+        "All SIX original logic rungs execute with explicit original TM0 TOF, preset 25, base OneSecond (25000 ms). This is isolated logic, not whole-project import.",
+        "Adapter seeds M40/M0/M10/M60/M4/M5 from inputs 0..5. Q0.15 observes M30 after timer update; Q0.0/Q0.1 retain original one-scan ordering.",
+        "Controlled cases exercise initial disabled state, enable, falling edge, 24999/25000 ms expiry and restart, followed by seeded irregular scans. dt_ms advances time after the scan."
+      ],
+      "status": "PASS",
+      "frames": 1024,
+      "outputs_compared_per_frame": 16,
+      "engines": [
+        "oracle",
+        "original_il_vm",
+        "reversed_cpp_native",
+        "recompiled_il_vm"
+      ],
+      "first_mismatch": null,
+      "artifacts": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/m200-public-n8njif7x/power_generator_original_six_rungs_tof",
+      "meaning": "isolated original IL with explicit adapters; not whole-project/hardware validation"
+    }
+  ],
+  "inventory_counts": {
+    "il": {
+      "PASS": 92,
+      "REFUSED": 27
+    },
+    "graphics": {
+      "PASS": 56,
+      "REFUSED": 33,
+      "ABSENT": 30
+    }
+  }
+}

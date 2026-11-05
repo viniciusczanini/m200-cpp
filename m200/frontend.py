@@ -10,6 +10,8 @@ from pathlib import Path
 from .lower import Lowerer
 from .model import address, fail, timer_config
 from .numeric import Number, OPS, READS, WRITES, TYPES, boolean, expect, literal
+from .modbus import ModbusConfig
+from .communication import KINDS, BOOL_FIELDS, NUM_FIELDS
 
 SDK = Path(__file__).resolve().parents[1] / "sdk"
 WRAPPERS = {
@@ -92,9 +94,27 @@ class Frontend:
         self.outputs = {}
         self.init = []
         self.next_timer = 0
+        self.communication_specs = {}
+        self.explicit_communications = {}
+        self.communication_modes = {k: set() for k in KINDS}
+        self.communication_ids = {k: set() for k in KINDS}
+        self.next_communication = {k: 0 for k in KINDS}
+        self.comm_observed = set()
         reserved = set()
         reserved_words = set()
         for n in walk(tree):
+            if n.get("kind") == "VarDecl" and n.get("type", {}).get(
+                "desugaredQualType", n.get("type", {}).get("qualType", "")
+            ) in ["plc::" + k for k in KINDS]:
+                cfg = self.communication_config(n)
+                self.communication_specs[n["id"]] = cfg
+                reserved_words.update(
+                    range(cfg.index_data, cfg.index_data + cfg.data_words)
+                )
+                if cfg.kind == "WRITE_READ_VAR":
+                    reserved_words.update(
+                        range(cfg.index_data_in, cfg.index_data_in + cfg.read_quantity)
+                    )
             if n.get("kind") == "CallExpr":
                 name, args = self.call(n)
                 if name in ("plc::read_m", "plc::write_m"):
@@ -105,6 +125,10 @@ class Frontend:
                     index = self.index(args[0], 8000 - TYPES[typ][1] + 1, n)
                     reserved_words.update(range(index, index + TYPES[typ][1]))
         self.lower = Lowerer(reserved, reserved_words)
+        if any(len(modes) > 1 for modes in self.communication_modes.values()):
+            fail(
+                "do not mix automatic and explicit communication indices of the same kind"
+            )
 
     def error(self, node, message):
         loc = self.location(node)
@@ -120,11 +144,63 @@ class Frontend:
 
     def const(self, node):
         node = strip(node)
+        if node.get("kind") == "DeclRefExpr":
+            ref = self.nodes.get(node.get("referencedDecl", {}).get("id"), {})
+            if ref.get("kind") == "EnumConstantDecl" and len(ref.get("inner", [])) == 1:
+                return self.const(ref["inner"][0])
         if node.get("kind") == "IntegerLiteral":
             return int(node["value"])
         if node.get("kind") == "UnaryOperator" and node.get("opcode") == "-":
             return -self.const(node["inner"][0])
         self.error(node, "a literal integer is required here")
+
+    def communication_config(self, node):
+        kind = node["type"].get("desugaredQualType", node["type"]["qualType"])[5:]
+        ctor = next(
+            (x for x in node.get("inner", []) if x["kind"] == "CXXConstructExpr"), None
+        )
+        if ctor is None:
+            self.error(
+                node, "native communication configuration requires a constructor"
+            )
+        args = [self.const(x) for x in ctor.get("inner", [])]
+        if any(not -2147483648 <= x <= 2147483647 for x in args):
+            self.error(
+                node,
+                "communication constructor value exceeds its signed 32-bit representation",
+            )
+        count = 9 if kind == "WriteReadVar" else 7
+        explicit = len(args) == count + 1
+        self.communication_modes[kind].add(explicit)
+        if explicit:
+            index = args.pop(0)
+            if not 0 <= index < 32 or index in self.communication_ids[kind]:
+                self.error(node, "invalid or duplicate explicit communication index")
+            self.communication_ids[kind].add(index)
+            self.explicit_communications[node["id"]] = index
+        if len(args) != count:
+            self.error(node, "invalid communication constructor arguments")
+        link = {1: "SL1", 2: "ETH1"}.get(args[0])
+        if link is None:
+            self.error(node, "unsupported embedded communication link")
+        cfg = dict(kind=KINDS[kind], link=link, id=args[1], timeout_100ms=args[2])
+        if kind == "WriteReadVar":
+            cfg.update(
+                first_obj=args[3],
+                quantity=args[4],
+                index_data=args[5],
+                first_read_obj=args[6],
+                read_quantity=args[7],
+                index_data_in=args[8],
+            )
+        else:
+            cfg.update(
+                obj_type=args[3],
+                first_obj=args[4],
+                quantity=args[5],
+                index_data=args[6],
+            )
+        return ModbusConfig(**cfg)
 
     def index(self, node, count, owner):
         value = self.const(node)
@@ -280,6 +356,44 @@ class Frontend:
                 return result
             self.error(node, "unsupported call: " + name)
         if kind == "CXXMemberCallExpr":
+            member = children[0]
+            obj = strip(member.get("inner", [{}])[0])
+            ref = obj.get("referencedDecl", {}).get("id")
+            if ref in self.instances and self.instances[ref][0] in KINDS:
+                typ, (key, cfg) = self.instances[ref]
+                name = member.get("name")
+                if name != "update":
+                    self.comm_observed.add(ref)
+                    suffix = {v: k for k, v in BOOL_FIELDS.items()}.get(name)
+                    if suffix:
+                        return key + "." + suffix
+                    suffix = {v[1]: k for k, v in NUM_FIELDS.items()}.get(name)
+                    if suffix:
+                        return Number(NUM_FIELDS[suffix][0], key + "." + suffix)
+                    self.error(node, "unsupported communication status getter")
+                if not side_effect:
+                    self.error(
+                        node, "communication update must be unconditional once per scan"
+                    )
+                if ref in self.calls:
+                    self.error(node, "instance updated more than once per scan")
+                self.calls.add(ref)
+                execute = self.lower.copy(boolean(self.expr(children[1], env)))
+                abort = boolean(self.expr(children[2], env))
+                self.lower.program.communications[key] = cfg
+                if abort == "0":
+                    self.lower.rung("BLK " + key, "LD " + execute, "EXECUTE", "END_BLK")
+                else:
+                    abort = self.lower.copy(abort)
+                    self.lower.rung(
+                        "BLK " + key,
+                        "LD " + execute,
+                        "EXECUTE",
+                        "LD " + abort,
+                        "ABORT",
+                        "END_BLK",
+                    )
+                return key + ".DONE"
             if not side_effect:
                 self.error(
                     node,
@@ -359,6 +473,16 @@ class Frontend:
             if not global_scope:
                 self.error(node, "stateful instances must be global")
             kind = typ[5:]
+            if kind in KINDS:
+                cfg = self.communication_specs[node["id"]]
+                index = self.explicit_communications.get(
+                    node["id"], self.next_communication[kind]
+                )
+                if index >= 32:
+                    self.error(node, "native communication instance capacity exceeded")
+                self.next_communication[kind] += 1
+                self.instances[node["id"]] = (kind, ("%" + cfg.kind + str(index), cfg))
+                return
             if kind not in (
                 "Ton",
                 "Tof",
@@ -472,6 +596,8 @@ class Frontend:
             else:
                 self.error(node, "only output/write_m calls may be used as statements")
             self.lower.assign(target, self.expr(args[1]), guard)
+        elif kind == "CXXMemberCallExpr":
+            self.expr(node, side_effect=guard is None)
         elif kind == "NullStmt":
             pass
         else:
@@ -542,6 +668,8 @@ class Frontend:
             finally:
                 self.lower, self.inputs, self.outputs, self.active = saved
         self.statement(body)
+        if self.comm_observed - self.calls:
+            fail("communication status read without an unconditional update per scan")
         tail = [
             ["LD " + image, f"ST %Q0.{n}"] for n, image in sorted(self.outputs.items())
         ]

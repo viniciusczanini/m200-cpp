@@ -16,7 +16,8 @@ from .project import load_project, write_project
 from .reverse import to_cpp
 from .jsonio import loads
 from .capabilities import summary as capability_summary, catalogue, lookup
-from .numeric import OPS, READS, WRITES, TYPES
+from .numeric import OPS, READS, WRITES, TYPES, memory_words_used
+from .communication import KINDS
 
 ARTIFACTS = {
     "program.m200.json",
@@ -170,10 +171,7 @@ def read_program(path):
 def report(program):
     text = "\n".join(" ".join(r) for r in program.rungs)
     addresses = set(re.findall(r"%M\d+", text))
-    words = set()
-    for prefix, index in re.findall(r"%M([WDF])(\d+)", text):
-        start = int(index)
-        words.update(range(start, start + (1 if prefix == "W" else 2)))
+    words = memory_words_used(program)
     return {
         "tool": "m200-cpp",
         "version": __version__,
@@ -186,8 +184,11 @@ def report(program):
             "memory_words": len(words),
             "shared_word_capacity": 8000,
             "compiler_allocatable_words": 4000,
+            "required_word_allocation": max(words, default=-1) + 1,
             "timers": len(program.timers),
             "timer_capacity": 255,
+            "communication_blocks": len(program.communications),
+            "communication_capacity_per_kind": 32,
             "rungs": len(program.rungs),
             "il_instructions": sum(map(len, program.rungs)),
         },
@@ -197,10 +198,12 @@ def report(program):
             "timing_on_hardware": "pending",
         },
         "metadata": program.metadata,
+        "communications": {k: v.to_dict() for k, v in program.communications.items()},
         "limitations": [
-            "Only the documented boolean and explicit typed-numeric C++ subsets are implemented.",
+            "Only the documented boolean, typed-numeric and statically configured communication C++ subsets are implemented.",
             "No vendor schema/editor validation has been run.",
             "Native timers require official simulation/hardware timing checks.",
+            "Communication endpoints must be configured explicitly; successful local Modbus exchanges do not establish physical PLC compatibility.",
         ],
     }
 
@@ -268,6 +271,9 @@ def main(argv=None):
                     "RisingEdge",
                     "FallingEdge",
                 ],
+                "communication_types": list(KINDS),
+                "modbus_client_function_codes": [1, 2, 3, 4, 5, 6, 15, 16, 23],
+                "modbus_xml_scope": "READ_VAR/WRITE_VAR word profiles and proved port enums only; unknown XML variants fail explicitly",
                 "note": "Inventory stages are deliberately unpromoted documentary records. This library list names the locally implemented subset; editor and physical validation are pending.",
             }
             print(json.dumps(data, indent=2))

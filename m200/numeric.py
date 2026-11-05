@@ -10,6 +10,7 @@ import struct
 from dataclasses import dataclass
 
 from .model import fail, CompileError
+from .communication import status_reference, NUM_FIELDS, NUM_REFERENCE, cpp_name
 
 TYPES = {"i16": ("MW", 1), "i32": ("MD", 2), "f32": ("MF", 2)}
 READS = {"read_word": "i16", "read_dword": "i32", "read_real": "f32"}
@@ -119,7 +120,7 @@ def boolean(value):
 
 
 def word_address(text):
-    m = re.fullmatch(r"%(MW|MD|MF)(0|[1-9]\d*)", text)
+    m = re.fullmatch(r"%(MW|MD|MF)(0|[1-9][0-9]*)", text)
     if not m:
         fail("unsupported numeric address: " + text)
     prefix, index = m.group(1), int(m.group(2))
@@ -132,14 +133,19 @@ def word_address(text):
 
 def operand(text, kind):
     if text.startswith("%"):
-        actual, _ = word_address(text)
+        status = status_reference(text)
+        actual = (
+            NUM_FIELDS[status[1]][0]
+            if status and status[1] in NUM_FIELDS
+            else word_address(text)[0]
+        )
         if actual != kind:
             fail("mixed numeric IL types")
         return Number(kind, text)
     pattern = (
-        r"-?(?:0|[1-9]\d*)"
+        r"-?(?:0|[1-9][0-9]*)"
         if kind != "f32"
-        else r"-?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?"
+        else r"-?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?"
     )
     if not re.fullmatch(pattern, text):
         fail("invalid numeric IL literal: " + text)
@@ -149,7 +155,7 @@ def operand(text, kind):
 
 def operation(line):
     """Parse one closed, side-effect-free operation (never eval source text)."""
-    m = re.fullmatch(r"\[\s*(%(?:MW|MD|MF)\d+)\s*:=\s*(.*?)\s*\]", line)
+    m = re.fullmatch(r"\[\s*(%(?:MW|MD|MF)[0-9]+)\s*:=\s*(.*?)\s*\]", line)
     if not m:
         fail("unsupported numeric operation: " + line)
     target, expression = m.groups()
@@ -159,7 +165,11 @@ def operation(line):
         if out != typ:
             continue
         if shape == "binary":
-            atom = r"(%(?:MW|MD|MF)\d+|-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)"
+            atom = (
+                r"("
+                + NUM_REFERENCE
+                + r"|%(?:MW|MD|MF)[0-9]+|-?[0-9]+(?:\.[0-9]*)?(?:[eE][+-]?[0-9]+)?)"
+            )
             pat = atom + r"\s*" + re.escape(token) + r"\s*" + atom
         else:
             pat = re.escape(token) + r"\((.*)\)"
@@ -188,12 +198,35 @@ def operation(line):
     return target, "copy", [operand(expression, typ)]
 
 
+def is_operation(line):
+    return line.startswith("[") or re.match(r"OPER(?:\s|$)", line) is not None
+
+
+def instruction_operation(line):
+    if line.startswith("OPER"):
+        parts = line.split(maxsplit=1)
+        if len(parts) != 2 or parts[0] != "OPER":
+            fail("invalid OPER instruction")
+        line = parts[1]
+    return operation(line)
+
+
 def comparison(text):
-    m = re.fullmatch(r"\[\s*(%(?:MW|MD|MF)\d+)\s*(>=|<=|<>|=|>|<)\s*(.+)\s*\]", text)
+    m = re.fullmatch(
+        r"\[\s*("
+        + NUM_REFERENCE
+        + r"|%(?:MW|MD|MF)[0-9]+)\s*(>=|<=|<>|=|>|<)\s*(.+)\s*\]",
+        text,
+    )
     if not m:
         fail("unsupported numeric comparison: " + text)
     first, op, second = m.groups()
-    kind, _ = word_address(first)
+    status = status_reference(first)
+    kind = (
+        NUM_FIELDS[status[1]][0]
+        if status and status[1] in NUM_FIELDS
+        else word_address(first)[0]
+    )
     return operand(first, kind), op, operand(second.strip(), kind)
 
 
@@ -315,9 +348,10 @@ def write(words, target, value):
         words[index + 1] = (raw >> 16) & 65535
 
 
-def compare(words, parsed):
+def compare(words, parsed, reader=None):
     a, op, b = parsed
-    left, right = read(words, a), read(words, b)
+    reader = reader or (lambda v: read(words, v))
+    left, right = reader(a), reader(b)
     if op == "=":
         return left == right
     if op == "<>":
@@ -332,8 +366,29 @@ def compare(words, parsed):
 
 
 def cpp(value):
+    status = status_reference(value.code)
+    if status:
+        return cpp_name(status[0]) + "." + NUM_FIELDS[status[1]][1] + "()"
     if value.code.startswith("%"):
         kind, index = word_address(value.code)
         fn = {v: k for k, v in READS.items()}[kind]
         return "plc::%s(%d)" % (fn, index)
     return value.code + ("f" if value.kind == "f32" else "")
+
+
+def memory_words_used(program):
+    """Union of aliased MW/MD/MF cells and complete communication buffers."""
+    text = (
+        " ".join(" ".join(r) for r in program.rungs) + " " + " ".join(program.symbols)
+    )
+    words = set()
+    for prefix, index in re.findall(r"%M([WDF])([0-9]+)", text):
+        start = int(index)
+        words.update(range(start, start + (1 if prefix == "W" else 2)))
+    for cfg in program.communications.values():
+        words.update(range(cfg.index_data, cfg.index_data + cfg.data_words))
+        if cfg.kind == "WRITE_READ_VAR":
+            words.update(
+                range(cfg.index_data_in, cfg.index_data_in + cfg.read_quantity)
+            )
+    return words

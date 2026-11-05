@@ -5,17 +5,36 @@ experimental, even when their IL/graph representations agree locally.
 """
 
 import hashlib
+import os
 import re
+import tempfile
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
 from .il import validate
 from .config import configuration, unique_tree
 from .model import Program, Timer, address, fail
-from .numeric import word_address, comparison, operation, Number
+from .numeric import (
+    word_address,
+    comparison,
+    operation,
+    Number,
+    is_operation,
+    memory_words_used,
+)
+from .communication import parse_block
+from .communication_xml import read_blocks, write_blocks, check_template_channels
 
 TARGET = "TM200CE40T"
 BASES = {1: "OneMilliSeconds", 100: "OneHundredMilliSeconds", 1000: "OneSecond"}
+LEFT_ONLY = {
+    "Coil",
+    "SetCoil",
+    "ResetCoil",
+    "Operation",
+    "ReadVarBasic",
+    "WriteVarBasic",
+}
 
 
 def element(parent, tag, text=None):
@@ -49,26 +68,79 @@ def parse(path):
         if depth > 64:
             fail("project XML depth exceeds 64")
         pending.extend((child, depth + 1) for child in node)
-    unique_tree(root)
-    if root.findtext("HardwareConfiguration/Plc/Cpu/Reference") != TARGET:
-        fail("template/project must target " + TARGET)
     if len(root.findall("HardwareConfiguration/Plc/Cpu")) != 1:
         fail("project must contain exactly one CPU")
+    references = root.findall("HardwareConfiguration/Plc/Cpu/Reference")
+    if len(references) != 1 or len(references[0]):
+        fail("CPU reference must be one scalar")
+    actual = references[0].text or "unknown"
+    if actual != TARGET:
+        fail("source CPU " + actual + "; template/project must target " + TARGET)
+    unique_tree(root)
     return root
 
 
-def graphics(rung):
+def graphics(rung, timer_column=3, communication_contact_column=0):
     # Deliberately only series contacts, one action, and one optional Timer.
     # Compound expressions are split into boolean gates by the lowerer.
     if rung[0].startswith("BLK "):
         descriptor = rung[0].split()[1]
-        items = [("NormalContact", rung[1].split()[1], 0), ("Timer", descriptor, 3)]
-        items += [("Line", "", i) for i in (1, 2, 5, 6, 7, 8, 9)]
+        if descriptor.startswith(("%READ_VAR", "%WRITE_VAR", "%WRITE_READ_VAR")):
+            key, execute, _ = parse_block(rung)
+            if len(rung) != 4:
+                fail(
+                    "SMBP graphical ABORT wiring is not verified; IL output remains available"
+                )
+            native_kind = key[1:].rstrip("0123456789")
+            if native_kind not in ("READ_VAR", "WRITE_VAR"):
+                fail("SMBP graphical WRITE_READ_VAR layout is not verified")
+            column = 2 if native_kind == "READ_VAR" else 3
+            typ = "ReadVarBasic" if native_kind == "READ_VAR" else "WriteVarBasic"
+            if communication_contact_column not in range(column):
+                fail("communication contact must precede its block")
+            if execute[1].startswith("["):
+                fail("SMBP communication comparison input wiring is not verified")
+            return (
+                [
+                    (
+                        "NegatedContact" if execute[0] == "LDN" else "NormalContact",
+                        execute[1],
+                        communication_contact_column,
+                    )
+                ]
+                + [
+                    ("Line", "", i)
+                    for i in range(column)
+                    if i != communication_contact_column
+                ]
+                + [(typ, key, column)]
+            )
+        op, arg = rung[1].split(maxsplit=1)
+        if arg.startswith("["):
+            if op != "LD":
+                fail("negated timer comparison graphics are unsupported")
+            typ, arg, width = "Comparison", arg[1:-1].strip(), 2
+        else:
+            typ, width = "NegatedContact" if op == "LDN" else "NormalContact", 1
+        if timer_column not in (2, 3):
+            fail("unverified Timer graphical position")
+        items = [(typ, arg, 0), ("Timer", descriptor, timer_column)]
+        items += [
+            ("Line", "", i)
+            for i in range(width, 10)
+            if i not in (timer_column, timer_column + 1)
+        ]
         items.append(("Coil", rung[5].split()[1], 10))
     else:
         items = []
         column = 0
         for line in rung[:-1]:
+            if line.startswith("OPER "):
+                items.append(
+                    ("Comparison", line.split(maxsplit=1)[1][1:-1].strip(), column)
+                )
+                column += 2
+                continue
             op, arg = line.split(maxsplit=1)
             if op not in ("LD", "LDN", "AND", "ANDN"):
                 fail("project graphics for this IL operator are not supported")
@@ -86,13 +158,18 @@ def graphics(rung):
                 )
             )
             column += 1
-        terminal_operation = rung[-1].startswith("[")
+        terminal_operation = is_operation(rung[-1])
         end = 9 if terminal_operation else 10
         if column > end:
             fail("rung exceeds Ladder width")
         items += [("Line", "", i) for i in range(column, end)]
         if terminal_operation:
-            items.append(("Operation", rung[-1][1:-1].strip(), 9))
+            expression = (
+                rung[-1].split(maxsplit=1)[1]
+                if rung[-1].startswith("OPER ")
+                else rung[-1]
+            )
+            items.append(("Operation", expression[1:-1].strip(), 9))
         else:
             op, arg = rung[-1].split()
             items.append(
@@ -150,19 +227,30 @@ def check_graph(rung_node, lines):
                 fail("unexpected Ladder expression field")
         if typ in ("Comparison", "Operation"):
             arg = numeric_graph(typ, arg)
-        expected_connection = (
-            "Left"
-            if typ in ("Coil", "SetCoil", "ResetCoil", "Operation")
-            else "Left, Right"
-        )
+        expected_connection = "Left" if typ in LEFT_ONLY else "Left, Right"
         if e.findtext("ChosenConnection", "") != expected_connection:
             fail("unsupported Ladder connections")
         actual.append((typ, arg, column))
     if len(rows) != 1:
         fail("mixed Ladder rows are outside the supported series subset")
+    timer_columns = [col for typ, _, col in actual if typ == "Timer"]
+    comm_contact_column = 0
+    if lines[0].startswith("BLK ") and any(
+        t in ("ReadVarBasic", "WriteVarBasic") for t, _, _ in actual
+    ):
+        contacts = [
+            col for t, _, col in actual if t in ("NormalContact", "NegatedContact")
+        ]
+        if len(contacts) != 1:
+            fail("communication block requires one series input contact")
+        comm_contact_column = contacts[0]
+    if timer_columns and (len(timer_columns) != 1 or not lines[0].startswith("BLK ")):
+        fail("unexpected Timer graphical element")
     expected = [
         (t, numeric_graph(t, a) if t in ("Comparison", "Operation") else a, c)
-        for t, a, c in graphics(lines)
+        for t, a, c in graphics(
+            lines, timer_columns[0] if timer_columns else 3, comm_contact_column
+        )
     ]
     if sorted(actual) != sorted(expected):
         fail("IL and Ladder graphics do not agree")
@@ -172,7 +260,7 @@ def numeric_graph(typ, expression):
     # Parse token boundaries; removing whitespace could turn MW40 00 into MW4000.
     parsed = (
         comparison("[" + expression + "]")
-        if typ == "Comparison"
+        if typ == "Comparison" and ":=" not in expression
         else operation("[" + expression + "]")
     )
 
@@ -190,6 +278,9 @@ def load_project(path):
     root = parse(path)
     sw = configuration(root)
     p = Program()
+    graph_nodes = []
+    p.communications = read_blocks(sw)
+    check_template_channels(root, p.communications)
     timer_nodes = sw.find("Timers")
     if timer_nodes is not None:
         for t in timer_nodes:
@@ -280,18 +371,7 @@ def load_project(path):
                     text = instruction.findtext("InstructionLine", "").strip()
                     lines.append(" ".join(text.split()))
                 p.rungs.append(lines)
-                # Validate IL first so malformed instructions cannot be hidden by a graph.
-                validate(
-                    Program(
-                        p.rungs,
-                        {
-                            i: t
-                            for i, t in p.timers.items()
-                            if any(rr[0] == "BLK %TM" + str(i) for rr in p.rungs)
-                        },
-                    )
-                )
-                check_graph(r, lines)
+                graph_nodes.append((r, lines))
     for bit in sw.findall("MemoryBits/MemoryBit"):
         addr = bit.findtext("Address", "")
         address(addr, True)
@@ -304,6 +384,11 @@ def load_project(path):
         for word in sw.findall(collection + "/" + entry):
             p.symbols[word.findtext("Address")] = word.findtext("Symbol", "")
     validate(p)
+    # Validate the complete IL before examining its graphics. A status may be
+    # read before its configured FB is called later in the same scan.
+    validate_allocations(sw, p)
+    for node, lines in graph_nodes:
+        check_graph(node, lines)
     p.metadata = {
         "official_editor": "pending",
         "physical_plc": "pending",
@@ -317,10 +402,40 @@ def load_project(path):
     return p
 
 
+def validate_allocations(sw, program):
+    text = (
+        " ".join(" ".join(r) for r in program.rungs) + " " + " ".join(program.symbols)
+    )
+    bits = [int(n) for n in re.findall(r"%M([0-9]+)", text)]
+    requirements = {
+        "MemoryWordsMemoryAllocation": (
+            8000,
+            max(memory_words_used(program), default=-1) + 1,
+        ),
+        "MemoryBitsMemoryAllocation": (1024, max(bits, default=-1) + 1),
+        "TimersMemoryAllocation": (255, max(program.timers, default=-1) + 1),
+    }
+    for tag, (capacity, required) in requirements.items():
+        node = sw.find(tag)
+        if node is None:
+            continue
+        count = node.findtext("ForcedCount")
+        if count is not None and (
+            not re.fullmatch(r"0|[1-9][0-9]{0,3}", count) or int(count) > capacity
+        ):
+            fail("invalid " + tag + " allocation count")
+        if node.findtext("Allocation") == "Manual" and (
+            count is None or int(count) < required
+        ):
+            fail(tag + " allocation does not cover all referenced memory/buffers")
+
+
 def write_project(program, template, destination):
     validate(program)
     root = parse(template)
     sw = configuration(root)
+    check_template_channels(root, program.communications)
+    write_blocks(program, sw)
     for name in (
         "Pous",
         "Timers",
@@ -360,9 +475,7 @@ def write_project(program, template, destination):
             element(
                 e,
                 "ChosenConnection",
-                "Left"
-                if typ in ("Coil", "SetCoil", "ResetCoil", "Operation")
-                else "Left, Right",
+                "Left" if typ in LEFT_ONLY else "Left, Right",
             )
         il = element(r, "InstructionLines")
         for line in lines:
@@ -424,12 +537,7 @@ def write_project(program, template, destination):
     element(allocation, "Allocation", "Automatic")
     allocation = element(sw, "TimersMemoryAllocation")
     element(allocation, "Allocation", "Automatic")
-    required = 0
-    numeric_text = (
-        " ".join(" ".join(r) for r in program.rungs) + " " + " ".join(program.symbols)
-    )
-    for prefix, index in re.findall(r"%M([WDF])(\d+)", numeric_text):
-        required = max(required, int(index) + (1 if prefix == "W" else 2))
+    required = max(memory_words_used(program), default=-1) + 1
     if required:
         # Manual/ForcedCount is observed for this exact collection. Do not infer
         # a separate enum from the allocation of bits or timers.
@@ -446,8 +554,18 @@ def write_project(program, template, destination):
     if destination.resolve() == Path(template).resolve():
         fail("output must differ from the template")
     ET.indent(root, space="  ")
-    destination.write_bytes(ET.tostring(root, encoding="utf-8", xml_declaration=True))
-    # This is an internal representation check only, never vendor acceptance.
-    loaded = load_project(destination)
-    if loaded.rungs != program.rungs:
-        fail("internal XML round trip changed IL")
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(
+        prefix=".m200-candidate-", dir=str(destination.parent)
+    ) as temporary:
+        candidate = Path(temporary) / "candidate.smbp"
+        candidate.write_bytes(ET.tostring(root, encoding="utf-8", xml_declaration=True))
+        # Internal validation precedes replacement; never vendor acceptance.
+        loaded = load_project(candidate)
+        if (
+            loaded.rungs != program.rungs
+            or loaded.communications != program.communications
+            or loaded.timers != program.timers
+        ):
+            fail("internal XML round trip changed program/configuration")
+        os.replace(candidate, destination)

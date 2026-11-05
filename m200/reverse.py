@@ -1,9 +1,26 @@
 from .il import validate
 from .model import address
-from .numeric import comparison, operation, cpp, WRITES, word_address
+from .numeric import (
+    comparison,
+    cpp,
+    WRITES,
+    word_address,
+    is_operation,
+    instruction_operation,
+)
+from .communication import (
+    status_reference,
+    BOOL_FIELDS,
+    cpp_name,
+    parse_block,
+    constructor_cpp,
+)
 
 
 def read_cpp(arg):
+    status = status_reference(arg)
+    if status:
+        return cpp_name(status[0]) + "." + BOOL_FIELDS[status[1]] + "()"
     if arg.startswith("["):
         a, op, b = comparison(arg)
         return (
@@ -42,22 +59,31 @@ def to_cpp(program):
             "plc::%s timer_%d{%d};"
             % ({"TON": "Ton", "TOF": "Tof", "TP": "Pulse"}[t.kind], i, t.milliseconds)
         )
+    for key, cfg in sorted(program.communications.items()):
+        lines.append(constructor_cpp(key, cfg))
     lines += ["", "void scan() {", "  bool accumulator = false;"]
     for i in sorted(program.timers):
         lines.append("  bool timer_%d_result = false;" % i)
     for index, rung in enumerate(program.rungs):
         lines.append("  // Rung %d" % index)
         if rung[0].startswith("BLK "):
+            if rung[0].split(maxsplit=1)[1] in program.communications:
+                key, execute, abort = parse_block(rung)
+                ex = ("!" if execute[0] == "LDN" else "") + read_cpp(execute[1])
+                ab = ("!" if abort[0] == "LDN" else "") + read_cpp(abort[1])
+                lines.append("  " + cpp_name(key) + ".update(" + ex + "," + ab + ");")
+                continue
             n = int(rung[0].split("%TM")[1])
+            op, arg = rung[1].split(maxsplit=1)
+            enable = ("!" if op == "LDN" else "") + read_cpp(arg)
             lines += [
-                "  timer_%d_result = timer_%d.update(%s);"
-                % (n, n, read_cpp(rung[1][3:])),
+                "  timer_%d_result = timer_%d.update(%s);" % (n, n, enable),
                 "  " + write_cpp(rung[5][3:], "timer_%d_result" % n),
             ]
             continue
         for line in rung:
-            if line.startswith("["):
-                target, name, values = operation(line)
+            if is_operation(line):
+                target, name, values = instruction_operation(line)
                 kind, index = word_address(target)
                 args = [str(v) if isinstance(v, int) else cpp(v) for v in values]
                 expression = (

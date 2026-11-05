@@ -44,7 +44,7 @@ Também há `plc::clock_ms(10|100|1000|60000)`, que lê as bases globais `%S4..%
 - Executor IL com validação estrita, conversor IL/SMBP → C++ e comparação com a execução C++ nativa.
 - Projeto XML baseado em template, rungs Ladder de contatos em série, bobinas, timers e blocos numéricos Operation/Comparison, verificação local de coerência IL/gráfico e arquivo de vínculo fonte/rung.
 
-O protótipo **recusa** aritmética C++ com promoções implícitas (use as operações explícitas `plc::*`), unsigned, arrays, ponteiros, referências arbitrárias, classes da aplicação, loops, exceções, threads, funções externas, headers com declarações fora do SDK e nós AST desconhecidos. Recursos como Modbus, contadores nativos, retenção declarada, expansões, tarefas de evento, acesso imediato e PTO/PWM ainda não estão implementados. Não existe tentativa de compilar C++ geral e ignorar as partes difíceis.
+O protótipo **recusa** aritmética C++ com promoções implícitas (use as operações explícitas `plc::*`), unsigned, arrays, ponteiros, referências arbitrárias, classes da aplicação, loops, exceções, threads, funções externas, headers com declarações fora do SDK e nós AST desconhecidos. Contadores nativos, retenção declarada, expansões, tarefas de evento, acesso imediato e PTO/PWM ainda não estão implementados. Modbus tem agora um subconjunto descrito abaixo; não representa a cobertura completa de comunicação do PLC. Não existe tentativa de compilar C++ geral e ignorar as partes difíceis.
 
 `read_m`, `write_m` e `system` são primitivas de auditoria usadas no C++ reconstruído. `system` aceita somente as quatro bases de clock e o primeiro scan `%S13`. O significado da região retida e de estados iniciais de projetos externos precisa ser confrontado com sua configuração; não há simulação de falta de energia/retomada física.
 
@@ -76,9 +76,34 @@ O inventário reúne **250 registros documentais** (161 de linguagem/blocos e 89
 ./m200c capabilities HW.HSC
 ./m200c capabilities --all
 make stress
+make public-fetch   # download explícito dos originais fixados
+make public-check   # teste local dos originais, sem download implícito
 ```
 
 `make stress` cria relatórios e fontes de reprodução em um diretório temporário novo fora do repositório. Executa apenas testes locais e falha diante de divergências inesperadas. `make check` inclui a matriz de 47 intrínsecos numéricos e suas referências independentes.
+
+## Modbus no TM200CE40T
+
+```cpp
+#include <plc.hpp>
+plc::ReadVar remote{plc::Link::Ethernet, 1, 100,
+                    plc::Object::HoldingWords, 0, 2, 100};
+void scan() {
+    bool done = remote.update(plc::input(0), false);
+    plc::output(0, done);
+    plc::output(1, remote.busy());
+    plc::output(2, remote.error());
+    if (done) { plc::output(3, plc::read_word(100) > 0); }
+}
+```
+
+O exemplo lê dois registradores remotos desde o endereço zero para `%MW100..101`. O índice Ethernet `1` deve estar configurado no template do **TM200CE40T**. Os construtores `ReadVar`, `WriteVar` e `WriteReadVar` produzem blocos nativos de comunicação; getters expõem Done/Busy/Aborted/Error e os códigos de erro. O buffer inteiro é validado e reservado antes de alocar temporários. Índices explícitos preservam a identidade dos blocos na conversão de volta.
+
+A implementação local inclui os function codes 1/2/3/4/5/6/15/16/23, packing de bits, MBAP, erros, timeout, aborto e exclusão por porta. A simulação usa somente um transporte fornecido explicitamente. Sem transporte, uma tentativa retorna erro de canal não configurado; não existe sucesso simulado automático.
+
+A exportação `.smbp` cobre os perfis de READ_VAR/WRITE_VAR com enums e configuração comprovados em arquivos originais. Exige SL1 RS485/RTU/master explícita ou remoto Ethernet existente. Variantes de XML ainda desconhecidas — incluindo WRITE_READ_VAR, bits/single-coil, certos parâmetros de porta e a ligação gráfica ABORT — são recusadas na exportação. O suporte de protocolo/IL dessas operações não equivale a suporte de XML completo. Editor oficial, porta serial física e PLC continuam pendentes.
+
+Detalhes e limites: [docs/MODBUS.md](docs/MODBUS.md). Ensaios públicos: [docs/validation/PUBLIC-PROJECTS.md](docs/validation/PUBLIC-PROJECTS.md).
 
 ## Gerar o projeto que será testado no editor
 

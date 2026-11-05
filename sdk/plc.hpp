@@ -202,4 +202,50 @@ i32 real_to_dint(f32);
 i16 low_word(i32);
 i16 high_word(i32);
 #endif
+// Native Modbus function blocks. Ports/endpoints are configured in the template.
+enum class Link : int { Serial1=1, Ethernet=2 };
+enum class Object : int { HoldingWords=0, DiscreteInputs=1, Coils=2, InputWords=3, SingleCoil=4, SingleRegister=5 };
+#ifdef PLC_NATIVE
+namespace detail {
+struct CommunicationConfig { int kind,link,id,timeout,obj,first,quantity,index,first_read,read_quantity,index_in; };
+struct CommunicationResult { bool done=false,busy=false,aborted=false,error=false; i16 comm_error=0; i32 oper_error=0; };
+inline int communication_counts[3]={};
+// Explicit test transport callback. No device or success is fabricated by default.
+inline CommunicationResult (*communication_hook)(const CommunicationConfig&,int,bool,bool,unsigned long long,unsigned short*) = nullptr;
+}
+class Communication {
+    detail::CommunicationConfig config;
+    int index;
+    detail::CommunicationResult state;
+    bool initialized=false,old_execute=false,old_abort=false;
+public:
+    Communication(int kind,Link link,int id,int timeout,Object obj,int first,int qty,int data,int read_first=0,int read_qty=1,int in_data=0,int native_index=-1)
+      :config{kind,(int)link,id,timeout,(int)obj,first,qty,data,read_first,read_qty,in_data},index(native_index<0?detail::communication_counts[kind]++:native_index){if(index<0||index>=32)__builtin_trap();}
+    bool update(bool execute,bool abort) {
+        if(detail::communication_hook) {
+            state=detail::communication_hook(config,index,execute,abort,detail::now_ms,detail::words);
+        } else {
+            bool edge=initialized && execute && !old_execute;
+            bool cancel=initialized && abort && !old_abort;
+            if(!execute) state={};
+            if(edge&&!cancel){state={};state.error=true;state.comm_error=255;state.oper_error=15;}
+        }
+        initialized=true;old_execute=execute;old_abort=abort;return state.done;
+    }
+    bool done() const{return state.done;}
+    bool busy() const{return state.busy;}
+    bool aborted() const{return state.aborted;}
+    bool error() const{return state.error;}
+    i16 comm_error() const{return state.comm_error;}
+    i32 oper_error() const{return state.oper_error;}
+};
+struct ReadVar:Communication { ReadVar(Link l,int id,int t,Object o,int f,int q,int d):Communication(0,l,id,t,o,f,q,d){} ReadVar(int n,Link l,int id,int t,Object o,int f,int q,int d):Communication(0,l,id,t,o,f,q,d,0,1,0,n){} };
+struct WriteVar:Communication { WriteVar(Link l,int id,int t,Object o,int f,int q,int d):Communication(1,l,id,t,o,f,q,d){} WriteVar(int n,Link l,int id,int t,Object o,int f,int q,int d):Communication(1,l,id,t,o,f,q,d,0,1,0,n){} };
+struct WriteReadVar:Communication { WriteReadVar(Link l,int id,int t,int f,int q,int d,int rf,int rq,int rd):Communication(2,l,id,t,Object::HoldingWords,f,q,d,rf,rq,rd){} WriteReadVar(int n,Link l,int id,int t,int f,int q,int d,int rf,int rq,int rd):Communication(2,l,id,t,Object::HoldingWords,f,q,d,rf,rq,rd,n){} };
+#else
+struct ReadVar { ReadVar(Link,int,int,Object,int,int,int); ReadVar(int,Link,int,int,Object,int,int,int); bool update(bool,bool); bool done()const; bool busy()const; bool aborted()const; bool error()const; i16 comm_error()const; i32 oper_error()const; };
+struct WriteVar { WriteVar(Link,int,int,Object,int,int,int); WriteVar(int,Link,int,int,Object,int,int,int); bool update(bool,bool); bool done()const; bool busy()const; bool aborted()const; bool error()const; i16 comm_error()const; i32 oper_error()const; };
+struct WriteReadVar { WriteReadVar(Link,int,int,int,int,int,int,int,int); WriteReadVar(int,Link,int,int,int,int,int,int,int,int); bool update(bool,bool); bool done()const; bool busy()const; bool aborted()const; bool error()const; i16 comm_error()const; i32 oper_error()const; };
+#endif
+
 }

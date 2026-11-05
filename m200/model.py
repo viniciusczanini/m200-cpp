@@ -27,6 +27,7 @@ class Program:
     timers: dict = field(default_factory=dict)
     symbols: dict = field(default_factory=dict)
     metadata: dict = field(default_factory=dict)
+    communications: dict = field(default_factory=dict)
 
     def as_dict(self):
         return {
@@ -36,13 +37,22 @@ class Program:
             "timers": {str(k): asdict(v) for k, v in self.timers.items()},
             "symbols": self.symbols,
             "metadata": self.metadata,
+            "communications": {k: v.to_dict() for k, v in self.communications.items()},
         }
 
     @classmethod
     def from_dict(cls, data):
         if not isinstance(data, dict):
             fail("program JSON must be an object")
-        if set(data) - {"format", "target", "rungs", "timers", "symbols", "metadata"}:
+        if set(data) - {
+            "format",
+            "target",
+            "rungs",
+            "timers",
+            "symbols",
+            "metadata",
+            "communications",
+        }:
             fail("unknown program JSON fields")
         if data.get("format") != "m200-cpp-il-v1" or data.get("target") != "TM200CE40T":
             fail("unsupported program format or target")
@@ -55,7 +65,7 @@ class Program:
         ):
             fail("invalid program metadata")
         if any(
-            not isinstance(k, str) or not re.fullmatch(r"0|[1-9]\d*", k)
+            not isinstance(k, str) or not re.fullmatch(r"0|[1-9][0-9]*", k)
             for k in data["timers"]
         ):
             fail("timer indexes must use canonical decimal keys")
@@ -63,15 +73,24 @@ class Program:
             timers = {int(k): Timer(**v) for k, v in data["timers"].items()}
         except (TypeError, ValueError):
             fail("invalid timer JSON")
+        from .modbus import ModbusConfig
+
+        comms = data.get("communications", {})
+        if not isinstance(comms, dict):
+            fail("invalid communication configuration map")
         return cls(
-            data["rungs"], timers, data.get("symbols", {}), data.get("metadata", {})
+            data["rungs"],
+            timers,
+            data.get("symbols", {}),
+            data.get("metadata", {}),
+            {k: ModbusConfig.from_dict(v) for k, v in comms.items()},
         )
 
 
 def address(text, writable=False):
     if text in ("0", "1") and not writable:
         return ("constant", int(text))
-    m = re.fullmatch(r"%(I0\.|Q0\.|M|S)(\d+)", text)
+    m = re.fullmatch(r"%(I0\.|Q0\.|M|S)([0-9]+)", text)
     if not m:
         fail("unsupported bit address: " + text)
     kind, number = m.group(1), int(m.group(2))

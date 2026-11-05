@@ -1,0 +1,631 @@
+{
+  "date": "2026-11-05",
+  "version": "0.2.0",
+  "target": "TM200CE40T",
+  "tested_state": "working tree following 643d6c7; recorded hashes identify the tested files",
+  "unit_tests": {
+    "command": "make check",
+    "passed": 173,
+    "seconds": 51.987
+  },
+  "modbus_tests": {
+    "tests": 48,
+    "actual_tcp_loopback": true,
+    "physical_serial": false,
+    "physical_plc": false
+  },
+  "integration": {
+    "cpp_to_native_fb_il": true,
+    "smbp_typed_serial_roundtrip": true,
+    "smbp_ethernet_roundtrip_and_loopback_exchange": true,
+    "reverse_sparse_communication_identity": true,
+    "failed_candidate_preserves_destination": true
+  },
+  "public": {
+    "command": "make public-check",
+    "files": 10,
+    "cases": 19,
+    "frames": 16128,
+    "whole_projects_imported": 0,
+    "identity_unchanged": true,
+    "report": "PUBLIC-PROJECTS-RESULTS.json",
+    "inventory_counts": {
+      "il": {
+        "PASS": 92,
+        "REFUSED": 27
+      },
+      "graphics": {
+        "PASS": 56,
+        "REFUSED": 33,
+        "ABSENT": 30
+      }
+    }
+  },
+  "stress": {
+    "command": "make stress",
+    "status": "passed",
+    "frames_compared": 37716,
+    "seeds": [
+      20020261105,
+      20020261106
+    ],
+    "boolean_results": [
+      {
+        "name": "boolean_00_reverse_recompile",
+        "result": "LIMITATION",
+        "reason": "M200-E: memory exhausted (compiler temporaries also consume %M)"
+      },
+      {
+        "name": "boolean_00",
+        "result": "PASS",
+        "frames": 768,
+        "rungs": 236,
+        "instructions": 551,
+        "memory_bits": 202,
+        "timers": 0,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "boolean_01",
+        "result": "PASS",
+        "frames": 768,
+        "rungs": 224,
+        "instructions": 519,
+        "memory_bits": 190,
+        "timers": 0,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "boolean_02",
+        "result": "PASS",
+        "frames": 768,
+        "rungs": 244,
+        "instructions": 568,
+        "memory_bits": 210,
+        "timers": 0,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "boolean_03",
+        "result": "PASS",
+        "frames": 768,
+        "rungs": 233,
+        "instructions": 543,
+        "memory_bits": 199,
+        "timers": 0,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "boolean_04",
+        "result": "PASS",
+        "frames": 768,
+        "rungs": 236,
+        "instructions": 549,
+        "memory_bits": 202,
+        "timers": 0,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "boolean_05",
+        "result": "PASS",
+        "frames": 768,
+        "rungs": 264,
+        "instructions": 617,
+        "memory_bits": 230,
+        "timers": 0,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "boolean_06",
+        "result": "PASS",
+        "frames": 768,
+        "rungs": 261,
+        "instructions": 614,
+        "memory_bits": 227,
+        "timers": 0,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "boolean_07",
+        "result": "PASS",
+        "frames": 768,
+        "rungs": 234,
+        "instructions": 543,
+        "memory_bits": 200,
+        "timers": 0,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "boolean_08",
+        "result": "PASS",
+        "frames": 768,
+        "rungs": 244,
+        "instructions": 569,
+        "memory_bits": 210,
+        "timers": 0,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "boolean_09",
+        "result": "PASS",
+        "frames": 768,
+        "rungs": 224,
+        "instructions": 520,
+        "memory_bits": 190,
+        "timers": 0,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "boolean_10",
+        "result": "PASS",
+        "frames": 768,
+        "rungs": 240,
+        "instructions": 559,
+        "memory_bits": 206,
+        "timers": 0,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "boolean_11",
+        "result": "PASS",
+        "frames": 768,
+        "rungs": 223,
+        "instructions": 519,
+        "memory_bits": 189,
+        "timers": 0,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "boolean_12",
+        "result": "PASS",
+        "frames": 768,
+        "rungs": 234,
+        "instructions": 545,
+        "memory_bits": 200,
+        "timers": 0,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "boolean_13",
+        "result": "PASS",
+        "frames": 768,
+        "rungs": 278,
+        "instructions": 652,
+        "memory_bits": 244,
+        "timers": 0,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "boolean_14",
+        "result": "PASS",
+        "frames": 768,
+        "rungs": 262,
+        "instructions": 613,
+        "memory_bits": 228,
+        "timers": 0,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "boolean_15",
+        "result": "PASS",
+        "frames": 768,
+        "rungs": 249,
+        "instructions": 581,
+        "memory_bits": 215,
+        "timers": 0,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "stateful_10000",
+        "result": "PASS",
+        "frames": 10000,
+        "rungs": 157,
+        "instructions": 385,
+        "memory_bits": 108,
+        "timers": 8,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "class_Ton",
+        "result": "PASS",
+        "frames": 512,
+        "rungs": 10,
+        "instructions": 25,
+        "memory_bits": 7,
+        "timers": 1,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "class_Tof",
+        "result": "PASS",
+        "frames": 512,
+        "rungs": 10,
+        "instructions": 25,
+        "memory_bits": 7,
+        "timers": 1,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "class_Pulse",
+        "result": "PASS",
+        "frames": 512,
+        "rungs": 10,
+        "instructions": 25,
+        "memory_bits": 7,
+        "timers": 1,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "class_Clock",
+        "result": "PASS",
+        "frames": 512,
+        "rungs": 31,
+        "instructions": 84,
+        "memory_bits": 22,
+        "timers": 2,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "class_RisingEdge",
+        "result": "PASS",
+        "frames": 512,
+        "rungs": 14,
+        "instructions": 29,
+        "memory_bits": 10,
+        "timers": 0,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "class_FallingEdge",
+        "result": "PASS",
+        "frames": 512,
+        "rungs": 14,
+        "instructions": 29,
+        "memory_bits": 10,
+        "timers": 0,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "sdk_macro_constructor_escape",
+        "result": "REJECT",
+        "reason": "M200-E: macros may not alter declarations inside the bundled SDK",
+        "source": "/private/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/m200-stress-79kzhjy_/boolean_audit/sdk_macro_constructor_escape.cpp"
+      },
+      {
+        "name": "helper_variadic",
+        "result": "REJECT",
+        "reason": "M200-E: helper_variadic.cpp:2:6: variadic helpers are unsupported",
+        "source": "/private/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/m200-stress-79kzhjy_/boolean_audit/helper_variadic.cpp"
+      },
+      {
+        "name": "edge_global_copy",
+        "result": "PASS",
+        "frames": 128,
+        "rungs": 15,
+        "instructions": 31,
+        "memory_bits": 11,
+        "timers": 0,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "bool_aggregate_init",
+        "result": "REJECT",
+        "reason": "M200-E: bool_aggregate_init.cpp:2:19: unsupported expression: InitListExpr",
+        "source": "/private/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/m200-stress-79kzhjy_/boolean_audit/bool_aggregate_init.cpp"
+      },
+      {
+        "name": "auto_bool",
+        "result": "PASS",
+        "frames": 128,
+        "rungs": 8,
+        "instructions": 16,
+        "memory_bits": 5,
+        "timers": 0,
+        "reverse_recompiled": false
+      },
+      {
+        "name": "reject_int_promotion_arithmetic",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: reject_int_promotion_arithmetic.cpp:2:41: unsupported expression: BinaryOperator"
+      },
+      {
+        "name": "reject_bitwise_or",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: reject_bitwise_or.cpp:2:27: unsupported expression: BinaryOperator"
+      },
+      {
+        "name": "reject_conditional_update",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: reject_conditional_update.cpp:2:52: stateful update must be an unconditional standalone initializer or assignment"
+      },
+      {
+        "name": "reject_duplicate_update",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: reject_duplicate_update.cpp:2:55: instance updated more than once per scan"
+      },
+      {
+        "name": "reject_update_in_helper",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: reject_update_in_helper.cpp:2:37: stateful update must be an unconditional standalone initializer or assignment"
+      },
+      {
+        "name": "reject_update_temporary",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: reject_update_temporary.cpp:2:20: unsupported member call"
+      },
+      {
+        "name": "reject_dynamic_address",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: reject_dynamic_address.cpp:2:26: a literal integer is required here"
+      },
+      {
+        "name": "reject_unused_integer",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: reject_unused_integer.cpp:2:5: only bool variables are supported in this prototype"
+      },
+      {
+        "name": "reject_local_static",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: reject_local_static.cpp:2:25: local static variables are unsupported"
+      },
+      {
+        "name": "fast_period_nested",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: configuration value must be scalar: Period"
+      },
+      {
+        "name": "timer_preset_nested",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: configuration value must be scalar: Preset"
+      },
+      {
+        "name": "il_instruction_nested",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: configuration value must be scalar: InstructionLine"
+      },
+      {
+        "name": "unknown_software",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: unsupported configuration field: SoftwareConfiguration/UnknownTask"
+      },
+      {
+        "name": "duplicate_timer_preset",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: duplicate XML singleton: TimerTM/Preset"
+      },
+      {
+        "name": "duplicate_root_name",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: duplicate XML singleton: ProjectDescriptor/Name"
+      },
+      {
+        "name": "unknown_cpu",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: unsupported configuration field: Cpu/ActiveUnknown"
+      },
+      {
+        "name": "attribute",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: unsupported XML attribute: TimerTM/Executable"
+      },
+      {
+        "name": "graph_attribute",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: unsupported XML attribute: LadderEntity/Executable"
+      },
+      {
+        "name": "unknown_il",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: unsupported IL instruction/order: JMP %L9"
+      },
+      {
+        "name": "deep_64",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: project must contain exactly one CPU"
+      },
+      {
+        "name": "deep_256",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: project XML depth exceeds 64"
+      },
+      {
+        "name": "deep_1300",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: project XML depth exceeds 64"
+      },
+      {
+        "name": "dtd_utf-8",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: DTD/entity declarations are not supported"
+      },
+      {
+        "name": "dtd_utf-16",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: project XML must use UTF-8 encoding"
+      },
+      {
+        "name": "timer_index_alias",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: timer indexes must use canonical decimal keys"
+      },
+      {
+        "name": "unknown_json_field",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: unknown program JSON fields"
+      },
+      {
+        "name": "modified_artifact_preserved",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: an existing generated file was modified; choose another output directory"
+      },
+      {
+        "name": "unknown_file_preserved",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: output contains files not owned by this compiler; choose another directory"
+      },
+      {
+        "name": "owned_artifact_symlink_victim_preserved",
+        "result": "PASS"
+      },
+      {
+        "name": "decompile_same_source",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: decompile input, output and configuration sidecar must be distinct paths"
+      },
+      {
+        "name": "decompile_source_symlink",
+        "result": "PASS_REJECT",
+        "reason": "M200-E: decompile input, output and configuration sidecar must be distinct paths"
+      },
+      {
+        "name": "decompile_configuration_byte_preservation",
+        "result": "PASS"
+      }
+    ],
+    "il_properties": [
+      {
+        "case": 0,
+        "status": "PASS",
+        "frames": 1000,
+        "rungs": 56,
+        "instructions": 154
+      },
+      {
+        "case": 1,
+        "status": "PASS",
+        "frames": 1000,
+        "rungs": 56,
+        "instructions": 164
+      },
+      {
+        "case": 2,
+        "status": "PASS",
+        "frames": 1000,
+        "rungs": 56,
+        "instructions": 161
+      },
+      {
+        "case": 3,
+        "status": "PASS",
+        "frames": 1000,
+        "rungs": 56,
+        "instructions": 166
+      },
+      {
+        "case": 4,
+        "status": "PASS",
+        "frames": 1000,
+        "rungs": 56,
+        "instructions": 159
+      },
+      {
+        "case": 5,
+        "status": "PASS",
+        "frames": 1000,
+        "rungs": 56,
+        "instructions": 161
+      },
+      {
+        "case": 6,
+        "status": "PASS",
+        "frames": 1000,
+        "rungs": 56,
+        "instructions": 160
+      },
+      {
+        "case": 7,
+        "status": "PASS",
+        "frames": 1000,
+        "rungs": 56,
+        "instructions": 155
+      },
+      {
+        "case": 8,
+        "status": "PASS",
+        "frames": 1000,
+        "rungs": 56,
+        "instructions": 164
+      },
+      {
+        "case": 9,
+        "status": "PASS",
+        "frames": 1000,
+        "rungs": 56,
+        "instructions": 159
+      },
+      {
+        "case": 10,
+        "status": "PASS",
+        "frames": 1000,
+        "rungs": 56,
+        "instructions": 159
+      },
+      {
+        "case": 11,
+        "status": "PASS",
+        "frames": 1000,
+        "rungs": 56,
+        "instructions": 172
+      },
+      {
+        "case": "all_ops_reverse_recompile",
+        "status": "PASS",
+        "frames": 100
+      }
+    ]
+  },
+  "total_public_plus_stress_frames": 53844,
+  "examples": {
+    "command": "make examples",
+    "status": "passed",
+    "includes": "examples/modbus_read.cpp",
+    "transport_default": "none; explicit unconfigured-channel error"
+  },
+  "lint": "ruff passed",
+  "diff_check": "passed",
+  "official_editor": "pending",
+  "physical_plc": "pending",
+  "complete_library": false,
+  "source_sha256": {
+    "Makefile": "68ac9363cbb60fd1f3b44343ae451aee8a2adf40dca13853b0ea45436939bcf3",
+    "examples/blink.cpp": "8298b531155f8f8a552c03388645581ee4c771a46246932c24c5ecdb1294e16a",
+    "examples/latch.cpp": "254bd5a66054bf74c58827cc5f677a86e51645715dc0091b1a8c5230fbda44e7",
+    "examples/modbus_read.cpp": "c8ed552b77d55be92c6acce8d48a417d32a50ffe049ca614e5d7df9be690dd79",
+    "examples/numeric_control.cpp": "ff2f3e5d4e1b5ecdba55d92cf8b386c370c785dc6559f3a9940a04e062837eb1",
+    "m200/__init__.py": "77c5815a3596eebca3e939d1ad39abba46fa4edc4df148aaa7e47f13e5eda0ab",
+    "m200/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "m200/capabilities.py": "e94e59743ee0eae98c476938f8eafe04966c0823b825b1d070980d15d41348a0",
+    "m200/cli.py": "eebc55bcd3a6bf56e227344a005a6d1328c8c6b3ba20ed317f177ff392a2f8da",
+    "m200/communication.py": "105c1aef50e7ee00bc7c7142a5b6805d4ddf5f18fc04c5e60a52b78841a6b3b0",
+    "m200/communication_xml.py": "954e0fb861fef56381b204936c47f2f760dbcb3840dd018bb1d2a1b13bfc319f",
+    "m200/config.py": "3acbc41bf01d78576c34a5d716b559851fb13bb819fa14b149e4be9fd3dd5e52",
+    "m200/frontend.py": "08364ccbe56312176b01a5560b742be84cb55f661cc1a4dd4f6200ab5b3820f4",
+    "m200/il.py": "2a9b9902689ec4e3f4d6c4a8ccde9ab6714459eeb6fe02544609c75b9de5a44b",
+    "m200/jsonio.py": "c4d8447354b4f48205a8d5bfc58e1a3919656ba2073ecc5982b2f8fd6253fd70",
+    "m200/lower.py": "4263bf4f838b85d4461b3aa50bb9825f8a24ee8000f587efcfbc1a3f4d81f712",
+    "m200/modbus.py": "62e98577eba6e2de938bc2292dd6cb16f22f64e1101fabdf5ea0f33fd009e92c",
+    "m200/model.py": "d2875e0d003b19cf9232d5510bdf628281bf7f01c0917ccbb0a7c5d3612792da",
+    "m200/native.py": "6e782827bcfbd9201997a7466da3b78b6dde6b2298f7449f2f83d2c3a5806dd7",
+    "m200/numeric.py": "ee0e09ee2e9f824ce0a385789c23364e58cf1a77d4127e551de6bcab06f3b2ec",
+    "m200/project.py": "a8f7e02829ed8fd78cae8284b7dcf30ac78b378004d5ea031450992408ef55c6",
+    "m200/reverse.py": "99a3469630521ba0d2f47744e08d1cbb32c4c023f9977d9f23e4c5ea181dd64a",
+    "sdk/plc.hpp": "c732bf3bee10cd3f1a8cd5d0399d41e307cd424c630cb175a50c282ede3a7391",
+    "tests/public/fetch.py": "feb3c18c2ba1454da0e87450008343edd08a674e76da1a9cb81d087d860a87ed",
+    "tests/public/manifest.json": "8994ff39fa744c66024f481007cebf1293ab4110213ed8088823e7e3de69c1ea",
+    "tests/public/run.py": "546d34f1c6d1661e4703d76d364498f5f93a088aa6fc14f810ed00fd4afcc31d",
+    "tests/stress/boolean_audit.py": "ecd800fad5e3eb05948eb833f77a6098fb0e44aaecf8c0a81b60f1c529de146a",
+    "tests/stress/il_properties.py": "f2269c4d4beb32ea1e9e014aea71b67f3a05839ec137d5f9be237fa833f25644",
+    "tests/stress/run.py": "f8a317eea4fa0e016ce3c5dd9de2ee534ee333c659cf51396e27ce386d91b7d7",
+    "tests/test_adversarial.py": "70697b896097c6c84093595d03fa244498aa9e1dd92b767654bf9683c752a2c7",
+    "tests/test_capabilities.py": "15d1fab381fb0aa052e4bd985cc077ebce402964071e1d66ca5d6b763b62716e",
+    "tests/test_communication_compiler.py": "07e10834d084472242e0043f60b3d8e687b628c2536ab89adb6b7c7c9607f209",
+    "tests/test_communication_project.py": "62c93e9bceffa04150a72c7527adb48e2c959799eb7218460dbbe6ac791785a6",
+    "tests/test_communication_xml.py": "ed30c81619345e2a7f2289087724df2d6efeb48a37ba5f1ef1504477b4411fee",
+    "tests/test_modbus.py": "be200a1bdb1dfe4a8f03921af2e69650aa17fde3a78aea02df8e6ea8b6a4ea66",
+    "tests/test_numeric.py": "039fea429660de59cc435808fb34e835e4fd9739ed2b3bb9ab3451adec1ca63a",
+    "tests/test_numeric_stress.py": "6e1b286d9a1988591b37a7aa19f1327aaca2b1aaa5f28cb00905210d98e75f33",
+    "tests/test_public_regressions.py": "2dbedd883358b74d7c082ae750a107e3a57a889758eec1b61501b810b3dca532",
+    "tests/test_review_regressions.py": "458f5c6690fa7c9afc3035a27a9a40eb5167729d25e4faa53bd3c902dcffdd83",
+    "tests/test_toolchain.py": "4823ba9cb951d2ad8db09fa709a2f81b6724bdc9fb8b611ed181fefb72c472f6"
+  }
+}

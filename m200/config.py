@@ -4,6 +4,12 @@ import re
 from collections import Counter
 from .model import fail
 from .numeric import word_address
+from .communication_xml import (
+    allowed_attribute,
+    read_blocks,
+    validate_serial,
+    validate_remotes,
+)
 
 SOFTWARE = set(
     "Pous Subroutines WatchLists CustomSymbols ConstantWordsMemoryAllocation MemoryBitsMemoryAllocation MemoryWordsMemoryAllocation TimersMemoryAllocation CountersMemoryAllocation RegistersMemoryAllocation DrumsMemoryAllocation SbrsMemoryAllocation ScsMemoryAllocation FcsMemoryAllocation SchsMemoryAllocation HscsMemoryAllocation PtosMemoryAllocation MemoryBits SystemBits SystemWords GrafcetSteps MemoryWords MemoryDoubleWords MemoryFloats ConstantWords ConstantDoubleWords ConstantMemoryFloats Timers Counters FastCounters Registers Drums ShiftBitRegisters StepCounters ScheduleBlocks Pids MessageBlocks FunctionBlocks MotionTaskTables FastTask MastTask CpuBehavior TraceTimeBase UserFunctionPous UserFunctionBlockPous UserDefineFunctionBlocks".split()
@@ -12,6 +18,7 @@ EMPTY = set(
     "Subroutines GrafcetSteps MemoryWords MemoryDoubleWords MemoryFloats ConstantWords ConstantDoubleWords ConstantMemoryFloats Counters FastCounters Registers Drums ShiftBitRegisters StepCounters ScheduleBlocks Pids FunctionBlocks MotionTaskTables UserFunctionPous UserFunctionBlockPous UserDefineFunctionBlocks".split()
 )
 EMPTY -= {"MemoryWords", "MemoryDoubleWords", "MemoryFloats"}
+EMPTY.discard("FunctionBlocks")
 UI_ONLY = {
     "DisplayUserLabelsConfiguration",
     "GlobalProperties",
@@ -29,6 +36,9 @@ ROOT = {
     "HardwareConfiguration",
 } | UI_ONLY
 REPEATED = {
+    "FunctionBlocks": {"IFunctionBlock"},
+    "Devices": {"RemoteServer"},
+    "RemoteServers": {"RemoteServer"},
     "Pous": {"ProgramOrganizationUnits"},
     "Rungs": {"RungEntity"},
     "InstructionLines": {"InstructionLineEntity"},
@@ -73,12 +83,24 @@ def scalar(node):
 def unique_tree(root):
     # Arrays may repeat only their entry type. Every other interpreted field is
     # a singleton, including fields nested inside each array entry.
-    def visit(node):
+    def visit(node, parents=()):
         if node.tag in UI_ONLY:
             return
         if len(node) and (node.text or "").strip():
             fail("configuration value must be scalar: " + node.tag)
         for attribute, value in node.attrib.items():
+            in_fb = (
+                node.tag == "IFunctionBlock"
+                and parents
+                == ("ProjectDescriptor", "SoftwareConfiguration", "FunctionBlocks")
+            ) or parents == (
+                "ProjectDescriptor",
+                "SoftwareConfiguration",
+                "FunctionBlocks",
+                "IFunctionBlock",
+            )
+            if in_fb and allowed_attribute(node.tag, attribute, value):
+                continue
             if not (
                 node.tag == "UnitId"
                 and attribute == "{http://www.w3.org/2001/XMLSchema-instance}nil"
@@ -92,7 +114,7 @@ def unique_tree(root):
             if n > 1 and tag not in REPEATED.get(node.tag, set()):
                 fail("duplicate XML singleton: " + node.tag + "/" + tag)
         for child in node:
-            visit(child)
+            visit(child, parents + (node.tag,))
 
     visit(root)
     fields(root, ROOT)
@@ -262,11 +284,26 @@ def ethernet(node):
                     "InputRegister",
                     "RemoteServers",
                     "ModbusServerEnabled",
+                    "Devices",
+                    "DigitalInputsIoScanner",
+                    "DigitalOutputsIoScanner",
+                    "RegisterInputsIoScanner",
+                    "RegisterOutputsIoScanner",
+                    "RegisterDeviceStatusIoScanner",
+                    "RegisterInputsStatusIoScanner",
+                    "Drives",
+                    "IsIoScanner",
                 },
             )
             for c in part:
-                if c.tag == "RemoteServers":
+                if c.tag in ("RemoteServers", "Devices"):
+                    validate_remotes(c)
+                elif c.tag.endswith("IoScanner") or c.tag == "Drives":
                     empty(c)
+                elif c.tag == "IsIoScanner":
+                    scalar(c)
+                    if (c.text or "false").lower() != "false":
+                        fail("active IOScanner configuration is not implemented")
                 else:
                     scalar(c)
             if (
@@ -303,9 +340,42 @@ def configuration(root):
     plc_metadata = set(
         "Power5VCapacities Power24VCapacities Power5VTotalConsumption Power24VTotalConsumption ExpanderPower5VCapacities ExpanderPower24VCapacities ExpanderPower5VTotalConsumption ExpanderPower24VTotalConsumption".split()
     )
-    fields(plc, {"Cpu", "Extensions", "SerialLineConfiguration"} | plc_metadata)
+    fields(
+        plc,
+        {
+            "Cpu",
+            "Extensions",
+            "SerialLineConfiguration",
+            "SerialLineIoScannerConfiguration",
+        }
+        | plc_metadata,
+    )
     for part in plc:
-        if part.tag in ("Extensions", "SerialLineConfiguration"):
+        if part.tag == "SerialLineConfiguration" and len(part):
+            validate_serial(part)
+        elif part.tag == "SerialLineIoScannerConfiguration":
+            fields(
+                part,
+                {
+                    "TransmissionMode",
+                    "Devices",
+                    "DigitalInputsIoScanner",
+                    "DigitalOutputsIoScanner",
+                    "RegisterInputsIoScanner",
+                    "RegisterOutputsIoScanner",
+                    "RegisterDeviceStatusIoScanner",
+                    "RegisterInputsStatusIoScanner",
+                    "Drives",
+                },
+            )
+            for c in part:
+                if c.tag == "TransmissionMode":
+                    scalar(c)
+                    if c.text != "TransmissionModeRtu":
+                        fail("unproven serial IOScanner mode")
+                else:
+                    empty(c)
+        elif part.tag in ("Extensions", "SerialLineConfiguration"):
             empty(part)
         elif part.tag in plc_metadata:
             scalar(part)
@@ -344,7 +414,9 @@ def configuration(root):
         fail("missing SoftwareConfiguration")
     fields(sw, SOFTWARE)
     for part in sw:
-        if part.tag in EMPTY:
+        if part.tag == "FunctionBlocks":
+            read_blocks(sw)
+        elif part.tag in EMPTY:
             empty(part)
         elif part.tag.endswith("MemoryAllocation"):
             fields(part, {"Allocation", "ForcedCount"})

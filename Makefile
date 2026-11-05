@@ -1,4 +1,4 @@
-.PHONY: check examples stress
+.PHONY: check examples stress public-fetch public-check
 check:
 	python3 -m unittest discover -s tests -v
 examples:
@@ -6,5 +6,11 @@ examples:
 	python3 -m m200 check examples/latch.cpp --trace examples/trace.json
 	python3 -m m200 compile examples/numeric_control.cpp -o output/numeric-control
 	python3 -m m200 check examples/numeric_control.cpp --trace examples/trace.json
+	python3 -m m200 compile examples/modbus_read.cpp -o output/modbus-read
+	python3 -m m200 check examples/modbus_read.cpp --trace examples/trace.json
 stress:
 	python3 tests/stress/run.py
+public-fetch:
+	python3 tests/public/fetch.py
+public-check:
+	python3 tests/public/run.py

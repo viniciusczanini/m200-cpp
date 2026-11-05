@@ -20,3 +20,7 @@ Não criar stubs que retornem sucesso para periféricos não simulados. Não adi
 4. Catálogo consultável pela CLI, sem promover estados a partir de documentação. Lista separada da biblioteca atual.
 5. Verificação final: 91 testes locais; 37.716 scans de estresse; exemplos; lint e diff. Roteiros e resultados preservados.
 6. Lacunas explícitas em docs/capabilities/README.md e roteiro externo atualizado. Acesso futuro ao editor/PLC é necessário para cumprir a garantia final; não foi declarado compatível oficialmente.
+
+## Continuação: originais públicos e comunicação
+
+Pedido subsequente reforçou alvo TM200CE40T e incluiu Modbus explicitamente. Nesta etapa foram baixados dez originais com identidade fixada, executados dezenove ensaios com referência independente e implementados três blocos nativos de comunicação com protocolo/modelo assíncrono e TCP de teste. O backend XML aceita apenas os perfis comprovados; demais variantes continuam abertas na matriz. Foram corrigidas também formas de IL encontradas nos originais e erros concretos de integração apontados pela revisão. Resultado final: 173 testes, 16.128 scans públicos e 37.716 de estresse; ver PUBLIC-MODBUS-RESULTS.json. A biblioteca completa e a comprovação externa continuam pendentes; não foram concluídas por inferência destes resultados.
