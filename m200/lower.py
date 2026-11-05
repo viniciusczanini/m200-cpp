@@ -1,4 +1,5 @@
 from .model import Program, fail
+from .allocation import Storage
 from .numeric import Number, TYPES, boolean, expect, OPS, evaluate, read as read_number
 
 
@@ -6,7 +7,7 @@ class Lowerer:
     def __init__(self, reserved=(), reserved_words=()):
         self.program = Program()
         self.used = set(reserved)
-        self.next_bit = 500
+        self.storage = Storage(reserved, reserved_words)
         self.constants = {}
         self.constant_rungs = []
         self.next_label = 0
@@ -14,22 +15,14 @@ class Lowerer:
         self.origin = {"generated": "lowering"}
         self.origins = []
         self.used_words = set(reserved_words)
-        self.next_word = 4000
         self.guard = None
 
     def append(self, lines):
         self.program.rungs.append(list(lines))
         self.origins.append(dict(self.origin))
 
-    def bit(self, symbol="temporary"):
-        while self.next_bit in self.used:
-            self.next_bit += 1
-        if self.next_bit >= 1024:
-            fail("memory exhausted (compiler temporaries also consume %M)")
-        n = self.next_bit
-        self.used.add(n)
-        self.next_bit += 1
-        result = "%M" + str(n)
+    def bit(self, symbol="temporary", persistent=False):
+        result = self.storage.bit(symbol, persistent)
         self.program.symbols[result] = symbol
         return result
 
@@ -143,20 +136,10 @@ class Lowerer:
         )
         return out
 
-    def word(self, kind, symbol="numeric_temporary"):
+    def word(self, kind, symbol="numeric_temporary", persistent=False):
         if kind not in TYPES:
             fail("numeric literal requires a type context")
-        prefix, width = TYPES[kind]
-        while any(
-            n in self.used_words for n in range(self.next_word, self.next_word + width)
-        ):
-            self.next_word += 1
-        if self.next_word + width > 8000:
-            fail("shared word memory exhausted (MW/MD/MF alias the same 8000 words)")
-        n = self.next_word
-        self.used_words.update(range(n, n + width))
-        self.next_word += width
-        out = Number(kind, "%" + prefix + str(n))
+        out = self.storage.word(kind, symbol, persistent)
         self.program.symbols[out.code] = symbol
         return out
 

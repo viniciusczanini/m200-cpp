@@ -99,3 +99,36 @@ inventário. `COUNTER-RESEARCH.md` registra a contradição documental de E e
 exemplares de configuração/gráfico, sem declarar o contador implementado.
 Validação no editor e no hardware permanece pendente; o objetivo não foi
 declarado completo.
+
+## Continuação do objetivo: alocação e reuso
+
+O lowerer passou a emitir registros privados virtuais e alocá-los somente após
+montar o CFG completo. A análise considera vida entre scans, saltos para trás,
+escritas condicionais e a ordem das instruções dentro de cada rung. Globais e
+estado de instâncias conservam células únicas; acessos explícitos e buffers
+inteiros de comunicação permanecem reservados. Todos os 1024 bits M e 8000
+words compartilhados podem ser usados; 500/4000 são preferências de posição.
+Aliases de 16/32 bits e símbolos de reuso também são contabilizados.
+
+Verificação final desta etapa em 2026-11-05: **207/207 testes em 118,046 s**,
+`make examples`, `make public-check`, `make public-flow-check` e `make stress`
+com saída zero, lint e diff aprovados. Foram novamente **58.964 scans** públicos
+e de estresse, além dos testes unitários. A saída de `examples/loops.cpp` foi
+idêntica em bytes com PYTHONHASHSEED1 e2.
+
+Os testes de pressão incluem 600 bits globais (com ida e volta), 4200 words
+globais (C++ nativo/VM/XML), 1100 locais mortos, 300 atualizações sequenciais,
+vida em laços/entre scans, aliases ímpares e buffer Modbus de125 words. O teste
+antigo que recusava1100 locais foi atualizado: esses locais cabem por reuso;
+1100 globais persistentes continuam recusados. RED/GREEN cobriu também o
+relatório CLI com a capacidade antiga, interferência entre escrita e leitura
+posterior no mesmo rung, símbolos MW/MD/MF sobrepostos e instrução sem modelo
+de efeitos. Revisão e rechecagem independentes: `ALLOCATION-REVIEW.md`.
+
+`MEMORY-ALLOCATION-RESULTS.json` registra comandos, resultados e hashes atuais.
+Os relatórios de fluxo foram atualizados pela nova execução; relatórios antigos
+de outras etapas permanecem históricos. Coloração gulosa e análise conservadora
+não são prova de alocação ótima. A segunda tradução ainda pode exceder o
+orçamento provisório de instruções ou memória, mesmo existindo uma solução
+nativa menor. Essas lacunas, indexação dinâmica e demais recursos do inventário
+continuam no objetivo ativo; editor e PLC permanecem pendentes.

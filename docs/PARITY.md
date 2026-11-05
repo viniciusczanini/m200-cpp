@@ -52,9 +52,9 @@ continua sendo TM200CE40T, com opções e níveis funcionais identificados.
 
 ## Capacidade e diagnósticos
 
-As reservas fixas atuais de temporários (%M500..1023 e words a partir de 4000)
-não podem ser tratadas como o limite definitivo do controlador. A implementação
-final precisa de alocação/reuso e emissão suficientes para representar os
+As antigas reservas fixas de temporários (%M500..1023 e words a partir de 4000)
+foram substituídas por alocação em todo o banco e análise de vida no CFG. A
+implementação final ainda precisa de alocação/reuso e emissão suficientes para representar os
 programas nativos que cabem no perfil, contabilizando a memória do compilador.
 Formas de acesso direto a recursos nativos podem complementar a API de alto
 nível; não devem exigir que o usuário escreva Ladder ou IL manualmente.

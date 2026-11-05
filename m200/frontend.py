@@ -488,7 +488,9 @@ class Frontend:
             if len(initial) != 1:
                 self.error(node, "numeric variables require one initializer")
             value = expect(self.expr(initial[0]), numeric_kind)
-            target = self.lower.word(numeric_kind, node["name"])
+            target = self.lower.word(
+                numeric_kind, node["name"], persistent=global_scope
+            )
             self.variables[node["id"]] = target
             if global_scope:
                 if value.code.startswith("%"):
@@ -539,7 +541,7 @@ class Frontend:
                     if duration == 0:
                         self.error(node, "Clock half-period must be positive")
                     second = timer_config("TON", duration, index + 1)
-                    phase = self.lower.bit(node["name"] + "_phase")
+                    phase = self.lower.bit(node["name"] + "_phase", persistent=True)
                     self.init.append((phase, "0"))
                     self.instances[node["id"]] = (
                         kind,
@@ -548,7 +550,7 @@ class Frontend:
                 else:
                     self.instances[node["id"]] = (kind, (index, config))
             else:
-                old = self.lower.bit(node["name"] + "_previous")
+                old = self.lower.bit(node["name"] + "_previous", persistent=True)
                 self.instances[node["id"]] = (kind, old)
                 self.init.append((old, "0"))
             return
@@ -559,7 +561,7 @@ class Frontend:
         initial = [x for x in node.get("inner", []) if x.get("kind") != "AnnotateAttr"]
         if len(initial) != 1:
             self.error(node, "bool variables must have an initializer")
-        target = self.lower.bit(node["name"])
+        target = self.lower.bit(node["name"], persistent=global_scope)
         self.variables[node["id"]] = target
         if global_scope:
             value = strip(initial[0])
@@ -596,9 +598,9 @@ class Frontend:
         if len(values) > count:
             self.error(node, "too many array initializers")
         elements = [
-            self.lower.bit(f"{node['name']}_{i}")
+            self.lower.bit(f"{node['name']}_{i}", persistent=global_scope)
             if kind == "bool"
-            else self.lower.word(kind, f"{node['name']}_{i}")
+            else self.lower.word(kind, f"{node['name']}_{i}", persistent=global_scope)
             for i in range(count)
         ]
         self.arrays[node["id"]] = elements
@@ -867,7 +869,7 @@ class Frontend:
             + self.lower.origins
             + [{"generated": "output commit"} for _ in tail]
         )
-        return self.lower.program
+        return self.lower.storage.finalize(self.lower.program, self.lower.constants)
 
 
 def compile_source(path):

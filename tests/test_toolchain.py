@@ -328,9 +328,8 @@ class ToolchainTests(unittest.TestCase):
 
     def test_memory_exhaustion_is_rejected(self):
         body = (
-            "void scan(){"
-            + "".join("bool b%d=plc::input(0);" % i for i in range(1100))
-            + "plc::output(0,b1099);}"
+            "".join("bool b%d=false;" % i for i in range(1100))
+            + "void scan(){plc::output(0,b1099);}"
         )
         self.rejects(body, "M200-E")
 

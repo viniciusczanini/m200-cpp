@@ -5,8 +5,11 @@ A meta é acessar todos os recursos realmente disponíveis no TM200CE40T pelo C+
 O critério final é a [equivalência funcional](../PARITY.md): qualquer algoritmo
 aceito pelo software oficial para esse perfil deve ser expressível em C++.
 Uma lacuna desta tabela não reduz esse requisito e não pode ser apresentada
-como uma incapacidade do PLC. As reservas de temporários, o scan único e as
-recusas de fluxo de controle do protótipo também precisam evoluir para isso.
+como uma incapacidade do PLC. A alocação/reuso conservadores, o scan único e o
+fluxo de controle ainda parcial precisam evoluir para isso. O alocador já usa
+todo o banco, preserva globais/endereço explícito/buffers e considera saltos,
+vida entre scans e a ordem das instruções dentro de cada rung; não é uma prova
+de alocação ótima nem elimina todo overhead do compilador.
 
 `instructions.json` registra 161 itens; `hardware.json` registra 89. São 250 registros, com sobreposição entre instrução e hardware, e não 250 funcionalidades independentes. Alguns descrevem ausência de recurso, como analógicos embarcados. Cada entrada conserva limites, requisitos de versão funcional, objetos/endereço, configuração, fontes/páginas e pontos de validação. `HARDWARE-AUDIT.md` explica os 13 conflitos encontrados entre documentos.
 

@@ -180,10 +180,10 @@ def report(program):
         "resources": {
             "memory_bits": len(addresses),
             "memory_capacity": 1024,
-            "compiler_allocatable_bits": 524,
+            "compiler_allocatable_bits": 1024,
             "memory_words": len(words),
             "shared_word_capacity": 8000,
-            "compiler_allocatable_words": 4000,
+            "compiler_allocatable_words": 8000,
             "required_word_allocation": max(words, default=-1) + 1,
             "timers": len(program.timers),
             "timer_capacity": 255,
@@ -200,7 +200,8 @@ def report(program):
         "metadata": program.metadata,
         "communications": {k: v.to_dict() for k, v in program.communications.items()},
         "limitations": [
-            "Only the documented boolean, typed-numeric and statically configured communication C++ subsets are implemented.",
+            "Only the documented boolean, typed-numeric, fixed-array, control-flow and statically configured communication C++ subsets are implemented.",
+            "Conservative allocation and compiler overhead can still reject a program that has a smaller native implementation.",
             "No vendor schema/editor validation has been run.",
             "Native timers require official simulation/hardware timing checks.",
             "Communication endpoints must be configured explicitly; successful local Modbus exchanges do not establish physical PLC compatibility.",
