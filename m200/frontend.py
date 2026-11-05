@@ -9,7 +9,8 @@ import subprocess
 from pathlib import Path
 
 from .lower import Lowerer
-from .model import address, fail, timer_config, CompileError
+from .model import address, fail, timer_config, CompileError, Timer
+from .timers import preset_value
 from .arrays import Array, reference as array_reference
 from .numeric import Number, OPS, READS, WRITES, TYPES, boolean, expect, literal
 from .modbus import ModbusConfig
@@ -105,6 +106,7 @@ class Frontend:
         self.outputs = {}
         self.init = []
         self.next_timer = 0
+        self.timer_indices = set()
         self.communication_specs = {}
         self.explicit_communications = {}
         self.communication_modes = {k: set() for k in KINDS}
@@ -499,6 +501,31 @@ class Frontend:
             member = children[0]
             obj = strip(member.get("inner", [{}])[0])
             ref = obj.get("referencedDecl", {}).get("id")
+            if ref in self.instances and self.instances[ref][0] in (
+                "Ton",
+                "Tof",
+                "Pulse",
+            ):
+                _, (index, config) = self.instances[ref]
+                method = member.get("name")
+                if method in ("preset", "value", "done", "set_preset"):
+                    self.lower.program.timers[index] = config
+                    if method == "set_preset":
+                        value = expect(self.expr(children[1], env), "i16")
+                        if not value.code.startswith("%"):
+                            preset_value(int(value.code))
+                        self.lower.assign(
+                            Number("i16", f"%TM{index}.P"), value, self.lower.guard
+                        )
+                        return None
+                    value = (
+                        f"%TM{index}."
+                        + {"preset": "P", "value": "V", "done": "Q"}[method]
+                    )
+                    return self.lower.copy(
+                        value if method == "done" else Number("i16", value),
+                        "timer_property",
+                    )
             if ref in self.instances and self.instances[ref][0] in KINDS:
                 typ, (key, cfg) = self.instances[ref]
                 name = member.get("name")
@@ -654,14 +681,35 @@ class Frontend:
             if ctor is None:
                 self.error(node, "missing constructor")
             if kind in ("Ton", "Tof", "Pulse", "Clock"):
-                index = self.next_timer
-                self.next_timer += 2 if kind == "Clock" else 1
-                duration = self.const(ctor["inner"][0])
-                config = timer_config(
-                    {"Ton": "TON", "Tof": "TOF", "Pulse": "TP", "Clock": "TON"}[kind],
-                    duration,
-                    index,
-                )
+                args = ctor.get("inner", [])
+                timer_kind = {
+                    "Ton": "TON",
+                    "Tof": "TOF",
+                    "Pulse": "TP",
+                    "Clock": "TON",
+                }[kind]
+                index = self.next_timer if len(args) == 1 else self.const(args[0])
+                if index not in range(255):
+                    self.error(node, "invalid timer index")
+                indices = set(range(index, index + (2 if kind == "Clock" else 1)))
+                if indices & self.timer_indices:
+                    self.error(node, "duplicate native timer index")
+                self.timer_indices.update(indices)
+                self.next_timer = max(self.next_timer, max(indices) + 1)
+                if len(args) == 3 and kind != "Clock":
+                    base = self.const(args[1])
+                    ticks = preset_value(self.const(args[2]))
+                    if base not in (1, 10, 100, 1000, 60000) or (
+                        base == 1 and index >= 6
+                    ):
+                        self.error(node, "invalid timer time base")
+                    duration = base * ticks
+                    config = Timer(timer_kind, duration, base)
+                elif len(args) == 1:
+                    duration = self.const(args[0])
+                    config = timer_config(timer_kind, duration, index)
+                else:
+                    self.error(node, "unsupported timer constructor")
                 if kind == "Clock":
                     if duration == 0:
                         self.error(node, "Clock half-period must be positive")

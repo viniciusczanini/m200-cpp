@@ -1,0 +1,170 @@
+{
+  "target": "TM200CE40T",
+  "status": "local-tests-passed-experimental",
+  "baseline_commit": "50140dd17b7292c875afc71a27b5c7dcfffd2fa7",
+  "commands": [
+    {
+      "command": "make check",
+      "exit_code": 0,
+      "tests": 253,
+      "seconds": 80.816
+    },
+    {
+      "command": "make examples",
+      "exit_code": 0
+    },
+    {
+      "command": "make stress",
+      "exit_code": 0,
+      "scans": 70484,
+      "components": {
+        "legacy": 37716,
+        "control_flow": 3072,
+        "indexed_words": 10240,
+        "dynamic_arrays_and_bits": 11264,
+        "timer_properties": 8192
+      }
+    },
+    {
+      "command": "make public-check",
+      "exit_code": 0,
+      "scans": 16128,
+      "cases": 19,
+      "whole_projects_imported": 0
+    },
+    {
+      "command": "make public-flow-check",
+      "exit_code": 0,
+      "scans": 2048,
+      "cases": 2
+    },
+    {
+      "command": "uvx ruff check m200 tests m200c",
+      "exit_code": 0
+    },
+    {
+      "command": "uvx ruff format --check m200 tests m200c",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "public_and_stress_scans": 88660,
+  "source_sha256": {
+    "m200/__init__.py": "77c5815a3596eebca3e939d1ad39abba46fa4edc4df148aaa7e47f13e5eda0ab",
+    "m200/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "m200/allocation.py": "d24a9dd813fa5129b27b2a553e395c39d17079d5f129b674d05ee2ae4505fcf7",
+    "m200/arrays.py": "d4574f6e48ab98f70feb3f474f30bbf387117f5db3ddde395525a21a77da42ed",
+    "m200/capabilities.py": "e94e59743ee0eae98c476938f8eafe04966c0823b825b1d070980d15d41348a0",
+    "m200/cli.py": "84da79c54335e118f7a864591e45667ecf3703c64d491bb9574f9200d1c1b498",
+    "m200/communication.py": "105c1aef50e7ee00bc7c7142a5b6805d4ddf5f18fc04c5e60a52b78841a6b3b0",
+    "m200/communication_xml.py": "954e0fb861fef56381b204936c47f2f760dbcb3840dd018bb1d2a1b13bfc319f",
+    "m200/config.py": "3acbc41bf01d78576c34a5d716b559851fb13bb819fa14b149e4be9fd3dd5e52",
+    "m200/flow.py": "a61ed946937daa4e54002dc29664c0ef6c02617eb1abb8faa0d0169e06244dc6",
+    "m200/frontend.py": "be45eb4873f413cee55c2e37d2d63c4a441d6ab55021b12b60426c687f2c9f09",
+    "m200/il.py": "d9a743d146621f0631ca5e437cb5eb095c4dbd72a9c74935fa53ab64145090ec",
+    "m200/indexed.py": "b716e924847b6cbf6aee98e2a2d3de9a68f20184e591d0def0872884e678be20",
+    "m200/jsonio.py": "c4d8447354b4f48205a8d5bfc58e1a3919656ba2073ecc5982b2f8fd6253fd70",
+    "m200/lower.py": "b8ccd5045ce5deed35230c7741c4e56a8f9a1ed28d00a9221e2d0c52fb046017",
+    "m200/modbus.py": "62e98577eba6e2de938bc2292dd6cb16f22f64e1101fabdf5ea0f33fd009e92c",
+    "m200/model.py": "49ef16c1c9dd985e89de889573bcfbbecb039f94fcbfe422b723b51409a69113",
+    "m200/native.py": "838a14f581bddde44c96510ed3237ed50863f6cb6b1cc8fc1b8eeadc52b8c2c0",
+    "m200/numeric.py": "4169b46f9a1f029efc025a564b8d4923344baea7d3a5b271e03426573f827315",
+    "m200/project.py": "2135b3df1ec97816f455a3c6d28ba29b2b9c4175ed559517455c5dce5acfabc9",
+    "m200/reverse.py": "574e1536893e5922f978a2899ed001043245bb64faf107eb0d87944d64013135",
+    "m200/timers.py": "372da1ca4a6b8cf4f168f6318f808d120cd830cdeab08c0f6a4d327a8148a562",
+    "tests/test_adversarial.py": "70697b896097c6c84093595d03fa244498aa9e1dd92b767654bf9683c752a2c7",
+    "tests/test_allocation.py": "840f03e2fadf0a1e001c94be7eba03122764a5fccca3c982b22e888b6ea08af5",
+    "tests/test_arrays.py": "e41d1d729a04fa7cea78c6511eb1f5c77908a022f02475b9b3d056984049efcd",
+    "tests/test_capabilities.py": "15d1fab381fb0aa052e4bd985cc077ebce402964071e1d66ca5d6b763b62716e",
+    "tests/test_communication_compiler.py": "07e10834d084472242e0043f60b3d8e687b628c2536ab89adb6b7c7c9607f209",
+    "tests/test_communication_project.py": "62c93e9bceffa04150a72c7527adb48e2c959799eb7218460dbbe6ac791785a6",
+    "tests/test_communication_xml.py": "ed30c81619345e2a7f2289087724df2d6efeb48a37ba5f1ef1504477b4411fee",
+    "tests/test_control_flow.py": "8c2ad3d223641ee562ad74236c9ec04429c5bb24a1755fcffdaa562a856509db",
+    "tests/test_dynamic_arrays.py": "6714bd13bd8b0b1bcb3443cfa713e3ddaa0045e5f4be3b9854f94c282d719cc2",
+    "tests/test_indexed.py": "e8e9d248f90c47197a982ca2410efcae37f070b1c11b41ce0d26145cc8e92589",
+    "tests/test_indexed_bits.py": "5e7c05ab57931ed15012a580adc3034a36ed6c78b3df0ddc59ad9b8a5aca6a6f",
+    "tests/test_modbus.py": "be200a1bdb1dfe4a8f03921af2e69650aa17fde3a78aea02df8e6ea8b6a4ea66",
+    "tests/test_numeric.py": "039fea429660de59cc435808fb34e835e4fd9739ed2b3bb9ab3451adec1ca63a",
+    "tests/test_numeric_stress.py": "6e1b286d9a1988591b37a7aa19f1327aaca2b1aaa5f28cb00905210d98e75f33",
+    "tests/test_public_regressions.py": "2dbedd883358b74d7c082ae750a107e3a57a889758eec1b61501b810b3dca532",
+    "tests/test_review_regressions.py": "458f5c6690fa7c9afc3035a27a9a40eb5167729d25e4faa53bd3c902dcffdd83",
+    "tests/test_timer_properties.py": "daf92505702d81502023602b3102c4cc34c84a621ba99a90ebb3662daf277012",
+    "tests/test_toolchain.py": "45e4f0f08ec2c0feae7604bf07956fae4d615a5d5bb1a9a79bd9c3a804a14e10",
+    "tests/stress/boolean_audit.py": "ecd800fad5e3eb05948eb833f77a6098fb0e44aaecf8c0a81b60f1c529de146a",
+    "tests/stress/control_flow.py": "ad7814da8c24d58557b9f749252f624e86d71dd28f1873f8b84dcbf5dece6586",
+    "tests/stress/dynamic_arrays.py": "df53722713450024bfce76434e1e548ceabccde25b7b5654417d8a2a889566ac",
+    "tests/stress/il_properties.py": "f2269c4d4beb32ea1e9e014aea71b67f3a05839ec137d5f9be237fa833f25644",
+    "tests/stress/indexed.py": "d8937c58e751f515b6d65dcc4f3d1d1a2545d4dee9ed673f73e02fa4f77426a3",
+    "tests/stress/run.py": "f8a317eea4fa0e016ce3c5dd9de2ee534ee333c659cf51396e27ce386d91b7d7",
+    "tests/stress/timer_properties.py": "de3006b72b4d589785cfb7c6a34aac23a47792f2dc44c6e6a7b2e1a03125304d",
+    "tests/public/control_flow.py": "65f9d5f2aba359e6c316aa133c577496114e3981728cf5ce60ada5ecbad7ae72",
+    "tests/public/fetch.py": "196a8b6233a222fd1ebb86a89ced34dda368568bd0a82407cc792d45760af5ba",
+    "tests/public/run.py": "546d34f1c6d1661e4703d76d364498f5f93a088aa6fc14f810ed00fd4afcc31d",
+    "examples/blink.cpp": "8298b531155f8f8a552c03388645581ee4c771a46246932c24c5ecdb1294e16a",
+    "examples/dynamic_arrays.cpp": "1b856ff38fd734674b4d52779d8b1b47bb2ba76bb6facef3a8d2751acdf686b1",
+    "examples/dynamic_bits.cpp": "9535588b69655900fe8f7a481cbba0a71da800f67ac5416dbf6d68d8c93ada50",
+    "examples/indexed_words.cpp": "b7e23a747d2bc5bac4973b5d15cc9f35ed22d0bedbe0b6ca01af422f70cd4558",
+    "examples/latch.cpp": "254bd5a66054bf74c58827cc5f677a86e51645715dc0091b1a8c5230fbda44e7",
+    "examples/loops.cpp": "5cf27acce4bbb8dea98ed8fbc6c4b655ed1585ce8887bda5a22660c253078ea2",
+    "examples/modbus_read.cpp": "c8ed552b77d55be92c6acce8d48a417d32a50ffe049ca614e5d7df9be690dd79",
+    "examples/numeric_control.cpp": "ff2f3e5d4e1b5ecdba55d92cf8b386c370c785dc6559f3a9940a04e062837eb1",
+    "examples/timer_properties.cpp": "9dcf04ed120fe2fe109ab8cd2c01de5fe91a7d85def7e3bf4681e510685b03d2",
+    "sdk/plc.hpp": "43af2a5005e9229129cce242cf754955b608f2f8b70a8b8d0749ef74569ea69d",
+    "Makefile": "e6aa05d9c1e1ec4244de8352c0334d39cfddb6d05a7529d0130ce46401d9839e",
+    "m200c": "dda4ffd05d83eb4e6656bead70f45d34fec369b9bfaa0b0e58b94489c6c215bd"
+  },
+  "log_sha256": {
+    "check": "d3eebfbf4f6145529068b19fbb3ee95945e4fd8ef83f3e54083f971008222afa",
+    "stress": "b6554171d1cdafdf2e3785d27b1b5490e6c3ad527971e65ac24ca077cc7aec09",
+    "examples": "d415d1669656a4e590ce0881eaaf9c07fa0b16c7478a131a5c77983044a71517",
+    "public": "72dc196f54714b5c7772a9b5835f871677a41523e2e0519d9f8fa55ba5132d23",
+    "public_flow": "a97c6a2bffe5b5a89748a13e6e3cecfcb8a7c5dc6116c274da14e6106b1b3030",
+    "targeted_after_review_fix": "0b5db7d85d2663f8dc675c040c21f22b75f610120303abfd15ac97395232ed6e"
+  },
+  "review": {
+    "independent": true,
+    "initial_findings": [
+      {
+        "problem": "iostream name pollution rejects valid global clock",
+        "fixed": true,
+        "test_source_renamed": false
+      }
+    ],
+    "recheck": "10/10 timer tests and zero-dt/EOF complete, empty, truncated checked; no remaining new finding"
+  },
+  "implemented": [
+    "TM.P read/write",
+    "TM.V read-only",
+    "TM.Q read-only",
+    "explicit native index/base/preset constructors",
+    "nondynamic preset captured at activation",
+    "internal progress across skipped timer blocks",
+    "reverse preserves sparse identity and time base",
+    "property-only timer configuration"
+  ],
+  "model": "nonretentive, IsDynamicPreset=false; activation-relative floor(elapsed/base); VM and independent SDK plus event/end-time stress oracle",
+  "public_timer_case": {
+    "scans": 512,
+    "source": "I1 in docs/capabilities/INDEXED-SOURCES.json",
+    "scope": "isolated actual TM1.P indexed assignment and original TOF/base1s configuration",
+    "cpu_rewritten": false,
+    "whole_project_imported": false
+  },
+  "known_gaps": [
+    "IsRetentive=true",
+    "IsDynamicPreset=true",
+    "10ms timer-base XML serialization",
+    "native tick phase and lifecycle/restarts",
+    "indexed-bit XML profile",
+    "preexisting native reference-harness globals named getchar/putchar collide with C linkage",
+    "remaining resource/configuration families in docs/capabilities/README.md"
+  ],
+  "audit_repository_status_note": "legacy boolean audit observed repository_status_unchanged=false while documentation and report files were changing concurrently; no claim of unchanged tree during run. Source hashes bind implementation.",
+  "official_editor": "pending",
+  "physical_plc": "pending",
+  "full_parity": "incomplete",
+  "goal_status": "active"
+}

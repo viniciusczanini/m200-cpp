@@ -211,5 +211,40 @@ atualizados. O objetivo integral continua ativo e incompleto; demais famílias,
 perfil de bits, overhead e validação oficial/física continuam pendentes. Tudo
 local, sem CI, publicação, conexão ou transmissão ao PLC.
 
+## Continuação do objetivo: propriedades de temporizadores
+
+Após50140dd, P/V/Q de TON/TOF/TP e escrita P foram integrados em C++/IL/VM,
+SDK, XML sintético e reversão. Construtores explícitos conservam o índice,
+base e preset, incluindo TM42/TM254. O modelo não retentivo/não dinâmico
+captura P na ativação; escrever P durante a execução não muda esse preset
+ativo. V/Q continuam avançando sob salto, enquanto a saída ligada ao bloco
+só é escrita se ele executa. A fase física do tick continua sem comprovação.
+
+Rodada final: **253/253 testes em80.816s**, `make examples`, `make stress`,
+`make public-check`, `make public-flow-check`, lint/formatação/diff com saída0.
+O stress novo tem15casos tipo/base e1atribuição real isolada,8192scans.
+Stress total70.484; públicos18.176; **88.660 scans na rodada**, sem multiplicar
+pelas etapas de comparação nem somar reruns ou unitários.
+
+O caso público usa a atribuição real `%TM1.P := %MW20[%MW10]` e configuração
+original TOF/TM1/base1s de I1. Seu hash foi conferido antes/depois; não houve
+reescrita de CPU nem importação integral desse projeto M221. Todos os
+XMLs aprovados continuam do perfil sintético local, sem aceite oficial.
+
+A revisão encontrou um conflito do harness que incluía iostream com uma
+variável válida chamada clock. Foi reproduzido e corrigido mantendo o teste
+com o mesmo nome. A rechecagem passou10/10 e conferiu0ms/EOF vazio, completo
+e truncado. Colisões preexistentes com nomes C getchar/putchar continuam
+documentadas. A auditoria antiga observou árvore mudando por documentação e
+relatórios concorrentes; os hashes atuais, e não o HEAD anterior isolado,
+identificam o código da bateria.
+
+Os relatórios `TIMER-PROPERTY-LOCAL-RESULTS.json` e
+`TIMER-PROPERTY-STRESS-RESULTS.json` vinculam resultados aos bytes atuais.
+`../capabilities/TIMER-PROPERTIES.md` descreve contratos e limites. Timers
+retentivos/DynamicPreset=true, XML de base10ms, demais famílias e validação
+oficial/física permanecem pendentes. Objetivo ativo/incompleto; tudo local,
+sem CI ou transmissão ao PLC.
+
 O objetivo integral continua ativo; Task2 do plano de indexação ainda está
 pendente e não foi substituída pela API de words explícitos.

@@ -12,6 +12,13 @@ from dataclasses import dataclass
 from .model import fail, CompileError
 from .communication import status_reference, NUM_FIELDS, NUM_REFERENCE, cpp_name
 from .indexed import WORD_PATTERN, is_indexed, parse as parse_indexed
+from .timers import (
+    NUMERIC_PATTERN as TIMER_PATTERN,
+    reference as timer_reference,
+    GETTERS,
+)
+
+VALUE_PATTERN = "(?:" + WORD_PATTERN + "|" + TIMER_PATTERN + ")"
 
 TYPES = {"i16": ("MW", 1), "i32": ("MD", 2), "f32": ("MF", 2)}
 READS = {"read_word": "i16", "read_dword": "i32", "read_real": "f32"}
@@ -132,7 +139,12 @@ def word_address(text):
     return kind, index
 
 
-def reference_address(text):
+def reference_address(text, writable=False):
+    timer = timer_reference(text, writable)
+    if timer:
+        if timer[1] not in ("P", "V"):
+            fail("timer output is not numeric: " + text)
+        return "i16", timer[0]
     if is_indexed(text):
         kind, base, _ = parse_indexed(text)
         return kind, base
@@ -172,11 +184,11 @@ def operation(line):
             ("add_" if token == "INC" else "sub_") + typ,
             [Number(typ, target), literal(1, typ)],
         )
-    m = re.fullmatch(r"\[\s*(" + WORD_PATTERN + r")\s*:=\s*(.*?)\s*\]", line)
+    m = re.fullmatch(r"\[\s*(" + VALUE_PATTERN + r")\s*:=\s*(.*?)\s*\]", line)
     if not m:
         fail("unsupported numeric operation: " + line)
     target, expression = m.groups()
-    typ, _ = reference_address(target)
+    typ, _ = reference_address(target, True)
     # Match longer names via exact token, not prefix. Arithmetic is one operator.
     for name, (out, args, token, shape) in OPS.items():
         if out != typ:
@@ -186,7 +198,7 @@ def operation(line):
                 r"("
                 + NUM_REFERENCE
                 + r"|"
-                + WORD_PATTERN
+                + VALUE_PATTERN
                 + r"|-?[0-9]+(?:\.[0-9]*)?(?:[eE][+-]?[0-9]+)?)"
             )
             pat = atom + r"\s*" + re.escape(token) + r"\s*" + atom
@@ -242,7 +254,7 @@ def comparison(text):
         r"\[\s*("
         + NUM_REFERENCE
         + r"|"
-        + WORD_PATTERN
+        + VALUE_PATTERN
         + r")\s*(>=|<=|<>|=|>|<)\s*(.+)\s*\]",
         text,
     )
@@ -255,7 +267,7 @@ def comparison(text):
     kind = (
         NUM_FIELDS[status[1]][0]
         if status and status[1] in NUM_FIELDS
-        else word_address(first)[0]
+        else reference_address(first)[0]
     )
     return operand(first, kind), op, operand(second.strip(), kind)
 
@@ -396,6 +408,9 @@ def compare(words, parsed, reader=None):
 
 
 def cpp(value):
+    timer = timer_reference(value.code)
+    if timer:
+        return "timer_%d.%s()" % (timer[0], GETTERS[timer[1]])
     status = status_reference(value.code)
     if status:
         return cpp_name(status[0]) + "." + NUM_FIELDS[status[1]][1] + "()"

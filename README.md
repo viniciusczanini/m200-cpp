@@ -78,6 +78,18 @@ AND/OR nativo com comparação indexada também é recusado enquanto a ordem de 
 
 `read_m`, `write_m` e `system` são primitivas de auditoria usadas no C++ reconstruído. `system` aceita somente as quatro bases de clock e o primeiro scan `%S13`. O significado da região retida e de estados iniciais de projetos externos precisa ser confrontado com sua configuração; não há simulação de falta de energia/retomada física.
 
+`Ton`, `Tof` e `Pulse` também expõem `preset()` (%TM.P), `value()` (%TM.V),
+`done()` (%TM.Q) e `set_preset(i16)`. O construtor explícito
+`plc::Ton t{42,100,3}` fixa TM42, base100ms e preset3ticks; a reversão conserva
+esses três parâmetros. A escrita P usa o objeto nativo, sem variável sombra.
+V/Q são somente leitura. Com `IsDynamicPreset=false`, o novo P só afeta a
+próxima ativação, mesmo sendo lido imediatamente. Saltar o bloco deixa seu
+estado interno progredir, mas não reescreve a saída ligada ao bloco. A fase
+real dos ticks e o ciclo de vida precisam de validação externa. As opções
+retentiva e Dynamic Preset=true continuam recusadas. A base10ms continua
+bloqueada no XML por falta de serialização comprovada. Exemplo:
+`examples/timer_properties.cpp`; contratos: `docs/capabilities/TIMER-PROPERTIES.md`.
+
 ## Números e inventário completo de pesquisa
 
 ```cpp

@@ -88,6 +88,13 @@ class Program:
 
 
 def address(text, writable=False):
+    if text.startswith("%TM"):
+        from .timers import reference
+
+        index, field = reference(text, writable)
+        if field != "Q":
+            fail("numeric timer property is not a bit: " + text)
+        return "TM.Q", index
     if "[" in text:
         from .indexed import parse_bit
 

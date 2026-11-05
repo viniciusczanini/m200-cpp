@@ -286,6 +286,12 @@ def main(argv=None):
                     "RisingEdge",
                     "FallingEdge",
                 ],
+                "timer_properties": {
+                    "types": ["Ton", "Tof", "Pulse"],
+                    "methods": ["preset", "value", "done", "set_preset"],
+                    "explicit_constructor": "native_index, base_ms, preset_ticks",
+                    "scope": "Nonretentive, IsDynamicPreset=false; P writes affect next activation. Jumping a block preserves internal progression; native tick phase and lifecycle validation pending.",
+                },
                 "communication_types": list(KINDS),
                 "modbus_client_function_codes": [1, 2, 3, 4, 5, 6, 15, 16, 23],
                 "modbus_xml_scope": "READ_VAR/WRITE_VAR word profiles and proved port enums only; unknown XML variants fail explicitly",

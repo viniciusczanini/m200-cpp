@@ -15,7 +15,9 @@ from .model import fail
 from .numeric import Number, TYPES
 
 REFERENCE = re.compile(r"%M(?:W|D|F)?[0-9]+")
-ASSIGNMENT = re.compile(r"(?:OPER\s+)?\[\s*(%M(?:W|D|F)[0-9]+)(?:\[%MW[0-9]+\])?\s*:=")
+ASSIGNMENT = re.compile(
+    r"(?:OPER\s+)?\[\s*(%M(?:W|D|F)[0-9]+|%TM[0-9]+\.P)(?:\[%MW[0-9]+\])?\s*:="
+)
 UNARY = re.compile(r"(?:OPER\s+)?\[\s*(?:INC|DEC)\s+(%M(?:W|D)[0-9]+)\s*\]")
 
 

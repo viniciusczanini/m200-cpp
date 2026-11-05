@@ -3,6 +3,12 @@
 import re
 
 from .model import address, fail, timer_config
+from .timers import (
+    TimerState,
+    REFERENCE as TIMER_REFERENCE,
+    reference as timer_reference,
+    preset_value,
+)
 from .flow import JUMPS, destinations, label_name, split_label
 from .indexed import (
     ANY_INDEXED,
@@ -160,7 +166,13 @@ def validate(program):
             continue
         for i, line in enumerate(rung):
             if is_operation(line) and i > 0:
-                instruction_operation(line)
+                target, name, values = instruction_operation(line)
+                if (
+                    timer_reference(target, True)
+                    and name == "copy"
+                    and not values[0].code.startswith("%")
+                ):
+                    preset_value(int(values[0].code))
                 continue
             parts = line.split(maxsplit=1)
             if len(parts) != 2:
@@ -189,7 +201,15 @@ def validate(program):
             fail("rung has no action")
     if set(jumps) - labels.keys():
         fail("jump references an undefined label")
-    if set(program.timers) != timer_uses:
+    property_uses = {
+        int(m[1])
+        for rung in program.rungs
+        for line in rung
+        for m in TIMER_REFERENCE.finditer(line)
+    }
+    if property_uses - program.timers.keys():
+        fail("undefined timer property")
+    if set(program.timers) != timer_uses | property_uses:
         fail("unused timer configuration is unsupported")
     if set(program.communications) != communication_uses:
         fail("unused communication configuration is unsupported")
@@ -231,11 +251,12 @@ class Machine:
         self.outputs = [False] * 16
         self.now = 0
         self.first = True
-        self.timers = {
-            i: {"start": None, "previous": False, "q": False} for i in program.timers
-        }
+        self.timers = {i: TimerState(t) for i, t in program.timers.items()}
 
     def read(self, operand, inputs):
+        timer = timer_reference(operand)
+        if timer:
+            return self.timers[timer[0]].read(timer[1], self.now)
         if is_bit_indexed(operand):
             index, error = resolve_bit(operand, self.words, self.index_bit_limit)
             self.index_error |= error
@@ -276,6 +297,9 @@ class Machine:
         (self.memory if kind == "M" else self.outputs)[index] = bool(value)
 
     def read_number(self, value):
+        timer = timer_reference(value.code)
+        if timer:
+            return self.timers[timer[0]].read(timer[1], self.now)
         if is_indexed(value.code):
             kind, index, error = resolve_indexed(
                 value.code, self.words, self.index_word_limit
@@ -290,6 +314,10 @@ class Machine:
         )
 
     def write_number(self, target, value):
+        timer = timer_reference(target, True)
+        if timer:
+            self.timers[timer[0]].set_preset(value)
+            return
         if is_indexed(target):
             kind, index, error = resolve_indexed(
                 target, self.words, self.index_word_limit
@@ -299,37 +327,7 @@ class Machine:
         write_number(self.words, target, value)
 
     def timer(self, index, enabled):
-        config = self.program.timers[index]
-        state = self.timers[index]
-        start = state["start"]
-        q = state["q"]
-        prev = state["previous"]
-        if config.kind == "TON":
-            if not enabled:
-                start = None
-                q = False
-            else:
-                if start is None:
-                    start = self.now
-                q = self.now - start >= config.milliseconds
-        elif config.kind == "TOF":
-            if enabled:
-                q = True
-                start = None
-            else:
-                if prev:
-                    start = self.now
-                if start is not None and self.now - start >= config.milliseconds:
-                    q = False
-                    start = None
-        else:
-            if enabled and not prev and start is None:
-                start = self.now
-            if start is not None and self.now - start >= config.milliseconds:
-                start = None
-            q = start is not None
-        state.update(start=start, previous=enabled, q=q)
-        return q
+        return self.timers[index].update(enabled, self.now)
 
     def step(self, inputs=None, dt_ms=10):
         if inputs is None:

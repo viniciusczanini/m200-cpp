@@ -16,11 +16,14 @@ examples:
 	python3 -m m200 check examples/dynamic_arrays.cpp --trace examples/trace.json
 	python3 -m m200 compile examples/dynamic_bits.cpp -o output/dynamic-bits
 	python3 -m m200 check examples/dynamic_bits.cpp --trace examples/trace.json
+	python3 -m m200 compile examples/timer_properties.cpp -o output/timer-properties
+	python3 -m m200 check examples/timer_properties.cpp --trace examples/trace.json
 stress:
 	python3 tests/stress/run.py
 	python3 tests/stress/control_flow.py
 	python3 tests/stress/indexed.py
 	python3 tests/stress/dynamic_arrays.py
+	python3 tests/stress/timer_properties.py
 public-fetch:
 	python3 tests/public/fetch.py
 public-check:

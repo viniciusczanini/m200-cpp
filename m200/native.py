@@ -22,16 +22,26 @@ def run_native(source, frames):
         harness = root / "harness.cpp"
         binary = root / "reference"
         harness.write_text(
-            """#include <iostream>
+            """namespace _M200NativeHarness {
+extern "C" int getchar(void);
+extern "C" int putchar(int);
+bool read_unsigned(unsigned& value){
+  int c;
+  do{c=getchar();if(c<0)return false;}while(c<=32);
+  value=0;
+  do{if(c<'0'||c>'9')return false;value=value*10+(unsigned)(c-'0');c=getchar();}while(c>32);
+  return true;
+}
+}
 #define PLC_NATIVE
 #include "%s"
 int main(){
   unsigned dt; unsigned value;
-  while(std::cin >> dt){
-    for(int i=0;i<24;++i){if(!(std::cin>>value))return 2;plc::detail::inputs[i]=value!=0;}
+  while(_M200NativeHarness::read_unsigned(dt)){
+    for(int i=0;i<24;++i){if(!_M200NativeHarness::read_unsigned(value))return 2;plc::detail::inputs[i]=value!=0;}
     scan();
-    for(int i=0;i<16;++i)std::cout << (plc::detail::outputs[i]?'1':'0');
-    std::cout << '\\n';
+    for(int i=0;i<16;++i)_M200NativeHarness::putchar(plc::detail::outputs[i]?'1':'0');
+    _M200NativeHarness::putchar('\\n');
     plc::detail::first_scan=false;plc::detail::now_ms+=dt;
   }
 }

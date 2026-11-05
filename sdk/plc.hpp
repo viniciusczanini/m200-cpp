@@ -2,6 +2,9 @@
 
 // This API is type-checked by Clang; only the documented subset is translated.
 namespace plc {
+using i16 = short;
+using i32 = int;
+using f32 = float;
 #ifdef PLC_NATIVE
 namespace detail {
 inline bool inputs[24] = {};
@@ -12,6 +15,9 @@ inline bool first_scan = true;
 inline bool index_error = false;
 inline int word_memory_limit = 0;
 inline int bit_memory_limit = 0;
+inline int timer_next_index = 0;
+inline bool timer_used[255] = {};
+inline int claim_timer(int index){if(index<0||index>=255||timer_used[index])__builtin_trap();timer_used[index]=true;if(timer_next_index<=index)timer_next_index=index+1;return index;}
 }
 inline bool input(int n) { return detail::inputs[n]; }
 inline void output(int n, bool v) { detail::outputs[n] = v; }
@@ -30,30 +36,46 @@ inline bool clock_ms(unsigned period) {
     return ((detail::now_ms / (period/2)) & 1) != 0;
 }
 class TimerState {
-    unsigned duration;
-    int kind;
-    bool previous = false, running = false, result = false;
-    unsigned long long started = 0;
-public:
-    TimerState(unsigned ms,int k):duration(ms),kind(k){}
-    bool update(bool enabled) {
-        if(kind==0) {
-            if(!enabled){running=false;result=false;}
-            else { if(!running){running=true;started=detail::now_ms;} result=detail::now_ms-started>=duration; }
-        } else if(kind==1) {
-            if(enabled){result=true;running=false;}
-            else { if(previous){running=true;started=detail::now_ms;} if(running && detail::now_ms-started>=duration){result=false;running=false;} }
-        } else {
-            if(enabled&&!previous&&!running){running=true;started=detail::now_ms;}
-            if(running&&detail::now_ms-started>=duration)running=false;
-            result=running;
+    int kind, base=1, configured=0, active=0, current=0;
+    bool previous=false, result=false;
+    long long started=-1;
+    void begin(){started=(long long)detail::now_ms;active=configured;current=0;}
+    void refresh(){
+        if(started>=0){
+            unsigned long long ticks=(detail::now_ms-(unsigned long long)started)/(unsigned)base;
+            current=ticks>(unsigned)active?active:(int)ticks;
+            if(ticks>=(unsigned)active){result=kind==0;if(kind!=0)started=-1;}
         }
-        previous=enabled;return result;
+        if(kind==2&&started<0&&!previous)current=0;
+    }
+public:
+    TimerState(unsigned ms,int k):kind(k){
+        int index=detail::claim_timer(detail::timer_next_index);
+        const int bases[]={1,10,100,1000,60000};
+        bool found=false;
+        for(int candidate:bases){if(candidate==1&&index>=6)continue;
+            if(ms<=(unsigned)candidate*9999U&&ms%(unsigned)candidate==0){base=candidate;configured=(int)(ms/(unsigned)base);found=true;break;}}
+        if(!found)__builtin_trap();active=configured;
+    }
+    TimerState(int index,int tb,int ticks,int k):kind(k),base(tb),configured(ticks),active(ticks){
+        detail::claim_timer(index);
+        if((tb!=1&&tb!=10&&tb!=100&&tb!=1000&&tb!=60000)||(tb==1&&index>=6)||ticks<0||ticks>9999)__builtin_trap();
+    }
+    i16 preset()const{return (i16)configured;}
+    i16 value(){refresh();return (i16)current;}
+    bool done(){refresh();return result;}
+    void set_preset(i16 ticks){if(ticks<0||ticks>9999)__builtin_trap();configured=ticks;}
+    bool update(bool enabled){
+        refresh();
+        if(kind==0){if(!enabled){started=-1;current=0;result=false;}else if(started<0)begin();}
+        else if(kind==1){if(enabled){started=-1;current=0;result=true;}else if(previous)begin();}
+        else if(enabled&&!previous&&started<0){begin();result=true;}
+        previous=enabled;refresh();return result;
     }
 };
-struct Ton:TimerState{explicit Ton(unsigned ms):TimerState(ms,0){}};
-struct Tof:TimerState{explicit Tof(unsigned ms):TimerState(ms,1){}};
-struct Pulse:TimerState{explicit Pulse(unsigned ms):TimerState(ms,2){}};
+struct Ton:TimerState{explicit Ton(unsigned ms):TimerState(ms,0){} Ton(int i,int b,int p):TimerState(i,b,p,0){}};
+struct Tof:TimerState{explicit Tof(unsigned ms):TimerState(ms,1){} Tof(int i,int b,int p):TimerState(i,b,p,1){}};
+struct Pulse:TimerState{explicit Pulse(unsigned ms):TimerState(ms,2){} Pulse(int i,int b,int p):TimerState(i,b,p,2){}};
 class Clock {
     Ton turn_on, turn_off;
     bool value=false;
@@ -82,17 +104,14 @@ void write_m_indexed(int,int,bool);
 bool system(int);
 void clear_index_error();
 bool clock_ms(unsigned);
-struct Ton { explicit Ton(unsigned); bool update(bool); };
-struct Tof { explicit Tof(unsigned); bool update(bool); };
-struct Pulse { explicit Pulse(unsigned); bool update(bool); };
+struct Ton { explicit Ton(unsigned); Ton(int,int,int); bool update(bool); i16 preset()const; i16 value(); bool done(); void set_preset(i16); };
+struct Tof { explicit Tof(unsigned); Tof(int,int,int); bool update(bool); i16 preset()const; i16 value(); bool done(); void set_preset(i16); };
+struct Pulse { explicit Pulse(unsigned); Pulse(int,int,int); bool update(bool); i16 preset()const; i16 value(); bool done(); void set_preset(i16); };
 struct Clock { explicit Clock(unsigned); bool update(bool); };
 struct RisingEdge { RisingEdge(); bool update(bool); };
 struct FallingEdge { FallingEdge(); bool update(bool); };
 #endif
 // Fixed-width numeric API. Explicit operations avoid C++ integer promotions.
-using i16 = short;
-using i32 = int;
-using f32 = float;
 #ifdef PLC_NATIVE
 static_assert(sizeof(i16)==2 && sizeof(i32)==4 && sizeof(f32)==4,"PLC numeric width mismatch");
 namespace detail {

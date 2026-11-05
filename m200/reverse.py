@@ -1,5 +1,6 @@
 from .il import validate
 from .model import address, fail
+from .timers import reference as timer_reference
 from .flow import JUMPS, split_label
 from .indexed import (
     is_indexed,
@@ -29,6 +30,9 @@ from .communication import (
 
 
 def read_cpp(arg):
+    timer = timer_reference(arg)
+    if timer:
+        return "timer_%d.done()" % timer[0]
     if is_bit_indexed(arg):
         base, index = parse_bit(arg)
         return "plc::read_m_indexed(%d,%d)" % (base, index)
@@ -77,8 +81,14 @@ def to_cpp(program):
     ]
     for i, t in sorted(program.timers.items()):
         lines.append(
-            "plc::%s timer_%d{%d};"
-            % ({"TON": "Ton", "TOF": "Tof", "TP": "Pulse"}[t.kind], i, t.milliseconds)
+            "plc::%s timer_%d{%d,%d,%d};"
+            % (
+                {"TON": "Ton", "TOF": "Tof", "TP": "Pulse"}[t.kind],
+                i,
+                i,
+                t.base_ms,
+                t.preset,
+            )
         )
     if has_indexed(program):
         lines.append(
@@ -114,6 +124,19 @@ def to_cpp(program):
         for line in rung:
             if is_operation(line):
                 target, name, values = instruction_operation(line)
+                timer = timer_reference(target, True)
+                if timer:
+                    args = [str(v) if isinstance(v, int) else cpp(v) for v in values]
+                    expression = (
+                        args[0]
+                        if name == "copy"
+                        else "plc::" + name + "(" + ",".join(args) + ")"
+                    )
+                    lines.append(
+                        "  if (accumulator) { timer_%d.set_preset(%s); }"
+                        % (timer[0], expression)
+                    )
+                    continue
                 if is_indexed(target):
                     kind, index, index_word = parse_indexed(target)
                 else:
