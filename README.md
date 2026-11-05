@@ -1,6 +1,6 @@
 # m200-cpp — protótipo local
 
-Ferramenta experimental para escrever lógica digital do **Schneider TM200CE40T** em C++ restrito, gerar IL e um projeto `.smbp` a partir de um template, e reconstruir C++ a partir das instruções reais do arquivo.
+Ferramenta experimental para escrever lógica do **Schneider TM200CE40T** em C++ restrito, gerar IL e um projeto `.smbp` a partir de um template, e reconstruir C++ a partir das instruções reais do arquivo.
 
 **Ainda não validado no EcoStruxure Machine Expert Basic nem no CLP.** Os testes locais não comprovam que o editor abre o arquivo, nem o comportamento elétrico ou temporal no equipamento. O usuário disponibilizará Windows/software/CLP no futuro via SSH. Nenhuma instalação de Windows ou comunicação com o CLP é necessária para usar o protótipo local.
 
@@ -40,12 +40,45 @@ Também há `plc::clock_ms(10|100|1000|60000)`, que lê as bases globais `%S4..%
 - `plc::input(0..23)`, `plc::output(0..15, bool)` e `plc::output_state(0..15)`, com índices literais.
 - `plc::Ton`, `plc::Tof`, `plc::Pulse`, `plc::Clock`, `plc::RisingEdge` e `plc::FallingEdge`. As instâncias são globais. Cada instância utilizada deve receber uma atualização incondicional por scan; habilitação é parâmetro explícito. Chamadas duplicadas ou condicionais são recusadas. Uma instância inteiramente não utilizada é permitida, embora sua declaração possa reservar recursos.
 - Alocação automática de bits e timers; os temporários também entram no orçamento. O alocador comum usa `%M500..1023`, evitando retenção automática acidental da faixa baixa. O uso explícito de endereços pelo código de auditoria reserva esses endereços e pode reduzir o espaço disponível.
+- Tipos `plc::i16`, `plc::i32` e `plc::f32`, 47 operações numéricas explícitas, comparações e leitura/escrita de words/dwords/REAL. `%MW`, `%MD` e `%MF` compartilham os mesmos 8.000 words; temporários numéricos usam a faixa a partir de 4.000 e reservam os endereços usados explicitamente.
 - Executor IL com validação estrita, conversor IL/SMBP → C++ e comparação com a execução C++ nativa.
-- Projeto XML baseado em template, rungs Ladder de contatos em série, bobinas e timers, verificação local de coerência IL/gráfico e arquivo de vínculo fonte/rung.
+- Projeto XML baseado em template, rungs Ladder de contatos em série, bobinas, timers e blocos numéricos Operation/Comparison, verificação local de coerência IL/gráfico e arquivo de vínculo fonte/rung.
 
-O protótipo **recusa** inteiros da aplicação e aritmética, arrays, ponteiros, referências arbitrárias, classes da aplicação, loops, exceções, threads, funções externas, headers com declarações fora do SDK e nós AST desconhecidos. Recursos como Modbus, contadores nativos, retenção declarada, expansões, tarefas de evento, acesso imediato e PTO/PWM ainda não estão implementados. Não existe tentativa de compilar C++ geral e ignorar as partes difíceis.
+O protótipo **recusa** aritmética C++ com promoções implícitas (use as operações explícitas `plc::*`), unsigned, arrays, ponteiros, referências arbitrárias, classes da aplicação, loops, exceções, threads, funções externas, headers com declarações fora do SDK e nós AST desconhecidos. Recursos como Modbus, contadores nativos, retenção declarada, expansões, tarefas de evento, acesso imediato e PTO/PWM ainda não estão implementados. Não existe tentativa de compilar C++ geral e ignorar as partes difíceis.
 
 `read_m`, `write_m` e `system` são primitivas de auditoria usadas no C++ reconstruído. `system` aceita somente as quatro bases de clock e o primeiro scan `%S13`. O significado da região retida e de estados iniciais de projetos externos precisa ser confrontado com sua configuração; não há simulação de falta de energia/retomada física.
+
+## Números e inventário completo de pesquisa
+
+```cpp
+#include <plc.hpp>
+plc::i16 count = 0;
+void scan() {
+    count = plc::add_i16(count, 1);
+    if (count >= 50) { count = 0; }
+    plc::f32 fraction = plc::div_f32(plc::int_to_real(count), 50.0f);
+    plc::write_word(0, count);
+    plc::write_real(2, fraction);
+    plc::output(0, fraction >= 0.5f);
+}
+```
+
+Use `plc::add_i16(a,b)`, `add_i32` ou `add_f32` para escolher a operação e sua largura. Os operadores C++ `+ - * /` para valores de aplicação são recusados. As operações aceitas incluem aritmética, REM, lógica word, shifts/rotações, raiz, funções REAL e conversões explícitas. A lista consultável está em `./m200c capabilities`; há um exemplo em `examples/numeric_control.cpp`. As comparações `== != < <= > >=` exigem tipos compatíveis. Literais REAL usam o sufixo `f`; inicializadores numéricos usam `plc::i16/i32/f32`.
+
+O compilador recusa literais fora da faixa, endereços impossíveis, shifts inválidos e operações obviamente inválidas com argumentos literais. Para erros que dependem de valores em execução, como overflow ou divisão por zero, a simulação local interrompe com erro e o SDK nativo recusa o mesmo domínio. Isso **não implementa ainda** os flags físicos `%S17/%S18/%SW17`, a recuperação de erros aritméticos ou uma garantia de scan/watchdog. Não se deve interpretar o modelo local de erro como prova de que o PLC irá parar ou proteger saídas. `DWORD`, `CONCATW`, EXPT e conversões DEG/RAD continuam recusados até resolver a semântica/evidência necessária.
+
+As expressões respeitam `if/else` e curto-circuito `&&/||`. O caminho inverso preserva endereços e operações. O C++ de auditoria pode compilar nativamente mesmo quando sua **recompilação para PLC** excede a memória, porque essa segunda tradução requer temporários adicionais; isso é uma limitação explícita.
+
+O inventário reúne **250 registros documentais** (161 de linguagem/blocos e 89 de hardware/configuração), incluindo 13 conflitos entre fontes, com páginas, limites e hashes dos documentos. Ele inclui recursos nativos, opcionais, ausentes e com suporte ainda desconhecido: não significa 250 recursos implementados. Os estados de pesquisa começam em `missing/pending` até receber evidência específica de implementação por fase; a seção `library` da CLI lista o subconjunto local atual. A biblioteca **ainda não está completa**. O trabalho restante está registrado em [docs/capabilities/README.md](docs/capabilities/README.md).
+
+```sh
+./m200c capabilities
+./m200c capabilities HW.HSC
+./m200c capabilities --all
+make stress
+```
+
+`make stress` cria relatórios e fontes de reprodução em um diretório temporário novo fora do repositório. Executa apenas testes locais e falha diante de divergências inesperadas. `make check` inclui a matriz de 47 intrínsecos numéricos e suas referências independentes.
 
 ## Gerar o projeto que será testado no editor
 
@@ -81,7 +114,7 @@ Uma restrição adicional do backend atual: a enumeração XML da base de timer 
 
 O conversor lê a IL e os timers efetivamente presentes no arquivo. O resultado é C++ válido para auditoria, com endereços explícitos e ordem de execução preservada. Nomes e estrutura exatos do C++ original não são recuperáveis em geral. Uma cópia do projeto acompanha a saída com o sufixo `.configuration.smbp`, preservando as informações que não pertencem ao código.
 
-Arquivos externos só são aceitos dentro do subconjunto reconhecido: instruções booleanas, blocos de timer específicos, seções em ordem e gráficos simples coerentes. Paralelos, grafcet, saltos, tarefas adicionais, bases/modos desconhecidos e divergências entre IL e gráfico geram erro. Um arquivo arbitrário do editor pode ser recusado; ainda não há descompilador geral de SMBP.
+Arquivos externos só são aceitos dentro do subconjunto reconhecido: instruções booleanas, operações/comparações numéricas reconhecidas, blocos de timer específicos, seções em ordem e gráficos simples coerentes. Paralelos, grafcet, saltos, tarefas adicionais, bases/modos desconhecidos e divergências entre IL e gráfico geram erro. Um arquivo arbitrário do editor pode ser recusado; ainda não há descompilador geral de SMBP.
 
 A descompilação recusa caminhos existentes ou que coincidam com o projeto de entrada, inclusive aliases por symlink e o caminho da cópia de configuração. Escolha um nome novo para cada conferência.
 

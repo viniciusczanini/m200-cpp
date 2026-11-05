@@ -14,6 +14,9 @@ from .model import CompileError, Program, fail
 from .native import run_native
 from .project import load_project, write_project
 from .reverse import to_cpp
+from .jsonio import loads
+from .capabilities import summary as capability_summary, catalogue, lookup
+from .numeric import OPS, READS, WRITES, TYPES
 
 ARTIFACTS = {
     "program.m200.json",
@@ -37,7 +40,7 @@ def build_artifacts(program, output, template=None):
         if any(out.iterdir()) and not (out / "report.json").exists():
             fail("existing output has no compiler report; choose another directory")
         if (out / "report.json").exists():
-            previous = json.loads((out / "report.json").read_text())
+            previous = loads((out / "report.json").read_text())
             if not isinstance(previous, dict) or previous.get("tool") != "m200-cpp":
                 fail("output report is not owned by this compiler")
             owned = previous.get("artifacts", {})
@@ -159,13 +162,18 @@ def read_program(path):
     path = Path(path)
     if path.suffix.lower() == ".smbp":
         return load_project(path)
-    p = Program.from_dict(json.loads(path.read_text()))
+    p = Program.from_dict(loads(path.read_text()))
     validate(p)
     return p
 
 
 def report(program):
-    addresses = set(re.findall(r"%M\d+", "\n".join(" ".join(r) for r in program.rungs)))
+    text = "\n".join(" ".join(r) for r in program.rungs)
+    addresses = set(re.findall(r"%M\d+", text))
+    words = set()
+    for prefix, index in re.findall(r"%M([WDF])(\d+)", text):
+        start = int(index)
+        words.update(range(start, start + (1 if prefix == "W" else 2)))
     return {
         "tool": "m200-cpp",
         "version": __version__,
@@ -175,7 +183,9 @@ def report(program):
             "memory_bits": len(addresses),
             "memory_capacity": 1024,
             "compiler_allocatable_bits": 524,
-            "memory_words": 0,
+            "memory_words": len(words),
+            "shared_word_capacity": 8000,
+            "compiler_allocatable_words": 4000,
             "timers": len(program.timers),
             "timer_capacity": 255,
             "rungs": len(program.rungs),
@@ -188,7 +198,7 @@ def report(program):
         },
         "metadata": program.metadata,
         "limitations": [
-            "Only the documented boolean C++ subset is implemented.",
+            "Only the documented boolean and explicit typed-numeric C++ subsets are implemented.",
             "No vendor schema/editor validation has been run.",
             "Native timers require official simulation/hardware timing checks.",
         ],
@@ -216,11 +226,52 @@ def main(argv=None):
     k = sub.add_parser("check")
     k.add_argument("source")
     k.add_argument("--trace", required=True)
+    caps = sub.add_parser(
+        "capabilities",
+        help="Source-backed inventory; implementation is a separate subset",
+    )
+    caps.add_argument("id", nargs="?")
+    caps.add_argument("--all", action="store_true")
     sub.add_parser(
         "certify", help="Always refuses: official validation is not available yet"
     )
     args = parser.parse_args(argv)
     try:
+        if args.command == "capabilities":
+            data = (
+                lookup(args.id)
+                if args.id
+                else catalogue()
+                if args.all
+                else capability_summary()
+            )
+            data["library"] = {
+                "status": "experimental_subset",
+                "complete": False,
+                "numeric_types": list(TYPES),
+                "numeric_intrinsics": sorted(OPS),
+                "numeric_memory_api": sorted(READS | WRITES),
+                "boolean_api": [
+                    "input",
+                    "output",
+                    "output_state",
+                    "read_m",
+                    "write_m",
+                    "system",
+                    "clock_ms",
+                ],
+                "stateful_types": [
+                    "Ton",
+                    "Tof",
+                    "Pulse",
+                    "Clock",
+                    "RisingEdge",
+                    "FallingEdge",
+                ],
+                "note": "Inventory stages are deliberately unpromoted documentary records. This library list names the locally implemented subset; editor and physical validation are pending.",
+            }
+            print(json.dumps(data, indent=2))
+            return 0
         if args.command == "certify":
             fail(
                 "official editor/PLC validation is pending; certification is unavailable"
@@ -240,7 +291,7 @@ def main(argv=None):
         if args.command == "inspect":
             print(json.dumps(report(read_program(args.program)), indent=2))
             return 0
-        frames = validate_frames(json.loads(Path(args.trace).read_text()))
+        frames = validate_frames(loads(Path(args.trace).read_text()))
         if args.command == "simulate":
             machine = Machine(read_program(args.program))
             print(

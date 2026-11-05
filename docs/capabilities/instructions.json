@@ -1,0 +1,4167 @@
+{
+  "schema": "schneider-m200-instruction-capabilities-research/v1",
+  "target": "TM200CE40T",
+  "audit_date": "2026-11-05",
+  "scope": "Documentary inventory for typed native code generation; not proof of editor acceptance, runtime equivalence, RF, wiring or physical operation. No repo edits, CI, firmware or PLC operations performed.",
+  "sources": {
+    "G": {
+      "document": "EIO0000003289.04",
+      "title": "EcoStruxure Machine Expert - Basic Generic Functions Library Guide",
+      "file": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/schneider-m200-study-4ep9rxv3/EIO0000003289.pdf",
+      "sha256": "d2c8af0598276e7a0bb4f30770e4529282962bc6ee3944dee0645cb9a3186595"
+    },
+    "P": {
+      "document": "EIO0000002019.06",
+      "title": "Modicon M100/M200 Logic Controller Programming Guide",
+      "file": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/schneider-m200-study-4ep9rxv3/EIO0000002019.pdf",
+      "sha256": "fb4f684e7efbb46e3e38e61ed532d99bf623bedffe447b5c379dd3dd6c4434df"
+    },
+    "O": {
+      "document": "EIO0000003281.04",
+      "title": "EcoStruxure Machine Expert - Basic Operating Guide",
+      "file": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/schneider-m200-study-4ep9rxv3/EIO0000003281.pdf",
+      "sha256": "2fb60e335bbe92342760471777abf256da7a434c61b98b464ae234aaa82c45e5"
+    },
+    "T": {
+      "document": "EIO0000002956.00",
+      "title": "Twido Emulation Support - Twido Functions",
+      "url": "https://product-help.se.com/docs/Machine%20Expert/V1.1/en/TwiEmSup/TwiEmSup/Twido_Functions/Twido_Functions.htm",
+      "scope": "Official compatibility mapping; corroborates Basic/Twido operand order but is not physical M200 evidence"
+    }
+  },
+  "operand_classes": {
+    "BOOL_READ": [
+      "0",
+      "1",
+      "%I",
+      "%Q",
+      "%M",
+      "%S",
+      "%X",
+      "%BLK.bit",
+      "%IW:Xk",
+      "%QW:Xk",
+      "%IWS:Xk",
+      "%QWS:Xk",
+      "%MW:Xk",
+      "%SW:Xk",
+      "%KW:Xk",
+      "%Mi[%MWj] (FL>=10.0)"
+    ],
+    "BOOL_WRITE": [
+      "%Q",
+      "%M",
+      "%BLK.writable_bit",
+      "%QW:Xk",
+      "%MW:Xk",
+      "writable %S",
+      "writable %SW:Xk",
+      "%Mi[%MWj] (FL>=10.0)"
+    ],
+    "WORD_READ": [
+      "int16 immediate",
+      "%MWi",
+      "%KWi",
+      "%IWi",
+      "%QWi",
+      "%IWSi",
+      "%QWSi",
+      "%SWi",
+      "%BLK.word"
+    ],
+    "WORD_WRITE": [
+      "%MWi",
+      "%QWi",
+      "writable %SWi",
+      "%BLK.writable_word"
+    ],
+    "DOUBLE_READ": [
+      "int32 immediate",
+      "%MDi",
+      "%KDi",
+      "%BLK.doubleword"
+    ],
+    "DOUBLE_WRITE": [
+      "%MDi",
+      "%BLK.writable_doubleword"
+    ],
+    "FLOAT_READ": [
+      "%MFi",
+      "%KFi"
+    ],
+    "FLOAT_WRITE": [
+      "%MFi"
+    ]
+  },
+  "memory_model": {
+    "BOOL": "1bit object",
+    "WORD": "16bit two-complement -32768..32767; hex16#0000..FFFF; unsigned exceptions includeSW andhardwarecounterobjects",
+    "DINT": "32bit two-complement -2147483648..2147483647",
+    "REAL": "32bit IEEE754 binary32; manual typo says734-1985",
+    "aliasing": "%MDi and%MFi alias underlying%MWi(low16)+%MWi+1(high16); %KD/%KF likewise%KW. Odd start indices legal but overlap neighbors.",
+    "indexed": "base+signed%MWindex; %MW[%PARAM] only owningUDF/UDFB. Out-of-zone sets%S20 and index reverts0 (base object, not guaranteed memory address0). Allocation bound is highest directly referenced object; actual configured allocation must be respected.",
+    "tables": "wordstride1, doubleword/floatstride2, length1..255",
+    "strings": "little-endian bytes in%MW/%KW, mandatory terminator, max509characters, storage1..255words. FL11 permitsCR/LF/NUL terminator elseCR.",
+    "unsupported_native_types": "No documented native int64,uint64,double64,IEC TIME/DATE/DT/STRING object class,C++ pointer/reference/heap/struct types; time/date/string represented with existing words/blocks. Do not silently equate unsupported C++ types to PLC values."
+  },
+  "target_object_budgets": {
+    "source": "P24–26",
+    "M": 1024,
+    "MW": 8000,
+    "MD_or_MF_possible_start_addresses": 7999,
+    "KW": 512,
+    "KD_or_KF_possible_start_addresses": 511,
+    "S": 160,
+    "SW": 234,
+    "I_embedded": 24,
+    "Q_embedded": 16,
+    "TM": 255,
+    "C": 255,
+    "R": 4,
+    "DR": 8,
+    "SBR": 8,
+    "SC": 8,
+    "SCH": 16,
+    "RTC": 2,
+    "PID": 14,
+    "FC": 4,
+    "HSC": 4,
+    "PLS_PWM_PTO_FREQGEN_shared_hardware_channels": 2,
+    "READ_VAR": {
+      "before10.1": 16,
+      "from10.1": 32
+    },
+    "WRITE_VAR": {
+      "before10.1": 16,
+      "from10.1": 32
+    },
+    "WRITE_READ_VAR": {
+      "before10.1": 16,
+      "from10.1": 32
+    },
+    "SEND_RECV_MSG": 16,
+    "MSG": {
+      "published_count": 1,
+      "note": "table vs generic port suffixes conflict; validate available object indices perM200port"
+    }
+  },
+  "tasks": {
+    "source": "P26–28",
+    "master": {
+      "count": 1,
+      "scan_modes": [
+        "freewheeling",
+        "periodic1..150ms"
+      ],
+      "priority": "lowest"
+    },
+    "periodic": {
+      "count": 1,
+      "period_ms": "1..255",
+      "priority": "aboveMaster belowEvents"
+    },
+    "events": {
+      "physical_inputs": "%I0.2..%I0.5, rising/falling/both;4events",
+      "HSC": "%HSC0/%HSC1,2events each;4events",
+      "priority": "highest, interrupts master/periodic"
+    },
+    "watchdogs": "task watchdog overrun=>HALTED; system watchdog >80percentCPU=>HALTED; backend must account worst-case loops/event workload"
+  },
+  "capabilities": [
+    {
+      "id": "bool.ld",
+      "mnemonic": "LD",
+      "native_syntax": "LD bit",
+      "arguments": {
+        "bit": "BOOL_READ"
+      },
+      "semantics": "load accumulator",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "39–46"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": []
+    },
+    {
+      "id": "bool.ldn",
+      "mnemonic": "LDN",
+      "native_syntax": "LDN bit",
+      "arguments": {
+        "bit": "BOOL_READ"
+      },
+      "semantics": "load inverted bit",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "39–46"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": []
+    },
+    {
+      "id": "bool.and",
+      "mnemonic": "AND",
+      "native_syntax": "AND bit",
+      "arguments": {
+        "bit": "BOOL_READ"
+      },
+      "semantics": "accumulator AND bit",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "39–46"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": []
+    },
+    {
+      "id": "bool.andn",
+      "mnemonic": "ANDN",
+      "native_syntax": "ANDN bit",
+      "arguments": {
+        "bit": "BOOL_READ"
+      },
+      "semantics": "accumulator AND inverted bit",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "39–46"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": []
+    },
+    {
+      "id": "bool.or",
+      "mnemonic": "OR",
+      "native_syntax": "OR bit",
+      "arguments": {
+        "bit": "BOOL_READ"
+      },
+      "semantics": "accumulator OR bit",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "39–46"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": []
+    },
+    {
+      "id": "bool.orn",
+      "mnemonic": "ORN",
+      "native_syntax": "ORN bit",
+      "arguments": {
+        "bit": "BOOL_READ"
+      },
+      "semantics": "accumulator OR inverted bit",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "39–46"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": []
+    },
+    {
+      "id": "bool.xor",
+      "mnemonic": "XOR",
+      "native_syntax": "XOR bit",
+      "arguments": {
+        "bit": "BOOL_READ"
+      },
+      "semantics": "accumulator XOR bit",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "39–46"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "XOR family cannot occupy first rung position or run parallel to another Ladder element"
+      ]
+    },
+    {
+      "id": "bool.xorn",
+      "mnemonic": "XORN",
+      "native_syntax": "XORN bit",
+      "arguments": {
+        "bit": "BOOL_READ"
+      },
+      "semantics": "accumulator XOR inverted bit",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "39–46"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "XOR family cannot occupy first rung position or run parallel to another Ladder element"
+      ]
+    },
+    {
+      "id": "bool.ldr",
+      "mnemonic": "LDR",
+      "native_syntax": "LDR bit",
+      "arguments": {
+        "bit": [
+          "%I",
+          "%M"
+        ]
+      },
+      "semantics": "Use rising edge",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "37–45"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "edge contacts are restricted to %I and %M",
+        "previous/current master-cycle state; manual contrasts one-scan delay with immediate RISING/FALLING functions",
+        "do not substitute expression edge detection without preserving scan semantics"
+      ]
+    },
+    {
+      "id": "bool.ldf",
+      "mnemonic": "LDF",
+      "native_syntax": "LDF bit",
+      "arguments": {
+        "bit": [
+          "%I",
+          "%M"
+        ]
+      },
+      "semantics": "Use falling edge",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "37–45"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "edge contacts are restricted to %I and %M",
+        "previous/current master-cycle state; manual contrasts one-scan delay with immediate RISING/FALLING functions",
+        "do not substitute expression edge detection without preserving scan semantics"
+      ]
+    },
+    {
+      "id": "bool.andr",
+      "mnemonic": "ANDR",
+      "native_syntax": "ANDR bit",
+      "arguments": {
+        "bit": [
+          "%I",
+          "%M"
+        ]
+      },
+      "semantics": "Use rising edge",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "37–45"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "edge contacts are restricted to %I and %M",
+        "previous/current master-cycle state; manual contrasts one-scan delay with immediate RISING/FALLING functions",
+        "do not substitute expression edge detection without preserving scan semantics"
+      ]
+    },
+    {
+      "id": "bool.andf",
+      "mnemonic": "ANDF",
+      "native_syntax": "ANDF bit",
+      "arguments": {
+        "bit": [
+          "%I",
+          "%M"
+        ]
+      },
+      "semantics": "Use falling edge",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "37–45"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "edge contacts are restricted to %I and %M",
+        "previous/current master-cycle state; manual contrasts one-scan delay with immediate RISING/FALLING functions",
+        "do not substitute expression edge detection without preserving scan semantics"
+      ]
+    },
+    {
+      "id": "bool.orr",
+      "mnemonic": "ORR",
+      "native_syntax": "ORR bit",
+      "arguments": {
+        "bit": [
+          "%I",
+          "%M"
+        ]
+      },
+      "semantics": "Use rising edge",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "37–45"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "edge contacts are restricted to %I and %M",
+        "previous/current master-cycle state; manual contrasts one-scan delay with immediate RISING/FALLING functions",
+        "do not substitute expression edge detection without preserving scan semantics"
+      ]
+    },
+    {
+      "id": "bool.orf",
+      "mnemonic": "ORF",
+      "native_syntax": "ORF bit",
+      "arguments": {
+        "bit": [
+          "%I",
+          "%M"
+        ]
+      },
+      "semantics": "Use falling edge",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "37–45"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "edge contacts are restricted to %I and %M",
+        "previous/current master-cycle state; manual contrasts one-scan delay with immediate RISING/FALLING functions",
+        "do not substitute expression edge detection without preserving scan semantics"
+      ]
+    },
+    {
+      "id": "bool.xorr",
+      "mnemonic": "XORR",
+      "native_syntax": "XORR bit",
+      "arguments": {
+        "bit": [
+          "%I",
+          "%M"
+        ]
+      },
+      "semantics": "Use rising edge",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "37–45"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "edge contacts are restricted to %I and %M",
+        "previous/current master-cycle state; manual contrasts one-scan delay with immediate RISING/FALLING functions",
+        "do not substitute expression edge detection without preserving scan semantics"
+      ]
+    },
+    {
+      "id": "bool.xorf",
+      "mnemonic": "XORF",
+      "native_syntax": "XORF bit",
+      "arguments": {
+        "bit": [
+          "%I",
+          "%M"
+        ]
+      },
+      "semantics": "Use falling edge",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "37–45"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "edge contacts are restricted to %I and %M",
+        "previous/current master-cycle state; manual contrasts one-scan delay with immediate RISING/FALLING functions",
+        "do not substitute expression edge detection without preserving scan semantics"
+      ]
+    },
+    {
+      "id": "bool.st",
+      "mnemonic": "ST",
+      "native_syntax": "ST bit",
+      "arguments": {
+        "bit": "BOOL_WRITE + %X for S/R only"
+      },
+      "semantics": "write accumulator to bit",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "41"
+        }
+      ],
+      "evidence_level": "manual_only"
+    },
+    {
+      "id": "bool.stn",
+      "mnemonic": "STN",
+      "native_syntax": "STN bit",
+      "arguments": {
+        "bit": "BOOL_WRITE + %X for S/R only"
+      },
+      "semantics": "write inverted accumulator to bit",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "41"
+        }
+      ],
+      "evidence_level": "manual_only"
+    },
+    {
+      "id": "bool.s",
+      "mnemonic": "S",
+      "native_syntax": "S bit",
+      "arguments": {
+        "bit": "BOOL_WRITE + %X for S/R only"
+      },
+      "semantics": "if accumulator true set bit; otherwise retain",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "41"
+        }
+      ],
+      "evidence_level": "manual_only"
+    },
+    {
+      "id": "bool.r",
+      "mnemonic": "R",
+      "native_syntax": "R bit",
+      "arguments": {
+        "bit": "BOOL_WRITE + %X for S/R only"
+      },
+      "semantics": "if accumulator true reset bit; otherwise retain",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "41"
+        }
+      ],
+      "evidence_level": "manual_only"
+    },
+    {
+      "id": "bool.not_accumulator",
+      "mnemonic": "N",
+      "native_syntax": "N",
+      "arguments": {},
+      "semantics": "Invert Boolean accumulator",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "46"
+        }
+      ],
+      "evidence_level": "manual_only"
+    },
+    {
+      "id": "bool.expression_rising",
+      "mnemonic": "RISING",
+      "native_syntax": "RISINGn",
+      "arguments": {
+        "n": "compiler-managed unique state index for this instruction kind"
+      },
+      "semantics": "Detect edge of immediately preceding Boolean expression in the same scan",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "47–48"
+        },
+        {
+          "source": "O",
+          "pages": "55"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": "6.0",
+      "limits": {
+        "per_kind_below_10_1": 32,
+        "per_kind_from_10_1": 255
+      },
+      "constraints": [
+        "not first instruction/column of rung or branch",
+        "not immediately after AND, ANDN, OR, ORN",
+        "state indices are global objects if used within UDFB; do not silently share across instances"
+      ]
+    },
+    {
+      "id": "bool.expression_falling",
+      "mnemonic": "FALLING",
+      "native_syntax": "FALLINGn",
+      "arguments": {
+        "n": "compiler-managed unique state index for this instruction kind"
+      },
+      "semantics": "Detect edge of immediately preceding Boolean expression in the same scan",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "47–48"
+        },
+        {
+          "source": "O",
+          "pages": "55"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": "6.0",
+      "limits": {
+        "per_kind_below_10_1": 32,
+        "per_kind_from_10_1": 255
+      },
+      "constraints": [
+        "not first instruction/column of rung or branch",
+        "not immediately after AND, ANDN, OR, ORN",
+        "state indices are global objects if used within UDFB; do not silently share across instances"
+      ]
+    },
+    {
+      "id": "compare.gt",
+      "mnemonic": ">",
+      "native_syntax": "LD [a > b] | AND [a > b] | OR [a > b]",
+      "arguments": {
+        "a": "word | doubleword | float object",
+        "b": "same type; immediate or object; indexed objects permitted as documented"
+      },
+      "semantics": "Boolean comparison",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "49–50"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "up to 5 operands and 3 arithmetic-parenthesis levels",
+        "mixed integer/float values require explicit conversion",
+        "comparison may appear within Boolean parentheses"
+      ],
+      "operand_table_note": "G p49 restricts Op1 to non-indexed references while Op2 explicitly lists indexed references; do not assume symmetric indexed operands without editor validation"
+    },
+    {
+      "id": "compare.ge",
+      "mnemonic": ">=",
+      "native_syntax": "LD [a >= b] | AND [a >= b] | OR [a >= b]",
+      "arguments": {
+        "a": "word | doubleword | float object",
+        "b": "same type; immediate or object; indexed objects permitted as documented"
+      },
+      "semantics": "Boolean comparison",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "49–50"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "up to 5 operands and 3 arithmetic-parenthesis levels",
+        "mixed integer/float values require explicit conversion",
+        "comparison may appear within Boolean parentheses"
+      ],
+      "operand_table_note": "G p49 restricts Op1 to non-indexed references while Op2 explicitly lists indexed references; do not assume symmetric indexed operands without editor validation"
+    },
+    {
+      "id": "compare.lt",
+      "mnemonic": "<",
+      "native_syntax": "LD [a < b] | AND [a < b] | OR [a < b]",
+      "arguments": {
+        "a": "word | doubleword | float object",
+        "b": "same type; immediate or object; indexed objects permitted as documented"
+      },
+      "semantics": "Boolean comparison",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "49–50"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "up to 5 operands and 3 arithmetic-parenthesis levels",
+        "mixed integer/float values require explicit conversion",
+        "comparison may appear within Boolean parentheses"
+      ],
+      "operand_table_note": "G p49 restricts Op1 to non-indexed references while Op2 explicitly lists indexed references; do not assume symmetric indexed operands without editor validation"
+    },
+    {
+      "id": "compare.le",
+      "mnemonic": "<=",
+      "native_syntax": "LD [a <= b] | AND [a <= b] | OR [a <= b]",
+      "arguments": {
+        "a": "word | doubleword | float object",
+        "b": "same type; immediate or object; indexed objects permitted as documented"
+      },
+      "semantics": "Boolean comparison",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "49–50"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "up to 5 operands and 3 arithmetic-parenthesis levels",
+        "mixed integer/float values require explicit conversion",
+        "comparison may appear within Boolean parentheses"
+      ],
+      "operand_table_note": "G p49 restricts Op1 to non-indexed references while Op2 explicitly lists indexed references; do not assume symmetric indexed operands without editor validation"
+    },
+    {
+      "id": "compare.eq",
+      "mnemonic": "=",
+      "native_syntax": "LD [a = b] | AND [a = b] | OR [a = b]",
+      "arguments": {
+        "a": "word | doubleword | float object",
+        "b": "same type; immediate or object; indexed objects permitted as documented"
+      },
+      "semantics": "Boolean comparison",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "49–50"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "up to 5 operands and 3 arithmetic-parenthesis levels",
+        "mixed integer/float values require explicit conversion",
+        "comparison may appear within Boolean parentheses"
+      ],
+      "operand_table_note": "G p49 restricts Op1 to non-indexed references while Op2 explicitly lists indexed references; do not assume symmetric indexed operands without editor validation"
+    },
+    {
+      "id": "compare.ne",
+      "mnemonic": "<>",
+      "native_syntax": "LD [a <> b] | AND [a <> b] | OR [a <> b]",
+      "arguments": {
+        "a": "word | doubleword | float object",
+        "b": "same type; immediate or object; indexed objects permitted as documented"
+      },
+      "semantics": "Boolean comparison",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "49–50"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "up to 5 operands and 3 arithmetic-parenthesis levels",
+        "mixed integer/float values require explicit conversion",
+        "comparison may appear within Boolean parentheses"
+      ],
+      "operand_table_note": "G p49 restricts Op1 to non-indexed references while Op2 explicitly lists indexed references; do not assume symmetric indexed operands without editor validation"
+    },
+    {
+      "id": "assign.scalar",
+      "mnemonic": ":=",
+      "native_syntax": "[dst := src]",
+      "arguments": {
+        "dst": "WORD_WRITE | DOUBLE_WRITE | FLOAT_WRITE; documented indexed memory targets",
+        "src": "same scalar type; object or immediate; documented indexed sources"
+      },
+      "semantics": "Copy scalar value only when Boolean accumulator is true",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "50–52"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "typed assignment does not authorize automatic int/float conversion",
+        "%MWi[%PARAMj] exists only inside its owning UDF/UDFB",
+        "all system/block writable permissions still apply"
+      ]
+    },
+    {
+      "id": "assign.bitstring",
+      "mnemonic": ":=",
+      "native_syntax": "[dst := src]",
+      "arguments": {
+        "dst": "%Mi:L | %Qi:L | writable %Si:L | %Xi:L | word/doubleword memory",
+        "src": "bitstring | integer immediate | word/doubleword"
+      },
+      "semantics": "Pack/unpack bits; first string bit maps to word bit0; unused destination word bits zeroed",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "31, 51–52"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "%M/%S/%X base index multiple of 8",
+        "embedded I/O bit-string access is limited to first 16 channels by generic manual; needs model-specific verification for higher channels",
+        "bound by allocated objects and destination width"
+      ]
+    },
+    {
+      "id": "assign.table",
+      "mnemonic": ":=",
+      "native_syntax": "[dst:L := src:L] | [dst:L := scalar]",
+      "arguments": {
+        "dst": "%MW table | writable system/output-word table | %MD table | %MF table",
+        "src": "matching type table (same L) or scalar of matching type"
+      },
+      "semantics": "Copy table or fill table with scalar",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "84"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "limits": {
+        "length_max": 255
+      },
+      "constraints": [
+        "32-bit table elements stride two underlying %MW/%KW addresses",
+        "do not assume overlap-copy direction or memmove semantics; unspecified"
+      ]
+    },
+    {
+      "id": "integer.add",
+      "mnemonic": "+",
+      "native_syntax": "[%MWd := %MWa + %MWb]",
+      "arguments": {
+        "overloads": [
+          "int16",
+          "int32"
+        ],
+        "dst": "WORD_WRITE | DOUBLE_WRITE",
+        "src": "matching WORD_READ | DOUBLE_READ; SQRT/ABS source cannot be immediate"
+      },
+      "semantics": "Native signed integer add",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "53–55"
+        },
+        {
+          "source": "P",
+          "pages": "322–323"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18 on overflow, divide-by-zero, negative SQRT, invalid conversion"
+      ],
+      "constraints": [
+        "controller sets flags; user must acknowledge/reset to reuse",
+        "result on exceptional arithmetic generally invalid/unspecified; do not promise saturation",
+        "addition example 23241+21853 yields -20442 with %S18=1",
+        "ABS is not documented for int16",
+        "negative integer / and REM exact rounding/sign, INT_MIN/-1 and SQRT rounding require differential validation"
+      ]
+    },
+    {
+      "id": "integer.subtract",
+      "mnemonic": "-",
+      "native_syntax": "[%MWd := %MWa - %MWb]",
+      "arguments": {
+        "overloads": [
+          "int16",
+          "int32"
+        ],
+        "dst": "WORD_WRITE | DOUBLE_WRITE",
+        "src": "matching WORD_READ | DOUBLE_READ; SQRT/ABS source cannot be immediate"
+      },
+      "semantics": "Native signed integer subtract",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "53–55"
+        },
+        {
+          "source": "P",
+          "pages": "322–323"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18 on overflow, divide-by-zero, negative SQRT, invalid conversion"
+      ],
+      "constraints": [
+        "controller sets flags; user must acknowledge/reset to reuse",
+        "result on exceptional arithmetic generally invalid/unspecified; do not promise saturation",
+        "addition example 23241+21853 yields -20442 with %S18=1",
+        "ABS is not documented for int16",
+        "negative integer / and REM exact rounding/sign, INT_MIN/-1 and SQRT rounding require differential validation"
+      ]
+    },
+    {
+      "id": "integer.multiply",
+      "mnemonic": "*",
+      "native_syntax": "[%MWd := %MWa * %MWb]",
+      "arguments": {
+        "overloads": [
+          "int16",
+          "int32"
+        ],
+        "dst": "WORD_WRITE | DOUBLE_WRITE",
+        "src": "matching WORD_READ | DOUBLE_READ; SQRT/ABS source cannot be immediate"
+      },
+      "semantics": "Native signed integer multiply",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "53–55"
+        },
+        {
+          "source": "P",
+          "pages": "322–323"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18 on overflow, divide-by-zero, negative SQRT, invalid conversion"
+      ],
+      "constraints": [
+        "controller sets flags; user must acknowledge/reset to reuse",
+        "result on exceptional arithmetic generally invalid/unspecified; do not promise saturation",
+        "addition example 23241+21853 yields -20442 with %S18=1",
+        "ABS is not documented for int16",
+        "negative integer / and REM exact rounding/sign, INT_MIN/-1 and SQRT rounding require differential validation"
+      ]
+    },
+    {
+      "id": "integer.divide",
+      "mnemonic": "/",
+      "native_syntax": "[%MWd := %MWa / %MWb]",
+      "arguments": {
+        "overloads": [
+          "int16",
+          "int32"
+        ],
+        "dst": "WORD_WRITE | DOUBLE_WRITE",
+        "src": "matching WORD_READ | DOUBLE_READ; SQRT/ABS source cannot be immediate"
+      },
+      "semantics": "Native signed integer divide",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "53–55"
+        },
+        {
+          "source": "P",
+          "pages": "322–323"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18 on overflow, divide-by-zero, negative SQRT, invalid conversion"
+      ],
+      "constraints": [
+        "controller sets flags; user must acknowledge/reset to reuse",
+        "result on exceptional arithmetic generally invalid/unspecified; do not promise saturation",
+        "addition example 23241+21853 yields -20442 with %S18=1",
+        "ABS is not documented for int16",
+        "negative integer / and REM exact rounding/sign, INT_MIN/-1 and SQRT rounding require differential validation"
+      ]
+    },
+    {
+      "id": "integer.rem",
+      "mnemonic": "REM",
+      "native_syntax": "[%MWd := %MWa REM %MWb]",
+      "arguments": {
+        "overloads": [
+          "int16",
+          "int32"
+        ],
+        "dst": "WORD_WRITE | DOUBLE_WRITE",
+        "src": "matching WORD_READ | DOUBLE_READ; SQRT/ABS source cannot be immediate"
+      },
+      "semantics": "Native signed integer rem",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "53–55"
+        },
+        {
+          "source": "P",
+          "pages": "322–323"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18 on overflow, divide-by-zero, negative SQRT, invalid conversion"
+      ],
+      "constraints": [
+        "controller sets flags; user must acknowledge/reset to reuse",
+        "result on exceptional arithmetic generally invalid/unspecified; do not promise saturation",
+        "addition example 23241+21853 yields -20442 with %S18=1",
+        "ABS is not documented for int16",
+        "negative integer / and REM exact rounding/sign, INT_MIN/-1 and SQRT rounding require differential validation"
+      ]
+    },
+    {
+      "id": "integer.sqrt",
+      "mnemonic": "SQRT",
+      "native_syntax": "[dst := SQRT(src)]",
+      "arguments": {
+        "overloads": [
+          "int16",
+          "int32"
+        ],
+        "dst": "WORD_WRITE | DOUBLE_WRITE",
+        "src": "matching WORD_READ | DOUBLE_READ; SQRT/ABS source cannot be immediate"
+      },
+      "semantics": "Native signed integer sqrt",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "53–55"
+        },
+        {
+          "source": "P",
+          "pages": "322–323"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18 on overflow, divide-by-zero, negative SQRT, invalid conversion"
+      ],
+      "constraints": [
+        "controller sets flags; user must acknowledge/reset to reuse",
+        "result on exceptional arithmetic generally invalid/unspecified; do not promise saturation",
+        "addition example 23241+21853 yields -20442 with %S18=1",
+        "ABS is not documented for int16",
+        "negative integer / and REM exact rounding/sign, INT_MIN/-1 and SQRT rounding require differential validation"
+      ]
+    },
+    {
+      "id": "integer.inc",
+      "mnemonic": "INC",
+      "native_syntax": "[INC dst]",
+      "arguments": {
+        "overloads": [
+          "int16",
+          "int32"
+        ],
+        "dst": "WORD_WRITE | DOUBLE_WRITE",
+        "src": "matching WORD_READ | DOUBLE_READ; SQRT/ABS source cannot be immediate"
+      },
+      "semantics": "Native signed integer inc",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "53–55"
+        },
+        {
+          "source": "P",
+          "pages": "322–323"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18 on overflow, divide-by-zero, negative SQRT, invalid conversion"
+      ],
+      "constraints": [
+        "controller sets flags; user must acknowledge/reset to reuse",
+        "result on exceptional arithmetic generally invalid/unspecified; do not promise saturation",
+        "addition example 23241+21853 yields -20442 with %S18=1",
+        "ABS is not documented for int16",
+        "negative integer / and REM exact rounding/sign, INT_MIN/-1 and SQRT rounding require differential validation"
+      ]
+    },
+    {
+      "id": "integer.dec",
+      "mnemonic": "DEC",
+      "native_syntax": "[DEC dst]",
+      "arguments": {
+        "overloads": [
+          "int16",
+          "int32"
+        ],
+        "dst": "WORD_WRITE | DOUBLE_WRITE",
+        "src": "matching WORD_READ | DOUBLE_READ; SQRT/ABS source cannot be immediate"
+      },
+      "semantics": "Native signed integer dec",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "53–55"
+        },
+        {
+          "source": "P",
+          "pages": "322–323"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18 on overflow, divide-by-zero, negative SQRT, invalid conversion"
+      ],
+      "constraints": [
+        "controller sets flags; user must acknowledge/reset to reuse",
+        "result on exceptional arithmetic generally invalid/unspecified; do not promise saturation",
+        "addition example 23241+21853 yields -20442 with %S18=1",
+        "ABS is not documented for int16",
+        "negative integer / and REM exact rounding/sign, INT_MIN/-1 and SQRT rounding require differential validation"
+      ]
+    },
+    {
+      "id": "integer.abs",
+      "mnemonic": "ABS",
+      "native_syntax": "[dst := ABS(src)]",
+      "arguments": {
+        "overloads": [
+          "int32"
+        ],
+        "dst": "WORD_WRITE | DOUBLE_WRITE",
+        "src": "matching WORD_READ | DOUBLE_READ; SQRT/ABS source cannot be immediate"
+      },
+      "semantics": "Native signed integer abs",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "53–55"
+        },
+        {
+          "source": "P",
+          "pages": "322–323"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18 on overflow, divide-by-zero, negative SQRT, invalid conversion"
+      ],
+      "constraints": [
+        "controller sets flags; user must acknowledge/reset to reuse",
+        "result on exceptional arithmetic generally invalid/unspecified; do not promise saturation",
+        "addition example 23241+21853 yields -20442 with %S18=1",
+        "ABS is not documented for int16",
+        "negative integer / and REM exact rounding/sign, INT_MIN/-1 and SQRT rounding require differential validation"
+      ]
+    },
+    {
+      "id": "word.and",
+      "mnemonic": "AND",
+      "native_syntax": "[dst := a AND b]",
+      "arguments": {
+        "dst": "WORD_WRITE",
+        "src": "WORD_READ; NOT source cannot be immediate"
+      },
+      "semantics": "Bitwise AND on 16 bits",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "55–56"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "doubleword overload is not documented for these operators; split into words only if explicitly implemented/tested"
+      ]
+    },
+    {
+      "id": "word.or",
+      "mnemonic": "OR",
+      "native_syntax": "[dst := a OR b]",
+      "arguments": {
+        "dst": "WORD_WRITE",
+        "src": "WORD_READ; NOT source cannot be immediate"
+      },
+      "semantics": "Bitwise OR on 16 bits",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "55–56"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "doubleword overload is not documented for these operators; split into words only if explicitly implemented/tested"
+      ]
+    },
+    {
+      "id": "word.xor",
+      "mnemonic": "XOR",
+      "native_syntax": "[dst := a XOR b]",
+      "arguments": {
+        "dst": "WORD_WRITE",
+        "src": "WORD_READ; NOT source cannot be immediate"
+      },
+      "semantics": "Bitwise XOR on 16 bits",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "55–56"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "doubleword overload is not documented for these operators; split into words only if explicitly implemented/tested"
+      ]
+    },
+    {
+      "id": "word.not",
+      "mnemonic": "NOT",
+      "native_syntax": "[dst := NOT(src)]",
+      "arguments": {
+        "dst": "WORD_WRITE",
+        "src": "WORD_READ; NOT source cannot be immediate"
+      },
+      "semantics": "Bitwise NOT on 16 bits",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "55–56"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "doubleword overload is not documented for these operators; split into words only if explicitly implemented/tested"
+      ]
+    },
+    {
+      "id": "bits.shl",
+      "mnemonic": "SHL",
+      "native_syntax": "[dst := SHL(src,n)]",
+      "arguments": {
+        "dst": "WORD_WRITE | DOUBLE_WRITE",
+        "src": "same-width word/doubleword object or constant (not immediate)",
+        "n": "compile-time integer; 1..16 for word; 1..32 for doubleword"
+      },
+      "semantics": "Logical shift or rotate of fixed-width bit pattern; SHR is logical zero-fill",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "56–57"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S17 equals last ejected bit"
+      ],
+      "constraints": [
+        "do not lower signed C++ >> to SHR without defining logical semantics",
+        "not a general runtime-count shift intrinsic"
+      ]
+    },
+    {
+      "id": "bits.shr",
+      "mnemonic": "SHR",
+      "native_syntax": "[dst := SHR(src,n)]",
+      "arguments": {
+        "dst": "WORD_WRITE | DOUBLE_WRITE",
+        "src": "same-width word/doubleword object or constant (not immediate)",
+        "n": "compile-time integer; 1..16 for word; 1..32 for doubleword"
+      },
+      "semantics": "Logical shift or rotate of fixed-width bit pattern; SHR is logical zero-fill",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "56–57"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S17 equals last ejected bit"
+      ],
+      "constraints": [
+        "do not lower signed C++ >> to SHR without defining logical semantics",
+        "not a general runtime-count shift intrinsic"
+      ]
+    },
+    {
+      "id": "bits.rol",
+      "mnemonic": "ROL",
+      "native_syntax": "[dst := ROL(src,n)]",
+      "arguments": {
+        "dst": "WORD_WRITE | DOUBLE_WRITE",
+        "src": "same-width word/doubleword object or constant (not immediate)",
+        "n": "compile-time integer; 1..16 for word; 1..32 for doubleword"
+      },
+      "semantics": "Logical shift or rotate of fixed-width bit pattern; SHR is logical zero-fill",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "56–57"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S17 equals last ejected bit"
+      ],
+      "constraints": [
+        "do not lower signed C++ >> to SHR without defining logical semantics",
+        "not a general runtime-count shift intrinsic"
+      ]
+    },
+    {
+      "id": "bits.ror",
+      "mnemonic": "ROR",
+      "native_syntax": "[dst := ROR(src,n)]",
+      "arguments": {
+        "dst": "WORD_WRITE | DOUBLE_WRITE",
+        "src": "same-width word/doubleword object or constant (not immediate)",
+        "n": "compile-time integer; 1..16 for word; 1..32 for doubleword"
+      },
+      "semantics": "Logical shift or rotate of fixed-width bit pattern; SHR is logical zero-fill",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "56–57"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S17 equals last ejected bit"
+      ],
+      "constraints": [
+        "do not lower signed C++ >> to SHR without defining logical semantics",
+        "not a general runtime-count shift intrinsic"
+      ]
+    },
+    {
+      "id": "convert.bti",
+      "mnemonic": "BTI",
+      "native_syntax": "[dst := BTI(src)]",
+      "arguments": {
+        "dst": "WORD_WRITE | DOUBLE_WRITE",
+        "src": "matching word or doubleword object/constant, no immediate"
+      },
+      "semantics": "BCD to binary",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "58–59"
+        },
+        {
+          "source": "P",
+          "pages": "323"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "limits": {
+        "bcd16_digits": 4,
+        "bcd32_digits": 8
+      },
+      "error_flags": [
+        "%S18 invalid/out-of-range BCD conversion"
+      ],
+      "constraints": [
+        "user clears flag; invalid result not a portable numeric value"
+      ]
+    },
+    {
+      "id": "convert.itb",
+      "mnemonic": "ITB",
+      "native_syntax": "[dst := ITB(src)]",
+      "arguments": {
+        "dst": "WORD_WRITE | DOUBLE_WRITE",
+        "src": "matching word or doubleword object/constant, no immediate"
+      },
+      "semantics": "Binary to BCD",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "58–59"
+        },
+        {
+          "source": "P",
+          "pages": "323"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "limits": {
+        "bcd16_digits": 4,
+        "bcd32_digits": 8
+      },
+      "error_flags": [
+        "%S18 invalid/out-of-range BCD conversion"
+      ],
+      "constraints": [
+        "user clears flag; invalid result not a portable numeric value"
+      ]
+    },
+    {
+      "id": "convert.lw",
+      "mnemonic": "LW",
+      "native_syntax": "[dst := LW(src)]",
+      "arguments": {
+        "dst": "%MW for LW/HW; %MD or writable doubleword block object for CONCATW/DWORD",
+        "src": "LW/HW: %MD/%KD/%BLK.doubleword; CONCATW: %MW/%KW/immediate each; DWORD: %MW/%KW"
+      },
+      "semantics": "extract low 16 bits",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "59–60"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "unresolved": []
+    },
+    {
+      "id": "convert.hw",
+      "mnemonic": "HW",
+      "native_syntax": "[dst := HW(src)]",
+      "arguments": {
+        "dst": "%MW for LW/HW; %MD or writable doubleword block object for CONCATW/DWORD",
+        "src": "LW/HW: %MD/%KD/%BLK.doubleword; CONCATW: %MW/%KW/immediate each; DWORD: %MW/%KW"
+      },
+      "semantics": "extract high 16 bits",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "59–60"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "unresolved": []
+    },
+    {
+      "id": "convert.concatw",
+      "mnemonic": "CONCATW",
+      "native_syntax": "[dst := CONCATW(a,b)]",
+      "arguments": {
+        "dst": "%MW for LW/HW; %MD or writable doubleword block object for CONCATW/DWORD",
+        "src": "LW/HW: %MD/%KD/%BLK.doubleword; CONCATW: %MW/%KW/immediate each; DWORD: %MW/%KW"
+      },
+      "semantics": "Concatenate low16-bit first argument and high16-bit second argument into32-bit value; official Basic/Twido emulation mapping lists i_iLowVal then i_iHighVal.",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "59–60"
+        },
+        {
+          "source": "T",
+          "pages": "section FC_ConcatOfInt, web lines154–159"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "unresolved": [
+        "Operand order is corroborated by official compatibility mapping, not yet differential-tested on M200."
+      ]
+    },
+    {
+      "id": "convert.dword",
+      "mnemonic": "DWORD",
+      "native_syntax": "[dst := DWORD(src)]",
+      "arguments": {
+        "dst": "%MW for LW/HW; %MD or writable doubleword block object for CONCATW/DWORD",
+        "src": "LW/HW: %MD/%KD/%BLK.doubleword; CONCATW: %MW/%KW/immediate each; DWORD: %MW/%KW"
+      },
+      "semantics": "convert 16-bit word into 32-bit doubleword",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "59–60"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "unresolved": [
+        "Negative-word sign extension versus zero extension is not established by Gp59–60. Emit native DWORD instruction, but do not claim host emulation equivalence without differential test."
+      ]
+    },
+    {
+      "id": "float.add",
+      "mnemonic": "+",
+      "native_syntax": "[dst := a + b]",
+      "arguments": {
+        "dst": "%MF; TRUNC may also target %MD",
+        "src": "%MF/%KF; binary + - * / may also take immediate float",
+        "EXPT": "first argument %MF/%KF exponent; second argument %MW/%KW/immediate integer base"
+      },
+      "semantics": "IEEE binary32 native add",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "27–28, 67–68"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18; %SW17:X0 invalid/NaN, X2 division by zero, X3 overflow/Infinity"
+      ],
+      "constraints": [
+        "float and integer operands do not mix except explicit documented EXPT overload",
+        "TRUNC toward zero; %MD overflow saturates to signed int32 limits and sets %S18; %MF destination has no integer-range clipping",
+        "TRUNC does not affect %S17",
+        "manual binary32 numeric limit is +/-3.402824E+38",
+        "EXPT(base,exponent) conventional order would be wrong for this PLC"
+      ]
+    },
+    {
+      "id": "float.subtract",
+      "mnemonic": "-",
+      "native_syntax": "[dst := a - b]",
+      "arguments": {
+        "dst": "%MF; TRUNC may also target %MD",
+        "src": "%MF/%KF; binary + - * / may also take immediate float",
+        "EXPT": "first argument %MF/%KF exponent; second argument %MW/%KW/immediate integer base"
+      },
+      "semantics": "IEEE binary32 native subtract",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "27–28, 67–68"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18; %SW17:X0 invalid/NaN, X2 division by zero, X3 overflow/Infinity"
+      ],
+      "constraints": [
+        "float and integer operands do not mix except explicit documented EXPT overload",
+        "TRUNC toward zero; %MD overflow saturates to signed int32 limits and sets %S18; %MF destination has no integer-range clipping",
+        "TRUNC does not affect %S17",
+        "manual binary32 numeric limit is +/-3.402824E+38",
+        "EXPT(base,exponent) conventional order would be wrong for this PLC"
+      ]
+    },
+    {
+      "id": "float.multiply",
+      "mnemonic": "*",
+      "native_syntax": "[dst := a * b]",
+      "arguments": {
+        "dst": "%MF; TRUNC may also target %MD",
+        "src": "%MF/%KF; binary + - * / may also take immediate float",
+        "EXPT": "first argument %MF/%KF exponent; second argument %MW/%KW/immediate integer base"
+      },
+      "semantics": "IEEE binary32 native multiply",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "27–28, 67–68"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18; %SW17:X0 invalid/NaN, X2 division by zero, X3 overflow/Infinity"
+      ],
+      "constraints": [
+        "float and integer operands do not mix except explicit documented EXPT overload",
+        "TRUNC toward zero; %MD overflow saturates to signed int32 limits and sets %S18; %MF destination has no integer-range clipping",
+        "TRUNC does not affect %S17",
+        "manual binary32 numeric limit is +/-3.402824E+38",
+        "EXPT(base,exponent) conventional order would be wrong for this PLC"
+      ]
+    },
+    {
+      "id": "float.divide",
+      "mnemonic": "/",
+      "native_syntax": "[dst := a / b]",
+      "arguments": {
+        "dst": "%MF; TRUNC may also target %MD",
+        "src": "%MF/%KF; binary + - * / may also take immediate float",
+        "EXPT": "first argument %MF/%KF exponent; second argument %MW/%KW/immediate integer base"
+      },
+      "semantics": "IEEE binary32 native divide",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "27–28, 67–68"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18; %SW17:X0 invalid/NaN, X2 division by zero, X3 overflow/Infinity"
+      ],
+      "constraints": [
+        "float and integer operands do not mix except explicit documented EXPT overload",
+        "TRUNC toward zero; %MD overflow saturates to signed int32 limits and sets %S18; %MF destination has no integer-range clipping",
+        "TRUNC does not affect %S17",
+        "manual binary32 numeric limit is +/-3.402824E+38",
+        "EXPT(base,exponent) conventional order would be wrong for this PLC"
+      ]
+    },
+    {
+      "id": "float.log",
+      "mnemonic": "LOG",
+      "native_syntax": "[dst := LOG(src)]",
+      "arguments": {
+        "dst": "%MF; TRUNC may also target %MD",
+        "src": "%MF/%KF; binary + - * / may also take immediate float",
+        "EXPT": "first argument %MF/%KF exponent; second argument %MW/%KW/immediate integer base"
+      },
+      "semantics": "IEEE binary32 native log",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "27–28, 67–68"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18; %SW17:X0 invalid/NaN, X2 division by zero, X3 overflow/Infinity"
+      ],
+      "constraints": [
+        "float and integer operands do not mix except explicit documented EXPT overload",
+        "TRUNC toward zero; %MD overflow saturates to signed int32 limits and sets %S18; %MF destination has no integer-range clipping",
+        "TRUNC does not affect %S17",
+        "manual binary32 numeric limit is +/-3.402824E+38",
+        "EXPT(base,exponent) conventional order would be wrong for this PLC"
+      ]
+    },
+    {
+      "id": "float.ln",
+      "mnemonic": "LN",
+      "native_syntax": "[dst := LN(src)]",
+      "arguments": {
+        "dst": "%MF; TRUNC may also target %MD",
+        "src": "%MF/%KF; binary + - * / may also take immediate float",
+        "EXPT": "first argument %MF/%KF exponent; second argument %MW/%KW/immediate integer base"
+      },
+      "semantics": "IEEE binary32 native ln",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "27–28, 67–68"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18; %SW17:X0 invalid/NaN, X2 division by zero, X3 overflow/Infinity"
+      ],
+      "constraints": [
+        "float and integer operands do not mix except explicit documented EXPT overload",
+        "TRUNC toward zero; %MD overflow saturates to signed int32 limits and sets %S18; %MF destination has no integer-range clipping",
+        "TRUNC does not affect %S17",
+        "manual binary32 numeric limit is +/-3.402824E+38",
+        "EXPT(base,exponent) conventional order would be wrong for this PLC"
+      ]
+    },
+    {
+      "id": "float.sqrt",
+      "mnemonic": "SQRT",
+      "native_syntax": "[dst := SQRT(src)]",
+      "arguments": {
+        "dst": "%MF; TRUNC may also target %MD",
+        "src": "%MF/%KF; binary + - * / may also take immediate float",
+        "EXPT": "first argument %MF/%KF exponent; second argument %MW/%KW/immediate integer base"
+      },
+      "semantics": "IEEE binary32 native sqrt",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "27–28, 67–68"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18; %SW17:X0 invalid/NaN, X2 division by zero, X3 overflow/Infinity"
+      ],
+      "constraints": [
+        "float and integer operands do not mix except explicit documented EXPT overload",
+        "TRUNC toward zero; %MD overflow saturates to signed int32 limits and sets %S18; %MF destination has no integer-range clipping",
+        "TRUNC does not affect %S17",
+        "manual binary32 numeric limit is +/-3.402824E+38",
+        "EXPT(base,exponent) conventional order would be wrong for this PLC"
+      ]
+    },
+    {
+      "id": "float.abs",
+      "mnemonic": "ABS",
+      "native_syntax": "[dst := ABS(src)]",
+      "arguments": {
+        "dst": "%MF; TRUNC may also target %MD",
+        "src": "%MF/%KF; binary + - * / may also take immediate float",
+        "EXPT": "first argument %MF/%KF exponent; second argument %MW/%KW/immediate integer base"
+      },
+      "semantics": "IEEE binary32 native abs",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "27–28, 67–68"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18; %SW17:X0 invalid/NaN, X2 division by zero, X3 overflow/Infinity"
+      ],
+      "constraints": [
+        "float and integer operands do not mix except explicit documented EXPT overload",
+        "TRUNC toward zero; %MD overflow saturates to signed int32 limits and sets %S18; %MF destination has no integer-range clipping",
+        "TRUNC does not affect %S17",
+        "manual binary32 numeric limit is +/-3.402824E+38",
+        "EXPT(base,exponent) conventional order would be wrong for this PLC"
+      ]
+    },
+    {
+      "id": "float.trunc",
+      "mnemonic": "TRUNC",
+      "native_syntax": "[dst := TRUNC(src)]",
+      "arguments": {
+        "dst": "%MF; TRUNC may also target %MD",
+        "src": "%MF/%KF; binary + - * / may also take immediate float",
+        "EXPT": "first argument %MF/%KF exponent; second argument %MW/%KW/immediate integer base"
+      },
+      "semantics": "IEEE binary32 native trunc",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "27–28, 67–68"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18; %SW17:X0 invalid/NaN, X2 division by zero, X3 overflow/Infinity"
+      ],
+      "constraints": [
+        "float and integer operands do not mix except explicit documented EXPT overload",
+        "TRUNC toward zero; %MD overflow saturates to signed int32 limits and sets %S18; %MF destination has no integer-range clipping",
+        "TRUNC does not affect %S17",
+        "manual binary32 numeric limit is +/-3.402824E+38",
+        "EXPT(base,exponent) conventional order would be wrong for this PLC"
+      ]
+    },
+    {
+      "id": "float.exp",
+      "mnemonic": "EXP",
+      "native_syntax": "[dst := EXP(src)]",
+      "arguments": {
+        "dst": "%MF; TRUNC may also target %MD",
+        "src": "%MF/%KF; binary + - * / may also take immediate float",
+        "EXPT": "first argument %MF/%KF exponent; second argument %MW/%KW/immediate integer base"
+      },
+      "semantics": "IEEE binary32 native exp",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "27–28, 67–68"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18; %SW17:X0 invalid/NaN, X2 division by zero, X3 overflow/Infinity"
+      ],
+      "constraints": [
+        "float and integer operands do not mix except explicit documented EXPT overload",
+        "TRUNC toward zero; %MD overflow saturates to signed int32 limits and sets %S18; %MF destination has no integer-range clipping",
+        "TRUNC does not affect %S17",
+        "manual binary32 numeric limit is +/-3.402824E+38",
+        "EXPT(base,exponent) conventional order would be wrong for this PLC"
+      ]
+    },
+    {
+      "id": "float.expt",
+      "mnemonic": "EXPT",
+      "native_syntax": "[dst := EXPT(exponent,base)]",
+      "arguments": {
+        "dst": "%MF; TRUNC may also target %MD",
+        "src": "%MF/%KF; binary + - * / may also take immediate float",
+        "EXPT": "first argument %MF/%KF exponent; second argument %MW/%KW/immediate integer base"
+      },
+      "semantics": "IEEE binary32 native expt",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "27–28, 67–68"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18; %SW17:X0 invalid/NaN, X2 division by zero, X3 overflow/Infinity"
+      ],
+      "constraints": [
+        "float and integer operands do not mix except explicit documented EXPT overload",
+        "TRUNC toward zero; %MD overflow saturates to signed int32 limits and sets %S18; %MF destination has no integer-range clipping",
+        "TRUNC does not affect %S17",
+        "manual binary32 numeric limit is +/-3.402824E+38",
+        "EXPT(base,exponent) conventional order would be wrong for this PLC"
+      ]
+    },
+    {
+      "id": "float.sin",
+      "mnemonic": "SIN",
+      "native_syntax": "[%MFd := SIN(%MFs)]",
+      "arguments": {
+        "dst": "%MF",
+        "src": "%MF/%KF"
+      },
+      "semantics": "Native trigonometric/angle conversion; angles in radians for trig",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "69–70"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18 and %SW17 on invalid/overflow"
+      ],
+      "unresolved": [],
+      "constraints": [
+        "Input radians -4096*pi .. +4096*pi inclusive. Precision decreases outside -2*pi .. +2*pi due to modulo2*pi."
+      ],
+      "rendered_pdf_verified": true
+    },
+    {
+      "id": "float.cos",
+      "mnemonic": "COS",
+      "native_syntax": "[%MFd := COS(%MFs)]",
+      "arguments": {
+        "dst": "%MF",
+        "src": "%MF/%KF"
+      },
+      "semantics": "Native trigonometric/angle conversion; angles in radians for trig",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "69–70"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18 and %SW17 on invalid/overflow"
+      ],
+      "unresolved": [],
+      "constraints": [
+        "Input radians -4096*pi .. +4096*pi inclusive. Precision decreases outside -2*pi .. +2*pi due to modulo2*pi."
+      ],
+      "rendered_pdf_verified": true
+    },
+    {
+      "id": "float.tan",
+      "mnemonic": "TAN",
+      "native_syntax": "[%MFd := TAN(%MFs)]",
+      "arguments": {
+        "dst": "%MF",
+        "src": "%MF/%KF"
+      },
+      "semantics": "Native trigonometric/angle conversion; angles in radians for trig",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "69–70"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18 and %SW17 on invalid/overflow"
+      ],
+      "unresolved": [],
+      "constraints": [
+        "Input radians -4096*pi .. +4096*pi inclusive. Precision decreases outside -2*pi .. +2*pi due to modulo2*pi."
+      ],
+      "rendered_pdf_verified": true
+    },
+    {
+      "id": "float.asin",
+      "mnemonic": "ASIN",
+      "native_syntax": "[%MFd := ASIN(%MFs)]",
+      "arguments": {
+        "dst": "%MF",
+        "src": "%MF/%KF"
+      },
+      "semantics": "Native trigonometric/angle conversion; angles in radians for trig",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "69–70"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18 and %SW17 on invalid/overflow"
+      ],
+      "unresolved": [],
+      "constraints": [
+        "Output range -pi/2 .. +pi/2",
+        "ASIN/ACOS input outside[-1,1] invalid; flags%S18 and%SW17:X0"
+      ]
+    },
+    {
+      "id": "float.acos",
+      "mnemonic": "ACOS",
+      "native_syntax": "[%MFd := ACOS(%MFs)]",
+      "arguments": {
+        "dst": "%MF",
+        "src": "%MF/%KF"
+      },
+      "semantics": "Native trigonometric/angle conversion; angles in radians for trig",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "69–70"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18 and %SW17 on invalid/overflow"
+      ],
+      "unresolved": [],
+      "constraints": [
+        "Output range 0 .. pi",
+        "ASIN/ACOS input outside[-1,1] invalid; flags%S18 and%SW17:X0"
+      ]
+    },
+    {
+      "id": "float.atan",
+      "mnemonic": "ATAN",
+      "native_syntax": "[%MFd := ATAN(%MFs)]",
+      "arguments": {
+        "dst": "%MF",
+        "src": "%MF/%KF"
+      },
+      "semantics": "Native trigonometric/angle conversion; angles in radians for trig",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "69–70"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18 and %SW17 on invalid/overflow"
+      ],
+      "unresolved": [],
+      "constraints": [
+        "Output range -pi/2 .. +pi/2"
+      ]
+    },
+    {
+      "id": "float.deg_to_rad",
+      "mnemonic": "DEG_TO_RAD",
+      "native_syntax": "[%MFd := DEG_TO_RAD(%MFs)]",
+      "arguments": {
+        "dst": "%MF",
+        "src": "%MF/%KF"
+      },
+      "semantics": "Native trigonometric/angle conversion; angles in radians for trig",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "69–70"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18 and %SW17 on invalid/overflow"
+      ],
+      "unresolved": [
+        "G p70 describes output as0..2*pi or0..360, suggesting normalization, while official Twido emulation support describes only linear unit-conversion formula. Exact handling of negative angles/multiple turns and endpoints needs target differential test."
+      ],
+      "constraints": [
+        "Input degrees -737280.0 .. +737280.0 inclusive. Output angle in0..2*pi; out-of-range =>NaN, %S18 and%SW17:X0."
+      ],
+      "rendered_pdf_verified": true
+    },
+    {
+      "id": "float.rad_to_deg",
+      "mnemonic": "RAD_TO_DEG",
+      "native_syntax": "[%MFd := RAD_TO_DEG(%MFs)]",
+      "arguments": {
+        "dst": "%MF",
+        "src": "%MF/%KF"
+      },
+      "semantics": "Native trigonometric/angle conversion; angles in radians for trig",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "69–70"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18 and %SW17 on invalid/overflow"
+      ],
+      "unresolved": [
+        "G p70 describes output as0..2*pi or0..360, suggesting normalization, while official Twido emulation support describes only linear unit-conversion formula. Exact handling of negative angles/multiple turns and endpoints needs target differential test."
+      ],
+      "constraints": [
+        "Input radians -4096*pi .. +4096*pi inclusive. Output angle in0..360degrees; out-of-range =>NaN, %S18 and%SW17:X0."
+      ],
+      "rendered_pdf_verified": true
+    },
+    {
+      "id": "convert.int_to_real",
+      "mnemonic": "INT_TO_REAL",
+      "native_syntax": "[dst := INT_TO_REAL(src)]",
+      "arguments": {
+        "dst": "%MF",
+        "src": "%MW/%KW"
+      },
+      "semantics": "Explicit numeric conversion; REAL_TO_* rounds to nearest, ties to even (10.5=>10, 11.5=>12)",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "71–72"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18 when converted float outside destination integer range"
+      ],
+      "constraints": [
+        "not equivalent to C++ truncating static_cast<int>",
+        "exact invalid/out-of-range destination bits unspecified"
+      ]
+    },
+    {
+      "id": "convert.dint_to_real",
+      "mnemonic": "DINT_TO_REAL",
+      "native_syntax": "[dst := DINT_TO_REAL(src)]",
+      "arguments": {
+        "dst": "%MF",
+        "src": "%MD/%KD"
+      },
+      "semantics": "Explicit numeric conversion; REAL_TO_* rounds to nearest, ties to even (10.5=>10, 11.5=>12)",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "71–72"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18 when converted float outside destination integer range"
+      ],
+      "constraints": [
+        "not equivalent to C++ truncating static_cast<int>",
+        "exact invalid/out-of-range destination bits unspecified"
+      ]
+    },
+    {
+      "id": "convert.real_to_int",
+      "mnemonic": "REAL_TO_INT",
+      "native_syntax": "[dst := REAL_TO_INT(src)]",
+      "arguments": {
+        "dst": "%MW or documented output word",
+        "src": "%MF/%KF"
+      },
+      "semantics": "Explicit numeric conversion; REAL_TO_* rounds to nearest, ties to even (10.5=>10, 11.5=>12)",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "71–72"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18 when converted float outside destination integer range"
+      ],
+      "constraints": [
+        "not equivalent to C++ truncating static_cast<int>",
+        "exact invalid/out-of-range destination bits unspecified"
+      ]
+    },
+    {
+      "id": "convert.real_to_dint",
+      "mnemonic": "REAL_TO_DINT",
+      "native_syntax": "[dst := REAL_TO_DINT(src)]",
+      "arguments": {
+        "dst": "%MD",
+        "src": "%MF/%KF"
+      },
+      "semantics": "Explicit numeric conversion; REAL_TO_* rounds to nearest, ties to even (10.5=>10, 11.5=>12)",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "71–72"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "error_flags": [
+        "%S18 when converted float outside destination integer range"
+      ],
+      "constraints": [
+        "not equivalent to C++ truncating static_cast<int>",
+        "exact invalid/out-of-range destination bits unspecified"
+      ]
+    },
+    {
+      "id": "ascii.round",
+      "mnemonic": "ROUND",
+      "native_syntax": "[dst := ROUND(src,n)]",
+      "arguments": {
+        "dst": "%MWx:7",
+        "src": "%MWy, immediate significant_digits 1..8"
+      },
+      "semantics": "Round down ASCII decimal numeric representation to 1..8 significant digits; max 13 bytes; preserve input end marker; scientific notation forbidden",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "72–82"
+        },
+        {
+          "source": "O",
+          "pages": "82–83"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "mandatory destination table suffix is exact: ROUND/FLOAT_TO_ASCII :7; INT_TO_ASCII :4; DINT_TO_ASCII :6",
+        "string bytes in memory are little-endian (low byte is first character), explicit O p82; generic prose saying most-significant-byte-first conflicts with examples",
+        "default end marker CR(13), configurable CR/LF/NUL from FL11.0"
+      ],
+      "unresolved": [
+        "ASCII parser text is internally inconsistent about minus being valid initial character yet a separator; test exact malformed forms",
+        "FLOAT_TO_ASCII text says precision 6 figures while examples show seven significant figures; preserve native lowering and verify before emulation"
+      ]
+    },
+    {
+      "id": "ascii.ascii_to_int",
+      "mnemonic": "ASCII_TO_INT",
+      "native_syntax": "[dst := ASCII_TO_INT(src)]",
+      "arguments": {
+        "dst": "%MWx",
+        "src": "%MWy/%KWy"
+      },
+      "semantics": "Read up to four words; skip leading spaces, optional initial minus, stop at non-digit; clamp overflow to -32768/+32767 with %S18; invalid first separator gives 0/%S18",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "72–82"
+        },
+        {
+          "source": "O",
+          "pages": "82–83"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "mandatory destination table suffix is exact: ROUND/FLOAT_TO_ASCII :7; INT_TO_ASCII :4; DINT_TO_ASCII :6",
+        "string bytes in memory are little-endian (low byte is first character), explicit O p82; generic prose saying most-significant-byte-first conflicts with examples",
+        "default end marker CR(13), configurable CR/LF/NUL from FL11.0"
+      ],
+      "unresolved": [
+        "ASCII parser text is internally inconsistent about minus being valid initial character yet a separator; test exact malformed forms",
+        "FLOAT_TO_ASCII text says precision 6 figures while examples show seven significant figures; preserve native lowering and verify before emulation"
+      ]
+    },
+    {
+      "id": "ascii.int_to_ascii",
+      "mnemonic": "INT_TO_ASCII",
+      "native_syntax": "[dst := INT_TO_ASCII(src)]",
+      "arguments": {
+        "dst": "%MWx:4",
+        "src": "16-bit word object; no immediate"
+      },
+      "semantics": "Signed decimal ASCII output, 1..4 words used, append configured terminator",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "72–82"
+        },
+        {
+          "source": "O",
+          "pages": "82–83"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "mandatory destination table suffix is exact: ROUND/FLOAT_TO_ASCII :7; INT_TO_ASCII :4; DINT_TO_ASCII :6",
+        "string bytes in memory are little-endian (low byte is first character), explicit O p82; generic prose saying most-significant-byte-first conflicts with examples",
+        "default end marker CR(13), configurable CR/LF/NUL from FL11.0"
+      ],
+      "unresolved": [
+        "ASCII parser text is internally inconsistent about minus being valid initial character yet a separator; test exact malformed forms",
+        "FLOAT_TO_ASCII text says precision 6 figures while examples show seven significant figures; preserve native lowering and verify before emulation"
+      ]
+    },
+    {
+      "id": "ascii.ascii_to_float",
+      "mnemonic": "ASCII_TO_FLOAT",
+      "native_syntax": "[dst := ASCII_TO_FLOAT(src)]",
+      "arguments": {
+        "dst": "%MFx",
+        "src": "%MWy/%KWy"
+      },
+      "semantics": "Parse decimal/scientific ASCII into binary32; overflow=>signed Infinity/%S18/%SW17:X3; magnitude below 1.175494E-38=>0; nonnumber=>NaN/%SW17:X0",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "72–82"
+        },
+        {
+          "source": "O",
+          "pages": "82–83"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "mandatory destination table suffix is exact: ROUND/FLOAT_TO_ASCII :7; INT_TO_ASCII :4; DINT_TO_ASCII :6",
+        "string bytes in memory are little-endian (low byte is first character), explicit O p82; generic prose saying most-significant-byte-first conflicts with examples",
+        "default end marker CR(13), configurable CR/LF/NUL from FL11.0"
+      ],
+      "unresolved": [
+        "ASCII parser text is internally inconsistent about minus being valid initial character yet a separator; test exact malformed forms",
+        "FLOAT_TO_ASCII text says precision 6 figures while examples show seven significant figures; preserve native lowering and verify before emulation"
+      ]
+    },
+    {
+      "id": "ascii.float_to_ascii",
+      "mnemonic": "FLOAT_TO_ASCII",
+      "native_syntax": "[dst := FLOAT_TO_ASCII(src)]",
+      "arguments": {
+        "dst": "%MWx:7",
+        "src": "%MFy/%KFy"
+      },
+      "semantics": "Scientific notation; Infinity/NaN=>NAN; append terminator; examples produce six digits after decimal (e.g.1.234568e+09)",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "72–82"
+        },
+        {
+          "source": "O",
+          "pages": "82–83"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "mandatory destination table suffix is exact: ROUND/FLOAT_TO_ASCII :7; INT_TO_ASCII :4; DINT_TO_ASCII :6",
+        "string bytes in memory are little-endian (low byte is first character), explicit O p82; generic prose saying most-significant-byte-first conflicts with examples",
+        "default end marker CR(13), configurable CR/LF/NUL from FL11.0"
+      ],
+      "unresolved": [
+        "ASCII parser text is internally inconsistent about minus being valid initial character yet a separator; test exact malformed forms",
+        "FLOAT_TO_ASCII text says precision 6 figures while examples show seven significant figures; preserve native lowering and verify before emulation"
+      ]
+    },
+    {
+      "id": "ascii.ascii_to_dint",
+      "mnemonic": "ASCII_TO_DINT",
+      "native_syntax": "[dst := ASCII_TO_DINT(src)]",
+      "arguments": {
+        "dst": "%MDx",
+        "src": "%MWy/%KWy"
+      },
+      "semantics": "Parse signed decimal ASCII; skip leading spaces; clamp overflow to int32 min/max and set %S18; invalid first separator gives0/%S18; no scientific notation",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "72–82"
+        },
+        {
+          "source": "O",
+          "pages": "82–83"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "mandatory destination table suffix is exact: ROUND/FLOAT_TO_ASCII :7; INT_TO_ASCII :4; DINT_TO_ASCII :6",
+        "string bytes in memory are little-endian (low byte is first character), explicit O p82; generic prose saying most-significant-byte-first conflicts with examples",
+        "default end marker CR(13), configurable CR/LF/NUL from FL11.0"
+      ],
+      "unresolved": [
+        "ASCII parser text is internally inconsistent about minus being valid initial character yet a separator; test exact malformed forms",
+        "FLOAT_TO_ASCII text says precision 6 figures while examples show seven significant figures; preserve native lowering and verify before emulation"
+      ]
+    },
+    {
+      "id": "ascii.dint_to_ascii",
+      "mnemonic": "DINT_TO_ASCII",
+      "native_syntax": "[dst := DINT_TO_ASCII(src)]",
+      "arguments": {
+        "dst": "%MWx:6",
+        "src": "%MDy/%KDy"
+      },
+      "semantics": "Signed decimal ASCII output, 1..6 words used, append configured terminator",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "72–82"
+        },
+        {
+          "source": "O",
+          "pages": "82–83"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "mandatory destination table suffix is exact: ROUND/FLOAT_TO_ASCII :7; INT_TO_ASCII :4; DINT_TO_ASCII :6",
+        "string bytes in memory are little-endian (low byte is first character), explicit O p82; generic prose saying most-significant-byte-first conflicts with examples",
+        "default end marker CR(13), configurable CR/LF/NUL from FL11.0"
+      ],
+      "unresolved": [
+        "ASCII parser text is internally inconsistent about minus being valid initial character yet a separator; test exact malformed forms",
+        "FLOAT_TO_ASCII text says precision 6 figures while examples show seven significant figures; preserve native lowering and verify before emulation"
+      ]
+    },
+    {
+      "id": "table.sum_arr",
+      "mnemonic": "SUM_ARR",
+      "native_syntax": "[dst := SUM_ARR(Tab)]",
+      "arguments": {
+        "Tab": "%MDi:L/%KDi:L or %MFi:L/%KFi:L; L<=255"
+      },
+      "semantics": "Sum table; overflow sets %S18",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "85–96"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "returns": "%MD or %MF same type as table",
+      "constraints": [
+        "doubleword/float table elements stride 2 word addresses",
+        "NaN sorting/comparison order and source/destination overlap not defined by these sections; do not invent"
+      ]
+    },
+    {
+      "id": "table.equal_arr",
+      "mnemonic": "EQUAL_ARR",
+      "native_syntax": "[%MWd := EQUAL_ARR(Tab1,Tab2)]",
+      "arguments": {
+        "Tab": "%MDi:L/%KDi:L or %MFi:L/%KFi:L; L<=255",
+        "Tab2": "same type and length as Tab"
+      },
+      "semantics": "Zero-based first unequal rank, -1 if equal",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "85–96"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "returns": "%MW",
+      "constraints": [
+        "doubleword/float table elements stride 2 word addresses",
+        "NaN sorting/comparison order and source/destination overlap not defined by these sections; do not invent"
+      ]
+    },
+    {
+      "id": "table.find_eqr",
+      "mnemonic": "FIND_EQR",
+      "native_syntax": "[%MWd := FIND_EQR(Tab,Val)]",
+      "arguments": {
+        "Tab": "%MDi:L/%KDi:L or %MFi:L/%KFi:L; L<=255",
+        "Val": "same typed %MD/%KD or %MF/%KF object; no immediate"
+      },
+      "semantics": "Zero-based first rank satisfying =, -1 if absent",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "85–96"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "returns": "%MW",
+      "constraints": [
+        "doubleword/float table elements stride 2 word addresses",
+        "NaN sorting/comparison order and source/destination overlap not defined by these sections; do not invent"
+      ]
+    },
+    {
+      "id": "table.find_gtr",
+      "mnemonic": "FIND_GTR",
+      "native_syntax": "[%MWd := FIND_GTR(Tab,Val)]",
+      "arguments": {
+        "Tab": "%MDi:L/%KDi:L or %MFi:L/%KFi:L; L<=255",
+        "Val": "same typed %MD/%KD or %MF/%KF object; no immediate"
+      },
+      "semantics": "Zero-based first rank satisfying >, -1 if absent",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "85–96"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "returns": "%MW",
+      "constraints": [
+        "doubleword/float table elements stride 2 word addresses",
+        "NaN sorting/comparison order and source/destination overlap not defined by these sections; do not invent"
+      ]
+    },
+    {
+      "id": "table.find_ltr",
+      "mnemonic": "FIND_LTR",
+      "native_syntax": "[%MWd := FIND_LTR(Tab,Val)]",
+      "arguments": {
+        "Tab": "%MDi:L/%KDi:L or %MFi:L/%KFi:L; L<=255",
+        "Val": "same typed %MD/%KD or %MF/%KF object; no immediate"
+      },
+      "semantics": "Zero-based first rank satisfying <, -1 if absent",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "85–96"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "returns": "%MW",
+      "constraints": [
+        "doubleword/float table elements stride 2 word addresses",
+        "NaN sorting/comparison order and source/destination overlap not defined by these sections; do not invent"
+      ]
+    },
+    {
+      "id": "table.max_arr",
+      "mnemonic": "MAX_ARR",
+      "native_syntax": "[dst := MAX_ARR(Tab)]",
+      "arguments": {
+        "Tab": "%MDi:L/%KDi:L or %MFi:L/%KFi:L; L<=255"
+      },
+      "semantics": "Return maximum/minimum VALUE (not index)",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "85–96"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "returns": "%MD or %MF same type as table",
+      "constraints": [
+        "doubleword/float table elements stride 2 word addresses",
+        "NaN sorting/comparison order and source/destination overlap not defined by these sections; do not invent"
+      ]
+    },
+    {
+      "id": "table.min_arr",
+      "mnemonic": "MIN_ARR",
+      "native_syntax": "[dst := MIN_ARR(Tab)]",
+      "arguments": {
+        "Tab": "%MDi:L/%KDi:L or %MFi:L/%KFi:L; L<=255"
+      },
+      "semantics": "Return maximum/minimum VALUE (not index)",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "85–96"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "returns": "%MD or %MF same type as table",
+      "constraints": [
+        "doubleword/float table elements stride 2 word addresses",
+        "NaN sorting/comparison order and source/destination overlap not defined by these sections; do not invent"
+      ]
+    },
+    {
+      "id": "table.occur_arr",
+      "mnemonic": "OCCUR_ARR",
+      "native_syntax": "[%MWd := OCCUR_ARR(Tab,Val)]",
+      "arguments": {
+        "Tab": "%MDi:L/%KDi:L or %MFi:L/%KFi:L; L<=255",
+        "Val": "same typed %MD/%KD or %MF/%KF object; no immediate"
+      },
+      "semantics": "Count equal elements",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "85–96"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "returns": "%MW",
+      "constraints": [
+        "doubleword/float table elements stride 2 word addresses",
+        "NaN sorting/comparison order and source/destination overlap not defined by these sections; do not invent"
+      ]
+    },
+    {
+      "id": "table.rol_arr",
+      "mnemonic": "ROL_ARR",
+      "native_syntax": "[ROL_ARR(n,Tab)]",
+      "arguments": {
+        "Tab": "writable %MDi:L or %MFi:L",
+        "n/direction": "%MW/%KW/immediate integer"
+      },
+      "semantics": "Rotate n positions top to bottom; n<=0 no change",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "85–96"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "returns": "in-place",
+      "constraints": [
+        "doubleword/float table elements stride 2 word addresses",
+        "NaN sorting/comparison order and source/destination overlap not defined by these sections; do not invent"
+      ]
+    },
+    {
+      "id": "table.ror_arr",
+      "mnemonic": "ROR_ARR",
+      "native_syntax": "[ROR_ARR(n,Tab)]",
+      "arguments": {
+        "Tab": "writable %MDi:L or %MFi:L",
+        "n/direction": "%MW/%KW/immediate integer"
+      },
+      "semantics": "Rotate n positions bottom to top; n<=0 no change",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "85–96"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "returns": "in-place",
+      "constraints": [
+        "doubleword/float table elements stride 2 word addresses",
+        "NaN sorting/comparison order and source/destination overlap not defined by these sections; do not invent"
+      ]
+    },
+    {
+      "id": "table.sort_arr",
+      "mnemonic": "SORT_ARR",
+      "native_syntax": "[SORT_ARR(n,Tab)]",
+      "arguments": {
+        "Tab": "writable %MDi:L or %MFi:L",
+        "n/direction": "%MW/%KW/immediate integer"
+      },
+      "semantics": "Direction>0 ascending, <0 descending, =0 no change",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "85–96"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "returns": "in-place",
+      "constraints": [
+        "doubleword/float table elements stride 2 word addresses",
+        "NaN sorting/comparison order and source/destination overlap not defined by these sections; do not invent"
+      ]
+    },
+    {
+      "id": "table.mean",
+      "mnemonic": "MEAN",
+      "native_syntax": "[dst := MEAN(Tab)]",
+      "arguments": {
+        "Tab": "%MFi:L/%KFi:L only"
+      },
+      "semantics": "Arithmetic mean of floating table",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "85–96"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "returns": "%MF",
+      "constraints": [
+        "doubleword/float table elements stride 2 word addresses",
+        "NaN sorting/comparison order and source/destination overlap not defined by these sections; do not invent"
+      ]
+    },
+    {
+      "id": "table.swap",
+      "mnemonic": "SWAP",
+      "native_syntax": "[dst:L := SWAP(src:L)]",
+      "arguments": {
+        "src": "16-bit memory/constant/I/O/network word table",
+        "dst": "writable 16-bit memory/I/O/network word table same length"
+      },
+      "semantics": "Swap low/high byte in each 16-bit element",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "85–96"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "returns": "table",
+      "constraints": [
+        "doubleword/float table elements stride 2 word addresses",
+        "NaN sorting/comparison order and source/destination overlap not defined by these sections; do not invent"
+      ]
+    },
+    {
+      "id": "table.lkup",
+      "mnemonic": "LKUP",
+      "native_syntax": "[%MWd := LKUP(%MFbase,size)]",
+      "arguments": {
+        "dst": "%MW status",
+        "X": "%MFbase containing X",
+        "size": "%MW/%KW/immediate, even >=6"
+      },
+      "semantics": "X at base; Y written to base+2; X1/Y1 at base+4/base+6, then stride4 per pair. size=10 describes X/Y plus four point pairs, last word index base+18. Status0 success,1 descending Xi,2 X below first,4 above last,8 bad size.",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "92–95"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "Returns status, not interpolated Y. Xi sorted ascending.",
+        "Rendered Gp92 equation1: Y=Yi+((Y[i+1]-Yi)/(X[i+1]-Xi))*(X-Xi) forXi<=X<=X[i+1].",
+        "Rendered Gp92 equation2 forXi=X[i+1]=X prints Y=(Y[i+1]-Yi)/2 (difference divided by2, not arithmetic mean). Preserve native call; differential verification required before reproducing equation2 in host runtime."
+      ],
+      "unresolved": [
+        "Docs signature lists %MF0 specifically but example/general array prose uses %MFi; confirm nonzero base in editor"
+      ],
+      "rendered_pdf_verified": true
+    },
+    {
+      "id": "string.literal",
+      "mnemonic": ":=",
+      "native_syntax": "[%MWx:L := \"text\"]",
+      "arguments": {
+        "dst": "%MW table 1..255 words",
+        "text": "ASCII literal without quotation character"
+      },
+      "semantics": "Little-endian bytes with mandatory end marker; up to509 characters; %MWx:? asks editor to calculate size",
+      "sources": [
+        {
+          "source": "O",
+          "pages": "82–83"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": "6.0",
+      "constraints": [
+        "do not overlap string words with scalar storage",
+        "default CR terminator, CR/LF/NUL selectable FL>=11.0"
+      ]
+    },
+    {
+      "id": "string.length",
+      "mnemonic": "LENGTH",
+      "native_syntax": "[dst := LENGTH(a)]",
+      "arguments": {
+        "dst": "%MW scalar for LENGTH/EQUAL_STR; %MWx:L for CONCAT",
+        "a/b": "%MWy:A or %KWy:A strings; no immediate strings"
+      },
+      "semantics": "Return string length (character count); exact missing-terminator behavior needs editor test",
+      "sources": [
+        {
+          "source": "O",
+          "pages": "84–86"
+        },
+        {
+          "source": "P",
+          "pages": "323"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": "6.0",
+      "constraints": [
+        "CONCAT editor does not validate adequate destination capacity; compiler should",
+        "strings have allocated word length and explicit terminator; not C++ std::string"
+      ]
+    },
+    {
+      "id": "string.concat",
+      "mnemonic": "CONCAT",
+      "native_syntax": "[dst := CONCAT(a,b)]",
+      "arguments": {
+        "dst": "%MW scalar for LENGTH/EQUAL_STR; %MWx:L for CONCAT",
+        "a/b": "%MWy:A or %KWy:A strings; no immediate strings"
+      },
+      "semantics": "Append second string to first in destination; ensure terminator, replacing final char if full; %S28 if source allocation exhausted or destination full",
+      "sources": [
+        {
+          "source": "O",
+          "pages": "84–86"
+        },
+        {
+          "source": "P",
+          "pages": "323"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": "6.0",
+      "constraints": [
+        "CONCAT editor does not validate adequate destination capacity; compiler should",
+        "strings have allocated word length and explicit terminator; not C++ std::string"
+      ]
+    },
+    {
+      "id": "string.equal_str",
+      "mnemonic": "EQUAL_STR",
+      "native_syntax": "[dst := EQUAL_STR(a,b)]",
+      "arguments": {
+        "dst": "%MW scalar for LENGTH/EQUAL_STR; %MWx:L for CONCAT",
+        "a/b": "%MWy:A or %KWy:A strings; no immediate strings"
+      },
+      "semantics": "Return zero-based first differing character index; -1 if equal; bounds exhaustion sets %S28",
+      "sources": [
+        {
+          "source": "O",
+          "pages": "84–86"
+        },
+        {
+          "source": "P",
+          "pages": "323"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": "6.0",
+      "constraints": [
+        "CONCAT editor does not validate adequate destination capacity; compiler should",
+        "strings have allocated word length and explicit terminator; not C++ std::string"
+      ]
+    },
+    {
+      "id": "control.end",
+      "mnemonic": "END",
+      "native_syntax": "END",
+      "arguments": {},
+      "semantics": "Terminate current task/UDF/UDFB/subroutine level",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "60–62"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "JMP not in parentheses or MPS/MPP range; target label before LD/LDN/LDR/LDF/BLK",
+        "no instructions after unconditional END/JMP in same rung; a new rung is required",
+        "upstream jumps can exceed watchdog"
+      ]
+    },
+    {
+      "id": "control.endc",
+      "mnemonic": "ENDC",
+      "native_syntax": "ENDC",
+      "arguments": {},
+      "semantics": "Terminate current level if accumulator1",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "60–62"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "JMP not in parentheses or MPS/MPP range; target label before LD/LDN/LDR/LDF/BLK",
+        "no instructions after unconditional END/JMP in same rung; a new rung is required",
+        "upstream jumps can exceed watchdog"
+      ]
+    },
+    {
+      "id": "control.endcn",
+      "mnemonic": "ENDCN",
+      "native_syntax": "ENDCN",
+      "arguments": {},
+      "semantics": "Terminate current level if accumulator0",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "60–62"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "JMP not in parentheses or MPS/MPP range; target label before LD/LDN/LDR/LDF/BLK",
+        "no instructions after unconditional END/JMP in same rung; a new rung is required",
+        "upstream jumps can exceed watchdog"
+      ]
+    },
+    {
+      "id": "control.endt",
+      "mnemonic": "ENDT",
+      "native_syntax": "ENDT",
+      "arguments": {},
+      "semantics": "End SFC transition rung; valid only there",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "60–62"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "JMP not in parentheses or MPS/MPP range; target label before LD/LDN/LDR/LDF/BLK",
+        "no instructions after unconditional END/JMP in same rung; a new rung is required",
+        "upstream jumps can exceed watchdog"
+      ]
+    },
+    {
+      "id": "control.nop",
+      "mnemonic": "NOP",
+      "native_syntax": "NOP",
+      "arguments": {},
+      "semantics": "No operation",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "60–62"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "JMP not in parentheses or MPS/MPP range; target label before LD/LDN/LDR/LDF/BLK",
+        "no instructions after unconditional END/JMP in same rung; a new rung is required",
+        "upstream jumps can exceed watchdog"
+      ]
+    },
+    {
+      "id": "control.jmp",
+      "mnemonic": "JMP",
+      "native_syntax": "JMP %Ln",
+      "arguments": {
+        "label": "unique program-local %Ln"
+      },
+      "semantics": "Unconditional branch",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "60–62"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "JMP not in parentheses or MPS/MPP range; target label before LD/LDN/LDR/LDF/BLK",
+        "no instructions after unconditional END/JMP in same rung; a new rung is required",
+        "upstream jumps can exceed watchdog"
+      ]
+    },
+    {
+      "id": "control.jmpc",
+      "mnemonic": "JMPC",
+      "native_syntax": "JMPC %Ln",
+      "arguments": {
+        "label": "unique program-local %Ln"
+      },
+      "semantics": "Branch when accumulator1",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "60–62"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "JMP not in parentheses or MPS/MPP range; target label before LD/LDN/LDR/LDF/BLK",
+        "no instructions after unconditional END/JMP in same rung; a new rung is required",
+        "upstream jumps can exceed watchdog"
+      ]
+    },
+    {
+      "id": "control.jmpcn",
+      "mnemonic": "JMPCN",
+      "native_syntax": "JMPCN %Ln",
+      "arguments": {
+        "label": "unique program-local %Ln"
+      },
+      "semantics": "Branch when accumulator0",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "60–62"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "JMP not in parentheses or MPS/MPP range; target label before LD/LDN/LDR/LDF/BLK",
+        "no instructions after unconditional END/JMP in same rung; a new rung is required",
+        "upstream jumps can exceed watchdog"
+      ]
+    },
+    {
+      "id": "control.subroutine",
+      "mnemonic": "SRn",
+      "native_syntax": "LD condition; SRn",
+      "arguments": {
+        "n": "defined Free POU subroutine number"
+      },
+      "semantics": "Conditional call when accumulator is1; return resumes caller; callee may change accumulator",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "65–66"
+        },
+        {
+          "source": "O",
+          "pages": "49–50"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "subroutine cannot call another subroutine",
+        "UDF cannot call subroutine; subroutine may call UDF",
+        "no call in parentheses or MPS/MPP region",
+        "SRn must be last action for LD reversibility"
+      ]
+    },
+    {
+      "id": "control.if",
+      "mnemonic": "IF",
+      "native_syntax": "IFindex ... THENindex",
+      "arguments": {},
+      "semantics": "Native structured Ladder/IL flow element",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "62–65"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": "6.0",
+      "constraints": [
+        "offline creation only",
+        "one structured element per rung",
+        "matching index in same POU",
+        "IF/ELSE/FOR beginning of rung; ENDIF/ENDFOR end of dedicated rung",
+        "maximum up to128 less declared %L labels",
+        "FOR raw IL serialization of assistant parameters is not specified in text; do not invent syntax"
+      ]
+    },
+    {
+      "id": "control.else",
+      "mnemonic": "ELSE",
+      "native_syntax": "ELSEindex",
+      "arguments": {},
+      "semantics": "Native structured Ladder/IL flow element",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "62–65"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": "6.0",
+      "constraints": [
+        "offline creation only",
+        "one structured element per rung",
+        "matching index in same POU",
+        "IF/ELSE/FOR beginning of rung; ENDIF/ENDFOR end of dedicated rung",
+        "maximum up to128 less declared %L labels",
+        "FOR raw IL serialization of assistant parameters is not specified in text; do not invent syntax"
+      ]
+    },
+    {
+      "id": "control.endif",
+      "mnemonic": "ENDIF",
+      "native_syntax": "ENDIFindex",
+      "arguments": {},
+      "semantics": "Native structured Ladder/IL flow element",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "62–65"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": "6.0",
+      "constraints": [
+        "offline creation only",
+        "one structured element per rung",
+        "matching index in same POU",
+        "IF/ELSE/FOR beginning of rung; ENDIF/ENDFOR end of dedicated rung",
+        "maximum up to128 less declared %L labels",
+        "FOR raw IL serialization of assistant parameters is not specified in text; do not invent syntax"
+      ]
+    },
+    {
+      "id": "control.for",
+      "mnemonic": "FOR",
+      "native_syntax": "FORindex",
+      "arguments": {
+        "FOR_config": "counter %MW; init/end/step %MW or immediate int16; condition < <= = >= > <>"
+      },
+      "semantics": "Native structured Ladder/IL flow element",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "62–65"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": "6.0",
+      "constraints": [
+        "offline creation only",
+        "one structured element per rung",
+        "matching index in same POU",
+        "IF/ELSE/FOR beginning of rung; ENDIF/ENDFOR end of dedicated rung",
+        "maximum up to128 less declared %L labels",
+        "FOR raw IL serialization of assistant parameters is not specified in text; do not invent syntax"
+      ]
+    },
+    {
+      "id": "control.endfor",
+      "mnemonic": "ENDFOR",
+      "native_syntax": "ENDFORindex",
+      "arguments": {},
+      "semantics": "Native structured Ladder/IL flow element",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "62–65"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": "6.0",
+      "constraints": [
+        "offline creation only",
+        "one structured element per rung",
+        "matching index in same POU",
+        "IF/ELSE/FOR beginning of rung; ENDIF/ENDFOR end of dedicated rung",
+        "maximum up to128 less declared %L labels",
+        "FOR raw IL serialization of assistant parameters is not specified in text; do not invent syntax"
+      ]
+    },
+    {
+      "id": "stack.mps",
+      "mnemonic": "MPS",
+      "native_syntax": "MPS",
+      "arguments": {},
+      "semantics": "push Boolean accumulator",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "82–83"
+        },
+        {
+          "source": "O",
+          "pages": "49–51"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "pair each MPS with MPP in same rung",
+        "never within parentheses",
+        "G says storage32; O reversibility says >11 nested MPS error: strict reversible target <=11 pending editor test"
+      ]
+    },
+    {
+      "id": "stack.mrd",
+      "mnemonic": "MRD",
+      "native_syntax": "MRD",
+      "arguments": {},
+      "semantics": "read stack top into accumulator without pop",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "82–83"
+        },
+        {
+          "source": "O",
+          "pages": "49–51"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "pair each MPS with MPP in same rung",
+        "never within parentheses",
+        "G says storage32; O reversibility says >11 nested MPS error: strict reversible target <=11 pending editor test"
+      ]
+    },
+    {
+      "id": "stack.mpp",
+      "mnemonic": "MPP",
+      "native_syntax": "MPP",
+      "arguments": {},
+      "semantics": "pop top into accumulator",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "82–83"
+        },
+        {
+          "source": "O",
+          "pages": "49–51"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "pair each MPS with MPP in same rung",
+        "never within parentheses",
+        "G says storage32; O reversibility says >11 nested MPS error: strict reversible target <=11 pending editor test"
+      ]
+    },
+    {
+      "id": "block.blk",
+      "mnemonic": "BLK",
+      "native_syntax": "BLK %BLOCKinstance",
+      "arguments": {},
+      "semantics": "Native reversible function-block structural instruction",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "103–104"
+        },
+        {
+          "source": "O",
+          "pages": "49–51"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "BLK starts inputs; OUT_BLK optional starts wired outputs; END_BLK closes block/rung",
+        "inputs only before OUT_BLK, outputs only after OUT_BLK; no nested BLK",
+        "direct forms such as CU %C0 are valid IL but nonreversible",
+        "one block per rung beforeFL10.1; up to5 fromFL10.1",
+        "input/output repeated or out of declared order loses reversibility"
+      ]
+    },
+    {
+      "id": "block.out_blk",
+      "mnemonic": "OUT_BLK",
+      "native_syntax": "OUT_BLK",
+      "arguments": {},
+      "semantics": "Native reversible function-block structural instruction",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "103–104"
+        },
+        {
+          "source": "O",
+          "pages": "49–51"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "BLK starts inputs; OUT_BLK optional starts wired outputs; END_BLK closes block/rung",
+        "inputs only before OUT_BLK, outputs only after OUT_BLK; no nested BLK",
+        "direct forms such as CU %C0 are valid IL but nonreversible",
+        "one block per rung beforeFL10.1; up to5 fromFL10.1",
+        "input/output repeated or out of declared order loses reversibility"
+      ]
+    },
+    {
+      "id": "block.end_blk",
+      "mnemonic": "END_BLK",
+      "native_syntax": "END_BLK",
+      "arguments": {},
+      "semantics": "Native reversible function-block structural instruction",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "103–104"
+        },
+        {
+          "source": "O",
+          "pages": "49–51"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "BLK starts inputs; OUT_BLK optional starts wired outputs; END_BLK closes block/rung",
+        "inputs only before OUT_BLK, outputs only after OUT_BLK; no nested BLK",
+        "direct forms such as CU %C0 are valid IL but nonreversible",
+        "one block per rung beforeFL10.1; up to5 fromFL10.1",
+        "input/output repeated or out of declared order loses reversibility"
+      ]
+    },
+    {
+      "id": "fb.tm",
+      "mnemonic": "%TM",
+      "native_syntax": "BLK %TMi; LD ...; IN; END_BLK",
+      "arguments": {
+        "inputs": [
+          "IN"
+        ],
+        "outputs": [
+          "Q"
+        ],
+        "objects": {
+          "P": "RW0..9999",
+          "V": "programRO0..P",
+          "Q": "BOOL"
+        }
+      },
+      "semantics": "TON, TOF or TP configured mode; TB1ms only instances0..5, otherwise10ms/100ms/1s/1min. Native timers keep running across skipped block/program jumps; direct wired coil not evaluated while skipped. Cold resets V/Q and restores configuredP; warm preservesV/P; STOP does not freezeV. TP cannot be reset.",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "106–119"
+        },
+        {
+          "source": "P",
+          "pages": "24–26"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": null,
+      "requires_configuration": true,
+      "unresolved": [],
+      "constraints": [
+        "Manual pp109/113/117 says test%TMi.Q only once in program.",
+        "Timer values advance independently of block scan; a host scan-count timer substitute is not equivalent."
+      ]
+    },
+    {
+      "id": "fb.c",
+      "mnemonic": "%C",
+      "native_syntax": "BLK %Ci; LD ...; R; S; CU; CD; END_BLK",
+      "arguments": {
+        "inputs": [
+          "R",
+          "S",
+          "CU",
+          "CD"
+        ],
+        "outputs": [
+          "E",
+          "D",
+          "F"
+        ],
+        "objects": {
+          "P": "RW0..9999",
+          "V": "programRO0..9999",
+          "E": "underflow BOOL",
+          "D": "V=P BOOL",
+          "F": "overflow BOOL"
+        }
+      },
+      "semantics": "R priority forcesV0 and outputs0; S forcesV=P andD1 if noR. CU/CD rising edges increment/decrement, wrap9999<->0. Cold clears; warm/STOP preserve.",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "119–123"
+        },
+        {
+          "source": "P",
+          "pages": "24–26"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": null,
+      "requires_configuration": true,
+      "unresolved": [
+        "G p120 E description says set whenV reaches0; G p122 main operation says E set on0->9999 underflow. Same p122 mistakenly refers toF when describing reset of down-overflow. Do not choose host-emulation behavior without editor/runtime differential test.",
+        "SimultaneousCU/CD edge processing ordering not specified by textual operation table."
+      ]
+    },
+    {
+      "id": "fb.r",
+      "mnemonic": "%R",
+      "native_syntax": "BLK %Ri; LD ...; R; I; O; END_BLK",
+      "arguments": {
+        "inputs": [
+          "R",
+          "I",
+          "O"
+        ],
+        "outputs": [
+          "E",
+          "F"
+        ],
+        "objects": {
+          "I": "RW16-bit input word",
+          "O": "RW16-bit output word",
+          "E": "empty BOOL",
+          "F": "full BOOL"
+        }
+      },
+      "semantics": "16-word FIFO/LIFO configured storage. R clears queue, E1. Full suppresses push; empty suppresses pop and preservesO. Simultaneous I/O rising edges in same call do neither. Cold clears; warm/STOP preserve.",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "141–146"
+        },
+        {
+          "source": "P",
+          "pages": "24–26"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": null,
+      "requires_configuration": true,
+      "unresolved": []
+    },
+    {
+      "id": "fb.dr",
+      "mnemonic": "%DR",
+      "native_syntax": "BLK %DRi; LD ...; R; U; END_BLK",
+      "arguments": {
+        "inputs": [
+          "R",
+          "U"
+        ],
+        "outputs": [
+          "F"
+        ],
+        "objects": {
+          "S": "RW0..7, write requires decimal immediate; applies next call",
+          "F": "at final configured step"
+        }
+      },
+      "semantics": "1..8 steps, 16 configured output/memory-bit cams. R step0, U rising advances. Control bits update only step change or warm/cold restart; skipped calls retain outputs.",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "146–151"
+        },
+        {
+          "source": "P",
+          "pages": "24–26"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": null,
+      "requires_configuration": true,
+      "unresolved": []
+    },
+    {
+      "id": "fb.sbr",
+      "mnemonic": "%SBR",
+      "native_syntax": "BLK %SBRi; LD ...; R; CU; CD; END_BLK",
+      "arguments": {
+        "inputs": [
+          "R",
+          "CU",
+          "CD"
+        ],
+        "outputs": [],
+        "objects": {
+          "j": "RWbit0..15"
+        }
+      },
+      "semantics": "16-bit shift register, CU rising left, CD rising right, R zeroes. Cold clears; warm preserves.",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "152–155"
+        },
+        {
+          "source": "P",
+          "pages": "24–26"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": null,
+      "requires_configuration": true,
+      "unresolved": []
+    },
+    {
+      "id": "fb.sc",
+      "mnemonic": "%SC",
+      "native_syntax": "BLK %SCi; LD ...; R; CU; CD; END_BLK",
+      "arguments": {
+        "inputs": [
+          "R",
+          "CU",
+          "CD"
+        ],
+        "outputs": [],
+        "objects": {
+          "j": "RWstep bit0..255"
+        }
+      },
+      "semantics": "One active step of256; R step0; CU/CD rising advances/reverses. Cold initializes; warm preserves. Simultaneous CU/CD and endpoint wrapping are not specified in text.",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "155–158"
+        },
+        {
+          "source": "P",
+          "pages": "24–26"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": null,
+      "requires_configuration": true,
+      "unresolved": []
+    },
+    {
+      "id": "fb.rtc",
+      "mnemonic": "%RTC",
+      "native_syntax": "BLK %RTCi; LD ...; Enable; RD; WR; END_BLK",
+      "arguments": {
+        "inputs": [
+          "Enable",
+          "RD",
+          "WR"
+        ],
+        "outputs": [
+          "Done",
+          "Error",
+          "DayOfWeek",
+          "ErrorId"
+        ],
+        "objects": {
+          "DAY": "1..31",
+          "MONTH": "1..12",
+          "YEAR": ">=2000",
+          "HOURS": "0..23",
+          "MINUTES": "0..59",
+          "SECONDS": "0..59"
+        }
+      },
+      "semantics": "Enable1 reads RD/WR continuously; RD1WR0 read continuously; RD0WR1 write on WR rising. Enable0 disables and resets outputs. ErrorId 1year,2month,3day,4week,5hour,6minute,7second,8combination,9internal,256read+write,257S50already1. DayOfWeek0unexecuted,1..7calendar.",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "163–166"
+        },
+        {
+          "source": "P",
+          "pages": "24–26"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": "5.0",
+      "requires_configuration": true,
+      "unresolved": [
+        "RTC exact symbolic IL input names/wiring order not provided in generic textual example; use validated Ladder/XML/editor signature"
+      ]
+    },
+    {
+      "id": "fb.timer_retention",
+      "mnemonic": "Retentive",
+      "native_syntax": "timer configuration",
+      "arguments": {},
+      "semantics": "Retain elapsed value on interruption before preset; exact TON/TOF timing differs; TP has no reset",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "108–118"
+        },
+        {
+          "source": "O",
+          "pages": "55"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": "4.0 conservatively",
+      "unresolved": [
+        "G p108 says>=3.3; O functional level summary says>=4.0. Preserve explicit profile and validate target editor"
+      ]
+    },
+    {
+      "id": "fb.timer_dynamic_preset",
+      "mnemonic": "Dynamic Preset",
+      "native_syntax": "timer configuration",
+      "arguments": {},
+      "semantics": "ChangedP effective immediately/at next timebase update; whenV>=newP timer acts as preset reached; disabled by default",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "108–118"
+        },
+        {
+          "source": "O",
+          "pages": "55"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": "12.0"
+    },
+    {
+      "id": "fb.schedule",
+      "mnemonic": "%SCH",
+      "native_syntax": "configuration only; [%SCHi.STARTDAY := %MWx]",
+      "arguments": {
+        "members": [
+          "STARTDAY",
+          "STARTMONTH",
+          "STARTHOUR",
+          "STARTMIN",
+          "ENDDAY",
+          "ENDMONTH",
+          "ENDHOUR",
+          "ENDMIN",
+          "DOW"
+        ]
+      },
+      "semantics": "Not insertable in rung as FB; configured calendar/time window writes chosen%M/%Q. Dynamic fields apply nextMAST; cold restores config. %SW114 bit i enables schedule; multiple schedules same output OR together.",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "158–162"
+        },
+        {
+          "source": "P",
+          "pages": "25"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": "6.0 for member objects",
+      "requires_configuration": true,
+      "limits": {
+        "instances": 16
+      },
+      "constraints": [
+        "requires valid available RTC (%S51,%SW118)",
+        "day1..31,month1..12,hour0..23,minute0..59",
+        "DOW bit encoding absent from cited textual table; do not invent"
+      ]
+    },
+    {
+      "id": "io.read_imm_in",
+      "mnemonic": "READ_IMM_IN",
+      "native_syntax": "[%MWd := READ_IMM_IN(index)]",
+      "arguments": {
+        "index": "%MW/%KW/immediate integer"
+      },
+      "semantics": "Read embedded digital input immediately and update image",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "96–99"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "returns": {
+        "0": "success",
+        "1": "index exceeds max",
+        "2": "input forced"
+      },
+      "constraints": [
+        "embedded digital channels only; not cartridge/expansion",
+        "does not replace physical timing validation"
+      ]
+    },
+    {
+      "id": "io.write_imm_out",
+      "mnemonic": "WRITE_IMM_OUT",
+      "native_syntax": "[%MWd := WRITE_IMM_OUT(index)]",
+      "arguments": {
+        "index": "%MW/%KW/immediate integer"
+      },
+      "semantics": "Write current output-image bit immediately to embedded digital output",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "96–99"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "returns": {
+        "0": "success",
+        "3": "index exceeds max",
+        "4": "output forced",
+        "5": "dedicated hardware output",
+        "6": "alarm output"
+      },
+      "constraints": [
+        "embedded digital channels only; not cartridge/expansion",
+        "does not replace physical timing validation"
+      ]
+    },
+    {
+      "id": "io.read_imm",
+      "mnemonic": "READ_IMM",
+      "native_syntax": "[READ_IMM(%HSCi.V)]",
+      "arguments": {
+        "object": [
+          "%HSCi.P",
+          "%HSCi.PD",
+          "%HSCi.V",
+          "%HSCi.VD"
+        ]
+      },
+      "semantics": "Immediate HSC register/image synchronization",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "99–100"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": "3.3",
+      "constraints": [
+        "only explicitly listed HSC parameters",
+        "generic references M221 advanced manual; cross-check M200 HSC modes before exposing"
+      ]
+    },
+    {
+      "id": "io.write_imm",
+      "mnemonic": "WRITE_IMM",
+      "native_syntax": "[WRITE_IMM(%HSCi.V)]",
+      "arguments": {
+        "object": [
+          "%HSCi.P",
+          "%HSCi.PD",
+          "%HSCi.V",
+          "%HSCi.VD"
+        ]
+      },
+      "semantics": "Immediate HSC register/image synchronization",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "99–100"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": "3.3",
+      "constraints": [
+        "only explicitly listed HSC parameters",
+        "generic references M221 advanced manual; cross-check M200 HSC modes before exposing"
+      ]
+    },
+    {
+      "id": "comm.exch1",
+      "mnemonic": "EXCH1",
+      "native_syntax": "[EXCH1 %MWi:L]",
+      "arguments": {
+        "table": "control/data table %MWi:L"
+      },
+      "semantics": "Execute exchange using configured port protocol; coordinate previous completion via%MSGx.D",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "124–130"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "port-specific applicability must come from M200 hardware/configuration, not generic guide",
+        "generic supportsSL1/SL2/Ethernet; M200 programming table says1%MSG object, so exact available indices require model/editor check"
+      ],
+      "evidence_scope": "generic inventory only; defer serial/Ethernet capability audit"
+    },
+    {
+      "id": "comm.exch2",
+      "mnemonic": "EXCH2",
+      "native_syntax": "[EXCH2 %MWi:L]",
+      "arguments": {
+        "table": "control/data table %MWi:L"
+      },
+      "semantics": "Execute exchange using configured port protocol; coordinate previous completion via%MSGx.D",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "124–130"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "port-specific applicability must come from M200 hardware/configuration, not generic guide",
+        "generic supportsSL1/SL2/Ethernet; M200 programming table says1%MSG object, so exact available indices require model/editor check"
+      ],
+      "evidence_scope": "generic inventory only; defer serial/Ethernet capability audit"
+    },
+    {
+      "id": "comm.exch3",
+      "mnemonic": "EXCH3",
+      "native_syntax": "[EXCH3 %MWi:L]",
+      "arguments": {
+        "table": "control/data table %MWi:L"
+      },
+      "semantics": "Execute exchange using configured port protocol; coordinate previous completion via%MSGx.D",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "124–130"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "port-specific applicability must come from M200 hardware/configuration, not generic guide",
+        "generic supportsSL1/SL2/Ethernet; M200 programming table says1%MSG object, so exact available indices require model/editor check"
+      ],
+      "evidence_scope": "generic inventory only; defer serial/Ethernet capability audit"
+    },
+    {
+      "id": "fb.message",
+      "mnemonic": "%MSG",
+      "native_syntax": "BLK %MSGx; LD ...; R; END_BLK",
+      "arguments": {
+        "inputs": [
+          "R"
+        ],
+        "outputs": [
+          "D",
+          "E"
+        ]
+      },
+      "semantics": "R aborts current exchange, clears error, setsDone; D indicates ready for next exchange; E reports error, code in%SW63/64/65 by port",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "126–129"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "evidence_scope": "generic inventory only; M200 port indices require separate validation"
+    },
+    {
+      "id": "comm.read_var",
+      "mnemonic": "%READ_VAR",
+      "native_syntax": "configured native function block",
+      "arguments": {},
+      "semantics": "See native communication block; protocol/argument details belong to communication audit",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "171–177"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "evidence_scope": "inventory only; not an implemented signature",
+      "constraints": []
+    },
+    {
+      "id": "comm.write_var",
+      "mnemonic": "%WRITE_VAR",
+      "native_syntax": "configured native function block",
+      "arguments": {},
+      "semantics": "See native communication block; protocol/argument details belong to communication audit",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "177–181"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "evidence_scope": "inventory only; not an implemented signature",
+      "constraints": []
+    },
+    {
+      "id": "comm.write_read_var",
+      "mnemonic": "%WRITE_READ_VAR",
+      "native_syntax": "configured native function block",
+      "arguments": {},
+      "semantics": "See native communication block; protocol/argument details belong to communication audit",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "182–186"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "evidence_scope": "inventory only; not an implemented signature",
+      "constraints": []
+    },
+    {
+      "id": "comm.send_recv_msg",
+      "mnemonic": "%SEND_RECV_MSG",
+      "native_syntax": "configured native function block",
+      "arguments": {},
+      "semantics": "See native communication block; protocol/argument details belong to communication audit",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "187–191"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "evidence_scope": "inventory only; not an implemented signature",
+      "constraints": []
+    },
+    {
+      "id": "comm.send_recv_sms",
+      "mnemonic": "%SEND_RECV_SMS",
+      "native_syntax": "configured native function block",
+      "arguments": {},
+      "semantics": "See native communication block; protocol/argument details belong to communication audit",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "192–203"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "evidence_scope": "inventory only; not an implemented signature",
+      "constraints": [
+        "SEND_RECV_SMS appears in generic manual but not M200 supported object list; cannot mark M200 supported without explicit proof"
+      ]
+    },
+    {
+      "id": "user.udf",
+      "mnemonic": "UDF",
+      "native_syntax": "[dst := FUNCTION_NAME(args)]",
+      "arguments": {
+        "return": "%RET0 optional Word/Double/Float",
+        "params": "%PARAMn Word/Double/Float",
+        "locals": "%VARn Word/Double/Float"
+      },
+      "semantics": "Native reusable function implemented inLD/IL; usable operation/comparison expression; no direct/indirect recursion. UDF may callUDF; may not callSR. Global objects remain accessible.",
+      "sources": [
+        {
+          "source": "O",
+          "pages": "67–71"
+        },
+        {
+          "source": "G",
+          "pages": "206"
+        },
+        {
+          "source": "P",
+          "pages": "25–26"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": "6.0",
+      "limits": {
+        "params_plus_locals": 48
+      },
+      "constraints": [
+        "O says usable master/periodic/event/freePOU; G list omits event; use editor test for event call",
+        "C++ bool/pointer/array/struct UDF signatures not native documented types"
+      ]
+    },
+    {
+      "id": "user.udfb",
+      "mnemonic": "UDFB",
+      "native_syntax": "native Ladder function-block definition and instance",
+      "arguments": {
+        "input_pins": "%I_n BOOL",
+        "output_pins": "%Q_n BOOL",
+        "params": "%PARAMn Word/Double/Float",
+        "locals": "%VARn Word/Double/Float"
+      },
+      "semantics": "Stateful native function-block instances; interface values available via%NAMEinstance.PARAMn. Global%MW/%TM/RISING objects shared across all instances unless declared local FB (FL11+).",
+      "sources": [
+        {
+          "source": "O",
+          "pages": "74–78"
+        },
+        {
+          "source": "P",
+          "pages": "25–26"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": "6.0",
+      "limits": {
+        "input_pins_from_10_0": 32,
+        "output_pins_from_10_0": 32,
+        "input_pins_before_10_0": 8,
+        "output_pins_before_10_0": 8,
+        "params_plus_locals": 48
+      },
+      "constraints": [
+        "manual explicitly says cannot program UDFB in IL editor; native Ladder/XML authoring route required",
+        "local FB supportFL11; allocates global backing instances after last used global instance, therefore total block budget still applies"
+      ]
+    },
+    {
+      "id": "grafcet.initial",
+      "mnemonic": "=*=",
+      "native_syntax": "=*= n",
+      "arguments": {
+        "n": "defined step number integer from1"
+      },
+      "semantics": "Define initial step",
+      "sources": [
+        {
+          "source": "O",
+          "pages": "135–139"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "master task only",
+        "only onePOST in program",
+        "no Grafcet instructions inPOST",
+        "%S21 initialize active/initial; %S22 clearall; %S23 preset/freeze, only preprocessing"
+      ]
+    },
+    {
+      "id": "grafcet.step",
+      "mnemonic": "-*-",
+      "native_syntax": "-*- n",
+      "arguments": {
+        "n": "defined step number integer from1"
+      },
+      "semantics": "Define step",
+      "sources": [
+        {
+          "source": "O",
+          "pages": "135–139"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "master task only",
+        "only onePOST in program",
+        "no Grafcet instructions inPOST",
+        "%S21 initialize active/initial; %S22 clearall; %S23 preset/freeze, only preprocessing"
+      ]
+    },
+    {
+      "id": "grafcet.post",
+      "mnemonic": "=*= POST",
+      "native_syntax": "=*= POST",
+      "arguments": {
+        "n": "defined step number integer from1"
+      },
+      "semantics": "End sequential/start postprocessing",
+      "sources": [
+        {
+          "source": "O",
+          "pages": "135–139"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "master task only",
+        "only onePOST in program",
+        "no Grafcet instructions inPOST",
+        "%S21 initialize active/initial; %S22 clearall; %S23 preset/freeze, only preprocessing"
+      ]
+    },
+    {
+      "id": "grafcet.next",
+      "mnemonic": "#",
+      "native_syntax": "#n",
+      "arguments": {
+        "n": "defined step number integer from1"
+      },
+      "semantics": "Deactivate current step and activate n",
+      "sources": [
+        {
+          "source": "O",
+          "pages": "135–139"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "master task only",
+        "only onePOST in program",
+        "no Grafcet instructions inPOST",
+        "%S21 initialize active/initial; %S22 clearall; %S23 preset/freeze, only preprocessing"
+      ]
+    },
+    {
+      "id": "grafcet.deactivate_current",
+      "mnemonic": "#",
+      "native_syntax": "#",
+      "arguments": {
+        "n": "defined step number integer from1"
+      },
+      "semantics": "Deactivate current step",
+      "sources": [
+        {
+          "source": "O",
+          "pages": "135–139"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "master task only",
+        "only onePOST in program",
+        "no Grafcet instructions inPOST",
+        "%S21 initialize active/initial; %S22 clearall; %S23 preset/freeze, only preprocessing"
+      ]
+    },
+    {
+      "id": "grafcet.deactivate_pair",
+      "mnemonic": "#D",
+      "native_syntax": "#D n",
+      "arguments": {
+        "n": "defined step number integer from1"
+      },
+      "semantics": "Deactivate current step and n",
+      "sources": [
+        {
+          "source": "O",
+          "pages": "135–139"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "master task only",
+        "only onePOST in program",
+        "no Grafcet instructions inPOST",
+        "%S21 initialize active/initial; %S22 clearall; %S23 preset/freeze, only preprocessing"
+      ]
+    },
+    {
+      "id": "grafcet.activate",
+      "mnemonic": "S",
+      "native_syntax": "S %Xn",
+      "arguments": {
+        "n": "defined step number integer from1"
+      },
+      "semantics": "Activate n without changing other active steps",
+      "sources": [
+        {
+          "source": "O",
+          "pages": "135–139"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "master task only",
+        "only onePOST in program",
+        "no Grafcet instructions inPOST",
+        "%S21 initialize active/initial; %S22 clearall; %S23 preset/freeze, only preprocessing"
+      ]
+    },
+    {
+      "id": "grafcet.deactivate",
+      "mnemonic": "R",
+      "native_syntax": "R %Xn",
+      "arguments": {
+        "n": "defined step number integer from1"
+      },
+      "semantics": "Deactivate n without changing other active steps",
+      "sources": [
+        {
+          "source": "O",
+          "pages": "135–139"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "master task only",
+        "only onePOST in program",
+        "no Grafcet instructions inPOST",
+        "%S21 initialize active/initial; %S22 clearall; %S23 preset/freeze, only preprocessing"
+      ]
+    },
+    {
+      "id": "grafcet.sfc",
+      "mnemonic": "Grafcet(SFC)",
+      "native_syntax": "graphical POU with LD/IL action/transition rungs",
+      "arguments": {},
+      "semantics": "Multi-token not IEC61131-3 SFC. At master start apply pending deactivation then activation (activation wins), scan active steps ascending, queue transition changes until nextcycle; one sequential step percycle.",
+      "sources": [
+        {
+          "source": "O",
+          "pages": "140–141"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "functional_level_min": "4.0",
+      "constraints": [
+        "master only, multipleGrafcetPOUs allowed",
+        "cannot convert SFC<->LD/IL or GrafcetList<->SFC; distinct project representation",
+        "transition rung endsENDT"
+      ]
+    },
+    {
+      "id": "clock.snapshot",
+      "mnemonic": "%SW49..53",
+      "native_syntax": "[%MWx:5 := %SW49:5]",
+      "arguments": {
+        "words": "49weekday,50seconds,51HHMM,52MMDD,53CCYY allBCD"
+      },
+      "semantics": "Read RTC snapshot into words; Monday1..Sunday7. %SW54..57 lastSTOPtime and%SW58cause.",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "207–209"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "RTC must exist and be valid",
+        "coherent multiword atomicity during clock rollover unspecified; use%RTCblock if required/validated"
+      ]
+    },
+    {
+      "id": "clock.set",
+      "mnemonic": "%S50",
+      "native_syntax": "S %S50; [write%SW50..53]; R %S50",
+      "arguments": {},
+      "semantics": "S50=1 freezesRTCimageupdates; fallingS50 commits BCDvalues toRTC; weekday recomputed",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "209–210"
+        }
+      ],
+      "evidence_level": "manual_only",
+      "constraints": [
+        "validate calendar/range before write",
+        "requires hardwareRTC"
+      ]
+    },
+    {
+      "id": "clock.adjust",
+      "mnemonic": "%S59/%SW59",
+      "native_syntax": "set %S59; pulse componentbit %SW59",
+      "arguments": {},
+      "semantics": "Rising bits1..6 incrementsec,min,hour,day,month,year; bits9..14 decrement. Bit0/8 weekday and7/15century cannot be changed.",
+      "sources": [
+        {
+          "source": "G",
+          "pages": "210–211"
+        }
+      ],
+      "evidence_level": "manual_only"
+    },
+    {
+      "id": "clock.absolute_counter",
+      "mnemonic": "%SW18/%SW19",
+      "native_syntax": "read system words",
+      "arguments": {},
+      "semantics": "100ms counter: lowSW18 counts0..32767, then incrementsSW19 and resets0; not ordinary binary uint32 packing; cold/initialization reset",
+      "sources": [
+        {
+          "source": "P",
+          "pages": "329–330, system word table %SW18/%SW19"
+        }
+      ],
+      "evidence_level": "manual_only"
+    }
+  ],
+  "critical_reversibility_rules": [
+    {
+      "id": "rev.function_blocks",
+      "source": "O49–51/G103",
+      "rule": "Use BLK/optionalOUT_BLK/END_BLK in documented input/output order; no nestedFB; directCU%C0 etc is nonreversible despite legalIL."
+    },
+    {
+      "id": "rev.boolean_parentheses",
+      "source": "O134–135",
+      "rule": "max32 balanced Boolean parentheses; onlyAND(/OR( withN/F/R/[modifiers. No labels,SR,JMP,FB,ST/STN/S/R,MPS/MRD/MPP inside."
+    },
+    {
+      "id": "rev.operation_expression",
+      "source": "G16/O55",
+      "rule": "max5operands/3arithmetic-parenthesislevels; multiaoperandFL>=5.0. OPER[expr] supports middle ofrung. Distinct from32Booleanparentheses."
+    },
+    {
+      "id": "rev.stack",
+      "source": "O50–51/G82",
+      "rule": "strict reversible max11nestedMPS pendingeditor; matchpush/pop withinrung; noSR/JMP inside stack range; un-nestedOR andOR afteraction/MPS/MRD/MPP nonreversible."
+    },
+    {
+      "id": "rev.control",
+      "source": "O49–51",
+      "rule": "Labels/subroutine/Grafcet definitions followedbyLD/BLK; no duplicate labels/SR/steps/POST; first instruction rungdelimiter; no instructions afterJMP/ENDunconditional withinrung."
+    },
+    {
+      "id": "rev.last_action",
+      "source": "O51",
+      "rule": "SR orJMPC must be last action inrung; OR afteraction andcertainFBoutputlogic losesreversibility; canonical Ladder rungmax256x30cells."
+    },
+    {
+      "id": "rev.graphical_only",
+      "source": "O48,76,140",
+      "rule": "NativeUDFB cannot be authored inILeditor; SFCgraph cannot convert to/fromLD/IL. A compiler promising wholeprojectroundtrip must have separate verified project/Laddergeneration."
+    }
+  ],
+  "genuine_unknowns": [
+    "No localeditor/PLC conformance evidence in this read-only audit. A correct native mnemonic does not establish project XML serialization or runtime simulator equivalence.",
+    "DWORD sign extension, signeddivision/remainder details, error-result bits and floatNaNtableordering insufficiently specified by text.",
+    "Timer retentive minimumFL: G3.3 vs O4.0; stack32storage vs O>11nestederror; UDF event eligibility Oyes/Gomission; %MSGcount1 vsgeneric3ports. Preserve these as profilevalidationgates.",
+    "FORassistant rawILserialization, nativeRTCreversibleILwiring, UDFBprojectrepresentation and localinstanceallocation must be validated with the owningeditor.",
+    "SEND_RECV_SMS unsupported/unproven forM200: not inPobjectlist. PID/motion/hardware/communication detailedsemantics are separate target-specificcapabilities, not coveredbythisgenericinstructionartifact.",
+    "LKUP duplicated-X formula printed as(Ynext-Ycurrent)/2 is unusual; genericguidecounterEunderflow description also conflicts between tables. Use nativecall and differentialtest beforehostemulation.",
+    "CONCATW low,high order corroborated by officialBasic/Twidoemulationmapping; DEG/RADnormalizationbehavior remains ambiguous between nativeguide outputrange prose and emulationformula."
+  ],
+  "exact_lowering_examples": [
+    {
+      "id": "scalar_i16_add",
+      "il": "LD 1\nOPER [%MW0 := %MW2 + 10]",
+      "source": "G16,53–54"
+    },
+    {
+      "id": "scalar_i32_remainder",
+      "il": "LD 1\nOPER [%MD0 := %MD2 REM 7]",
+      "source": "G53–54"
+    },
+    {
+      "id": "word_bitwise_not",
+      "il": "LD 1\nOPER [%MW0 := NOT(%MW2)]",
+      "source": "G55–56"
+    },
+    {
+      "id": "f32_comparison",
+      "il": "LD [%MF0 >= %MF2]\nST %M0",
+      "source": "G49–50"
+    },
+    {
+      "id": "f32_operation_in_middle",
+      "il": "LD %M0\nOPER [%MF10 := ((SIN(%MF12 + 60.0) + COS(%MF13)) + %MF10) + 1.2]",
+      "source": "G16 (example)"
+    }
+  ]
+}

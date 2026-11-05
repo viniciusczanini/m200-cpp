@@ -9,6 +9,7 @@ from pathlib import Path
 
 from .lower import Lowerer
 from .model import address, fail, timer_config
+from .numeric import Number, OPS, READS, WRITES, TYPES, boolean, expect, literal
 
 SDK = Path(__file__).resolve().parents[1] / "sdk"
 WRAPPERS = {
@@ -68,6 +69,15 @@ class Frontend:
                     fail(
                         "only declarations from the bundled plc.hpp header are supported"
                     )
+                # The file path alone does not establish header integrity: user
+                # macros can inject arbitrary declarations inside this namespace.
+                for descendant in walk(node):
+                    locations = [descendant.get("loc", {})]
+                    locations += list(descendant.get("range", {}).values())
+                    if any(
+                        "expansionLoc" in p or "spellingLoc" in p for p in locations
+                    ):
+                        fail("macros may not alter declarations inside the bundled SDK")
                 continue
             if loc.get("offset") is not None:
                 if loc.get("file", str(path)) != str(path):
@@ -83,12 +93,18 @@ class Frontend:
         self.init = []
         self.next_timer = 0
         reserved = set()
+        reserved_words = set()
         for n in walk(tree):
             if n.get("kind") == "CallExpr":
                 name, args = self.call(n)
                 if name in ("plc::read_m", "plc::write_m"):
                     reserved.add(self.index(args[0], 1024, n))
-        self.lower = Lowerer(reserved)
+                key = name.removeprefix("plc::")
+                if key in READS or key in WRITES:
+                    typ = (READS | WRITES)[key]
+                    index = self.index(args[0], 8000 - TYPES[typ][1] + 1, n)
+                    reserved_words.update(range(index, index + TYPES[typ][1]))
+        self.lower = Lowerer(reserved, reserved_words)
 
     def error(self, node, message):
         loc = self.location(node)
@@ -140,6 +156,14 @@ class Frontend:
         children = node.get("inner", [])
         if kind == "CXXBoolLiteralExpr":
             return "1" if node["value"] else "0"
+        if kind == "IntegerLiteral":
+            if "unsigned" in node.get("type", {}).get("qualType", ""):
+                self.error(node, "unsigned numeric literals/promotions are unsupported")
+            return Number("literal", node["value"])
+        if kind == "FloatingLiteral":
+            if node["type"]["qualType"] != "float":
+                self.error(node, "REAL literals require the f suffix")
+            return literal(float(node["value"]), "f32")
         if kind == "DeclRefExpr":
             ref = node["referencedDecl"]["id"]
             if ref in env:
@@ -149,18 +173,69 @@ class Frontend:
             self.error(node, "unknown or unsupported variable")
         if kind == "UnaryOperator" and node.get("opcode") == "!":
             return self.lower.neg(self.expr(children[0], env))
+        if kind == "UnaryOperator" and node.get("opcode") == "-":
+            value = self.expr(children[0], env)
+            if not isinstance(value, Number) or value.code.startswith("%"):
+                self.error(
+                    node,
+                    "numeric negation requires a literal; use plc::sub_* for variables",
+                )
+            return (
+                Number(value.kind, str(-int(value.code)))
+                if value.kind == "literal"
+                else literal(-float(value.code), value.kind)
+            )
         if kind == "BinaryOperator" and node.get("opcode") in (
             "&&",
             "||",
             "^",
             "==",
             "!=",
+            "<",
+            ">",
+            "<=",
+            ">=",
         ):
-            return self.lower.binary(
-                node["opcode"], self.expr(children[0], env), self.expr(children[1], env)
-            )
+            a = self.expr(children[0], env)
+            old_guard = self.lower.guard
+            if node["opcode"] in ("&&", "||"):
+                boolean(a)
+                rhs_guard = a if node["opcode"] == "&&" else self.lower.neg(a)
+                self.lower.guard = (
+                    rhs_guard
+                    if old_guard is None
+                    else self.lower.binary("&&", old_guard, rhs_guard)
+                )
+            try:
+                b = self.expr(children[1], env)
+            finally:
+                self.lower.guard = old_guard
+            if isinstance(a, Number) or isinstance(b, Number):
+                if node["opcode"] not in ("==", "!=", "<", ">", "<=", ">="):
+                    self.error(
+                        node, "numeric operators require explicit plc::* intrinsics"
+                    )
+                return self.lower.comparison(node["opcode"], a, b)
+            return self.lower.binary(node["opcode"], a, b)
         if kind == "CallExpr":
             name, args = self.call(node)
+            key = name.removeprefix("plc::")
+            if key in READS:
+                typ = READS[key]
+                index = self.index(args[0], 8000 - TYPES[typ][1] + 1, node)
+                return Number(typ, "%" + TYPES[typ][0] + str(index))
+            if key in OPS:
+                typ, argtypes, _, _ = OPS[key]
+                values = []
+                for arg, argkind in zip(args, argtypes):
+                    if argkind == "shift":
+                        n = self.const(arg)
+                        if not 1 <= n <= (16 if typ == "i16" else 32):
+                            self.error(node, "shift count outside operand width")
+                        values.append(n)
+                    else:
+                        values.append(expect(self.expr(arg, env), argkind))
+                return self.lower.numeric(key, values)
             if name == "plc::input":
                 return self.input(self.index(args[0], 24, node))
             if name == "plc::output_state":
@@ -219,7 +294,7 @@ class Frontend:
                 self.error(node, "instance updated more than once per scan")
             self.calls.add(ref)
             typ, data = self.instances[ref]
-            signal = self.lower.copy(self.expr(children[1], env))
+            signal = self.lower.copy(boolean(self.expr(children[1], env)))
             if typ in ("Ton", "Tof", "Pulse"):
                 index, config = data
                 return self.lower.timer(index, config, signal)
@@ -261,6 +336,25 @@ class Frontend:
             .get("desugaredQualType", node["type"]["qualType"])
             .replace("struct ", "")
         )
+        numeric_kind = {"plc::i16": "i16", "plc::i32": "i32", "plc::f32": "f32"}.get(
+            node["type"]["qualType"].removeprefix("const ")
+        )
+        if numeric_kind:
+            if node.get("storageClass") == "static" and not global_scope:
+                self.error(node, "local static variables are unsupported")
+            initial = node.get("inner", [])
+            if len(initial) != 1:
+                self.error(node, "numeric variables require one initializer")
+            value = expect(self.expr(initial[0]), numeric_kind)
+            target = self.lower.word(numeric_kind, node["name"])
+            self.variables[node["id"]] = target
+            if global_scope:
+                if value.code.startswith("%"):
+                    self.error(node, "global numeric initializer must be a literal")
+                self.init.append((target, value))
+            else:
+                self.lower.assign(target, value, guard)
+            return
         if typ.startswith("plc::"):
             if not global_scope:
                 self.error(node, "stateful instances must be global")
@@ -327,11 +421,14 @@ class Frontend:
 
     def statement(self, node, guard=None):
         old = self.lower.origin
+        old_guard = self.lower.guard
         self.lower.origin = self.location(node)
+        self.lower.guard = guard
         try:
             self._statement(node, guard)
         finally:
             self.lower.origin = old
+            self.lower.guard = old_guard
 
     def _statement(self, node, guard=None):
         kind = node["kind"]
@@ -345,7 +442,7 @@ class Frontend:
         elif kind == "IfStmt":
             if node.get("hasInit") or node.get("hasVar") or len(children) not in (2, 3):
                 self.error(node, "unsupported if initializer")
-            cond = self.lower.copy(self.expr(children[0]), "branch_condition")
+            cond = self.lower.copy(boolean(self.expr(children[0])), "branch_condition")
             yes = cond if guard is None else self.lower.binary("&&", guard, cond)
             self.statement(children[1], yes)
             if len(children) == 3:
@@ -368,6 +465,10 @@ class Frontend:
                 target = self.output(self.index(args[0], 16, node))
             elif name == "plc::write_m":
                 target = "%M" + str(self.index(args[0], 1024, node))
+            elif name.removeprefix("plc::") in WRITES:
+                typ = WRITES[name.removeprefix("plc::")]
+                index = self.index(args[0], 8000 - TYPES[typ][1] + 1, node)
+                target = Number(typ, "%" + TYPES[typ][0] + str(index))
             else:
                 self.error(node, "only output/write_m calls may be used as statements")
             self.lower.assign(target, self.expr(args[1]), guard)
@@ -382,6 +483,8 @@ class Frontend:
             if n["kind"] == "VarDecl":
                 self.declaration(n, global_scope=True)
             elif n["kind"] == "FunctionDecl":
+                if n.get("variadic"):
+                    self.error(n, "variadic helpers are unsupported")
                 if any(
                     x["kind"] not in ("ParmVarDecl", "CompoundStmt")
                     for x in n.get("inner", [])
@@ -435,7 +538,7 @@ class Frontend:
             }
             helper_body = next(x for x in f["inner"] if x["kind"] == "CompoundStmt")
             try:
-                self.expr(helper_body["inner"][0]["inner"][0], params)
+                boolean(self.expr(helper_body["inner"][0]["inner"][0], params))
             finally:
                 self.lower, self.inputs, self.outputs, self.active = saved
         self.statement(body)
@@ -450,6 +553,9 @@ class Frontend:
         ]
         prefix += [["LD %S13", "R " + v] for _, v in sorted(self.outputs.items())]
         for target, value in self.init:
+            if isinstance(target, Number):
+                prefix.append(["LD %S13", "[" + target.code + ":=" + value.code + "]"])
+                continue
             prefix.append(
                 ["LD %S13", "S " + target]
                 if value == "1"

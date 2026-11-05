@@ -1,0 +1,5237 @@
+{
+  "schema_version": 1,
+  "audit_date": "2026-11-05",
+  "owner": "m200_capabilities_hardware",
+  "scope": "Read-onlyprimary-sourcecapabilityauditofTM200CE40T;notanimplementationorofficialcompatibilitycertification.",
+  "validation_boundaries": [
+    "NoofficialMachineExpertBasiceditoraccesswasavailable",
+    "NophysicalPLCaccess",
+    "Nofirmwarewrites,applicationdownloadsorI/Oactivation",
+    "NoremoteCI/build/testexecution",
+    "JSONsyntaxandstable-IDuniquenessvalidatedlocallyonly"
+  ],
+  "sources": [
+    {
+      "id": "PROG",
+      "document_reference": "EIO0000002019",
+      "version": "06",
+      "title": "Modicon M100/M200 Logic Controller — Programming Guide",
+      "pdf": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/schneider-m200-study-4ep9rxv3/EIO0000002019.pdf",
+      "text": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/schneider-m200-study-4ep9rxv3/EIO0000002019.txt",
+      "sha256": "fb4f684e7efbb46e3e38e61ed532d99bf623bedffe447b5c379dd3dd6c4434df",
+      "url": "https://www.se.com/ww/en/download/document/EIO0000002019/",
+      "page_numbering": "Printed page equals 1-based PDF page in local extraction."
+    },
+    {
+      "id": "HW",
+      "document_reference": "EIO0000002023",
+      "version": "06",
+      "title": "Modicon M100/M200 Logic Controller — Hardware Guide",
+      "pdf": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/schneider-m200-study-4ep9rxv3/EIO0000002023.pdf",
+      "text": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/schneider-m200-study-4ep9rxv3/EIO0000002023.txt",
+      "sha256": "184dd6da7ae276d72e05e67a9640ed8ff3a4211b603bdca4c4b6c7aec597cd69",
+      "url": "https://www.se.com/ww/en/download/document/EIO0000002023/",
+      "page_numbering": "Printed page equals 1-based PDF page in local extraction."
+    },
+    {
+      "id": "GEN",
+      "document_reference": "EIO0000003289",
+      "version": "04",
+      "title": "EcoStruxure Machine Expert Basic — Generic Functions Library Guide",
+      "pdf": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/schneider-m200-study-4ep9rxv3/EIO0000003289.pdf",
+      "text": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/schneider-m200-study-4ep9rxv3/EIO0000003289.txt",
+      "sha256": "d2c8af0598276e7a0bb4f30770e4529282962bc6ee3944dee0645cb9a3186595",
+      "url": "https://www.se.com/ww/en/download/document/EIO0000003289/",
+      "page_numbering": "Printed page equals 1-based PDF page in local extraction."
+    },
+    {
+      "id": "OPER",
+      "document_reference": "EIO0000003281",
+      "version": "04",
+      "title": "EcoStruxure Machine Expert Basic — Operating Guide",
+      "pdf": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/schneider-m200-study-4ep9rxv3/EIO0000003281.pdf",
+      "text": "/var/folders/zk/1kwvl6qj7cvd9v06lf__vwsr0000gn/T/schneider-m200-study-4ep9rxv3/EIO0000003281.txt",
+      "sha256": "2fb60e335bbe92342760471777abf256da7a434c61b98b464ae234aaa82c45e5",
+      "url": "https://www.se.com/ww/en/download/document/EIO0000003281/",
+      "page_numbering": "Printed page equals 1-based PDF page in local extraction."
+    },
+    {
+      "id": "CAT",
+      "document_reference": "DIA3ED2140906EN",
+      "version": "10.0",
+      "release_date": "2026-10-02",
+      "title": "Modicon M200 Logic controllers for simple machines up to 196 I/O",
+      "pdf": "/tmp/m200-hardware-catalog.pdf",
+      "text": "/tmp/m200-hardware-catalog.txt",
+      "sha256": "7f0ea63961360c15c3cf3e9781b47686ed20fe29b62aa6e6502d1fb1e5130c09",
+      "url": "https://www.se.com/my/en/download/document/DIA3ED2140906EN/",
+      "download_url": "https://download.schneider-electric.com/files?p_Doc_Ref=DIA3ED2140906EN",
+      "page_numbering": "Selection guide printed spread 6–7 is PDF page 9; visually inspected local page9 PNG."
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "HW.DIGITAL_INPUTS",
+      "title": "24 embedded digital inputs",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "addresses": "%I0.0..%I0.23",
+        "high_speed": [
+          "%I0.0",
+          "%I0.1",
+          "%I0.6",
+          "%I0.7"
+        ],
+        "fast_counter": [
+          "%I0.2",
+          "%I0.3",
+          "%I0.4",
+          "%I0.5"
+        ],
+        "regular": "%I0.8..%I0.23",
+        "electrical": "24 Vdc sink/source Type1; 0..28.8V input range; regular inputs limited to 5kHz hardware and sampled according to application scan"
+      },
+      "configuration_fields": [
+        "Used",
+        "Address",
+        "Symbol",
+        "Used by",
+        "Filtering",
+        "Latch",
+        "Run/Stop",
+        "Event",
+        "Priority",
+        "Subroutine",
+        "Comment"
+      ],
+      "evidence": [
+        {
+          "source": "HW",
+          "pages": [
+            15,
+            20,
+            21
+          ],
+          "section": "Controller references; Regular and fast inputs"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            51,
+            52,
+            53
+          ],
+          "section": "Configuring Digital Inputs"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            24
+          ],
+          "section": "Maximum Number of Objects"
+        }
+      ]
+    },
+    {
+      "id": "HW.DIGITAL_INPUT_FILTER",
+      "title": "Integrator filter and fast-input bounce filtering",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "integrator_ms": [
+          "No Filter",
+          3,
+          12
+        ],
+        "default_ms": 3,
+        "restrictions": [
+          "Latch/Event require No Filter",
+          "HSC-enabled inputs and latch/event fast inputs have bounce-filter availability in hardware guide"
+        ]
+      },
+      "configuration_fields": [
+        "Filtering"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            52
+          ],
+          "section": "Digital input properties"
+        },
+        {
+          "source": "HW",
+          "pages": [
+            65
+          ],
+          "section": "Integrator Filter Principle; Bounce Filter Availability"
+        }
+      ]
+    },
+    {
+      "id": "HW.DIGITAL_INPUT_LATCH",
+      "title": "Fast input rising-edge latch",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "addresses": "%I0.2..%I0.5",
+        "minimum_latched_pulse_ms": 1,
+        "edge": "rising only",
+        "incompatible": [
+          "integrator filtering",
+          "Run/Stop",
+          "Event"
+        ],
+        "semantics": "A short pulse is remembered and delivered during the next scan; falling-edge latch is unavailable."
+      },
+      "configuration_fields": [
+        "Latch",
+        "Filtering"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            52
+          ],
+          "section": "Digital Inputs Configuration"
+        },
+        {
+          "source": "HW",
+          "pages": [
+            65,
+            66
+          ],
+          "section": "Latching"
+        }
+      ]
+    },
+    {
+      "id": "HW.RUN_STOP_INPUT",
+      "title": "One dedicated Run/Stop digital input",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "count": 1,
+        "semantics": "Rising edge requests RUN; low level forces STOP. Input cannot simultaneously serve FC/HSC/latch/event or other function block. Hardware Run/Stop switch also exists.",
+        "input16_caveat": "HW p69 row I16 shows Run/Stop unavailable despite general prose saying all inputs: unresolved table inconsistency; reject or require validation for %I0.16 assignment."
+      },
+      "configuration_fields": [
+        "Run/Stop",
+        "Application starting mode"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            32,
+            33,
+            52
+          ],
+          "section": "Controller state transitions; Digital input properties"
+        },
+        {
+          "source": "HW",
+          "pages": [
+            69,
+            75,
+            76
+          ],
+          "section": "TM200 U/T inputs; Run/Stop"
+        }
+      ]
+    },
+    {
+      "id": "HW.DIGITAL_OUTPUTS",
+      "title": "16 embedded source transistor outputs",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "addresses": "%Q0.0..%Q0.15",
+        "fast": [
+          "%Q0.0",
+          "%Q0.1"
+        ],
+        "regular": "%Q0.2..%Q0.15",
+        "logic": "PNP/source (positive)",
+        "voltage_vdc": [
+          20.4,
+          28.8
+        ],
+        "regular_current_a_per_channel": 0.5,
+        "current_groups_a": {
+          "Q0..Q3": 2,
+          "Q4..Q7": 2,
+          "Q8..Q15": 4
+        },
+        "fast_mode_current_ma": 50,
+        "fast_switching_us_max": 5,
+        "overload": "Short-circuit protection and automatic retry each1s; group enters protection together."
+      },
+      "configuration_fields": [
+        "Used",
+        "Address",
+        "Symbol",
+        "Used by",
+        "Status Alarm",
+        "Fallback value",
+        "Comment"
+      ],
+      "evidence": [
+        {
+          "source": "HW",
+          "pages": [
+            15,
+            25,
+            26,
+            27
+          ],
+          "section": "References; Regular/Fast transistor output characteristics"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            54,
+            55
+          ],
+          "section": "Configuring Digital Outputs"
+        }
+      ]
+    },
+    {
+      "id": "HW.STATUS_ALARM_OUTPUT",
+      "title": "One running-state alarm output",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "count": 1,
+        "allowed_addresses": "%Q0.0..%Q0.7",
+        "true_when": "RUNNING",
+        "false_when": "all other controller states",
+        "restriction": "Cannot also be used as program output; fallback field disabled."
+      },
+      "configuration_fields": [
+        "Status Alarm"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            54,
+            55
+          ],
+          "section": "Digital outputs configuration"
+        }
+      ]
+    },
+    {
+      "id": "HW.OUTPUT_FALLBACK",
+      "title": "Output default values, maintain values and expert-function stop behavior",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented_with_conflict",
+      "details": {
+        "default_fallback": 0,
+        "regular_outputs": "Configured0/1 fallback or Maintain values according to fallback mode.",
+        "expert_outputs": "PTO fallback forced0; expert outputs HSC/PLS/PWM/PTO/FREQGEN listed0 in general table.",
+        "forcing": "Output forcing overrides application logic; persists logout/online change, cleared by cold start/download; forcing does not apply to expert functions.",
+        "HSC_conflict": "HSC-specific p175 says reflex outputs0 if Maintain values is selected, otherwise configured fallback; general p37 says all expert outputs0."
+      },
+      "configuration_fields": [
+        "Fallback value",
+        "Fallback Behavior",
+        "Maintain values"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            35,
+            36,
+            37,
+            55,
+            175
+          ],
+          "section": "Output Behavior; Fallback Values; HSC Special Cases"
+        },
+        {
+          "source": "HW",
+          "pages": [
+            72
+          ],
+          "section": "Fallback Modes"
+        }
+      ],
+      "conflicts": [
+        "CF.HSC_FALLBACK"
+      ]
+    },
+    {
+      "id": "HW.FAST_COUNTER",
+      "title": "Four 5kHz fast counters",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "instances": "%FC0..%FC3",
+        "pin_map": {
+          "%FC0": "%I0.2",
+          "%FC1": "%I0.3",
+          "%FC2": "%I0.4",
+          "%FC3": "%I0.5"
+        },
+        "frequency_hz_max": 5000,
+        "modes": [
+          "Up Counter",
+          "Down Counter"
+        ],
+        "word_preset": [
+          0,
+          65535
+        ],
+        "dword_preset": [
+          0,
+          4294967295
+        ],
+        "members": [
+          "IN",
+          "R",
+          "D",
+          "P",
+          "PD",
+          "V",
+          "VD"
+        ],
+        "semantics": "IN enables counting/hold; R initializes0 for up or preset for down, resets D. D latches when up reaches preset or down reaches0."
+      },
+      "configuration_fields": [
+        "Input",
+        "Configured",
+        "Preset",
+        "Double Word",
+        "Symbol",
+        "Comment"
+      ],
+      "evidence": [
+        {
+          "source": "HW",
+          "pages": [
+            21,
+            69
+          ],
+          "section": "Fast Input Characteristics; Input function matrix"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            169,
+            170,
+            171
+          ],
+          "section": "Fast Counter (%FC)"
+        }
+      ]
+    },
+    {
+      "id": "HW.HSC",
+      "title": "High-speed counters, phase modes and width",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "instances": "%HSC0..%HSC3",
+        "frequency_hz_max": 100000,
+        "single_phase_map": {
+          "HSC0": "%I0.0",
+          "HSC1": "%I0.6",
+          "HSC2": "%I0.1",
+          "HSC3": "%I0.7"
+        },
+        "dual_phase_pairs": {
+          "HSC0": [
+            "%I0.0",
+            "%I0.1"
+          ],
+          "HSC1": [
+            "%I0.6",
+            "%I0.7"
+          ]
+        },
+        "dual_phase_modes": [
+          "Pulse / Direction",
+          "Clock Wise / Counter Clock Wise",
+          "Quadrature X1",
+          "Quadrature X2",
+          "Quadrature X4"
+        ],
+        "count_modes": {
+          "single": [
+            "One Shot",
+            "Modulo Loop",
+            "Free Large"
+          ],
+          "dual": [
+            "Modulo Loop",
+            "Free Large"
+          ]
+        },
+        "word_range": [
+          0,
+          65535
+        ],
+        "dword_range": [
+          0,
+          4294967295
+        ],
+        "quadrature_x1_dword_limit": 2147483647,
+        "read_only_present_value": [
+          "%HSCi.V",
+          "%HSCi.VD"
+        ]
+      },
+      "configuration_fields": [
+        "Type of HSC",
+        "Counting Mode",
+        "Input Mode",
+        "Double Word",
+        "Preset",
+        "Modulo Value (%HSC.P)",
+        "Threshold S0",
+        "Threshold S1",
+        "Trigger function",
+        "Priority",
+        "Preset Input",
+        "Catch Input",
+        "Reflex Output0",
+        "Reflex Output1"
+      ],
+      "evidence": [
+        {
+          "source": "HW",
+          "pages": [
+            21
+          ],
+          "section": "Fast Input Characteristics"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            172,
+            173,
+            174,
+            175,
+            176
+          ],
+          "section": "High Speed Counters Configuration; High Speed Counter"
+        }
+      ]
+    },
+    {
+      "id": "HW.HSC_AUX",
+      "title": "HSC preset/capture and reflex outputs",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "HSC0": {
+          "preset": "%I0.2",
+          "capture": "%I0.3",
+          "reflex_outputs": [
+            "%Q0.4",
+            "%Q0.5"
+          ]
+        },
+        "HSC1": {
+          "preset": "%I0.5",
+          "capture": "%I0.4",
+          "reflex_outputs": [
+            "%Q0.6",
+            "%Q0.7"
+          ]
+        },
+        "HSC2_HSC3": "Single-phase only; no auxiliary/reflex outputs assigned in p63 table",
+        "reflex_conditions": [
+          "Value < S0",
+          "S0 <= Value < S1",
+          "Value >= S1"
+        ],
+        "conflicts": "An auxiliary pin allocated to HSC cannot simultaneously be FC/event; HSC0 dual phase consumes HSC2 pulse pin, HSC1 dual phase consumes HSC3 pulse pin."
+      },
+      "configuration_fields": [
+        "Preset Input",
+        "Catch Input",
+        "Reflex Output0",
+        "Reflex Output1",
+        "Value < S0",
+        "S0 <= Value < S1",
+        "Value >= S1"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            62,
+            63,
+            67,
+            68
+          ],
+          "section": "Dedicated I/O Assignments; Reflex Outputs Configuration"
+        },
+        {
+          "source": "HW",
+          "pages": [
+            69,
+            71,
+            72
+          ],
+          "section": "Input/Output Management"
+        }
+      ]
+    },
+    {
+      "id": "HW.HSC_FREQUENCY_METER",
+      "title": "Two HSC frequency meters",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "instances": [
+          "%HSC0",
+          "%HSC1"
+        ],
+        "pins": [
+          "%I0.0",
+          "%I0.6"
+        ],
+        "window_ms": [
+          100,
+          1000
+        ],
+        "default_window_ms": 1000,
+        "frequency_hz": [
+          100,
+          100000
+        ],
+        "double_word_optional": true,
+        "members": [
+          "%HSCi.T",
+          "%HSCi.V",
+          "%HSCi.VD"
+        ]
+      },
+      "configuration_fields": [
+        "Type of HSC=Frequency Meter",
+        "Double Word",
+        "Time Window100ms",
+        "Time Window1s"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            69,
+            184,
+            185
+          ],
+          "section": "Configuring Frequency Meter; HSC Frequency Meter Mode"
+        }
+      ]
+    },
+    {
+      "id": "HW.PULSE_RESOURCES",
+      "title": "Two mutually exclusive pulse generator resources",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "outputs": [
+          "%Q0.0",
+          "%Q0.1"
+        ],
+        "resource_types": [
+          "Not Configured",
+          "PLS",
+          "PWM",
+          "PTO",
+          "FREQGEN"
+        ],
+        "sharing": "Each output can implement one allocated expert function. A PTO direction output may consume another output including the other fast pulse pin; CW/CCW PTO0 consumes both fast outputs and disables PTO1."
+      },
+      "configuration_fields": [
+        "Address",
+        "Symbol",
+        "Type",
+        "Configuration",
+        "Type of pulse generator",
+        "Comment"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            55,
+            56,
+            57,
+            59,
+            210,
+            223
+          ],
+          "section": "Configuring Pulse Generators; PWM; PTO"
+        },
+        {
+          "source": "HW",
+          "pages": [
+            71,
+            72
+          ],
+          "section": "Transistor Output Management Availability"
+        }
+      ]
+    },
+    {
+      "id": "HW.PLS",
+      "title": "Square-wave pulse count generation",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented_with_conflict",
+      "details": {
+        "instances": "%PLS0..%PLS1",
+        "pins": [
+          "%Q0.0",
+          "%Q0.1"
+        ],
+        "duty_percent": 50,
+        "timebase_preset_ranges": {
+          "0.1ms": [
+            1,
+            20000
+          ],
+          "1ms": [
+            1,
+            2000
+          ],
+          "10ms": [
+            1,
+            200
+          ],
+          "1s": [
+            1,
+            2
+          ]
+        },
+        "documented_configuration_frequency_hz": [
+          0.5,
+          10000
+        ],
+        "hardware_claim_hz_max": 100000,
+        "pulses_word": [
+          0,
+          32767
+        ],
+        "pulses_dword": [
+          0,
+          2147483647
+        ],
+        "pulses0": "unlimited",
+        "members": [
+          "IN",
+          "R",
+          "Q",
+          "D",
+          "P",
+          "N",
+          "ND"
+        ],
+        "update_semantics": "Period change at end of ongoing period. P0/out-of-range stops. Pulse count change applies next execution; out-of-range count forced0."
+      },
+      "configuration_fields": [
+        "Double Word",
+        "Time Base",
+        "Preset",
+        "Num. Pulse",
+        "Current",
+        "Done"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            57,
+            58,
+            185,
+            186,
+            187,
+            188
+          ],
+          "section": "PLS Configuration; Pulse (%PLS)"
+        },
+        {
+          "source": "HW",
+          "pages": [
+            27
+          ],
+          "section": "Maximum PLS/PTO/FREQGEN frequency"
+        }
+      ],
+      "conflicts": [
+        "CF.PLS_FREQUENCY",
+        "CF.PLS_DUTY"
+      ]
+    },
+    {
+      "id": "HW.PWM",
+      "title": "Two PWM outputs with integer-percent duty cycle",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "instances": "%PWM0..%PWM1",
+        "pins": [
+          "%Q0.0",
+          "%Q0.1"
+        ],
+        "frequency_hz": [
+          1,
+          10000
+        ],
+        "duty_percent": [
+          0,
+          100
+        ],
+        "duty_step_percent": 1,
+        "accuracy_percent_full_scale": 1,
+        "timebase_preset_ranges": {
+          "0.1ms": [
+            1,
+            10000
+          ],
+          "1ms": [
+            1,
+            1000
+          ],
+          "10ms": [
+            1,
+            100
+          ],
+          "1s": [
+            1,
+            1
+          ]
+        },
+        "members": [
+          "IN",
+          "P",
+          "R"
+        ],
+        "semantics": "R is duty%; >100 treated100; period changed at end of active period; P0 stops output; IN0 drives output0."
+      },
+      "configuration_fields": [
+        "Time Base",
+        "Preset",
+        "Duty cycle"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            58,
+            210,
+            211,
+            212
+          ],
+          "section": "PWM Configuration; PWM parameters"
+        },
+        {
+          "source": "HW",
+          "pages": [
+            27
+          ],
+          "section": "PWM mode specifications"
+        }
+      ]
+    },
+    {
+      "id": "HW.FREQGEN",
+      "title": "Two variable-frequency 50% square-wave generators",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "instances": "%FREQGEN0..%FREQGEN1",
+        "pins": [
+          "%Q0.0",
+          "%Q0.1"
+        ],
+        "frequency_hz": [
+          0,
+          100000
+        ],
+        "step_hz": 1,
+        "duty_percent": 50,
+        "members": [
+          "ENABLE",
+          "SYNC",
+          "Freq",
+          "INFREQ",
+          "BUSY",
+          "ERROR",
+          "ErrorId"
+        ],
+        "sync": "Rising SYNC applies target frequency immediately without waiting end of active period.",
+        "stop": "Application stop cancels generation without waiting pulse end; ERROR remainsFALSE. Errors auto-acknowledge when condition clears.",
+        "error_ids": {
+          "NoError": 0,
+          "OutputProtection": 1007,
+          "InvalidFrequencyValue": 3002
+        }
+      },
+      "configuration_fields": [
+        "Freq",
+        "Symbol",
+        "Comment"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            24,
+            61,
+            291,
+            292,
+            293
+          ],
+          "section": "Maximum Objects; Configuring Frequency Generator; FREQGEN"
+        },
+        {
+          "source": "HW",
+          "pages": [
+            71
+          ],
+          "section": "Transistor Output Management Availability"
+        }
+      ]
+    },
+    {
+      "id": "HW.PTO_AXIS",
+      "title": "Two independent single-axis PTO resources",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented_with_conflict",
+      "details": {
+        "instances": [
+          "%PTO0",
+          "%PTO1"
+        ],
+        "output_modes": [
+          "Pulse / Direction",
+          "Clock Wise / Counter Clock Wise"
+        ],
+        "pulse_pins": {
+          "PTO0": "%Q0.0",
+          "PTO1": "%Q0.1"
+        },
+        "direction": "Not used or %Q0.0..%Q0.15; defaultsPTO0=%Q0.2,PTO1=%Q0.3",
+        "cw_ccw": "OnlyPTO0 usingQ0.0/Q0.1; disablesPTO1",
+        "velocity_hz": [
+          0,
+          100000
+        ],
+        "step_hz": 1,
+        "position_signed32": [
+          -2147483648,
+          2147483647
+        ],
+        "accel_hz_per_ms": [
+          1,
+          100000
+        ],
+        "velocity_accuracy_percent": 1,
+        "profiles": [
+          "trapezoidal",
+          "S-curve"
+        ],
+        "fast_output_current_ma_conservative": 50,
+        "programming_current_claim_ma": 200,
+        "semantics": "Open-loop pulse positioning; two independent axes, not evidence of coordinated/interpolated motion."
+      },
+      "configuration_fields": [
+        "Output Mode",
+        "Pulse",
+        "Direction",
+        "Clock Wise",
+        "Counter Clock Wise",
+        "Maximum Velocity",
+        "Start Velocity",
+        "Stop Velocity",
+        "Maximum Acceleration",
+        "Maximum Deceleration",
+        "Fast Stop Deceleration",
+        "Backlash Compensation",
+        "Enable the software position limits",
+        "Low Limit",
+        "High Limit",
+        "Enable the REF input",
+        "Enable the INDEX input",
+        "Enable the PROBE input",
+        "Contact type"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            59,
+            60,
+            223,
+            224,
+            225,
+            226,
+            240,
+            241
+          ],
+          "section": "PTO configuration; PTO characteristics"
+        },
+        {
+          "source": "HW",
+          "pages": [
+            26,
+            27,
+            71,
+            72
+          ],
+          "section": "Fast outputs; allocation"
+        }
+      ],
+      "conflicts": [
+        "CF.FAST_OUTPUT_CURRENT"
+      ]
+    },
+    {
+      "id": "HW.PTO_AUX_INPUTS",
+      "title": "PTO reference/index/probe and application limits",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "PTO0": {
+          "REF": "%I0.8",
+          "INDEX": "%I0.9",
+          "PROBE": "%I0.12"
+        },
+        "PTO1": {
+          "REF": "%I0.10",
+          "INDEX": "%I0.11",
+          "PROBE": "%I0.13"
+        },
+        "application_assigned": [
+          "DriveReady",
+          "Limit positive",
+          "Limit negative",
+          "DriveEnable output"
+        ],
+        "model_specific": "Do not use C16 mappings I2/I4/I5 for CE40T. REF/INDEX/PROBE pins fixed by selected model.",
+        "nominal_response_us": {
+          "origin": 250,
+          "limit": 250,
+          "probe": 30,
+          "probe_falling_edge_possible": 50
+        }
+      },
+      "configuration_fields": [
+        "Enable the REF input",
+        "Enable the INDEX input",
+        "Enable the PROBE input",
+        "Contact type",
+        "DriveReady",
+        "LimP",
+        "LimN",
+        "DriveEnable"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            60,
+            224,
+            240
+          ],
+          "section": "PTO auxiliary input and output assignment"
+        },
+        {
+          "source": "HW",
+          "pages": [
+            26,
+            69
+          ],
+          "section": "Fast output response; input allocation"
+        }
+      ]
+    },
+    {
+      "id": "HW.PTO_HOME",
+      "title": "Homing methods and software limits",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "homing_modes": {
+          "PositionSetting": 0,
+          "LongReference": 1,
+          "ShortReference_Reversal": 20,
+          "ShortReference_NoReversal": 21,
+          "ShortReference_with_INDEX": 22
+        },
+        "position_setting": "Changes coordinate without physical move",
+        "home_offset_pulses": [
+          -2147483648,
+          2147483647
+        ],
+        "backlash_compensation_pulses": [
+          0,
+          65535
+        ],
+        "absolute_move": "Requires Homed; otherwise InvalidAbsolute error",
+        "software_limits": "Active after successful homing; valid signed32 range; hardware limits required for correct homing behavior."
+      },
+      "configuration_fields": [
+        "HomingMode",
+        "Position",
+        "HomeOffset",
+        "Backlash Compensation",
+        "Low Limit",
+        "High Limit"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            228,
+            229,
+            230,
+            241,
+            242,
+            243,
+            244,
+            245,
+            246,
+            247,
+            248,
+            267
+          ],
+          "section": "Backlash; positioning limits; homing; MC_MoveAbs"
+        }
+      ]
+    },
+    {
+      "id": "HW.PTO_QUEUE",
+      "title": "Single buffered motion command and queue rules",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "capacity": 1,
+        "buffer_modes": {
+          "mcAborting": 0,
+          "mcBuffered": 1,
+          "mcBlendingPrevious": 3,
+          "seTrigger": 10,
+          "seBufferedDelay": 11
+        },
+        "direction_codes": {
+          "mcPositiveDirection": 1,
+          "mcNegativeDirection": -1
+        },
+        "queue_cleared_on": [
+          "aborting move",
+          "MC_Stop_PTO",
+          "ErrorStop"
+        ],
+        "same_instance": "Do not use same FB instance from different tasks; do not modify AXIS while executing.",
+        "stop_state": "Cold restart =>Disabled, controller stop=>ErrorStop."
+      },
+      "configuration_fields": [
+        "BufferMode",
+        "AXIS"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            232,
+            240,
+            248,
+            254
+          ],
+          "section": "PTO Special Cases; Buffer Modes; Motion Queue Diagram"
+        }
+      ]
+    },
+    {
+      "id": "HW.PTO_MOTION_TABLES",
+      "title": "Preconfigured16-step single-axis motion sequences",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "object": "%MTx",
+        "steps_per_table_max": 16,
+        "commands": [
+          "Move absolute",
+          "Move relative",
+          "Halt",
+          "Set position",
+          "Move velocity"
+        ],
+        "next_step_conditions": [
+          "Done / In velocity",
+          "Blending previous",
+          "Probe input event",
+          "SW event",
+          "Delay"
+        ],
+        "probe_events_per_table_max": 1,
+        "software_event_poll_ms": 4,
+        "delay_ms": [
+          0,
+          65535
+        ],
+        "delay0": "For event waits,0 means no timeout",
+        "read_par_delay": "PTO parameter1000 does not change motion-table Delay",
+        "configuration": "Motion overview is an estimate with assumptions, not physical trajectory verification."
+      },
+      "configuration_fields": [
+        "Step",
+        "Type",
+        "Pos",
+        "Distance",
+        "Vel",
+        "Acc",
+        "Dec",
+        "Jerk ratio",
+        "Next step",
+        "Event",
+        "Delay",
+        "Software Objects",
+        "Use probe event range",
+        "First position",
+        "Last position"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            232,
+            233,
+            234,
+            235,
+            236
+          ],
+          "section": "Motion Task Table Assistant"
+        }
+      ]
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_MOTIONTASK_PTO",
+      "title": "MC_MotionTask_PTO",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "object_prefix": "%MC_MOTIONTASK_PTO",
+        "purpose": "Execute a configured motion table",
+        "maximum_instances_listed": 2,
+        "maximum_note": "Null means not stated in maximum-objects table; do not invent a count.",
+        "dependency": "ConfiguredPTO axis; MC_Power is mandatory before moves."
+      },
+      "configuration_fields": [
+        "AXIS",
+        "Inputs/outputs per official block-specific section"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            255
+          ],
+          "section": "MC_MotionTask_PTO Function Block"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            238,
+            239
+          ],
+          "section": "Maximum objects; PTO Function Blocks"
+        }
+      ]
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_POWER_PTO",
+      "title": "MC_Power_PTO",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "object_prefix": "%MC_POWER_PTO",
+        "purpose": "Enable axis; required before any move",
+        "maximum_instances_listed": 86,
+        "maximum_note": "Null means not stated in maximum-objects table; do not invent a count.",
+        "dependency": "ConfiguredPTO axis; MC_Power is mandatory before moves."
+      },
+      "configuration_fields": [
+        "AXIS",
+        "Inputs/outputs per official block-specific section"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            258
+          ],
+          "section": "MC_Power_PTO Function Block"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            238,
+            239
+          ],
+          "section": "Maximum objects; PTO Function Blocks"
+        }
+      ]
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_MOVEVEL_PTO",
+      "title": "MC_MoveVel_PTO",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "object_prefix": "%MC_MOVEVEL_PTO",
+        "purpose": "Continuous velocity move",
+        "maximum_instances_listed": 86,
+        "maximum_note": "Null means not stated in maximum-objects table; do not invent a count.",
+        "dependency": "ConfiguredPTO axis; MC_Power is mandatory before moves."
+      },
+      "configuration_fields": [
+        "AXIS",
+        "Inputs/outputs per official block-specific section"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            261
+          ],
+          "section": "MC_MoveVel_PTO Function Block"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            238,
+            239
+          ],
+          "section": "Maximum objects; PTO Function Blocks"
+        }
+      ]
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_MOVEREL_PTO",
+      "title": "MC_MoveRel_PTO",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "object_prefix": "%MC_MOVEREL_PTO",
+        "purpose": "Incremental distance move",
+        "maximum_instances_listed": 86,
+        "maximum_note": "Null means not stated in maximum-objects table; do not invent a count.",
+        "dependency": "ConfiguredPTO axis; MC_Power is mandatory before moves."
+      },
+      "configuration_fields": [
+        "AXIS",
+        "Inputs/outputs per official block-specific section"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            264
+          ],
+          "section": "MC_MoveRel_PTO Function Block"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            238,
+            239
+          ],
+          "section": "Maximum objects; PTO Function Blocks"
+        }
+      ]
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_MOVEABS_PTO",
+      "title": "MC_MoveAbs_PTO",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "object_prefix": "%MC_MOVEABS_PTO",
+        "purpose": "Absolute position move; needs homed axis",
+        "maximum_instances_listed": 86,
+        "maximum_note": "Null means not stated in maximum-objects table; do not invent a count.",
+        "dependency": "ConfiguredPTO axis; MC_Power is mandatory before moves."
+      },
+      "configuration_fields": [
+        "AXIS",
+        "Inputs/outputs per official block-specific section"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            267
+          ],
+          "section": "MC_MoveAbs_PTO Function Block"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            238,
+            239
+          ],
+          "section": "Maximum objects; PTO Function Blocks"
+        }
+      ]
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_HOME_PTO",
+      "title": "MC_Home_PTO",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "object_prefix": "%MC_HOME_PTO",
+        "purpose": "Establish absolute reference",
+        "maximum_instances_listed": 86,
+        "maximum_note": "Null means not stated in maximum-objects table; do not invent a count.",
+        "dependency": "ConfiguredPTO axis; MC_Power is mandatory before moves."
+      },
+      "configuration_fields": [
+        "AXIS",
+        "Inputs/outputs per official block-specific section"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            270
+          ],
+          "section": "MC_Home_PTO Function Block"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            238,
+            239
+          ],
+          "section": "Maximum objects; PTO Function Blocks"
+        }
+      ]
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_SETPOS_PTO",
+      "title": "MC_SetPos_PTO",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "object_prefix": "%MC_SETPOS_PTO",
+        "purpose": "Change axis coordinates without physical movement",
+        "maximum_instances_listed": null,
+        "maximum_note": "Null means not stated in maximum-objects table; do not invent a count.",
+        "dependency": "ConfiguredPTO axis; MC_Power is mandatory before moves."
+      },
+      "configuration_fields": [
+        "AXIS",
+        "Inputs/outputs per official block-specific section"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            272
+          ],
+          "section": "MC_SetPos_PTO Function Block"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            238,
+            239
+          ],
+          "section": "Maximum objects; PTO Function Blocks"
+        }
+      ]
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_STOP_PTO",
+      "title": "MC_Stop_PTO",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "object_prefix": "%MC_STOP_PTO",
+        "purpose": "Controlled stop into Stopping; abort active motion",
+        "maximum_instances_listed": null,
+        "maximum_note": "Null means not stated in maximum-objects table; do not invent a count.",
+        "dependency": "ConfiguredPTO axis; MC_Power is mandatory before moves."
+      },
+      "configuration_fields": [
+        "AXIS",
+        "Inputs/outputs per official block-specific section"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            273
+          ],
+          "section": "MC_Stop_PTO Function Block"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            238,
+            239
+          ],
+          "section": "Maximum objects; PTO Function Blocks"
+        }
+      ]
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_HALT_PTO",
+      "title": "MC_Halt_PTO",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "object_prefix": "%MC_HALT_PTO",
+        "purpose": "Controlled halt into Discrete then Standstill",
+        "maximum_instances_listed": null,
+        "maximum_note": "Null means not stated in maximum-objects table; do not invent a count.",
+        "dependency": "ConfiguredPTO axis; MC_Power is mandatory before moves."
+      },
+      "configuration_fields": [
+        "AXIS",
+        "Inputs/outputs per official block-specific section"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            275
+          ],
+          "section": "MC_Halt_PTO Function Block"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            238,
+            239
+          ],
+          "section": "Maximum objects; PTO Function Blocks"
+        }
+      ]
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_READACTVEL_PTO",
+      "title": "MC_ReadActVel_PTO",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "object_prefix": "%MC_READACTVEL_PTO",
+        "purpose": "Read velocity",
+        "maximum_instances_listed": 40,
+        "maximum_note": "Null means not stated in maximum-objects table; do not invent a count.",
+        "dependency": "ConfiguredPTO axis; MC_Power is mandatory before moves."
+      },
+      "configuration_fields": [
+        "AXIS",
+        "Inputs/outputs per official block-specific section"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            277
+          ],
+          "section": "MC_ReadActVel_PTO Function Block"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            238,
+            239
+          ],
+          "section": "Maximum objects; PTO Function Blocks"
+        }
+      ]
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_READACTPOS_PTO",
+      "title": "MC_ReadActPos_PTO",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "object_prefix": "%MC_READACTPOS_PTO",
+        "purpose": "Read position",
+        "maximum_instances_listed": 40,
+        "maximum_note": "Null means not stated in maximum-objects table; do not invent a count.",
+        "dependency": "ConfiguredPTO axis; MC_Power is mandatory before moves."
+      },
+      "configuration_fields": [
+        "AXIS",
+        "Inputs/outputs per official block-specific section"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            278
+          ],
+          "section": "MC_ReadActPos_PTO Function Block"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            238,
+            239
+          ],
+          "section": "Maximum objects; PTO Function Blocks"
+        }
+      ]
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_READSTS_PTO",
+      "title": "MC_ReadSts_PTO",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "object_prefix": "%MC_READSTS_PTO",
+        "purpose": "Read state diagram status",
+        "maximum_instances_listed": 40,
+        "maximum_note": "Null means not stated in maximum-objects table; do not invent a count.",
+        "dependency": "ConfiguredPTO axis; MC_Power is mandatory before moves."
+      },
+      "configuration_fields": [
+        "AXIS",
+        "Inputs/outputs per official block-specific section"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            279
+          ],
+          "section": "MC_ReadSts_PTO Function Block"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            238,
+            239
+          ],
+          "section": "Maximum objects; PTO Function Blocks"
+        }
+      ]
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_READMOTIONSTATE_PTO",
+      "title": "MC_ReadMotionState_PTO",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "object_prefix": "%MC_READMOTIONSTATE_PTO",
+        "purpose": "Read motion status",
+        "maximum_instances_listed": 40,
+        "maximum_note": "Null means not stated in maximum-objects table; do not invent a count.",
+        "dependency": "ConfiguredPTO axis; MC_Power is mandatory before moves."
+      },
+      "configuration_fields": [
+        "AXIS",
+        "Inputs/outputs per official block-specific section"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            281
+          ],
+          "section": "MC_ReadMotionState_PTO Function Block"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            238,
+            239
+          ],
+          "section": "Maximum objects; PTO Function Blocks"
+        }
+      ]
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_READAXISERROR_PTO",
+      "title": "MC_ReadAxisError_PTO",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "object_prefix": "%MC_READAXISERROR_PTO",
+        "purpose": "Read axis error",
+        "maximum_instances_listed": 40,
+        "maximum_note": "Null means not stated in maximum-objects table; do not invent a count.",
+        "dependency": "ConfiguredPTO axis; MC_Power is mandatory before moves."
+      },
+      "configuration_fields": [
+        "AXIS",
+        "Inputs/outputs per official block-specific section"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            282
+          ],
+          "section": "MC_ReadAxisError_PTO Function Block"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            238,
+            239
+          ],
+          "section": "Maximum objects; PTO Function Blocks"
+        }
+      ]
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_RESET_PTO",
+      "title": "MC_Reset_PTO",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "object_prefix": "%MC_RESET_PTO",
+        "purpose": "Clear permitted axis errors from ErrorStop",
+        "maximum_instances_listed": 40,
+        "maximum_note": "Null means not stated in maximum-objects table; do not invent a count.",
+        "dependency": "ConfiguredPTO axis; MC_Power is mandatory before moves."
+      },
+      "configuration_fields": [
+        "AXIS",
+        "Inputs/outputs per official block-specific section"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            283
+          ],
+          "section": "MC_Reset_PTO Function Block"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            238,
+            239
+          ],
+          "section": "Maximum objects; PTO Function Blocks"
+        }
+      ]
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_TOUCHPROBE_PTO",
+      "title": "MC_TouchProbe_PTO",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "object_prefix": "%MC_TOUCHPROBE_PTO",
+        "purpose": "Activate trigger/probe capture",
+        "maximum_instances_listed": 40,
+        "maximum_note": "Null means not stated in maximum-objects table; do not invent a count.",
+        "dependency": "ConfiguredPTO axis; MC_Power is mandatory before moves."
+      },
+      "configuration_fields": [
+        "AXIS",
+        "Inputs/outputs per official block-specific section"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            284
+          ],
+          "section": "MC_TouchProbe_PTO Function Block"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            238,
+            239
+          ],
+          "section": "Maximum objects; PTO Function Blocks"
+        }
+      ]
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_ABORTTRIGGER_PTO",
+      "title": "MC_AbortTrigger_PTO",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "object_prefix": "%MC_ABORTTRIGGER_PTO",
+        "purpose": "Abort probe trigger",
+        "maximum_instances_listed": 40,
+        "maximum_note": "Null means not stated in maximum-objects table; do not invent a count.",
+        "dependency": "ConfiguredPTO axis; MC_Power is mandatory before moves."
+      },
+      "configuration_fields": [
+        "AXIS",
+        "Inputs/outputs per official block-specific section"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            286
+          ],
+          "section": "MC_AbortTrigger_PTO Function Block"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            238,
+            239
+          ],
+          "section": "Maximum objects; PTO Function Blocks"
+        }
+      ]
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_READPAR_PTO",
+      "title": "MC_ReadPar_PTO",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "object_prefix": "%MC_READPAR_PTO",
+        "purpose": "Read PTO parameter",
+        "maximum_instances_listed": 40,
+        "maximum_note": "Null means not stated in maximum-objects table; do not invent a count.",
+        "dependency": "ConfiguredPTO axis; MC_Power is mandatory before moves."
+      },
+      "configuration_fields": [
+        "AXIS",
+        "Inputs/outputs per official block-specific section"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            287
+          ],
+          "section": "MC_ReadPar_PTO Function Block"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            238,
+            239
+          ],
+          "section": "Maximum objects; PTO Function Blocks"
+        }
+      ]
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_WRITEPAR_PTO",
+      "title": "MC_WritePar_PTO",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "object_prefix": "%MC_WRITEPAR_PTO",
+        "purpose": "Write PTO parameter",
+        "maximum_instances_listed": 40,
+        "maximum_note": "Null means not stated in maximum-objects table; do not invent a count.",
+        "dependency": "ConfiguredPTO axis; MC_Power is mandatory before moves."
+      },
+      "configuration_fields": [
+        "AXIS",
+        "Inputs/outputs per official block-specific section"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            289
+          ],
+          "section": "MC_WritePar_PTO Function Block"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            238,
+            239
+          ],
+          "section": "Maximum objects; PTO Function Blocks"
+        }
+      ]
+    },
+    {
+      "id": "HW.PTO_PARAMETER_ACCESS",
+      "title": "PTO runtime read/write parameter numbers",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "parameters": {
+          "1": [
+            "CommandedPosition",
+            "R"
+          ],
+          "2": [
+            "SWLimitPos",
+            "RW"
+          ],
+          "3": [
+            "SWLimitNeg",
+            "RW"
+          ],
+          "4": [
+            "EnableLimitPos",
+            "RW"
+          ],
+          "5": [
+            "EnableLimitNeg",
+            "RW"
+          ],
+          "9": [
+            "MaxVelocityAppl",
+            "RW"
+          ],
+          "10": [
+            "ActualVelocity",
+            "R"
+          ],
+          "11": [
+            "CommandedVelocity",
+            "R"
+          ],
+          "13": [
+            "MaxAccelerationAppl",
+            "RW"
+          ],
+          "15": [
+            "MaxDecelerationAppl",
+            "RW"
+          ],
+          "1000": [
+            "Delay",
+            "RW"
+          ],
+          "1004": [
+            "EnableDirPos",
+            "RW"
+          ],
+          "1005": [
+            "EnableDirNeg",
+            "RW"
+          ]
+        },
+        "16..999": "ReservedPLCopen range",
+        "direction_enable_updates": "Applied next move or nextvelocity0"
+      },
+      "configuration_fields": [
+        "ParNumber",
+        "Value"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            248,
+            249,
+            287,
+            288,
+            289,
+            290
+          ],
+          "section": "PTO Parameter; MC_ReadPar/MC_WritePar"
+        }
+      ]
+    },
+    {
+      "id": "HW.ANALOG_EMBEDDED",
+      "title": "No embedded analog I/O",
+      "model": "TM200CE40T",
+      "applicability": "unsupported_embedded",
+      "evidence_status": "documented",
+      "details": {
+        "embedded_analog_inputs": 0,
+        "embedded_analog_outputs": 0,
+        "alternate": "Add optional TMCR2 cartridge or TM2/TM3 analog expansion. A %IW/%QW address alone does not prove physical analog channel exists."
+      },
+      "configuration_fields": [],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            24
+          ],
+          "section": "Maximum Number of Objects"
+        }
+      ]
+    },
+    {
+      "id": "HW.EXPANSION_BUS",
+      "title": "Up to4 local TM2/TM3/TM3R expansion modules",
+      "model": "TM200CE40T",
+      "applicability": "optional_expansion",
+      "evidence_status": "documented",
+      "details": {
+        "max_modules": 4,
+        "supported_families": [
+          "TM3 digital I/O",
+          "TM3R digital mixed I/O",
+          "TM3 analog I/O",
+          "TM2 digital I/O",
+          "TM2 analog I/O"
+        ],
+        "ordering": "TM2 cannot precede any TM3/TM3R module",
+        "bus_budget": {
+          "5V_mA": 360,
+          "24V_mA": 320
+        },
+        "addresses": {
+          "digital": "%Iy.z / %Qy.z; y=1..4 module position",
+          "analog": "Module-family-specific%IW/%QW and%IWS/%QWS"
+        },
+        "caveat": "Exact optional-module reference, channel count, range, bus consumption and max digital outputs require its own official module manual and official-editor hardware validation. Family support does not imply every TM3 accessory/safety/expert module is supported."
+      },
+      "configuration_fields": [
+        "Expansion module reference",
+        "Position",
+        "Optional module",
+        "Channel Type",
+        "Minimum",
+        "Maximum",
+        "Filter",
+        "Fallback value"
+      ],
+      "evidence": [
+        {
+          "source": "HW",
+          "pages": [
+            17,
+            18
+          ],
+          "section": "M200 maximum hardware configuration"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            22,
+            24,
+            70,
+            73,
+            99,
+            100,
+            107,
+            108,
+            109,
+            110
+          ],
+          "section": "I/O expansion configuration"
+        }
+      ]
+    },
+    {
+      "id": "HW.EXPANSION_BUS_ERRORS",
+      "title": "Active/passive expansion error management and restart",
+      "model": "TM200CE40T",
+      "applicability": "optional_expansion",
+      "evidence_status": "documented",
+      "details": {
+        "active_default": "%S106=0; after2 consecutive unsuccessful bus-task cycles, TM3 outputs0; bus off.",
+        "passive": "%S106=1; TM3 holds~10s then0 if unrecovered; TM2 holds indefinitely until power cycle/initialize; embedded I/O/application continue.",
+        "restart": "Rising%S107 only if%S106=0,%SW118 bit14=0,and at least one%SW120 bit=1.",
+        "diagnostics": [
+          "%SW118",
+          "%SW119 optional module bitmap",
+          "%SW120 module error bitmap",
+          "ERR LED"
+        ]
+      },
+      "configuration_fields": [
+        "Optional module",
+        "%S106",
+        "%S107"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            70,
+            71,
+            72,
+            335
+          ],
+          "section": "I/O Bus Error Handling; system words"
+        }
+      ]
+    },
+    {
+      "id": "HW.CARTRIDGE_SLOTS",
+      "title": "Two TMCR2 cartridge slots and compatibility rules",
+      "model": "TM200CE40T",
+      "applicability": "optional_cartridge",
+      "evidence_status": "documented_with_conflict",
+      "details": {
+        "slots": 2,
+        "digital_analog_refs": [
+          "TMCR2DM4U",
+          "TMCR2AI2",
+          "TMCR2AQ2V",
+          "TMCR2AQ2C",
+          "TMCR2AM3",
+          "TMCR2TI2"
+        ],
+        "serial_refs": [
+          "TMCR2SL1",
+          "TMCR2SL1A",
+          "TMCR2SL1S"
+        ],
+        "older_levels": "OneTMCR2SL1 orTMCR2SL1A maximum; oneI/O+one serial or two I/O supported.",
+        "functional_level12_1": "TMCR2SL1S supported. Allowed2serial combinations:TMCR2SL1A+TMCR2SL1S, or2xTMCR2SL1S. TwoTMCR2SL1A or twoTMCR2SL1 not allowed.",
+        "level12_0": "Exact12.0 boundary not clarified: prose says<12.0 legacy and>=12.1 new; treat12.0 conservatively as legacy."
+      },
+      "configuration_fields": [
+        "Cartridge reference",
+        "Slot",
+        "Functional Level"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            74,
+            75
+          ],
+          "section": "Cartridge Configuration; Serial Cartridge Compatibility"
+        },
+        {
+          "source": "HW",
+          "pages": [
+            27,
+            42,
+            43
+          ],
+          "section": "TMCR2 cartridges; TMCR2SL1S"
+        }
+      ],
+      "conflicts": [
+        "CF.SERIAL_CARTRIDGE_COUNT"
+      ]
+    },
+    {
+      "id": "HW.CARTRIDGE_DIGITAL",
+      "title": "TMCR2DM4U2DI+2sinkDO",
+      "model": "TM200CE40T",
+      "applicability": "optional_cartridge",
+      "evidence_status": "documented",
+      "details": {
+        "inputs": 2,
+        "outputs": 2,
+        "output_logic": "sink even on source-outputCE40T controller",
+        "rated_output_a": 0.5,
+        "addresses": {
+          "input": "%I0.x0y",
+          "output": "%Q0.x0y",
+          "x": "cartridge1or2",
+          "y": "channel0or1"
+        }
+      },
+      "configuration_fields": [
+        "Used",
+        "Address",
+        "Symbol",
+        "Comment"
+      ],
+      "evidence": [
+        {
+          "source": "HW",
+          "pages": [
+            27,
+            28,
+            29
+          ],
+          "section": "TMCR2DM4U characteristics"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            78
+          ],
+          "section": "TMCR2DM4U"
+        }
+      ]
+    },
+    {
+      "id": "HW.CARTRIDGE_AI2",
+      "title": "TMCR2AI2 two12-bit analog inputs",
+      "model": "TM200CE40T",
+      "applicability": "optional_cartridge",
+      "evidence_status": "documented",
+      "details": {
+        "inputs": 2,
+        "resolution_bits": 12,
+        "ranges": [
+          "0..10V",
+          "0..20mA",
+          "4..20mA"
+        ],
+        "address": "%IW0.x0y (e.g.%IW0.101)",
+        "status": "%IWS0.x0y",
+        "scaling": [
+          -32768,
+          32767
+        ],
+        "default_scales": {
+          "0..10V": [
+            0,
+            10000
+          ],
+          "0..20mA": [
+            0,
+            20000
+          ],
+          "4..20mA": [
+            4000,
+            20000
+          ]
+        },
+        "sample_ms_per_enabled_channel": 10,
+        "filter_config": "Filter0..100 times100ms unit (0..10s); hardwarep31 says0.01s increment, conflict.",
+        "isolation": "not isolated"
+      },
+      "configuration_fields": [
+        "Type",
+        "Scope=Normal",
+        "Min.",
+        "Max.",
+        "Filter",
+        "Filter Unit=100ms",
+        "Units"
+      ],
+      "evidence": [
+        {
+          "source": "HW",
+          "pages": [
+            30,
+            31
+          ],
+          "section": "TMCR2AI2 Characteristics"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            78,
+            79,
+            97
+          ],
+          "section": "TMCR2AI2 configuration; diagnostics"
+        }
+      ],
+      "conflicts": [
+        "CF.AI2_FILTER_RESOLUTION"
+      ]
+    },
+    {
+      "id": "HW.CARTRIDGE_AQ2V",
+      "title": "TMCR2AQ2V two12-bit voltage outputs",
+      "model": "TM200CE40T",
+      "applicability": "optional_cartridge",
+      "evidence_status": "documented",
+      "details": {
+        "outputs": 2,
+        "range": "0..10V",
+        "resolution_bits": 12,
+        "address": "%QW0.x0y",
+        "status": "%QWS0.x0y",
+        "scaling": [
+          -32768,
+          32767
+        ],
+        "default_scale": [
+          0,
+          10000
+        ],
+        "load_impedance": "greater2kOhm",
+        "conversion_ms": 20,
+        "total_transfer_ms": 40,
+        "isolation": "not isolated"
+      },
+      "configuration_fields": [
+        "Type",
+        "Scope=Normal",
+        "Minimum",
+        "Maximum",
+        "Fallback value",
+        "Units"
+      ],
+      "evidence": [
+        {
+          "source": "HW",
+          "pages": [
+            31,
+            32,
+            33
+          ],
+          "section": "TMCR2AQ2V"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            80,
+            81,
+            97,
+            98
+          ],
+          "section": "TMCR2AQ2V configuration; diagnostics"
+        }
+      ]
+    },
+    {
+      "id": "HW.CARTRIDGE_AQ2C",
+      "title": "TMCR2AQ2C two12-bit current outputs",
+      "model": "TM200CE40T",
+      "applicability": "optional_cartridge",
+      "evidence_status": "documented",
+      "details": {
+        "outputs": 2,
+        "range": "4..20mA",
+        "resolution_bits": 12,
+        "address": "%QW0.x0y",
+        "status": "%QWS0.x0y",
+        "scaling": [
+          -32768,
+          32767
+        ],
+        "default_scale": [
+          4000,
+          20000
+        ],
+        "load_impedance": "less500Ohm",
+        "conversion_ms": 20,
+        "total_transfer_ms": 40,
+        "isolation": "not isolated"
+      },
+      "configuration_fields": [
+        "Type",
+        "Scope=Normal",
+        "Minimum",
+        "Maximum",
+        "Fallback value",
+        "Units"
+      ],
+      "evidence": [
+        {
+          "source": "HW",
+          "pages": [
+            33,
+            34
+          ],
+          "section": "TMCR2AQ2C"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            79,
+            80,
+            97,
+            98
+          ],
+          "section": "TMCR2AQ2C configuration; diagnostics"
+        }
+      ]
+    },
+    {
+      "id": "HW.CARTRIDGE_AM3",
+      "title": "TMCR2AM3 two16-bit AI plus one16-bit AO",
+      "model": "TM200CE40T",
+      "applicability": "optional_cartridge",
+      "evidence_status": "documented_with_conflict",
+      "details": {
+        "inputs": 2,
+        "outputs": 1,
+        "resolution_bits": 16,
+        "ranges": [
+          "0..5V",
+          "0..10V",
+          "0..20mA",
+          "4..20mA"
+        ],
+        "addresses": [
+          "%IW0.x0y",
+          "%QW0.x0y"
+        ],
+        "scaling": [
+          -32768,
+          32767
+        ],
+        "filter_levels": {
+          "0": "none",
+          "1,2": "smooth",
+          "3,4": "average",
+          "5,6": "high"
+        },
+        "isolation": "I/O isolated from internal logic; input/output mutually not isolated.",
+        "summary_conflict": "Programmingp74 summary voltage-only; detailedpp81–83 and hardwarepp35–37 explicitly voltage+current."
+      },
+      "configuration_fields": [
+        "Type",
+        "Scope=Customized/Normal",
+        "Minimum",
+        "Maximum",
+        "Filter",
+        "Fallback value"
+      ],
+      "evidence": [
+        {
+          "source": "HW",
+          "pages": [
+            34,
+            35,
+            36,
+            37
+          ],
+          "section": "TMCR2AM3 characteristics"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            74,
+            81,
+            82,
+            83
+          ],
+          "section": "Cartridge features; TMCR2AM3 details"
+        }
+      ],
+      "conflicts": [
+        "CF.AM3_SIGNAL_TYPES"
+      ]
+    },
+    {
+      "id": "HW.CARTRIDGE_TI2",
+      "title": "TMCR2TI2 thermocouple/3-wireRTD inputs",
+      "model": "TM200CE40T",
+      "applicability": "optional_cartridge",
+      "evidence_status": "documented",
+      "details": {
+        "inputs": 2,
+        "nominal_resolution_bits": 14,
+        "actual_steps": "Signal-dependent; not a uniform16384steps. HWp39 listsK15000,J12000,R/S17600,PT10010500,PT10008000,NI100/NI10002400etc.",
+        "ranges_celsius": {
+          "K": [
+            -200,
+            1300
+          ],
+          "J": [
+            -200,
+            1000
+          ],
+          "R": [
+            0,
+            1760
+          ],
+          "S": [
+            0,
+            1760
+          ],
+          "B": [
+            0,
+            1820
+          ],
+          "E": [
+            -200,
+            800
+          ],
+          "T": [
+            -200,
+            400
+          ],
+          "N": [
+            -200,
+            1300
+          ],
+          "C": [
+            0,
+            2315
+          ],
+          "PT100": [
+            -200,
+            850
+          ],
+          "PT1000": [
+            -200,
+            600
+          ],
+          "NI100": [
+            -60,
+            180
+          ],
+          "NI1000": [
+            -60,
+            180
+          ]
+        },
+        "sample_ms_per_enabled_channel": {
+          "thermocouple": 125,
+          "RTD": 250
+        },
+        "address": "%IW0.x0y",
+        "status": "%IWS0.x0y",
+        "scale": "Customized signed16 orNormal units Celsius/Fahrenheit, usually0.1degree; B/C Fahrenheit0.2degree.",
+        "filter": "0..100 times100ms =>0..10s",
+        "isolation": "not isolated"
+      },
+      "configuration_fields": [
+        "Type",
+        "Scope",
+        "Minimum",
+        "Maximum",
+        "Filter",
+        "Filter Unit",
+        "Units"
+      ],
+      "evidence": [
+        {
+          "source": "HW",
+          "pages": [
+            37,
+            38,
+            39
+          ],
+          "section": "TMCR2TI2 characteristics"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            83,
+            84,
+            85,
+            97
+          ],
+          "section": "TMCR2TI2 configuration; diagnostics"
+        }
+      ]
+    },
+    {
+      "id": "HW.ANALOG_DIAGNOSTICS",
+      "title": "Per-channel analog status and cartridge health",
+      "model": "TM200CE40T",
+      "applicability": "optional_cartridge_or_expansion",
+      "evidence_status": "documented",
+      "details": {
+        "cartridge_input_status_codes": {
+          "0": "Normal",
+          "1": "Converting",
+          "2": "Initialization",
+          "3": "Input setting error or no input",
+          "5": "High range wiring error",
+          "6": "Low range wiring error",
+          "7": "Nonvolatile memory error"
+        },
+        "cartridge_output_status_codes": {
+          "0": "Normal",
+          "2": "Initialization",
+          "3": "Output setting error or no output",
+          "7": "Nonvolatile memory error"
+        },
+        "per_channel_addresses": [
+          "%IWS0.x0y",
+          "%QWS0.x0y"
+        ],
+        "cartridge_status": [
+          "%SW128",
+          "%SW129"
+        ],
+        "bus_health": "%SW118bit5=0 for cartridge error. Expansion-module%IWS/%QWS status coding is module-specific, not automatically cartridge coding."
+      },
+      "configuration_fields": [],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            97,
+            98,
+            109,
+            110,
+            335,
+            336
+          ],
+          "section": "TMCR2 Analog Cartridge Diagnostics; Expansion Analog Diagnostics; system words"
+        }
+      ]
+    },
+    {
+      "id": "HW.ETHERNET",
+      "title": "One embedded10/100Ethernet port",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "connector": "RJ45",
+        "speed_mbps": [
+          10,
+          100
+        ],
+        "autonegotiation": true,
+        "mdi_mdix": true,
+        "medium": "shielded Ethernet",
+        "services": [
+          "ModbusTCPServer",
+          "ModbusTCPClient",
+          "ModbusTCPSlaveDeviceMapping",
+          "Programming/download/monitoring"
+        ],
+        "security_enables": [
+          "Programming protocol enabled",
+          "Auto discovery protocol enabled",
+          "Modbus server enabled"
+        ]
+      },
+      "configuration_fields": [
+        "Device name",
+        "IP address by DHCP",
+        "IP address by BOOTP",
+        "Fixed IP address",
+        "IP address",
+        "Subnet mask",
+        "Gateway address",
+        "Transfer Rate",
+        "Security Parameters"
+      ],
+      "evidence": [
+        {
+          "source": "HW",
+          "pages": [
+            129,
+            130
+          ],
+          "section": "Ethernet Port"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            111,
+            112,
+            113,
+            114,
+            115,
+            116
+          ],
+          "section": "Ethernet Configuration"
+        }
+      ]
+    },
+    {
+      "id": "HW.ETHERNET_ADDRESSING",
+      "title": "Fixed/DHCP/BOOTP with MAC-derived fallback",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "fixed_default": "0.0.0.0 =>10.10.XXX.YYY from decimal last2MACbytes",
+        "duplicate_ip": "FallbackMAC-derived address; %SW118bit9=1,%SW62=1",
+        "runtime_ip_words": {
+          "IP": [
+            "%SW33",
+            "%SW34"
+          ],
+          "MASK": [
+            "%SW35",
+            "%SW36"
+          ],
+          "GATEWAY": [
+            "%SW37",
+            "%SW38"
+          ],
+          "read_write_select": "%S33"
+        },
+        "MAC_words": [
+          "%SW107",
+          "%SW108",
+          "%SW109"
+        ],
+        "reconfiguration": "IP process restarts reboot, cable reconnect,changedIPdownload, DHCP/BOOTP server/lease events."
+      },
+      "configuration_fields": [
+        "IP address by DHCP",
+        "IP address by BOOTP",
+        "Fixed IP address",
+        "IP address",
+        "Subnet mask",
+        "Gateway address"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            113,
+            114,
+            115,
+            329,
+            334
+          ],
+          "section": "Ethernet addressing; runtime configuration"
+        }
+      ]
+    },
+    {
+      "id": "HW.ETHERNET_RATE_OVERRIDE",
+      "title": "Runtime forcing Ethernet autonegotiation/speed/duplex",
+      "model": "TM200CE40T",
+      "applicability": "unsupported_embedded",
+      "evidence_status": "documented_with_conflict",
+      "details": {
+        "unsupported_bits": [
+          "%S34",
+          "%S35",
+          "%S36"
+        ],
+        "specific_source": "Programmingp323 explicitly marks all3 not supported; Ethernet TransferRate is read-onlyAuto.",
+        "conflicting_hardware_note": "Hardwarep130 says changing these bits may reinitializeEthernet; do not expose unsupported controls."
+      },
+      "configuration_fields": [],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            114,
+            323
+          ],
+          "section": "Ethernet TransferRate; System Bits"
+        },
+        {
+          "source": "HW",
+          "pages": [
+            130
+          ],
+          "section": "Ethernet status note"
+        }
+      ],
+      "conflicts": [
+        "CF.ETHERNET_RATE_BITS"
+      ]
+    },
+    {
+      "id": "HW.MODBUS_TCP_CONNECTIONS",
+      "title": "TCP server/client connection limits",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "server_connections_max": 8,
+        "client_connections_max": 1,
+        "remote_device_definitions_max": 16,
+        "eviction": "Newoverlimitserverconnection closesoldestexceptMachineExpertBasic; do not equate16configuredremotes with16simultaneousTCPclients.",
+        "state_transitions": "RUNNING/STOPPED/HALTEDstatechange closesconnections; poweroutagecannotclosecleanly.",
+        "diagnostic": "%SW168 serverconnectionsinuse"
+      },
+      "configuration_fields": [],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            112,
+            118,
+            119,
+            338
+          ],
+          "section": "Ethernet Services; Client Remote Devices; connection diagnostics"
+        }
+      ]
+    },
+    {
+      "id": "HW.MODBUS_TCP_MAPPING",
+      "title": "Separate mapped network register table",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "functional_level_min": "3.2",
+        "UnitID": [
+          1,
+          247
+        ],
+        "output_registers_received": "%IWM0..%IWM19",
+        "input_registers_sent": "%QWM0..%QWM19",
+        "register_count_each": [
+          1,
+          20
+        ],
+        "register_count_default_each": 10,
+        "routing": "MatchingUnitID usesmappedobjects; UnitID255 ornonmatchingUnitID accessesordinary%MW instead withoutModbuserror.",
+        "function_map": {
+          "3": "read%QWM",
+          "4": "read%IWM",
+          "6": "writeone%IWM",
+          "16": "writemultiple%IWM",
+          "23": "read%QWM+write%IWM"
+        },
+        "runtime_access": "Accessprioritysameasordinary%MW."
+      },
+      "configuration_fields": [
+        "Enabled",
+        "Unit ID",
+        "Output registers (%IWM)",
+        "Input registers (%QWM)"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            117,
+            118,
+            136,
+            215,
+            216
+          ],
+          "section": "ModbusTCPMapping; network objects"
+        }
+      ]
+    },
+    {
+      "id": "HW.MODBUS_SERIAL",
+      "title": "EmbeddednonisolatedRS485SL1",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented_with_conflict",
+      "details": {
+        "embedded_ports": 1,
+        "port": "SL1",
+        "medium": "RS485only",
+        "isolation": false,
+        "baud_rates": [
+          1200,
+          2400,
+          4800,
+          9600,
+          19200,
+          38400,
+          57600,
+          115200
+        ],
+        "baud_default_programming": 19200,
+        "parity": [
+          "None",
+          "Even",
+          "Odd"
+        ],
+        "parity_default": "Even",
+        "data_bits": [
+          7,
+          8
+        ],
+        "stop_bits": [
+          1,
+          2
+        ],
+        "protocols": [
+          "ModbusRTU",
+          "ModbusASCII",
+          "ASCII",
+          "ModbusSerialIOScanner"
+        ],
+        "modbus_roles": [
+          "Master",
+          "Slave"
+        ],
+        "slave_address": [
+          1,
+          247
+        ],
+        "slave_default": 1,
+        "polarization": "Softwareconfigurable560Ohmresistors",
+        "power5v_supply": false,
+        "cable": "Shielded; HWstates50mbetweencontrollerandisolatedjunctionbox.",
+        "runtime_modbus_config": {
+          "SL1_enable": "%S124",
+          "SL1_words": [
+            "%SW224",
+            "%SW227"
+          ],
+          "SL2_enable": "%S125",
+          "SL2_words": [
+            "%SW225",
+            "%SW228"
+          ],
+          "SL3_enable": "%S126",
+          "SL3_words": [
+            "%SW226",
+            "%SW229"
+          ]
+        },
+        "runtime_caveat": "ProtocolenableedgecancelsongoingEXCH; ignoredwhenIOScannerconfiguredorpostconfigurationexists."
+      },
+      "configuration_fields": [
+        "Baud rate",
+        "Parity",
+        "Data bits",
+        "Stop bits",
+        "Physical medium",
+        "Polarization",
+        "Protocol",
+        "Addressing",
+        "Address [1...247]",
+        "Response time (x100ms)",
+        "Time between frames (ms)"
+      ],
+      "evidence": [
+        {
+          "source": "HW",
+          "pages": [
+            132,
+            133
+          ],
+          "section": "Serial Line1"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            124,
+            125,
+            126,
+            127,
+            128,
+            326,
+            339,
+            340
+          ],
+          "section": "Serial Line Configuration; dynamicRTUconfig"
+        }
+      ],
+      "conflicts": [
+        "CF.RS485_5V"
+      ]
+    },
+    {
+      "id": "HW.SERIAL_OPTIONAL",
+      "title": "AdditionalRS232/RS485andisolatedRS485cartridges",
+      "model": "TM200CE40T",
+      "applicability": "optional_cartridge",
+      "evidence_status": "documented",
+      "details": {
+        "TMCR2SL1": {
+          "ports": 1,
+          "medium": [
+            "RS232",
+            "RS485"
+          ],
+          "isolated": false
+        },
+        "TMCR2SL1A": {
+          "ports": 1,
+          "medium": [
+            "RS485"
+          ],
+          "isolated": true
+        },
+        "TMCR2SL1S": {
+          "ports": 1,
+          "medium": [
+            "RS485"
+          ],
+          "isolated": true,
+          "functional_level_min": "12.1"
+        },
+        "baud_range": [
+          1200,
+          115200
+        ],
+        "logical_ports": "SL2 and,withpermitted2serialcartridges,SL3",
+        "compatibility": "SeeHW.CARTRIDGE_SLOTS; cannotinferalltwocartridgecombinations."
+      },
+      "configuration_fields": [
+        "Physical medium",
+        "Protocol",
+        "Baud rate",
+        "Parity",
+        "Data bits",
+        "Stop bits",
+        "Polarization",
+        "Addressing",
+        "Slave address",
+        "Functional Level"
+      ],
+      "evidence": [
+        {
+          "source": "HW",
+          "pages": [
+            39,
+            40,
+            41,
+            42,
+            43
+          ],
+          "section": "Serial cartridge characteristics"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            74,
+            75,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97
+          ],
+          "section": "Serial cartridge compatibility/configuration"
+        }
+      ]
+    },
+    {
+      "id": "HW.MODBUS_FUNCTION_CODES",
+      "title": "Modbusserver/internal-memoryrequestcodes",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "codes": {
+          "1": "read%M",
+          "2": "read%M",
+          "3": "read%MW",
+          "4": "read%MW",
+          "5": "writesingle%M",
+          "6": "writesingle%MW",
+          "8": "diagnosticssubcodes0,10..18",
+          "15": "writemultiple%M",
+          "16": "writemultiple%MW",
+          "23": "read/writemultiple%MW",
+          "43": "deviceidentificationMEI14"
+        },
+        "caveat": "Serialsupportedcodetableexplicit;TCPmappingisasubsetandhasdifferent%IWM/%QWMrouting.Otherremotedevicesmayinterpretcoil/registerregionsdifferently."
+      },
+      "configuration_fields": [],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            134,
+            135,
+            136
+          ],
+          "section": "SupportedModbusFunctionCodes"
+        }
+      ]
+    },
+    {
+      "id": "HW.MODBUS_IOSCANNER",
+      "title": "OneglobalIOScannerinstanceSerialORtcp",
+      "model": "TM200CE40T",
+      "applicability": "embedded_or_optional_serial",
+      "evidence_status": "documented",
+      "details": {
+        "instances_global_max": 1,
+        "exclusion": "CannotenableTCPIOScannerandSerialIOScannerconcurrently;norcanscanonmultipleserialports.",
+        "functional_level_tcp_min": "6.0",
+        "objects_total": {
+          "below6.0": 128,
+          "atleast6.0": 512
+        },
+        "devices_max": 16,
+        "init_requests_per_device_max": 20,
+        "channels_per_device_max": 10,
+        "initialization": "Waitforallinitrequestacknowledgmentsbeforecyclicexchange;networkobjectsnotupdatedwhileinitializing.",
+        "trigger_modes": [
+          "Cyclic",
+          "Rising edgeof%M"
+        ],
+        "cycle_time_units_ms": 10,
+        "cycle_time_parameter": [
+          1,
+          6000
+        ],
+        "default_cycle_time_ms": 200,
+        "remote_offset": [
+          0,
+          65535
+        ],
+        "read_error_policies": [
+          "Set to zero",
+          "Retain last value"
+        ],
+        "reset_suspend": {
+          "SL1": [
+            "%S110",
+            "%S113"
+          ],
+          "SL2": [
+            "%S111",
+            "%S114"
+          ],
+          "SL3": [
+            "%S109",
+            "%S116"
+          ],
+          "ETH1": [
+            "%S112",
+            "%S115"
+          ]
+        },
+        "state_words": {
+          "SL1": "%SW210",
+          "SL2": "%SW211",
+          "SL3": "%SW213",
+          "ETH1": "%SW212"
+        },
+        "states": {
+          "0": "stopped",
+          "1": "initializing",
+          "2": "operational",
+          "3": "partiallyoperational",
+          "4": "suspended"
+        },
+        "per_device_reset": "Configured%Mresendinitializationrequests."
+      },
+      "configuration_fields": [
+        "Enable Modbus TCP IOScanner",
+        "IP address",
+        "ID",
+        "Name",
+        "Type",
+        "Index",
+        "Response timeout (x100ms)",
+        "Reset variable",
+        "Init Request Unit ID",
+        "Channels Unit ID",
+        "Init. requests",
+        "Channels",
+        "Message type",
+        "Trigger",
+        "Cycle time (x10ms)",
+        "Memory bit",
+        "READ Offset",
+        "READ Length",
+        "WRITE Offset",
+        "WRITE Length",
+        "Error management"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            116,
+            118,
+            119,
+            120,
+            121,
+            122,
+            123,
+            124,
+            128,
+            129,
+            130,
+            131,
+            132,
+            133,
+            134,
+            136,
+            339
+          ],
+          "section": "IOScannerconfiguration/limits/state"
+        }
+      ]
+    },
+    {
+      "id": "HW.MODBUS_IOSCANNER_LIMITS",
+      "title": "IOScannerrequestsizeandaddresslimits",
+      "model": "TM200CE40T",
+      "applicability": "embedded_or_optional_serial",
+      "evidence_status": "documented",
+      "details": {
+        "max_lengths": {
+          "1_read_coils_bits": 128,
+          "2_read_discrete_bits": 128,
+          "3_read_holding_words": 125,
+          "4_read_input_words": 125,
+          "5_write_single_coil": 1,
+          "6_write_single_register": 1,
+          "15_write_coils_bits": 128,
+          "16_write_words": 123,
+          "23_read_words": 125,
+          "23_write_words": 121
+        },
+        "init_supported": [
+          5,
+          6,
+          15,
+          16
+        ],
+        "channel_supported": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          15,
+          16,
+          23
+        ],
+        "network_address_formula": "a=100+SL1device,200+SL2device,300+ETH1device,400+SL3device; b=channel,c=objectindex",
+        "objects": [
+          "%INa.b.c",
+          "%QNa.b.c",
+          "%IWNa.b.c",
+          "%QWNa.b.c",
+          "%IWNSa",
+          "%IWNSa.b"
+        ],
+        "examples": [
+          "%IWN302.3.0=Ethernetdevice2channel3word0",
+          "%QWN205.0.4=SL2device5channel0word4"
+        ]
+      },
+      "configuration_fields": [
+        "Message type",
+        "Offset",
+        "Length",
+        "Initialization value"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            23,
+            24,
+            121,
+            131,
+            135,
+            217,
+            218,
+            219,
+            220,
+            221
+          ],
+          "section": "Addressing; request limits; networkobjects"
+        }
+      ]
+    },
+    {
+      "id": "HW.COMM_READ_VAR",
+      "title": "ModbusREAD_VARdataread",
+      "model": "TM200CE40T",
+      "applicability": "embedded_or_optional_serial",
+      "evidence_status": "documented",
+      "details": {
+        "Link": [
+          "SL1",
+          "SL2ifcartridge",
+          "SL3ifpermittedcartridgesandFL12.1",
+          "ETH1"
+        ],
+        "serial_id": [
+          1,
+          247
+        ],
+        "ethernet_id": [
+          1,
+          16
+        ],
+        "timeout": "100msunits,default100=10s,0=noenforcedtimeout; FBtimeoutoverridesportconfiguration",
+        "triggers": [
+          "Executerisingedge",
+          "Abortrisingedge"
+        ],
+        "first_run": "TRUEonfirstRUNcycleisnotarisingedge; mustfirstobserveFALSE",
+        "outputs": [
+          "Done",
+          "Busy",
+          "Aborted",
+          "Error",
+          "CommErrorBYTE",
+          "OperErrorDWORD"
+        ],
+        "concurrency": "Only1activecommunicationFBorEXCHperport; checkcurrentexchangestatusbeforestartinganother.",
+        "instances_per_type": {
+          "FLbelow10.1": 16,
+          "FLatleast10.1": 32
+        },
+        "local_words": "%MW0..%MW7999;validateentirebufferendnotjuststart.",
+        "object_types": {
+          "0": "holdingwordsFC3",
+          "1": "digitalinputsFC2",
+          "2": "digitaloutputsFC1",
+          "3": "inputwordsFC4"
+        },
+        "quantities": {
+          "holding/inputwords": [
+            1,
+            125
+          ],
+          "bits": [
+            1,
+            2000
+          ]
+        },
+        "remote_first_object": [
+          0,
+          65535
+        ],
+        "bit_packing": "Consecutivebitsinlocal%MWtable,bit0upwards."
+      },
+      "configuration_fields": [
+        "Link",
+        "Id",
+        "Timeout",
+        "ObjType",
+        "FirstObj",
+        "Quantity",
+        "IndexData",
+        "Symbol",
+        "Comment"
+      ],
+      "evidence": [
+        {
+          "source": "GEN",
+          "pages": [
+            171,
+            172,
+            173,
+            174,
+            175,
+            176,
+            177
+          ],
+          "section": "READ_VAR"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            25
+          ],
+          "section": "MaximumObjects"
+        }
+      ]
+    },
+    {
+      "id": "HW.COMM_WRITE_VAR",
+      "title": "ModbusWRITE_VARdatawrite",
+      "model": "TM200CE40T",
+      "applicability": "embedded_or_optional_serial",
+      "evidence_status": "documented",
+      "details": {
+        "Link": [
+          "SL1",
+          "SL2ifcartridge",
+          "SL3ifpermittedcartridgesandFL12.1",
+          "ETH1"
+        ],
+        "serial_id": [
+          1,
+          247
+        ],
+        "ethernet_id": [
+          1,
+          16
+        ],
+        "timeout": "100msunits,default100=10s,0=noenforcedtimeout; FBtimeoutoverridesportconfiguration",
+        "triggers": [
+          "Executerisingedge",
+          "Abortrisingedge"
+        ],
+        "first_run": "TRUEonfirstRUNcycleisnotarisingedge; mustfirstobserveFALSE",
+        "outputs": [
+          "Done",
+          "Busy",
+          "Aborted",
+          "Error",
+          "CommErrorBYTE",
+          "OperErrorDWORD"
+        ],
+        "concurrency": "Only1activecommunicationFBorEXCHperport; checkcurrentexchangestatusbeforestartinganother.",
+        "instances_per_type": {
+          "FLbelow10.1": 16,
+          "FLatleast10.1": 32
+        },
+        "local_words": "%MW0..%MW7999;validateentirebufferendnotjuststart.",
+        "object_types": {
+          "0": "multipleholdingwordsFC16",
+          "2": "multiplecoilsFC15",
+          "4": "singlecoilFC5",
+          "5": "singleregisterFC6"
+        },
+        "quantities": {
+          "words": [
+            1,
+            123
+          ],
+          "bits": [
+            1,
+            1968
+          ]
+        },
+        "single_write_functional_level_min": "5.0",
+        "broadcast_id": 0,
+        "remote_first_object": [
+          0,
+          65535
+        ],
+        "bit_packing": "Valuespackedconsecutivelyinlocal%MWtable."
+      },
+      "configuration_fields": [
+        "Link",
+        "Id",
+        "Timeout",
+        "ObjType",
+        "FirstObj",
+        "Quantity",
+        "IndexData",
+        "Symbol",
+        "Comment"
+      ],
+      "evidence": [
+        {
+          "source": "GEN",
+          "pages": [
+            177,
+            178,
+            179,
+            180,
+            181,
+            182
+          ],
+          "section": "WRITE_VAR"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            25
+          ],
+          "section": "MaximumObjects"
+        }
+      ]
+    },
+    {
+      "id": "HW.COMM_WRITE_READ_VAR",
+      "title": "Modbusatomicread/writewords",
+      "model": "TM200CE40T",
+      "applicability": "embedded_or_optional_serial",
+      "evidence_status": "documented_with_erratum",
+      "details": {
+        "Link": [
+          "SL1",
+          "SL2ifcartridge",
+          "SL3ifpermittedcartridgesandFL12.1",
+          "ETH1"
+        ],
+        "serial_id": [
+          1,
+          247
+        ],
+        "ethernet_id": [
+          1,
+          16
+        ],
+        "timeout": "100msunits,default100=10s,0=noenforcedtimeout; FBtimeoutoverridesportconfiguration",
+        "triggers": [
+          "Executerisingedge",
+          "Abortrisingedge"
+        ],
+        "first_run": "TRUEonfirstRUNcycleisnotarisingedge; mustfirstobserveFALSE",
+        "outputs": [
+          "Done",
+          "Busy",
+          "Aborted",
+          "Error",
+          "CommErrorBYTE",
+          "OperErrorDWORD"
+        ],
+        "concurrency": "Only1activecommunicationFBorEXCHperport; checkcurrentexchangestatusbeforestartinganother.",
+        "instances_per_type": {
+          "FLbelow10.1": 16,
+          "FLatleast10.1": 32
+        },
+        "local_words": "%MW0..%MW7999;validateentirebufferendnotjuststart.",
+        "modbus_function_decimal": 23,
+        "modbus_function_hex": "0x17",
+        "read_quantity": [
+          1,
+          125
+        ],
+        "write_quantity": [
+          1,
+          121
+        ],
+        "remote_first_object": [
+          0,
+          65535
+        ],
+        "erratum": "GENp185callsMbsFct17andthenfunctioncode17withouthexqualification; requestisFC0x17=23decimalperPROGp135."
+      },
+      "configuration_fields": [
+        "Link",
+        "Id",
+        "Timeout",
+        "FirstWriteObj",
+        "WriteQuantity",
+        "IndexDataOut",
+        "FirstReadObj",
+        "ReadQuantity",
+        "IndexDataIn",
+        "Symbol",
+        "Comment"
+      ],
+      "evidence": [
+        {
+          "source": "GEN",
+          "pages": [
+            182,
+            183,
+            184,
+            185,
+            186,
+            187
+          ],
+          "section": "WRITE_READ_VAR"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            135
+          ],
+          "section": "MaximumObjects; Modbuscodes"
+        }
+      ]
+    },
+    {
+      "id": "HW.COMM_SEND_RECV_MSG",
+      "title": "SerialASCIIcharacterexchange",
+      "model": "TM200CE40T",
+      "applicability": "embedded_or_optional_serial",
+      "evidence_status": "documented",
+      "details": {
+        "instances_max": 16,
+        "link": "Serialportsonly; embeddedSL1andoptionalserialports",
+        "quantity_send_bytes": [
+          0,
+          255
+        ],
+        "receive_buffer_bytes": [
+          0,
+          255
+        ],
+        "quantity_received_bytes": [
+          0,
+          255
+        ],
+        "local_buffer_word_index": [
+          0,
+          7999
+        ],
+        "mode": "Send0=>receive-only;recvsize0=>send-only;bothpositive=>sendthenreceive.",
+        "end_conditions": [
+          "receivedframelength",
+          "receivedframesilencetimeout",
+          "endcharacterstructure"
+        ],
+        "receive_buffer": "SizeRecvBufferisnotanendcondition;receivedcharacterscopieduponendconditionuptobuffercapacity.",
+        "timeout": "100msunitsdefault100,0=nolimit",
+        "status": [
+          "Execute",
+          "Abort",
+          "Done",
+          "Busy",
+          "Aborted",
+          "Error",
+          "CommError",
+          "OperError"
+        ],
+        "concurrency": "1activeFB/EXCHperport"
+      },
+      "configuration_fields": [
+        "Link",
+        "Timeout",
+        "QuantityToSend",
+        "BufferToSend",
+        "SizeRecvBuffer",
+        "BufferToRecv",
+        "QuantityRecv",
+        "Start character",
+        "First end character",
+        "Second end character",
+        "Frame length received",
+        "Frame received timeout (ms)",
+        "Send frame characters"
+      ],
+      "evidence": [
+        {
+          "source": "GEN",
+          "pages": [
+            187,
+            188,
+            189,
+            190,
+            191,
+            192
+          ],
+          "section": "SEND_RECV_MSG"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            128
+          ],
+          "section": "MaximumObjects; ASCIIprotocolsettings"
+        }
+      ]
+    },
+    {
+      "id": "HW.COMM_EXCH",
+      "title": "RawEXCHinstructionsandmessageexchangeobjects",
+      "model": "TM200CE40T",
+      "applicability": "embedded_or_optional_serial",
+      "evidence_status": "documented",
+      "details": {
+        "ports": {
+          "EXCH1": "SL1",
+          "EXCH2": "SL2ifpresent",
+          "EXCH3": "Ethernet",
+          "EXCH4": "SL3ifpresent"
+        },
+        "diagnostics": {
+          "EXCH1": "%SW63",
+          "EXCH2": "%SW64",
+          "EXCH3": "%SW65",
+          "EXCH4": "%SW66"
+        },
+        "message_status": "%MSGobjectcontrols/reportsongoingexchange;exacttableformatmustfollowgenericfunctionsinstructionsection",
+        "concurrency": "ShareportresourcewithREAD_VAR/WRITE_VAR/WRITE_READ_VAR/SEND_RECV_MSG;cannotexecuteconcurrently."
+      },
+      "configuration_fields": [
+        "Port",
+        "Exchange table",
+        "%MSG status"
+      ],
+      "evidence": [
+        {
+          "source": "GEN",
+          "pages": [
+            171
+          ],
+          "section": "CommunicationObjectsconcurrency"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            331,
+            332
+          ],
+          "section": "EXCHerrorcodes"
+        }
+      ]
+    },
+    {
+      "id": "HW.ETHERNET_IP_ADAPTER",
+      "title": "EtherNet/IPadapteradvertisedbutconfigurationunresolved",
+      "model": "TM200CE40T",
+      "applicability": "embedded_documentation_claim",
+      "evidence_status": "conflicting_documentation_unknown_configuration",
+      "details": {
+        "official_catalog_claim": "CATv10selectionguideexplicitlylistsEtherNet/IPadapterforTM200CE***includingTM200CE40T.",
+        "programming_gap": "PROG.06Ethernetservicesp112onlylistsModbusTCPserver/client/slavedevice;thereisnoadapterconfigurationchapter.",
+        "possible_diagnostics": [
+          "%SW190..191Class1outgoing",
+          "%SW192..193Class1incoming",
+          "%SW194..197unconnectedpackets",
+          "%SW198..201Class3packets",
+          "%SW202inputinstance",
+          "%SW203inputsize",
+          "%SW204outputinstance",
+          "%SW205outputsize",
+          "%SW206timeouts"
+        ],
+        "unknown": [
+          "firmware/functionallevelapplicability",
+          "assemblyinstances/sizesallowed",
+          "EDSfile",
+          "RPI/connectionlimits",
+          "input/outputnetworkobjectmapping",
+          "officialSMBP/XMLconfiguration",
+          "runtimecorrectness"
+        ],
+        "recommendation": "Includeincapabilitymatrixasunknown/documentedclaim;preservenativeconfigurationopaquely;failunsupportedauthoringexplicitlyuntilofficialeditor/EDS/manualevidence.ClarifyEthernetIPv4isnotEtherNet/IPCIP."
+      },
+      "configuration_fields": [
+        "unknown;donotinventassemblyconfiguration"
+      ],
+      "evidence": [
+        {
+          "source": "CAT",
+          "pages": [
+            9
+          ],
+          "section": "Selectionguideprinted6–7;Ethernetlinkrow"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            112,
+            338,
+            339
+          ],
+          "section": "EthernetServices;Class1/Class3/instanceSystemWords"
+        }
+      ],
+      "conflicts": [
+        "CF.ETHERNET_IP_ADAPTER"
+      ]
+    },
+    {
+      "id": "HW.OTHER_NETWORK_PROTOCOLS",
+      "title": "Othernetworkprotocolcapabilityboundary",
+      "model": "TM200CE40T",
+      "applicability": "unknown_not_documented",
+      "evidence_status": "not_documented",
+      "details": {
+        "not_established": [
+          "userrawTCPsockets",
+          "userUDPblocks",
+          "OPCUA",
+          "HTTPserver",
+          "MQTT",
+          "CANopen",
+          "PROFINET",
+          "EtherCAT",
+          "EtherNet/IPscanner/originator"
+        ],
+        "semantics": "NotfoundinthereviewedM200docsdoesnotprovethatallfuturefirmwarecannotimplementthese;donotclaimthemintoolchainordocumentasTM200CE40Tsupportedwithoutprimaryevidence. Optionalgatewayintegrationisnotembeddedprotocolsupport."
+      },
+      "configuration_fields": [],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            112,
+            124
+          ],
+          "section": "DocumentedEthernetandSerialservices"
+        },
+        {
+          "source": "HW",
+          "pages": [
+            129,
+            132
+          ],
+          "section": "DocumentedEthernetandSerialphysicalports"
+        }
+      ]
+    },
+    {
+      "id": "HW.USB_PROGRAMMING",
+      "title": "USBMini-Bprogrammingport",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "function": "Officialprogramming/updates/maintenanceandshortdatainspectionconnection",
+        "usertype": "USBdeviceporttoPChost;notUSBhost/generalperipheralport",
+        "long_term": "HWrequiresadaptedcablestominimizeEMIforlong-termcommissioning/monitoring."
+      },
+      "configuration_fields": [],
+      "evidence": [
+        {
+          "source": "HW",
+          "pages": [
+            130,
+            131
+          ],
+          "section": "USBMini-BProgrammingPort"
+        }
+      ]
+    },
+    {
+      "id": "HW.RTC",
+      "title": "EmbeddedRTCwithseparatelyorderedbattery",
+      "model": "TM200CE40T",
+      "applicability": "embedded_requires_optional_battery",
+      "evidence_status": "documented",
+      "details": {
+        "battery": "TMARBAT1notdeliveredwithcontroller;PanasonicBR2032typeperHW",
+        "drift_seconds_per_month_max": 90,
+        "drift_temperature_c": 25,
+        "backup_years_min_at25c": 3,
+        "battery_life_years_at25c": 5,
+        "function_block_instances": 2,
+        "rtc_members": [
+          "RD",
+          "WR",
+          "DAY",
+          "MONTH",
+          "YEAR",
+          "HOURS",
+          "MINUTES",
+          "SECONDS",
+          "Done",
+          "Error",
+          "DayOfWeek",
+          "ErrorId"
+        ],
+        "calendar_ranges": {
+          "DAY": [
+            1,
+            31
+          ],
+          "MONTH": [
+            1,
+            12
+          ],
+          "YEAR_min": 2000,
+          "HOURS": [
+            0,
+            23
+          ],
+          "MINUTES": [
+            0,
+            59
+          ],
+          "SECONDS": [
+            0,
+            59
+          ]
+        },
+        "simultaneous_RD_WR": "Not supported;ErrorId256. Updatealreadyinprogress%S50=>257.",
+        "date_validation": "Calendarcombinationerrorsmustbedetected,notjustper-fieldbounds.",
+        "function_block_functional_level_min": "5.0"
+      },
+      "configuration_fields": [
+        "Day",
+        "Month",
+        "Year",
+        "Hours",
+        "Minutes",
+        "Seconds",
+        "Symbol",
+        "Comment"
+      ],
+      "evidence": [
+        {
+          "source": "HW",
+          "pages": [
+            79,
+            80,
+            81
+          ],
+          "section": "M200RTC;Battery"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            25
+          ],
+          "section": "MaximumRTCobjects"
+        },
+        {
+          "source": "GEN",
+          "pages": [
+            163,
+            164,
+            165,
+            166
+          ],
+          "section": "RTCfunctionblock"
+        }
+      ]
+    },
+    {
+      "id": "HW.RTC_SYSTEM_WORDS",
+      "title": "BCDclockwordsandhealth",
+      "model": "TM200CE40T",
+      "applicability": "embedded_requires_optional_battery",
+      "evidence_status": "documented",
+      "details": {
+        "words": {
+          "%SW49": "weekday1Monday",
+          "%SW50": "00SSseconds",
+          "%SW51": "HHMMhoursminutes",
+          "%SW52": "MMDDmonthday",
+          "%SW53": "CCYYcenturyyear"
+        },
+        "read_write_gate": "%S50=1stopswordupdatesandallowswrites;fallingedgeappliesnewRTCandrestartsupdates",
+        "health": [
+          "%S51=1timeinvalid/needsinitialization",
+          "%S52=1invalidRTCwrite",
+          "BATLEDmissing/depletedbattery"
+        ],
+        "adjustment": [
+          "%SW59+%S59increment/decrement",
+          "%SW60RTCcorrectionM200only"
+        ],
+        "last_stop_time": [
+          "%SW54",
+          "%SW55",
+          "%SW56",
+          "%SW57"
+        ]
+      },
+      "configuration_fields": [
+        "%S50",
+        "%SW49..53",
+        "%SW59",
+        "%SW60"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            324,
+            330,
+            331
+          ],
+          "section": "RTCsystembits/words"
+        }
+      ]
+    },
+    {
+      "id": "HW.RTC_SCHEDULE",
+      "title": "SixteenscheduleblocksusingRTC",
+      "model": "TM200CE40T",
+      "applicability": "embedded_requires_optional_battery",
+      "evidence_status": "documented",
+      "details": {
+        "instances_max": 16,
+        "address": "SCHi / %SCHaccordingtoprogrammingnotation",
+        "enable_bitmap": "%SW114defaultsFFFFhex",
+        "dependency": "ReliableRTC,batteryandcalendardatarequired."
+      },
+      "configuration_fields": [
+        "Start date",
+        "End date",
+        "Day of week",
+        "Start time",
+        "End time",
+        "Output bit"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            334
+          ],
+          "section": "MaximumObjects;EnableSchedule"
+        },
+        {
+          "source": "GEN",
+          "pages": [
+            158,
+            159,
+            160,
+            161,
+            162
+          ],
+          "section": "Scheduleblocksection"
+        }
+      ]
+    },
+    {
+      "id": "HW.PERSISTENT_AUTO",
+      "title": "Automaticpower-lossretention",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "word_region": "%MW0..%MW2999",
+        "bit_region": "%M0..%M499",
+        "save": "Internalflashafteranypowerinterruption",
+        "restore": "Duringinitializationevenifcoldstartcausedbymissing/depletedbattery",
+        "cleared_by": [
+          "newapplicationdownload",
+          "INIT",
+          "%S0activation"
+        ],
+        "not_all_memory": "%MW3000..%MW7999arenotautomaticallyretainedbythisfeature."
+      },
+      "configuration_fields": [],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            33,
+            34
+          ],
+          "section": "ColdStart;PersistentVariables"
+        }
+      ]
+    },
+    {
+      "id": "HW.PERSISTENT_REQUEST",
+      "title": "Requestednonvolatilesave/restoreandCSVmemorybackup",
+      "model": "TM200CE40T",
+      "applicability": "embedded_with_optional_sd",
+      "evidence_status": "documented_with_errata",
+      "details": {
+        "destination_gate": "%S90=0internalnonvolatile,1SD",
+        "request_bits": {
+          "erase": "%S91",
+          "available": "%S92",
+          "save": "%S93",
+          "restore": "%S94"
+        },
+        "count_word": "%SW148",
+        "internal_word_region_M200": "%MW3000..%MW4999(max2000requestedwords)",
+        "sd_word_region": "allmemorywordsstarting%MW0",
+        "completion": "S93/S94resetbyfirmware;S92indicatesavailableinternalbackup;SW147givesSDresult. Eraseentiresavedset,notsubset.",
+        "restore_sd": "CompleteCSVprocessed;SW148updatedwithactualrestoredcount.",
+        "naming_conflict": "Overviewp34callsMemoryVariables.csvbutfiletablep138callsMemories.csv;retainoriginalpathsandverifyeditor-generatedscriptbeforeauthoring."
+      },
+      "configuration_fields": [
+        "%S90",
+        "%SW148",
+        "%S91",
+        "%S93",
+        "%S94"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            34,
+            35,
+            138,
+            157,
+            158,
+            159,
+            160,
+            325,
+            333,
+            337
+          ],
+          "section": "Save/Restorebyrequest;MemoryManagement;SystemWords"
+        }
+      ]
+    },
+    {
+      "id": "HW.SD",
+      "title": "MicroSD/SDHCslotandfilemanagement",
+      "model": "TM200CE40T",
+      "applicability": "embedded_with_optional_sd",
+      "evidence_status": "documented_with_conflict",
+      "details": {
+        "format": [
+          "FAT",
+          "FAT32"
+        ],
+        "not_supported": "NTFS",
+        "hardware_capacity_gb_max": 32,
+        "programming_claim_gb_max": 64,
+        "speed_classes": [
+          4,
+          10
+        ],
+        "backup_area_mb": 64,
+        "data_area_gb": 1.93,
+        "operations": [
+          "clonefirmware+application+postconfig",
+          "firmwareupdate",
+          "applicationbackup/restore",
+          "postconfigurationmanagement",
+          "errorlogbackup/delete",
+          "memorybackup/restore"
+        ],
+        "runtime_access": "Hardwareguidep76–77:cardaccessonlyinSTOP;insertinRUNdoesnothing;stoppingwithcardinsertedstartsaccess;RUNwaitsoperationcomplete. Do not infer unrestricted livefilesystem/data-loggingAPI.",
+        "runtime_request_gap": "PROGp34offersS93/S94SDmemoryrequestsbutdoesnotresolveallSTOP-onlyrestrictions;markrun-stateavailabilityunverified.",
+        "card_status": "%SW7bits2present,3access,5error"
+      },
+      "configuration_fields": [
+        "SDscriptmanagement",
+        "Memorymanagement"
+      ],
+      "evidence": [
+        {
+          "source": "HW",
+          "pages": [
+            76,
+            77,
+            79
+          ],
+          "section": "MicroSDCard;Characteristics"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            34,
+            137,
+            138,
+            328
+          ],
+          "section": "SDfilemanagement;memoryrequests;status"
+        }
+      ],
+      "conflicts": [
+        "CF.SD_CAPACITY",
+        "CF.SD_RUN_ACCESS"
+      ]
+    },
+    {
+      "id": "HW.SD_FILE_LAYOUT",
+      "title": "OfficialSDfilesandscriptlocations",
+      "model": "TM200CE40T",
+      "applicability": "embedded_with_optional_sd",
+      "evidence_status": "documented",
+      "details": {
+        "files": {
+          "/Script.cmd": "SDmanagementscript",
+          "/Script.log": "scriptresultlog",
+          "/sys/os/M200M100.mfw": "firmware",
+          "/TM3/TM3_Ana.mfw": "TM3analogmodulefirmware",
+          "/usr/app/*.smbk": "compiledapplicationbackup",
+          "/usr/cfg/Machine.cfg": "postconfiguration",
+          "/usr/mem/Memories.csv": "memorybackup",
+          "/sys/log/PlcLog.csv": "controllererrorlog"
+        },
+        "SMBP_boundary": "*.smbpisaPCeditorproject,notdocumentedasdirectPLCexecutableinput;*.smbkcompiledapplicationcreatedbyofficialsoftwareisdistinct.",
+        "automation": "SDscriptmayexecutechangesautomatically;researchauditdidnotinsertcardortransmitanything."
+      },
+      "configuration_fields": [
+        "Script.cmdcommands"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            138,
+            140,
+            141,
+            142,
+            143,
+            144,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            153
+          ],
+          "section": "SDSupportedFileTypes;managementsections"
+        }
+      ]
+    },
+    {
+      "id": "HW.POST_CONFIGURATION",
+      "title": "Machine.cfgnetwork/serialpostconfiguration",
+      "model": "TM200CE40T",
+      "applicability": "embedded_or_optional_serial",
+      "evidence_status": "documented",
+      "details": {
+        "grammar": "channel.parameter=value,nospacesaround=;case-sensitive;#comment;ANSIencoding",
+        "fields": {
+          "ETH": [
+            "IPMODE0Fixed/1BOOTP/2DHCP",
+            "IP",
+            "MASK",
+            "GATEWAY",
+            "NETWORKNAMEmax16ASCII"
+          ],
+          "SL1/SL2/SL3": [
+            "HW0RS232TMCR2SL1only/1RS485",
+            "BAUDS",
+            "PARITY0None/1Odd/2Even",
+            "DATAFORMAT7or8",
+            "STOPBIT1or2",
+            "MODBUSADDR1..247",
+            "POLARIZATION0/1"
+          ]
+        },
+        "SL1_HW": "Must1;embeddedRS485only",
+        "application": "ReadonColdStart,reboot,download;Ethernetsectionalsooncablereconnect. OmittedfieldsfallthroughapplicationvaluesunderdescribedIPmoderequirements."
+      },
+      "configuration_fields": [
+        "ETH.IPMODE",
+        "ETH.IP",
+        "ETH.MASK",
+        "ETH.GATEWAY",
+        "ETH.NETWORKNAME",
+        "SLn.HW",
+        "SLn.BAUDS",
+        "SLn.PARITY",
+        "SLn.DATAFORMAT",
+        "SLn.STOPBIT",
+        "SLn.MODBUSADDR",
+        "SLn.POLARIZATION"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            38,
+            39,
+            40
+          ],
+          "section": "PostConfigurationFileManagement"
+        },
+        {
+          "source": "HW",
+          "pages": [
+            77
+          ],
+          "section": "MicroSDpostconfigurationSL1note"
+        }
+      ]
+    },
+    {
+      "id": "HW.TASKS",
+      "title": "Master,periodic,eventtasksandpriorities",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented_with_default_conflict",
+      "details": {
+        "master_tasks_max": 1,
+        "master_modes": [
+          "Normal/freewheeling",
+          "Periodic"
+        ],
+        "master_period_ms": [
+          1,
+          150
+        ],
+        "model_programming_default_master_ms": 10,
+        "generic_operation_default_master_ms": 100,
+        "periodic_tasks_max": 1,
+        "periodic_period_ms": [
+          1,
+          255
+        ],
+        "periodic_default_ms": 255,
+        "minimum_period_gate": "1msonlyFL>=5.0,else2ms",
+        "event_sources": {
+          "physical": 4,
+          "HSC_threshold": 4,
+          "total": 8
+        },
+        "input_events": "I0.2..I0.5rising/falling/both,nofilter",
+        "HSC_events": "HSC0/1TH0/TH1",
+        "priorities": "Event>periodic>master;eventpriority0highest..7lowest,allunique",
+        "event_io": "OnlyembeddedcontrollerI/Ocanbeusedineventsubroutine;donotassumeexpansionI/Oupdatesinsidetheevent.",
+        "event_sequence": "savecontext,runspecificSR,updateembeddedoutputs,restorecontext"
+      },
+      "configuration_fields": [
+        "Scan mode",
+        "Period",
+        "Watchdog",
+        "Event source",
+        "Priority",
+        "Subroutine"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            26,
+            27,
+            28,
+            52,
+            53
+          ],
+          "section": "TaskStructure;EventPriorities"
+        },
+        {
+          "source": "OPER",
+          "pages": [
+            57,
+            88,
+            89,
+            90
+          ],
+          "section": "Tasktypes;EventSources;EventManagement"
+        }
+      ],
+      "conflicts": [
+        "CF.MASTER_DEFAULT_PERIOD"
+      ]
+    },
+    {
+      "id": "HW.WATCHDOG",
+      "title": "ApplicationwatchdogandsystemCPUwatchdog",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "app_watchdog_ms": [
+          10,
+          500
+        ],
+        "config_word": "%SW11",
+        "system_cpu_limit_percent": 80,
+        "on_exceed": "HALTED;bit%S11=1",
+        "scan_overrun": "%S19periodoverrunflagseparatefromHALT",
+        "timing_diagnostics": {
+          "last_ms": "%SW30",
+          "max_ms": "%SW31",
+          "min_ms": "%SW32",
+          "last_us_remainder": "%SW70",
+          "max_us_remainder": "%SW71",
+          "min_us_remainder": "%SW72",
+          "CPUload": "%SW75"
+        },
+        "simulation_boundary": "HostperformanceisnotevidenceofPLCscanlatency/CPUutilization."
+      },
+      "configuration_fields": [
+        "Watchdog",
+        "%SW11"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            27,
+            33,
+            322,
+            323,
+            328,
+            329,
+            332
+          ],
+          "section": "Watchdog;ControllerHALT;TimingSystemWords"
+        }
+      ]
+    },
+    {
+      "id": "HW.EVENT_QUEUE_CONTROL",
+      "title": "Eventqueuepermissionandstatus",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "control": "%S38permitsqueueplacement;default1",
+        "queue_limit": "Notverifiedfromcurrentextract;donotinventdepth/overflowpolicy",
+        "diagnostics": [
+          "%SW48eventscount",
+          "%SW40..47averageeventdurationus",
+          "%SW130..137lasteventdurationus",
+          "%SW149..156lasteventdurationms",
+          "%SW159..166averagedurationms"
+        ],
+        "periodic_diagnostics": [
+          "%SW39averageus",
+          "%SW138lastus",
+          "%SW157lastms",
+          "%SW158averagems"
+        ]
+      },
+      "configuration_fields": [
+        "%S38"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            323,
+            330,
+            336,
+            337,
+            338
+          ],
+          "section": "Eventqueuebit;executiontimingsystemwords"
+        }
+      ]
+    },
+    {
+      "id": "HW.DIAGNOSTICS",
+      "title": "ControllerI/O,identity,errorlogandnetworkhealth",
+      "model": "TM200CE40T",
+      "applicability": "embedded",
+      "evidence_status": "documented",
+      "details": {
+        "status": [
+          "%SW6controllerstate",
+          "%SW7state/SDstatus",
+          "%S12RUNNING",
+          "%S13firstRUNcycle",
+          "%S10I/Ohealth",
+          "%S119localI/Ohealth",
+          "%SW118controllerstatus"
+        ],
+        "identity": [
+          "%SW13bootversion",
+          "%SW14commercialversion",
+          "%SW15..16firmware",
+          "%SW67modelcode",
+          "%SW94..95applicationsignature",
+          "%SW115..117serialnumber"
+        ],
+        "cartridges": [
+          "%SW89slot1firmware",
+          "%SW90slot2firmware",
+          "%SW128..129status"
+        ],
+        "expansion": [
+          "%SW91..93slot1..3firmware",
+          "%SW97slot4firmware",
+          "%SW119optionalbitmap",
+          "%SW120errorbitmap"
+        ],
+        "outputs": "%SW139group-protectionbitmap",
+        "last_stop": "%SW58reason",
+        "logs": [
+          "%SW140..142lasterror",
+          "%SW143logentrycount",
+          "/sys/log/PlcLog.csv"
+        ],
+        "network_counters": [
+          "%SW170..181SL1/SL2/USB/TCPtx/rx/error",
+          "%SW188..189Modbusmapping",
+          "%SW215..217SL3tx/rx/error"
+        ],
+        "explicitly_readonly": "Hardware-writtenstatusfieldsarenotgenericwritablememory;respectR/Wsystemwordpermissions."
+      },
+      "configuration_fields": [],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            321,
+            322,
+            323,
+            324,
+            325,
+            326,
+            327,
+            328,
+            329,
+            330,
+            331,
+            332,
+            333,
+            334,
+            335,
+            336,
+            337,
+            338,
+            339,
+            340
+          ],
+          "section": "SystemBitsandSystemWordsDescription"
+        }
+      ]
+    },
+    {
+      "id": "HW.ATV_BLOCK.MC_POWER_ATV",
+      "title": "MC_Power_ATV",
+      "model": "TM200CE40T",
+      "applicability": "optional_remote_drive",
+      "evidence_status": "documented",
+      "details": {
+        "purpose": "Enable/disable the remote drive power stage",
+        "maximum_instances_of_each_block": 16,
+        "drive_objects": "%DRV0..%DRV15",
+        "requirements": [
+          "Configured Modbus TCP IOScanner or Modbus Serial IOScanner",
+          "Supported ATV drive type added to scanner with predefined initialization and channels"
+        ],
+        "exchange": "Modbus FC23 (0x17) reads/writes drive ETA, ETI, RFRD, DP0 and CMD registers as configured.",
+        "STOP_HALT": "Fallback values sends command0x00 leading to Switch On Disabled/NST; Maintain values leaves command unchanged. Empty/powerless/application update stops scanning.",
+        "boundary": "This is a remote Altivar drive over Modbus; do not map it to the embedded pulse generator resource or assume an external ATV is present."
+      },
+      "configuration_fields": [
+        "Axis/%DRVn",
+        "Drive type",
+        "IOScanner channels",
+        "Execute/Enable/Forward/Backward as applicable",
+        "Velocity as applicable",
+        "Symbol",
+        "Comment"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            189,
+            190,
+            191,
+            192,
+            193,
+            194
+          ],
+          "section": "Drive objects and Drive function blocks"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            196
+          ],
+          "section": "MC_Power_ATV block-specific section"
+        }
+      ]
+    },
+    {
+      "id": "HW.ATV_BLOCK.MC_JOG_ATV",
+      "title": "MC_Jog_ATV",
+      "model": "TM200CE40T",
+      "applicability": "optional_remote_drive",
+      "evidence_status": "documented",
+      "details": {
+        "purpose": "Jog forward/backward at a commanded velocity",
+        "maximum_instances_of_each_block": 16,
+        "drive_objects": "%DRV0..%DRV15",
+        "requirements": [
+          "Configured Modbus TCP IOScanner or Modbus Serial IOScanner",
+          "Supported ATV drive type added to scanner with predefined initialization and channels"
+        ],
+        "exchange": "Modbus FC23 (0x17) reads/writes drive ETA, ETI, RFRD, DP0 and CMD registers as configured.",
+        "STOP_HALT": "Fallback values sends command0x00 leading to Switch On Disabled/NST; Maintain values leaves command unchanged. Empty/powerless/application update stops scanning.",
+        "boundary": "This is a remote Altivar drive over Modbus; do not map it to the embedded pulse generator resource or assume an external ATV is present."
+      },
+      "configuration_fields": [
+        "Axis/%DRVn",
+        "Drive type",
+        "IOScanner channels",
+        "Execute/Enable/Forward/Backward as applicable",
+        "Velocity as applicable",
+        "Symbol",
+        "Comment"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            189,
+            190,
+            191,
+            192,
+            193,
+            194
+          ],
+          "section": "Drive objects and Drive function blocks"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            194
+          ],
+          "section": "MC_Jog_ATV block-specific section"
+        }
+      ]
+    },
+    {
+      "id": "HW.ATV_BLOCK.MC_MOVEVEL_ATV",
+      "title": "MC_MoveVel_ATV",
+      "model": "TM200CE40T",
+      "applicability": "optional_remote_drive",
+      "evidence_status": "documented",
+      "details": {
+        "purpose": "Command a target velocity",
+        "maximum_instances_of_each_block": 16,
+        "drive_objects": "%DRV0..%DRV15",
+        "requirements": [
+          "Configured Modbus TCP IOScanner or Modbus Serial IOScanner",
+          "Supported ATV drive type added to scanner with predefined initialization and channels"
+        ],
+        "exchange": "Modbus FC23 (0x17) reads/writes drive ETA, ETI, RFRD, DP0 and CMD registers as configured.",
+        "STOP_HALT": "Fallback values sends command0x00 leading to Switch On Disabled/NST; Maintain values leaves command unchanged. Empty/powerless/application update stops scanning.",
+        "boundary": "This is a remote Altivar drive over Modbus; do not map it to the embedded pulse generator resource or assume an external ATV is present."
+      },
+      "configuration_fields": [
+        "Axis/%DRVn",
+        "Drive type",
+        "IOScanner channels",
+        "Execute/Enable/Forward/Backward as applicable",
+        "Velocity as applicable",
+        "Symbol",
+        "Comment"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            189,
+            190,
+            191,
+            192,
+            193,
+            194
+          ],
+          "section": "Drive objects and Drive function blocks"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            198
+          ],
+          "section": "MC_MoveVel_ATV block-specific section"
+        }
+      ]
+    },
+    {
+      "id": "HW.ATV_BLOCK.MC_STOP_ATV",
+      "title": "MC_Stop_ATV",
+      "model": "TM200CE40T",
+      "applicability": "optional_remote_drive",
+      "evidence_status": "documented",
+      "details": {
+        "purpose": "Stop the ongoing drive movement",
+        "maximum_instances_of_each_block": 16,
+        "drive_objects": "%DRV0..%DRV15",
+        "requirements": [
+          "Configured Modbus TCP IOScanner or Modbus Serial IOScanner",
+          "Supported ATV drive type added to scanner with predefined initialization and channels"
+        ],
+        "exchange": "Modbus FC23 (0x17) reads/writes drive ETA, ETI, RFRD, DP0 and CMD registers as configured.",
+        "STOP_HALT": "Fallback values sends command0x00 leading to Switch On Disabled/NST; Maintain values leaves command unchanged. Empty/powerless/application update stops scanning.",
+        "boundary": "This is a remote Altivar drive over Modbus; do not map it to the embedded pulse generator resource or assume an external ATV is present."
+      },
+      "configuration_fields": [
+        "Axis/%DRVn",
+        "Drive type",
+        "IOScanner channels",
+        "Execute/Enable/Forward/Backward as applicable",
+        "Velocity as applicable",
+        "Symbol",
+        "Comment"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            189,
+            190,
+            191,
+            192,
+            193,
+            194
+          ],
+          "section": "Drive objects and Drive function blocks"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            200
+          ],
+          "section": "MC_Stop_ATV block-specific section"
+        }
+      ]
+    },
+    {
+      "id": "HW.ATV_BLOCK.MC_READSTATUS_ATV",
+      "title": "MC_ReadStatus_ATV",
+      "model": "TM200CE40T",
+      "applicability": "optional_remote_drive",
+      "evidence_status": "documented",
+      "details": {
+        "purpose": "Read drive status",
+        "maximum_instances_of_each_block": 16,
+        "drive_objects": "%DRV0..%DRV15",
+        "requirements": [
+          "Configured Modbus TCP IOScanner or Modbus Serial IOScanner",
+          "Supported ATV drive type added to scanner with predefined initialization and channels"
+        ],
+        "exchange": "Modbus FC23 (0x17) reads/writes drive ETA, ETI, RFRD, DP0 and CMD registers as configured.",
+        "STOP_HALT": "Fallback values sends command0x00 leading to Switch On Disabled/NST; Maintain values leaves command unchanged. Empty/powerless/application update stops scanning.",
+        "boundary": "This is a remote Altivar drive over Modbus; do not map it to the embedded pulse generator resource or assume an external ATV is present."
+      },
+      "configuration_fields": [
+        "Axis/%DRVn",
+        "Drive type",
+        "IOScanner channels",
+        "Execute/Enable/Forward/Backward as applicable",
+        "Velocity as applicable",
+        "Symbol",
+        "Comment"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            189,
+            190,
+            191,
+            192,
+            193,
+            194
+          ],
+          "section": "Drive objects and Drive function blocks"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            202
+          ],
+          "section": "MC_ReadStatus_ATV block-specific section"
+        }
+      ]
+    },
+    {
+      "id": "HW.ATV_BLOCK.MC_READMOTIONSTATE_ATV",
+      "title": "MC_ReadMotionState_ATV",
+      "model": "TM200CE40T",
+      "applicability": "optional_remote_drive",
+      "evidence_status": "documented",
+      "details": {
+        "purpose": "Read movement status, velocity and errors",
+        "maximum_instances_of_each_block": 16,
+        "drive_objects": "%DRV0..%DRV15",
+        "requirements": [
+          "Configured Modbus TCP IOScanner or Modbus Serial IOScanner",
+          "Supported ATV drive type added to scanner with predefined initialization and channels"
+        ],
+        "exchange": "Modbus FC23 (0x17) reads/writes drive ETA, ETI, RFRD, DP0 and CMD registers as configured.",
+        "STOP_HALT": "Fallback values sends command0x00 leading to Switch On Disabled/NST; Maintain values leaves command unchanged. Empty/powerless/application update stops scanning.",
+        "boundary": "This is a remote Altivar drive over Modbus; do not map it to the embedded pulse generator resource or assume an external ATV is present."
+      },
+      "configuration_fields": [
+        "Axis/%DRVn",
+        "Drive type",
+        "IOScanner channels",
+        "Execute/Enable/Forward/Backward as applicable",
+        "Velocity as applicable",
+        "Symbol",
+        "Comment"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            189,
+            190,
+            191,
+            192,
+            193,
+            194
+          ],
+          "section": "Drive objects and Drive function blocks"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            203
+          ],
+          "section": "MC_ReadMotionState_ATV block-specific section"
+        }
+      ]
+    },
+    {
+      "id": "HW.ATV_BLOCK.MC_RESET_ATV",
+      "title": "MC_Reset_ATV",
+      "model": "TM200CE40T",
+      "applicability": "optional_remote_drive",
+      "evidence_status": "documented",
+      "details": {
+        "purpose": "Acknowledge/reset permitted drive errors",
+        "maximum_instances_of_each_block": 16,
+        "drive_objects": "%DRV0..%DRV15",
+        "requirements": [
+          "Configured Modbus TCP IOScanner or Modbus Serial IOScanner",
+          "Supported ATV drive type added to scanner with predefined initialization and channels"
+        ],
+        "exchange": "Modbus FC23 (0x17) reads/writes drive ETA, ETI, RFRD, DP0 and CMD registers as configured.",
+        "STOP_HALT": "Fallback values sends command0x00 leading to Switch On Disabled/NST; Maintain values leaves command unchanged. Empty/powerless/application update stops scanning.",
+        "boundary": "This is a remote Altivar drive over Modbus; do not map it to the embedded pulse generator resource or assume an external ATV is present."
+      },
+      "configuration_fields": [
+        "Axis/%DRVn",
+        "Drive type",
+        "IOScanner channels",
+        "Execute/Enable/Forward/Backward as applicable",
+        "Velocity as applicable",
+        "Symbol",
+        "Comment"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            25,
+            189,
+            190,
+            191,
+            192,
+            193,
+            194
+          ],
+          "section": "Drive objects and Drive function blocks"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            205
+          ],
+          "section": "MC_Reset_ATV block-specific section"
+        }
+      ]
+    },
+    {
+      "id": "HW.PID_PROCESS_CONTROL",
+      "title": "PID process control function",
+      "model": "TM200CE40T",
+      "applicability": "embedded_software_optional_physical_io",
+      "evidence_status": "documented",
+      "details": {
+        "maximum_instances": 14,
+        "hardware_boundary": "The PID calculation does not create embedded analog I/O. Any physical analog sensor or actuator requires a configured cartridge, expansion module or network source.",
+        "advanced_semantics": "Generic Functions p166 delegates detailed PID modes, auto tuning and assistant/parameter semantics to the separate Advanced Functions Library Guide. That manual was not included in this audit; detailed PID behavior remains outside verified scope."
+      },
+      "configuration_fields": [
+        "PID mode",
+        "Input",
+        "Set point",
+        "Output",
+        "PID coefficients",
+        "Auto tuning per separate Advanced Functions guide"
+      ],
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            25
+          ],
+          "section": "Maximum Number of Objects"
+        },
+        {
+          "source": "GEN",
+          "pages": [
+            166
+          ],
+          "section": "PID Function"
+        }
+      ]
+    }
+  ],
+  "conflicts": [
+    {
+      "id": "CF.PLS_FREQUENCY",
+      "evidence": [
+        {
+          "source": "HW",
+          "pages": [
+            27
+          ],
+          "section": "100kHzPLShardwarelimit"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            187
+          ],
+          "section": "PLStimebaseandfrequencytablemax10kHz"
+        }
+      ],
+      "resolution": "Useconfigurable10kHzceiling;100kHzPLSnotprovedbydocumentedconfiguration."
+    },
+    {
+      "id": "CF.PLS_DUTY",
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            185
+          ],
+          "section": "PLSfixed50%duty"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            187
+          ],
+          "section": "PLSi.Rdutycycletext"
+        }
+      ],
+      "resolution": "TreatPLSfixed50%perdescription;do notsilentlyaliasPWMratiosemanticsfromcontradictorytable."
+    },
+    {
+      "id": "CF.FAST_OUTPUT_CURRENT",
+      "evidence": [
+        {
+          "source": "HW",
+          "pages": [
+            26
+          ],
+          "section": "50mAfastmode"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            225,
+            240
+          ],
+          "section": "PTOmax200mAclaim"
+        }
+      ],
+      "resolution": "Hardwaremodel-specific50mAconservativeceiling;physicalelectricalverificationrequired."
+    },
+    {
+      "id": "CF.SD_CAPACITY",
+      "evidence": [
+        {
+          "source": "HW",
+          "pages": [
+            79
+          ],
+          "section": "32GBmaximum"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            137
+          ],
+          "section": "64GBmaximum"
+        }
+      ],
+      "resolution": "Use32GBconservativeceiling;donotclaim64GBsupported."
+    },
+    {
+      "id": "CF.SD_RUN_ACCESS",
+      "evidence": [
+        {
+          "source": "HW",
+          "pages": [
+            76,
+            77
+          ],
+          "section": "SDaccessSTOPonly"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            34
+          ],
+          "section": "SDmemorysave/restorebyapplicationbits"
+        }
+      ],
+      "resolution": "Modelstateexplicitly;run-stateavailabilityofrequestsisunknown."
+    },
+    {
+      "id": "CF.SERIAL_CARTRIDGE_COUNT",
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            75
+          ],
+          "section": "FL12.1allowsSL1A+SL1Sor2xSL1S"
+        },
+        {
+          "source": "CAT",
+          "pages": [
+            9
+          ],
+          "section": "Footnoteonecommunicationcartridgemax"
+        }
+      ],
+      "resolution": "Firmware/functionallevel-gatedprogrammingrule;catalogfootnoteincompletefornewSL1S."
+    },
+    {
+      "id": "CF.AM3_SIGNAL_TYPES",
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            74
+          ],
+          "section": "Voltage-onlysummary"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            81,
+            82,
+            83
+          ],
+          "section": "Voltage+currentdetailedconfiguration"
+        },
+        {
+          "source": "HW",
+          "pages": [
+            35,
+            36,
+            37
+          ],
+          "section": "Voltage+currenthardware"
+        }
+      ],
+      "resolution": "Detailedhardwareandconfigsupersedesummary."
+    },
+    {
+      "id": "CF.AI2_FILTER_RESOLUTION",
+      "evidence": [
+        {
+          "source": "HW",
+          "pages": [
+            31
+          ],
+          "section": "0.01sincrement"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            79
+          ],
+          "section": "100msunit"
+        }
+      ],
+      "resolution": "Authorconfig0..100*100msuntilofficialeditorprovesfinerincrement."
+    },
+    {
+      "id": "CF.ETHERNET_IP_ADAPTER",
+      "evidence": [
+        {
+          "source": "CAT",
+          "pages": [
+            9
+          ],
+          "section": "ExplicitEtherNet/IPadapterclaim"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            112
+          ],
+          "section": "ServiceslistonlyModbus"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            338,
+            339
+          ],
+          "section": "CIP-styleClass1/Class3diagnosticwords"
+        }
+      ],
+      "resolution": "Unknownnativeconfiguration;catalogdocumentedclaim;do notmarkunsupportedhardwareorimplementedcompilerfeature."
+    },
+    {
+      "id": "CF.RS485_5V",
+      "evidence": [
+        {
+          "source": "HW",
+          "pages": [
+            132
+          ],
+          "section": "No5VRS485supply"
+        },
+        {
+          "source": "CAT",
+          "pages": [
+            9
+          ],
+          "section": "SerialRS485with+5Vsupply"
+        }
+      ],
+      "resolution": "Hardwareguidenominalno5V;neverdependonserialsupplywithoutphysicalconfirmation."
+    },
+    {
+      "id": "CF.ETHERNET_RATE_BITS",
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            323
+          ],
+          "section": "S34/S35/S36notsupported"
+        },
+        {
+          "source": "HW",
+          "pages": [
+            130
+          ],
+          "section": "ChangesreinitializeEthernet"
+        }
+      ],
+      "resolution": "Treatexplicitprogrammingsupporttableasauthoritativeandrejectcontrols."
+    },
+    {
+      "id": "CF.HSC_FALLBACK",
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            37
+          ],
+          "section": "All expertoutputs0"
+        },
+        {
+          "source": "PROG",
+          "pages": [
+            175
+          ],
+          "section": "HSCreflexfallbackconditional"
+        }
+      ],
+      "resolution": "Preserveconfiguration;exactstopbehaviorunverified,donotclaimgenericrulecoversallcases."
+    },
+    {
+      "id": "CF.MASTER_DEFAULT_PERIOD",
+      "evidence": [
+        {
+          "source": "PROG",
+          "pages": [
+            26
+          ],
+          "section": "Default10ms"
+        },
+        {
+          "source": "OPER",
+          "pages": [
+            57
+          ],
+          "section": "Default100ms"
+        }
+      ],
+      "resolution": "Requireexplicitconfiguration;avoiddefault-dependentsemantics."
+    }
+  ],
+  "unknowns": [
+    "NativeSMBPXMLschema/configurationfieldsforhardwarefunctionsareunverifieduntilrealeditorprojectfixturesareavailable;namedfieldsinthisartifactareofficialUIfields,notsyntheticXMLtags.",
+    "EtherNet/IPadapterisadvertisedinprimarycatalogbutassemblyconfiguration/EDS/RPI/limitsareunresolved.",
+    "ExactfirmwarematchingFL12.1andSL1ScombinationsneedsWindowseditorandphysicalPLCverification.",
+    "AlloptionalTM2/TM3module-specificcapabilitiesneedseparateofficialmodulecatalog/manualaudit;onlyfamily-levelcompatibilityandbuslimitestablishedhere.",
+    "Eventqueuedepthandnested-event/overflowbehaviornotverifiedfromcurrentmanualsections.",
+    "Electricalresponse,RFisnotapplicablehere,PLCscanlatency,watchdogrealCPUload,power-lossretention,andphysicalpulse/serial/Ethernettimingwerenottested."
+  ],
+  "implementation_recommendations": [
+    "Separatephysicalhardwarecapability,compiler/loweringimplementation,native-projectserialization,hostsimulation,official-editorvalidation,andphysicalPLCvalidationstatusforeachstablecapabilityID.",
+    "Implementstrictmodel-awarepin/resourceallocatorforDI/DO,FC,HSCauxiliary/event/latch/RunStop,pulsefunctions,PTOdirection/ref/index/probe,alarmandreflexoutputs;rejectconflictsbeforeemit.",
+    "Addexplicitfunctionallevelgates(3.2Modbusmapping,5.0min1mstasks/singlecoilregisterwrite/PTOdirectionunused,6.0TCPIOScanner512objects,10.1commFB32instances,12.1SL1S).",
+    "Requiredeclaredcartridge/moduleinventorybeforeacceptinganyanalogorexpansionaddress;validatewholebufferbounds,widthoverlaps,andread-onlymemberaccess.",
+    "Do notflattenasynchronouscommunication/motionFBstosinglescanassignments;modelbusy/done/abort/errorrising-edge,state,portownershipandboundedmotionqueue.",
+    "Preserveunknownnativeconfigurationopaquelyandreportunsupportedauthoringexplicitly;neverguessXMLtagstoadvertisecapabilitycoverage.",
+    "TreatphysicalSTOP/hardwarelimits/outputfallbackasruntimecontractsthatlocalmodeltestsdo notcertify."
+  ],
+  "recommended_local_test_matrix": [
+    {
+      "id": "TEST.HW.PINS",
+      "checks": [
+        "BoundaryI0.0/I0.23andQ0.0/Q0.15;rejectI24/Q16",
+        "Enumerateallfastresourcesandpairwiseconflicts",
+        "HSC0dual+HSC2andHSC1dual+HSC3conflict",
+        "PTO0CW/CCWvsPTO1/PWM1/FREQGEN1",
+        "PTOdirectionvsotheroutputowners",
+        "Analogwithoutconfiguredcartridge/modulefails"
+      ]
+    },
+    {
+      "id": "TEST.HW.RANGES",
+      "checks": [
+        "Allmin/maxandjustoutsideboundariesforFC/HSC16/32bit,PLS/PWMperiod/count/duty,FREQGEN0..100000,PTOsignedpositions/velocity/accel",
+        "1mstasksrequireFL>=5;10.1commcountsand12.1SL1Scombinationgates",
+        "TM2ordering,modulecount4andbus5V/24Vbudgets"
+      ]
+    },
+    {
+      "id": "TEST.COMM.STATE",
+      "checks": [
+        "NoExecuteedgeoninitialRUNTRUE;FALSEthenTRUEstarts;repeatededgewhilebusyignored",
+        "Abort/timeouterrorcodesandlateresponseignored",
+        "PortcontentionbetweenFBandEXCHfails",
+        "ModbusmappingUnitIDmatchingandordinaryMWfallback",
+        "IOScanner1global,16devices,20init,10channels,objectbudgetandperFCrequestlengths",
+        "Wordbufferendandbitpackingincludingoddbytecounts",
+        "Zero/retain-lastreaderrorpolicy;resetresendsinitbeforecyclicupdates"
+      ]
+    },
+    {
+      "id": "TEST.MOTION.STATE",
+      "checks": [
+        "Powerenableprerequisite",
+        "Absolute movebeforehomingfails",
+        "Onebuffer,queuefull,abortingmove,Stop,Halt,ErrorStopandResettransitions",
+        "Signedlimits,softwarelimitafterhome,proberange,backlashnotaddedtoposition",
+        "Read-onlyPTOparametersrejectwrites;unknownparameterfails"
+      ]
+    },
+    {
+      "id": "TEST.RETENTION.RTC",
+      "checks": [
+        "PowerlossretainsMW0..2999/M0..499only",
+        "Download/INIT/S0resetretainedvalues",
+        "RequestedregionMW3000..4999vsSDallwords",
+        "RTCBCD/calendar/leapyearandRD+WRerror256,alreadyupdating257",
+        "STOP-onlySDstatepermissionsandbusy/statusresults",
+        "Watchdogvsperiod-overrunandtimingwordcomposition"
+      ]
+    },
+    {
+      "id": "TEST.NATIVE.ROUNDTRIP",
+      "checks": [
+        "FixturesauthoredinofficialeditorforallfeaturefamilieswhenWindowsavailable",
+        "Losslessroundtripnativeopaquehardwarefields",
+        "Compareofficialeditorvalidation/compilerdiagnostics,notXMLsyntacticroundtripalone",
+        "OnlythenperformauthorizedPLCbenchtestswithloadsdisconnected"
+      ]
+    }
+  ]
+}

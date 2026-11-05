@@ -1,8 +1,18 @@
 from .il import validate
 from .model import address
+from .numeric import comparison, operation, cpp, WRITES, word_address
 
 
 def read_cpp(arg):
+    if arg.startswith("["):
+        a, op, b = comparison(arg)
+        return (
+            "("
+            + cpp(a)
+            + {"=": "==", "<>": "!=", ">": ">", ">=": ">=", "<": "<", "<=": "<="}[op]
+            + cpp(b)
+            + ")"
+        )
     kind, n = address(arg)
     if kind == "constant":
         return "true" if n else "false"
@@ -46,7 +56,21 @@ def to_cpp(program):
             ]
             continue
         for line in rung:
-            op, arg = line.split()
+            if line.startswith("["):
+                target, name, values = operation(line)
+                kind, index = word_address(target)
+                args = [str(v) if isinstance(v, int) else cpp(v) for v in values]
+                expression = (
+                    args[0]
+                    if name == "copy"
+                    else "plc::" + name + "(" + ",".join(args) + ")"
+                )
+                fn = {v: k for k, v in WRITES.items()}[kind]
+                lines.append(
+                    "  if (accumulator) { plc::%s(%d,%s); }" % (fn, index, expression)
+                )
+                continue
+            op, arg = line.split(maxsplit=1)
             if op in ("ST", "S", "R"):
                 statement = write_cpp(
                     arg,

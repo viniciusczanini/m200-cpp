@@ -42,6 +42,8 @@ class Program:
     def from_dict(cls, data):
         if not isinstance(data, dict):
             fail("program JSON must be an object")
+        if set(data) - {"format", "target", "rungs", "timers", "symbols", "metadata"}:
+            fail("unknown program JSON fields")
         if data.get("format") != "m200-cpp-il-v1" or data.get("target") != "TM200CE40T":
             fail("unsupported program format or target")
         if not isinstance(data.get("rungs"), list) or not isinstance(
@@ -52,6 +54,11 @@ class Program:
             data.get("metadata", {}), dict
         ):
             fail("invalid program metadata")
+        if any(
+            not isinstance(k, str) or not re.fullmatch(r"0|[1-9]\d*", k)
+            for k in data["timers"]
+        ):
+            fail("timer indexes must use canonical decimal keys")
         try:
             timers = {int(k): Timer(**v) for k, v in data["timers"].items()}
         except (TypeError, ValueError):

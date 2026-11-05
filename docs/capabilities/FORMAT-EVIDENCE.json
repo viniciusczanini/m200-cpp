@@ -1,0 +1,342 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-05",
+  "scope": "Read-only primary public authored SMBP examples; serialization evidence only, not official schema/editor/CE40T acceptance.",
+  "sources": [
+    {
+      "request": {
+        "repository_full_name": "ph0wn/writeups",
+        "path": "2026/ghost-ship-cannons/setup/CTF_Challenge_Cannon.smbp",
+        "ref": "40a9692518f7c4f367df3904c090f37641704069"
+      },
+      "metadata": {
+        "encoding": "utf-8",
+        "sha": "f24105319afa06de426bec86fde91323df9db5d4",
+        "display_url": "https://github.com/ph0wn/writeups/blob/40a9692518f7c4f367df3904c090f37641704069/2026/ghost-ship-cannons/setup/CTF_Challenge_Cannon.smbp",
+        "display_title": "CTF_Challenge_Cannon.smbp"
+      },
+      "normalized_text_sha256": "0ff1b364892d72adebf08b46941490bf86821a21ca98123a879ff78caecd9358",
+      "project_version": "2.9.0.0",
+      "management_level": "FunctLevelMan14_0",
+      "controller_references": [
+        "TM221CE16T"
+      ],
+      "note": "Fetched through GitHub connector at pinned commit. Local text normalizes line endings; source blob SHA remains in metadata."
+    },
+    {
+      "request": {
+        "repository_full_name": "wavestone-cdt/plc-code-security",
+        "path": "icsjwg2022/plc_programs/demo3.smbp",
+        "ref": "a7fc4f9aa395ccbf628e888918fb6281995901b9"
+      },
+      "metadata": {
+        "encoding": "utf-8",
+        "sha": "1125b00da5de770080e2c5cca05688c916824764",
+        "display_url": "https://github.com/wavestone-cdt/plc-code-security/blob/a7fc4f9aa395ccbf628e888918fb6281995901b9/icsjwg2022/plc_programs/demo3.smbp",
+        "display_title": "demo3.smbp"
+      },
+      "normalized_text_sha256": "5ebf51174450e091b52e6a197cc39e187fdc5edd50bab5980639d7902b208fe7",
+      "project_version": "2.2.0.0",
+      "management_level": "FunctLevelMan11_0",
+      "controller_references": [
+        "TM221ME16R/G"
+      ],
+      "note": "Fetched through GitHub connector at pinned commit. Local text normalizes line endings; source blob SHA remains in metadata."
+    },
+    {
+      "request": {
+        "repository_full_name": "ss56/somachine-basic-programs",
+        "path": "timer test.smbp",
+        "ref": "c6e657a1759625d772fa01751259ff0cde6f0252"
+      },
+      "metadata": {
+        "encoding": "utf-8",
+        "sha": "496f0218a5c78c291d8dd8518c9a1e2b57fce23c",
+        "display_url": "https://github.com/ss56/somachine-basic-programs/blob/master/timer%20test.smbp",
+        "display_title": "timer test.smbp"
+      },
+      "normalized_text_sha256": "fb3d0fbd57044cf0ad28e1fff81fe81637966f85065f21113a22ec27e6a9b3f7",
+      "project_version": "1.6.0.0",
+      "management_level": "FunctLevelMan7_0",
+      "controller_references": [
+        "TM221CE16R"
+      ],
+      "note": "Fetched through GitHub connector at pinned commit. Local text normalizes line endings; source blob SHA remains in metadata."
+    },
+    {
+      "request": {
+        "repository_full_name": "ss56/somachine-basic-programs",
+        "path": "equations.smbp",
+        "ref": "c6e657a1759625d772fa01751259ff0cde6f0252"
+      },
+      "metadata": {
+        "encoding": "utf-8",
+        "sha": "37fa01c9c838fd180f0f7445138fbe6bc8163be3",
+        "display_url": "https://github.com/ss56/somachine-basic-programs/blob/master/equations.smbp",
+        "display_title": "equations.smbp"
+      },
+      "normalized_text_sha256": "85b004dff3ef151b97df2f6e2c3b838801387fbe1bf413adc3b67d1351061355",
+      "project_version": "2.0.0.0",
+      "management_level": "FunctLevelMan7_0",
+      "controller_references": [
+        "TM221CE16R"
+      ],
+      "note": "Fetched through GitHub connector at pinned commit. Local text normalizes line endings; source blob SHA remains in metadata."
+    },
+    {
+      "request": {
+        "repository_full_name": "ss56/somachine-basic-programs",
+        "path": "memory floats multiply.smbp",
+        "ref": "c6e657a1759625d772fa01751259ff0cde6f0252"
+      },
+      "metadata": {
+        "encoding": "utf-8",
+        "sha": "d7e79634ab38022cd28eb3d82da7f1cadff6ca69",
+        "display_url": "https://github.com/ss56/somachine-basic-programs/blob/master/memory%20floats%20multiply.smbp",
+        "display_title": "memory floats multiply.smbp"
+      },
+      "normalized_text_sha256": "e18f6928f731f168965771b14633281c9dc450e8e0d8dfaefb962211026675fe",
+      "project_version": "2.0.0.0",
+      "management_level": "FunctLevelMan11_0",
+      "controller_references": [
+        "TM221CE16R"
+      ],
+      "note": "Fetched through GitHub connector at pinned commit. Local text normalizes line endings; source blob SHA remains in metadata."
+    },
+    {
+      "request": {
+        "repository_full_name": "wavestone-cdt/plc-code-security",
+        "path": "dc30/PLC Programs examples/simulation.smbp",
+        "ref": "a7fc4f9aa395ccbf628e888918fb6281995901b9"
+      },
+      "metadata": {
+        "encoding": "utf-8",
+        "sha": "5479e5af26310c2db65e82c58118397fa7dcfd09",
+        "display_url": "https://github.com/wavestone-cdt/plc-code-security/blob/a7fc4f9aa395ccbf628e888918fb6281995901b9/dc30/PLC%20Programs%20examples/simulation.smbp",
+        "display_title": "simulation.smbp"
+      },
+      "normalized_text_sha256": "914c28775f24ca1baeee1850b48dabcba1e7efdeb3f2459f0fbbecb8237bea63",
+      "project_version": "2.2.0.0",
+      "management_level": "FunctLevelMan13_0",
+      "controller_references": [
+        "TM221ME16R/G"
+      ],
+      "note": "Fetched through GitHub connector at pinned commit. Local text normalizes line endings; source blob SHA remains in metadata."
+    },
+    {
+      "request": {
+        "repository_full_name": "afafirmansyah/automatic-tank-gauging",
+        "path": "Program.smbp",
+        "ref": "0a32c0f49051d84e5c341dbcf5d9cb7160446c62"
+      },
+      "metadata": {
+        "encoding": "utf-8",
+        "sha": "86d5fdba310676419efd636d7d3c8d0802e326e6",
+        "display_url": "https://github.com/afafirmansyah/automatic-tank-gauging/blob/0a32c0f49051d84e5c341dbcf5d9cb7160446c62/Program.smbp",
+        "display_title": "Program.smbp"
+      },
+      "normalized_text_sha256": "ae45cfb39f1d7ee958de6508a47dc71b514a8acb98507ef5544143e5c15d6762",
+      "project_version": "2.6.0.0",
+      "management_level": "FunctLevelMan17_0",
+      "controller_references": [
+        "TM221CE16R",
+        "TM2AMM6HT"
+      ],
+      "note": "Fetched through GitHub connector at pinned commit. Local text normalizes line endings; source blob SHA remains in metadata."
+    },
+    {
+      "request": {
+        "repository_full_name": "wavestone-cdt/plc-code-security",
+        "path": "icsjwg2022/plc_programs/demo2_timer.smbp",
+        "ref": "a7fc4f9aa395ccbf628e888918fb6281995901b9"
+      },
+      "metadata": {
+        "encoding": "utf-8",
+        "sha": "29b55a1e71ffff810400468ca2b2e0e6a26ae3f6",
+        "display_url": "https://github.com/wavestone-cdt/plc-code-security/blob/a7fc4f9aa395ccbf628e888918fb6281995901b9/icsjwg2022/plc_programs/demo2_timer.smbp",
+        "display_title": "demo2_timer.smbp"
+      },
+      "normalized_text_sha256": "f857f0bd2cde6b4891c7c24ebd854dc3f2c8e45b6a23bb42480cf79c01f0f85d",
+      "project_version": "2.2.0.0",
+      "management_level": "FunctLevelMan11_0",
+      "controller_references": [
+        "TM221ME16R/G"
+      ],
+      "note": "Fetched through GitHub connector at pinned commit. Local text normalizes line endings; source blob SHA remains in metadata."
+    }
+  ],
+  "excerpts": [
+    {
+      "source_index": 1,
+      "repo": "wavestone-cdt/plc-code-security",
+      "commit": "a7fc4f9aa395ccbf628e888918fb6281995901b9",
+      "path": "icsjwg2022/plc_programs/demo3.smbp",
+      "start_line": 14,
+      "end_line": 102,
+      "url": "https://github.com/wavestone-cdt/plc-code-security/blob/a7fc4f9aa395ccbf628e888918fb6281995901b9/icsjwg2022/plc_programs/demo3.smbp#L14-L102",
+      "id": "comparison_complete_rung"
+    },
+    {
+      "source_index": 1,
+      "repo": "wavestone-cdt/plc-code-security",
+      "commit": "a7fc4f9aa395ccbf628e888918fb6281995901b9",
+      "path": "icsjwg2022/plc_programs/demo3.smbp",
+      "start_line": 32,
+      "end_line": 38,
+      "url": "https://github.com/wavestone-cdt/plc-code-security/blob/a7fc4f9aa395ccbf628e888918fb6281995901b9/icsjwg2022/plc_programs/demo3.smbp#L32-L38",
+      "id": "comparison_entity"
+    },
+    {
+      "source_index": 1,
+      "repo": "wavestone-cdt/plc-code-security",
+      "commit": "a7fc4f9aa395ccbf628e888918fb6281995901b9",
+      "path": "icsjwg2022/plc_programs/demo3.smbp",
+      "start_line": 25,
+      "end_line": 31,
+      "url": "https://github.com/wavestone-cdt/plc-code-security/blob/a7fc4f9aa395ccbf628e888918fb6281995901b9/icsjwg2022/plc_programs/demo3.smbp#L25-L31",
+      "id": "inline_operation_entity"
+    },
+    {
+      "source_index": 3,
+      "repo": "ss56/somachine-basic-programs",
+      "commit": "c6e657a1759625d772fa01751259ff0cde6f0252",
+      "path": "equations.smbp",
+      "start_line": 14,
+      "end_line": 95,
+      "url": "https://github.com/ss56/somachine-basic-programs/blob/c6e657a1759625d772fa01751259ff0cde6f0252/equations.smbp#L14-L95",
+      "id": "operation_complete_rung"
+    },
+    {
+      "source_index": 3,
+      "repo": "ss56/somachine-basic-programs",
+      "commit": "c6e657a1759625d772fa01751259ff0cde6f0252",
+      "path": "equations.smbp",
+      "start_line": 64,
+      "end_line": 70,
+      "url": "https://github.com/ss56/somachine-basic-programs/blob/c6e657a1759625d772fa01751259ff0cde6f0252/equations.smbp#L64-L70",
+      "id": "operation_entity"
+    },
+    {
+      "source_index": 1,
+      "repo": "wavestone-cdt/plc-code-security",
+      "commit": "a7fc4f9aa395ccbf628e888918fb6281995901b9",
+      "path": "icsjwg2022/plc_programs/demo3.smbp",
+      "start_line": 1105,
+      "end_line": 1108,
+      "url": "https://github.com/wavestone-cdt/plc-code-security/blob/a7fc4f9aa395ccbf628e888918fb6281995901b9/icsjwg2022/plc_programs/demo3.smbp#L1105-L1108",
+      "id": "word_allocation_manual"
+    },
+    {
+      "source_index": 1,
+      "repo": "wavestone-cdt/plc-code-security",
+      "commit": "a7fc4f9aa395ccbf628e888918fb6281995901b9",
+      "path": "icsjwg2022/plc_programs/demo3.smbp",
+      "start_line": 2431,
+      "end_line": 2435,
+      "url": "https://github.com/wavestone-cdt/plc-code-security/blob/a7fc4f9aa395ccbf628e888918fb6281995901b9/icsjwg2022/plc_programs/demo3.smbp#L2431-L2435",
+      "id": "memory_word"
+    },
+    {
+      "source_index": 5,
+      "repo": "wavestone-cdt/plc-code-security",
+      "commit": "a7fc4f9aa395ccbf628e888918fb6281995901b9",
+      "path": "dc30/PLC Programs examples/simulation.smbp",
+      "start_line": 2964,
+      "end_line": 2968,
+      "url": "https://github.com/wavestone-cdt/plc-code-security/blob/a7fc4f9aa395ccbf628e888918fb6281995901b9/dc30/PLC%20Programs%20examples/simulation.smbp#L2964-L2968",
+      "id": "memory_dword"
+    },
+    {
+      "source_index": 6,
+      "repo": "afafirmansyah/automatic-tank-gauging",
+      "commit": "0a32c0f49051d84e5c341dbcf5d9cb7160446c62",
+      "path": "Program.smbp",
+      "start_line": 2211,
+      "end_line": 2215,
+      "url": "https://github.com/afafirmansyah/automatic-tank-gauging/blob/0a32c0f49051d84e5c341dbcf5d9cb7160446c62/Program.smbp#L2211-L2215",
+      "id": "memory_float"
+    },
+    {
+      "source_index": 6,
+      "repo": "afafirmansyah/automatic-tank-gauging",
+      "commit": "0a32c0f49051d84e5c341dbcf5d9cb7160446c62",
+      "path": "Program.smbp",
+      "start_line": 2216,
+      "end_line": 2220,
+      "url": "https://github.com/afafirmansyah/automatic-tank-gauging/blob/0a32c0f49051d84e5c341dbcf5d9cb7160446c62/Program.smbp#L2216-L2220",
+      "id": "memory_float_nonordinal_index"
+    },
+    {
+      "source_index": 1,
+      "repo": "wavestone-cdt/plc-code-security",
+      "commit": "a7fc4f9aa395ccbf628e888918fb6281995901b9",
+      "path": "icsjwg2022/plc_programs/demo3.smbp",
+      "start_line": 2503,
+      "end_line": 2508,
+      "url": "https://github.com/wavestone-cdt/plc-code-security/blob/a7fc4f9aa395ccbf628e888918fb6281995901b9/icsjwg2022/plc_programs/demo3.smbp#L2503-L2508",
+      "id": "timer_1s_original"
+    }
+  ],
+  "findings": {
+    "terminal_operation": {
+      "ElementType": "Operation",
+      "expression_field": "OperationExpression",
+      "Descriptor": "absent in verified nodes",
+      "expression_has_brackets": false,
+      "example": "%MW1 := %MW1 + 1",
+      "row": 0,
+      "column": 9,
+      "ChosenConnection": "Left",
+      "IL": "[ %MW1 := %MW1 + 1 ]",
+      "grid_extent": "Inferred 2 columns (9\u201310) from complete rung and adjacent line placements; no explicit Width element in node."
+    },
+    "comparison": {
+      "ElementType": "Comparison",
+      "expression_field": "ComparisonExpression",
+      "Descriptor": "absent in verified nodes",
+      "example": "%MW0 < 20",
+      "row": 0,
+      "column": 3,
+      "ChosenConnection": "Left, Right",
+      "IL": "AND [ %MW0 < 20 ]",
+      "grid_extent": "Inferred2columns: comparison starts1,3,5; lines7,8,9;coil10."
+    },
+    "inline_operation": {
+      "ElementType": "Comparison",
+      "expression_field": "ComparisonExpression",
+      "example": "%TM0.P := %MW0",
+      "IL": "OPER [ %TM0.P := %MW0 ]",
+      "warning": "Comparison XML type can represent inline numeric operation, not only boolean comparison. Terminal assignment uses Operation node."
+    },
+    "memory_collections": {
+      "MemoryWords": "MemoryWord",
+      "MemoryDoubleWords": "MemoryDoubleWord",
+      "MemoryFloats": "MemoryFloat",
+      "members_observed": [
+        "Address",
+        "Index",
+        "Symbol",
+        "Comment(optional)"
+      ],
+      "index_semantics": "Address numeric index, not list position: MF12Index12 thenMF14Index14.",
+      "Type": "No per-record Type field found in these authored memory records; collection/address identify word/dword/float.",
+      "InitialValue": "Not found in verified user-memory records. Do not invent an XML initial-value field. Native initialization may be expressed in program logic; exact project field remains unknown."
+    },
+    "allocation": {
+      "MemoryWordsMemoryAllocation": "Manual + ForcedCount2000 observed",
+      "empty_node": "Also observed <MemoryWordsMemoryAllocation />; exact enum/default for Automatic not established by these files."
+    },
+    "timer10ms": {
+      "status": "unknown_in_primary_authored_fixture",
+      "secondary_hint": "Wayan123/multi-plc-agent codec.py uses TenMilliSeconds; not accepted as original-editor evidence.",
+      "primary_observation": "TimerTM BaseOneSecond observed; other timer fixtures omit Base, which does not prove a 10ms enum."
+    }
+  },
+  "validation": {
+    "XML_parse": "8 original source files and11excerpt XML fragments parsed locally",
+    "repo_modified": false,
+    "editor_run": false,
+    "physical_plc_run": false,
+    "installer_downloaded": false
+  }
+}

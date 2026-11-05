@@ -79,4 +79,127 @@ struct Clock { explicit Clock(unsigned); bool update(bool); };
 struct RisingEdge { RisingEdge(); bool update(bool); };
 struct FallingEdge { FallingEdge(); bool update(bool); };
 #endif
+// Fixed-width numeric API. Explicit operations avoid C++ integer promotions.
+using i16 = short;
+using i32 = int;
+using f32 = float;
+#ifdef PLC_NATIVE
+static_assert(sizeof(i16)==2 && sizeof(i32)==4 && sizeof(f32)==4,"PLC numeric width mismatch");
+namespace detail {
+inline unsigned short words[8000] = {};
+inline i16 check_i16(long long v){if(v < -32768LL || v > 32767LL)__builtin_trap();return (i16)v;}
+inline i32 check_i32(long long v){if(v < -2147483648LL || v > 2147483647LL)__builtin_trap();return (i32)v;}
+inline f32 check_f32(f32 v){if(!__builtin_isfinite(v))__builtin_trap();return v;}
+inline i16 bits_i16(unsigned v){unsigned short raw=(unsigned short)v;i16 out;__builtin_memcpy(&out,&raw,2);return out;}
+inline i32 bits_i32(unsigned v){i32 out;__builtin_memcpy(&out,&v,4);return out;}
+}
+inline i16 read_word(int n){return detail::bits_i16(detail::words[n]);}
+inline void write_word(int n,i16 v){detail::words[n]=(unsigned short)v;}
+inline i32 read_dword(int n){return detail::bits_i32((unsigned)detail::words[n]|((unsigned)detail::words[n+1]<<16));}
+inline void write_dword(int n,i32 v){unsigned raw;__builtin_memcpy(&raw,&v,4);detail::words[n]=(unsigned short)raw;detail::words[n+1]=(unsigned short)(raw>>16);}
+inline f32 read_real(int n){i32 raw=read_dword(n);f32 out;__builtin_memcpy(&out,&raw,4);return detail::check_f32(out);}
+inline void write_real(int n,f32 v){i32 raw;__builtin_memcpy(&raw,&v,4);write_dword(n,raw);}
+
+inline i16 add_i16(i16 a, i16 b){return detail::check_i16((long long)a+(long long)b);}
+inline i16 sub_i16(i16 a, i16 b){return detail::check_i16((long long)a-(long long)b);}
+inline i16 mul_i16(i16 a, i16 b){return detail::check_i16((long long)a*(long long)b);}
+inline i16 div_i16(i16 a, i16 b){if(b==0)__builtin_trap();return detail::check_i16((long long)a/(long long)b);}
+inline i16 sqrt_i16(i16 a){if(a<0)__builtin_trap();return detail::check_i16((long long)__builtin_sqrt((double)a));}
+inline i32 add_i32(i32 a, i32 b){return detail::check_i32((long long)a+(long long)b);}
+inline i32 sub_i32(i32 a, i32 b){return detail::check_i32((long long)a-(long long)b);}
+inline i32 mul_i32(i32 a, i32 b){return detail::check_i32((long long)a*(long long)b);}
+inline i32 div_i32(i32 a, i32 b){if(b==0)__builtin_trap();return detail::check_i32((long long)a/(long long)b);}
+inline i32 sqrt_i32(i32 a){if(a<0)__builtin_trap();return detail::check_i32((long long)__builtin_sqrt((double)a));}
+inline f32 add_f32(f32 a, f32 b){return detail::check_f32(a+b);}
+inline f32 sub_f32(f32 a, f32 b){return detail::check_f32(a-b);}
+inline f32 mul_f32(f32 a, f32 b){return detail::check_f32(a*b);}
+inline f32 div_f32(f32 a, f32 b){if(b==0)__builtin_trap();return detail::check_f32(a/b);}
+inline f32 sqrt_f32(f32 a){if(a<0)__builtin_trap();return detail::check_f32(__builtin_sqrtf(a));}
+inline i16 rem_i16(i16 a, i16 b){if(b==0)__builtin_trap();detail::check_i16((long long)a/(long long)b);return detail::check_i16((long long)a%(long long)b);}
+inline i16 shl_i16(i16 a, int b){if(b<1||b>16)__builtin_trap();unsigned long long u=(unsigned)a&65535U;return detail::bits_i16((unsigned)(u<<b));}
+inline i16 shr_i16(i16 a, int b){if(b<1||b>16)__builtin_trap();unsigned long long u=(unsigned)a&65535U;return detail::bits_i16((unsigned)(u>>b));}
+inline i16 rol_i16(i16 a, int b){if(b<1||b>16)__builtin_trap();unsigned long long u=(unsigned)a&65535U;return detail::bits_i16((unsigned)((u<<b)|(u>>(16-b))));}
+inline i16 ror_i16(i16 a, int b){if(b<1||b>16)__builtin_trap();unsigned long long u=(unsigned)a&65535U;return detail::bits_i16((unsigned)((u>>b)|(u<<(16-b))));}
+inline i32 rem_i32(i32 a, i32 b){if(b==0)__builtin_trap();detail::check_i32((long long)a/(long long)b);return detail::check_i32((long long)a%(long long)b);}
+inline i32 shl_i32(i32 a, int b){if(b<1||b>32)__builtin_trap();unsigned long long u=(unsigned)a&0xffffffffU;return detail::bits_i32((unsigned)(u<<b));}
+inline i32 shr_i32(i32 a, int b){if(b<1||b>32)__builtin_trap();unsigned long long u=(unsigned)a&0xffffffffU;return detail::bits_i32((unsigned)(u>>b));}
+inline i32 rol_i32(i32 a, int b){if(b<1||b>32)__builtin_trap();unsigned long long u=(unsigned)a&0xffffffffU;return detail::bits_i32((unsigned)((u<<b)|(u>>(32-b))));}
+inline i32 ror_i32(i32 a, int b){if(b<1||b>32)__builtin_trap();unsigned long long u=(unsigned)a&0xffffffffU;return detail::bits_i32((unsigned)((u>>b)|(u<<(32-b))));}
+inline i16 and_i16(i16 a, i16 b){return detail::bits_i16(a&b);}
+inline i16 or_i16(i16 a, i16 b){return detail::bits_i16(a|b);}
+inline i16 xor_i16(i16 a, i16 b){return detail::bits_i16(a^b);}
+inline i16 not_i16(i16 a){return detail::bits_i16(~a);}
+inline i32 abs_i32(i32 a){return detail::check_i32(a<0?-(long long)a:(long long)a);}
+inline f32 abs_f32(f32 a){return detail::check_f32(__builtin_fabsf(a));}
+inline f32 trunc_f32(f32 a){return detail::check_f32(__builtin_truncf(a));}
+inline f32 log_f32(f32 a){return detail::check_f32(__builtin_log10f(a));}
+inline f32 ln_f32(f32 a){return detail::check_f32(__builtin_logf(a));}
+inline f32 exp_f32(f32 a){return detail::check_f32(__builtin_expf(a));}
+inline f32 sin_f32(f32 a){if(a < -12867.963509103793 || a > 12867.963509103793)__builtin_trap();return detail::check_f32(__builtin_sinf(a));}
+inline f32 cos_f32(f32 a){if(a < -12867.963509103793 || a > 12867.963509103793)__builtin_trap();return detail::check_f32(__builtin_cosf(a));}
+inline f32 tan_f32(f32 a){if(a < -12867.963509103793 || a > 12867.963509103793)__builtin_trap();return detail::check_f32(__builtin_tanf(a));}
+inline f32 asin_f32(f32 a){return detail::check_f32(__builtin_asinf(a));}
+inline f32 acos_f32(f32 a){return detail::check_f32(__builtin_acosf(a));}
+inline f32 atan_f32(f32 a){return detail::check_f32(__builtin_atanf(a));}
+inline f32 int_to_real(i16 a){return (f32)a;}
+inline f32 dint_to_real(i32 a){return (f32)a;}
+inline i16 real_to_int(f32 a){double v=__builtin_rint((double)a);if(!__builtin_isfinite(v)||v<-32768.0||v>32767.0)__builtin_trap();return (i16)v;}
+inline i32 real_to_dint(f32 a){double v=__builtin_rint((double)a);if(!__builtin_isfinite(v)||v<-2147483648.0||v>2147483647.0)__builtin_trap();return (i32)v;}
+inline i16 low_word(i32 a){return detail::bits_i16((unsigned)a);}
+inline i16 high_word(i32 a){return detail::bits_i16((unsigned)a>>16);}
+#else
+i16 read_word(int);
+void write_word(int,i16);
+i32 read_dword(int);
+void write_dword(int,i32);
+f32 read_real(int);
+void write_real(int,f32);
+i16 add_i16(i16,i16);
+i16 sub_i16(i16,i16);
+i16 mul_i16(i16,i16);
+i16 div_i16(i16,i16);
+i16 sqrt_i16(i16);
+i32 add_i32(i32,i32);
+i32 sub_i32(i32,i32);
+i32 mul_i32(i32,i32);
+i32 div_i32(i32,i32);
+i32 sqrt_i32(i32);
+f32 add_f32(f32,f32);
+f32 sub_f32(f32,f32);
+f32 mul_f32(f32,f32);
+f32 div_f32(f32,f32);
+f32 sqrt_f32(f32);
+i16 rem_i16(i16,i16);
+i16 shl_i16(i16,int);
+i16 shr_i16(i16,int);
+i16 rol_i16(i16,int);
+i16 ror_i16(i16,int);
+i32 rem_i32(i32,i32);
+i32 shl_i32(i32,int);
+i32 shr_i32(i32,int);
+i32 rol_i32(i32,int);
+i32 ror_i32(i32,int);
+i16 and_i16(i16,i16);
+i16 or_i16(i16,i16);
+i16 xor_i16(i16,i16);
+i16 not_i16(i16);
+i32 abs_i32(i32);
+f32 abs_f32(f32);
+f32 trunc_f32(f32);
+f32 log_f32(f32);
+f32 ln_f32(f32);
+f32 exp_f32(f32);
+f32 sin_f32(f32);
+f32 cos_f32(f32);
+f32 tan_f32(f32);
+f32 asin_f32(f32);
+f32 acos_f32(f32);
+f32 atan_f32(f32);
+f32 int_to_real(i16);
+f32 dint_to_real(i32);
+i16 real_to_int(f32);
+i32 real_to_dint(f32);
+i16 low_word(i32);
+i16 high_word(i32);
+#endif
 }

@@ -12,6 +12,7 @@ from pathlib import Path
 from .il import validate
 from .config import configuration, unique_tree
 from .model import Program, Timer, address, fail
+from .numeric import word_address, comparison, operation, Number
 
 TARGET = "TM200CE40T"
 BASES = {1: "OneMilliSeconds", 100: "OneHundredMilliSeconds", 1000: "OneSecond"}
@@ -28,6 +29,12 @@ def parse(path):
     data = Path(path).read_bytes()
     if len(data) > 20_000_000:
         fail("project exceeds the experimental parser size limit")
+    try:
+        data.decode("utf-8-sig")
+    except UnicodeDecodeError:
+        fail("project XML must use UTF-8 encoding")
+    if b"\x00" in data:
+        fail("project XML must use UTF-8 encoding")
     if b"<!DOCTYPE" in data.upper() or b"<!ENTITY" in data.upper():
         fail("DTD/entity declarations are not supported")
     try:
@@ -36,6 +43,12 @@ def parse(path):
         fail("invalid XML: " + str(exc))
     if root.tag != "ProjectDescriptor":
         fail("unsupported project root or encrypted project")
+    pending = [(root, 0)]
+    while pending:
+        node, depth = pending.pop()
+        if depth > 64:
+            fail("project XML depth exceeds 64")
+        pending.extend((child, depth + 1) for child in node)
     unique_tree(root)
     if root.findtext("HardwareConfiguration/Plc/Cpu/Reference") != TARGET:
         fail("template/project must target " + TARGET)
@@ -54,22 +67,37 @@ def graphics(rung):
         items.append(("Coil", rung[5].split()[1], 10))
     else:
         items = []
-        for index, line in enumerate(rung[:-1]):
-            op, arg = line.split()
+        column = 0
+        for line in rung[:-1]:
+            op, arg = line.split(maxsplit=1)
             if op not in ("LD", "LDN", "AND", "ANDN"):
                 fail("project graphics for this IL operator are not supported")
+            if arg.startswith("["):
+                if op not in ("LD", "AND"):
+                    fail("negated numeric comparison graphics are unsupported")
+                items.append(("Comparison", arg[1:-1].strip(), column))
+                column += 2
+                continue
             items.append(
                 (
                     "NegatedContact" if op in ("LDN", "ANDN") else "NormalContact",
                     arg,
-                    index,
+                    column,
                 )
             )
-        if len(items) > 10:
+            column += 1
+        terminal_operation = rung[-1].startswith("[")
+        end = 9 if terminal_operation else 10
+        if column > end:
             fail("rung exceeds Ladder width")
-        items += [("Line", "", i) for i in range(len(items), 10)]
-        op, arg = rung[-1].split()
-        items.append(({"ST": "Coil", "S": "SetCoil", "R": "ResetCoil"}[op], arg, 10))
+        items += [("Line", "", i) for i in range(column, end)]
+        if terminal_operation:
+            items.append(("Operation", rung[-1][1:-1].strip(), 9))
+        else:
+            op, arg = rung[-1].split()
+            items.append(
+                ({"ST": "Coil", "S": "SetCoil", "R": "ResetCoil"}[op], arg, 10)
+            )
     return items
 
 
@@ -94,10 +122,15 @@ def check_graph(rung_node, lines):
                 "Row",
                 "Column",
                 "ChosenConnection",
+                "ComparisonExpression",
+                "OperationExpression",
             )
             for c in e
         ):
             fail("unknown Ladder element fields")
+        for child in e:
+            if len(child):
+                fail("Ladder value must be scalar: " + child.tag)
         try:
             row = int(e.findtext("Row", "0"))
             column = int(e.findtext("Column", "-1"))
@@ -107,17 +140,50 @@ def check_graph(rung_node, lines):
             fail("parallel/multi-row Ladder is outside the supported import subset")
         rows.add(row)
         typ = e.findtext("ElementType", "")
-        arg = e.findtext("Descriptor", "")
+        expr_field = {
+            "Comparison": "ComparisonExpression",
+            "Operation": "OperationExpression",
+        }.get(typ, "Descriptor")
+        arg = e.findtext(expr_field, "")
+        for field in ("Descriptor", "ComparisonExpression", "OperationExpression"):
+            if field != expr_field and e.findtext(field, ""):
+                fail("unexpected Ladder expression field")
+        if typ in ("Comparison", "Operation"):
+            arg = numeric_graph(typ, arg)
         expected_connection = (
-            "Left" if typ in ("Coil", "SetCoil", "ResetCoil") else "Left, Right"
+            "Left"
+            if typ in ("Coil", "SetCoil", "ResetCoil", "Operation")
+            else "Left, Right"
         )
         if e.findtext("ChosenConnection", "") != expected_connection:
             fail("unsupported Ladder connections")
         actual.append((typ, arg, column))
     if len(rows) != 1:
         fail("mixed Ladder rows are outside the supported series subset")
-    if sorted(actual) != sorted(graphics(lines)):
+    expected = [
+        (t, numeric_graph(t, a) if t in ("Comparison", "Operation") else a, c)
+        for t, a, c in graphics(lines)
+    ]
+    if sorted(actual) != sorted(expected):
         fail("IL and Ladder graphics do not agree")
+
+
+def numeric_graph(typ, expression):
+    # Parse token boundaries; removing whitespace could turn MW40 00 into MW4000.
+    parsed = (
+        comparison("[" + expression + "]")
+        if typ == "Comparison"
+        else operation("[" + expression + "]")
+    )
+
+    def freeze(value):
+        if isinstance(value, Number):
+            return (value.kind, value.code)
+        if isinstance(value, list):
+            return tuple(freeze(v) for v in value)
+        return value
+
+    return tuple(freeze(v) for v in parsed)
 
 
 def load_project(path):
@@ -143,6 +209,9 @@ def load_project(path):
                 for x in t
             ):
                 fail("unsupported timer configuration")
+            for child in t:
+                if len(child):
+                    fail("timer value must be scalar: " + child.tag)
             if (
                 t.findtext("IsRetentive", "false").lower() != "false"
                 or t.findtext("IsDynamicPreset", "false").lower() != "false"
@@ -169,6 +238,9 @@ def load_project(path):
                 fail("POU section order is unsupported or inconsistent")
             if any(c.tag not in ("Name", "SectionNumber", "Rungs") for c in pou):
                 fail("unsupported POU properties")
+            for child in pou:
+                if child.tag != "Rungs" and len(child):
+                    fail("POU value must be scalar: " + child.tag)
             rungs = pou.find("Rungs")
             if rungs is None:
                 continue
@@ -186,6 +258,11 @@ def load_project(path):
                     for c in r
                 ):
                     fail("unsupported rung properties")
+                for child in r:
+                    if child.tag not in ("LadderElements", "InstructionLines") and len(
+                        child
+                    ):
+                        fail("rung value must be scalar: " + child.tag)
                 if r.findtext("Label", ""):
                     fail("labeled rungs require unsupported control flow")
                 instructions = r.find("InstructionLines")
@@ -197,6 +274,9 @@ def load_project(path):
                         c.tag not in ("InstructionLine", "Comment") for c in instruction
                     ):
                         fail("unknown instruction fields")
+                    for child in instruction:
+                        if len(child):
+                            fail("instruction value must be scalar: " + child.tag)
                     text = instruction.findtext("InstructionLine", "").strip()
                     lines.append(" ".join(text.split()))
                 p.rungs.append(lines)
@@ -216,6 +296,13 @@ def load_project(path):
         addr = bit.findtext("Address", "")
         address(addr, True)
         p.symbols[addr] = bit.findtext("Symbol", "")
+    for collection, entry in (
+        ("MemoryWords", "MemoryWord"),
+        ("MemoryDoubleWords", "MemoryDoubleWord"),
+        ("MemoryFloats", "MemoryFloat"),
+    ):
+        for word in sw.findall(collection + "/" + entry):
+            p.symbols[word.findtext("Address")] = word.findtext("Symbol", "")
     validate(p)
     p.metadata = {
         "official_editor": "pending",
@@ -240,6 +327,10 @@ def write_project(program, template, destination):
         "MemoryBits",
         "MemoryBitsMemoryAllocation",
         "TimersMemoryAllocation",
+        "MemoryWords",
+        "MemoryDoubleWords",
+        "MemoryFloats",
+        "MemoryWordsMemoryAllocation",
     ):
         old = sw.find(name)
         if old is not None:
@@ -256,15 +347,22 @@ def write_project(program, template, destination):
             e = element(graph, "LadderEntity")
             element(e, "ElementType", typ)
             if arg:
-                element(e, "Descriptor", arg)
-                element(e, "Comment", "")
-                element(e, "Symbol", "")
+                field = {
+                    "Comparison": "ComparisonExpression",
+                    "Operation": "OperationExpression",
+                }.get(typ, "Descriptor")
+                element(e, field, arg)
+                if field == "Descriptor":
+                    element(e, "Comment", "")
+                    element(e, "Symbol", "")
             element(e, "Row", 0)
             element(e, "Column", column)
             element(
                 e,
                 "ChosenConnection",
-                "Left" if typ in ("Coil", "SetCoil", "ResetCoil") else "Left, Right",
+                "Left"
+                if typ in ("Coil", "SetCoil", "ResetCoil", "Operation")
+                else "Left, Right",
             )
         il = element(r, "InstructionLines")
         for line in lines:
@@ -302,7 +400,22 @@ def write_project(program, template, destination):
         element(e, "IsRetentive", "false")
         element(e, "IsDynamicPreset", "false")
     bits = element(sw, "MemoryBits")
+    numeric = {
+        k: element(sw, k) for k in ("MemoryWords", "MemoryDoubleWords", "MemoryFloats")
+    }
     for addr, symbol in sorted(program.symbols.items()):
+        if addr.startswith(("%MW", "%MD", "%MF")):
+            kind, index = word_address(addr)
+            collection, entry = {
+                "i16": ("MemoryWords", "MemoryWord"),
+                "i32": ("MemoryDoubleWords", "MemoryDoubleWord"),
+                "f32": ("MemoryFloats", "MemoryFloat"),
+            }[kind]
+            e = element(numeric[collection], entry)
+            element(e, "Address", addr)
+            element(e, "Index", index)
+            element(e, "Symbol", re.sub(r"[^A-Za-z0-9_]", "_", symbol) + "_" + addr[1:])
+            continue
         e = element(bits, "MemoryBit")
         element(e, "Address", addr)
         element(e, "Index", int(addr[2:]))
@@ -311,6 +424,18 @@ def write_project(program, template, destination):
     element(allocation, "Allocation", "Automatic")
     allocation = element(sw, "TimersMemoryAllocation")
     element(allocation, "Allocation", "Automatic")
+    required = 0
+    numeric_text = (
+        " ".join(" ".join(r) for r in program.rungs) + " " + " ".join(program.symbols)
+    )
+    for prefix, index in re.findall(r"%M([WDF])(\d+)", numeric_text):
+        required = max(required, int(index) + (1 if prefix == "W" else 2))
+    if required:
+        # Manual/ForcedCount is observed for this exact collection. Do not infer
+        # a separate enum from the allocation of bits or timers.
+        allocation = element(sw, "MemoryWordsMemoryAllocation")
+        element(allocation, "Allocation", "Manual")
+        element(allocation, "ForcedCount", required)
     name = root.find("Name")
     if name is not None:
         name.text = "m200-cpp EXPERIMENTAL"

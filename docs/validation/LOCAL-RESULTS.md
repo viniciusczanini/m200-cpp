@@ -37,3 +37,20 @@ Não houve uma segunda revisão independente; as correções foram verificadas p
 - **Comparação nativa/IL:** ambos implementam um modelo local de tempo. Ela detecta divergências de tradução, mas não estabelece tempo real do CLP. Custo: precisão, fase, jitter, STOP/RUN, retenção, interface elétrica e operação com cargas aguardam testes físicos/oficiais.
 
 A revisão deliberadamente não julgou firmware/nível funcional, conectividade real do Ladder, enumerações/defaults de todas as versões, comportamento físico ou recursos explicitamente fora do subconjunto. Esses limites não foram convertidos em alegações de compatibilidade.
+
+## Ampliação de capacidades e estresse — 2026-11-05
+
+Nova verificação final, após a revisão independente da expansão numérica:
+
+- `make check`: **91 testes**, todos aprovados (46,141 s nesta execução).
+- `make examples`: aprovou os exemplos booleanos e o novo `numeric_control.cpp`; comparação original C++/IL/C++ reverso em 64 frames por conferência.
+- `make stress`: **37.716 scans válidos**, sem divergências nos programas exercitados, com sementes 20020261105 e 20020261106. Inclui 12.000 scans confrontados também com oracle Python independente e 100 scans de recompilação dos operadores booleanos reversos. Esta contagem substitui a de 37.844 do snapshot inicial: helper variádico agora é corretamente recusado, reduzindo 128 scans aceitos.
+- A matriz numérica incluída em `make check` cobre os 47 intrínsecos, 151 vetores fixos/aleatórios/de fronteira, 10 casos transcendentes não triviais, 2.048 scans de histórico com referência independente, 27 erros de domínio e oito famílias de falha sob guarda.
+- `uvx ruff check m200 tests m200c` e `git diff --check`: aprovados.
+- Inventário: 250 registros documentais, 13 conflitos de fontes. Não equivale a 250 recursos implementados.
+
+Relatório reproduzível e hashes das fontes: `STRESS-RESULTS.json`. A auditoria independente inicial e os repros estão descritos em `INTENSIVE-AUDIT.md`; os scripts foram incorporados em `tests/stress`. A validação oficial continua pendente.
+
+Falhas encontradas e corrigidas com regressões RED/GREEN: macro alterando declarações dentro do SDK; filhos XML ocultos em escalares; profundidade XML/JSON; DTD em UTF-16; aliases e duplicatas de JSON; helpers variádicos; literais REAL32 lidos como binary64; unsigned descartado na comparação; TRUNC perdendo zero negativo; comparação numérica lida em ramo de curto-circuito inativo; negação literal repetida; metadados inválidos de símbolos/origem; e remoção de espaços dentro de tokens gráficos. A revisão independente listou quatro problemas importantes e dois menores; todos receberam correções e testes. O SDK nativo passou também a recusar leitura REAL não finita, alinhando seu domínio ao executor local.
+
+Semântica física de overflow e flags aritméticos, blocos/periféricos restantes, enums não comprovados, retenção e modos de partida/STOP/RUN continuam abertos. Nem os testes de estresse nem o XML coerente estabelecem compatibilidade oficial ou comprovação de watchdog/tempo de scan.

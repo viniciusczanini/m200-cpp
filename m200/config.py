@@ -3,6 +3,7 @@
 import re
 from collections import Counter
 from .model import fail
+from .numeric import word_address
 
 SOFTWARE = set(
     "Pous Subroutines WatchLists CustomSymbols ConstantWordsMemoryAllocation MemoryBitsMemoryAllocation MemoryWordsMemoryAllocation TimersMemoryAllocation CountersMemoryAllocation RegistersMemoryAllocation DrumsMemoryAllocation SbrsMemoryAllocation ScsMemoryAllocation FcsMemoryAllocation SchsMemoryAllocation HscsMemoryAllocation PtosMemoryAllocation MemoryBits SystemBits SystemWords GrafcetSteps MemoryWords MemoryDoubleWords MemoryFloats ConstantWords ConstantDoubleWords ConstantMemoryFloats Timers Counters FastCounters Registers Drums ShiftBitRegisters StepCounters ScheduleBlocks Pids MessageBlocks FunctionBlocks MotionTaskTables FastTask MastTask CpuBehavior TraceTimeBase UserFunctionPous UserFunctionBlockPous UserDefineFunctionBlocks".split()
@@ -10,6 +11,7 @@ SOFTWARE = set(
 EMPTY = set(
     "Subroutines GrafcetSteps MemoryWords MemoryDoubleWords MemoryFloats ConstantWords ConstantDoubleWords ConstantMemoryFloats Counters FastCounters Registers Drums ShiftBitRegisters StepCounters ScheduleBlocks Pids FunctionBlocks MotionTaskTables UserFunctionPous UserFunctionBlockPous UserDefineFunctionBlocks".split()
 )
+EMPTY -= {"MemoryWords", "MemoryDoubleWords", "MemoryFloats"}
 UI_ONLY = {
     "DisplayUserLabelsConfiguration",
     "GlobalProperties",
@@ -33,6 +35,9 @@ REPEATED = {
     "LadderElements": {"LadderEntity"},
     "Timers": {"TimerTM"},
     "MemoryBits": {"MemoryBit"},
+    "MemoryWords": {"MemoryWord"},
+    "MemoryDoubleWords": {"MemoryDoubleWord"},
+    "MemoryFloats": {"MemoryFloat"},
     "SystemBits": {"MemoryBit"},
     "SystemWords": {"MemoryWord"},
     "MessageBlocks": {"MessageBlock"},
@@ -71,6 +76,8 @@ def unique_tree(root):
     def visit(node):
         if node.tag in UI_ONLY:
             return
+        if len(node) and (node.text or "").strip():
+            fail("configuration value must be scalar: " + node.tag)
         for attribute, value in node.attrib.items():
             if not (
                 node.tag == "UnitId"
@@ -133,6 +140,29 @@ def check_io(node, entry, prefix, capacity):
             or io.findtext("Address") != prefix + str(index)
         ):
             fail("invalid or duplicate I/O descriptor")
+        seen.add(index)
+
+
+def check_numbers(node):
+    entry, prefix = {
+        "MemoryWords": ("MemoryWord", "MW"),
+        "MemoryDoubleWords": ("MemoryDoubleWord", "MD"),
+        "MemoryFloats": ("MemoryFloat", "MF"),
+    }[node.tag]
+    fields(node, {entry})
+    seen = set()
+    for item in node:
+        fields(item, {"Address", "Index", "Symbol", "Comment"})
+        for child in item:
+            scalar(child)
+        addr = item.findtext("Address", "")
+        _, index = word_address(addr)
+        if (
+            not addr.startswith("%" + prefix)
+            or item.findtext("Index") != str(index)
+            or index in seen
+        ):
+            fail("invalid or duplicate numeric memory metadata")
         seen.add(index)
 
 
@@ -324,6 +354,8 @@ def configuration(root):
                 fail("unsupported memory allocation mode")
         elif part.tag == "MemoryBits":
             check_bits(part, "M", 1024)
+        elif part.tag in ("MemoryWords", "MemoryDoubleWords", "MemoryFloats"):
+            check_numbers(part)
         elif part.tag == "SystemBits":
             check_bits(part, "S", 160)
         elif part.tag == "SystemWords":
@@ -346,6 +378,8 @@ def configuration(root):
                     fail("configured message blocks are unsupported")
         elif part.tag == "FastTask":
             fields(part, {"Period"})
+            for c in part:
+                scalar(c)
             if part.findtext("Period", "255") != "255":
                 fail("active fast task is unsupported")
         elif part.tag == "MastTask":

@@ -1,0 +1,24 @@
+# Cobertura e lacunas
+
+A meta é acessar todos os recursos realmente disponíveis no TM200CE40T pelo C++ restrito, com ida e volta para o editor. O inventário é uma base de rastreamento, não uma declaração de que essa meta foi atingida.
+
+`instructions.json` registra 161 itens; `hardware.json` registra 89. São 250 registros, com sobreposição entre instrução e hardware, e não 250 funcionalidades independentes. Alguns descrevem ausência de recurso, como analógicos embarcados. Cada entrada conserva limites, requisitos de versão funcional, objetos/endereço, configuração, fontes/páginas e pontos de validação. `HARDWARE-AUDIT.md` explica os 13 conflitos encontrados entre documentos.
+
+| Grupo | Implementado no protótipo | Ainda falta |
+|---|---|---|
+| Digital e estado booleano | I/O embarcado, memória M, gates, if/else, bordas, clocks | filtros/latch/reflexos, alarm/fallback, I/O imediato, mapa completo S/SW, retenção configurável |
+| Numéricos | i16/i32/f32, 47 intrínsecos, comparações, memória MW/MD/MF compartilhada, XML Operation/Comparison, reversão | demais operandos/constantes, flags e recuperação de erro, operações/casos ambíguos, BCD/ASCII/strings/tabelas |
+| Blocos | TON/TOF/TP e classes de clock/borda | contadores C/FC/HSC, registradores, drum/SBR/SC, RTC/schedule, PID e seus parâmetros |
+| Hardware rápido | limites e conflitos de pinos documentados | configuração e execução de HSC, PWM/PLS/FREQGEN/PTO e blocos de movimento |
+| Comunicação | capacidades e limites documentados | serial, Modbus TCP/RTU/ASCII, IOScanner, EXCH/MSG e blocos assíncronos; resolver configuração EtherNet/IP anunciada no catálogo |
+| Expansão | cartuchos e TM2/TM3/TM3R documentados | perfil de configuração, tipos de I/O, conversões/calibração/diagnósticos e conflitos |
+| Execução | scan mestre restrito, inicialização do contrato local | tarefas/eventos, prioridades, watchdog comprovado, subrotinas nativas, UDF/UDFB, Grafcet, STOP/RUN e retomadas |
+| Projeto oficial | subconjunto XML, coerência gráfica, preservação do template e reversão | template autêntico CE40T, enums restantes, schema real, abrir/compilar/salvar no editor oficial, simulador oficial e hardware |
+
+Os estados normalizados por fase na API de catálogo começam conservadoramente em `missing` (frontend/IL/reversão/SMBP/local) e `pending` (editor/hardware). Eles não são promovidos por texto de pesquisa. O comando `capabilities` mostra separadamente a biblioteca implementada. A granularidade dos registros inclui famílias com muitos operandos/modos; um caso local funcionando não conclui a família toda. Não há porcentagem artificial de conclusão.
+
+Para cada lacuna, a conclusão exige definir a API e o estado/configuração, emitir instrução e gráfico coerentes, recuperar C++ do programa real, testar limites e erros com referência independente, e obter a evidência externa correspondente. Periféricos assíncronos não devem ganhar stubs que retornam sucesso. Configurações/enums desconhecidos continuam recusados.
+
+A falta atual de Windows/editor/PLC impede a garantia final solicitada. Não impede desenvolver as partes locais restantes; as pendências da tabela permanecem trabalho aberto. A base XML de timer de 10 ms ainda não foi confirmada em um projeto original e continua bloqueada na exportação.
+
+Fontes oficiais centrais: [programação M100/M200](https://www.se.com/id/en/download/document/EIO0000002019/), [hardware](https://www.se.com/ph/en/download/document/EIO0000002023/), [funções genéricas](https://www.se.com/us/en/download/document/EIO0000003289/), [operação](https://www.se.com/us/en/download/document/EIO0000003281/). Os registros conservam versão e hash para evitar confundir edições futuras com as auditadas.
