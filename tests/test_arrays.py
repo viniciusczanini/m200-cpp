@@ -121,6 +121,17 @@ plc::output(0,a[0]==2 && a[1]==5 && a[2]==5);}""",
             with self.subTest(body=body), self.assertRaises(CompileError):
                 self.compile(body)
 
+    def test_extern_array_is_not_fabricated_or_reinitialized(self):
+        for body in (
+            "extern bool a[2];void scan(){plc::output(0,a[0]);}",
+            "bool a[2]={true};extern bool a[2];void scan(){plc::output(0,a[0]);}",
+        ):
+            with (
+                self.subTest(body=body),
+                self.assertRaisesRegex(CompileError, "extern"),
+            ):
+                self.compile(body)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,30 @@
+{
+  "format": "m200-public-control-flow-v1",
+  "target": "TM200CE40T",
+  "sources": [
+    {
+      "file": "flow-original-loop.smbp",
+      "repository": "didim99/TSTU",
+      "commit": "ea8c59ca97fc99d07cc979a2fcb78113c322cf2c",
+      "path": "labwork/mps/Lab-08-M221-delivery.smbp",
+      "permalink": "https://github.com/didim99/TSTU/blob/ea8c59ca97fc99d07cc979a2fcb78113c322cf2c/labwork/mps/Lab-08-M221-delivery.smbp",
+      "raw_url": "https://raw.githubusercontent.com/didim99/TSTU/ea8c59ca97fc99d07cc979a2fcb78113c322cf2c/labwork/mps/Lab-08-M221-delivery.smbp",
+      "bytes": 94335,
+      "sha256": "4ea44184fd796888498b39561f60ff8ae4c4458447b9328896376431c1afe110",
+      "git_blob": "2e93a0a44e66cbb6b1b50181bce7f50ce69784f6",
+      "cpu": "TM221M16R/G"
+    },
+    {
+      "file": "flow-original-jump.smbp",
+      "repository": "brymon68/cs_8803_7",
+      "commit": "2cacf9fd8b059a0d87a0fe6105fbf9fa586b5c4f",
+      "path": "Project 1/PLC+Vulnerabilities.smbp",
+      "permalink": "https://github.com/brymon68/cs_8803_7/blob/2cacf9fd8b059a0d87a0fe6105fbf9fa586b5c4f/Project%201/PLC%2BVulnerabilities.smbp",
+      "raw_url": "https://raw.githubusercontent.com/brymon68/cs_8803_7/2cacf9fd8b059a0d87a0fe6105fbf9fa586b5c4f/Project%201/PLC%2BVulnerabilities.smbp",
+      "bytes": 104852,
+      "sha256": "fa31ac8cba4424f3069b089f20b016935e75f314991efcd040e42ceea81bdd1f",
+      "git_blob": "2b9591e6798a053a33be05aa035b34945fe4dfd6",
+      "cpu": "TM221M16R/G"
+    }
+  ]
+}

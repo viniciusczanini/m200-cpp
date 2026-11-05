@@ -24,6 +24,8 @@ Estado: pendente. Este documento não registra resultados que ainda não acontec
 
 Rodar as mesmas sequências de entradas/tempo do C++ de referência. Cobrir toggle, if/else, múltiplas atribuições, condição capturada antes de mudar estado, leitura da última escrita de saída, primeiro scan, reset/enable de timers, TON/TOF/TP, clock e bordas. Registrar diferenças de resolução, fase e jitter. Alguns objetos/periféricos não são simulados pelo software; não atribuir a eles validação simulada.
 
+Para arrays e fluxo, testar também inicializadores parciais, locais reexecutados em laços, globais entre scans, aliases e endereços reservados; zero/múltiplas iterações de while/for/do, break/continue aninhados, condições com falha em ramo inativo, entrada por goto em ramo condicional, labels no IL e no campo XML, salto para trás e visita repetida a um bloco no mesmo scan. Conferir os elementos Jump/JMPC e abrir/salvar/reabrir os arquivos exatos gerados, sem substituir o modelo do template. O limite local da VM não comprova o watchdog do controlador.
+
 ## Equipamento físico, em etapa separada
 
 Após autorização para a sessão de teste física, usar o editor oficial para a transferência. Começar com as cargas isoladas e conferir I/O, RUN/STOP, tempos, reset e retomada de alimentação. O teste lógico local não comprova interface elétrica, correntes, proteções ou acionamento de cargas. A comunicação USB depende de drivers compatíveis com a arquitetura do Windows; Ethernet será verificada separadamente.

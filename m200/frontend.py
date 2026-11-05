@@ -131,6 +131,8 @@ class Frontend:
                     index = self.index(args[0], 8000 - TYPES[typ][1] + 1, n)
                     reserved_words.update(range(index, index + TYPES[typ][1]))
         self.lower = Lowerer(reserved, reserved_words)
+        self.loops = []
+        self.source_labels = {}
         if any(len(modes) > 1 for modes in self.communication_modes.values()):
             fail(
                 "do not mix automatic and explicit communication indices of the same kind"
@@ -570,6 +572,8 @@ class Frontend:
             )
 
     def array_declaration(self, node, typ, count, guard, global_scope):
+        if node.get("storageClass") == "extern":
+            self.error(node, "extern array declarations are not implemented")
         if node.get("storageClass") == "static" and not global_scope:
             self.error(node, "local static arrays are not implemented")
         kind = typ.removeprefix("plc::")
@@ -636,6 +640,9 @@ class Frontend:
         elif kind == "IfStmt":
             if node.get("hasInit") or node.get("hasVar") or len(children) not in (2, 3):
                 self.error(node, "unsupported if initializer")
+            if any(n.get("kind") == "LabelStmt" for n in walk(node)):
+                self.branch_with_labels(node, guard)
+                return
             cond = self.lower.copy(boolean(self.expr(children[0])), "branch_condition")
             yes = cond if guard is None else self.lower.binary("&&", guard, cond)
             self.statement(children[1], yes)
@@ -643,6 +650,20 @@ class Frontend:
                 no = self.lower.neg(cond)
                 no = no if guard is None else self.lower.binary("&&", guard, no)
                 self.statement(children[2], no)
+        elif kind in ("WhileStmt", "ForStmt", "DoStmt"):
+            self.loop(node, guard)
+        elif kind in ("BreakStmt", "ContinueStmt"):
+            if not self.loops:
+                self.error(node, "break/continue requires an enclosing loop")
+            self.lower.jump(self.loops[-1][kind], guard if guard is not None else "1")
+        elif kind == "LabelStmt":
+            self.lower.label(self.source_labels[node["declId"]])
+            self.statement(children[0], guard)
+        elif kind == "GotoStmt":
+            label = self.source_labels.get(node.get("targetLabelDeclId"))
+            if label is None:
+                self.error(node, "goto target is outside scan()")
+            self.lower.jump(label, guard if guard is not None else "1")
         elif kind == "BinaryOperator" and node.get("opcode") == "=":
             lhs = strip(children[0])
             ref = lhs.get("referencedDecl", {}).get("id")
@@ -676,6 +697,74 @@ class Frontend:
             pass
         else:
             self.error(node, "unsupported statement: " + kind)
+
+    def branch_with_labels(self, node, guard):
+        # A goto may enter the branch without executing its condition. A guard
+        # bit computed before the label would then be stale or uninitialized.
+        children = node["inner"]
+        end = self.lower.new_label()
+        otherwise = self.lower.new_label() if len(children) == 3 else end
+        if guard is not None:
+            self.lower.jump(end, guard, negate=True)
+        old_guard = self.lower.guard
+        self.lower.guard = None
+        try:
+            self.lower.jump(otherwise, boolean(self.expr(children[0])), negate=True)
+            self.statement(children[1])
+            if len(children) == 3:
+                self.lower.jump(end)
+                self.lower.label(otherwise)
+                self.statement(children[2])
+            self.lower.label(end)
+        finally:
+            self.lower.guard = old_guard
+
+    def loop(self, node, guard):
+        children = node.get("inner", [])
+        kind = node["kind"]
+        head, end = self.lower.new_label(), self.lower.new_label()
+        update = self.lower.new_label() if kind in ("ForStmt", "DoStmt") else head
+        if guard is not None:
+            self.lower.jump(end, guard, negate=True)
+        # Once entered, control transfers implement activation. Predicating the
+        # body with its outer condition would incorrectly re-read that condition
+        # after an assignment changes it within the loop.
+        old_guard = self.lower.guard
+        self.lower.guard = None
+        try:
+            if kind == "ForStmt":
+                if len(children) != 5 or children[1].get("kind"):
+                    self.error(node, "for condition declarations are not implemented")
+                initial, _, condition, increment, body = children
+                if initial.get("kind"):
+                    self.statement(initial)
+            elif kind == "WhileStmt":
+                if len(children) != 2:
+                    self.error(node, "while condition declarations are not implemented")
+                condition, body = children
+                increment = None
+            else:
+                body, condition = children
+                increment = None
+            self.lower.label(head)
+            if kind != "DoStmt" and condition.get("kind"):
+                self.lower.jump(end, boolean(self.expr(condition)), negate=True)
+            self.loops.append({"BreakStmt": end, "ContinueStmt": update})
+            try:
+                self.statement(body)
+            finally:
+                self.loops.pop()
+            if update != head:
+                self.lower.label(update)
+            if increment is not None and increment.get("kind"):
+                self.statement(increment)
+            if kind == "DoStmt":
+                self.lower.jump(head, boolean(self.expr(condition)))
+            else:
+                self.lower.jump(head)
+            self.lower.label(end)
+        finally:
+            self.lower.guard = old_guard
 
     def compile(self):
         scans = []
@@ -741,6 +830,11 @@ class Frontend:
                 boolean(self.expr(helper_body["inner"][0]["inner"][0], params))
             finally:
                 self.lower, self.inputs, self.outputs, self.active = saved
+        self.source_labels = {
+            n["declId"]: self.lower.new_label()
+            for n in walk(body)
+            if n.get("kind") == "LabelStmt"
+        }
         self.statement(body)
         if self.comm_observed - self.calls:
             fail("communication status read without an unconditional update per scan")
@@ -754,6 +848,7 @@ class Frontend:
             ["LD %Q0." + str(n), "ST " + v] for n, v in sorted(self.outputs.items())
         ]
         prefix += [["LD %S13", "R " + v] for _, v in sorted(self.outputs.items())]
+        prefix += self.lower.constant_rungs
         for target, value in self.init:
             if isinstance(target, Number):
                 prefix.append(["LD %S13", "[" + target.code + ":=" + value.code + "]"])

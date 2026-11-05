@@ -45,11 +45,11 @@
 
 **Interfaces:** preservar `Program` e API CLI; representar labels/saltos explicitamente, com resolução e validação antes de execução. C++ `while`/`for`/`do`, `break` e `continue` devem manter execução no mesmo scan. O modelo de teste deve limitar execução infinita com erro explícito, sem alegar prova de WCET físico.
 
-- [ ] Conferir contratos nativos de labels/saltos, limites e reversibilidade gráfica em fontes primárias e projetos originais.
-- [ ] Escrever e executar testes RED de zero/múltiplas iterações, aninhamento, break/continue, guardas e sequência; incluir laço não terminante e destinos inválidos.
-- [ ] Implementar lowering, VM, reversão e emissão comprovada; recuperar C++ real com controle equivalente.
-- [ ] Confrontar com C++ nativo e oráculos independentes; testar serialização e recusas de formatos sem evidência.
-- [ ] Rodar suíte completa e registrar commit/resultados/lacunas.
+- [x] Conferir contratos nativos de labels/saltos, limites e reversibilidade gráfica em fontes primárias e projetos originais.
+- [x] Escrever e executar testes RED de zero/múltiplas iterações, aninhamento, break/continue, guardas e sequência; incluir laço não terminante e destinos inválidos.
+- [x] Implementar lowering, VM, reversão e emissão comprovada; recuperar C++ real com controle equivalente.
+- [x] Confrontar com C++ nativo e oráculos independentes; testar serialização e recusas de formatos sem evidência.
+- [x] Rodar suíte completa e registrar commit/resultados/lacunas.
 
 ## Task 3: contadores nativos %C
 

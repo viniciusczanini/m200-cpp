@@ -66,3 +66,36 @@ Correções desta rodada com regressões: OPER inline e ações após bobina; ti
 A revisão independente do núcleo e da integração XML encontrou as falhas de representação, socket, status antecipado, contexto Type e alocação, todas corrigidas e cobertas pelas regressões. `ruff` e `git diff --check` aprovados. Resultados e hashes atuais: `PUBLIC-MODBUS-RESULTS.json` e `PUBLIC-PROJECTS-RESULTS.json`. O antigo `STRESS-RESULTS.json` continua sendo o registro histórico da etapa anterior.
 
 Limites permanecem explícitos em `../MODBUS.md` e `../capabilities/README.md`. A biblioteca não está completa; XML de certas variantes Modbus, demais recursos nativos e validação no Machine Expert Basic/TM200CE40T físico continuam pendentes. Não houve CI, publicação, conexão a dispositivo real nem tentativa de transmissão ao PLC.
+
+## Continuação do objetivo: arrays e fluxo nativo
+
+Objetivo de equivalência completo explicitamente ativado pelo usuário. Arrays
+fixos bool/i16/i32/f32 com índice literal, inicialização parcial, persistência e
+escrita condicional foram implementados. While/for/do, break/continue, labels e
+goto são traduzidos para saltos que executam no mesmo scan. IL/VM/reversão
+aceitam JMP/JMPC/JMPCN e INC/DEC; XML usa Jump/JMPC observado num original.
+
+Verificação integrada em 2026-11-05: **195/195 testes em 67,025 s**, exemplos
+incluindo `loops.cpp`, lint e diff aprovados. `make stress` passou 37.716 scans
+anteriores mais **3.072 scans em 12 composições de laços**, com fórmula
+independente, C++ original, IL, C++ reverso nativo, recompilação e XML sintético.
+`make public-check` passou novamente 19 casos/16.128 scans. Dois novos originais
+baixados e verificados por tamanho/SHA256/GitblobSHA1 forneceram saltos e laço
+reais: `make public-flow-check` passou **2 casos/2.048 scans**. Total público e
+estresse desta rodada: **58.964 scans**, além da suíte unitária. Nenhum CPU foi
+reescrito e os projetos estrangeiros completos continuam recusados.
+
+RED/GREEN corrigiu goto entrando em ramo sem avaliar sua condição, array extern
+recriado indevidamente, label antes de opcode inválido e espaços legítimos em
+funções IL de um original. A expectativa antiga de recusar qualquer while foi
+substituída pelos novos testes de execução e erro explícito de limite local.
+Revisão independente e composições adicionais: `LANGUAGE-REVIEW.md`.
+Relatórios com hashes: `CONTROL-FLOW-STRESS-RESULTS.json` e
+`PUBLIC-CONTROL-FLOW-RESULTS.json`. Resultados antigos permanecem históricos.
+
+Ainda faltam indexação dinâmica, alocação/reuso sem reservas artificiais,
+estruturas/operadores restantes, blocos/periféricos e os demais itens do
+inventário. `COUNTER-RESEARCH.md` registra a contradição documental de E e
+exemplares de configuração/gráfico, sem declarar o contador implementado.
+Validação no editor e no hardware permanece pendente; o objetivo não foi
+declarado completo.

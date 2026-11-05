@@ -8,6 +8,9 @@ class Lowerer:
         self.used = set(reserved)
         self.next_bit = 500
         self.constants = {}
+        self.constant_rungs = []
+        self.next_label = 0
+        self.label_scratch = None
         self.origin = {"generated": "lowering"}
         self.origins = []
         self.used_words = set(reserved_words)
@@ -40,16 +43,40 @@ class Lowerer:
                     if "0" not in self.constants:
                         zero = self.bit("constant_false")
                         self.constants["0"] = zero
-                        self.append(["LD %I0.0", "ANDN %I0.0", "ST " + zero])
+                        self.constant_rungs.append(
+                            ["LD %I0.0", "ANDN %I0.0", "ST " + zero]
+                        )
                     if key == "1":
                         one = self.bit("constant_true")
                         self.constants["1"] = one
-                        self.append(["LDN " + self.constants["0"], "ST " + one])
+                        self.constant_rungs.append(
+                            ["LDN " + self.constants["0"], "ST " + one]
+                        )
                 line = parts[0] + " " + self.constants[key]
             normalized.append(line)
         self.append(normalized)
         if sum(map(len, self.program.rungs)) > 10000:
             fail("experimental instruction budget exceeded")
+
+    def new_label(self):
+        if self.next_label >= 64:
+            fail("native label capacity exceeded (%L0..%L63)")
+        label = "%L" + str(self.next_label)
+        self.next_label += 1
+        return label
+
+    def label(self, label):
+        # Native labels must precede a load or a block. An explicit anchor also
+        # works for an empty C++ statement or a loop exit at the end of scan().
+        if self.label_scratch is None:
+            self.label_scratch = self.bit("label_anchor")
+        self.rung("LD 0", "ST " + self.label_scratch)
+        self.program.rungs[-1].insert(0, label + ":")
+
+    def jump(self, label, condition="1", negate=False):
+        # Jump/JMPC is observed in an original Ladder project. Negate the
+        # contact instead of guessing a graphical enum for JMPCN or JMP.
+        self.rung(("LDN " if negate else "LD ") + condition, "JMPC " + label)
 
     def copy(self, value, name="temporary"):
         if isinstance(value, Number):

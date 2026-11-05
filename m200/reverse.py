@@ -1,5 +1,6 @@
 from .il import validate
 from .model import address
+from .flow import JUMPS, split_label
 from .numeric import (
     comparison,
     cpp,
@@ -64,8 +65,11 @@ def to_cpp(program):
     lines += ["", "void scan() {", "  bool accumulator = false;"]
     for i in sorted(program.timers):
         lines.append("  bool timer_%d_result = false;" % i)
-    for index, rung in enumerate(program.rungs):
+    for index, raw_rung in enumerate(program.rungs):
         lines.append("  // Rung %d" % index)
+        label, rung = split_label(raw_rung)
+        if label is not None:
+            lines.append("  native_" + label[1:] + ": ;")
         if rung[0].startswith("BLK "):
             if rung[0].split(maxsplit=1)[1] in program.communications:
                 key, execute, abort = parse_block(rung)
@@ -97,7 +101,21 @@ def to_cpp(program):
                 )
                 continue
             op, arg = line.split(maxsplit=1)
-            if op in ("ST", "S", "R"):
+            if op in JUMPS:
+                jump = "goto native_" + arg[1:] + ";"
+                lines.append(
+                    "  "
+                    + (
+                        jump
+                        if op == "JMP"
+                        else "if ("
+                        + ("!" if op == "JMPCN" else "")
+                        + "accumulator) { "
+                        + jump
+                        + " }"
+                    )
+                )
+            elif op in ("ST", "S", "R"):
                 statement = write_cpp(
                     arg,
                     "accumulator" if op == "ST" else "true" if op == "S" else "false",

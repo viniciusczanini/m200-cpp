@@ -207,7 +207,6 @@ class ToolchainTests(unittest.TestCase):
 
     def test_rejects_unsupported_cpp_including_unused_declarations(self):
         for body in [
-            "void scan(){while(true){}}",
             "int value=0;void scan(){}",
             "struct Bad{int x;};void scan(){}",
             "void scan(){bool* p=nullptr;}",

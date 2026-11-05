@@ -1,0 +1,66 @@
+{
+  "target": "TM200CE40T",
+  "seed": 20020261107,
+  "sources": [
+    {
+      "file": "flow-original-loop.smbp",
+      "repository": "didim99/TSTU",
+      "commit": "ea8c59ca97fc99d07cc979a2fcb78113c322cf2c",
+      "path": "labwork/mps/Lab-08-M221-delivery.smbp",
+      "permalink": "https://github.com/didim99/TSTU/blob/ea8c59ca97fc99d07cc979a2fcb78113c322cf2c/labwork/mps/Lab-08-M221-delivery.smbp",
+      "raw_url": "https://raw.githubusercontent.com/didim99/TSTU/ea8c59ca97fc99d07cc979a2fcb78113c322cf2c/labwork/mps/Lab-08-M221-delivery.smbp",
+      "bytes": 94335,
+      "sha256": "4ea44184fd796888498b39561f60ff8ae4c4458447b9328896376431c1afe110",
+      "git_blob": "2e93a0a44e66cbb6b1b50181bce7f50ce69784f6",
+      "cpu": "TM221M16R/G"
+    },
+    {
+      "file": "flow-original-jump.smbp",
+      "repository": "brymon68/cs_8803_7",
+      "commit": "2cacf9fd8b059a0d87a0fe6105fbf9fa586b5c4f",
+      "path": "Project 1/PLC+Vulnerabilities.smbp",
+      "permalink": "https://github.com/brymon68/cs_8803_7/blob/2cacf9fd8b059a0d87a0fe6105fbf9fa586b5c4f/Project%201/PLC%2BVulnerabilities.smbp",
+      "raw_url": "https://raw.githubusercontent.com/brymon68/cs_8803_7/2cacf9fd8b059a0d87a0fe6105fbf9fa586b5c4f/Project%201/PLC%2BVulnerabilities.smbp",
+      "bytes": 104852,
+      "sha256": "fa31ac8cba4424f3069b089f20b016935e75f314991efcd040e42ceea81bdd1f",
+      "git_blob": "2b9591e6798a053a33be05aa035b34945fe4dfd6",
+      "cpu": "TM221M16R/G"
+    }
+  ],
+  "cases": 2,
+  "scans": 2048,
+  "originals_modified": false,
+  "checks": [
+    "independent oracle",
+    "original isolated IL",
+    "reverse native C++",
+    "recompiled IL"
+  ],
+  "official_editor": "pending",
+  "physical_plc": "pending",
+  "scope": "Foreign CPU projects are refused whole; only original rungs execute with explicit adapters. Original parallel Ladder is not declared supported.",
+  "source_sha256": {
+    "m200/__init__.py": "77c5815a3596eebca3e939d1ad39abba46fa4edc4df148aaa7e47f13e5eda0ab",
+    "m200/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "m200/capabilities.py": "e94e59743ee0eae98c476938f8eafe04966c0823b825b1d070980d15d41348a0",
+    "m200/cli.py": "eebc55bcd3a6bf56e227344a005a6d1328c8c6b3ba20ed317f177ff392a2f8da",
+    "m200/communication.py": "105c1aef50e7ee00bc7c7142a5b6805d4ddf5f18fc04c5e60a52b78841a6b3b0",
+    "m200/communication_xml.py": "954e0fb861fef56381b204936c47f2f760dbcb3840dd018bb1d2a1b13bfc319f",
+    "m200/config.py": "3acbc41bf01d78576c34a5d716b559851fb13bb819fa14b149e4be9fd3dd5e52",
+    "m200/flow.py": "a61ed946937daa4e54002dc29664c0ef6c02617eb1abb8faa0d0169e06244dc6",
+    "m200/frontend.py": "543808bdbb9b14f26758703827251950649dd88c1b5a1cb7870b7acebf47c2b3",
+    "m200/il.py": "b577dbe359ffefd4bf6b6c5d3376c4f65c2f42bf37bb3f25fcf5c601b155c607",
+    "m200/jsonio.py": "c4d8447354b4f48205a8d5bfc58e1a3919656ba2073ecc5982b2f8fd6253fd70",
+    "m200/lower.py": "7f9eaaf420c91e445f93874c11ad649ed8932c63487a1d907bf06af277dcbe8d",
+    "m200/modbus.py": "62e98577eba6e2de938bc2292dd6cb16f22f64e1101fabdf5ea0f33fd009e92c",
+    "m200/model.py": "d2875e0d003b19cf9232d5510bdf628281bf7f01c0917ccbb0a7c5d3612792da",
+    "m200/native.py": "6e782827bcfbd9201997a7466da3b78b6dde6b2298f7449f2f83d2c3a5806dd7",
+    "m200/numeric.py": "cb5411faf2df5463bce8f9d0537c9bb0dc78353fa2fb0f5f7f4e1b494930c863",
+    "m200/project.py": "e32dd019ec6b4ad873b11957417aea19cdb5784dea720fdfecca9d728e8f3601",
+    "m200/reverse.py": "a477b4bd5edd78522e297341ce4d1374a23af0bb1343e05219bfa05458de0e5a",
+    "sdk/plc.hpp": "c732bf3bee10cd3f1a8cd5d0399d41e307cd424c630cb175a50c282ede3a7391",
+    "tests/public/control_flow.py": "65f9d5f2aba359e6c316aa133c577496114e3981728cf5ce60ada5ecbad7ae72",
+    "tests/public/fetch.py": "196a8b6233a222fd1ebb86a89ced34dda368568bd0a82407cc792d45760af5ba",
+    "tests/public/control-flow-manifest.json": "9c90f5da2e907305d50f8dbb6a5d64e77306a2b92b501d7f0a79e9380a2d07a9"
+  }
+}

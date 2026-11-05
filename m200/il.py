@@ -3,6 +3,7 @@
 import re
 
 from .model import address, fail, timer_config
+from .flow import JUMPS, destinations, label_name, split_label
 from .communication import (
     status_reference,
     BOOL_FIELDS,
@@ -97,9 +98,21 @@ def validate(program):
             or not 0 <= t.preset <= 9999
         ):
             fail("invalid timer base/preset")
-    for rung in program.rungs:
+    labels = destinations(program)
+    jumps = []
+    for raw_rung in program.rungs:
+        label, rung = split_label(raw_rung)
         if not rung:
             fail("empty IL rung")
+        if label is not None and rung[0].split(maxsplit=1)[0] not in (
+            "LD",
+            "LDN",
+            "BLK",
+        ):
+            fail("label must precede a supported load or block")
+        if len(rung) == 1 and rung[0].startswith("JMP "):
+            jumps.append(label_name(rung[0].split(maxsplit=1)[1]))
+            continue
         if rung[0].startswith("BLK "):
             if (
                 rung[0]
@@ -144,15 +157,20 @@ def validate(program):
             allowed = (
                 ("LD", "LDN")
                 if i == 0
-                else ("ST", "S", "R")
+                else ("ST", "S", "R", *JUMPS)
                 if i == len(rung) - 1
                 else ("AND", "ANDN", "OR", "ORN", "XOR", "XORN", "ST", "S", "R")
             )
             if op not in allowed:
                 fail("unsupported IL instruction/order: " + line)
-            bit_operand(arg, op in ("ST", "S", "R"))
+            if op in JUMPS:
+                jumps.append(label_name(arg))
+            else:
+                bit_operand(arg, op in ("ST", "S", "R"))
         if len(rung) < 2:
             fail("rung has no action")
+    if set(jumps) - labels.keys():
+        fail("jump references an undefined label")
     if set(program.timers) != timer_uses:
         fail("unused timer configuration is unsupported")
     if set(program.communications) != communication_uses:
@@ -165,9 +183,15 @@ def validate(program):
 
 
 class Machine:
-    def __init__(self, program, communication_transport=None):
+    def __init__(
+        self, program, communication_transport=None, *, instruction_limit=100000
+    ):
         validate(program)
+        if type(instruction_limit) is not int or not 1 <= instruction_limit <= 10000000:
+            fail("invalid local execution limit")
         self.program = program
+        self.labels = destinations(program)
+        self.instruction_limit = instruction_limit
         self.memory = [False] * 1024
         self.words = [0] * 8000
         self.communication = CommunicationEngine(communication_transport)
@@ -270,7 +294,16 @@ class Machine:
                 1,
             ):
                 fail("invalid input trace")
-        for rung in self.program.rungs:
+        pc = 0
+        executed = 0
+        while pc < len(self.program.rungs):
+            _, rung = split_label(self.program.rungs[pc])
+            pc += 1
+            executed += len(rung)
+            if executed > self.instruction_limit:
+                fail(
+                    "local execution limit exceeded; physical watchdog is not simulated"
+                )
             if rung[0].startswith("BLK "):
                 if rung[0].split(maxsplit=1)[1] in self.program.communications:
                     key, execute, abort = parse_block(rung)
@@ -305,6 +338,10 @@ class Machine:
                         write_number(self.words, target, evaluate(name, args, kind))
                     continue
                 op, arg = line.split(maxsplit=1)
+                if op in JUMPS:
+                    if op == "JMP" or (acc if op == "JMPC" else not acc):
+                        pc = self.labels[arg]
+                    continue
                 if op in ("ST", "S", "R"):
                     if op == "ST":
                         self.write(arg, acc)

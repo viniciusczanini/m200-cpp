@@ -29,8 +29,9 @@ def verified_bytes(path, source):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--corpus", type=Path, default=DEFAULT_CORPUS)
+    parser.add_argument("--manifest", type=Path, default=HERE / "manifest.json")
     args = parser.parse_args()
-    manifest = json.loads((HERE / "manifest.json").read_text())
+    manifest = json.loads(args.manifest.read_text())
     args.corpus.mkdir(parents=True, exist_ok=True)
     for source in manifest["sources"]:
         destination = args.corpus / source["file"]

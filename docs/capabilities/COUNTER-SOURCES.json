@@ -1,0 +1,75 @@
+{
+  "format": "m200-counter-research-sources-v1",
+  "sources": [
+    {
+      "file": "Project1_Part1B.smbp",
+      "repository": "brymon68/cs_8803_7",
+      "commit": "2cacf9fd8b059a0d87a0fe6105fbf9fa586b5c4f",
+      "path": "Project 1/Project1_Part1B.smbp",
+      "git_blob": "828901f5c25b9598c707862f50920173e212cb70",
+      "sha256": "836a371e610d37747fe23dbc8a35414f9273ef92dca6c4e7f70e94a2219c86c3",
+      "cpu": "TM221M16R/G",
+      "project_version": "1.6.0.0",
+      "functional_level": "FunctLevelMan7_0",
+      "bytes": 80154,
+      "raw_url": "https://raw.githubusercontent.com/brymon68/cs_8803_7/2cacf9fd8b059a0d87a0fe6105fbf9fa586b5c4f/Project%201/Project1_Part1B.smbp",
+      "permalink": "https://github.com/brymon68/cs_8803_7/blob/2cacf9fd8b059a0d87a0fe6105fbf9fa586b5c4f/Project%201/Project1_Part1B.smbp"
+    },
+    {
+      "file": "Project1_Part3.smbp",
+      "repository": "brymon68/cs_8803_7",
+      "commit": "2cacf9fd8b059a0d87a0fe6105fbf9fa586b5c4f",
+      "path": "Project 1/Project1_Part3.smbp",
+      "git_blob": "1a6efc32dbdff25725c68baab6a2bbecb50863b0",
+      "sha256": "6f23b03cec4e9e028bbe4dc5ba89340484f19a6bd5126b7ea2dda7e6361d0a20",
+      "cpu": "TM221M16R/G",
+      "project_version": "1.6.0.0",
+      "functional_level": "FunctLevelMan7_0",
+      "bytes": 70906,
+      "raw_url": "https://raw.githubusercontent.com/brymon68/cs_8803_7/2cacf9fd8b059a0d87a0fe6105fbf9fa586b5c4f/Project%201/Project1_Part3.smbp",
+      "permalink": "https://github.com/brymon68/cs_8803_7/blob/2cacf9fd8b059a0d87a0fe6105fbf9fa586b5c4f/Project%201/Project1_Part3.smbp"
+    },
+    {
+      "file": "starting_motors.smbp",
+      "repository": "thalesfb/ind_automation",
+      "commit": "17a8500ab8189392d11e756324386f4f07ac1544",
+      "path": "starting_motors/clp/starting_motors.smbp",
+      "git_blob": "3deaecd3f64f930ff873dc0ebfd3e65fe5ded6c1",
+      "sha256": "808a67dc05578dc0738b2fb0f2b02693655c8a3ee4b0dd32525ac31d852e42fd",
+      "cpu": "TM221CE24R",
+      "project_version": "2.9.0.0",
+      "functional_level": "FunctLevelMan20_0",
+      "bytes": 187980,
+      "raw_url": "https://raw.githubusercontent.com/thalesfb/ind_automation/17a8500ab8189392d11e756324386f4f07ac1544/starting_motors/clp/starting_motors.smbp",
+      "permalink": "https://github.com/thalesfb/ind_automation/blob/17a8500ab8189392d11e756324386f4f07ac1544/starting_motors/clp/starting_motors.smbp"
+    },
+    {
+      "file": "car_garage.smbp",
+      "repository": "Jaron-voided/PLC_Ladder_Projects",
+      "commit": "0677b8cd814ed7a04c20ecede1a24f05c0561e91",
+      "path": "Car_Garage/car_garage.smbp",
+      "git_blob": "024e4660697a2dc0e8cb08ad2c5d2dc56ab783ca",
+      "sha256": "4e41502503c499291f3d728c03d7815bb3715b9b77d28821e79be52c6766b81a",
+      "cpu": "TM221M16R/G",
+      "project_version": "3.0.0.0",
+      "functional_level": "FunctLevelMan21_0",
+      "bytes": 79628,
+      "raw_url": "https://raw.githubusercontent.com/Jaron-voided/PLC_Ladder_Projects/0677b8cd814ed7a04c20ecede1a24f05c0561e91/Car_Garage/car_garage.smbp",
+      "permalink": "https://github.com/Jaron-voided/PLC_Ladder_Projects/blob/0677b8cd814ed7a04c20ecede1a24f05c0561e91/Car_Garage/car_garage.smbp"
+    },
+    {
+      "file": "Lab-07-M221-autoOperator.smbp",
+      "repository": "didim99/TSTU",
+      "commit": "ea8c59ca97fc99d07cc979a2fcb78113c322cf2c",
+      "path": "labwork/mps/Lab-07-M221-autoOperator.smbp",
+      "git_blob": "425372b07a34946b6363b78bd15a5fbf8727cc98",
+      "sha256": "a4307729f0864133e414517ef49c37e6648f29d7403a8f9737e2f7367461a738",
+      "cpu": "TM221ME16R/G",
+      "project_version": "2.6.0.0",
+      "functional_level": "FunctLevelMan17_0",
+      "bytes": 114221,
+      "raw_url": "https://raw.githubusercontent.com/didim99/TSTU/ea8c59ca97fc99d07cc979a2fcb78113c322cf2c/labwork/mps/Lab-07-M221-autoOperator.smbp",
+      "permalink": "https://github.com/didim99/TSTU/blob/ea8c59ca97fc99d07cc979a2fcb78113c322cf2c/labwork/mps/Lab-07-M221-autoOperator.smbp"
+    }
+  ]
+}

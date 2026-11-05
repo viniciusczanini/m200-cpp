@@ -155,6 +155,15 @@ def operand(text, kind):
 
 def operation(line):
     """Parse one closed, side-effect-free operation (never eval source text)."""
+    unary = re.fullmatch(r"\[\s*(INC|DEC)\s+(%(?:MW|MD)[0-9]+)\s*\]", line)
+    if unary:
+        token, target = unary.groups()
+        typ, _ = word_address(target)
+        return (
+            target,
+            ("add_" if token == "INC" else "sub_") + typ,
+            [Number(typ, target), literal(1, typ)],
+        )
     m = re.fullmatch(r"\[\s*(%(?:MW|MD|MF)[0-9]+)\s*:=\s*(.*?)\s*\]", line)
     if not m:
         fail("unsupported numeric operation: " + line)
@@ -172,7 +181,7 @@ def operation(line):
             )
             pat = atom + r"\s*" + re.escape(token) + r"\s*" + atom
         else:
-            pat = re.escape(token) + r"\((.*)\)"
+            pat = re.escape(token) + r"\s*\((.*)\)"
         found = re.fullmatch(pat, expression)
         if not found:
             continue

@@ -107,7 +107,7 @@ comprova esse caminho inverso.
   completa enquanto houver algoritmos/recursos nativos do perfil sem expressão
   equivalente suportada.
 
-O estado atual, com 173 testes locais e os ensaios já registrados, é experimental
-e parcial. O inventário e as pendências estão em `capabilities/README.md`.
+O estado atual, com as baterias locais e os ensaios registrados em
+`validation/LOCAL-RESULTS.md`, é experimental e parcial. O inventário e as pendências estão em `capabilities/README.md`.
 Ausência atual de Windows/PLC impede a aceitação externa, mas não elimina o
 trabalho local de linguagem, blocos, alocação e backend que ainda falta.

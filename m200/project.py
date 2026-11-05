@@ -14,6 +14,7 @@ from pathlib import Path
 from .il import validate
 from .config import configuration, unique_tree
 from .model import Program, Timer, address, fail
+from .flow import split_label
 from .numeric import (
     word_address,
     comparison,
@@ -34,6 +35,7 @@ LEFT_ONLY = {
     "Operation",
     "ReadVarBasic",
     "WriteVarBasic",
+    "Jump",
 }
 
 
@@ -83,6 +85,9 @@ def parse(path):
 def graphics(rung, timer_column=3, communication_contact_column=0):
     # Deliberately only series contacts, one action, and one optional Timer.
     # Compound expressions are split into boolean gates by the lowerer.
+    _, rung = split_label(rung)
+    if any(line.split(maxsplit=1)[0] in ("JMP", "JMPCN") for line in rung):
+        fail("SMBP graphics for JMP/JMPCN are unverified; generate a contact and JMPC")
     if rung[0].startswith("BLK "):
         descriptor = rung[0].split()[1]
         if descriptor.startswith(("%READ_VAR", "%WRITE_VAR", "%WRITE_READ_VAR")):
@@ -173,12 +178,19 @@ def graphics(rung, timer_column=3, communication_contact_column=0):
         else:
             op, arg = rung[-1].split()
             items.append(
-                ({"ST": "Coil", "S": "SetCoil", "R": "ResetCoil"}[op], arg, 10)
+                (
+                    {"ST": "Coil", "S": "SetCoil", "R": "ResetCoil", "JMPC": "Jump"}[
+                        op
+                    ],
+                    arg,
+                    10,
+                )
             )
     return items
 
 
 def check_graph(rung_node, lines):
+    _, lines = split_label(lines)
     graph = rung_node.find("LadderElements")
     if graph is None or not len(graph):
         if rung_node.findtext("IsLadderSelected", "false").lower() == "true":
@@ -354,8 +366,6 @@ def load_project(path):
                         child
                     ):
                         fail("rung value must be scalar: " + child.tag)
-                if r.findtext("Label", ""):
-                    fail("labeled rungs require unsupported control flow")
                 instructions = r.find("InstructionLines")
                 if instructions is None:
                     fail("rung has no IL representation")
@@ -370,6 +380,9 @@ def load_project(path):
                             fail("instruction value must be scalar: " + child.tag)
                     text = instruction.findtext("InstructionLine", "").strip()
                     lines.append(" ".join(text.split()))
+                label, _ = split_label(lines)
+                if r.findtext("Label", "") != (label or ""):
+                    fail("rung label field and actual instruction label disagree")
                 p.rungs.append(lines)
                 graph_nodes.append((r, lines))
     for bit in sw.findall("MemoryBits/MemoryBit"):
@@ -495,7 +508,8 @@ def write_project(program, template, destination):
             "MainComment",
             source + " | Experimental generated logic; official validation pending",
         )
-        element(r, "Label", "")
+        label, _ = split_label(lines)
+        element(r, "Label", label or "")
         element(r, "IsLadderSelected", "true")
     timers = element(sw, "Timers")
     for i, t in sorted(program.timers.items()):

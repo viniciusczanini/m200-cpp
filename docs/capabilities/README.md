@@ -13,12 +13,12 @@ recusas de fluxo de controle do protótipo também precisam evoluir para isso.
 | Grupo | Implementado no protótipo | Ainda falta |
 |---|---|---|
 | Digital e estado booleano | I/O embarcado, memória M, gates, if/else, bordas, clocks | filtros/latch/reflexos, alarm/fallback, I/O imediato, mapa completo S/SW, retenção configurável |
-| Numéricos | i16/i32/f32, 47 intrínsecos, comparações, memória MW/MD/MF compartilhada, XML Operation/Comparison, reversão | demais operandos/constantes, flags e recuperação de erro, operações/casos ambíguos, BCD/ASCII/strings/tabelas |
+| Numéricos | i16/i32/f32, 47 intrínsecos, INC/DEC em IL, comparações, memória MW/MD/MF compartilhada, arrays fixos com índice literal, XML Operation/Comparison, reversão | indexação dinâmica/multidimensional, demais operandos/constantes, flags e recuperação de erro, operações/casos ambíguos, BCD/ASCII/strings/tabelas |
 | Blocos | TON/TOF/TP e classes de clock/borda | contadores C/FC/HSC, registradores, drum/SBR/SC, RTC/schedule, PID e seus parâmetros |
 | Hardware rápido | limites e conflitos de pinos documentados | configuração e execução de HSC, PWM/PLS/FREQGEN/PTO e blocos de movimento |
 | Comunicação | ReadVar/WriteVar/WriteReadVar em C++/IL e modelo assíncrono; FC1/2/3/4/5/6/15/16/23; MBAP; TCP local; XML de READ/WRITE word e perfis de porta comprovados | demais enums/configurações XML, propriedades dinâmicas dos blocos, IOScanner, EXCH/MSG, serial ASCII/RTU físico, mapas específicos de servidor e EtherNet/IP; validação oficial |
 | Expansão | cartuchos e TM2/TM3/TM3R documentados | perfil de configuração, tipos de I/O, conversões/calibração/diagnósticos e conflitos |
-| Execução | scan mestre restrito, inicialização do contrato local | tarefas/eventos, prioridades, watchdog comprovado, subrotinas nativas, UDF/UDFB, Grafcet, STOP/RUN e retomadas |
+| Execução | scan mestre restrito, inicialização do contrato local, while/for/do, break/continue, goto/labels e JMP/JMPC/JMPCN reais em IL/VM/reversão; XML Jump/JMPC observado | demais estruturas/operadores C++, fluxo/chamadas completo, tarefas/eventos, prioridades, watchdog comprovado, subrotinas nativas, UDF/UDFB, Grafcet, STOP/RUN e retomadas |
 | Projeto oficial | subconjunto XML, coerência gráfica, preservação do template e reversão | template autêntico CE40T, enums restantes, schema real, abrir/compilar/salvar no editor oficial, simulador oficial e hardware |
 
 Os estados normalizados por fase na API de catálogo começam conservadoramente em `missing` (frontend/IL/reversão/SMBP/local) e `pending` (editor/hardware). Eles não são promovidos por texto de pesquisa. O comando `capabilities` mostra separadamente a biblioteca implementada. A granularidade dos registros inclui famílias com muitos operandos/modos; um caso local funcionando não conclui a família toda. Não há porcentagem artificial de conclusão.
