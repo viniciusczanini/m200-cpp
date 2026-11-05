@@ -522,6 +522,170 @@ class ToolchainTests(unittest.TestCase):
         self.assertNotEqual(r.returncode, 0)
         self.assertIn("pending", r.stderr)
 
+    def test_macro_expanded_declarations_cannot_hide_executable_code(self):
+        self.rejects(
+            "#define HIDDEN __attribute__((constructor)) void before_scan(){plc::output(0,true);}\nHIDDEN\nvoid scan(){}",
+            "M200-E",
+        )
+        self.rejects(
+            "#define HIDDEN int unsupported=42;\nHIDDEN\nvoid scan(){}", "M200-E"
+        )
+        (self.work / "macros.hpp").write_text(
+            "#define HIDDEN __attribute__((constructor)) void before_scan(){plc::output(0,true);}\n"
+        )
+        self.rejects('#include "macros.hpp"\nHIDDEN\nvoid scan(){}', "M200-E")
+
+    def test_normal_macro_definitions_are_validated_as_cpp(self):
+        p = self.compile(
+            "#define STATE bool state=false;\nSTATE\n#define SCAN void scan(){state=!state;plc::output(0,state);}\nSCAN"
+        )
+        got = self.run_program(p, [{}] * 3)
+        self.assertEqual([v[0] for v in got], [True, False, True])
+
+    def test_unknown_active_configuration_and_real_io_entry_names_fail_closed(self):
+        import xml.etree.ElementTree as ET
+
+        p = self.compile("void scan(){plc::output(0,true);}")
+        project = self.api("project")
+        dest = self.work / "config.smbp"
+        for parent, xml in [
+            (
+                "SoftwareConfiguration",
+                "<MessageBlocks><UnknownActiveObject>true</UnknownActiveObject></MessageBlocks>",
+            ),
+            (
+                "HardwareConfiguration/Plc/Cpu",
+                "<UnknownExecutionObject><Enabled>true</Enabled></UnknownExecutionObject>",
+            ),
+            (
+                "HardwareConfiguration/Plc/Cpu",
+                "<DigitalInputs><DiscretInput><Address>%I0.0</Address><Index>0</Index><RunStop>true</RunStop></DiscretInput></DigitalInputs>",
+            ),
+            (
+                "HardwareConfiguration/Plc/Cpu",
+                "<HighSpeedCounters><HighSpeedCounter><Address>%HSC0</Address><Index>0</Index><ReflexOutputs><ReflexOutput><Index>0</Index><Activated>true</Activated></ReflexOutput></ReflexOutputs></HighSpeedCounter></HighSpeedCounters>",
+            ),
+        ]:
+            with self.subTest(xml=xml):
+                project.write_project(p, ROOT / "tests/fixtures/synthetic.smbp", dest)
+                tree = ET.parse(dest)
+                tree.find(parent).append(ET.fromstring(xml))
+                tree.write(dest)
+                with self.assertRaisesRegex(Exception, "M200-E"):
+                    project.load_project(dest)
+                with self.assertRaisesRegex(Exception, "M200-E"):
+                    project.write_project(p, dest, self.work / "reexport.smbp")
+
+    def test_duplicate_xml_singletons_cannot_hide_program_data(self):
+        import xml.etree.ElementTree as ET
+
+        p = self.compile(
+            "plc::Ton t{20};void scan(){bool done=t.update(plc::input(0));plc::output(0,done);}"
+        )
+        project = self.api("project")
+        dest = self.work / "duplicates.smbp"
+        cases = [
+            (
+                "SoftwareConfiguration",
+                "<Pous><UnknownActiveTask>true</UnknownActiveTask></Pous>",
+            ),
+            (
+                ".//RungEntity",
+                "<InstructionLines><InstructionLineEntity><InstructionLine>JMP %L999</InstructionLine></InstructionLineEntity></InstructionLines>",
+            ),
+            (".//TimerTM", "<Preset>9999</Preset>"),
+            (".//LadderEntity", "<Column>9</Column>"),
+            (
+                ".//InstructionLineEntity",
+                "<InstructionLine>JMP %L999</InstructionLine>",
+            ),
+        ]
+        for parent, xml in cases:
+            with self.subTest(parent=parent):
+                project.write_project(p, ROOT / "tests/fixtures/synthetic.smbp", dest)
+                tree = ET.parse(dest)
+                tree.find(parent).append(ET.fromstring(xml))
+                tree.write(dest)
+                with self.assertRaisesRegex(Exception, "M200-E"):
+                    project.load_project(dest)
+
+    def test_unmodeled_xml_attributes_are_rejected(self):
+        import xml.etree.ElementTree as ET
+
+        p = self.compile("void scan(){plc::output(0,true);}")
+        project = self.api("project")
+        dest = self.work / "attributes.smbp"
+        project.write_project(p, ROOT / "tests/fixtures/synthetic.smbp", dest)
+        tree = ET.parse(dest)
+        tree.find(".//RungEntity").set(
+            "{http://www.w3.org/2001/XMLSchema-instance}type", "UnknownExecutableRung"
+        )
+        tree.write(dest)
+        with self.assertRaisesRegex(Exception, "M200-E"):
+            project.load_project(dest)
+
+    def test_rebuild_does_not_delete_a_file_absent_from_old_manifest(self):
+        source = self.work / "a.cpp"
+        source.write_text("#include <plc.hpp>\nvoid scan(){}")
+        out = self.work / "out"
+        cmd = [sys.executable, "-m", "m200", "compile", str(source), "-o", str(out)]
+        first = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
+        self.assertEqual(first.returncode, 0, first.stderr)
+        manual = out / "program.smbp"
+        manual.write_bytes(b"MY MANUAL PROJECT")
+        again = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
+        self.assertEqual(again.returncode, 1)
+        self.assertEqual(manual.read_bytes(), b"MY MANUAL PROJECT")
+
+    def test_decompile_rejects_source_output_and_sidecar_aliases(self):
+        project = self.api("project")
+        p = self.compile("void scan(){plc::output(0,true);}")
+        source = self.work / "original.smbp"
+        project.write_project(p, ROOT / "tests/fixtures/synthetic.smbp", source)
+        original = source.read_bytes()
+
+        def run(dest):
+            return subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "m200",
+                    "decompile",
+                    str(source),
+                    "-o",
+                    str(dest),
+                ],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+            )
+
+        self.assertEqual(run(source).returncode, 1)
+        self.assertEqual(source.read_bytes(), original)
+        alias = self.work / "alias.cpp"
+        alias.symlink_to(source)
+        self.assertEqual(run(alias).returncode, 1)
+        self.assertEqual(source.read_bytes(), original)
+        # The destination's sidecar is the input path in this case.
+        source2 = self.work / "audit.cpp.configuration.smbp"
+        source2.write_bytes(original)
+        r = subprocess.run(
+            [
+                sys.executable,
+                "-m",
+                "m200",
+                "decompile",
+                str(source2),
+                "-o",
+                str(self.work / "audit.cpp"),
+            ],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(r.returncode, 1)
+        self.assertEqual(source2.read_bytes(), original)
+
 
 if __name__ == "__main__":
     unittest.main()

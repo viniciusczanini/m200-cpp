@@ -38,9 +38,18 @@ def build_artifacts(program, output, template=None):
             fail("existing output has no compiler report; choose another directory")
         if (out / "report.json").exists():
             previous = json.loads((out / "report.json").read_text())
-            if previous.get("tool") != "m200-cpp":
+            if not isinstance(previous, dict) or previous.get("tool") != "m200-cpp":
                 fail("output report is not owned by this compiler")
-            for name, digest in previous.get("artifacts", {}).items():
+            owned = previous.get("artifacts", {})
+            if not isinstance(owned, dict):
+                fail("invalid previous artifact manifest")
+            if any(
+                p.name != "report.json" and p.name not in owned for p in out.iterdir()
+            ):
+                fail(
+                    "existing file is absent from the previous artifact manifest; choose another output directory"
+                )
+            for name, digest in owned.items():
                 if name not in ARTIFACTS:
                     fail("invalid previous artifact manifest")
                 path = out / name
@@ -97,6 +106,53 @@ def build_artifacts(program, output, template=None):
         for f in stage.iterdir():
             os.replace(f, out / f.name)
     return result
+
+
+def decompile_file(source, output):
+    source = Path(source)
+    output = Path(output)
+    sidecar = (
+        Path(str(output) + ".configuration.smbp")
+        if source.suffix.lower() == ".smbp"
+        else None
+    )
+    paths = [source.resolve(), output.resolve()] + (
+        [sidecar.resolve()] if sidecar else []
+    )
+    if len(set(paths)) != len(paths):
+        fail("decompile input, output and configuration sidecar must be distinct paths")
+    destinations = [output] + ([sidecar] if sidecar else [])
+    if any(p.exists() or p.is_symlink() for p in destinations):
+        fail("decompile output already exists; choose a new output path")
+    original = source.read_bytes()
+    program = read_program(source)
+    if source.read_bytes() != original:
+        fail("source project changed while being read")
+    code = to_cpp(program).encode("utf-8")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    created = []
+    # Stage both payloads before creating any destination. Exclusive opens also
+    # protect files created by another process between the check and the write.
+    with tempfile.TemporaryDirectory(
+        prefix=".m200-decompile-", dir=str(output.parent)
+    ) as d:
+        stage = Path(d)
+        (stage / "program.cpp").write_bytes(code)
+        if sidecar:
+            (stage / "original.smbp").write_bytes(original)
+        try:
+            for destination, data in [
+                (output, (stage / "program.cpp").read_bytes())
+            ] + (
+                [(sidecar, (stage / "original.smbp").read_bytes())] if sidecar else []
+            ):
+                with destination.open("xb") as f:
+                    created.append(destination)
+                    f.write(data)
+        except OSError:
+            for p in created:
+                p.unlink(missing_ok=True)
+            raise
 
 
 def read_program(path):
@@ -176,13 +232,7 @@ def main(argv=None):
             print(json.dumps(result, indent=2))
             return 0
         if args.command == "decompile":
-            p = read_program(args.project)
-            Path(args.output).write_text(to_cpp(p))
-            # Preserve the original configuration alongside the reconstructed code.
-            if Path(args.project).suffix.lower() == ".smbp":
-                Path(str(args.output) + ".configuration.smbp").write_bytes(
-                    Path(args.project).read_bytes()
-                )
+            decompile_file(args.project, args.output)
             print(
                 "Experimental C++ reconstructed from actual IL; official validation pending."
             )

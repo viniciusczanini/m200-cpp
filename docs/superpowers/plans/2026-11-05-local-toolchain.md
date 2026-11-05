@@ -64,4 +64,4 @@ Files: README, examples, Windows validation checklist, Makefile, CLI smoke tests
 - [x] Document exact supported subset, unknowns, clocks/timer semantics, compile/decompile commands and deferred Windows proof.
 - [x] Run `make check`, build examples and inspect generated reports/projects.
 - [x] Commit locally, obtain one fresh implementation review, fix important findings with RED/GREEN tests, rerun the suite.
-- [ ] Leave all work local, with official editor and physical tests explicitly pending.
+- [x] Leave all work local, with official editor and physical tests explicitly pending.

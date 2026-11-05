@@ -38,7 +38,7 @@ Também há `plc::clock_ms(10|100|1000|60000)`, que lê as bases globais `%S4..%
 - Funções auxiliares booleanas com um único `return` puro, sem recursão ou efeitos colaterais.
 - Estado global entre scans e captura das entradas usadas. Saídas têm imagem lógica e escrita consolidada no final do ciclo. No primeiro scan de RUN, saídas e globais comuns usadas pelo programa são reinicializadas conforme o contrato.
 - `plc::input(0..23)`, `plc::output(0..15, bool)` e `plc::output_state(0..15)`, com índices literais.
-- `plc::Ton`, `plc::Tof`, `plc::Pulse`, `plc::Clock`, `plc::RisingEdge` e `plc::FallingEdge`. As instâncias são globais. Cada instância deve receber uma atualização incondicional por scan; habilitação é parâmetro explícito. Chamadas duplicadas ou condicionais são recusadas.
+- `plc::Ton`, `plc::Tof`, `plc::Pulse`, `plc::Clock`, `plc::RisingEdge` e `plc::FallingEdge`. As instâncias são globais. Cada instância utilizada deve receber uma atualização incondicional por scan; habilitação é parâmetro explícito. Chamadas duplicadas ou condicionais são recusadas. Uma instância inteiramente não utilizada é permitida, embora sua declaração possa reservar recursos.
 - Alocação automática de bits e timers; os temporários também entram no orçamento. O alocador comum usa `%M500..1023`, evitando retenção automática acidental da faixa baixa. O uso explícito de endereços pelo código de auditoria reserva esses endereços e pode reduzir o espaço disponível.
 - Executor IL com validação estrita, conversor IL/SMBP → C++ e comparação com a execução C++ nativa.
 - Projeto XML baseado em template, rungs Ladder de contatos em série, bobinas e timers, verificação local de coerência IL/gráfico e arquivo de vínculo fonte/rung.
@@ -67,6 +67,8 @@ O compilador mantém a configuração de hardware do template e substitui o prog
 
 `tests/fixtures/synthetic.smbp` é exclusivamente uma fixture de parser. Ela permite exercitar a serialização aqui, mas **não é um perfil oficial nem um projeto pronto para carregar no CLP**. Não há um template autêntico do TM200CE40T incluído.
 
+O perfil de leitura é conservador: até um template real vazio pode exigir ajuste de defaults quando tivermos o editor. Configurações desconhecidas, XML ambíguo com campos duplicados e atributos de execução não reconhecidos são recusados.
+
 Uma restrição adicional do backend atual: a enumeração XML da base de timer de **10 ms** ainda não foi estabelecida por um exemplo inspecionado. A IL/modelo local pode usar essa base, mas a exportação `.smbp` a recusa. As outras bases também continuam sem validação no editor. Timers de 1 ms só podem ocupar `%TM0..%TM5`; um `Clock` consome dois timers. Configurações não representáveis ou recursos esgotados geram erro.
 
 ## Converter de volta e conferir
@@ -81,6 +83,8 @@ O conversor lê a IL e os timers efetivamente presentes no arquivo. O resultado 
 
 Arquivos externos só são aceitos dentro do subconjunto reconhecido: instruções booleanas, blocos de timer específicos, seções em ordem e gráficos simples coerentes. Paralelos, grafcet, saltos, tarefas adicionais, bases/modos desconhecidos e divergências entre IL e gráfico geram erro. Um arquivo arbitrário do editor pode ser recusado; ainda não há descompilador geral de SMBP.
 
+A descompilação recusa caminhos existentes ou que coincidam com o projeto de entrada, inclusive aliases por symlink e o caminho da cópia de configuração. Escolha um nome novo para cada conferência.
+
 `check` compara a execução nativa do C++ original, a IL e o C++ reconstruído para a mesma sequência de entradas/tempo. Isso ajuda a detectar erros de ordem e conversão. A conferência de volta e o executor próprio compartilham partes do modelo e não substituem o simulador oficial. O comando `certify` sempre recusa declarar compatibilidade enquanto a validação oficial estiver pendente.
 
 As saídas são preparadas antes de substituir artefatos de uma compilação anterior. Arquivos gerados que tenham sido editados, ou arquivos desconhecidos no diretório, impedem a sobrescrita. Escolha outro diretório para preservar uma edição manual.
@@ -92,3 +96,5 @@ O roteiro está em [docs/validation/WINDOWS.md](docs/validation/WINDOWS.md). SSH
 A ferramenta nova da Apple pesquisada foi **Container machines**, um ambiente Linux persistente. Ela pode ajudar em testes Linux, mas não fornece o Windows do editor Schneider. O compilador já executa nativamente no Mac; nenhuma VM é dependência deste protótipo.
 
 Fontes técnicas e limites da pesquisa: [docs/FORMAT.md](docs/FORMAT.md). Todos os testes são locais; não há CI ou publicação remota configurada.
+
+Resultados, revisão e decisões: [docs/validation/LOCAL-RESULTS.md](docs/validation/LOCAL-RESULTS.md).

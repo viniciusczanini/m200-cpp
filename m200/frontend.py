@@ -32,6 +32,15 @@ def walk(node):
         yield from walk(child)
 
 
+def source_location(node):
+    loc = node.get("loc") or node.get("range", {}).get("begin", {})
+    # A macro expansion is a declaration at the expansion site, not an absent
+    # declaration. Its spelling can live in another file or on the #define line.
+    while "expansionLoc" in loc:
+        loc = loc["expansionLoc"]
+    return loc
+
+
 class Frontend:
     def __init__(self, tree, path):
         self.path = path
@@ -47,8 +56,9 @@ class Frontend:
                 names(c, prefix)
 
         names(tree)
+        self.top = []
         for node in tree.get("inner", []):
-            loc = node.get("loc", {})
+            loc = source_location(node)
             if loc.get("includedFrom") and loc.get("offset") is not None:
                 if not (
                     node.get("kind") == "NamespaceDecl"
@@ -58,13 +68,11 @@ class Frontend:
                     fail(
                         "only declarations from the bundled plc.hpp header are supported"
                     )
-        self.top = [
-            n
-            for n in tree.get("inner", [])
-            if n.get("loc", {}).get("offset") is not None
-            and not n["loc"].get("includedFrom")
-            and n["loc"].get("file", str(path)) == str(path)
-        ]
+                continue
+            if loc.get("offset") is not None:
+                if loc.get("file", str(path)) != str(path):
+                    fail("declaration originates outside the source and bundled SDK")
+                self.top.append(node)
         self.functions = {n["id"]: n for n in self.top if n["kind"] == "FunctionDecl"}
         self.variables = {}
         self.instances = {}
@@ -87,8 +95,8 @@ class Frontend:
         fail("%s:%s:%s: %s" % (loc["file"], loc["line"], loc["column"], message))
 
     def location(self, node):
-        loc = node.get("loc") or node.get("range", {}).get("begin", {})
-        offset = loc.get("expansionLoc", loc).get("offset", 0)
+        loc = source_location(node)
+        offset = loc.get("offset", 0)
         text = self.path.read_text()
         line = text.count("\n", 0, offset) + 1
         column = offset - text.rfind("\n", 0, offset)

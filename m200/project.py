@@ -10,16 +10,11 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 from .il import validate
+from .config import configuration, unique_tree
 from .model import Program, Timer, address, fail
 
 TARGET = "TM200CE40T"
 BASES = {1: "OneMilliSeconds", 100: "OneHundredMilliSeconds", 1000: "OneSecond"}
-KNOWN_SOFTWARE = set(
-    ["Pous", "Subroutines", "WatchLists", "CustomSymbols", "ConstantWordsMemoryAllocation", "MemoryBitsMemoryAllocation", "MemoryWordsMemoryAllocation", "TimersMemoryAllocation", "CountersMemoryAllocation", "RegistersMemoryAllocation", "DrumsMemoryAllocation", "SbrsMemoryAllocation", "ScsMemoryAllocation", "FcsMemoryAllocation", "SchsMemoryAllocation", "HscsMemoryAllocation", "PtosMemoryAllocation", "MemoryBits", "SystemBits", "SystemWords", "GrafcetSteps", "MemoryWords", "MemoryDoubleWords", "MemoryFloats", "ConstantWords", "ConstantDoubleWords", "ConstantMemoryFloats", "Timers", "Counters", "FastCounters", "Registers", "Drums", "ShiftBitRegisters", "StepCounters", "ScheduleBlocks", "Pids", "MessageBlocks", "FunctionBlocks", "MotionTaskTables", "FastTask", "MastTask", "CpuBehavior", "TraceTimeBase", "UserFunctionPous", "UserFunctionBlockPous", "UserDefineFunctionBlocks"]
-)
-EMPTY_ONLY = set(
-    ["Subroutines", "GrafcetSteps", "Counters", "FastCounters", "Registers", "Drums", "ShiftBitRegisters", "StepCounters", "ScheduleBlocks", "Pids", "FunctionBlocks", "MotionTaskTables", "UserFunctionPous", "UserFunctionBlockPous", "UserDefineFunctionBlocks"]
-)
 
 
 def element(parent, tag, text=None):
@@ -41,65 +36,12 @@ def parse(path):
         fail("invalid XML: " + str(exc))
     if root.tag != "ProjectDescriptor":
         fail("unsupported project root or encrypted project")
+    unique_tree(root)
     if root.findtext("HardwareConfiguration/Plc/Cpu/Reference") != TARGET:
         fail("template/project must target " + TARGET)
     if len(root.findall("HardwareConfiguration/Plc/Cpu")) != 1:
         fail("project must contain exactly one CPU")
     return root
-
-
-def configuration(root):
-    sw = root.find("SoftwareConfiguration")
-    if sw is None:
-        fail("missing SoftwareConfiguration")
-    for child in sw:
-        if child.tag not in KNOWN_SOFTWARE:
-            fail("unknown software configuration: " + child.tag)
-        if child.tag in EMPTY_ONLY and len(child):
-            fail("unsupported active objects: " + child.tag)
-    for tag in ("MemoryBitsMemoryAllocation", "TimersMemoryAllocation"):
-        allocation = sw.find(tag)
-        if allocation is not None and allocation.findtext("Allocation", "") not in (
-            "",
-            "Automatic",
-            "Manual",
-        ):
-            fail("unsupported memory allocation mode")
-    # Free POUs/event tasks could execute outside the scan we translate.
-    pous = sw.find("Pous")
-    if pous is not None and any(c.tag != "ProgramOrganizationUnits" for c in pous):
-        fail("unsupported POU/task kind")
-    fast = sw.find("FastTask")
-    if fast is not None and any(c.tag != "Period" for c in fast):
-        fail("active fast/event task is unsupported")
-    mast = sw.find("MastTask")
-    if mast is not None and any(
-        c.tag not in ("UsePeriodScanMode", "PeriodScan") for c in mast
-    ):
-        fail("unsupported master task configuration")
-    plc = root.find("HardwareConfiguration/Plc")
-    if plc is not None:
-        for c in plc:
-            if c.tag != "Cpu" and len(c):
-                fail("hardware expansion/configuration is unsupported: " + c.tag)
-    cpu = root.find("HardwareConfiguration/Plc/Cpu")
-    for tag in (
-        "PulseTrainOutputs",
-        "InputAssemblys",
-        "OutputAssemblys",
-        "InputRegisters",
-        "HoldingRegisters",
-    ):
-        c = cpu.find(tag)
-        if c is not None and len(c):
-            fail("active peripheral/network objects are unsupported: " + tag)
-    for io in cpu.findall("DigitalInputs/DigitalInput"):
-        for c in io:
-            if any(
-                word in c.tag.lower() for word in ("runstop", "event", "latch")
-            ) and c.text not in (None, "", "false", "False", "0"):
-                fail("special input function is unsupported: " + c.tag)
-    return sw
 
 
 def graphics(rung):
