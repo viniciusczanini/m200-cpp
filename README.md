@@ -1,5 +1,11 @@
 # m200-cpp — protótipo local
 
+A meta final é **equivalência funcional com a programação oficial do
+TM200CE40T**: todo algoritmo aceito nesse perfil deve ter uma forma suportada
+de expressão em C++ e gerar um projeto equivalente. As restrições atuais do
+protótipo são trabalho pendente, não o escopo final da biblioteca. O contrato
+completo está em [docs/PARITY.md](docs/PARITY.md).
+
 Ferramenta experimental para escrever lógica do **Schneider TM200CE40T** em C++ restrito, gerar IL e um projeto `.smbp` a partir de um template, e reconstruir C++ a partir das instruções reais do arquivo.
 
 **Ainda não validado no EcoStruxure Machine Expert Basic nem no CLP.** Os testes locais não comprovam que o editor abre o arquivo, nem o comportamento elétrico ou temporal no equipamento. O usuário disponibilizará Windows/software/CLP no futuro via SSH. Nenhuma instalação de Windows ou comunicação com o CLP é necessária para usar o protótipo local.

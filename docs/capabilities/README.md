@@ -2,6 +2,12 @@
 
 A meta é acessar todos os recursos realmente disponíveis no TM200CE40T pelo C++ restrito, com ida e volta para o editor. O inventário é uma base de rastreamento, não uma declaração de que essa meta foi atingida.
 
+O critério final é a [equivalência funcional](../PARITY.md): qualquer algoritmo
+aceito pelo software oficial para esse perfil deve ser expressível em C++.
+Uma lacuna desta tabela não reduz esse requisito e não pode ser apresentada
+como uma incapacidade do PLC. As reservas de temporários, o scan único e as
+recusas de fluxo de controle do protótipo também precisam evoluir para isso.
+
 `instructions.json` registra 161 itens; `hardware.json` registra 89. São 250 registros, com sobreposição entre instrução e hardware, e não 250 funcionalidades independentes. Alguns descrevem ausência de recurso, como analógicos embarcados. Cada entrada conserva limites, requisitos de versão funcional, objetos/endereço, configuração, fontes/páginas e pontos de validação. `HARDWARE-AUDIT.md` explica os 13 conflitos encontrados entre documentos.
 
 | Grupo | Implementado no protótipo | Ainda falta |
