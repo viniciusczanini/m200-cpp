@@ -1,0 +1,132 @@
+{
+  "date": "2026-11-06",
+  "scope": "Fail-closed MastTask profile validation; no task scheduler implementation",
+  "base_checkpoint": {
+    "commit": "8a80a7c8b3e82b7da11bd5a565a305ea651dc990",
+    "tests": 496,
+    "historical_results_modified_by_this_change": false
+  },
+  "changed_code_sha256": {
+    "m200/config.py": "5411e6a28bd67da9a45c1660f1c62673443b249ac76948ede80b57c6e322f73e",
+    "tests/test_mast_task_profile.py": "6bcbc398b4a2048c44a92433dc9d1f03755b5186814c0136fea4cdde04125d93"
+  },
+  "contract": {
+    "required_container": "Exactly one explicit MastTask with both scalar fields",
+    "accepted": {
+      "UsePeriodScanMode": "false",
+      "PeriodScan": "100"
+    },
+    "mode": "Canonical false/true spelling; true refused as unsupported periodic master execution",
+    "period": "Canonical positive ASCII integer within 1..150; only the observed inactive 100 profile admitted",
+    "other_valid_inactive_periods": "Explicit unverified tool profile; not a statement that the PLC cannot use those values",
+    "authority": "Actual project/template; opaque Program metadata cannot override it",
+    "rejection_preserves": [
+      "template bytes",
+      "existing destination bytes",
+      "absence of an initially absent destination"
+    ]
+  },
+  "TDD": {
+    "promoted_RED": {
+      "tests": 10,
+      "failures": 35,
+      "errors": 0,
+      "seconds": 0.483,
+      "scope": "negative subcases; existing valid/duplicate/unknown-structure cases already passed"
+    },
+    "GREEN": {
+      "tests": 10,
+      "result": "OK",
+      "seconds": 0.437
+    }
+  },
+  "full_regression": {
+    "command": "make check",
+    "expanded_command": "python3 -m unittest discover -s tests -v",
+    "tests": 506,
+    "result": "OK",
+    "seconds": 199.031,
+    "source_input_pins": 108,
+    "mismatches_after_run": 0,
+    "independent_reviewer_repeated_full_suite": false
+  },
+  "ruff": {
+    "version": "0.17.3",
+    "check_command": "ruff check m200 tests",
+    "check": "pass",
+    "format_command": "ruff format --check m200 tests",
+    "format": "pass",
+    "python_files": 96
+  },
+  "independent_review": {
+    "new_guard_defects": [],
+    "configuration_cases": 333,
+    "canonical_mode_period_matrix_cases": 300,
+    "export_authority_atomicity_cases": 8,
+    "focused_tests": 10,
+    "focused_seconds": 0.409,
+    "review_json_sha256": "77bd18d8afd0c40fb092b0293f24cba2ad57f25a2962def8357b3bae79074e2b",
+    "review_md_sha256": "f7b604d494820c740e287fffc807b9a567e87c26346730b65d9a3b66ac633ad5",
+    "full_log_and_108_pins_independently_verified": true
+  },
+  "existing_parser_limitation": {
+    "classification": "Pre-existing generic unique_tree mixed-content strictness limitation, separate from MastTask semantic fields",
+    "non_whitespace_child_tail_can_be_accepted": true,
+    "field_override_or_periodic_authorization_found": false,
+    "complete_mixed_XML_rejection_claimed": false
+  },
+  "evidence_sha256": {
+    "output/diagnostics/mast-task-profile-2026-11-06/promoted-red.log": "e74419f78d5975e9c07ca0ee412cf2ab2701973cff6fb9db6ef9dc9bd7af91a2",
+    "output/diagnostics/mast-task-profile-2026-11-06/focused-green.log": "b5afdcb6cde98858942b1849a78f14af3a8eaa06735822ecdf2de78e653cc91b",
+    "output/diagnostics/mast-task-profile-2026-11-06/full-regression.log": "e913eb05aad343cffc43eee103222cb329a02873813ab106325ba63811e6453c",
+    "output/diagnostics/mast-task-profile-2026-11-06/source-pin.json": "f53f5b4b245cfea7610ca0b0967f9872428bb8852e22f496096d7727f66bcd4f",
+    "output/reports/mast-task-independent-review-2026-11-06/review.json": "77bd18d8afd0c40fb092b0293f24cba2ad57f25a2962def8357b3bae79074e2b",
+    "output/reports/mast-task-independent-review-2026-11-06/REVIEW.md": "f7b604d494820c740e287fffc807b9a567e87c26346730b65d9a3b66ac633ad5",
+    "output/reports/mast-task-independent-review-2026-11-06/probe-results.json": "b25a5666fb9852e16765055a13285a8f7997acd0ee19470a79596abfe6fec254"
+  },
+  "basis": {
+    "authentic_CE40T_template": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf",
+    "M200_guide": {
+      "document": "EIO0000002019.06",
+      "pages": [
+        26,
+        27,
+        28
+      ],
+      "period_ms": [
+        1,
+        150
+      ],
+      "printed_default_ms": 10,
+      "sha256": "fb4f684e7efbb46e3e38e61ed532d99bf623bedffe447b5c379dd3dd6c4434df"
+    },
+    "Operating_guide": {
+      "document": "EIO0000003281.04",
+      "pages": [
+        56,
+        57
+      ],
+      "printed_default_ms": 100,
+      "one_ms_from_human_level": "5.0",
+      "sha256": "2fb60e335bbe92342760471777abf256da7a434c61b98b464ae234aaa82c45e5"
+    },
+    "installed_constructor": {
+      "assembly": "SchneiderElectric.SoMachineBasic.Entities.dll",
+      "sha256": "bf7b33a79356dbfd9839891b00e61695b5af3b5ee7ce121def37e3e973a9455e",
+      "token": "0x060007ea",
+      "observed_defaults": "false/100"
+    }
+  },
+  "parity_work_remaining": [
+    "periodic master scheduling",
+    "additional periodic task",
+    "hardware events, priorities, context and preemption",
+    "native SR/UDF/UDFB/Grafcet contexts"
+  ],
+  "runtime_scope": {
+    "official_GUI_used_for_this_fix": false,
+    "simulator_or_PLC_run": false,
+    "network_or_serial_probe": false,
+    "physical_timing_claim": false
+  }
+}

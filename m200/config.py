@@ -463,6 +463,8 @@ def configuration(root):
     if sw is None:
         fail("missing SoftwareConfiguration")
     fields(sw, SOFTWARE)
+    if len(sw.findall("MastTask")) != 1:
+        fail("one explicit MastTask profile is required")
     read_counters(sw)
     for part in sw:
         if part.tag == "FunctionBlocks":
@@ -507,8 +509,22 @@ def configuration(root):
                 fail("active fast task is unsupported")
         elif part.tag == "MastTask":
             fields(part, {"UsePeriodScanMode", "PeriodScan"})
+            if {c.tag for c in part} != {"UsePeriodScanMode", "PeriodScan"}:
+                fail("MastTask requires UsePeriodScanMode and PeriodScan")
             for c in part:
                 scalar(c)
+            mode = part.findtext("UsePeriodScanMode", "")
+            period = part.findtext("PeriodScan", "")
+            if mode not in ("false", "true"):
+                fail("invalid MastTask UsePeriodScanMode boolean")
+            if not re.fullmatch(r"[1-9][0-9]{0,2}", period) or int(period) > 150:
+                fail("invalid MastTask PeriodScan; expected an integer in 1..150")
+            if mode == "true":
+                fail("periodic master task execution is unsupported")
+            # Only this exact inactive profile is established by saved fixtures.
+            # Other controller periods need a separate tool-profile contract.
+            if period != "100":
+                fail("unverified inactive master period profile")
         elif part.tag == "CpuBehavior":
             fields(
                 part,
