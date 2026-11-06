@@ -2,6 +2,7 @@
 """Timer property timelines against an event oracle and pinned original IL."""
 
 # ruff: noqa: E402
+import argparse
 import hashlib
 import json
 import random
@@ -14,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 from m200.frontend import compile_source
 from m200.il import Machine
-from m200.model import CompileError, Program, Timer
+from m200.model import Program, Timer
 from m200.native import run_native
 from m200.project import load_project, write_project, BASES
 from m200.reverse import to_cpp
@@ -81,7 +82,7 @@ class EventOracle:
         return row + [False] * 8
 
 
-def verify(program, source, frames, expected, work, name, xml):
+def verify(program, source, frames, expected, work, name):
     def check(p, label):
         machine = Machine(p)
         for i, (frame, row) in enumerate(zip(frames, expected)):
@@ -101,19 +102,10 @@ def verify(program, source, frames, expected, work, name, xml):
     if rebuilt.timers != program.timers:
         raise AssertionError(name + " lost timer identity/configuration")
     destination = work / (name + ".smbp")
-    if xml:
-        write_project(program, ROOT / "tests/fixtures/synthetic.smbp", destination)
-        check(load_project(destination), "XML")
-        write_project(rebuilt, ROOT / "tests/fixtures/synthetic.smbp", destination)
-        check(load_project(destination), "reverse XML")
-    else:
-        try:
-            write_project(program, ROOT / "tests/fixtures/synthetic.smbp", destination)
-        except CompileError as exc:
-            if "10 ms timer base" not in str(exc):
-                raise
-        else:
-            raise AssertionError("unverified 10ms base exported")
+    write_project(program, ROOT / "tests/fixtures/synthetic.smbp", destination)
+    check(load_project(destination), "XML")
+    write_project(rebuilt, ROOT / "tests/fixtures/synthetic.smbp", destination)
+    check(load_project(destination), "reverse XML")
 
 
 def generated_source(kind, index, base):
@@ -166,9 +158,7 @@ def original_case(work, rng):
         expected.append([i == index for i in range(8)] + [False] * 8)
     source = work / "original.cpp"
     source.write_text(to_cpp(program))
-    verify(
-        program, source, frames, expected, work, "original_indexed_timer_preset", True
-    )
+    verify(program, source, frames, expected, work, "original_indexed_timer_preset")
     if hashlib.sha256(path.read_bytes()).hexdigest() != entry["sha256"]:
         raise AssertionError("original changed")
     return dict(
@@ -183,7 +173,17 @@ def original_case(work, rng):
     )
 
 
-def main():
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--output",
+        type=Path,
+        help="Write a fresh report here instead of updating the historical report",
+    )
+    args = parser.parse_args(argv)
+    output = args.output or ROOT / "docs/validation/TIMER-PROPERTY-STRESS-RESULTS.json"
+    if args.output is not None and output.exists():
+        parser.error("explicit output already exists; choose a fresh report path")
     rng = random.Random(SEED)
     results = []
     with tempfile.TemporaryDirectory(prefix="m200-timer-property-stress-") as directory:
@@ -209,15 +209,13 @@ def main():
                 source = work / (name + ".cpp")
                 source.write_text(generated_source(kind, index, base))
                 program = compile_source(source)
-                verify(program, source, frames, expected, work, name, base != 10)
+                verify(program, source, frames, expected, work, name)
                 results.append(
                     dict(
                         case=name,
                         scans=len(frames),
                         status="pass",
-                        xml="gated: 10ms serialization unverified"
-                        if base == 10
-                        else "synthetic-profile pass",
+                        xml="synthetic-profile pass",
                     )
                 )
                 print(f"PASS: {name} / {len(frames)} scans", flush=True)
@@ -238,9 +236,13 @@ def main():
         official_editor="pending",
         physical_plc="pending",
     )
-    (ROOT / "docs/validation/TIMER-PROPERTY-STRESS-RESULTS.json").write_text(
-        json.dumps(report, ensure_ascii=False, indent=2) + "\n"
-    )
+    data = json.dumps(report, ensure_ascii=False, indent=2) + "\n"
+    if args.output is None:
+        output.write_text(data)
+    else:
+        output.parent.mkdir(parents=True, exist_ok=True)
+        with output.open("x") as report_file:
+            report_file.write(data)
     print(
         f"PASS: {len(results)} cases / {report['scans']} scans; original indexed assignment isolated; no whole-project import or official acceptance"
     )
