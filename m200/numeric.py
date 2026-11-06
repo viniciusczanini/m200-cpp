@@ -19,7 +19,13 @@ from .timers import (
     GETTERS,
 )
 
-VALUE_PATTERN = "(?:" + WORD_PATTERN + "|" + TIMER_PATTERN + ")"
+from .counters import (
+    NUMERIC_PATTERN as COUNTER_PATTERN,
+    reference as counter_reference,
+    GETTERS as COUNTER_GETTERS,
+)
+
+VALUE_PATTERN = "(?:" + WORD_PATTERN + "|" + TIMER_PATTERN + "|" + COUNTER_PATTERN + ")"
 
 TYPES = {"i16": ("MW", 1), "i32": ("MD", 2), "f32": ("MF", 2)}
 READS = {"read_word": "i16", "read_dword": "i32", "read_real": "f32"}
@@ -141,6 +147,11 @@ def word_address(text):
 
 
 def reference_address(text, writable=False):
+    counter = counter_reference(text, writable)
+    if counter:
+        if counter[1] not in ("P", "V"):
+            fail("counter output is not numeric: " + text)
+        return "i16", counter[0]
     timer = timer_reference(text, writable)
     if timer:
         if timer[1] not in ("P", "V"):
@@ -443,6 +454,9 @@ def compare(words, parsed, reader=None):
 
 
 def cpp(value):
+    counter = counter_reference(value.code)
+    if counter:
+        return "counter_%d.%s()" % (counter[0], COUNTER_GETTERS[counter[1]])
     if is_string(value.code):
         bank, start, count = bit_string(value.code)
         prefix = {"M": "m", "I0.": "input", "Q0.": "output"}[bank]

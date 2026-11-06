@@ -19,6 +19,12 @@ from .indexed import is_indexed, is_bit_indexed
 from .bits import bit_string
 from .edges import API as EDGE_API
 from .edge_functions import API as EXPRESSION_API
+from .counters import (
+    Counter,
+    METHODS as COUNTER_METHODS,
+    GETTERS as COUNTER_GETTERS,
+    preset_value as counter_preset,
+)
 
 PACK_READS = {
     f"read_{bank}_bits_{kind}": (bank, kind)
@@ -590,6 +596,47 @@ class Frontend:
             member = children[0]
             obj = strip(member.get("inner", [{}])[0])
             ref = obj.get("referencedDecl", {}).get("id")
+            if ref in self.instances and self.instances[ref][0] == "Counter":
+                index = self.instances[ref][1]
+                method = member.get("name")
+                args = children[1:]
+                if method in (*COUNTER_METHODS, "update", "set_preset"):
+                    if self.active:
+                        self.error(
+                            node,
+                            "stateful counter calls are not allowed inside pure helpers",
+                        )
+                    if method == "set_preset":
+                        value = expect(self.expr(args[0], env), "i16")
+                        if not value.code.startswith("%"):
+                            counter_preset(int(value.code))
+                        self.lower.assign(
+                            Number("i16", f"%C{index}.P"), value, self.lower.guard
+                        )
+                        return None
+                    signals = [
+                        self.lower.copy(boolean(self.expr(a, env)), "counter_argument")
+                        for a in args
+                    ]
+                    pins = (
+                        ("R", "S", "CU", "CD")
+                        if method == "update"
+                        else (COUNTER_METHODS[method],)
+                    )
+                    for pin, signal in zip(pins, signals):
+                        self.lower.counter_action(index, pin, signal, self.lower.guard)
+                    if method != "update":
+                        return None
+                    return self.lower.copy(f"%C{index}.D", "counter_result")
+                fields = {v: k for k, v in COUNTER_GETTERS.items()}
+                if method in fields:
+                    field = fields[method]
+                    value = f"%C{index}.{field}"
+                    return self.lower.copy(
+                        Number("i16", value) if field in ("P", "V") else value,
+                        "counter_property",
+                    )
+                self.error(node, "unsupported counter method: " + str(method))
             if ref in self.instances and self.instances[ref][0] in (
                 "Ton",
                 "Tof",
@@ -761,6 +808,7 @@ class Frontend:
                 "Clock",
                 "RisingEdge",
                 "FallingEdge",
+                "Counter",
             ):
                 self.error(node, "unsupported library instance")
             ctor = next(
@@ -769,6 +817,20 @@ class Frontend:
             )
             if ctor is None:
                 self.error(node, "missing constructor")
+            if kind == "Counter":
+                args = ctor.get("inner", [])
+                if len(args) != 2:
+                    self.error(node, "Counter requires explicit index and preset")
+                index, preset = (self.const(a) for a in args)
+                if (
+                    type(index) is not int
+                    or not 0 <= index < 255
+                    or index in self.lower.program.counters
+                ):
+                    self.error(node, "invalid or duplicate native counter index")
+                self.lower.program.counters[index] = Counter(counter_preset(preset))
+                self.instances[node["id"]] = (kind, index)
+                return
             if kind in ("Ton", "Tof", "Pulse", "Clock"):
                 args = ctor.get("inner", [])
                 timer_kind = {

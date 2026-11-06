@@ -1,0 +1,404 @@
+{
+  "target": "TM200CE40T",
+  "status": "local-tests-passed-experimental",
+  "baseline_commit": "0440b9f1b75065f17476394ee989fc0f69f09c28",
+  "commands": [
+    {
+      "command": [
+        "make",
+        "check"
+      ],
+      "exit_code": 0,
+      "seconds": 123.742,
+      "log_sha256": "2798fc59287f17e1ffdb42d234743c9646f83f7a199b524efd7cf912c428935a"
+    },
+    {
+      "command": [
+        "make",
+        "examples"
+      ],
+      "exit_code": 0,
+      "seconds": 10.304,
+      "log_sha256": "a4eebaab7f1d0f8bb628e167be8b14dfa6af8848a3e550667191abd7b168fbf6"
+    },
+    {
+      "command": [
+        "make",
+        "public-check"
+      ],
+      "exit_code": 0,
+      "seconds": 12.432,
+      "log_sha256": "c728ed22d25871dedf04af5fb5b14199baae03a635d298a1f796331976c4e410"
+    },
+    {
+      "command": [
+        "make",
+        "public-flow-check"
+      ],
+      "exit_code": 0,
+      "seconds": 2.404,
+      "log_sha256": "a97c6a2bffe5b5a89748a13e6e3cecfcb8a7c5dc6116c274da14e6106b1b3030"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/stress/native_edges.py"
+      ],
+      "exit_code": 0,
+      "seconds": 189.056,
+      "log_sha256": "e3403af34807eb36914ef45aa5c234001a3387338da3cb76eb4f438933d037d1"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/stress/counters.py"
+      ],
+      "exit_code": 0,
+      "seconds": 355.212,
+      "log_sha256": "8e88f658c6b965b21742ab6f1a25c407fec1d4db43db6afb26c6dc6f08b37a31"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/stress/expression_edges.py"
+      ],
+      "exit_code": 0,
+      "seconds": 137.226,
+      "log_sha256": "0a4b4fdbba301ce6617f7aeb9ecbd5964d0b520e5617de9a3015ba030d4a9a40"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/stress/bit_objects.py"
+      ],
+      "exit_code": 0,
+      "seconds": 103.127,
+      "log_sha256": "5cc22778e7a2e16e74f1b5fd8b27cdb2b8ae68ba1e41e91f097ed74d905d1404"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/stress/dynamic_arrays.py"
+      ],
+      "exit_code": 0,
+      "seconds": 53.516,
+      "log_sha256": "0a9b6f1974e71987ec7af0b937c418ec33f2bfc50c6c2102c46345c251eccf83"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/stress/digital_io.py"
+      ],
+      "exit_code": 0,
+      "seconds": 72.995,
+      "log_sha256": "f25a407436b01663da6c61a3dd93a0832642bd84b04710b76702cfee7e61433d"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/stress/timer_modes.py"
+      ],
+      "exit_code": 0,
+      "seconds": 54.933,
+      "log_sha256": "1bd2623a39f8965689e151f06aeda89919aba5fb3ab823b932b75473d915fb50"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/stress/indexed.py"
+      ],
+      "exit_code": 0,
+      "seconds": 34.733,
+      "log_sha256": "8711e338768ee3a9da143a9a9017ebd9a307cbf873183f5aef726a46882e3194"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/stress/run.py"
+      ],
+      "exit_code": 0,
+      "seconds": 46.676,
+      "log_sha256": "e48c177a53985fa753a5e47fb5dcf335e1935b576468f29adb36fcf078552769"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/stress/timer_properties.py"
+      ],
+      "exit_code": 0,
+      "seconds": 28.842,
+      "log_sha256": "a29a7663df7839a0002867174ad9ac5100e32a37bbbcb5306d5b1dd94d99353c"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/stress/control_flow.py"
+      ],
+      "exit_code": 0,
+      "seconds": 15.427,
+      "log_sha256": "1a0c7cd572ff78c80808f8bc0e2412fedff80bf2154c067954cabcd4cd0b8734"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/stress/native_logic.py"
+      ],
+      "exit_code": 0,
+      "seconds": 11.24,
+      "log_sha256": "d29940fc69c5e90266647b350cebc1e97bf2e41efee81bb2a2b6b7e45cf0859e"
+    },
+    {
+      "command": [
+        "uvx",
+        "ruff",
+        "check",
+        "m200",
+        "tests",
+        "m200c"
+      ],
+      "exit_code": 0,
+      "seconds": 0.276,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "command": [
+        "uvx",
+        "ruff",
+        "format",
+        "--check",
+        "m200",
+        "tests",
+        "m200c"
+      ],
+      "exit_code": 0,
+      "seconds": 0.031,
+      "log_sha256": "9d67c799638d3a83a6700213f2611aca574ca19163ae4a9c3700b14d4e002c85"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.021,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "m200",
+        "capabilities"
+      ],
+      "exit_code": 0,
+      "seconds": 0.066,
+      "log_sha256": "78c7ef2bb315b68638e37c0f10fd1bcb66a0d56cbf5185a1343b4807bb259266"
+    },
+    {
+      "command": [
+        "make",
+        "public-counter-fetch"
+      ],
+      "exit_code": 0,
+      "seconds": 0.068,
+      "log_sha256": "345e2a4b3af712869ea1a53a09aca740a5210c2d7b269827994222aabb337a27"
+    }
+  ],
+  "unit_tests": 348,
+  "unit_test_seconds": 123.615,
+  "stress_components": {
+    "native_edge_contacts": 20736,
+    "expression_edge_functions": 6144,
+    "native_counters": 23040,
+    "bit_objects": 17152,
+    "dynamic_arrays_and_bits": 11264,
+    "digital_io": 12800,
+    "timer_modes": 18432,
+    "indexed_words": 10240,
+    "timer_properties": 8192,
+    "control_flow": 3072,
+    "native_logic": 5120,
+    "legacy": 37716
+  },
+  "stress_scans": 173908,
+  "public_scans": 18176,
+  "public_and_stress_scans": 192084,
+  "stress_orchestration": {
+    "parallel_workers": 4,
+    "scope": "The twelve make stress recipe scripts executed as independent local commands with separate logs/statuses/results; make stress itself was not invoked."
+  },
+  "native_counters": {
+    "cases": 45,
+    "scans": 23040,
+    "indices": [
+      0,
+      1,
+      31,
+      32,
+      63,
+      127,
+      200,
+      254
+    ],
+    "presets": [
+      0,
+      1,
+      2,
+      9998,
+      9999
+    ],
+    "full_capacity": 255,
+    "observation": "every counter contributes to readback; actual exported XML ->C++ ->compile ->new XML checked",
+    "originals": [
+      "B rung2 whole",
+      "C rung0 whole",
+      "M rung12 whole",
+      "L rung18 whole plus rung15 contiguous [5:7] P assignment/S pair"
+    ],
+    "counter_graph_scope": "simple independent inputs, including exact C original; raw B/M branch/output graphs remain pending although their complete isolated IL rungs are normalized/exported"
+  },
+  "counter_policy": "Provisional G122-based down-wrap E, conflicting with G120/G123; stored R/S, masked-edge consumption, repeated calls, ordering and lifecycle unconfirmed externally.",
+  "digital_io": {
+    "embedded_inputs": 24,
+    "embedded_outputs": 16,
+    "distinct_input_output_polarity_bindings": 768,
+    "cases": 49,
+    "scans": 12800,
+    "electrical_io": "not tested"
+  },
+  "current_report_sha256": {
+    "docs/validation/NATIVE-EDGE-STRESS-RESULTS.json": "26c11989a4e69d6bbb2cb971150d56ba7e20e1b1b50cdf891096f155aec2aa49",
+    "docs/validation/EXPRESSION-EDGE-STRESS-RESULTS.json": "44efedca2bef86c7d9d0edaf8cad5f4d411b948a5bae3d544656267fb9cdbb1f",
+    "docs/validation/COUNTER-STRESS-RESULTS.json": "a867d8ce381ac3127b4cbcb873a7c54a4a777ebb63a40e9d902d522d05458b6b",
+    "docs/validation/BIT-OBJECT-STRESS-RESULTS.json": "9ca95bf6b672c1d90fa8845a620be9753d0416cce460d1aa786220e6ce62323e",
+    "docs/validation/DYNAMIC-ARRAY-STRESS-RESULTS.json": "fe156548945a920b2282755f55a7caa189a3fa5e5a5fb892850920ea0a8ab005",
+    "docs/validation/DIGITAL-IO-STRESS-RESULTS.json": "41e24ec2c41d611b735e700777347add8729e5caa9941e5ea2ba4c94a97eaed2",
+    "docs/validation/TIMER-MODE-STRESS-RESULTS.json": "41cbe3b0c0eb4f85435f2ece6adff0effde9a94637a0ad4fe943de27215c5102",
+    "docs/validation/INDEXED-STRESS-RESULTS.json": "b17d2f9a532cf6dbe24bb9c4996e0fd687c6360ee174ab4b4d2e2249d8a3ba0f",
+    "docs/validation/TIMER-PROPERTY-STRESS-RESULTS.json": "d59de68b4796e785ca5800ad5ddf40868d7f45a5934efce0d0e6b95bd82318d5",
+    "docs/validation/CONTROL-FLOW-STRESS-RESULTS.json": "392a758cc69ec2dd9356dbbed53ad05d3fc56a5a551196b8c8ef3c8212b3f310",
+    "docs/validation/NATIVE-LOGIC-STRESS-RESULTS.json": "5c09dad3658dc5b8d1d5b5fe0e3b9ccac0c5694f24d3666993d149e7856ee882",
+    "docs/validation/PUBLIC-CONTROL-FLOW-RESULTS.json": "13d9edb1d37a92fedad68e4befa19f93be9c9218105ea0b2fa04c04ef384073d"
+  },
+  "source_sha256": {
+    "AGENTS.md": "28fdaebefb29e3f008694671b0e836424207bda829f0083dbba16c3438be3f97",
+    "Makefile": "f964d3de10081622211c690280fea38d91de939d2f18e54380d8d35c35d8f9bb",
+    "docs/capabilities/COUNTER-RESEARCH.md": "10565db05698fc5996af21f64e7e312276af30c2292dbac71e7fb535b57a998a",
+    "docs/capabilities/COUNTER-SOURCES.json": "2da70defcc1c7dedbea5dbf97e3d53df0e74a766cfde231852954af4419ddfbd",
+    "docs/capabilities/COUNTERS.md": "44c1a5994c0d5706407133185afff669cfee3fb3d7971caf4e88d8d736790f11",
+    "docs/capabilities/FORMAT-EVIDENCE.json": "77025350a3d3aded742e7a8736b00777f5777b626f47bb7e333a4b5539a95082",
+    "docs/capabilities/INDEXED-SOURCES.json": "8d9e40c40a2ea1df365bed39b50321aae2370aa3e48f10dab496d7d3c143ad1a",
+    "docs/capabilities/VENDOR-STATIC-SOURCES.json": "db28634f1f9040c7f0b65c64bd53930d180db162a252b21314c5872bcebbb4ca",
+    "docs/capabilities/hardware.json": "48586d35de4beacc315eb84f8d0c56f9dbea9ccc97622d614c77216701c3b8e0",
+    "docs/capabilities/instructions.json": "7b6b6f4bdfa18d02ff1a1ae88c02fe439edda94e9c8c5c33579137df4c40229d",
+    "docs/superpowers/plans/2026-11-05-counters.md": "7b6a345a6706f6fd59f2db8ad185863cedb8fb4139190eeca796a96dc8ba3d3b",
+    "docs/validation/COUNTER-REVIEW.md": "55320799a3d4623e8b32bd29cfa56596d2b9e5f7d07caa6e5698ac9380dbb0a9",
+    "examples/bit_objects.cpp": "124a5be631c495665043d573be711f4bd9f961e5f65248de54c246762d4215e1",
+    "examples/blink.cpp": "8298b531155f8f8a552c03388645581ee4c771a46246932c24c5ecdb1294e16a",
+    "examples/counter.cpp": "e355f98a0b1c1c2c76226e5a7bcfbc3941fd4b042e289b6dcc5fe3825881cbdd",
+    "examples/dynamic_arrays.cpp": "1b856ff38fd734674b4d52779d8b1b47bb2ba76bb6facef3a8d2751acdf686b1",
+    "examples/dynamic_bits.cpp": "9535588b69655900fe8f7a481cbba0a71da800f67ac5416dbf6d68d8c93ada50",
+    "examples/expression_edges.cpp": "6d87cc50eaabaf2dd8a8d454537b0de0751e6fac56d15a0f9dadb26116ce5b01",
+    "examples/indexed_words.cpp": "b7e23a747d2bc5bac4973b5d15cc9f35ed22d0bedbe0b6ca01af422f70cd4558",
+    "examples/latch.cpp": "254bd5a66054bf74c58827cc5f677a86e51645715dc0091b1a8c5230fbda44e7",
+    "examples/loops.cpp": "5cf27acce4bbb8dea98ed8fbc6c4b655ed1585ce8887bda5a22660c253078ea2",
+    "examples/modbus_read.cpp": "c8ed552b77d55be92c6acce8d48a417d32a50ffe049ca614e5d7df9be690dd79",
+    "examples/native_edges.cpp": "0692426c1b217dd63eaf983284e4809f9bd9458e1c65466d7fd43a34203d9fd9",
+    "examples/numeric_control.cpp": "ff2f3e5d4e1b5ecdba55d92cf8b386c370c785dc6559f3a9940a04e062837eb1",
+    "examples/timer_modes.cpp": "6065a49e58bceeb3d2ab23b4a289ae31d6c8513b0df5b4f455139edb61651725",
+    "examples/timer_properties.cpp": "9dcf04ed120fe2fe109ab8cd2c01de5fe91a7d85def7e3bf4681e510685b03d2",
+    "examples/trace.json": "2fadc413bc4f93e3a2eb5b86ab83c3c4b6f85d08c38e9d015b9a8deda608b90f",
+    "m200/__init__.py": "77c5815a3596eebca3e939d1ad39abba46fa4edc4df148aaa7e47f13e5eda0ab",
+    "m200/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "m200/allocation.py": "f21e8753757ebf1c54874c18c3385a7d79ce52992514725920c29a1ca6281be9",
+    "m200/arrays.py": "d4574f6e48ab98f70feb3f474f30bbf387117f5db3ddde395525a21a77da42ed",
+    "m200/bits.py": "d76ca8b8bb587a6811cfb3e157c00385ba0a836b8eb669afdda9af4e635b6a61",
+    "m200/capabilities.py": "e94e59743ee0eae98c476938f8eafe04966c0823b825b1d070980d15d41348a0",
+    "m200/cli.py": "cd8de4496288deb1593ea9871d62d0f9e303a520faa1df59a52eedcd156aee2d",
+    "m200/communication.py": "105c1aef50e7ee00bc7c7142a5b6805d4ddf5f18fc04c5e60a52b78841a6b3b0",
+    "m200/communication_xml.py": "954e0fb861fef56381b204936c47f2f760dbcb3840dd018bb1d2a1b13bfc319f",
+    "m200/config.py": "536cde246108b3357f094757efc2c4e1e6290f667baa86c355d92305e25014b8",
+    "m200/copy_fusion.py": "39c8f498518c46d35ad61ec2c53564a61748a4957eae25e8d241a3c7e4b98816",
+    "m200/counter_xml.py": "b1b29965344a8c4e8da21248a10136c24dfec6868c7c29b6427f7ed3dab3a835",
+    "m200/counters.py": "0e4ed9d8fe6f4356f3d6b6986558a0f9caa019daa3f741b12522d1fdd6f376ce",
+    "m200/edge_functions.py": "c58b059d15ee7387ed7e65f841ad549f3b30c3781a258c0a6340a96e9cd92a24",
+    "m200/edges.py": "e590a801d00b94d20a2dd1f428635aa299e3bd59bcbfe2442f5ffa4fd3d64713",
+    "m200/flow.py": "a61ed946937daa4e54002dc29664c0ef6c02617eb1abb8faa0d0169e06244dc6",
+    "m200/frontend.py": "eb394863ab161ff5653ed02d81aba57fcb3dcdfda9b1d87fafe803e0c1aa4443",
+    "m200/il.py": "dc7747af981d299566729d97265584739ea685159cec883d53a4ad7de69d54d4",
+    "m200/indexed.py": "0b8ca542e2be87392d8de2a75ef8ad0d48534b28d7f82d1e24fd1bf38fc8343b",
+    "m200/jsonio.py": "c4d8447354b4f48205a8d5bfc58e1a3919656ba2073ecc5982b2f8fd6253fd70",
+    "m200/ladder_lowering.py": "6ded10d59e90334b2a128123a1a354fefb72d188a09196aa71f8878c3b78a822",
+    "m200/lower.py": "e5c96dc27d31fecfce7ad15544c64a4369659e5ce8f6a062061b68d9fdc2c2d4",
+    "m200/modbus.py": "62e98577eba6e2de938bc2292dd6cb16f22f64e1101fabdf5ea0f33fd009e92c",
+    "m200/model.py": "d17fba9dac20e051e9c9c45bacf77bbc90846de926e9dc93839d3143fecad055",
+    "m200/native.py": "016a6af7d7f7b1de11dab9bee1477faa9f4d393f75bbf09e1b3bf5daa5e6ac4f",
+    "m200/native_logic.py": "10d4b0d4ce3aa98e5c5f35b2f83f9c6aa4d92f3bb7cbc05887a895a1b60dbe3f",
+    "m200/numeric.py": "72ef2f9e73a91f5307aa2686ffa08b5d43d46f0dfaec765f70e03f00ceff7005",
+    "m200/project.py": "f06d154c6728954badf78bf390deb76576cff8b001f3227a4ff42d44cead8bd0",
+    "m200/reverse.py": "8559131c3ff315c2f2e1a4233be426554aa9325abee03f5e6f5760bf3d40516f",
+    "m200/timers.py": "384e3c26facd76ed8da5449d001348fe1c1dd818a73532ab9c782e6a9b0fedf6",
+    "m200c": "dda4ffd05d83eb4e6656bead70f45d34fec369b9bfaa0b0e58b94489c6c215bd",
+    "sdk/plc.hpp": "7b4e856d72a48330c789baf22813b1b72a139ba8b52338143ca20f08543932d8",
+    "tests/fixtures/native_counter_graphs.json": "0830c6669cded99441496d3d496b8dbb67d133f7a8ace160daae40868d35029a",
+    "tests/fixtures/native_timer_graphs.json": "e8f82d22bca8b5c6a480598dfceb33bf2744feada776812b98261060132b518c",
+    "tests/fixtures/synthetic.smbp": "5c04625cb62d03bd8d2982430970bbb3fb81070205c302d4e39f5a5b78a7f515",
+    "tests/public/control-flow-manifest.json": "9c90f5da2e907305d50f8dbb6a5d64e77306a2b92b501d7f0a79e9380a2d07a9",
+    "tests/public/control_flow.py": "65f9d5f2aba359e6c316aa133c577496114e3981728cf5ce60ada5ecbad7ae72",
+    "tests/public/fetch.py": "196a8b6233a222fd1ebb86a89ced34dda368568bd0a82407cc792d45760af5ba",
+    "tests/public/manifest.json": "7c54959214e085d2852a6601a27a48cf212744cb26ce5aadac6ab8f4d6386324",
+    "tests/public/run.py": "c87893404e91a1b90e648303aafa647c7e9d9199c1e6b86e30ea1c0710b27fda",
+    "tests/stress/bit_objects.py": "a39468f5ae36159b378cda34f2bfbe81abdf42fa1cb1fbf5cca0e6325b9c0489",
+    "tests/stress/boolean_audit.py": "ecd800fad5e3eb05948eb833f77a6098fb0e44aaecf8c0a81b60f1c529de146a",
+    "tests/stress/control_flow.py": "ad7814da8c24d58557b9f749252f624e86d71dd28f1873f8b84dcbf5dece6586",
+    "tests/stress/counters.py": "477b0685314abb2bafa58f27989df132a9b374dac8a4dc4a882a87d5fcd9acd6",
+    "tests/stress/digital_io.py": "e9c5f30e351cebc403f5d4224c728b0813de2e6830b35a63ed0a81ed61c9ec09",
+    "tests/stress/dynamic_arrays.py": "df53722713450024bfce76434e1e548ceabccde25b7b5654417d8a2a889566ac",
+    "tests/stress/expression_edges.py": "d8dc293380b5aa3de06c3d764dab8324a974fd8d7f9d6962dbd776b9abc5d82a",
+    "tests/stress/il_properties.py": "f2269c4d4beb32ea1e9e014aea71b67f3a05839ec137d5f9be237fa833f25644",
+    "tests/stress/indexed.py": "d8937c58e751f515b6d65dcc4f3d1d1a2545d4dee9ed673f73e02fa4f77426a3",
+    "tests/stress/native_edges.py": "29bb2bcff1568a0e6adfacd46840dbd20f6f159043df4da86b4a5765a1c986da",
+    "tests/stress/native_logic.py": "c70a0a69556ab796c18b53d0b2d5ce4b3f1dbd45df9093c8760fff17b6c9551b",
+    "tests/stress/run.py": "f8a317eea4fa0e016ce3c5dd9de2ee534ee333c659cf51396e27ce386d91b7d7",
+    "tests/stress/timer_modes.py": "e49f7526f0fec09d072721deeb33b4c0a5a098fc75151a7293644f24e4441baf",
+    "tests/stress/timer_properties.py": "de3006b72b4d589785cfb7c6a34aac23a47792f2dc44c6e6a7b2e1a03125304d",
+    "tests/test_adversarial.py": "70697b896097c6c84093595d03fa244498aa9e1dd92b767654bf9683c752a2c7",
+    "tests/test_allocation.py": "30841d4cbd34aa72a5423150773c1f9cb69ba81a8b550b2b82b8be735cce98ff",
+    "tests/test_arrays.py": "e41d1d729a04fa7cea78c6511eb1f5c77908a022f02475b9b3d056984049efcd",
+    "tests/test_bit_objects.py": "9fc13a3081ad8c13d0276364d0b6b62beed307a8e4af61752fcf98c7d0a5ce8f",
+    "tests/test_capabilities.py": "15d1fab381fb0aa052e4bd985cc077ebce402964071e1d66ca5d6b763b62716e",
+    "tests/test_communication_compiler.py": "07e10834d084472242e0043f60b3d8e687b628c2536ab89adb6b7c7c9607f209",
+    "tests/test_communication_project.py": "62c93e9bceffa04150a72c7527adb48e2c959799eb7218460dbbe6ac791785a6",
+    "tests/test_communication_xml.py": "ed30c81619345e2a7f2289087724df2d6efeb48a37ba5f1ef1504477b4411fee",
+    "tests/test_control_flow.py": "8c2ad3d223641ee562ad74236c9ec04429c5bb24a1755fcffdaa562a856509db",
+    "tests/test_copy_fusion.py": "bef86dfabf49e5a25aa2193eed4107346a74657dd4619a581770f3d181487740",
+    "tests/test_counters.py": "ff93ed6f67bf6c86fe688efb636aafbce53025b9fd9eb6542f2fabdb895265ed",
+    "tests/test_dynamic_arrays.py": "6714bd13bd8b0b1bcb3443cfa713e3ddaa0045e5f4be3b9854f94c282d719cc2",
+    "tests/test_expression_edges.py": "2971d2147c3172619923a2bb587fff2b7f5ca7f6f10c7a6a84d157dd96a50526",
+    "tests/test_indexed.py": "e8e9d248f90c47197a982ca2410efcae37f070b1c11b41ce0d26145cc8e92589",
+    "tests/test_indexed_bits.py": "5e7c05ab57931ed15012a580adc3034a36ed6c78b3df0ddc59ad9b8a5aca6a6f",
+    "tests/test_modbus.py": "be200a1bdb1dfe4a8f03921af2e69650aa17fde3a78aea02df8e6ea8b6a4ea66",
+    "tests/test_native_edges.py": "1671d2c49540d1dfc9b709e47fa6b0521505b73f92bad755a06f8f047b51f3eb",
+    "tests/test_native_logic.py": "aaa004e025625c9107441f17c5b7578fede443eb24d24e59985c2d22c035d7c7",
+    "tests/test_numeric.py": "039fea429660de59cc435808fb34e835e4fd9739ed2b3bb9ab3451adec1ca63a",
+    "tests/test_numeric_stress.py": "6e1b286d9a1988591b37a7aa19f1327aaca2b1aaa5f28cb00905210d98e75f33",
+    "tests/test_public_regressions.py": "2dbedd883358b74d7c082ae750a107e3a57a889758eec1b61501b810b3dca532",
+    "tests/test_review_regressions.py": "458f5c6690fa7c9afc3035a27a9a40eb5167729d25e4faa53bd3c902dcffdd83",
+    "tests/test_timer_modes.py": "d85e8526a32b60859c507fefd596eaeb53c5580d397fc705167f51f159d69fb3",
+    "tests/test_timer_properties.py": "daf92505702d81502023602b3102c4cc34c84a621ba99a90ebb3662daf277012",
+    "tests/test_toolchain.py": "45e4f0f08ec2c0feae7604bf07956fae4d615a5d5bb1a9a79bd9c3a804a14e10"
+  },
+  "preserved_audit_json_sha256": {
+    "legacy-artifacts/boolean_audit/results.json": "e8d52b0d22bd9003f5e19353f939f1120cf70ceb44a3e3004d92fbe9c99539d5",
+    "legacy-artifacts/il_properties/results.json": "f9f5e0c1295dfb8ec8de638829eb1e9dc1f7a6c18c65205026c39bc95afa56a5",
+    "public-artifacts/results.json": "6a28c8806dfd88281c16d55e6fc4ec180fa08f884de443c550f6b5060567981d"
+  },
+  "official_editor": "pending",
+  "physical_plc": "pending",
+  "complete_library": false,
+  "whole_original_projects_imported": 0,
+  "originals_modified": false,
+  "goal_status": "active-incomplete",
+  "counting": "Final stress/public input frames counted once; excludes development reruns, unit frames, comparison stages and extra300 reviewer-only scans."
+}

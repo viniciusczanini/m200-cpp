@@ -19,7 +19,7 @@ from .copy_fusion import fuse as fuse_copies
 
 REFERENCE = re.compile(r"%M(?:W|D|F)?[0-9]+")
 ASSIGNMENT = re.compile(
-    r"(?:OPER\s+)?\[\s*(%M(?:W|D|F)[0-9]+|%TM[0-9]+\.P|%(?:M[0-9]+|Q0\.[0-9]+):[0-9]+)(?:\[%MW[0-9]+\])?\s*:="
+    r"(?:OPER\s+)?\[\s*(%M(?:W|D|F)[0-9]+|%(?:TM|C)[0-9]+\.P|%(?:M[0-9]+|Q0\.[0-9]+):[0-9]+)(?:\[%MW[0-9]+\])?\s*:="
 )
 UNARY = re.compile(r"(?:OPER\s+)?\[\s*(?:INC|DEC)\s+(%M(?:W|D)[0-9]+)\s*\]")
 
@@ -75,6 +75,8 @@ def effects(rung, registers, constants, aliases=None):
             *JUMPS,
             "BLK",
             "IN",
+            "CU",
+            "CD",
             "OUT_BLK",
             "END_BLK",
             "EXECUTE",

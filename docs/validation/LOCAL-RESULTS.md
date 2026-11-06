@@ -476,3 +476,70 @@ perfil exato e PLC pendentes. Biblioteca incompleta e objetivo integral ativo;
 contadores, demais flags/objetos/periféricos, tarefas e outras lacunas da tabela
 continuam trabalho aberto. Tudo local, sem CI, publicação ou transmissão/atuação
 no PLC.
+
+
+## Continuação do objetivo: contadores comuns nativos %C
+
+Após `0440b9f`, a API `Counter{id,preset}` oferece R/S/CU/CD por métodos,
+update serializado R/S/CU/CD, P/V/E/D/F e escrita de P. Identidade/configuração
+seguem no IR/JSON, VM/SDK, C++ reconstruído e Counter nativo no projeto.
+Chamadas podem ser condicionais, repetidas e intercaladas com leituras no mesmo
+scan. Estado do contador não é emulado com M/MW. O normalizador preserva a
+ordem e usa rungs separados para ações e ligações de saída complexas.
+
+**A semântica física de %C ainda não está fechada.** O modelo local segue a
+tabela G122 para E no retorno down0->9999, em conflito com G120/G123 que o
+situam na chegada a0. Consumo de bordas sob R/S, níveis retidos, repetição,
+interação de direções, flags e ciclo de vida também continuam políticas locais
+explicitadas em `../capabilities/COUNTERS.md`. O oracle testa essa hipótese;
+concordância entre implementações não resolve a contradição do manual.
+
+Configuração Counter e entradas independentes possuem layout nativo; o gráfico
+completo de entradas do original C foi verificado diretamente. Os gráficos raw
+B/M com fan-out/prefixos compartilhados ainda não são importáveis e continuam
+trabalho aberto da meta integral. Os seus rungs IL completos são usados e
+normalizados/exportados; isso não é alegado como importação desses gráficos.
+S tem posição derivada do desenho oficial, com aceitação externa pendente.
+As flags podem ser ligadas por contatos em rungs separados.
+
+A conferência dos bytes corrigiu uma anotação de pesquisa: C/L têm
+CountersMemoryAllocation/ForcedCount1, enquanto B/M têm o container vazio.
+Não foram inventados enums Automatic/Manual para essa coleção. Os cinco
+arquivos originais foram novamente conferidos por tamanho/SHA256/Git blob,
+sem mudar CPU ou bytes. Fixtures locais guardam as configurações e o rung C
+extraídos, para os testes unitários não dependerem da rede.
+
+Rodada final: **348 testes em123,615 s**, exemplos, públicos, lint, formatação,
+capabilities e diff passaram. Os doze scripts da receita stress foram rodados
+como comandos locais independentes, com quatro workers e logs/statuses
+separados. O novo stress tem **45 casos/23.040 scans**: oito IDs, cinco presets,
+prioridades, limites/rollover, flags, condições/loops e todos os255 contadores
+juntos, cada valor contribuindo para o resultado observado. Também verifica
+C++ reconstruído do XML efetivamente exportado, recompilado e exportado de novo.
+
+São usados os rungs inteiros B2, C0 e M12, cada um com harness explícito e
+configuração de contadores derivada do original. De L são usados o rung18
+inteiro e o trecho contíguo[5:7] de rung15, atribuição a P e S; as partes ELSE,
+numéricas e Timer desse rung15 estão explicitamente excluídas. Esse caso combina
+preset em execução, CD e ANDF M0 com amostragem entre scans. Não se importou
+nenhum projeto estrangeiro inteiro nem se validou o seu gráfico raw completo.
+
+A revisão independente encontrou texto desconhecido em Counters aceito/apagado;
+o teste reproduziu a falha antes da correção e passou depois, conservando o
+arquivo de destino. Outro teste protege campos desconhecidos no template antes
+de substituí-lo. O revisor não relatou outra divergência reproduzível; seus
+300 scans extras ficam fora do total. Ver `COUNTER-REVIEW.md`.
+
+Total final: **173.908 scans de stress +18.176 públicos =192.084**, sem somar
+reruns, frames unitários, etapas de comparação ou extras do revisor. A matriz
+digital de768 ligações/12.800 scans e os testes de Modbus e demais recursos
+passaram novamente. Isso cobre a imagem lógica e os modelos locais, sem prova
+de eletrônica ou execução em PLC.
+
+Resultados e hashes: `COUNTER-LOCAL-RESULTS.json`, `COUNTER-STRESS-RESULTS.json`
+e os doze relatórios atuais de stress/públicos referenciados pelo primeiro.
+Os relatórios locais das etapas anteriores são históricos. Editor, perfil
+exato e PLC físico pendentes; biblioteca incompleta e objetivo integral ativo.
+FC/HSC, pulsos/movimento, flags e objetos restantes, tarefas, expansões e demais
+lacunas continuam trabalho aberto. Tudo local, sem CI, publicação ou atuação
+em PLC.

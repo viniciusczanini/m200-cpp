@@ -166,7 +166,13 @@ M linhas4136-4144 mostra outra variante real:
 
 Não há `Type`, `CounterType`, `Mode`, `Single`, enum de direção, valor corrente ou flags nesses registros. Isso prova somente as variantes observadas; não demonstra que outros campos sejam universalmente proibidos. A palavra SINGLE da representação visual do manual **não é prova de enum XML**.
 
-As amostras incluem `SoftwareConfiguration/CountersMemoryAllocation` vazio. Não foi obtida amostra positiva para opções não vazias de alocação específicas de Counters. Não criar enums por analogia com timers.
+Correção após conferir novamente os bytes preservados, durante a implementação:
+B/M têm `SoftwareConfiguration/CountersMemoryAllocation` vazio, mas C/L têm
+`<CountersMemoryAllocation><ForcedCount>1</ForcedCount></CountersMemoryAllocation>`.
+A afirmação anterior de ausência de amostra positiva não vazia estava incorreta.
+Os hashes dos arquivos são os mesmos; nenhum original foi modificado. Isso
+comprova ForcedCount sem Allocation nesses dois arquivos; não comprova tokens
+de enum de alocação. Não criar esses enums por analogia com timers.
 
 ### 6.2 Graph de Counter literal comprovado
 

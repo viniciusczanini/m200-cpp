@@ -1,4 +1,4 @@
-.PHONY: check examples stress digital-io-stress expression-edge-stress public-fetch public-check public-flow-fetch public-flow-check public-indexed-fetch
+.PHONY: check examples stress digital-io-stress expression-edge-stress counter-stress public-fetch public-check public-flow-fetch public-flow-check public-indexed-fetch public-counter-fetch
 check:
 	python3 -m unittest discover -s tests -v
 examples:
@@ -26,6 +26,8 @@ examples:
 	python3 -m m200 check examples/native_edges.cpp --trace examples/trace.json
 	python3 -m m200 compile examples/expression_edges.cpp -o output/expression-edges
 	python3 -m m200 check examples/expression_edges.cpp --trace examples/trace.json
+	python3 -m m200 compile examples/counter.cpp -o output/counter
+	python3 -m m200 check examples/counter.cpp --trace examples/trace.json
 stress:
 	python3 tests/stress/run.py
 	python3 tests/stress/control_flow.py
@@ -38,6 +40,9 @@ stress:
 	python3 tests/stress/digital_io.py
 	python3 tests/stress/native_edges.py
 	python3 tests/stress/expression_edges.py
+	python3 tests/stress/counters.py
+counter-stress:
+	python3 tests/stress/counters.py
 expression-edge-stress:
 	python3 tests/stress/expression_edges.py
 digital-io-stress:
@@ -52,3 +57,5 @@ public-flow-check:
 	python3 tests/public/control_flow.py
 public-indexed-fetch:
 	python3 tests/public/fetch.py --manifest docs/capabilities/INDEXED-SOURCES.json --corpus research/downloads/indexed-sources
+public-counter-fetch:
+	python3 tests/public/fetch.py --manifest docs/capabilities/COUNTER-SOURCES.json --corpus research/downloads/counter-sources

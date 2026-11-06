@@ -6,6 +6,12 @@ from .native_logic import decode, STORES, OPEN
 from .bits import word_bit, is_string, bit_string
 from .edges import OPS as EDGE_OPS, BASE as EDGE_BASE, cpp as edge_cpp
 from .edge_functions import parse as expression_edge
+from .counters import (
+    reference as counter_reference,
+    index as counter_index,
+    GETTERS as COUNTER_GETTERS,
+    METHODS as COUNTER_METHODS,
+)
 from .indexed import (
     is_indexed,
     parse as parse_indexed,
@@ -33,6 +39,9 @@ from .communication import (
 
 
 def read_cpp(arg):
+    counter = counter_reference(arg)
+    if counter:
+        return "counter_%d.%s()" % (counter[0], COUNTER_GETTERS[counter[1]])
     if ":X" in arg:
         word, bit = word_bit(arg)
         return f"plc::read_word_bit({word},{bit})"
@@ -102,6 +111,8 @@ def to_cpp(program):
                 else "",
             )
         )
+    for i, c in sorted(program.counters.items()):
+        lines.append(f"plc::Counter counter_{i}{{{i},{c.preset}}};")
     if has_indexed(program):
         lines.append(
             "plc::WordMemory native_word_image{%d};" % direct_word_limit(program)
@@ -150,6 +161,10 @@ def to_cpp(program):
         saved = []
         groups = []
         for op, arg in decode(rung):
+            if op in ("R", "S", "CU", "CD") and arg.startswith("%C") and "." not in arg:
+                method = {v: k for k, v in COUNTER_METHODS.items()}[op]
+                lines.append(f"  counter_{counter_index(arg)}.{method}(accumulator);")
+                continue
             function = expression_edge(op)
             if function is not None:
                 kind, i = function
@@ -158,6 +173,18 @@ def to_cpp(program):
             if op == "NUM":
                 line = arg
                 target, name, values = instruction_operation(line)
+                counter = counter_reference(target, True)
+                if counter:
+                    args = [str(v) if isinstance(v, int) else cpp(v) for v in values]
+                    expression = (
+                        args[0]
+                        if name == "copy"
+                        else "plc::" + name + "(" + ",".join(args) + ")"
+                    )
+                    lines.append(
+                        f"  if (accumulator) {{ counter_{counter[0]}.set_preset({expression}); }}"
+                    )
+                    continue
                 if is_string(target):
                     bank, start, count = bit_string(target, True)
                     prefix = "m" if bank == "M" else "output"

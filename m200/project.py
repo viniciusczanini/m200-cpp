@@ -28,6 +28,12 @@ from .numeric import (
 )
 from .communication import parse_block
 from .communication_xml import read_blocks, write_blocks, check_template_channels
+from .counter_xml import (
+    read_configs as read_counters,
+    write_configs as write_counters,
+    graphics as counter_graphics,
+    check_graph as check_counter_graph,
+)
 
 TARGET = "TM200CE40T"
 BASES = {1: "OneMilliSeconds", 100: "OneHundredMilliSeconds", 1000: "OneSecond"}
@@ -222,6 +228,9 @@ def graphics(rung, timer_column=3, communication_contact_column=0):
 
 def check_graph(rung_node, lines):
     _, lines = split_label(lines)
+    if lines[0].startswith("BLK %C"):
+        check_counter_graph(rung_node, lines)
+        return
     graph = rung_node.find("LadderElements")
     if graph is None or not len(graph):
         if rung_node.findtext("IsLadderSelected", "false").lower() == "true":
@@ -321,6 +330,7 @@ def load_project(path):
     root = parse(path)
     sw = configuration(root)
     p = Program()
+    p.counters = read_counters(sw)
     graph_nodes = []
     p.communications = read_blocks(sw)
     check_template_channels(root, p.communications)
@@ -505,6 +515,7 @@ def write_project(program, template, destination):
     sw = configuration(root)
     check_template_channels(root, program.communications)
     write_blocks(program, sw)
+    write_counters(program, sw)
     for name in (
         "Pous",
         "Timers",
@@ -527,7 +538,16 @@ def write_project(program, template, destination):
     for i, lines in enumerate(program.rungs):
         r = element(rungs, "RungEntity")
         graph = element(r, "LadderElements")
-        for typ, arg, column in graphics(lines):
+        _, body = split_label(lines)
+        items = (
+            counter_graphics(body)
+            if body[0].startswith("BLK %C")
+            else [
+                (t, a, 0, c, "Left" if t in LEFT_ONLY else "Left, Right")
+                for t, a, c in graphics(lines)
+            ]
+        )
+        for typ, arg, row, column, connection in items:
             e = element(graph, "LadderEntity")
             element(e, "ElementType", typ)
             if arg:
@@ -539,12 +559,12 @@ def write_project(program, template, destination):
                 if field == "Descriptor":
                     element(e, "Comment", "")
                     element(e, "Symbol", "")
-            element(e, "Row", 0)
+            element(e, "Row", row)
             element(e, "Column", column)
             element(
                 e,
                 "ChosenConnection",
-                "Left" if typ in LEFT_ONLY else "Left, Right",
+                connection,
             )
         il = element(r, "InstructionLines")
         for line in lines:
@@ -636,6 +656,7 @@ def write_project(program, template, destination):
             loaded.rungs != program.rungs
             or loaded.communications != program.communications
             or loaded.timers != program.timers
+            or loaded.counters != program.counters
         ):
             fail("internal XML round trip changed program/configuration")
         os.replace(candidate, destination)

@@ -7,6 +7,7 @@ from .numeric import is_operation
 from .flow import JUMPS
 from .edges import OPS as EDGE_OPS, LOADS
 from .edge_functions import parse as expression_edge
+from .counters import body as counter_body, ACTIONS as COUNTER_ACTIONS
 
 STORES = ("ST", "STN", "S", "R")
 LOGIC = ("LD", "LDN", "AND", "ANDN", "OR", "ORN", "XOR", "XORN", *EDGE_OPS)
@@ -56,7 +57,8 @@ def timer_body(rung):
 def decode(rung):
     if any(not line.strip() for line in rung):
         fail("empty native instruction")
-    body = timer_body(rung)
+    body = counter_body(rung)
+    body = timer_body(rung) if body is None else body
     rung = body if body is not None else rung
     result = []
     stack = 0
@@ -99,7 +101,7 @@ def decode(rung):
             parentheses += 1
             if parentheses > 32:
                 fail("parenthesis depth exceeds 32")
-        elif op in (*STORES, *JUMPS, "IN", "NUM"):
+        elif op in (*STORES, *JUMPS, "IN", "NUM", *COUNTER_ACTIONS):
             if parentheses:
                 fail("action instruction inside parentheses")
             if op in JUMPS and (stack or i != len(rung) - 1):
@@ -112,11 +114,17 @@ def decode(rung):
                 fail("IN accumulator effects before subsequent actions are unverified")
         elif op not in LOGIC:
             fail("unsupported IL instruction/order: " + line)
-        if op in (*LOGIC, *STORES, *JUMPS, "IN") and not arg:
+        if op in (*LOGIC, *STORES, *JUMPS, "IN", *COUNTER_ACTIONS) and not arg:
             fail("missing operand for " + op)
         result.append((op, arg))
     if stack or parentheses:
         fail("unbalanced boolean stack/parentheses")
-    if not result or result[-1][0] not in (*STORES, *JUMPS, "IN", "NUM"):
+    if not result or result[-1][0] not in (
+        *STORES,
+        *JUMPS,
+        "IN",
+        "NUM",
+        *COUNTER_ACTIONS,
+    ):
         fail("rung has no terminal action")
     return result

@@ -123,6 +123,40 @@ public:
     }
 };
 struct RisingEdge { bool old=false; bool update(bool v){bool q=v&&!old;old=v;return q;} };
+namespace detail {inline bool counter_used[255]={};}
+class Counter {
+    int configured,current=0;
+    bool r=false,s=false,up=false,down=false,e=false,d=false,f=false;
+    void apply(int pin,bool enabled){
+        bool edge=false;
+        if(pin==0)r=enabled;
+        else if(pin==1)s=enabled;
+        else if(pin==2){edge=enabled&&!up;up=enabled;}
+        else {edge=enabled&&!down;down=enabled;}
+        if(r){current=0;e=d=f=false;}
+        else if(s){current=configured;d=true;}
+        else if(pin>=2&&enabled){
+            if(edge&&pin==2){current=(current+1)%10000;f=current==0;}
+            else if(edge){current=(current+9999)%10000;e=current==9999;}
+            d=current==configured;
+        }
+    }
+public:
+    // Local policy: see COUNTERS.md; flags/interactions await hardware proof.
+    Counter(int index,int preset):configured(preset){
+        if(index<0||index>=255||detail::counter_used[index]||preset<0||preset>9999)__builtin_trap();
+        detail::counter_used[index]=true;
+    }
+    i16 preset()const{return (i16)configured;}
+    i16 value()const{return (i16)current;}
+    bool empty()const{return e;} bool done()const{return d;} bool full()const{return f;}
+    void set_preset(i16 value){if(value<0||value>9999)__builtin_trap();configured=value;}
+    void reset(bool value){apply(0,value);} void set(bool value){apply(1,value);}
+    void count_up(bool value){apply(2,value);} void count_down(bool value){apply(3,value);}
+    bool update(bool reset_value,bool set_value,bool up_value,bool down_value){
+        reset(reset_value);set(set_value);count_up(up_value);count_down(down_value);return d;
+    }
+};
 struct FallingEdge { bool old=false; bool update(bool v){bool q=!v&&old;old=v;return q;} };
 #else
 bool input(int);
@@ -143,6 +177,7 @@ bool system(int);
 void clear_index_error();
 bool clock_ms(unsigned);
 struct Ton { explicit Ton(unsigned); Ton(int,int,int); Ton(int,int,int,bool,bool); bool update(bool); i16 preset()const; i16 value(); bool done(); void set_preset(i16); };
+struct Counter { Counter(int,int); i16 preset()const; i16 value()const; bool empty()const; bool done()const; bool full()const; void set_preset(i16); void reset(bool); void set(bool); void count_up(bool); void count_down(bool); bool update(bool,bool,bool,bool); };
 struct Tof { explicit Tof(unsigned); Tof(int,int,int); Tof(int,int,int,bool,bool); bool update(bool); i16 preset()const; i16 value(); bool done(); void set_preset(i16); };
 struct Pulse { explicit Pulse(unsigned); Pulse(int,int,int); Pulse(int,int,int,bool,bool); bool update(bool); i16 preset()const; i16 value(); bool done(); void set_preset(i16); };
 struct Clock { explicit Clock(unsigned); bool update(bool); };

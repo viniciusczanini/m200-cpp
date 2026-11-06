@@ -14,6 +14,15 @@ from .native_logic import decode, STORES, OPEN, timer_index
 from .bits import is_string, references as bit_references, signed_pattern
 from .edges import OPS as EDGE_OPS, BASE as EDGE_BASE, LOADS, operand as edge_operand
 from .edge_functions import parse as expression_edge
+from .counters import (
+    Counter,
+    CounterState,
+    reference as counter_reference,
+    index as counter_index,
+    ACTIONS as COUNTER_ACTIONS,
+    REFERENCE as COUNTER_REFERENCE,
+    preset_value as counter_preset,
+)
 from .indexed import (
     ANY_INDEXED,
     is_indexed,
@@ -99,6 +108,12 @@ def validate(program):
     if sum(map(len, program.rungs)) > 10000:
         fail("instruction budget exceeded")
     timer_uses = set()
+    if not isinstance(program.counters, dict):
+        fail("invalid counter configuration map")
+    for i, c in program.counters.items():
+        if type(i) is not int or not 0 <= i < 255 or not isinstance(c, Counter):
+            fail("invalid counter configuration")
+        counter_preset(c.preset)
     if not isinstance(program.communications, dict):
         fail("invalid communication configuration map")
     communication_uses = set()
@@ -161,6 +176,12 @@ def validate(program):
             if op == "NUM":
                 target, name, values = instruction_operation(arg)
                 if (
+                    counter_reference(target, True)
+                    and name == "copy"
+                    and not values[0].code.startswith("%")
+                ):
+                    counter_preset(int(values[0].code))
+                if (
                     timer_reference(target, True)
                     and name == "copy"
                     and not values[0].code.startswith("%")
@@ -171,6 +192,12 @@ def validate(program):
                 continue
             if op in EDGE_OPS:
                 edge_operand(arg)
+                continue
+            if op in ("CU", "CD") or (
+                op in ("R", "S") and arg.startswith("%C") and "." not in arg
+            ):
+                if counter_index(arg) not in program.counters:
+                    fail("undefined counter action: " + arg)
                 continue
             if op == "IN":
                 index = timer_index(arg)
@@ -191,6 +218,14 @@ def validate(program):
                 bit_operand(arg, op in STORES and arg != "%S20")
     if set(jumps) - labels.keys():
         fail("jump references an undefined label")
+    counter_uses = {
+        int(m[1])
+        for rung in program.rungs
+        for line in rung
+        for m in COUNTER_REFERENCE.finditer(line)
+    }
+    if counter_uses - program.counters.keys():
+        fail("undefined counter property")
     property_uses = {
         int(m[1])
         for rung in program.rungs
@@ -272,8 +307,12 @@ class Machine:
             if expression_edge(op) is not None
         }
         self.timers = {i: TimerState(t) for i, t in program.timers.items()}
+        self.counters = {i: CounterState(c) for i, c in program.counters.items()}
 
     def read(self, operand, inputs):
+        counter = counter_reference(operand)
+        if counter:
+            return self.counters[counter[0]].read(counter[1])
         timer = timer_reference(operand)
         if timer:
             return self.timers[timer[0]].read(timer[1], self.now)
@@ -324,6 +363,9 @@ class Machine:
         (self.memory if kind == "M" else self.outputs)[index] = bool(value)
 
     def read_number(self, value):
+        counter = counter_reference(value.code)
+        if counter:
+            return self.counters[counter[0]].read(counter[1])
         if is_string(value.code):
             raw = sum(
                 int(self.read(ref, self.current_inputs)) << i
@@ -347,6 +389,10 @@ class Machine:
         )
 
     def write_number(self, target, value):
+        counter = counter_reference(target, True)
+        if counter:
+            self.counters[counter[0]].set_preset(value)
+            return
         if is_string(target):
             for i, ref in enumerate(bit_references(target)):
                 self.write(ref, bool(value & (1 << i)))
@@ -440,6 +486,9 @@ class Machine:
                     continue
                 if op == "IN":
                     self.timer(timer_index(arg), acc)
+                    continue
+                if op in COUNTER_ACTIONS and arg.startswith("%C") and "." not in arg:
+                    self.counters[counter_index(arg)].action(op, acc)
                     continue
                 if op == "N":
                     acc = not acc

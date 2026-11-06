@@ -127,6 +127,16 @@ class Lowerer:
             self.label(end)
         return out
 
+    def counter_action(self, index, pin, signal, guard=None):
+        end = None
+        if guard is not None:
+            end = self.new_label()
+            self.jump(end, guard, negate=True)
+        snapshot = self.copy(boolean(signal), "counter_input")
+        self.rung("LD " + snapshot, pin + " %C" + str(index))
+        if end is not None:
+            self.label(end)
+
     def binary(self, operator, a, b):
         boolean(a)
         boolean(b)

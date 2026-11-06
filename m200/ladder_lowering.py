@@ -13,12 +13,17 @@ from .model import fail
 from .bits import memory_bits_used
 from .edges import OPS as EDGE_OPS, BASE as EDGE_BASE, SERIES, LOADS
 from .edge_functions import parse as expression_edge
+from .counter_xml import simple as simple_counter
 
 
 def needed(program):
     for raw in program.rungs:
         _, rung = split_label(raw)
         if rung[0].startswith("BLK "):
+            if rung[0].startswith("BLK %C"):
+                if simple_counter(rung):
+                    continue
+                return True
             if rung[0].split(maxsplit=1)[1] in program.communications:
                 continue
             input_parts = rung[1].split(maxsplit=1) if len(rung) > 1 else []
@@ -40,6 +45,11 @@ def needed(program):
                 continue
             return True
         instructions = decode(rung)
+        if any(
+            op in ("R", "S", "CU", "CD") and arg.startswith("%C") and "." not in arg
+            for op, arg in instructions
+        ):
+            return True
         if any(
             op in ("LDN", "ANDN") and arg.startswith("[") for op, arg in instructions
         ):
@@ -83,6 +93,7 @@ def normalize(program):
         return result
 
     lower.program.timers = copy.deepcopy(program.timers)
+    lower.program.counters = copy.deepcopy(program.counters)
     lower.program.communications = copy.deepcopy(program.communications)
     lower.program.metadata = copy.deepcopy(program.metadata)
     acc = lower.bit("native_accumulator")
@@ -196,6 +207,12 @@ def normalize(program):
                 elif op == "IN":
                     i = timer_index(arg)
                     lower.timer(i, program.timers[i], acc)
+                elif (
+                    op in ("R", "S", "CU", "CD")
+                    and arg.startswith("%C")
+                    and "." not in arg
+                ):
+                    lower.rung("BLK " + arg, "LD " + acc, op, "END_BLK")
                 elif op in STORES:
                     value = lower.neg(acc) if op == "STN" else acc
                     lower.rung("LD " + value, ("ST" if op == "STN" else op) + " " + arg)

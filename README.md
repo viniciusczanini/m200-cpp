@@ -129,6 +129,17 @@ do projeto efetivamente gerado. O modelo de histórico/partida ainda aguarda
 comprovação externa. Exemplo `examples/expression_edges.cpp`; contrato
 `docs/capabilities/EXPRESSION-EDGES.md` e custos em `docs/capabilities/COPY-FUSION.md`.
 
+Contadores comuns usam `plc::Counter{id,preset}`, com R/S/CU/CD por
+`reset/set/count_up/count_down(bool)` e getters `preset/value/done/empty/full`.
+`update(r,s,cu,cd)` executa as quatro ações nessa ordem e retorna D;
+`set_preset(i16)` escreve P. Instâncias podem aparecer em vários pontos e laços.
+O projeto usa Counter nativo, com configuração e identidade preservadas, sem
+simular o contador com M/MW. Flags, interação entre entradas e histórico são
+um modelo local provisório, incluindo um conflito no manual sobre E.
+Gráficos com branches/saídas do Counter original ainda requerem trabalho na
+importação; o exportador normaliza a lógica em rungs separados.
+Contrato `docs/capabilities/COUNTERS.md`; exemplo `examples/counter.cpp`.
+
 ## Números e inventário completo de pesquisa
 
 ```cpp

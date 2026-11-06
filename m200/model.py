@@ -30,6 +30,7 @@ class Program:
     symbols: dict = field(default_factory=dict)
     metadata: dict = field(default_factory=dict)
     communications: dict = field(default_factory=dict)
+    counters: dict = field(default_factory=dict)
 
     def as_dict(self):
         return {
@@ -40,6 +41,7 @@ class Program:
             "symbols": self.symbols,
             "metadata": self.metadata,
             "communications": {k: v.to_dict() for k, v in self.communications.items()},
+            "counters": {str(k): asdict(v) for k, v in self.counters.items()},
         }
 
     @classmethod
@@ -54,6 +56,7 @@ class Program:
             "symbols",
             "metadata",
             "communications",
+            "counters",
         }:
             fail("unknown program JSON fields")
         if data.get("format") != "m200-cpp-il-v1" or data.get("target") != "TM200CE40T":
@@ -80,16 +83,38 @@ class Program:
         comms = data.get("communications", {})
         if not isinstance(comms, dict):
             fail("invalid communication configuration map")
+        from .counters import Counter
+
+        raw_counters = data.get("counters", {})
+        if not isinstance(raw_counters, dict) or any(
+            not isinstance(k, str)
+            or not re.fullmatch(r"0|[1-9][0-9]*", k)
+            or int(k) >= 255
+            for k in raw_counters
+        ):
+            fail("invalid counter configuration map")
+        try:
+            counters = {int(k): Counter(**v) for k, v in raw_counters.items()}
+        except (TypeError, ValueError):
+            fail("invalid counter JSON")
         return cls(
             data["rungs"],
             timers,
             data.get("symbols", {}),
             data.get("metadata", {}),
             {k: ModbusConfig.from_dict(v) for k, v in comms.items()},
+            counters,
         )
 
 
 def address(text, writable=False):
+    if text.startswith("%C"):
+        from .counters import reference
+
+        index, field = reference(text, writable)
+        if field not in ("E", "D", "F"):
+            fail("numeric counter property is not a bit: " + text)
+        return "C." + field, index
     if ":X" in text:
         from .bits import word_bit
 

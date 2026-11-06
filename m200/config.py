@@ -3,6 +3,7 @@
 import re
 from collections import Counter
 from .model import fail
+from .counter_xml import read_configs as read_counters
 from .numeric import word_address
 from .communication_xml import (
     allowed_attribute,
@@ -19,6 +20,7 @@ EMPTY = set(
 )
 EMPTY -= {"MemoryWords", "MemoryDoubleWords", "MemoryFloats"}
 EMPTY.discard("FunctionBlocks")
+EMPTY.discard("Counters")
 UI_ONLY = {
     "DisplayUserLabelsConfiguration",
     "GlobalProperties",
@@ -44,6 +46,7 @@ REPEATED = {
     "InstructionLines": {"InstructionLineEntity"},
     "LadderElements": {"LadderEntity"},
     "Timers": {"TimerTM"},
+    "Counters": {"Counter"},
     "MemoryBits": {"MemoryBit"},
     "MemoryWords": {"MemoryWord"},
     "MemoryDoubleWords": {"MemoryDoubleWord"},
@@ -413,6 +416,7 @@ def configuration(root):
     if sw is None:
         fail("missing SoftwareConfiguration")
     fields(sw, SOFTWARE)
+    read_counters(sw)
     for part in sw:
         if part.tag == "FunctionBlocks":
             read_blocks(sw)
