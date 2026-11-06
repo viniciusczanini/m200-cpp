@@ -1,0 +1,717 @@
+{
+  "format": "m200-timer-options-official-observations-v1",
+  "date": "2026-11-06",
+  "target": "TM200CE40T",
+  "observation_checkpoint_commit": "6bf242c15c784203a14506b897bfdd66f3054530",
+  "scope": "Bounded official local-simulator observations of three separate timer configurations and an otherwise-identical ordinary-false control; not a blanket runtime/profile/timing or supported-export certification.",
+  "artifacts": {
+    "hand_built_true_candidate": {
+      "path": "plc-mac-lab/diagnostics/timer-options-behavior/timer_options_behavior.smbp",
+      "bytes": 452549,
+      "sha256": "72590cd249739a1bdc4f7387f8508f918d0a7c6b85ad0e15240fdcb9bb5b23ec"
+    },
+    "official_editor_saved": {
+      "path": "output/editor-validation/timer-options-official/timer_options_behavior_editor_saved.smbp",
+      "bytes": 471237,
+      "sha256": "5358e5334696e1838e8b34b9efaa84fafb2a7bd97802d2d2ee32ae94a7f52214"
+    },
+    "ordinary_false_watch_clone": {
+      "path": "output/editor-validation/timer-options-official/timer_options_false_watch_control.smbp",
+      "bytes": 471240,
+      "sha256": "ff8d737a4bb38725de268ef22908bea685ac0b3dc5b20412d69a7688bf2a7aa6"
+    },
+    "source_observations": {
+      "path": "output/editor-validation/timer-options-official/observed.json",
+      "bytes": 10620,
+      "sha256": "7f411b1b8e5b1385719c28af1125ef1d728c421ff30f9115185e62a7e296fc84"
+    }
+  },
+  "preparation": {
+    "guide": {
+      "path": "plc-mac-lab/diagnostics/timer-options-behavior/GUIDE.md",
+      "bytes": 7961,
+      "sha256": "7fa50a56c9e8fe26c38664e58a502bca29fde5ba5fb54b85564d4aa7779fac8e"
+    },
+    "manifest": {
+      "path": "plc-mac-lab/diagnostics/timer-options-behavior/manifest.json",
+      "bytes": 12193,
+      "sha256": "577d235c7c576a6dd38eca438be7e8e77102c9afa06bf67217c49314e3c984c3"
+    },
+    "independent_oracle": {
+      "path": "plc-mac-lab/diagnostics/timer-options-behavior/independent-oracles.json",
+      "bytes": 24852,
+      "sha256": "2521e484ab8ec1c3df7d9350c2e4f53e96f41c8b018a354abf7660e91d6fa276"
+    },
+    "origin": "Candidate made by changing only3optionfields in an ordinary false-option export; true-option product gate not bypassed in the compiler.",
+    "historical_preparation_note": "The preparation GUIDE/manifest predate the official GUI run; their old no-runtime wording is historical. Their26local checkpoints are model evidence, not the12GUI word samples."
+  },
+  "configuration": {
+    "management_level": "FunctLevelMan21_0",
+    "base": "OneSecond",
+    "base_ms": 1000,
+    "initial_preset": 20,
+    "separate_instances": [
+      {
+        "address": "%TM0",
+        "index": 0,
+        "kind": "TON",
+        "preset": 20,
+        "base": "OneSecond",
+        "retentive": true,
+        "dynamic_preset": false
+      },
+      {
+        "address": "%TM1",
+        "index": 1,
+        "kind": "TOF",
+        "preset": 20,
+        "base": "OneSecond",
+        "retentive": true,
+        "dynamic_preset": false
+      },
+      {
+        "address": "%TM2",
+        "index": 2,
+        "kind": "TON",
+        "preset": 20,
+        "base": "OneSecond",
+        "retentive": false,
+        "dynamic_preset": true
+      }
+    ],
+    "inputs": {
+      "I0.0": "retentive TON enable",
+      "I0.1": "retentive TOF enable",
+      "I0.2": "dynamic TON enable",
+      "I0.3": "write TM2.P=5",
+      "I0.4": "write TM2.P=20, priority over I0.3"
+    },
+    "words": {
+      "MW200": "TM0.V",
+      "MW201": "TM0.P",
+      "MW202": "TM1.V",
+      "MW203": "TM1.P",
+      "MW204": "TM2.V",
+      "MW205": "TM2.P"
+    },
+    "outputs": {
+      "Q0.0": "TM0.Q",
+      "Q0.1": "TM1.Q",
+      "Q0.2": "TM2.Q",
+      "Q0.13": "TM0.V>0",
+      "Q0.14": "TM1.V>0"
+    },
+    "no_combined_true_modes": "No instance has both IsRetentive and IsDynamicPreset true."
+  },
+  "official_runtime": {
+    "operator": "root agent, direct GUI observation",
+    "state": "No error / Online / identical / RUN",
+    "input_method": "Official simulator input buttons; six GUI-added animation words. No Force, external TCP client or physical controller.",
+    "environment": "Authorized Wine/.NET lab; existing Untrusted DLL detected banner remains visible.",
+    "snapshots": {
+      "true_option_words": [
+        {
+          "phase": "initial",
+          "MW200_to_MW205": [
+            0,
+            20,
+            0,
+            20,
+            0,
+            20
+          ],
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/initial.png",
+            "bytes": 411274,
+            "sha256": "5158238c847c60f96e18e16c757f9b783b39bc1147f48c1a4ec5c3018b6c84d5",
+            "original_capture_path": "output/editor-validation/timer-options-official/initial.png"
+          }
+        },
+        {
+          "phase": "ton-paused",
+          "MW200_to_MW205": [
+            18,
+            20,
+            0,
+            20,
+            0,
+            20
+          ],
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/ton-paused.png",
+            "bytes": 411015,
+            "sha256": "d2bd7266ca483f23ddf982736b53122a2eb1a69bbb2f3633f58c862a00fd018e",
+            "original_capture_path": "output/editor-validation/timer-options-official/ton-paused.png"
+          }
+        },
+        {
+          "phase": "ton-held",
+          "MW200_to_MW205": [
+            18,
+            20,
+            0,
+            20,
+            0,
+            20
+          ],
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/ton-held.png",
+            "bytes": 411015,
+            "sha256": "d2bd7266ca483f23ddf982736b53122a2eb1a69bbb2f3633f58c862a00fd018e",
+            "original_capture_path": "output/editor-validation/timer-options-official/ton-held.png"
+          }
+        },
+        {
+          "phase": "ton-complete-tof-enabled",
+          "MW200_to_MW205": [
+            20,
+            20,
+            0,
+            20,
+            0,
+            20
+          ],
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/ton-complete-tof-enabled.png",
+            "bytes": 410456,
+            "sha256": "82f1e6548b0480db1047e89747339a23560a6e7d5c2286cb2bbf33e9cb1ec5c5",
+            "original_capture_path": "output/editor-validation/timer-options-official/ton-complete-tof-enabled.png"
+          }
+        },
+        {
+          "phase": "tof-paused",
+          "MW200_to_MW205": [
+            0,
+            20,
+            4,
+            20,
+            0,
+            20
+          ],
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/tof-paused.png",
+            "bytes": 410663,
+            "sha256": "eb4acc33fa274f03ed31f19c7e3601018a3743f0f0817ca5a7ebe44cc5db3f83",
+            "original_capture_path": "output/editor-validation/timer-options-official/tof-paused.png"
+          },
+          "sha256": "eb4acc33fa274f03ed31f19c7e3601018a3743f0f0817ca5a7ebe44cc5db3f83"
+        },
+        {
+          "phase": "tof-held",
+          "MW200_to_MW205": [
+            0,
+            20,
+            4,
+            20,
+            0,
+            20
+          ],
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/tof-held.png",
+            "bytes": 410663,
+            "sha256": "eb4acc33fa274f03ed31f19c7e3601018a3743f0f0817ca5a7ebe44cc5db3f83",
+            "original_capture_path": "output/editor-validation/timer-options-official/tof-held.png"
+          },
+          "sha256": "eb4acc33fa274f03ed31f19c7e3601018a3743f0f0817ca5a7ebe44cc5db3f83"
+        },
+        {
+          "phase": "tof-resumed",
+          "MW200_to_MW205": [
+            0,
+            20,
+            18,
+            20,
+            0,
+            20
+          ],
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/tof-resumed.png",
+            "bytes": 411046,
+            "sha256": "0ddac6feee483ef47c93790e7bdab7291792a68c640f484e1746bc695e6f79bc",
+            "original_capture_path": "output/editor-validation/timer-options-official/tof-resumed.png"
+          },
+          "sha256": "0ddac6feee483ef47c93790e7bdab7291792a68c640f484e1746bc695e6f79bc"
+        },
+        {
+          "phase": "tof-completed",
+          "MW200_to_MW205": [
+            0,
+            20,
+            20,
+            20,
+            0,
+            20
+          ],
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/tof-completed.png",
+            "bytes": 411041,
+            "sha256": "36587399c7cceab9d7cdf1e5580ea723b7e8e08730508f82b4862362e7c91f36",
+            "original_capture_path": "output/editor-validation/timer-options-official/tof-completed.png"
+          },
+          "sha256": "36587399c7cceab9d7cdf1e5580ea723b7e8e08730508f82b4862362e7c91f36"
+        },
+        {
+          "phase": "dynamic-active-before-change",
+          "MW200_to_MW205": [
+            0,
+            20,
+            20,
+            20,
+            2,
+            20
+          ],
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/dynamic-active-before-change.png",
+            "bytes": 410917,
+            "sha256": "ee0f9e69ac59cdb36805268c27384bf7421edc168973a19061dc682b94935893",
+            "original_capture_path": "output/editor-validation/timer-options-official/dynamic-active-before-change.png"
+          },
+          "sha256": "ee0f9e69ac59cdb36805268c27384bf7421edc168973a19061dc682b94935893"
+        },
+        {
+          "phase": "dynamic-changed-completed",
+          "MW200_to_MW205": [
+            0,
+            20,
+            20,
+            20,
+            6,
+            5
+          ],
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/dynamic-changed-completed.png",
+            "bytes": 410521,
+            "sha256": "f70f5c7ccbb5214bc98cc63e212d4980b00fbc0e9bb53479c36e13022c869a46",
+            "original_capture_path": "output/editor-validation/timer-options-official/dynamic-changed-completed.png"
+          },
+          "sha256": "f70f5c7ccbb5214bc98cc63e212d4980b00fbc0e9bb53479c36e13022c869a46"
+        },
+        {
+          "phase": "dynamic-clear-preset-restored",
+          "MW200_to_MW205": [
+            0,
+            20,
+            20,
+            20,
+            0,
+            20
+          ],
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/dynamic-clear-preset-restored.png",
+            "bytes": 410834,
+            "sha256": "60dedf63f7b2c5db62982b8d7d648c954de30bc70ca32a1a531c3816c8f0a4c6",
+            "original_capture_path": "output/editor-validation/timer-options-official/dynamic-clear-preset-restored.png"
+          },
+          "sha256": "60dedf63f7b2c5db62982b8d7d648c954de30bc70ca32a1a531c3816c8f0a4c6"
+        },
+        {
+          "phase": "tof-reassert-cleared",
+          "MW200_to_MW205": [
+            0,
+            20,
+            0,
+            20,
+            0,
+            20
+          ],
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/tof-reassert-cleared.png",
+            "bytes": 410683,
+            "sha256": "7fd9b2768754202bd846b8ae6c8b047f5b5914be07366b1ba80555e8ee8ff776",
+            "original_capture_path": "output/editor-validation/timer-options-official/tof-reassert-cleared.png"
+          },
+          "sha256": "7fd9b2768754202bd846b8ae6c8b047f5b5914be07366b1ba80555e8ee8ff776"
+        }
+      ],
+      "true_option_panels": [
+        {
+          "phase": "dynamic-changed-completed-panel",
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/dynamic-changed-completed-panel.png",
+            "bytes": 19632,
+            "sha256": "021b47d22ec88d0af057c99c169941fe9b0bee6bf7ae46e783ea68f0f32f0037",
+            "original_capture_path": "output/editor-validation/timer-options-official/dynamic-changed-completed-panel.png"
+          },
+          "sha256": "021b47d22ec88d0af057c99c169941fe9b0bee6bf7ae46e783ea68f0f32f0037"
+        },
+        {
+          "phase": "tof-completed-panel",
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/tof-completed-panel.png",
+            "bytes": 18768,
+            "sha256": "acba10bbb882d6681f0b866a54e401f357d9d9dc8bdcf45d2683e85c7f6730e6",
+            "original_capture_path": "output/editor-validation/timer-options-official/tof-completed-panel.png"
+          },
+          "sha256": "acba10bbb882d6681f0b866a54e401f357d9d9dc8bdcf45d2683e85c7f6730e6"
+        },
+        {
+          "phase": "tof-reassert-panel",
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/tof-reassert-panel.png",
+            "bytes": 18510,
+            "sha256": "f6d9d2b5eb844a6c6ef449e49e56e0f835361f3ea1d0c9764bbc8190d2591853",
+            "original_capture_path": "output/editor-validation/timer-options-official/tof-reassert-panel.png"
+          },
+          "sha256": "f6d9d2b5eb844a6c6ef449e49e56e0f835361f3ea1d0c9764bbc8190d2591853"
+        }
+      ],
+      "ordinary_words": [
+        {
+          "phase": "false-ton-cleared",
+          "MW200_to_MW205": [
+            0,
+            20,
+            0,
+            20,
+            0,
+            20
+          ],
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/false-ton-cleared.png",
+            "bytes": 410314,
+            "sha256": "b53559ea2bb5cb952de0645f39f7f4b8780b5321f399b681d3a25500b2f663d1",
+            "original_capture_path": "output/editor-validation/timer-options-official/false-ton-cleared.png"
+          },
+          "sha256": "b53559ea2bb5cb952de0645f39f7f4b8780b5321f399b681d3a25500b2f663d1"
+        },
+        {
+          "phase": "false-tof-reassert-cleared",
+          "MW200_to_MW205": [
+            0,
+            20,
+            0,
+            20,
+            0,
+            20
+          ],
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/false-tof-reassert-cleared.png",
+            "bytes": 409874,
+            "sha256": "a5ac558045845f09ba1a880b2b55d9f2e9d9bd2a1e0034e05d8686a611931a8e",
+            "original_capture_path": "output/editor-validation/timer-options-official/false-tof-reassert-cleared.png"
+          },
+          "sha256": "a5ac558045845f09ba1a880b2b55d9f2e9d9bd2a1e0034e05d8686a611931a8e"
+        },
+        {
+          "phase": "false-dynamic-p5-still-counting",
+          "MW200_to_MW205": [
+            0,
+            20,
+            0,
+            20,
+            6,
+            5
+          ],
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/false-dynamic-p5-still-counting.png",
+            "bytes": 409402,
+            "sha256": "a3d47045851d185bc4b4f294997782fa6f556be57f15ffda0db5de551a17d35d",
+            "original_capture_path": "output/editor-validation/timer-options-official/false-dynamic-p5-still-counting.png"
+          },
+          "sha256": "a3d47045851d185bc4b4f294997782fa6f556be57f15ffda0db5de551a17d35d"
+        },
+        {
+          "phase": "false-dynamic-p5-later-still-counting",
+          "MW200_to_MW205": [
+            0,
+            20,
+            0,
+            20,
+            18,
+            5
+          ],
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/false-dynamic-p5-later-still-counting.png",
+            "bytes": 409503,
+            "sha256": "9a74567dfce890ab902c66d7a43b506a635c78fd39d9c400b82ac2ba51e34903",
+            "original_capture_path": "output/editor-validation/timer-options-official/false-dynamic-p5-later-still-counting.png"
+          },
+          "sha256": "9a74567dfce890ab902c66d7a43b506a635c78fd39d9c400b82ac2ba51e34903"
+        },
+        {
+          "phase": "false-dynamic-p5-completed-original-p20",
+          "MW200_to_MW205": [
+            0,
+            20,
+            0,
+            20,
+            20,
+            5
+          ],
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/false-dynamic-p5-completed-original-p20.png",
+            "bytes": 409481,
+            "sha256": "3bfe6452b8b91ce2b56e602c7fd096864073bfeea8d4e50d17dd15a3c8fa62a3",
+            "original_capture_path": "output/editor-validation/timer-options-official/false-dynamic-p5-completed-original-p20.png"
+          },
+          "sha256": "3bfe6452b8b91ce2b56e602c7fd096864073bfeea8d4e50d17dd15a3c8fa62a3"
+        },
+        {
+          "phase": "false-clear-preset-restored",
+          "MW200_to_MW205": [
+            0,
+            20,
+            0,
+            20,
+            0,
+            20
+          ],
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/false-clear-preset-restored.png",
+            "bytes": 409874,
+            "sha256": "a5ac558045845f09ba1a880b2b55d9f2e9d9bd2a1e0034e05d8686a611931a8e",
+            "original_capture_path": "output/editor-validation/timer-options-official/false-clear-preset-restored.png"
+          },
+          "sha256": "a5ac558045845f09ba1a880b2b55d9f2e9d9bd2a1e0034e05d8686a611931a8e"
+        }
+      ],
+      "ordinary_panels": [
+        {
+          "phase": "false-ton-counting",
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/false-ton-counting-panel.png",
+            "bytes": 18938,
+            "sha256": "cdbbfe7c5bd74d4ebf7c7a11b40aff62527d62a1ab754acaefd8631a680ae9cd",
+            "original_capture_path": "output/editor-validation/timer-options-official/false-ton-counting-panel.png"
+          },
+          "sha256": "cdbbfe7c5bd74d4ebf7c7a11b40aff62527d62a1ab754acaefd8631a680ae9cd"
+        },
+        {
+          "phase": "false-ton-cleared",
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/false-ton-cleared-panel.png",
+            "bytes": 18376,
+            "sha256": "91946eb1aec064808e8537d412da0aeac9d80f16df53a03eed77a303c60e63be",
+            "original_capture_path": "output/editor-validation/timer-options-official/false-ton-cleared-panel.png"
+          },
+          "sha256": "91946eb1aec064808e8537d412da0aeac9d80f16df53a03eed77a303c60e63be"
+        },
+        {
+          "phase": "false-tof-offdelay-counting",
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/false-tof-offdelay-counting-panel.png",
+            "bytes": 18677,
+            "sha256": "cc50333c4b45353170fbc895fca5207e58519c593aa9c937b414715e6334f15a",
+            "original_capture_path": "output/editor-validation/timer-options-official/false-tof-offdelay-counting-panel.png"
+          },
+          "sha256": "cc50333c4b45353170fbc895fca5207e58519c593aa9c937b414715e6334f15a"
+        },
+        {
+          "phase": "false-tof-reassert-cleared",
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/false-tof-reassert-cleared-panel.png",
+            "bytes": 18510,
+            "sha256": "f6d9d2b5eb844a6c6ef449e49e56e0f835361f3ea1d0c9764bbc8190d2591853",
+            "original_capture_path": "output/editor-validation/timer-options-official/false-tof-reassert-cleared-panel.png"
+          },
+          "sha256": "f6d9d2b5eb844a6c6ef449e49e56e0f835361f3ea1d0c9764bbc8190d2591853"
+        },
+        {
+          "phase": "false-dynamic-v6-p5-qoff",
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/false-dynamic-v6-p5-qoff-panel.png",
+            "bytes": 19579,
+            "sha256": "2f755a28d7c134582a66f8a6f993d302b01cfcb3d53d6ce178e91b0aedd5ca7b",
+            "original_capture_path": "output/editor-validation/timer-options-official/false-dynamic-v6-p5-qoff-panel.png"
+          },
+          "sha256": "2f755a28d7c134582a66f8a6f993d302b01cfcb3d53d6ce178e91b0aedd5ca7b"
+        },
+        {
+          "phase": "false-dynamic-v18-p5-qoff",
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/false-dynamic-v18-p5-qoff-panel.png",
+            "bytes": 19579,
+            "sha256": "2f755a28d7c134582a66f8a6f993d302b01cfcb3d53d6ce178e91b0aedd5ca7b",
+            "original_capture_path": "output/editor-validation/timer-options-official/false-dynamic-v18-p5-qoff-panel.png"
+          },
+          "sha256": "2f755a28d7c134582a66f8a6f993d302b01cfcb3d53d6ce178e91b0aedd5ca7b"
+        },
+        {
+          "phase": "false-dynamic-v20-p5-qon",
+          "capture": {
+            "path": "docs/validation/editor-evidence/timer-options/false-dynamic-v20-p5-qon-panel.png",
+            "bytes": 19510,
+            "sha256": "b7969cf19548ffdc165d25763c54f40552c38f4c23651a0dfaf8ee06f3a2c531",
+            "original_capture_path": "output/editor-validation/timer-options-official/false-dynamic-v20-p5-qon-panel.png"
+          },
+          "sha256": "b7969cf19548ffdc165d25763c54f40552c38f4c23651a0dfaf8ee06f3a2c531"
+        }
+      ]
+    },
+    "retentive_TON": {
+      "paused_value": 18,
+      "held_value": 18,
+      "preset": 20,
+      "hold_duration_seconds_lower_bound": 52.7,
+      "duration_evidence": "Root wall-clock orchestration report; elapsed time is not encoded in identical PNG pixels.",
+      "resume": "V20 with Q0.0 on",
+      "after_completed_disable": "V0/Q0.0 clear",
+      "ordinary_comparison": "Q0.13 was on while counting, then off after disable; direct watch after disable shows0."
+    },
+    "retentive_TOF": {
+      "paused_value": 4,
+      "held_value": 4,
+      "preset": 20,
+      "hold_duration_seconds_approx": 286.6,
+      "duration_evidence": "Root wall-clock orchestration report, not a tick-accuracy measurement.",
+      "resume": "V18 then V20 with Q0.1 off at completion",
+      "after_completed_reassert": "V0 with Q0.1 on",
+      "ordinary_comparison": "Off-delay had Q0.14 on, then reasserting IN cleared Q0.14 and direct watch showed0. The transient nonzero is panel-only; no exact nonzero word value is claimed."
+    },
+    "dynamic_TON": {
+      "before_change": {
+        "V": 2,
+        "P": 20
+      },
+      "after_change": {
+        "V": 6,
+        "P": 5,
+        "Q": true
+      },
+      "elapsed_enable_to_after_observation_seconds_upper_bound": 10,
+      "elapsed_bound_source": "Root operator report, not an instrumented timer measurement.",
+      "clear_restore": {
+        "V": 0,
+        "P": 20
+      },
+      "ordinary_false_control": [
+        {
+          "V": 6,
+          "P": 5,
+          "Q": false
+        },
+        {
+          "V": 18,
+          "P": 5,
+          "Q": false
+        },
+        {
+          "V": 20,
+          "P": 5,
+          "Q": true
+        }
+      ],
+      "interpretation": "At this exact profile/base/configuration, active-preset behavior differed with the dynamic flag. Captured V6aboveP5 is retained as observed, not replaced with an assumed clamp-to5."
+    },
+    "snapshot_limitations": [
+      "Animation table shows5s time-base setting and is not synchronized with separate panel captures.",
+      "Fast ordinary-TOF transition showed0in the word table while the panel indicated V>0; only the panel nonzero claim is retained.",
+      "Paused/held PNG pairs and some control panel states are byte-identical; observations and elapsed durations are not extra distinct scan frames."
+    ]
+  },
+  "ordinary_control": {
+    "construction": "Exact byte replacement of the2true IsRetentive fields and1true IsDynamicPreset field in the officially saved file; all3became false.",
+    "exact_three_flag_replacement_matches": true,
+    "preserved": "All IL, graph bindings/geometry, hardware and six-word watch contents unchanged.",
+    "timer_flags": [
+      {
+        "address": "%TM0",
+        "index": 0,
+        "kind": "TON",
+        "preset": 20,
+        "base": "OneSecond",
+        "retentive": false,
+        "dynamic_preset": false
+      },
+      {
+        "address": "%TM1",
+        "index": 1,
+        "kind": "TOF",
+        "preset": 20,
+        "base": "OneSecond",
+        "retentive": false,
+        "dynamic_preset": false
+      },
+      {
+        "address": "%TM2",
+        "index": 2,
+        "kind": "TON",
+        "preset": 20,
+        "base": "OneSecond",
+        "retentive": false,
+        "dynamic_preset": false
+      }
+    ],
+    "runtime_state": "Root observed No error / Online / identical / RUN",
+    "control_restore": "V0/P20 restored for dynamic timer before stopping."
+  },
+  "save_readback": {
+    "rungs": 105,
+    "instruction_lines": 227,
+    "raw_instruction_strings_equal": false,
+    "typed_instruction_semantics_equal": true,
+    "typed_timer_flags_equal_with_editor_defaults": true,
+    "typed_graphs_equal": true,
+    "hardware_tree_equal": true,
+    "typed_IL_semantics_sha256": "8eff612556795b417ffb642d57474ea20da017e87eb7d64f31f9b9a61fec7656",
+    "typed_timer_configuration_sha256": "7fb5b3a15324df30e123b881acd11244f71660cfe99f4bad16b98e7fdcb4e17e",
+    "typed_graph_semantics_sha256": "da8626b3cdb1860344167063101c4f93211b893e90563e52e570f2e61c47b1aa",
+    "typed_hardware_tree_sha256": "e2e66ad46d542f4a9fb3061b7c32a749ebdeb2bbbb051a9b2999bcb4211fab20",
+    "method": "Per-rung decode; numeric operations/comparisons parsed into typed structures; defaults interpreted only for omitted TON/false timer fields. No whitespace-deletion equivalence shortcut.",
+    "serialization_changes": "Instruction padding and omitted default TON/false fields; semantic values preserved.",
+    "fresh_reopen": {
+      "capture": {
+        "path": "docs/validation/editor-evidence/timer-options/fresh-reopen.png",
+        "bytes": 498612,
+        "sha256": "274c72703980bad3577123cb2e28711729dacae39807c931fbd68b7c7c0b0368",
+        "original_capture_path": "output/editor-validation/timer-options-official/fresh-reopen.png"
+      },
+      "sha256": "274c72703980bad3577123cb2e28711729dacae39807c931fbd68b7c7c0b0368",
+      "status": "No error after another project was opened; saved file loaded by new filename; simulator stopped",
+      "scope": "Fresh file reopen with No error, not another runtime run of saved bytes."
+    }
+  },
+  "product_status_at_observation_capture": {
+    "true_option_import_export": "Still gated; these hand-built diagnostics are not proof of supported product-generated true-option output.",
+    "gate_rejections": [
+      {
+        "artifact": {
+          "path": "plc-mac-lab/diagnostics/timer-options-behavior/timer_options_behavior.smbp",
+          "bytes": 452549,
+          "sha256": "72590cd249739a1bdc4f7387f8508f918d0a7c6b85ad0e15240fdcb9bb5b23ec"
+        },
+        "error": "M200-E: timer-mode functional-level mapping is unverified for SMBP"
+      },
+      {
+        "artifact": {
+          "path": "output/editor-validation/timer-options-official/timer_options_behavior_editor_saved.smbp",
+          "bytes": 471237,
+          "sha256": "5358e5334696e1838e8b34b9efaa84fafb2a7bd97802d2d2ee32ae94a7f52214"
+        },
+        "error": "M200-E: timer-mode functional-level mapping is unverified for SMBP"
+      }
+    ],
+    "ordinary_false_clone_import": "Accepted by current product importer; clone origin remains a hand-built diagnostic.",
+    "code_sha256": {
+      "m200/project.py": "c72eda60704239f510f95de4df7fcd21ea0d493cd4ffba6472a1c5142374f461",
+      "m200/timer_profile.py": "1338b8dda86c775be488b3ddc097eee170049e97168f82ac1aa9c25cf4ea6034",
+      "m200/timers.py": "384e3c26facd76ed8da5449d001348fe1c1dd818a73532ab9c782e6a9b0fedf6",
+      "sdk/plc.hpp": "b1d6f04ab2ce88d4e37ac781a299f134c5882971f2d593ead502be3877e784b3"
+    },
+    "future_admission": "Any subsequent narrowly scoped product admission requires its own change/test record; this is a historical observation checkpoint."
+  },
+  "cleanup": {
+    "basis": "Root operator report after ordinary control, before moving to next GUI task",
+    "simulator": "stopped; panel gone",
+    "tcp502_listener_check": {
+      "command_result": "lsof TCP502:exit1/nooutput",
+      "meaning": "No local listener reported at that cleanup event; not a live global-state assertion."
+    }
+  },
+  "limitations": [
+    "Exact Man21/Base1s/selected initialP20 cases only; no lower-level or minimum-level proof.",
+    "No retention+dynamic combined instance, TP retention, STOP/RUN lifecycle, restart/power-loss or every possible preset transition established.",
+    "No exact same-scan/next-tick boundary, fractional-tick policy, physical timing, electrical I/O or full SDK/VM equivalence.",
+    "No physical PLC or complete library parity certification."
+  ],
+  "physical_plc": "pending",
+  "complete_library": false,
+  "public_capture_map": {
+    "path": "output/editor-validation/timer-options-official/public-capture-map.json",
+    "bytes": 7979,
+    "sha256": "58ba4266a446b8fdf22b9ea33b5eb85fc133887bf57a94ea77e2d5b0c4a120ee",
+    "files": 29,
+    "total_bytes": 8077267,
+    "preservation": "Root copied every PNG byte-exact; original output captures remain unchanged."
+  }
+}
