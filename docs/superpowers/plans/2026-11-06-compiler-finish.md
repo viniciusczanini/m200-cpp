@@ -59,7 +59,7 @@
 - [x] Check the unchanged application against four START phases and button cases; check actual forward/reverse programs locally. Loops remain actual control flow, without frame tables or one rung per application state.
 - [x] Freeze and run local checks for the guard checkpoint: `make check` 712 PASS, `make examples` PASS, ten budget cases/44 positions PASS. Later changes to either named overhead require their own frozen validation checkpoint.
 - [x] Open/save/fresh-reopen the exact 51/114 CLI output with No error; observe RUN, movement, STOP and held-START no-rearm in the official simulator. Record parser refusals separately from those bounded observations.
-- [ ] Publish the guard checkpoint and its portable size budgets. The two named emission overheads above remain priority 0 afterwards.
+- [x] Publish the guard checkpoint and its portable size budgets: `ecdafe98b3fda9c6ac2eb0e1c4132b4a1f50ff62` verified on remote `main`, Actions disabled. The two named emission overheads above remain priority 0 afterwards.
 
 **Done when:** The named redundant patterns are eliminated, benchmark ceilings pass, same-source behavior and reverse conversion pass, and the frozen artifact passes the editor gate. Global optimality, a smaller program found by changing the application, and unmeasured physical scan time are not release criteria. Further optional optimizations move after Task 7; a capacity failure in a valid native program remains a required compiler defect.
 
