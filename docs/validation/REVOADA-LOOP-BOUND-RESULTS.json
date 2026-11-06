@@ -1,0 +1,334 @@
+{
+  "status": "PASS all65536 i16 injected phases on exact native-saved IL",
+  "CPP": {
+    "path": "examples/christmas/revoada20_clock_10.cpp",
+    "bytes": 1519,
+    "sha256": "37e2386fe336e4ef411ad3eb7ee468c4800083708049b5d22c6b93bf1b17cb7d"
+  },
+  "generated": {
+    "path": "output/diagnostics/emission-cleanup-2026-11-06/cli/program.smbp",
+    "bytes": 248031,
+    "sha256": "f6e2d41ba8136fc2ddcdfe37b0461837d8ebe323dee2ee91548c31da9bc2fb3c"
+  },
+  "official_saved": {
+    "path": "output/diagnostics/emission-cleanup-2026-11-06/official-saved.smbp",
+    "bytes": 256533,
+    "sha256": "37f02502841e7f2ff72626f645a784d1ef3f7f4d88fd2005c82a15d635cea130"
+  },
+  "generated_saved_executable_IL_identical": true,
+  "rungs": 48,
+  "static_IL_lines": 108,
+  "symbol_derived_addresses": {
+    "phase": "%MW1",
+    "reflected": "%MW2",
+    "position": "%MW3",
+    "cursor": "%MW4",
+    "beats": "%MW0",
+    "running": "%M0",
+    "previous_clock": "%M1",
+    "mask": "%MW5"
+  },
+  "source_symbols": {
+    "%M0": "running_0",
+    "%M1": "previous_clock_1",
+    "%M2": "constant_false_2",
+    "%M3": "constant_true_3",
+    "%M4": "compiler_reused_M4_4",
+    "%M5": "compiler_reused_M5_5",
+    "%M6": "compiler_reused_M6_6",
+    "%MW0": "beats_MW0",
+    "%MW1": "phase_MW1",
+    "%MW2": "reflected_MW2",
+    "%MW3": "position_MW3",
+    "%MW4": "cursor_MW4",
+    "%MW5": "compiler_reused_MW5_MW5"
+  },
+  "loop_label": "%L0",
+  "loop_rungs": [
+    {
+      "index": 41,
+      "IL": [
+        "%L0:",
+        "LD [%MW4<%MW3]",
+        "ST %M4"
+      ]
+    },
+    {
+      "index": 42,
+      "IL": [
+        "LDN %M4",
+        "JMPC %L1"
+      ]
+    },
+    {
+      "index": 43,
+      "IL": [
+        "LD %M3",
+        "[%MW5:=SHL(%MW5,1)]"
+      ]
+    },
+    {
+      "index": 44,
+      "IL": [
+        "LD %M3",
+        "[%MW4:=%MW4 + 1]"
+      ]
+    },
+    {
+      "index": 45,
+      "IL": [
+        "LD %M3",
+        "JMPC %L0"
+      ]
+    }
+  ],
+  "initialization": "Normal first scan, START edge and release before injection;RUN stays true;dt0 keeps S5 low and beats0; signed phase injected using derived symbol target via Machine.write_number",
+  "normal_phase0_through19": [
+    {
+      "phase": 0,
+      "reflected": 0,
+      "position": 0,
+      "iterations": 0,
+      "cursor_writes": 1,
+      "mask_writes": 2,
+      "mask": 1
+    },
+    {
+      "phase": 1,
+      "reflected": 1,
+      "position": 0,
+      "iterations": 0,
+      "cursor_writes": 1,
+      "mask_writes": 2,
+      "mask": 1
+    },
+    {
+      "phase": 2,
+      "reflected": 2,
+      "position": 1,
+      "iterations": 1,
+      "cursor_writes": 2,
+      "mask_writes": 3,
+      "mask": 2
+    },
+    {
+      "phase": 3,
+      "reflected": 3,
+      "position": 2,
+      "iterations": 2,
+      "cursor_writes": 3,
+      "mask_writes": 4,
+      "mask": 4
+    },
+    {
+      "phase": 4,
+      "reflected": 4,
+      "position": 3,
+      "iterations": 3,
+      "cursor_writes": 4,
+      "mask_writes": 5,
+      "mask": 8
+    },
+    {
+      "phase": 5,
+      "reflected": 5,
+      "position": 4,
+      "iterations": 4,
+      "cursor_writes": 5,
+      "mask_writes": 6,
+      "mask": 16
+    },
+    {
+      "phase": 6,
+      "reflected": 6,
+      "position": 5,
+      "iterations": 5,
+      "cursor_writes": 6,
+      "mask_writes": 7,
+      "mask": 32
+    },
+    {
+      "phase": 7,
+      "reflected": 7,
+      "position": 6,
+      "iterations": 6,
+      "cursor_writes": 7,
+      "mask_writes": 8,
+      "mask": 64
+    },
+    {
+      "phase": 8,
+      "reflected": 8,
+      "position": 7,
+      "iterations": 7,
+      "cursor_writes": 8,
+      "mask_writes": 9,
+      "mask": 128
+    },
+    {
+      "phase": 9,
+      "reflected": 9,
+      "position": 8,
+      "iterations": 8,
+      "cursor_writes": 9,
+      "mask_writes": 10,
+      "mask": 256
+    },
+    {
+      "phase": 10,
+      "reflected": 10,
+      "position": 9,
+      "iterations": 9,
+      "cursor_writes": 10,
+      "mask_writes": 11,
+      "mask": 512
+    },
+    {
+      "phase": 11,
+      "reflected": 10,
+      "position": 9,
+      "iterations": 9,
+      "cursor_writes": 10,
+      "mask_writes": 11,
+      "mask": 512
+    },
+    {
+      "phase": 12,
+      "reflected": 9,
+      "position": 8,
+      "iterations": 8,
+      "cursor_writes": 9,
+      "mask_writes": 10,
+      "mask": 256
+    },
+    {
+      "phase": 13,
+      "reflected": 8,
+      "position": 7,
+      "iterations": 7,
+      "cursor_writes": 8,
+      "mask_writes": 9,
+      "mask": 128
+    },
+    {
+      "phase": 14,
+      "reflected": 7,
+      "position": 6,
+      "iterations": 6,
+      "cursor_writes": 7,
+      "mask_writes": 8,
+      "mask": 64
+    },
+    {
+      "phase": 15,
+      "reflected": 6,
+      "position": 5,
+      "iterations": 5,
+      "cursor_writes": 6,
+      "mask_writes": 7,
+      "mask": 32
+    },
+    {
+      "phase": 16,
+      "reflected": 5,
+      "position": 4,
+      "iterations": 4,
+      "cursor_writes": 5,
+      "mask_writes": 6,
+      "mask": 16
+    },
+    {
+      "phase": 17,
+      "reflected": 4,
+      "position": 3,
+      "iterations": 3,
+      "cursor_writes": 4,
+      "mask_writes": 5,
+      "mask": 8
+    },
+    {
+      "phase": 18,
+      "reflected": 3,
+      "position": 2,
+      "iterations": 2,
+      "cursor_writes": 3,
+      "mask_writes": 4,
+      "mask": 4
+    },
+    {
+      "phase": 19,
+      "reflected": 2,
+      "position": 1,
+      "iterations": 1,
+      "cursor_writes": 2,
+      "mask_writes": 3,
+      "mask": 2
+    }
+  ],
+  "all_i16": {
+    "phases_checked": 65536,
+    "phase_domain": [
+      -32768,
+      32767
+    ],
+    "reflected_range": [
+      -32768,
+      10
+    ],
+    "position_range": [
+      0,
+      9
+    ],
+    "iteration_histogram": {
+      "0": 65518,
+      "1": 2,
+      "2": 2,
+      "3": 2,
+      "4": 2,
+      "5": 2,
+      "6": 2,
+      "7": 2,
+      "8": 2,
+      "9": 2
+    },
+    "max_iterations": 9,
+    "max_iteration_phases": [
+      10,
+      11
+    ],
+    "max_cursor_writes_per_scan": 10,
+    "max_mask_writes_per_scan": 11,
+    "total_cursor_writes": 65626,
+    "total_mask_writes": 131162,
+    "outputs_onehot_for_every_injected_phase": true,
+    "seen_masks": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      128,
+      256,
+      512
+    ],
+    "arithmetic_overflow_or_shift_carry": false,
+    "elapsed_local_seconds": 20.3439885
+  },
+  "local_VM_instruction_budget": {
+    "exact_minimum_for_phase10": 190,
+    "all65536_pass_with_this_per_scan_budget": true,
+    "warmup_budget": 512,
+    "physical_watchdog_or_wall_time_bound": false
+  },
+  "proof": "For phase<=10 reflected=phase<=10. For phase>10, phase is11..32767 so21-phase is-32746..10, representable in i16. Reflected therefore lies-32768..10. Position is0 if reflected<=0, otherwise reflected-1 in0..9. Cursor starts0 and increments1 only while cursor<position, hence0..9 iterations without i16 overflow; mask is1<<position<=512.",
+  "limits": [
+    "Invalid injected phases are termination fault-injection cases, not valid-effect states or a recovery specification.",
+    "Instruction limit is a local interpreter budget per scan, not a physical PLC watchdog.",
+    "No physical scan time, WCET, firmware execution or real watchdog bound is measured.",
+    "The official backward-jump Advisory remains; it is a generic structural warning.",
+    "No CPP/core/SDK/GUI/fullsuite changes or actions."
+  ],
+  "all_inputs_unchanged": true
+}

@@ -16,6 +16,7 @@ from .edges import OPS as EDGE_OPS
 from .edge_functions import parse as expression_edge
 from .copy_fusion import fuse as fuse_copies
 from .dead_stores import eliminate as eliminate_dead_stores
+from .emission_cleanup import cleanup as cleanup_emission
 
 REFERENCE = re.compile(r"%M(?:W|D|F)?[0-9]+")
 ASSIGNMENT = re.compile(
@@ -355,6 +356,10 @@ class Storage:
             ref: ref.rstrip("0123456789") + str(mapping[root] + offset)
             for ref, (root, offset) in self.members.items()
         }
+
+        cleanup_emission(
+            program, self.registers, self.members, self.groups, names, constants, REFERENCE
+        )
 
         def rewrite(text):
             return REFERENCE.sub(lambda m: names.get(m[0], m[0]), text)

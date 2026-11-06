@@ -54,12 +54,22 @@
 - [x] Implement the narrowly proved fusion. Preserve predicate evaluation exactly once, in its original position. Nine focused methods and independent review passed; same C++ now 51/114.
 - [x] Add an explicit regression proving a dead pure private boolean read is eliminated, while numeric/indexed/edge/timer effects remain observable.
 - [x] Audit the remaining 51 benchmark rungs once and classify their purpose; keep the fixed audit in `GUARD-FUSION-RESULTS.json`.
-- [ ] Resolve the two remaining named emission overheads from that audit: the coalesced private word self-copy and label-only scratch anchors. Prove flag, alias, entry-path and cross-scan behavior before removing either. Keep necessary startup and clock history. Do not start another open-ended optimization search.
+- [x] Resolve the two named emission overheads: one coalesced private i16 self-copy and two unread label scratch anchors. The unchanged source now emits 48/108. Keep indexed/shared/SR contexts and native M-edge anchors protected; retain terminal/consecutive label targets and real source origins. Final724 passed after the independently found M-edge regression was fixed.
 - [x] Pin ten generic benchmarks in `tests/optimization/` for I/O, conditions, loops, early exits, aliases and SRs, with literal traces and explicit rung/IL/memory ceilings. The standalone runner also checks reverse conversion and rejects a deliberately impossible budget.
 - [x] Check the unchanged application against four START phases and button cases; check actual forward/reverse programs locally. Loops remain actual control flow, without frame tables or one rung per application state.
 - [x] Freeze and run local checks for the guard checkpoint: `make check` 712 PASS, `make examples` PASS, ten budget cases/44 positions PASS. Later changes to either named overhead require their own frozen validation checkpoint.
 - [x] Open/save/fresh-reopen the exact 51/114 CLI output with No error; observe RUN, movement, STOP and held-START no-rearm in the official simulator. Record parser refusals separately from those bounded observations.
 - [x] Publish the guard checkpoint and its portable size budgets: `ecdafe98b3fda9c6ac2eb0e1c4132b4a1f50ff62` verified on remote `main`, Actions disabled. The two named emission overheads above remain priority 0 afterwards.
+- [x] Validate the exact 48/108 cleanup artifact: official save/fresh reopen No error, bounded RUN/Q0→Q5/STOP/held-START observations, saved reverse 55/123 with local trace parity. The backward-jump advisory remains; all 65536 phase values terminate in at most nine shifts under the local VM test, without a physical watchdog guarantee.
+- [ ] Publish the final724 cleanup checkpoint and its warning/bound evidence.
+
+### Required capacity follow-up discovered by the requested documentation study
+
+This is a concrete capacity defect under this task's existing exception, not an open-ended size search: `BitMemory{1024}` plus `write_word(0,1)` currently fails because boolean constants require private M cells. The documented native form `LD 1; [%MW0:=1]` needs no M. It still needs authentic SHORT/OPEN graph capture in the installed profile.
+
+- [ ] Capture, save and freshly reopen the literal LD0/LD1 diagnostic as native Ladder; retain exact graphs and scope.
+- [ ] Add a failing capacity regression and closed literal-contact graph tests; implement direct native constants across generation/import/reverse while preserving evaluation effects and memory-image declarations.
+- [ ] Re-run the fixed budgets and same-source behavior, independent review, one frozen full local suite and exact editor gates; publish.
 
 **Done when:** The named redundant patterns are eliminated, benchmark ceilings pass, same-source behavior and reverse conversion pass, and the frozen artifact passes the editor gate. Global optimality, a smaller program found by changing the application, and unmeasured physical scan time are not release criteria. Further optional optimizations move after Task 7; a capacity failure in a valid native program remains a required compiler defect.
 
