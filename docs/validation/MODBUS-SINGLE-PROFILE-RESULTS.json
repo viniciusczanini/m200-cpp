@@ -34,7 +34,7 @@
     "authority": "actual XML/template level, configured link and serial-master fields; Program metadata cannot override them",
     "codec_context": "read_blocks/write_blocks remain typed codecs; load_project/write_project/check_template_channels enforce the complete profile",
     "buffer_words": 1,
-    "quantity": "Existing bounded ModbusConfig Quantity is preserved but ignored for extent/PDU; the actual editor captures have Quantity1"
+    "quantity": "Existing bounded ModbusConfig Quantity is preserved but ignored for extent/PDU; the actual editor captures have Quantity 1"
   },
   "remaining_gates": [
     "WRITE_READ_VAR typed XML",
@@ -164,8 +164,8 @@
     "late_unsupported_WR_collection_atomicity": "pass",
     "focused_tests": 10,
     "focused_seconds": 1.066,
-    "full_log_and_all134pins_verified": true,
-    "extra_full_suite_by_reviewer": false
+    "extra_full_suite_by_reviewer": false,
+    "full_log_and_all_134_pins_verified": true
   },
   "prepared_CLI_products": {
     "scope": "Preparation snapshot only; official GUI product acceptance recorded separately when observed",
@@ -218,7 +218,7 @@
     "url": "https://www.se.com/ww/en/download/document/EIO0000003289/",
     "sha256": "d2c8af0598276e7a0bb4f30770e4529282962bc6ee3944dee0645cb9a3186595",
     "facts": [
-      "FC5/FC6 minimum human level5.0",
+      "FC5/FC6 minimum human level 5.0",
       "Quantity ignored for single coil/register",
       "IndexData is a local MW source"
     ]

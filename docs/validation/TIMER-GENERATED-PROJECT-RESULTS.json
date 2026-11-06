@@ -1,0 +1,2385 @@
+{
+  "format": "m200-timer-generated-project-results-v1",
+  "date": "2026-11-06",
+  "target": "TM200CE40T",
+  "editor": "EcoStruxure Machine Expert Basic 1.4 build484, local Mac Wine lab",
+  "observed_by": "root personally performed official GUI/simulator actions; report author only read/verified existing records and copied exact PNGs",
+  "scope": "Two real public-CLI products saved/reopened; official simulator runtime only on the exact editor-saved watch product",
+  "source": {
+    "path": "output/editor-validation/timer-options-generated/timer_options_behavior.cpp",
+    "sha256": "7a6819152ed649e9413807c382d4b6e1d8c5f11256111a5add579540c73d39c0",
+    "text": "#include <plc.hpp>\n// Hand-built diagnostic only: true timer options remain gated for SMBP export.\n// Separate instances: retention and dynamic mode are never combined here.\nplc::Ton retained_on{0, 1000, 20, true, false};\nplc::Tof retained_off{1, 1000, 20, true, false};\nplc::Ton dynamic_on{2, 1000, 20, false, true};\n\nvoid scan() {\n    bool ton_in = plc::input(0);\n    bool tof_in = plc::input(1);\n    bool dynamic_in = plc::input(2);\n    bool request_five = plc::input(3);\n    bool restore_twenty = plc::input(4);\n    // Restore has explicit priority if both preset buttons are held.\n    if (restore_twenty) {\n        dynamic_on.set_preset(20);\n    } else if (request_five) {\n        dynamic_on.set_preset(5);\n    }\n    bool ton_q = retained_on.update(ton_in);\n    bool tof_q = retained_off.update(tof_in);\n    bool dynamic_q = dynamic_on.update(dynamic_in);\n\n    plc::write_word(200, retained_on.value());\n    plc::write_word(201, retained_on.preset());\n    plc::write_word(202, retained_off.value());\n    plc::write_word(203, retained_off.preset());\n    plc::write_word(204, dynamic_on.value());\n    plc::write_word(205, dynamic_on.preset());\n    plc::output(0, ton_q);\n    plc::output(1, tof_q);\n    plc::output(2, dynamic_q);\n    plc::output(3, ton_in);\n    plc::output(4, tof_in);\n    plc::output(5, dynamic_in);\n    plc::output(6, request_five);\n    plc::output(7, restore_twenty);\n    plc::output(8, retained_on.value() >= 5);\n    plc::output(9, retained_off.value() >= 5);\n    plc::output(10, dynamic_on.value() >= 6);\n    plc::output(11, dynamic_on.preset() == 5);\n    plc::output(12, dynamic_on.preset() == 20);\n    plc::output(13, retained_on.value() > 0);\n    plc::output(14, retained_off.value() > 0);\n    plc::output(15, dynamic_on.value() > 0);\n}\n",
+    "historical_comment_note": "Byte-exact original lab C++ retained. Its historical handbuilt/gated comment predates this newly admitted policy and is not a statement of current admission."
+  },
+  "frozen_preparation": {
+    "manifest_path": "output/editor-validation/timer-options-generated/manifest.json",
+    "sha256": "3d629c6f3044805542da30964c3fdc08f7911031e8d0c5d85cb7101f2a9704f5",
+    "base_commit": "30d2df43912b4f77adc0a2cb10020f59bb109fbd",
+    "commands": [
+      [
+        "python3",
+        "-m",
+        "m200",
+        "compile",
+        "output/editor-validation/timer-options-generated/timer_options_behavior.cpp",
+        "--template",
+        "tests/fixtures/official_tm200ce40t_memory.smbp",
+        "-o",
+        "output/editor-validation/timer-options-generated/build"
+      ],
+      [
+        "python3",
+        "-m",
+        "m200",
+        "decompile",
+        "output/editor-validation/timer-options-generated/build/program.smbp",
+        "-o",
+        "output/editor-validation/timer-options-generated/from-xml.cpp"
+      ],
+      [
+        "python3",
+        "-m",
+        "m200",
+        "compile",
+        "output/editor-validation/timer-options-generated/from-xml.cpp",
+        "--template",
+        "tests/fixtures/official_tm200ce40t_memory.smbp",
+        "-o",
+        "output/editor-validation/timer-options-generated/recompiled"
+      ]
+    ],
+    "artifacts": [
+      {
+        "path": "output/editor-validation/timer-options-generated/build/program.audit.cpp",
+        "bytes": 10013,
+        "sha256": "9283f6fac6877b2c47afd30c3b86fe5edc649eb254ecf84e747e9dafb3f7b7c3"
+      },
+      {
+        "path": "output/editor-validation/timer-options-generated/build/program.il",
+        "bytes": 3320,
+        "sha256": "e649b4f4ac3138f81a2582d5cfe01b677f404c2cdd68d0e80fc9be7aa37d28f7"
+      },
+      {
+        "path": "output/editor-validation/timer-options-generated/build/program.m200.json",
+        "bytes": 17088,
+        "sha256": "abe21681907e3d869fa408c975327c0146eebf9a80fb5197e533a49ce785f113"
+      },
+      {
+        "path": "output/editor-validation/timer-options-generated/build/program.smbp",
+        "bytes": 452279,
+        "sha256": "5f8594912d882a3f8631988d6b6653b567c6314f8ed353cab37ee0284c6fc312"
+      },
+      {
+        "path": "output/editor-validation/timer-options-generated/build/report.json",
+        "bytes": 13390,
+        "sha256": "452404d65e07d41ff0295ec628d682004c7911e82c9c8a812bdc522b69431476"
+      },
+      {
+        "path": "output/editor-validation/timer-options-generated/build/source-map.json",
+        "bytes": 14440,
+        "sha256": "d0d5e235086178b3911cb66fdc942f699c1beb80991b68666f297c0757bd283a"
+      },
+      {
+        "path": "output/editor-validation/timer-options-generated/compile.log",
+        "bytes": 13390,
+        "sha256": "452404d65e07d41ff0295ec628d682004c7911e82c9c8a812bdc522b69431476"
+      },
+      {
+        "path": "output/editor-validation/timer-options-generated/decompile.log",
+        "bytes": 76,
+        "sha256": "d38b87ad358c5005ad9691500b272793da59f3f1645b0e785f55f15faf447ff2"
+      },
+      {
+        "path": "output/editor-validation/timer-options-generated/from-xml.cpp",
+        "bytes": 10013,
+        "sha256": "9283f6fac6877b2c47afd30c3b86fe5edc649eb254ecf84e747e9dafb3f7b7c3"
+      },
+      {
+        "path": "output/editor-validation/timer-options-generated/from-xml.cpp.configuration.smbp",
+        "bytes": 452279,
+        "sha256": "5f8594912d882a3f8631988d6b6653b567c6314f8ed353cab37ee0284c6fc312"
+      },
+      {
+        "path": "output/editor-validation/timer-options-generated/recompile.log",
+        "bytes": 21363,
+        "sha256": "e41f66baa9181884748301e4549f9bfe1ee7035f49f4929ab8ecdbb14b779587"
+      },
+      {
+        "path": "output/editor-validation/timer-options-generated/recompiled/program.audit.cpp",
+        "bytes": 18616,
+        "sha256": "abe86270b90bba8418bd2ca8d064b732899310dd2b6a96a302dfdf74d3d97b65"
+      },
+      {
+        "path": "output/editor-validation/timer-options-generated/recompiled/program.il",
+        "bytes": 6323,
+        "sha256": "babc2333b623d24d8fed7afbab60d066730d1a09698b7f332c0775746e9784d5"
+      },
+      {
+        "path": "output/editor-validation/timer-options-generated/recompiled/program.m200.json",
+        "bytes": 29825,
+        "sha256": "1226159d2e1eeba9fef7194aa292e91f306fb21768b00168296f08df98286d0f"
+      },
+      {
+        "path": "output/editor-validation/timer-options-generated/recompiled/program.smbp",
+        "bytes": 787594,
+        "sha256": "2c7c1feb4f46c1a238d10aca9217d627b5abeb64ffd25c004eef64ce764ed114"
+      },
+      {
+        "path": "output/editor-validation/timer-options-generated/recompiled/report.json",
+        "bytes": 21363,
+        "sha256": "e41f66baa9181884748301e4549f9bfe1ee7035f49f4929ab8ecdbb14b779587"
+      },
+      {
+        "path": "output/editor-validation/timer-options-generated/recompiled/source-map.json",
+        "bytes": 26370,
+        "sha256": "f5c8c865b1b804125a8b42a4b96adc1482bf18b15e056f79646c2edae2a815ec"
+      },
+      {
+        "path": "output/editor-validation/timer-options-generated/timer_options_behavior.cpp",
+        "bytes": 1764,
+        "sha256": "7a6819152ed649e9413807c382d4b6e1d8c5f11256111a5add579540c73d39c0"
+      },
+      {
+        "path": "output/editor-validation/timer-options-generated/timer_options_generated.smbp",
+        "bytes": 452279,
+        "sha256": "5f8594912d882a3f8631988d6b6653b567c6314f8ed353cab37ee0284c6fc312"
+      }
+    ],
+    "GUI_pending_fields_retained": {
+      "open": "pending",
+      "save": "pending",
+      "reopen": "pending",
+      "runtime": "pending"
+    },
+    "note": "The immutable preparation predates GUI results and is not rewritten; later source changes are not represented as a rebuild."
+  },
+  "products": [
+    {
+      "id": "plain",
+      "source_Cpp_sha256": "7a6819152ed649e9413807c382d4b6e1d8c5f11256111a5add579540c73d39c0",
+      "CLI": {
+        "command": "python3 -m m200 compile output/editor-validation/timer-options-generated/timer_options_behavior.cpp --template tests/fixtures/official_tm200ce40t_memory.smbp -o output/editor-validation/timer-options-generated/build",
+        "provenance": "plain command is verbatim in frozen manifest; watch uses the root-reported normal CLI/template preparation and matching build source hash"
+      },
+      "template": {
+        "path": "tests/fixtures/official_tm200ce40t_memory.smbp",
+        "sha256": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf"
+      },
+      "original": {
+        "path": "output/editor-validation/timer-options-generated/build/program.smbp",
+        "sha256": "5f8594912d882a3f8631988d6b6653b567c6314f8ed353cab37ee0284c6fc312",
+        "bytes": 452279
+      },
+      "editor_saved": {
+        "path": "output/editor-validation/timer-options-generated/timer_options_generated_editor_saved.smbp",
+        "sha256": "0373d6f41d99e77ba2140e7fd93088f50abb1dc2731ac2e7ff640ff3b25e212d",
+        "bytes": 468779
+      },
+      "rungs": 105,
+      "IL_lines": 227,
+      "normalized_IL": [
+        [
+          "LD %I0.0",
+          "ST %M513"
+        ],
+        [
+          "LD %I0.1",
+          "ST %M511"
+        ],
+        [
+          "LD %I0.2",
+          "ST %M507"
+        ],
+        [
+          "LD %I0.3",
+          "ST %M508"
+        ],
+        [
+          "LD %I0.4",
+          "ST %M509"
+        ],
+        [
+          "LD %Q0.0",
+          "ST %M502"
+        ],
+        [
+          "LD %Q0.1",
+          "ST %M503"
+        ],
+        [
+          "LD %Q0.2",
+          "ST %M504"
+        ],
+        [
+          "LD %Q0.3",
+          "ST %M505"
+        ],
+        [
+          "LD %Q0.4",
+          "ST %M506"
+        ],
+        [
+          "LD %Q0.5",
+          "ST %M510"
+        ],
+        [
+          "LD %Q0.6",
+          "ST %M512"
+        ],
+        [
+          "LD %Q0.7",
+          "ST %M514"
+        ],
+        [
+          "LD %Q0.8",
+          "ST %M515"
+        ],
+        [
+          "LD %Q0.9",
+          "ST %M516"
+        ],
+        [
+          "LD %Q0.10",
+          "ST %M517"
+        ],
+        [
+          "LD %Q0.11",
+          "ST %M518"
+        ],
+        [
+          "LD %Q0.12",
+          "ST %M519"
+        ],
+        [
+          "LD %Q0.13",
+          "ST %M520"
+        ],
+        [
+          "LD %Q0.14",
+          "ST %M521"
+        ],
+        [
+          "LD %Q0.15",
+          "ST %M501"
+        ],
+        [
+          "LD %S13",
+          "R %M502"
+        ],
+        [
+          "LD %S13",
+          "R %M503"
+        ],
+        [
+          "LD %S13",
+          "R %M504"
+        ],
+        [
+          "LD %S13",
+          "R %M505"
+        ],
+        [
+          "LD %S13",
+          "R %M506"
+        ],
+        [
+          "LD %S13",
+          "R %M510"
+        ],
+        [
+          "LD %S13",
+          "R %M512"
+        ],
+        [
+          "LD %S13",
+          "R %M514"
+        ],
+        [
+          "LD %S13",
+          "R %M515"
+        ],
+        [
+          "LD %S13",
+          "R %M516"
+        ],
+        [
+          "LD %S13",
+          "R %M517"
+        ],
+        [
+          "LD %S13",
+          "R %M518"
+        ],
+        [
+          "LD %S13",
+          "R %M519"
+        ],
+        [
+          "LD %S13",
+          "R %M520"
+        ],
+        [
+          "LD %S13",
+          "R %M521"
+        ],
+        [
+          "LD %S13",
+          "R %M501"
+        ],
+        [
+          "LD %M500",
+          "ANDN %M500",
+          "ST %M500"
+        ],
+        [
+          "LDN %M500",
+          "ST %M501"
+        ],
+        [
+          "LD %M513",
+          "ST %M505"
+        ],
+        [
+          "LD %M511",
+          "ST %M506"
+        ],
+        [
+          "LD %M507",
+          "ST %M507"
+        ],
+        [
+          "LD %M508",
+          "ST %M508"
+        ],
+        [
+          "LD %M509",
+          "ST %M509"
+        ],
+        [
+          "LD %M509",
+          "ST %M502"
+        ],
+        [
+          "LD %M502",
+          "[%TM2.P:=20]"
+        ],
+        [
+          "LDN %M502",
+          "ST %M502"
+        ],
+        [
+          "LD %M508",
+          "ST %M503"
+        ],
+        [
+          "LD %M502",
+          "AND %M503",
+          "ST %M502"
+        ],
+        [
+          "LD %M502",
+          "[%TM2.P:=5]"
+        ],
+        [
+          "LD %M505",
+          "ST %M502"
+        ],
+        [
+          "BLK %TM0",
+          "LD %M502",
+          "IN",
+          "OUT_BLK",
+          "LD Q",
+          "ST %M502",
+          "END_BLK"
+        ],
+        [
+          "LD %M502",
+          "ST %M502"
+        ],
+        [
+          "LD %M506",
+          "ST %M503"
+        ],
+        [
+          "BLK %TM1",
+          "LD %M503",
+          "IN",
+          "OUT_BLK",
+          "LD Q",
+          "ST %M503",
+          "END_BLK"
+        ],
+        [
+          "LD %M503",
+          "ST %M503"
+        ],
+        [
+          "LD %M507",
+          "ST %M504"
+        ],
+        [
+          "BLK %TM2",
+          "LD %M504",
+          "IN",
+          "OUT_BLK",
+          "LD Q",
+          "ST %M504",
+          "END_BLK"
+        ],
+        [
+          "LD %M504",
+          "ST %M504"
+        ],
+        [
+          "LD %M501",
+          "[%MW200:=%TM0.V]"
+        ],
+        [
+          "LD %M501",
+          "[%MW201:=%TM0.P]"
+        ],
+        [
+          "LD %M501",
+          "[%MW202:=%TM1.V]"
+        ],
+        [
+          "LD %M501",
+          "[%MW203:=%TM1.P]"
+        ],
+        [
+          "LD %M501",
+          "[%MW204:=%TM2.V]"
+        ],
+        [
+          "LD %M501",
+          "[%MW205:=%TM2.P]"
+        ],
+        [
+          "LD %M502",
+          "ST %M502"
+        ],
+        [
+          "LD %M503",
+          "ST %M503"
+        ],
+        [
+          "LD %M504",
+          "ST %M504"
+        ],
+        [
+          "LD %M505",
+          "ST %M505"
+        ],
+        [
+          "LD %M506",
+          "ST %M506"
+        ],
+        [
+          "LD %M507",
+          "ST %M510"
+        ],
+        [
+          "LD %M508",
+          "ST %M512"
+        ],
+        [
+          "LD %M509",
+          "ST %M514"
+        ],
+        [
+          "LD %M501",
+          "[%MW4000:=%TM0.V]"
+        ],
+        [
+          "LD [%MW4000>=5]",
+          "ST %M515"
+        ],
+        [
+          "LD %M501",
+          "[%MW4000:=%TM1.V]"
+        ],
+        [
+          "LD [%MW4000>=5]",
+          "ST %M516"
+        ],
+        [
+          "LD %M501",
+          "[%MW4000:=%TM2.V]"
+        ],
+        [
+          "LD [%MW4000>=6]",
+          "ST %M517"
+        ],
+        [
+          "LD %M501",
+          "[%MW4000:=%TM2.P]"
+        ],
+        [
+          "LD [%MW4000=5]",
+          "ST %M518"
+        ],
+        [
+          "LD %M501",
+          "[%MW4000:=%TM2.P]"
+        ],
+        [
+          "LD [%MW4000=20]",
+          "ST %M519"
+        ],
+        [
+          "LD %M501",
+          "[%MW4000:=%TM0.V]"
+        ],
+        [
+          "LD [%MW4000>0]",
+          "ST %M520"
+        ],
+        [
+          "LD %M501",
+          "[%MW4000:=%TM1.V]"
+        ],
+        [
+          "LD [%MW4000>0]",
+          "ST %M521"
+        ],
+        [
+          "LD %M501",
+          "[%MW4000:=%TM2.V]"
+        ],
+        [
+          "LD [%MW4000>0]",
+          "ST %M501"
+        ],
+        [
+          "LD %M502",
+          "ST %Q0.0"
+        ],
+        [
+          "LD %M503",
+          "ST %Q0.1"
+        ],
+        [
+          "LD %M504",
+          "ST %Q0.2"
+        ],
+        [
+          "LD %M505",
+          "ST %Q0.3"
+        ],
+        [
+          "LD %M506",
+          "ST %Q0.4"
+        ],
+        [
+          "LD %M510",
+          "ST %Q0.5"
+        ],
+        [
+          "LD %M512",
+          "ST %Q0.6"
+        ],
+        [
+          "LD %M514",
+          "ST %Q0.7"
+        ],
+        [
+          "LD %M515",
+          "ST %Q0.8"
+        ],
+        [
+          "LD %M516",
+          "ST %Q0.9"
+        ],
+        [
+          "LD %M517",
+          "ST %Q0.10"
+        ],
+        [
+          "LD %M518",
+          "ST %Q0.11"
+        ],
+        [
+          "LD %M519",
+          "ST %Q0.12"
+        ],
+        [
+          "LD %M520",
+          "ST %Q0.13"
+        ],
+        [
+          "LD %M521",
+          "ST %Q0.14"
+        ],
+        [
+          "LD %M501",
+          "ST %Q0.15"
+        ]
+      ],
+      "typed_timers": [
+        {
+          "Address": "%TM0",
+          "Index": "0",
+          "Type": "TON",
+          "Preset": "20",
+          "Base": "OneSecond",
+          "IsRetentive": "true",
+          "IsDynamicPreset": "false"
+        },
+        {
+          "Address": "%TM1",
+          "Index": "1",
+          "Type": "TOF",
+          "Preset": "20",
+          "Base": "OneSecond",
+          "IsRetentive": "true",
+          "IsDynamicPreset": "false"
+        },
+        {
+          "Address": "%TM2",
+          "Index": "2",
+          "Type": "TON",
+          "Preset": "20",
+          "Base": "OneSecond",
+          "IsRetentive": "false",
+          "IsDynamicPreset": "true"
+        }
+      ],
+      "actual_management_token": "FunctLevelMan21_0",
+      "preserved": {
+        "normalized_IL": true,
+        "typed_timer_properties": true,
+        "hardware": true,
+        "watch_rows": true
+      },
+      "serialization_note": "Saved default TON Type and false option fields are omitted; typed defaults remain equal, not raw timer-subtree identity.",
+      "watch_rows": [],
+      "root_open_save_fresh_reopen": "No error, root personally viewed",
+      "runtime": "not attempted; root explicitly confirms this product was never run",
+      "captures": [
+        {
+          "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated/generated-save.png",
+          "path": "editor-evidence/timer-generated/plain-save.png",
+          "repository_path": "docs/validation/editor-evidence/timer-generated/plain-save.png",
+          "bytes": 381377,
+          "sha256": "ebd7fafbd9f10fb35e2398554771109eead7641d6406855c54f2258d3e37fb62",
+          "phase": "actual CLI product: No error / saved"
+        },
+        {
+          "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated/generated-reopen.png",
+          "path": "editor-evidence/timer-generated/plain-reopen.png",
+          "repository_path": "docs/validation/editor-evidence/timer-generated/plain-reopen.png",
+          "bytes": 498798,
+          "sha256": "e0197bc49af39cd61ebde8346963750b23e3814f4c8d18c48c71c32689a0a6d1",
+          "phase": "exact editor save freshly reopened after another project: No error"
+        }
+      ],
+      "readback": {
+        "path": "output/editor-validation/timer-options-generated/official-readback.json",
+        "sha256": "0db0ed6cc5773210cd157410e9872be6bbb2a3ff9cbf53f7717427297115c9a4"
+      }
+    },
+    {
+      "id": "watch",
+      "source_Cpp_sha256": "7a6819152ed649e9413807c382d4b6e1d8c5f11256111a5add579540c73d39c0",
+      "CLI": {
+        "command": "python3 -m m200 compile output/editor-validation/timer-options-generated/timer_options_behavior.cpp --template tests/fixtures/official_tm200ce40t_timer_options_behavior.smbp -o output/editor-validation/timer-options-generated-watch/build",
+        "provenance": "plain command is verbatim in frozen manifest; watch uses the root-reported normal CLI/template preparation and matching build source hash"
+      },
+      "template": {
+        "path": "tests/fixtures/official_tm200ce40t_timer_options_behavior.smbp",
+        "sha256": "5358e5334696e1838e8b34b9efaa84fafb2a7bd97802d2d2ee32ae94a7f52214"
+      },
+      "original": {
+        "path": "output/editor-validation/timer-options-generated-watch/build/program.smbp",
+        "sha256": "1653292a94ce9b4ecefb6075e8ba4afb5723d10e80e27acd1dd480ee7ffacb0f",
+        "bytes": 453678
+      },
+      "editor_saved": {
+        "path": "output/editor-validation/timer-options-generated-watch/timer_options_generated_watch_editor_saved.smbp",
+        "sha256": "7e0dbae16113baf5738f5bf79d8b892a830f570712cd3fc729583aad71519564",
+        "bytes": 470226
+      },
+      "rungs": 105,
+      "IL_lines": 227,
+      "normalized_IL": [
+        [
+          "LD %I0.0",
+          "ST %M513"
+        ],
+        [
+          "LD %I0.1",
+          "ST %M511"
+        ],
+        [
+          "LD %I0.2",
+          "ST %M507"
+        ],
+        [
+          "LD %I0.3",
+          "ST %M508"
+        ],
+        [
+          "LD %I0.4",
+          "ST %M509"
+        ],
+        [
+          "LD %Q0.0",
+          "ST %M502"
+        ],
+        [
+          "LD %Q0.1",
+          "ST %M503"
+        ],
+        [
+          "LD %Q0.2",
+          "ST %M504"
+        ],
+        [
+          "LD %Q0.3",
+          "ST %M505"
+        ],
+        [
+          "LD %Q0.4",
+          "ST %M506"
+        ],
+        [
+          "LD %Q0.5",
+          "ST %M510"
+        ],
+        [
+          "LD %Q0.6",
+          "ST %M512"
+        ],
+        [
+          "LD %Q0.7",
+          "ST %M514"
+        ],
+        [
+          "LD %Q0.8",
+          "ST %M515"
+        ],
+        [
+          "LD %Q0.9",
+          "ST %M516"
+        ],
+        [
+          "LD %Q0.10",
+          "ST %M517"
+        ],
+        [
+          "LD %Q0.11",
+          "ST %M518"
+        ],
+        [
+          "LD %Q0.12",
+          "ST %M519"
+        ],
+        [
+          "LD %Q0.13",
+          "ST %M520"
+        ],
+        [
+          "LD %Q0.14",
+          "ST %M521"
+        ],
+        [
+          "LD %Q0.15",
+          "ST %M501"
+        ],
+        [
+          "LD %S13",
+          "R %M502"
+        ],
+        [
+          "LD %S13",
+          "R %M503"
+        ],
+        [
+          "LD %S13",
+          "R %M504"
+        ],
+        [
+          "LD %S13",
+          "R %M505"
+        ],
+        [
+          "LD %S13",
+          "R %M506"
+        ],
+        [
+          "LD %S13",
+          "R %M510"
+        ],
+        [
+          "LD %S13",
+          "R %M512"
+        ],
+        [
+          "LD %S13",
+          "R %M514"
+        ],
+        [
+          "LD %S13",
+          "R %M515"
+        ],
+        [
+          "LD %S13",
+          "R %M516"
+        ],
+        [
+          "LD %S13",
+          "R %M517"
+        ],
+        [
+          "LD %S13",
+          "R %M518"
+        ],
+        [
+          "LD %S13",
+          "R %M519"
+        ],
+        [
+          "LD %S13",
+          "R %M520"
+        ],
+        [
+          "LD %S13",
+          "R %M521"
+        ],
+        [
+          "LD %S13",
+          "R %M501"
+        ],
+        [
+          "LD %M500",
+          "ANDN %M500",
+          "ST %M500"
+        ],
+        [
+          "LDN %M500",
+          "ST %M501"
+        ],
+        [
+          "LD %M513",
+          "ST %M505"
+        ],
+        [
+          "LD %M511",
+          "ST %M506"
+        ],
+        [
+          "LD %M507",
+          "ST %M507"
+        ],
+        [
+          "LD %M508",
+          "ST %M508"
+        ],
+        [
+          "LD %M509",
+          "ST %M509"
+        ],
+        [
+          "LD %M509",
+          "ST %M502"
+        ],
+        [
+          "LD %M502",
+          "[%TM2.P:=20]"
+        ],
+        [
+          "LDN %M502",
+          "ST %M502"
+        ],
+        [
+          "LD %M508",
+          "ST %M503"
+        ],
+        [
+          "LD %M502",
+          "AND %M503",
+          "ST %M502"
+        ],
+        [
+          "LD %M502",
+          "[%TM2.P:=5]"
+        ],
+        [
+          "LD %M505",
+          "ST %M502"
+        ],
+        [
+          "BLK %TM0",
+          "LD %M502",
+          "IN",
+          "OUT_BLK",
+          "LD Q",
+          "ST %M502",
+          "END_BLK"
+        ],
+        [
+          "LD %M502",
+          "ST %M502"
+        ],
+        [
+          "LD %M506",
+          "ST %M503"
+        ],
+        [
+          "BLK %TM1",
+          "LD %M503",
+          "IN",
+          "OUT_BLK",
+          "LD Q",
+          "ST %M503",
+          "END_BLK"
+        ],
+        [
+          "LD %M503",
+          "ST %M503"
+        ],
+        [
+          "LD %M507",
+          "ST %M504"
+        ],
+        [
+          "BLK %TM2",
+          "LD %M504",
+          "IN",
+          "OUT_BLK",
+          "LD Q",
+          "ST %M504",
+          "END_BLK"
+        ],
+        [
+          "LD %M504",
+          "ST %M504"
+        ],
+        [
+          "LD %M501",
+          "[%MW200:=%TM0.V]"
+        ],
+        [
+          "LD %M501",
+          "[%MW201:=%TM0.P]"
+        ],
+        [
+          "LD %M501",
+          "[%MW202:=%TM1.V]"
+        ],
+        [
+          "LD %M501",
+          "[%MW203:=%TM1.P]"
+        ],
+        [
+          "LD %M501",
+          "[%MW204:=%TM2.V]"
+        ],
+        [
+          "LD %M501",
+          "[%MW205:=%TM2.P]"
+        ],
+        [
+          "LD %M502",
+          "ST %M502"
+        ],
+        [
+          "LD %M503",
+          "ST %M503"
+        ],
+        [
+          "LD %M504",
+          "ST %M504"
+        ],
+        [
+          "LD %M505",
+          "ST %M505"
+        ],
+        [
+          "LD %M506",
+          "ST %M506"
+        ],
+        [
+          "LD %M507",
+          "ST %M510"
+        ],
+        [
+          "LD %M508",
+          "ST %M512"
+        ],
+        [
+          "LD %M509",
+          "ST %M514"
+        ],
+        [
+          "LD %M501",
+          "[%MW4000:=%TM0.V]"
+        ],
+        [
+          "LD [%MW4000>=5]",
+          "ST %M515"
+        ],
+        [
+          "LD %M501",
+          "[%MW4000:=%TM1.V]"
+        ],
+        [
+          "LD [%MW4000>=5]",
+          "ST %M516"
+        ],
+        [
+          "LD %M501",
+          "[%MW4000:=%TM2.V]"
+        ],
+        [
+          "LD [%MW4000>=6]",
+          "ST %M517"
+        ],
+        [
+          "LD %M501",
+          "[%MW4000:=%TM2.P]"
+        ],
+        [
+          "LD [%MW4000=5]",
+          "ST %M518"
+        ],
+        [
+          "LD %M501",
+          "[%MW4000:=%TM2.P]"
+        ],
+        [
+          "LD [%MW4000=20]",
+          "ST %M519"
+        ],
+        [
+          "LD %M501",
+          "[%MW4000:=%TM0.V]"
+        ],
+        [
+          "LD [%MW4000>0]",
+          "ST %M520"
+        ],
+        [
+          "LD %M501",
+          "[%MW4000:=%TM1.V]"
+        ],
+        [
+          "LD [%MW4000>0]",
+          "ST %M521"
+        ],
+        [
+          "LD %M501",
+          "[%MW4000:=%TM2.V]"
+        ],
+        [
+          "LD [%MW4000>0]",
+          "ST %M501"
+        ],
+        [
+          "LD %M502",
+          "ST %Q0.0"
+        ],
+        [
+          "LD %M503",
+          "ST %Q0.1"
+        ],
+        [
+          "LD %M504",
+          "ST %Q0.2"
+        ],
+        [
+          "LD %M505",
+          "ST %Q0.3"
+        ],
+        [
+          "LD %M506",
+          "ST %Q0.4"
+        ],
+        [
+          "LD %M510",
+          "ST %Q0.5"
+        ],
+        [
+          "LD %M512",
+          "ST %Q0.6"
+        ],
+        [
+          "LD %M514",
+          "ST %Q0.7"
+        ],
+        [
+          "LD %M515",
+          "ST %Q0.8"
+        ],
+        [
+          "LD %M516",
+          "ST %Q0.9"
+        ],
+        [
+          "LD %M517",
+          "ST %Q0.10"
+        ],
+        [
+          "LD %M518",
+          "ST %Q0.11"
+        ],
+        [
+          "LD %M519",
+          "ST %Q0.12"
+        ],
+        [
+          "LD %M520",
+          "ST %Q0.13"
+        ],
+        [
+          "LD %M521",
+          "ST %Q0.14"
+        ],
+        [
+          "LD %M501",
+          "ST %Q0.15"
+        ]
+      ],
+      "typed_timers": [
+        {
+          "Address": "%TM0",
+          "Index": "0",
+          "Type": "TON",
+          "Preset": "20",
+          "Base": "OneSecond",
+          "IsRetentive": "true",
+          "IsDynamicPreset": "false"
+        },
+        {
+          "Address": "%TM1",
+          "Index": "1",
+          "Type": "TOF",
+          "Preset": "20",
+          "Base": "OneSecond",
+          "IsRetentive": "true",
+          "IsDynamicPreset": "false"
+        },
+        {
+          "Address": "%TM2",
+          "Index": "2",
+          "Type": "TON",
+          "Preset": "20",
+          "Base": "OneSecond",
+          "IsRetentive": "false",
+          "IsDynamicPreset": "true"
+        }
+      ],
+      "actual_management_token": "FunctLevelMan21_0",
+      "preserved": {
+        "normalized_IL": true,
+        "typed_timer_properties": true,
+        "hardware": true,
+        "watch_rows": true
+      },
+      "serialization_note": "Saved default TON Type and false option fields are omitted; typed defaults remain equal, not raw timer-subtree identity.",
+      "watch_rows": [
+        {
+          "address": "%MW200",
+          "representation": "Decimal"
+        },
+        {
+          "address": "%MW201",
+          "representation": "Decimal"
+        },
+        {
+          "address": "%MW202",
+          "representation": "Decimal"
+        },
+        {
+          "address": "%MW203",
+          "representation": "Decimal"
+        },
+        {
+          "address": "%MW204",
+          "representation": "Decimal"
+        },
+        {
+          "address": "%MW205",
+          "representation": "Decimal"
+        }
+      ],
+      "root_open_save_fresh_reopen": "No error, root personally viewed",
+      "runtime": "only this exact editor-saved watch product was run in the official local simulator",
+      "captures": [
+        {
+          "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/generated-save.png",
+          "path": "editor-evidence/timer-generated/watch-save.png",
+          "repository_path": "docs/validation/editor-evidence/timer-generated/watch-save.png",
+          "bytes": 383148,
+          "sha256": "bd32153d3267595e3862441ee783cc8e9da68ea474ae2193947f53515ddacd6e",
+          "phase": "actual CLI product: No error / saved"
+        },
+        {
+          "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/generated-reopen.png",
+          "path": "editor-evidence/timer-generated/watch-reopen.png",
+          "repository_path": "docs/validation/editor-evidence/timer-generated/watch-reopen.png",
+          "bytes": 499517,
+          "sha256": "1216442076b98f1757b0a975a8a5668ceba5e18123cf3d543e99413bb576fe32",
+          "phase": "exact editor save freshly reopened after another project: No error"
+        }
+      ],
+      "readback": {
+        "path": "output/editor-validation/timer-options-generated-watch/official-readback.json",
+        "sha256": "e10c3afc2b956f99f782780f20ba81484e2ad56ad5228222140d4f956347b037"
+      }
+    }
+  ],
+  "word_map": {
+    "MW200": "TM0 retentive TON V",
+    "MW201": "TM0 P",
+    "MW202": "TM1 retentive TOF V",
+    "MW203": "TM1 P",
+    "MW204": "TM2 dynamic TON V",
+    "MW205": "TM2 P"
+  },
+  "runtime": {
+    "artifact_sha256": "7e0dbae16113baf5738f5bf79d8b892a830f570712cd3fc729583aad71519564",
+    "root_before_RUN": "Online / applications identical / STOP, then official RUN",
+    "RUN_target_proof": {
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793954531373987000-2146.png",
+      "path": "editor-evidence/timer-generated/runtime-target-run.png",
+      "repository_path": "docs/validation/editor-evidence/timer-generated/runtime-target-run.png",
+      "bytes": 300719,
+      "sha256": "4ae9e5c27162965a61bf3d4cb5d479403cdd5e6a672142268e4b133b0882bed4",
+      "phase": "root-viewed Online/RUN/identical target proof at end of runtime stage"
+    },
+    "simulator_reported_target": "TM200CE40T",
+    "simulator_reported_firmware_label": "1.14.1.0; not physical firmware proof",
+    "observations": [
+      {
+        "label": "baseline",
+        "words_MW200_to_MW205": [
+          0,
+          20,
+          0,
+          20,
+          0,
+          20
+        ],
+        "root_personally_viewed": true,
+        "capture": {
+          "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/baseline.png",
+          "path": "editor-evidence/timer-generated/baseline.png",
+          "repository_path": "docs/validation/editor-evidence/timer-generated/baseline.png",
+          "bytes": 416594,
+          "sha256": "7646dcfe8c11973f79671bb24703b43e2a43f5bdfb006318a59f34bf6a762e84",
+          "phase": "root personally viewed settled official local-simulator sample"
+        },
+        "source_capture": null,
+        "host_capture_epoch_ns": null
+      },
+      {
+        "label": "ton-counting",
+        "words_MW200_to_MW205": [
+          1,
+          20,
+          0,
+          20,
+          0,
+          20
+        ],
+        "root_personally_viewed": true,
+        "capture": {
+          "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/ton-counting.png",
+          "path": "editor-evidence/timer-generated/ton-counting.png",
+          "repository_path": "docs/validation/editor-evidence/timer-generated/ton-counting.png",
+          "bytes": 416105,
+          "sha256": "f6eb0f5b32346051a1e6306789ca073b9f683a47a5755c34149d457dc29e0f78",
+          "phase": "root personally viewed settled official local-simulator sample"
+        },
+        "source_capture": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793954272355236000-2146.png",
+        "host_capture_epoch_ns": "1793954272355236000"
+      },
+      {
+        "label": "ton-paused",
+        "words_MW200_to_MW205": [
+          4,
+          20,
+          0,
+          20,
+          0,
+          20
+        ],
+        "root_personally_viewed": true,
+        "capture": {
+          "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/ton-paused.png",
+          "path": "editor-evidence/timer-generated/ton-paused.png",
+          "repository_path": "docs/validation/editor-evidence/timer-generated/ton-paused.png",
+          "bytes": 416327,
+          "sha256": "0bb90f3776111191a82b13d10fe616b4f6135e60e6a0c86caa87d80d4a382ad6",
+          "phase": "root personally viewed settled official local-simulator sample"
+        },
+        "source_capture": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793954276607254000-2146.png",
+        "host_capture_epoch_ns": "1793954276607254000"
+      },
+      {
+        "label": "ton-paused-later",
+        "words_MW200_to_MW205": [
+          4,
+          20,
+          0,
+          20,
+          0,
+          20
+        ],
+        "root_personally_viewed": true,
+        "capture": {
+          "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/ton-paused-later.png",
+          "path": "editor-evidence/timer-generated/ton-paused-later.png",
+          "repository_path": "docs/validation/editor-evidence/timer-generated/ton-paused-later.png",
+          "bytes": 416327,
+          "sha256": "0bb90f3776111191a82b13d10fe616b4f6135e60e6a0c86caa87d80d4a382ad6",
+          "phase": "root personally viewed settled official local-simulator sample"
+        },
+        "source_capture": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793954291762141000-2146.png",
+        "host_capture_epoch_ns": "1793954291762141000"
+      },
+      {
+        "label": "ton-completed",
+        "words_MW200_to_MW205": [
+          20,
+          20,
+          0,
+          20,
+          0,
+          20
+        ],
+        "root_personally_viewed": true,
+        "capture": {
+          "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/ton-completed.png",
+          "path": "editor-evidence/timer-generated/ton-completed.png",
+          "repository_path": "docs/validation/editor-evidence/timer-generated/ton-completed.png",
+          "bytes": 416144,
+          "sha256": "1a171d7d5dc008379d00f886407d99a9753b4263ff7318df4b1cf3290845dadd",
+          "phase": "root personally viewed settled official local-simulator sample"
+        },
+        "source_capture": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793954344242895000-2146.png",
+        "host_capture_epoch_ns": "1793954344242895000"
+      },
+      {
+        "label": "ton-completed-panel",
+        "words_MW200_to_MW205": null,
+        "root_personally_viewed": true,
+        "capture": {
+          "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/ton-completed-panel.png",
+          "path": "editor-evidence/timer-generated/ton-completed-panel.png",
+          "repository_path": "docs/validation/editor-evidence/timer-generated/ton-completed-panel.png",
+          "bytes": 19032,
+          "sha256": "4f0af67e74edb38e9870da8f6325c95269f5beddcec767ff8a98e8920463fba1",
+          "phase": "root personally viewed settled official local-simulator sample"
+        },
+        "source_capture": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793954344063238000-3292.png",
+        "host_capture_epoch_ns": "1793954344063238000"
+      },
+      {
+        "label": "tof-paused",
+        "words_MW200_to_MW205": [
+          20,
+          20,
+          11,
+          20,
+          0,
+          20
+        ],
+        "root_personally_viewed": true,
+        "capture": {
+          "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/tof-paused.png",
+          "path": "editor-evidence/timer-generated/tof-paused.png",
+          "repository_path": "docs/validation/editor-evidence/timer-generated/tof-paused.png",
+          "bytes": 415863,
+          "sha256": "34543477fb17cbd8aaba2a7c790956767f1fac5ecf855e3e0b0eaa570908ca26",
+          "phase": "root personally viewed settled official local-simulator sample"
+        },
+        "source_capture": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793954355994052000-2146.png",
+        "host_capture_epoch_ns": "1793954355994052000"
+      },
+      {
+        "label": "ton-cleared-tof-held",
+        "words_MW200_to_MW205": [
+          0,
+          20,
+          11,
+          20,
+          0,
+          20
+        ],
+        "root_personally_viewed": true,
+        "capture": {
+          "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/ton-cleared-tof-held.png",
+          "path": "editor-evidence/timer-generated/ton-cleared-tof-held.png",
+          "repository_path": "docs/validation/editor-evidence/timer-generated/ton-cleared-tof-held.png",
+          "bytes": 416080,
+          "sha256": "53ccd0baf78b50046330341563111eba7d57ce47aa607ef0dcb71d5eff3a3fce",
+          "phase": "root personally viewed settled official local-simulator sample"
+        },
+        "source_capture": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793954367459971000-2146.png",
+        "host_capture_epoch_ns": "1793954367459971000"
+      },
+      {
+        "label": "tof-paused-later",
+        "words_MW200_to_MW205": [
+          0,
+          20,
+          11,
+          20,
+          0,
+          20
+        ],
+        "root_personally_viewed": true,
+        "capture": {
+          "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/tof-paused-later.png",
+          "path": "editor-evidence/timer-generated/tof-paused-later.png",
+          "repository_path": "docs/validation/editor-evidence/timer-generated/tof-paused-later.png",
+          "bytes": 416080,
+          "sha256": "53ccd0baf78b50046330341563111eba7d57ce47aa607ef0dcb71d5eff3a3fce",
+          "phase": "root personally viewed settled official local-simulator sample"
+        },
+        "source_capture": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793954375844411000-2146.png",
+        "host_capture_epoch_ns": "1793954375844411000"
+      },
+      {
+        "label": "dynamic-before",
+        "words_MW200_to_MW205": [
+          0,
+          20,
+          20,
+          20,
+          1,
+          20
+        ],
+        "root_personally_viewed": true,
+        "capture": {
+          "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/dynamic-before.png",
+          "path": "editor-evidence/timer-generated/dynamic-before.png",
+          "repository_path": "docs/validation/editor-evidence/timer-generated/dynamic-before.png",
+          "bytes": 416300,
+          "sha256": "ec28c83480673ef6431f16578b0442e0caadd521d59b57d1770aee2511889720",
+          "phase": "root personally viewed settled official local-simulator sample"
+        },
+        "source_capture": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793954415164092000-2146.png",
+        "host_capture_epoch_ns": "1793954415164092000"
+      },
+      {
+        "label": "dynamic-after-preset",
+        "words_MW200_to_MW205": [
+          0,
+          20,
+          20,
+          20,
+          5,
+          5
+        ],
+        "root_personally_viewed": true,
+        "capture": {
+          "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/dynamic-after-preset.png",
+          "path": "editor-evidence/timer-generated/dynamic-after-preset.png",
+          "repository_path": "docs/validation/editor-evidence/timer-generated/dynamic-after-preset.png",
+          "bytes": 415966,
+          "sha256": "4d871fcd6c176e093076b90a45b70ddcde476208b678082f06097ecb98c23f68",
+          "phase": "root personally viewed settled official local-simulator sample"
+        },
+        "source_capture": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793954420281523000-2146.png",
+        "host_capture_epoch_ns": "1793954420281523000"
+      },
+      {
+        "label": "dynamic-done-panel",
+        "words_MW200_to_MW205": null,
+        "root_personally_viewed": true,
+        "capture": {
+          "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/dynamic-done-panel.png",
+          "path": "editor-evidence/timer-generated/dynamic-done-panel.png",
+          "repository_path": "docs/validation/editor-evidence/timer-generated/dynamic-done-panel.png",
+          "bytes": 19450,
+          "sha256": "ba0409e02a154a4955c464d8a356122a3a53deceedef0ab7d110e79151cda2f0",
+          "phase": "root personally viewed settled official local-simulator sample"
+        },
+        "source_capture": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793954419116179000-3292.png",
+        "host_capture_epoch_ns": "1793954419116179000"
+      },
+      {
+        "label": "dynamic-cleared",
+        "words_MW200_to_MW205": [
+          0,
+          20,
+          20,
+          20,
+          0,
+          5
+        ],
+        "root_personally_viewed": true,
+        "capture": {
+          "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/dynamic-cleared.png",
+          "path": "editor-evidence/timer-generated/dynamic-cleared.png",
+          "repository_path": "docs/validation/editor-evidence/timer-generated/dynamic-cleared.png",
+          "bytes": 416115,
+          "sha256": "abc80ce80fd14a764c6cd9916fec317d859c49d2c91c3ed1dcb62fe36ca38cef",
+          "phase": "root personally viewed settled official local-simulator sample"
+        },
+        "source_capture": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793954458734705000-2146.png",
+        "host_capture_epoch_ns": "1793954458734705000"
+      },
+      {
+        "label": "dynamic-restored",
+        "words_MW200_to_MW205": [
+          0,
+          20,
+          20,
+          20,
+          0,
+          20
+        ],
+        "root_personally_viewed": true,
+        "capture": {
+          "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/dynamic-restored.png",
+          "path": "editor-evidence/timer-generated/dynamic-restored.png",
+          "repository_path": "docs/validation/editor-evidence/timer-generated/dynamic-restored.png",
+          "bytes": 416287,
+          "sha256": "b7472668343cc2be705d17c98c96da120274a401fbb969328cda421992cb0e68",
+          "phase": "root personally viewed settled official local-simulator sample"
+        },
+        "source_capture": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793954467117584000-2146.png",
+        "host_capture_epoch_ns": "1793954467117584000"
+      },
+      {
+        "label": "final-rearmed",
+        "words_MW200_to_MW205": [
+          0,
+          20,
+          0,
+          20,
+          0,
+          20
+        ],
+        "root_personally_viewed": true,
+        "capture": {
+          "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/final-rearmed.png",
+          "path": "editor-evidence/timer-generated/final-rearmed.png",
+          "repository_path": "docs/validation/editor-evidence/timer-generated/final-rearmed.png",
+          "bytes": 415915,
+          "sha256": "0d4dbb56838e9c884db2597d83c7c57962f54c13af09baadf5d6f515be8850f8",
+          "phase": "root personally viewed settled official local-simulator sample"
+        },
+        "source_capture": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793954508343301000-2146.png",
+        "host_capture_epoch_ns": "1793954508343301000"
+      }
+    ],
+    "host_capture_intervals": {
+      "TON_hold": {
+        "start": "ton-paused",
+        "end": "ton-paused-later",
+        "capture_separation_seconds": 15.154887,
+        "scope": "Host capture separation while value held; not precise controller timing"
+      },
+      "TOF_hold": {
+        "start": "tof-paused",
+        "end": "tof-paused-later",
+        "capture_separation_seconds": 19.850359,
+        "scope": "Host capture separation while value held; not precise controller timing"
+      }
+    },
+    "dynamic_timing_and_refresh_scope": {
+      "enable_action_started_epoch": 1793954410.272526,
+      "panel_capture_epoch": 1793954419.116179,
+      "watch_capture_epoch": 1793954420.281523,
+      "panel_after_action_start_seconds": 8.843652963638306,
+      "watch_after_action_start_seconds": 10.008996963500977,
+      "scope": "Conservative action-to-capture upper bound, not precise enable-edge latency; both samples are earlier than original P20 seconds",
+      "watch_sample": {
+        "V": 5,
+        "P": 5
+      },
+      "panel_sample": {
+        "Q0.2": true,
+        "Q0.10_value_at_least6": true
+      },
+      "same_scan_coherence_claimed": false,
+      "GUI_refresh_seconds": 5,
+      "interpretation": "Active dynamic-preset completion was observed; separate panel and table samples do not establish simultaneous V/Q, clamping or next-tick precision."
+    },
+    "settled_outcomes": [
+      "Retentive TON V4/P20 held with IN false, resumed to V20/Q0 on; disabling after completion cleared V0.",
+      "Retentive TOF V11/P20 held with IN true, resumed to V20/Q1 off; rearming I1 true gave V0/Q1 on.",
+      "Dynamic TON table changed from V1/P20 to V5/P5; a separate panel showed Q2 and Q10 on. Later disable cleared V0/P5 and restore returned V0/P20."
+    ],
+    "source_observations": {
+      "path": "output/editor-validation/timer-options-generated-watch/runtime-observations.json",
+      "sha256": "fd967ed3b54304c080af838aedfa0581c9d3f9d0bbe8fe8e5f9343fcc991cc21"
+    },
+    "action_journal": {
+      "path": "output/editor-validation/timer-options-generated-watch/runtime-actions.jsonl",
+      "sha256": "bca4e515103694328fecd394ebe646b0ae38e187c42fb5927a186859c89ec267",
+      "summary": [
+        {
+          "label": "ton-enable",
+          "started_epoch": 1793954267.481004,
+          "ended_epoch": 1793954271.664076,
+          "exit": 0
+        },
+        {
+          "label": "ton-counting",
+          "started_epoch": 1793954271.6644218,
+          "ended_epoch": 1793954272.612374,
+          "exit": 0
+        },
+        {
+          "label": "ton-pause",
+          "started_epoch": 1793954272.612679,
+          "ended_epoch": 1793954276.880225,
+          "exit": 0
+        },
+        {
+          "label": "ton-resume",
+          "started_epoch": 1793954306.6489139,
+          "ended_epoch": 1793954310.847617,
+          "exit": 0
+        },
+        {
+          "label": "tof-enable",
+          "started_epoch": 1793954321.556559,
+          "ended_epoch": 1793954325.72283,
+          "exit": 0
+        },
+        {
+          "label": "tof-start-delay",
+          "started_epoch": 1793954340.299314,
+          "ended_epoch": 1793954344.5182889,
+          "exit": 0
+        },
+        {
+          "label": "tof-pause",
+          "started_epoch": 1793954352.063773,
+          "ended_epoch": 1793954356.274698,
+          "exit": 0
+        },
+        {
+          "label": "ton-clear-after-completion",
+          "started_epoch": 1793954363.554398,
+          "ended_epoch": 1793954367.723501,
+          "exit": 0
+        },
+        {
+          "label": "tof-paused-later",
+          "started_epoch": 1793954375.111858,
+          "ended_epoch": 1793954376.109449,
+          "exit": 0
+        },
+        {
+          "label": "tof-resume",
+          "started_epoch": 1793954387.907584,
+          "ended_epoch": 1793954392.089568,
+          "exit": 0
+        },
+        {
+          "label": "dynamic-enable",
+          "started_epoch": 1793954410.272526,
+          "ended_epoch": 1793954414.471039,
+          "exit": 0
+        },
+        {
+          "label": "dynamic-before-preset",
+          "started_epoch": 1793954414.471327,
+          "ended_epoch": 1793954415.419345,
+          "exit": 0
+        },
+        {
+          "label": "dynamic-set-five",
+          "started_epoch": 1793954415.4196851,
+          "ended_epoch": 1793954419.566475,
+          "exit": 0
+        },
+        {
+          "label": "dynamic-after-preset",
+          "started_epoch": 1793954419.566758,
+          "ended_epoch": 1793954420.548316,
+          "exit": 0
+        },
+        {
+          "label": "dynamic-disable",
+          "started_epoch": 1793954454.788844,
+          "ended_epoch": 1793954459.0010712,
+          "exit": 0
+        },
+        {
+          "label": "dynamic-release-set-five",
+          "started_epoch": 1793954459.0367181,
+          "ended_epoch": 1793954463.2127411,
+          "exit": 0
+        },
+        {
+          "label": "dynamic-restore-twenty",
+          "started_epoch": 1793954463.24751,
+          "ended_epoch": 1793954467.395995,
+          "exit": 0
+        },
+        {
+          "label": "tof-rearm-after-completion",
+          "started_epoch": 1793954491.542122,
+          "ended_epoch": 1793954495.75722,
+          "exit": 0
+        },
+        {
+          "label": "final-settled",
+          "started_epoch": 1793954507.619562,
+          "ended_epoch": 1793954508.62193,
+          "exit": 0
+        },
+        {
+          "label": "commissioning-before-cleanup",
+          "started_epoch": 1793954527.091746,
+          "ended_epoch": 1793954531.636394,
+          "exit": 0
+        },
+        {
+          "label": "stop-local-simulator",
+          "started_epoch": 1793954559.3502321,
+          "ended_epoch": 1793954563.554133,
+          "exit": 0
+        }
+      ]
+    },
+    "distinct_observation_labels": 15,
+    "unique_runtime_PNG_hashes": 13,
+    "duplicate_image_note": "Repeated held-value captures can have identical PNG bytes; they are separately timestamped observations, not claimed unique controller scans.",
+    "root_reported_cleanup": {
+      "stopped_through_official_Commissioning": true,
+      "panel_absent_after": true,
+      "simulator_host_pid_54047_absent": true,
+      "local_TCP502_listener_absent": true,
+      "lsof_exit": 1,
+      "ps_exact_pid_exit": 1
+    },
+    "cleanup_capture": {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/simulator-stopped.png",
+      "path": "editor-evidence/timer-generated/simulator-stopped.png",
+      "repository_path": "docs/validation/editor-evidence/timer-generated/simulator-stopped.png",
+      "bytes": 287894,
+      "sha256": "60cb2ca84273600cc41a325e5697b80846869fe8dcc671e7555d853ee26e66c4",
+      "phase": "official Commissioning Stop simulator completed; panel absent"
+    },
+    "visible_environment_status": {
+      "banner": "Untrusted DLL detected",
+      "source": "RUN_target_proof capture",
+      "scope": "Visible existing lab environment status. This read-only report did not alter validation or integrity checks; no physical-controller equivalence is asserted."
+    }
+  },
+  "local_oracle": {
+    "existing_distinct_positions": 26,
+    "no_new_frame_total_claimed": true,
+    "VM_paths": [
+      "C++source",
+      "original",
+      "saved",
+      "watch-original",
+      "watch-saved",
+      "recompiled"
+    ],
+    "native_output_paths": [
+      "source",
+      "saved-watch reverse"
+    ],
+    "independent_readonly_check": {
+      "path": "output/reports/timer-generated-independent-2026-11-06/results.json",
+      "sha256": "7c7bc435ff9d9e1f7354d328426349670b2a90a661c5045394a46f65133cf4f8"
+    },
+    "native_SDK_VM_not_official_runtime": true,
+    "literal_oracle": {
+      "path": "tests/test_timer_option_bindings.py",
+      "sha256": "e07b68561a990fa72af70557bad9ae5a60a2e88230bc9dae53a4f9c2e0e67e73",
+      "symbol": "TRACE",
+      "timing_convention": "dt_ms advances time after the current scan in native and VM APIs; it is not official GUI timing.",
+      "rows": [
+        {
+          "dt_ms": 0,
+          "true_input_indices": [],
+          "expected_MW200_to_MW205": [
+            0,
+            20,
+            0,
+            20,
+            0,
+            20
+          ],
+          "expected_Q0_to_Q15_bits": "0000000000001000"
+        },
+        {
+          "dt_ms": 6000,
+          "true_input_indices": [
+            0
+          ],
+          "expected_MW200_to_MW205": [
+            0,
+            20,
+            0,
+            20,
+            0,
+            20
+          ],
+          "expected_Q0_to_Q15_bits": "0001000000001000"
+        },
+        {
+          "dt_ms": 0,
+          "true_input_indices": [
+            0
+          ],
+          "expected_MW200_to_MW205": [
+            6,
+            20,
+            0,
+            20,
+            0,
+            20
+          ],
+          "expected_Q0_to_Q15_bits": "0001000010001100"
+        },
+        {
+          "dt_ms": 10000,
+          "true_input_indices": [],
+          "expected_MW200_to_MW205": [
+            6,
+            20,
+            0,
+            20,
+            0,
+            20
+          ],
+          "expected_Q0_to_Q15_bits": "0000000010001100"
+        },
+        {
+          "dt_ms": 0,
+          "true_input_indices": [],
+          "expected_MW200_to_MW205": [
+            6,
+            20,
+            0,
+            20,
+            0,
+            20
+          ],
+          "expected_Q0_to_Q15_bits": "0000000010001100"
+        },
+        {
+          "dt_ms": 13000,
+          "true_input_indices": [
+            0
+          ],
+          "expected_MW200_to_MW205": [
+            6,
+            20,
+            0,
+            20,
+            0,
+            20
+          ],
+          "expected_Q0_to_Q15_bits": "0001000010001100"
+        },
+        {
+          "dt_ms": 1000,
+          "true_input_indices": [
+            0
+          ],
+          "expected_MW200_to_MW205": [
+            19,
+            20,
+            0,
+            20,
+            0,
+            20
+          ],
+          "expected_Q0_to_Q15_bits": "0001000010001100"
+        },
+        {
+          "dt_ms": 0,
+          "true_input_indices": [
+            0
+          ],
+          "expected_MW200_to_MW205": [
+            20,
+            20,
+            0,
+            20,
+            0,
+            20
+          ],
+          "expected_Q0_to_Q15_bits": "1001000010001100"
+        },
+        {
+          "dt_ms": 0,
+          "true_input_indices": [],
+          "expected_MW200_to_MW205": [
+            0,
+            20,
+            0,
+            20,
+            0,
+            20
+          ],
+          "expected_Q0_to_Q15_bits": "0000000000001000"
+        },
+        {
+          "dt_ms": 0,
+          "true_input_indices": [
+            1
+          ],
+          "expected_MW200_to_MW205": [
+            0,
+            20,
+            0,
+            20,
+            0,
+            20
+          ],
+          "expected_Q0_to_Q15_bits": "0100100000001000"
+        },
+        {
+          "dt_ms": 6000,
+          "true_input_indices": [],
+          "expected_MW200_to_MW205": [
+            0,
+            20,
+            0,
+            20,
+            0,
+            20
+          ],
+          "expected_Q0_to_Q15_bits": "0100000000001000"
+        },
+        {
+          "dt_ms": 0,
+          "true_input_indices": [],
+          "expected_MW200_to_MW205": [
+            0,
+            20,
+            6,
+            20,
+            0,
+            20
+          ],
+          "expected_Q0_to_Q15_bits": "0100000001001010"
+        },
+        {
+          "dt_ms": 10000,
+          "true_input_indices": [
+            1
+          ],
+          "expected_MW200_to_MW205": [
+            0,
+            20,
+            6,
+            20,
+            0,
+            20
+          ],
+          "expected_Q0_to_Q15_bits": "0100100001001010"
+        },
+        {
+          "dt_ms": 0,
+          "true_input_indices": [
+            1
+          ],
+          "expected_MW200_to_MW205": [
+            0,
+            20,
+            6,
+            20,
+            0,
+            20
+          ],
+          "expected_Q0_to_Q15_bits": "0100100001001010"
+        },
+        {
+          "dt_ms": 13000,
+          "true_input_indices": [],
+          "expected_MW200_to_MW205": [
+            0,
+            20,
+            6,
+            20,
+            0,
+            20
+          ],
+          "expected_Q0_to_Q15_bits": "0100000001001010"
+        },
+        {
+          "dt_ms": 1000,
+          "true_input_indices": [],
+          "expected_MW200_to_MW205": [
+            0,
+            20,
+            19,
+            20,
+            0,
+            20
+          ],
+          "expected_Q0_to_Q15_bits": "0100000001001010"
+        },
+        {
+          "dt_ms": 0,
+          "true_input_indices": [],
+          "expected_MW200_to_MW205": [
+            0,
+            20,
+            20,
+            20,
+            0,
+            20
+          ],
+          "expected_Q0_to_Q15_bits": "0000000001001010"
+        },
+        {
+          "dt_ms": 0,
+          "true_input_indices": [
+            1
+          ],
+          "expected_MW200_to_MW205": [
+            0,
+            20,
+            0,
+            20,
+            0,
+            20
+          ],
+          "expected_Q0_to_Q15_bits": "0100100000001000"
+        },
+        {
+          "dt_ms": 0,
+          "true_input_indices": [
+            1,
+            4
+          ],
+          "expected_MW200_to_MW205": [
+            0,
+            20,
+            0,
+            20,
+            0,
+            20
+          ],
+          "expected_Q0_to_Q15_bits": "0100100100001000"
+        },
+        {
+          "dt_ms": 7000,
+          "true_input_indices": [
+            1,
+            2
+          ],
+          "expected_MW200_to_MW205": [
+            0,
+            20,
+            0,
+            20,
+            0,
+            20
+          ],
+          "expected_Q0_to_Q15_bits": "0100110000001000"
+        },
+        {
+          "dt_ms": 0,
+          "true_input_indices": [
+            1,
+            2
+          ],
+          "expected_MW200_to_MW205": [
+            0,
+            20,
+            0,
+            20,
+            7,
+            20
+          ],
+          "expected_Q0_to_Q15_bits": "0100110000101001"
+        },
+        {
+          "dt_ms": 999,
+          "true_input_indices": [
+            1,
+            2,
+            3
+          ],
+          "expected_MW200_to_MW205": [
+            0,
+            20,
+            0,
+            20,
+            7,
+            5
+          ],
+          "expected_Q0_to_Q15_bits": "0100111000110001"
+        },
+        {
+          "dt_ms": 1,
+          "true_input_indices": [
+            1,
+            2,
+            3
+          ],
+          "expected_MW200_to_MW205": [
+            0,
+            20,
+            0,
+            20,
+            7,
+            5
+          ],
+          "expected_Q0_to_Q15_bits": "0100111000110001"
+        },
+        {
+          "dt_ms": 0,
+          "true_input_indices": [
+            1,
+            2,
+            3
+          ],
+          "expected_MW200_to_MW205": [
+            0,
+            20,
+            0,
+            20,
+            7,
+            5
+          ],
+          "expected_Q0_to_Q15_bits": "0110111000110001"
+        },
+        {
+          "dt_ms": 0,
+          "true_input_indices": [
+            1
+          ],
+          "expected_MW200_to_MW205": [
+            0,
+            20,
+            0,
+            20,
+            0,
+            5
+          ],
+          "expected_Q0_to_Q15_bits": "0100100000010000"
+        },
+        {
+          "dt_ms": 0,
+          "true_input_indices": [
+            1,
+            4
+          ],
+          "expected_MW200_to_MW205": [
+            0,
+            20,
+            0,
+            20,
+            0,
+            20
+          ],
+          "expected_Q0_to_Q15_bits": "0100100100001000"
+        }
+      ]
+    },
+    "review_source_pins": {
+      "m200/project.py": "3299d4cbecb3acaffbb6c222c1a178861b99c044a650af37648bba02306258e5",
+      "m200/timer_profile.py": "ca3f7855752418db88698ab0a6fff8ead02f67d8c63c767baeb7b0f985fd346e",
+      "m200/timers.py": "384e3c26facd76ed8da5449d001348fe1c1dd818a73532ab9c782e6a9b0fedf6",
+      "sdk/plc.hpp": "b1d6f04ab2ce88d4e37ac781a299f134c5882971f2d593ead502be3877e784b3"
+    },
+    "recompiled_artifact": {
+      "path": "output/editor-validation/timer-options-generated/recompiled/program.smbp",
+      "sha256": "2c7c1feb4f46c1a238d10aca9217d627b5abeb64ffd25c004eef64ce764ed114",
+      "bytes": 787594,
+      "rungs": 201,
+      "IL_lines": 420
+    },
+    "recompiled_raw_IL_identity_claimed": false,
+    "recompiled_GUI_tested": false,
+    "check_script": {
+      "path": "output/reports/timer-generated-independent-2026-11-06/check.py",
+      "sha256": "d2a89be747b061a604ffa4013c4893aefda34acfd841fe860445c4df6093d43b"
+    }
+  },
+  "prior_paired_controls": {
+    "record": "TIMER-OPTIONS-OFFICIAL-OBSERVATIONS.json",
+    "scope": "Earlier hand-built diagnostic and flags-off controls are separate. No generated-product flags-off control runtime is claimed here."
+  },
+  "limits": [
+    "Only three separate modes at base 1000 ms / actual Man21; no other base, level, kind or combined-mode admission is inferred.",
+    "The five-second GUI refresh and separate captures prevent fine timing, same-scan, V-clamping or next-tick conclusions.",
+    "No physical PLC, controller firmware or output-load proof.",
+    "Only official simulator buttons were used; no forced memory or external TCP client.",
+    "No full regression suite was run for this GUI stage.",
+    "The RUN capture retains the Untrusted DLL detected lab banner; no integrity-check bypass or physical-controller equivalence is claimed."
+  ],
+  "copied_PNG_count": 21,
+  "copied_PNG_bytes": 7800038,
+  "capture_copy_manifest": [
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated/generated-save.png",
+      "path": "editor-evidence/timer-generated/plain-save.png",
+      "repository_path": "docs/validation/editor-evidence/timer-generated/plain-save.png",
+      "bytes": 381377,
+      "sha256": "ebd7fafbd9f10fb35e2398554771109eead7641d6406855c54f2258d3e37fb62",
+      "phase": "actual CLI product: No error / saved"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated/generated-reopen.png",
+      "path": "editor-evidence/timer-generated/plain-reopen.png",
+      "repository_path": "docs/validation/editor-evidence/timer-generated/plain-reopen.png",
+      "bytes": 498798,
+      "sha256": "e0197bc49af39cd61ebde8346963750b23e3814f4c8d18c48c71c32689a0a6d1",
+      "phase": "exact editor save freshly reopened after another project: No error"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/generated-save.png",
+      "path": "editor-evidence/timer-generated/watch-save.png",
+      "repository_path": "docs/validation/editor-evidence/timer-generated/watch-save.png",
+      "bytes": 383148,
+      "sha256": "bd32153d3267595e3862441ee783cc8e9da68ea474ae2193947f53515ddacd6e",
+      "phase": "actual CLI product: No error / saved"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/generated-reopen.png",
+      "path": "editor-evidence/timer-generated/watch-reopen.png",
+      "repository_path": "docs/validation/editor-evidence/timer-generated/watch-reopen.png",
+      "bytes": 499517,
+      "sha256": "1216442076b98f1757b0a975a8a5668ceba5e18123cf3d543e99413bb576fe32",
+      "phase": "exact editor save freshly reopened after another project: No error"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/baseline.png",
+      "path": "editor-evidence/timer-generated/baseline.png",
+      "repository_path": "docs/validation/editor-evidence/timer-generated/baseline.png",
+      "bytes": 416594,
+      "sha256": "7646dcfe8c11973f79671bb24703b43e2a43f5bdfb006318a59f34bf6a762e84",
+      "phase": "root personally viewed settled official local-simulator sample"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/ton-counting.png",
+      "path": "editor-evidence/timer-generated/ton-counting.png",
+      "repository_path": "docs/validation/editor-evidence/timer-generated/ton-counting.png",
+      "bytes": 416105,
+      "sha256": "f6eb0f5b32346051a1e6306789ca073b9f683a47a5755c34149d457dc29e0f78",
+      "phase": "root personally viewed settled official local-simulator sample"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/ton-paused.png",
+      "path": "editor-evidence/timer-generated/ton-paused.png",
+      "repository_path": "docs/validation/editor-evidence/timer-generated/ton-paused.png",
+      "bytes": 416327,
+      "sha256": "0bb90f3776111191a82b13d10fe616b4f6135e60e6a0c86caa87d80d4a382ad6",
+      "phase": "root personally viewed settled official local-simulator sample"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/ton-paused-later.png",
+      "path": "editor-evidence/timer-generated/ton-paused-later.png",
+      "repository_path": "docs/validation/editor-evidence/timer-generated/ton-paused-later.png",
+      "bytes": 416327,
+      "sha256": "0bb90f3776111191a82b13d10fe616b4f6135e60e6a0c86caa87d80d4a382ad6",
+      "phase": "root personally viewed settled official local-simulator sample"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/ton-completed.png",
+      "path": "editor-evidence/timer-generated/ton-completed.png",
+      "repository_path": "docs/validation/editor-evidence/timer-generated/ton-completed.png",
+      "bytes": 416144,
+      "sha256": "1a171d7d5dc008379d00f886407d99a9753b4263ff7318df4b1cf3290845dadd",
+      "phase": "root personally viewed settled official local-simulator sample"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/ton-completed-panel.png",
+      "path": "editor-evidence/timer-generated/ton-completed-panel.png",
+      "repository_path": "docs/validation/editor-evidence/timer-generated/ton-completed-panel.png",
+      "bytes": 19032,
+      "sha256": "4f0af67e74edb38e9870da8f6325c95269f5beddcec767ff8a98e8920463fba1",
+      "phase": "root personally viewed settled official local-simulator sample"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/tof-paused.png",
+      "path": "editor-evidence/timer-generated/tof-paused.png",
+      "repository_path": "docs/validation/editor-evidence/timer-generated/tof-paused.png",
+      "bytes": 415863,
+      "sha256": "34543477fb17cbd8aaba2a7c790956767f1fac5ecf855e3e0b0eaa570908ca26",
+      "phase": "root personally viewed settled official local-simulator sample"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/ton-cleared-tof-held.png",
+      "path": "editor-evidence/timer-generated/ton-cleared-tof-held.png",
+      "repository_path": "docs/validation/editor-evidence/timer-generated/ton-cleared-tof-held.png",
+      "bytes": 416080,
+      "sha256": "53ccd0baf78b50046330341563111eba7d57ce47aa607ef0dcb71d5eff3a3fce",
+      "phase": "root personally viewed settled official local-simulator sample"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/tof-paused-later.png",
+      "path": "editor-evidence/timer-generated/tof-paused-later.png",
+      "repository_path": "docs/validation/editor-evidence/timer-generated/tof-paused-later.png",
+      "bytes": 416080,
+      "sha256": "53ccd0baf78b50046330341563111eba7d57ce47aa607ef0dcb71d5eff3a3fce",
+      "phase": "root personally viewed settled official local-simulator sample"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/dynamic-before.png",
+      "path": "editor-evidence/timer-generated/dynamic-before.png",
+      "repository_path": "docs/validation/editor-evidence/timer-generated/dynamic-before.png",
+      "bytes": 416300,
+      "sha256": "ec28c83480673ef6431f16578b0442e0caadd521d59b57d1770aee2511889720",
+      "phase": "root personally viewed settled official local-simulator sample"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/dynamic-after-preset.png",
+      "path": "editor-evidence/timer-generated/dynamic-after-preset.png",
+      "repository_path": "docs/validation/editor-evidence/timer-generated/dynamic-after-preset.png",
+      "bytes": 415966,
+      "sha256": "4d871fcd6c176e093076b90a45b70ddcde476208b678082f06097ecb98c23f68",
+      "phase": "root personally viewed settled official local-simulator sample"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/dynamic-done-panel.png",
+      "path": "editor-evidence/timer-generated/dynamic-done-panel.png",
+      "repository_path": "docs/validation/editor-evidence/timer-generated/dynamic-done-panel.png",
+      "bytes": 19450,
+      "sha256": "ba0409e02a154a4955c464d8a356122a3a53deceedef0ab7d110e79151cda2f0",
+      "phase": "root personally viewed settled official local-simulator sample"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/dynamic-cleared.png",
+      "path": "editor-evidence/timer-generated/dynamic-cleared.png",
+      "repository_path": "docs/validation/editor-evidence/timer-generated/dynamic-cleared.png",
+      "bytes": 416115,
+      "sha256": "abc80ce80fd14a764c6cd9916fec317d859c49d2c91c3ed1dcb62fe36ca38cef",
+      "phase": "root personally viewed settled official local-simulator sample"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/dynamic-restored.png",
+      "path": "editor-evidence/timer-generated/dynamic-restored.png",
+      "repository_path": "docs/validation/editor-evidence/timer-generated/dynamic-restored.png",
+      "bytes": 416287,
+      "sha256": "b7472668343cc2be705d17c98c96da120274a401fbb969328cda421992cb0e68",
+      "phase": "root personally viewed settled official local-simulator sample"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/final-rearmed.png",
+      "path": "editor-evidence/timer-generated/final-rearmed.png",
+      "repository_path": "docs/validation/editor-evidence/timer-generated/final-rearmed.png",
+      "bytes": 415915,
+      "sha256": "0d4dbb56838e9c884db2597d83c7c57962f54c13af09baadf5d6f515be8850f8",
+      "phase": "root personally viewed settled official local-simulator sample"
+    },
+    {
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793954531373987000-2146.png",
+      "path": "editor-evidence/timer-generated/runtime-target-run.png",
+      "repository_path": "docs/validation/editor-evidence/timer-generated/runtime-target-run.png",
+      "bytes": 300719,
+      "sha256": "4ae9e5c27162965a61bf3d4cb5d479403cdd5e6a672142268e4b133b0882bed4",
+      "phase": "root-viewed Online/RUN/identical target proof at end of runtime stage"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/timer-options-generated-watch/simulator-stopped.png",
+      "path": "editor-evidence/timer-generated/simulator-stopped.png",
+      "repository_path": "docs/validation/editor-evidence/timer-generated/simulator-stopped.png",
+      "bytes": 287894,
+      "sha256": "60cb2ca84273600cc41a325e5697b80846869fe8dcc671e7555d853ee26e66c4",
+      "phase": "official Commissioning Stop simulator completed; panel absent"
+    }
+  ]
+}
