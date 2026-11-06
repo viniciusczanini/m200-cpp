@@ -256,16 +256,14 @@ class CommunicationXMLTests(unittest.TestCase):
         self.assertEqual(b.find("ObjType/Value/FBComObjTypeParameterEnums").text, "IW")
         self.assertEqual(b.find("IndexData").get("Type"), INT_TYPE)
 
-    def test_unproven_enum_or_block_export_fails_without_mutation(self):
+    def test_unknown_enum_or_mismatched_block_export_fails_without_mutation(self):
         for cfg in [
             ModbusConfig(kind="WRITE_READ_VAR"),
         ]:
             sw = software(block())
             before = ET.tostring(sw)
             with self.subTest(cfg=cfg), self.assertRaises(CompileError):
-                comm.write_blocks(
-                    Program(communications={"%" + cfg.kind + "0": cfg}), sw
-                )
+                comm.write_blocks(Program(communications={"%READ_VAR0": cfg}), sw)
             self.assertEqual(ET.tostring(sw), before)
         with self.assertRaises(CompileError):
             comm.read_blocks(software(block(obj="Coils")))

@@ -1,0 +1,214 @@
+{
+  "format": "m200-register-config-foundation-results-v1",
+  "date": "2026-11-06",
+  "target": "TM200CE40T",
+  "repository_head_at_report": "b5584ca36eee3450946030596aa71979f59e6be4",
+  "scope": "Standalone typed Register CONFIG codec only. It is not integrated into config/project/Program/SDK, is not usable through the C++ compiler, and does not admit native Register projects.",
+  "product_admission": {
+    "status": "still gated",
+    "actual_saved_projects_still_refused": true,
+    "other_product_modules_importing_or_using_codec": [],
+    "no_Register_runtime_state_or_Cpp_API_added": true
+  },
+  "api": {
+    "read_registers": "read_registers(sw, referenced_ids=()) returns int->RegisterMode; IDs0..3, known Fifo default only for valid referenced omitted rows, explicit Fifo/Lifo preserved",
+    "write_registers": "Validates existing owned data and new typed mapping, stages a fresh Registers collection, then replaces that collection only. Sibling order/tail and unrelated XML are preserved.",
+    "mode_values": {
+      "RegisterMode.FIFO": "Fifo",
+      "RegisterMode.LIFO": "Lifo"
+    },
+    "writer_mode_requirement": "RegisterMode members, not implicitly coerced strings/integers",
+    "validation_limit": "This codec does not validate the whole hardware profile, allocations, native operands, IL, graphs or execution."
+  },
+  "source_pin": {
+    "scope": "Two new owned files plus exact optional lab inputs; no claim of a complete combined repository snapshot yet.",
+    "files": [
+      {
+        "path": "m200/register_xml.py",
+        "bytes": 4662,
+        "sha256": "8cccf50926e13978df2389afb48cf37409b451e8b4b80be86e1f3299dd292f71"
+      },
+      {
+        "path": "tests/test_register_xml.py",
+        "bytes": 13184,
+        "sha256": "07ebf1a24864e75551c561e6a5ce9ea049d2212568c19ef9d4a008952a577de3"
+      }
+    ]
+  },
+  "red": {
+    "methods": 18,
+    "failures": 18,
+    "errors": 0,
+    "cause": "new isolated codec module absent",
+    "log": {
+      "path": "output/diagnostics/native-blocks-research-2026-11-06/register-codec-red.log",
+      "bytes": 17345,
+      "sha256": "fe79a40828a490d486defac5fa6fae2381bb42ff1591b0c9ab7fccaf63efacab"
+    }
+  },
+  "focused": {
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "tests.test_register_xml",
+      "-v"
+    ],
+    "methods": 18,
+    "status": "passed",
+    "seconds": 0.038,
+    "skipped": 0,
+    "log": {
+      "path": "output/diagnostics/native-blocks-research-2026-11-06/register-codec-green.log",
+      "bytes": 2017,
+      "sha256": "175f06a15b11271cf89cecfe285ac75159d51995031f7e0fe4dd5f140896b718"
+    },
+    "always_run_methods": 17,
+    "conditional_authentic_lab_methods": 1,
+    "portable_checkout_expectation": "If either unpromoted lab save is absent, only the authentic-save method skips. The17independent literal/negative/atomicity methods still run. If present, the saved files must match exact hashes; mismatch fails."
+  },
+  "coverage": [
+    "Both literal native modes and omitted Fifo defaults",
+    "Referenced-only default discovery, explicit modes and sparse IDs/all4bounds",
+    "Strict IDs, address/index agreement, duplicate collection/entry/field rejection",
+    "Unknown/nested/attributed/mixed-content/noncanonical owned forms",
+    "Malformed existing Register data not silently replaced",
+    "Invalid new mappings rejected without mutating the input tree",
+    "Owned replacement preserves sibling objects/order/tail and unrelated attributes",
+    "Exact native save readback plus unchanged whole-project refusal"
+  ],
+  "actual_native_saves": {
+    "role": "Unpromoted read-only local test inputs, not new public fixtures or runtime evidence.",
+    "files": [
+      {
+        "path": "output/editor-validation/native-register-shared-request/editor-saved/register_fifo_editor_saved.smbp",
+        "bytes": 106489,
+        "sha256": "85219725709cbe90641e25bedddd6bfa4f13011a55e01be4ba087f8f42b09189"
+      },
+      {
+        "path": "output/editor-validation/native-register-shared-request/editor-saved/register_lifo_editor_saved.smbp",
+        "bytes": 106627,
+        "sha256": "8d04a2bc22bc2466a928ea185d41641f53c5493e26a2a19d690ef8e55822c1ab"
+      }
+    ],
+    "FIFO_configuration": "Registers collection empty despite referenced R0; read_registers(sw,(0,)) resolves defaultFifo",
+    "LIFO_configuration": "Explicit Register R0/Index0/TypeLifo",
+    "original_bytes_preserved": true
+  },
+  "primary_references": {
+    "plan": "docs/capabilities/REGISTER-IMPLEMENTATION-PLAN.md",
+    "research": "docs/capabilities/NATIVE-BLOCKS-NEXT-RESEARCH.md",
+    "Generic_Functions": "EIO0000003289.04 pp141\u2013146; fixed16words/16bits and register modes",
+    "M200_Programming": "EIO0000002019.06 pp21/25; four native register resources",
+    "installed_default_proof": {
+      "path": "output/diagnostics/native-blocks-research-2026-11-06/register-default-proof.json",
+      "bytes": 1900,
+      "sha256": "6b06a05f24250e6e15a75387f89f6813095b203e98d04e91e30b79a8d2145e31"
+    },
+    "limits": "These support configuration facts only in this report; no queue/reset/edge/capacity/lifecycle behavior is claimed."
+  },
+  "checks": {
+    "owned_python_ruff_check": "passed",
+    "owned_python_ruff_format": "passed",
+    "owned_python_py_compile": "passed",
+    "git_diff_check": "passed"
+  },
+  "independent_review": {
+    "status": "no actionable code finding in isolated codec scope",
+    "positive_literal_cases": 5,
+    "malformed_owned_cases": 20,
+    "invalid_mapping_atomic_cases": 4,
+    "invalid_reference_cases": 5,
+    "exact_saved_mode_cases": 2,
+    "focused_methods": 18,
+    "focused_seconds": 0.044,
+    "focused_skips": 0,
+    "simulated_missing_private_input": {
+      "tests_run": 1,
+      "skipped": 1,
+      "reason": "Optional pinned local editor saves are not present; no fixture was promoted"
+    },
+    "documentation_observation": "Resolved: public results disclose17 always-run methods plus1 conditional pinned-lab method, with actual18passes/0skips and the simulated explicit-skip control.",
+    "probes": {
+      "path": "output/reports/register-codec-independent-review-2026-11-06/probe-results.json",
+      "bytes": 6059,
+      "sha256": "938b802141fe0759ee04fbbbc0b69122962b89296f8823dc752bf677e7914937"
+    },
+    "probe_script": {
+      "path": "output/reports/register-codec-independent-review-2026-11-06/probe.py",
+      "bytes": 9571,
+      "sha256": "8ca1314c152ee06fa0490d94eb33fd3e9e4b2a21b113c8bdcc5fba2701737e16"
+    },
+    "focused_log": {
+      "path": "output/reports/register-codec-independent-review-2026-11-06/focused.log",
+      "bytes": 2017,
+      "sha256": "0e906d95bb8bddad0894af268cf47b6fef83502840d6deeabef527dd56e888ba"
+    },
+    "source_snapshot_equal_to_owner_pin": true,
+    "scope": "Read-only standalone config review; no new whole-project, SDK/runtime or full-suite evidence.",
+    "narrative": {
+      "path": "output/reports/register-codec-independent-review-2026-11-06/REVIEW.md",
+      "bytes": 2904,
+      "sha256": "797aff9eb335c6a670fdb6c809237f6949eb080e224bb70a1dbdcc1e78eec7c1"
+    },
+    "verification": {
+      "path": "output/reports/register-codec-independent-review-2026-11-06/verification.json",
+      "bytes": 717,
+      "sha256": "b4fe9b620f0648770c93f67c3973ce990a92d24cac8c7095bec3225a161b81ff"
+    }
+  },
+  "combined_full_regression": {
+    "status": "passed",
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "base_commit": "b5584ca36eee3450946030596aa71979f59e6be4",
+    "methods": 544,
+    "seconds": 187.332,
+    "skips": 0,
+    "standalone_register_foundation_methods": 18,
+    "write_read_profile_methods": 10,
+    "source_input_pins": 141,
+    "source_stable_after_run": true,
+    "source_matches_at_report_verification": true,
+    "optional_register_lab_inputs_pinned": true,
+    "optional_Register_lab_method_skipped": false,
+    "log": {
+      "path": "output/diagnostics/modbus-write-read-profile-2026-11-06/full-regression.log",
+      "bytes": 57525,
+      "sha256": "2d618087e5a01d38640151acfee5116f29b14e06532df676d39068af94351851"
+    },
+    "source_pin": {
+      "path": "output/diagnostics/modbus-write-read-profile-2026-11-06/source-pin.json",
+      "bytes": 15600,
+      "sha256": "5f298d2d7242ce5aa120a8df990c98c183cd135b4a782396a1b3aa2bbbe4848c"
+    },
+    "result": {
+      "path": "output/diagnostics/modbus-write-read-profile-2026-11-06/full-result.json",
+      "bytes": 361,
+      "sha256": "69a4bfe78263310b616b894dd926449c948ba9fe0e1894d6663fc9e3b3e321fd"
+    },
+    "scope": "One combined local regression owned by the WRITE_READ_VAR lane/root. Includes WR binding work plus the isolated Register config foundation; no Register C++/IR/SDK/project admission.",
+    "counting": "544 is the combined total, already including18foundation methods and10WR-profile methods. Focused/reviewer repetitions and negative subcases are not added again.",
+    "command_provenance": "Direct unittest invocation, confirmed by suite owner; equivalent to the Makefile check recipe, not a separate make invocation."
+  },
+  "counting": "18focused methods are not a complete native Register feature test total. Individual negative subcases/review repetitions and documentary/injected probe positions must not be added as extra unit tests or native runtime frames.",
+  "changes_excluded": [
+    "No config/project/Program/SDK integration",
+    "No whole-project or C++ Register admission",
+    "No fixture promotion",
+    "No new editor/simulator/physical observations",
+    "No GUI/Wine/network/CI/stage/commit operation by this lane"
+  ],
+  "focused_result_manifest": {
+    "path": "output/diagnostics/native-blocks-research-2026-11-06/register-codec-focused-results.json",
+    "bytes": 2864,
+    "sha256": "4412add5de1c74952b7deb47c8628a88fd5f295363bcb10996307650479c190a"
+  }
+}

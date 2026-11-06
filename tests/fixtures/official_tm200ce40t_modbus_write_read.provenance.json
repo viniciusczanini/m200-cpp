@@ -1,0 +1,75 @@
+{
+  "source": "User local Schneider Basic lab; official Ctrl+S save of a writable disposable P: candidate copy, followed by fresh reopen of an exact saved-byte clone",
+  "editor": "EcoStruxure Machine Expert Basic 1.4 build 484",
+  "target": "TM200CE40T",
+  "copied_utc": "2026-11-06",
+  "file": "official_tm200ce40t_modbus_write_read.smbp",
+  "sha256": "6a7edd820fcaee97cc4c1c783005f0a88a0409c98934e7b6964fbce1004bb52e",
+  "bytes": 89601,
+  "original_modified": false,
+  "parent_candidate": {
+    "file": "07_write_read_mw_fc23_il_only.smbp",
+    "sha256": "f0620597497aa9fae11ef0ab2f881412815cdf5cb3001a816b9c1f205efae745",
+    "operation": "Frozen IL-only candidate copied byte-for-byte to writable disposable P: working file; official editor converted it to the two-entity Execute-only Ladder form and Ctrl+S saved the working file. Saved bytes copied unchanged to a separate artifact; another project opened before this exact saved-byte clone was freshly reopened."
+  },
+  "hardware_template_sha256": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf",
+  "hardware_change_from_authentic_template": [
+    {
+      "path": "HardwareConfiguration/Plc/SerialLineConfiguration/Addressing",
+      "from": "SlaveAddressing",
+      "to": "MasterAddressing"
+    }
+  ],
+  "configuration": {
+    "kind": "WRITE_READ_VAR",
+    "management_level": "FunctLevelMan21_0",
+    "human_level": "14.0",
+    "link_xml": "SerialLine1",
+    "remote_device_id": 1,
+    "timeout_100ms": 100,
+    "object_xml": "MW",
+    "first_write_obj": 17,
+    "write_quantity": 2,
+    "index_data_out": 300,
+    "first_read_obj": 41,
+    "read_quantity": 3,
+    "index_data_in": 400
+  },
+  "observed_graph": [
+    {
+      "type": "NormalContact",
+      "descriptor": "%M12",
+      "row": 0,
+      "column": 0,
+      "connection": "Left, Right"
+    },
+    {
+      "type": "WriteReadVarBasic",
+      "descriptor": "%WRITE_READ_VAR0",
+      "row": 0,
+      "column": 1,
+      "connection": "Left"
+    }
+  ],
+  "editor_save": {
+    "status": "No error",
+    "observed_by": "root local desktop GUI operator",
+    "capture_file": "docs/validation/editor-evidence/modbus-bindings/07_write_read_mw_fc23_il_only_save.png",
+    "capture_sha256": "4b375102d02a10e6e958fc4f53f4c04fbb98d1f6c46db320e115a9f73bc6f0d6"
+  },
+  "editor_fresh_reopen": {
+    "status": "No error",
+    "observed_by": "root local desktop GUI operator",
+    "capture_file": "docs/validation/editor-evidence/modbus-bindings/07_reopen.png",
+    "capture_sha256": "7be78a4a396440645926e04386a189be5ca15db8e38e3a8cf230c052e8dcc6d6"
+  },
+  "local_readback": {
+    "file": "/Users/tommy/Offline/plc-mac-lab/diagnostics/modbus-next-bindings-20261106/editor-saved/07_write_read_mw_fc23_il_only_readback.json",
+    "sha256": "f7b3a37ecd937f79b53b8ea7afb9737b6c9e876744af6b1965948e2c44f54f97",
+    "normalized_IL_equal": true,
+    "hardware_semantics_equal": true,
+    "typed_function_blocks_equal": true,
+    "normalization": "Official Ladder conversion created exactly two entities and selected Ladder; IL spacing is preserved in this exact fixture"
+  },
+  "scope": "Exact static MW WRITE_READ_VAR ten-field binding and Execute-only graph at actual Man21/SL1. No native compilation, actual transaction, firmware or physical PLC proof; Abort/connected status forms remain separate."
+}

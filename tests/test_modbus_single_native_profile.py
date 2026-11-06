@@ -291,14 +291,14 @@ class ModbusSingleNativeProfileTests(unittest.TestCase):
                     self.assertTrue(peer.coils[first])
                 self.assertEqual(machine.words[index], value)
 
-    def test_write_read_abort_and_connected_output_forms_remain_gated_atomically(self):
+    def test_mismatched_block_and_graphs_are_rejected_atomically(self):
         program = self.program()
         sw = ET.parse(self.fixture("single_coil")).find("SoftwareConfiguration")
         original = ET.tostring(sw)
-        program.communications["%WRITE_READ_VAR0"] = ModbusConfig(
+        program.communications["%READ_VAR1"] = ModbusConfig(
             kind="WRITE_READ_VAR", index_data=300, index_data_in=400
         )
-        program.rungs.append(["BLK %WRITE_READ_VAR0", "LD %M12", "EXECUTE", "END_BLK"])
+        program.rungs.append(["BLK %READ_VAR1", "LD %M12", "EXECUTE", "END_BLK"])
         destination = self.work / "preserve.smbp"
         destination.write_bytes(b"PRESERVE")
         with self.assertRaises(CompileError):

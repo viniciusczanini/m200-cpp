@@ -307,12 +307,12 @@ class BitCommunicationXMLTests(unittest.TestCase):
             with self.subTest(change=change), self.assertRaises(CompileError):
                 self.load_tree(tree)
 
-    def test_unproven_kinds_and_abort_fail_without_replacing_existing_output(self):
+    def test_mismatched_kind_and_abort_preserve_existing_output(self):
         valid = ModbusConfig(obj_type=1, first_obj=17, quantity=17, index_data=200)
         for cfg in (
             ModbusConfig(kind="WRITE_READ_VAR", index_data=300, index_data_in=400),
         ):
-            key = "%" + cfg.kind + "0"
+            key = "%WRITE_VAR0"
             program = Program(
                 [
                     ["BLK %READ_VAR0", "LD %M10", "EXECUTE", "END_BLK"],

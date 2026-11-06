@@ -1,7 +1,8 @@
 """Closed SMBP communication serialization observed in authored public projects.
 
 READ_VAR supports MW/I/IW/Q; WRITE_VAR supports MW/Q and the two single-write
-enums. Single-write project profiles remain closed to observed Man21/SL1.
+enums. WRITE_READ_VAR supports its distinct static MW parameter map. Single-write
+and WRITE_READ_VAR project profiles remain closed to observed Man21/SL1.
 Enum strings are backed by exact TM200CE40T saved/reopened fixtures.
 See docs/capabilities/MODBUS-FORMAT-RESEARCH.md for pinned sources and gaps.
 This module never creates port settings or substitutes a controller profile.
@@ -28,7 +29,11 @@ _INT_TYPE = (
 )
 _BLOCK_TYPES = {
     k: _PREFIX + "Com." + v + ", " + _ASSEMBLY
-    for k, v in [("READ_VAR", "ReadVarBasic"), ("WRITE_VAR", "WriteVarBasic")]
+    for k, v in [
+        ("READ_VAR", "ReadVarBasic"),
+        ("WRITE_VAR", "WriteVarBasic"),
+        ("WRITE_READ_VAR", "WriteReadVarBasic"),
+    ]
 }
 _LINKS = {"SerialLine1": "SL1", "EthernetLink": "ETH1"}
 _OBJECTS = {
@@ -39,15 +44,33 @@ _OBJECTS = {
     "SINGLE_COIL": 4,
     "SINGLE_REG": 5,
 }
-_PARAMETERS = {
+_COMMON_PARAMETERS = {
     "Link": "link",
     "RemoteDeviceId": "id",
     "Timeout": "timeout_100ms",
     "ObjType": "obj_type",
+}
+_PARAMETERS = {
+    **_COMMON_PARAMETERS,
     "FirstObj": "first_obj",
     "Quantity": "quantity",
     "IndexData": "index_data",
 }
+_WRITE_READ_PARAMETERS = {
+    **_COMMON_PARAMETERS,
+    "FirstWriteObj": "first_obj",
+    "WriteQuantity": "quantity",
+    "IndexDataOut": "index_data",
+    "FirstReadObj": "first_read_obj",
+    "ReadQuantity": "read_quantity",
+    "IndexDataIn": "index_data_in",
+}
+_KIND_PARAMETERS = {
+    "READ_VAR": _PARAMETERS,
+    "WRITE_VAR": _PARAMETERS,
+    "WRITE_READ_VAR": _WRITE_READ_PARAMETERS,
+}
+_PARAMETER_TAGS = set(_PARAMETERS) | set(_WRITE_READ_PARAMETERS)
 _ENUMS = {"Link": "FBComLinkParameterEnums", "ObjType": "FBComObjTypeParameterEnums"}
 
 
@@ -73,7 +96,7 @@ def allowed_attribute(tag, name, value):
         return value in _BLOCK_TYPES.values()
     if tag in _ENUMS:
         return value == _enum_type(_ENUMS[tag])
-    return tag in _PARAMETERS and value == _INT_TYPE
+    return tag in _PARAMETER_TAGS and value == _INT_TYPE
 
 
 def _guard(node):
@@ -163,21 +186,25 @@ def read_blocks(sw):
     _children(container, {"IFunctionBlock"}, repeated={"IFunctionBlock"})
     result = {}
     for node in container:
-        fields = _children(
-            node,
-            {"Address", "Index"} | set(_PARAMETERS),
-            {"Address", "Index"} | set(_PARAMETERS),
-        )
-        address = _scalar(fields["Address"])
+        addresses = node.findall("Address")
+        if len(addresses) != 1:
+            fail("communication block requires exactly one Address")
+        address = _scalar(addresses[0])
         kind, index = _address(address)
         if node.attrib != {"Type": _BLOCK_TYPES.get(kind)}:
             fail("unsupported or mismatched communication block Type")
+        parameters = _KIND_PARAMETERS[kind]
+        fields = _children(
+            node,
+            {"Address", "Index"} | set(parameters),
+            {"Address", "Index"} | set(parameters),
+        )
         if (
             _integer(_scalar(fields["Index"]), "Index", 0, 31) != index
             or address in result
         ):
             fail("mismatched or duplicate communication block index")
-        values = {field: _parameter(fields[tag]) for tag, field in _PARAMETERS.items()}
+        values = {field: _parameter(fields[tag]) for tag, field in parameters.items()}
         result[address] = ModbusConfig(kind=kind, **values)
     return result
 
@@ -206,7 +233,7 @@ def write_blocks(program, sw):
         node = ET.SubElement(fresh, "IFunctionBlock", Type=_BLOCK_TYPES[kind])
         ET.SubElement(node, "Address").text = address
         ET.SubElement(node, "Index").text = str(index)
-        for tag, field in _PARAMETERS.items():
+        for tag, field in _KIND_PARAMETERS[kind].items():
             enum = _ENUMS.get(tag)
             value = getattr(config, field)
             if enum:
@@ -370,6 +397,11 @@ def check_template_channels(root, configs):
                 fail("unverified single-write functional-level profile")
             if config.link != "SL1":
                 fail("unverified single-write link profile; observed SL1 only")
+        if config.kind == "WRITE_READ_VAR":
+            if level != "FunctLevelMan21_0":
+                fail("unverified WRITE_READ_VAR functional-level profile")
+            if config.link != "SL1":
+                fail("unverified WRITE_READ_VAR link profile; observed SL1 only")
         links.add(config.link)
     if "SL1" in links:
         node = _find(root, "HardwareConfiguration/Plc/SerialLineConfiguration")

@@ -44,6 +44,7 @@ LEFT_ONLY = {
     "Operation",
     "ReadVarBasic",
     "WriteVarBasic",
+    "WriteReadVarBasic",
     "Jump",
     "End",
     "EndCn",
@@ -128,10 +129,15 @@ def graphics(rung, timer_column=3, communication_contact_column=0):
                     "SMBP graphical ABORT wiring is not verified; IL output remains available"
                 )
             native_kind = key[1:].rstrip("0123456789")
-            if native_kind not in ("READ_VAR", "WRITE_VAR"):
-                fail("SMBP graphical WRITE_READ_VAR layout is not verified")
-            column = 2 if native_kind == "READ_VAR" else 3
-            typ = "ReadVarBasic" if native_kind == "READ_VAR" else "WriteVarBasic"
+            typ, column = {
+                "READ_VAR": ("ReadVarBasic", 2),
+                "WRITE_VAR": ("WriteVarBasic", 3),
+                "WRITE_READ_VAR": ("WriteReadVarBasic", 1),
+            }[native_kind]
+            if native_kind == "WRITE_READ_VAR" and (
+                execute[0] != "LD" or execute[1] in ("0", "1")
+            ):
+                fail("unverified WRITE_READ_VAR Execute contact graph")
             if communication_contact_column not in range(column):
                 fail("communication contact must precede its block")
             if execute[1].startswith("["):
@@ -326,7 +332,8 @@ def check_graph(rung_node, lines, program=None):
     timer_columns = [col for typ, _, col in actual if typ == "Timer"]
     comm_contact_column = 0
     if lines[0].startswith("BLK ") and any(
-        t in ("ReadVarBasic", "WriteVarBasic") for t, _, _ in actual
+        t in ("ReadVarBasic", "WriteVarBasic", "WriteReadVarBasic")
+        for t, _, _ in actual
     ):
         contacts = [
             col for t, _, col in actual if t in ("NormalContact", "NegatedContact")
