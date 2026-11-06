@@ -53,7 +53,7 @@ def initialization(rungs, channels, constants):
             required -= proven
             pending -= proven
             if op in ("LD", "LDN"):
-                acc = constants.get(arg)
+                acc = arg == "1" if arg in ("0", "1") else constants.get(arg)
                 if op == "LDN" and acc is not None:
                     acc = not acc
             elif op not in ("ST", "STN", "S", "R"):

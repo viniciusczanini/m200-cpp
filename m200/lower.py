@@ -7,12 +7,15 @@ from .conversions import needs_word_snapshot
 
 
 class Lowerer:
-    def __init__(self, reserved=(), reserved_words=()):
+    def __init__(self, reserved=(), reserved_words=(), materialize_constants=False):
         self.program = Program()
         self.used = set(reserved)
         self.storage = Storage(reserved, reserved_words)
         self.constants = {}
         self.constant_rungs = []
+        # SHORT/OPEN are bound for ordinary series rungs. Keep established M
+        # contacts in block pins and the separately qualified native SR profile.
+        self.materialize_constants = materialize_constants
         self.next_label = 0
         self.label_scratch = None
         self.origin = {"generated": "lowering"}
@@ -41,9 +44,22 @@ class Lowerer:
 
     def rung(self, *lines):
         normalized = []
+        materialize = self.materialize_constants or any(
+            line.split(maxsplit=1)[0] in ("BLK", "ENDC", "ENDCN") for line in lines
+        )
         for line in lines:
             parts = line.split()
-            if len(parts) == 2 and parts[1] in ("0", "1"):
+            if (
+                not materialize
+                and len(parts) == 2
+                and parts[0] in ("LDN", "ANDN")
+                and parts[1] in ("0", "1")
+            ):
+                # The installed editor rejects negated digit operands. Use the
+                # positive opcode and inverse literal, without dropping reads.
+                parts = [parts[0][:-1], "1" if parts[1] == "0" else "0"]
+                line = " ".join(parts)
+            if len(parts) == 2 and parts[1] in ("0", "1") and materialize:
                 key = parts[1]
                 if key not in self.constants:
                     if "0" not in self.constants:

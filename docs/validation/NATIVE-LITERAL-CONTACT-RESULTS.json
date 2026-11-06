@@ -1,0 +1,308 @@
+{
+  "scope": "Native ordinary SHORT/OPEN constant contacts and capacity correction; exact generated TM200CE40T product validation",
+  "date": "2026-11-06",
+  "base_commit": "7ee136c2409b4b5620652123fa67e92c1af715d0",
+  "profile": {
+    "target": "TM200CE40T",
+    "editor": "EcoStruxure Machine Expert Basic1.4 build484",
+    "functional_level": "FunctLevelMan21_0",
+    "simulator_display_firmware": "1.14.1.0"
+  },
+  "source": {
+    "path": "examples/christmas/revoada20_clock_10.cpp",
+    "bytes": 1519,
+    "sha256": "37e2386fe336e4ef411ad3eb7ee468c4800083708049b5d22c6b93bf1b17cb7d"
+  },
+  "same_source_checkpoints": [
+    {
+      "rungs": 122,
+      "IL": 261,
+      "M": 22,
+      "MW": 7,
+      "MW_extent": 4006
+    },
+    {
+      "rungs": 48,
+      "IL": 108,
+      "M": 7,
+      "MW": 7,
+      "MW_extent": 181
+    },
+    {
+      "rungs": 46,
+      "IL": 103,
+      "M": 5,
+      "MW": 7,
+      "MW_extent": 181
+    }
+  ],
+  "implementation": [
+    "Ordinary LD0/1 and AND0/1 bind native Open/Short with empty descriptors.",
+    "Canonicalize LDN/ANDN digit operands to positive opcode and inverse digit before native export; the installed editor rejects negative digit forms.",
+    "No predicate/flag/index/edge evaluation is discarded. Native SR/block/END profile gates remain distinct.",
+    "Direct Timer digit pins normalize to the established memory contact profile. Communication rungs keep raw pins when unrelated normalization runs, preserving rejection of unbound raw digit pins."
+  ],
+  "capacity_regression": {
+    "source": "plc::BitMemory all{1024}; void scan(){plc::write_word(0,1);}",
+    "before": "Rejected because private constant M cells could not fit.",
+    "after": "One rung, LD1;[%MW0:=1], zero allocated private bits; all user bits remain unchanged in dirty-memory test.",
+    "scope": "This native implementation fits; this does not claim every full-bank algorithm needs no scratch."
+  },
+  "new_tests": {
+    "literal_contacts": 10,
+    "matrix_consistency": 7,
+    "files": [
+      "tests/test_literal_contacts.py",
+      "tests/test_completion_matrix.py"
+    ],
+    "updated_expectations": [
+      "tests/test_guard_fusion.py: native constants remove setup rung",
+      "tests/test_emission_cleanup.py: derive actual real-statement origin without the removed setup prefix"
+    ]
+  },
+  "frozen_suite": {
+    "exit": 0,
+    "seconds": 205.9833785,
+    "pinned_inputs": 286,
+    "changed_inputs": [],
+    "all_inputs_unchanged": true,
+    "log_sha256": "9aab647a3e47b49eb4be250787c4eeea6ccd55723326cefaae1a592f42a3e154",
+    "inputs_sha256": "3f3a452028037ba4852fc28cf5281e1f461aaa7486dd9f9b6584e4e1ca48571c",
+    "tests": 741,
+    "unittest_seconds": 205.817,
+    "skips": 0,
+    "command": "make check"
+  },
+  "development_validation": {
+    "initial_full": "740 tests, four failed assertions including stale rung budget and unintended raw Modbus pin admission; log preserved.",
+    "cancelled_repeat": "162.258s repeat terminated before source changes when a mixed-normalization counterexample was independently reproduced by root; not a pass.",
+    "fix": "Timer-only trigger plus preservation of communication rungs before normalization probe. Mixed raw0/raw1 refusal and validM control failed before fix, passed afterwards.",
+    "focused_after_fix": "10 literal tests and59 native Modbus profile tests PASS;9 guard tests PASS.",
+    "independent_review": "SR/profile/flags/index effects/NaN/audit hashes and corrected mixed communication dispatch reviewed; earlier incorrect mixed-path review withdrawn."
+  },
+  "additional_checks": {
+    "make_examples": "PASS",
+    "make_optimization_stress": "PASS ten cases,44 literal positions",
+    "four_START_phases": {
+      "status": "PASS sampled-clock contract",
+      "source": "examples/christmas/revoada20_clock_10.cpp",
+      "source_sha256": "37e2386fe336e4ef411ad3eb7ee468c4800083708049b5d22c6b93bf1b17cb7d",
+      "SMBP": "output/diagnostics/native-literal-contacts-2026-11-06/clock-check/program.smbp",
+      "SMBP_sha256": "f7e18061da37a8c1534953d25e90739d9ae4a1e0f197571f700cd7368202fb9a",
+      "start_phase_cases": [
+        {
+          "START_ms": 0,
+          "first_quantum_ms": 550,
+          "later_quantum_ms": 600,
+          "positions": 2459
+        },
+        {
+          "START_ms": 49,
+          "first_quantum_ms": 501,
+          "later_quantum_ms": 600,
+          "positions": 2458
+        },
+        {
+          "START_ms": 50,
+          "first_quantum_ms": 500,
+          "later_quantum_ms": 600,
+          "positions": 2459
+        },
+        {
+          "START_ms": 75,
+          "first_quantum_ms": 575,
+          "later_quantum_ms": 600,
+          "positions": 2469
+        }
+      ],
+      "control_positions": 14,
+      "onehot_order_double_endpoints_and_two_loops": true,
+      "timers": 0,
+      "rungs": 46,
+      "IL": 103,
+      "M_unique": 5,
+      "M_span": 5,
+      "MW_unique": 7,
+      "MW_span": 181,
+      "tradeoff": "First quantum500..600ms depends on START/clock phase; later600ms only when all rising/falling levels sampled. No missed-edge/saturation/monotonic-time guarantee or absolute START-phase parity."
+    },
+    "saved_reverse": {
+      "status": "PASS saved reverse/readback and exhaustive current-IL loop bound",
+      "official_saved": {
+        "path": "output/diagnostics/native-literal-contacts-2026-11-06/official-saved.smbp",
+        "bytes": 247838,
+        "sha256": "14a817b7e16ab1a3ca18916c5b9b6c8623f32ac354d4681381c4534b5de77ff2"
+      },
+      "generated": {
+        "path": "output/diagnostics/native-literal-contacts-2026-11-06/cli/program.smbp",
+        "bytes": 239795,
+        "sha256": "f7e18061da37a8c1534953d25e90739d9ae4a1e0f197571f700cd7368202fb9a"
+      },
+      "source_CPP_sha256": "37e2386fe336e4ef411ad3eb7ee468c4800083708049b5d22c6b93bf1b17cb7d",
+      "reverse_chain": {
+        "sequence_positions": 2461,
+        "control_positions": 14,
+        "VM_representations": [
+          "generated",
+          "official_saved",
+          "reverse_recompiled_IR",
+          "reverse_recompiled_SMBP"
+        ],
+        "reverse_CPP_native": true,
+        "trace_sha256": "c5ee228c4ee84c6e40ff17887b9cecbc4a665e1f12c33406b14a87364d3673c8",
+        "saved_rungs_IL": [
+          46,
+          103
+        ],
+        "reverse_recompiled_rungs_IL": [
+          51,
+          113
+        ],
+        "hardware_raw_equal": true,
+        "pinned_inputs_unchanged": 51
+      },
+      "loop_bound": {
+        "i16_cases": 65536,
+        "max_iterations": 9,
+        "max_iteration_phases": [
+          10,
+          11
+        ],
+        "max_cursor_writes_including_initialization": 10,
+        "max_mask_writes_including_initialization": 11,
+        "all_output_masks_onehot": true,
+        "local_VM_instruction_budget": 185,
+        "physical_watchdog_or_WCET_claim": false
+      },
+      "evidence": [
+        {
+          "path": "output/christmas/native-literal-saved-readback/results.json",
+          "bytes": 4139,
+          "sha256": "5d0deb34f28d24126e82fadf95fb025d6d41ffeb64873381a05050ea258fd984"
+        },
+        {
+          "path": "output/christmas/revoada-loop-bound-native-literals/results.json",
+          "bytes": 8297,
+          "sha256": "dcf56788a358365657c9e5f54efbc52b7d81940c100d0b1d18925eb0d711a989"
+        }
+      ],
+      "no_real_CPP_core_SDK_tests_docs_or_GUI_fullsuite_commit_changes": true
+    }
+  },
+  "native_fixtures": [
+    {
+      "path": "tests/fixtures/official_tm200ce40t_literal_contacts.smbp",
+      "bytes": 93663,
+      "sha256": "2217be52d1e525346a4705ca013ef67c7019c71d0a2c94a04a308324271cc5b6"
+    },
+    {
+      "path": "tests/fixtures/official_tm200ce40t_literal_series.smbp",
+      "bytes": 114394,
+      "sha256": "f5b15a32a106c6845bc3edb1a123e5ac28d010ee93e6916947724144b7fce95f"
+    }
+  ],
+  "generated": {
+    "path": "output/diagnostics/native-literal-contacts-2026-11-06/cli/program.smbp",
+    "bytes": 239795,
+    "sha256": "f7e18061da37a8c1534953d25e90739d9ae4a1e0f197571f700cd7368202fb9a"
+  },
+  "official_saved": {
+    "path": "output/diagnostics/native-literal-contacts-2026-11-06/official-saved.smbp",
+    "bytes": 247838,
+    "sha256": "14a817b7e16ab1a3ca18916c5b9b6c8623f32ac354d4681381c4534b5de77ff2"
+  },
+  "official_observations": {
+    "initial_Programming": "No error, actual46/103 CLI artifact.",
+    "saved_readback": "Executable IL equals generated; actual reverse C++ equals CLI audit byte-for-byte.",
+    "fresh_reopen": "Another saved diagnostic opened first, then exact saved-product clone; global No error observed in Configuration.",
+    "runtime": "Online/Run, applications identical, STARTQ0 on then laterQ9 on, STOPalloff; releaseSTOP withSTARTheld staysoff.",
+    "cleanup": "Official Stop simulator; own MacPID35470 gone and no TCP502 listener.",
+    "advisory": "Generic real-loop backward-jump advisory retained; final offline Programming shows advisories.",
+    "environment": "Existing untrusted-DLL banner unchanged; no integrity/validation bypass or Wine/helper changes."
+  },
+  "loop_bound": {
+    "result": {
+      "path": "docs/validation/NATIVE-LITERAL-LOOP-BOUND-RESULTS.json",
+      "bytes": 7354,
+      "sha256": "be945c2ca39d2704e804371894dd7fc6c8ae5b3a9a9108972f49645fd8245ebc"
+    },
+    "signed_i16_phases": 65536,
+    "max_iterations": 9,
+    "local_VM_budget": 185
+  },
+  "evidence": [
+    {
+      "path": "docs/validation/editor-evidence/native-literal-contacts/negated-digit-rejection.png",
+      "bytes": 409300,
+      "sha256": "c36d86d1358e8b94a13a181f768bb240ef09e74eb62f731c71c20a17924e3ae1"
+    },
+    {
+      "path": "docs/validation/editor-evidence/native-literal-contacts/positive-series-ladder.png",
+      "bytes": 422632,
+      "sha256": "9d417b33f38da18828191e1b91dc412d6cf538ca5e95fffb8ca395a45163592b"
+    },
+    {
+      "path": "docs/validation/editor-evidence/native-literal-contacts/diagnostic-fresh-no-error.png",
+      "bytes": 322165,
+      "sha256": "b7f8d204ac60c80609a8bc32a8ad5c86a19181c5b880292f00e51093f9ebfee6"
+    },
+    {
+      "path": "docs/validation/editor-evidence/native-literal-contacts/product-initial-no-error.png",
+      "bytes": 413987,
+      "sha256": "194d7998128b3a06e03a8b1ea1a7d1137de948946d473af90e6bdc44948d175c"
+    },
+    {
+      "path": "docs/validation/editor-evidence/native-literal-contacts/product-fresh-no-error.png",
+      "bytes": 486235,
+      "sha256": "18dfd268bc372640213e39425258d0915f05ce872f3bdd5eea79d459bfd3a01d"
+    },
+    {
+      "path": "docs/validation/editor-evidence/native-literal-contacts/product-run.png",
+      "bytes": 311272,
+      "sha256": "6fa4feb41c9236aa4cd381d5c90bbbd57fc0f7b1eb2b928d10b89a4086d67d0d"
+    },
+    {
+      "path": "docs/validation/editor-evidence/native-literal-contacts/panel-start-q0.png",
+      "bytes": 18106,
+      "sha256": "c8b95d0ae6bcefa8fd3e621eeb9a6c6e9feefcb06fb3976997c2684adb9359fd"
+    },
+    {
+      "path": "docs/validation/editor-evidence/native-literal-contacts/panel-later-q9.png",
+      "bytes": 18405,
+      "sha256": "650935d20bc5b62084daa00763f4bf1ef22e18c598b666d492a3e30d2e3039dc"
+    },
+    {
+      "path": "docs/validation/editor-evidence/native-literal-contacts/panel-stop-off.png",
+      "bytes": 18306,
+      "sha256": "d39544843b2fb36869b7fcede68da3edd2132fac0b92173f4930d8c439fc8c1b"
+    },
+    {
+      "path": "docs/validation/editor-evidence/native-literal-contacts/panel-held-start-off.png",
+      "bytes": 18239,
+      "sha256": "c4d4e401bd3919815439748bd29884d30cc6a105295198b31ad3695f41cf6c14"
+    },
+    {
+      "path": "docs/validation/editor-evidence/native-literal-contacts/product-cleanup-offline.png",
+      "bytes": 417450,
+      "sha256": "cc8fe64cf4590db33f39b97ce2aaa57a21f8225e6afde831475e8fb3c5434ca5"
+    }
+  ],
+  "final_source_pins": {
+    "m200/lower.py": "0ec7818fba0993d6077806d1985fc662c5ac85a2ddae299255df7919907f0ff5",
+    "m200/ladder_lowering.py": "642db6f4776a2a71b4f39e6d419f8358908c4ce415785e862987f4277be81588",
+    "m200/project.py": "fed6b6b8662deec6f77213791cc00395704fea421b7a318519ba6663fb77a993",
+    "m200/io_lowering.py": "3a79c87373e2ba2c635b5b0b32d78c48ded1044247d550454bbc72bcbd110c12",
+    "m200/frontend.py": "cccf25e8d92eb382d112b8f3bfe6bfaf487fbf8e556f27ba1b75d10a8f5055b9",
+    "m200/emission_cleanup.py": "b2e42eb01929b93135db6ac085143505eeff9e0af2c449986cc510d9278321eb",
+    "tests/test_literal_contacts.py": "b29308de7ff89367e117e94e67eb4dc4e1b7805987b45767dd8812a53990320c",
+    "tests/test_emission_cleanup.py": "a391d0989ed5df137b85d8ad7af5c895a27364768d270081c75cf507abc2bfe5",
+    "tests/test_guard_fusion.py": "1daa6f81febea136817f966f18e059d5eef37329ca9541fc23b16ebb1183c4c1",
+    "tests/test_completion_matrix.py": "d18e266d07dfaf7c89ca0732ca2330d1a72b3f22b97ddc9a5c699f8084ff22fc"
+  },
+  "limits": [
+    "Official observations are bounded current-profile simulator acceptance.",
+    "No physical controller or native Modbus transaction was performed in this increment.",
+    "Full toolchain coverage remains active work; matrix does not claim whole-family completion."
+  ],
+  "remote_CI": "No remote tests/builds/actions executed; Actions remains disabled."
+}

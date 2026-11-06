@@ -237,6 +237,12 @@ def graphics(rung, timer_column=3, communication_contact_column=0):
                 items.append(("Comparison", arg[1:-1].strip(), column))
                 column += 2
                 continue
+            if arg in ("0", "1") and op in ("LD", "LDN", "AND", "ANDN"):
+                if op.endswith("N"):
+                    fail("native literal contacts require positive LD/AND opcodes")
+                items.append(("Short" if arg == "1" else "Open", "", column))
+                column += 1
+                continue
             items.append(
                 (
                     contact_type(op),
@@ -348,7 +354,17 @@ def check_graph(rung_node, lines, program=None):
         if typ in ("Comparison", "Operation"):
             arg = numeric_graph(typ, arg)
         expected_connection = "Left" if typ in LEFT_ONLY else "Left, Right"
-        if e.findtext("ChosenConnection", "") != expected_connection:
+        observed_literal_operation = (
+            typ == "Operation"
+            and len(lines) == 2
+            and lines[0] == "LD 1"
+            and column == 9
+            and e.findtext("ChosenConnection", "") == "Left, Right"
+        )
+        if (
+            e.findtext("ChosenConnection", "") != expected_connection
+            and not observed_literal_operation
+        ):
             fail("unsupported Ladder connections")
         actual.append((typ, arg, column))
     if len(rows) != 1:

@@ -1,0 +1,13 @@
+{
+  "source": "Official Schneider Basic IL-to-Ladder conversion and Ctrl+S in local authorized Wine lab",
+  "editor": "EcoStruxure Machine Expert Basic1.4 build484",
+  "date": "2026-11-06",
+  "target": "TM200CE40T",
+  "management_level": "FunctLevelMan21_0",
+  "bytes": 114394,
+  "sha256": "f5b15a32a106c6845bc3edb1a123e5ac28d010ee93e6916947724144b7fce95f",
+  "input_sha256": "48325164cccc10e8faf99f49231251665e28a142c7faa01dffcde073a8a680b7",
+  "observed": "No error after conversion; eight ordinary coil rungs; LD0/1 atcolumn0, AND0/1 atcolumn1 maptoOpen/Short. Negateddigit forms were rejected and inverted before conversion.",
+  "newline": "byte-exact native save, CRLF",
+  "scope": "Ordinary series contacts, excluding native block/SR/END graph extensions."
+}

@@ -1412,6 +1412,7 @@ class Frontend:
                 self.lower, self.inputs, self.outputs, self.active = saved
         # All bodies share one allocator and the MAST task's native I/Q images.
         # No leaf prefix/tail/finalize may create a second controller scan.
+        self.lower.materialize_constants = bool(self.subroutine_specs)
         for number, name, section, function in self.subroutine_specs.values():
             leaf_body = next(
                 n for n in function["inner"] if n["kind"] == "CompoundStmt"

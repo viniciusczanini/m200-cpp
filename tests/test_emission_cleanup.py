@@ -124,13 +124,14 @@ class EmissionCleanupTests(unittest.TestCase):
         lower.jump(target)
         lower.label(target)
         lower.assign("%Q0.0", "%I0.0")
+        real_origin = {
+            "generated": f"source_{len(lower.constant_rungs) + len(lower.program.rungs) - 1}"
+        }
         program = self.finish(lower)
         labelled = [r for r in program.rungs if r[0] == target + ":"]
         self.assertEqual(labelled, [[target + ":", "LD %I0.0", "ST %Q0.0"]])
         index = program.rungs.index(labelled[0])
-        self.assertEqual(
-            program.metadata["rung_origins"][index], {"generated": "source_4"}
-        )
+        self.assertEqual(program.metadata["rung_origins"][index], real_origin)
         destination = self.work / "label.smbp"
         write_project(
             program, Path(__file__).parent / "fixtures/synthetic.smbp", destination

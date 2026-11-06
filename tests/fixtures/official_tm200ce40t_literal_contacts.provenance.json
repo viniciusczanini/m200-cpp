@@ -1,0 +1,11 @@
+{
+  "sha256": "2217be52d1e525346a4705ca013ef67c7019c71d0a2c94a04a308324271cc5b6",
+  "bytes": 93663,
+  "origin": "Official EcoStruxure Machine Expert Basic 1.4 build 484 conversion from IL-only three-rung diagnostic then Ctrl+S",
+  "target": "TM200CE40T",
+  "profile": "FunctLevelMan21_0",
+  "baseline": "official_tm200ce40t_memory.smbp",
+  "input_sha256": "05dec5becc6d3181ac950fff1c17ca819edbfd4fad4eb221bbc58b132b29ce01",
+  "observed": "LD 1 -> Short empty Descriptor; LD 0 -> Open empty Descriptor; row 0 column 0 Left, Right. Coil col10 Left; numeric Operation col9 Left, Right.",
+  "evidence_png": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793990382731119000-2146.png"
+}

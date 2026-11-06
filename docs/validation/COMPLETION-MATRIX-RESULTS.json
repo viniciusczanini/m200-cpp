@@ -1,0 +1,78 @@
+{
+  "scope": "Task3 matrix/docs consistency only; no compiler changes and no full suite or GUI",
+  "owned_files": [
+    {
+      "path": "docs/capabilities/COMPLETION-MATRIX.json",
+      "bytes": 157233,
+      "sha256": "672aa06cb307dbd1100bab52df0c4db47f93812d18bb724158b16b34d61f9898"
+    },
+    {
+      "path": "docs/capabilities/README.md",
+      "bytes": 6381,
+      "sha256": "5eaa5a472d665973b7edd2d7c3a014fbab07ff758e4f394dac9a03fcb8526896"
+    },
+    {
+      "path": "docs/MODBUS.md",
+      "bytes": 7049,
+      "sha256": "2b0fec916954267c783a219846764eaf30da39f07ae2bc964baa2b526f12468b"
+    },
+    {
+      "path": "tests/test_completion_matrix.py",
+      "bytes": 11927,
+      "sha256": "d18e266d07dfaf7c89ca0732ca2330d1a72b3f22b97ddc9a5c699f8084ff22fc"
+    }
+  ],
+  "matrix_closure": {
+    "instruction": 161,
+    "hardware": 89,
+    "total_unique_ids": 250,
+    "pinned_inputs": 41,
+    "profiles": 30,
+    "completion_percentage": null,
+    "whole_families_promoted": 0
+  },
+  "focused_test": {
+    "command": "python3 -m unittest discover -s tests -p test_completion_matrix.py -v",
+    "tests": 7,
+    "seconds": 0.092,
+    "skips": 0,
+    "result": "PASS",
+    "log": {
+      "path": "output/diagnostics/completion-matrix-integration-2026-11-06/final.log",
+      "bytes": 848,
+      "sha256": "cd5bfae20a37b940c69cfc4b263181f543341df038571dcb3d18debe0d485742"
+    }
+  },
+  "development_history": {
+    "initial_red": "All7failed because authoritative matrix absent",
+    "first_validation": "Four errors exposed stale field name from the draft; normalized it and preserved the failing log",
+    "final": "All7pass"
+  },
+  "checks": [
+    "Ruff check",
+    "Ruff format --check",
+    "git diff --check"
+  ],
+  "no_changes": [
+    "compiler/core/SDK",
+    "source instructions/hardware catalogues",
+    "root README",
+    "shared plan/ledger"
+  ],
+  "ongoing_root_work": "Native literal constant binding remains separately owned by root; no acceptance from that work is inferred here.",
+  "independent_review": {
+    "result": "PASS read-only",
+    "instruction_IDs": 161,
+    "hardware_IDs": 89,
+    "work_packages": 20,
+    "pinned_static_inputs": 41,
+    "whole_families_promoted": 0
+  },
+  "combined_gate": {
+    "tests": 741,
+    "result": "PASS",
+    "unittest_seconds": 205.817,
+    "command": "make check",
+    "local_only": true
+  }
+}

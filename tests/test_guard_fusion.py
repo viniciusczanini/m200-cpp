@@ -45,7 +45,12 @@ class GuardFusionTests(unittest.TestCase):
         saved = self.work / "compact.smbp"
         write_project(program, Path(__file__).parent / "fixtures/synthetic.smbp", saved)
         for candidate in (program, load_project(saved)):
-            for enabled, word, expected in [(0, -1, 0), (0, 1, 0), (1, -1, 0), (1, 1, 1)]:
+            for enabled, word, expected in [
+                (0, -1, 0),
+                (0, 1, 0),
+                (1, -1, 0),
+                (1, 1, 1),
+            ]:
                 machine = Machine(candidate)
                 machine.memory = [True] * 1024
                 machine.words[0] = word
@@ -71,7 +76,9 @@ class GuardFusionTests(unittest.TestCase):
         source = self.work / "flags.cpp"
         source.write_text(to_cpp(program))
         frames = [{"inputs": {0: v}} for v in (0, 1)]
-        self.assertEqual([q[:3] for q in run_native(source, frames)], [[0, 1, 1], [1, 1, 1]])
+        self.assertEqual(
+            [q[:3] for q in run_native(source, frames)], [[0, 1, 1], [1, 1, 1]]
+        )
 
     def test_private_numeric_predicate_is_fused_before_physical_allocation(self):
         lower = Lowerer(reserved_words={0})
@@ -79,10 +86,10 @@ class GuardFusionTests(unittest.TestCase):
         guard = lower.copy("%I0.0", "captured_guard")
         self.pair(lower, guard, "[" + value.code + ">=0]")
         program = self.finish(lower)
-        # Constant-false setup, unconditional word snapshot, and the one
-        # input/comparison/output rung; no extra captured-guard copies.
-        self.assertEqual(len(program.rungs), 3)
-        self.assertEqual(sum(map(len, program.rungs)), 8)
+        # Native literal guard for the word snapshot and one fused
+        # input/comparison/output rung; no constant-memory setup/copies.
+        self.assertEqual(len(program.rungs), 2)
+        self.assertEqual(sum(map(len, program.rungs)), 5)
         for enabled, word, expected in [(0, -1, 0), (0, 1, 0), (1, -1, 0), (1, 1, 1)]:
             machine = Machine(program)
             machine.words[0] = word
@@ -123,7 +130,13 @@ class GuardFusionTests(unittest.TestCase):
         lower.assign("%Q0.0", result)
         machine = Machine(self.finish(lower))
         machine.memory = [True] * 1024
-        for inputs, expected in [({2: 1}, 1), ({}, 0), ({2: 1}, 0), ({0: 1}, 1), ({2: 1}, 1)]:
+        for inputs, expected in [
+            ({2: 1}, 1),
+            ({}, 0),
+            ({2: 1}, 0),
+            ({0: 1}, 1),
+            ({2: 1}, 1),
+        ]:
             self.assertEqual(machine.step(inputs)[0], expected)
 
     def test_different_guard_preserves_both_inputs(self):
@@ -147,8 +160,12 @@ class GuardFusionTests(unittest.TestCase):
             "#include <plc.hpp>\nvoid scan(){bool unused=plc::input(0);plc::output(0,true);}"
         )
         program = compile_source(source)
-        self.assertGreater(program.metadata["dead_private_stores"]["eliminated_rungs"], 0)
-        self.assertFalse(any("%I0.0" in line for rung in program.rungs for line in rung))
+        self.assertGreater(
+            program.metadata["dead_private_stores"]["eliminated_rungs"], 0
+        )
+        self.assertFalse(
+            any("%I0.0" in line for rung in program.rungs for line in rung)
+        )
         self.assertTrue(Machine(program).step({})[0])
 
 

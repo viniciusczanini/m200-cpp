@@ -2,7 +2,7 @@
 
 O alvo do compilador continua sendo exclusivamente TM200CE40T. Projetos originais de M221, CE24R e CE40R servem como evidência de instruções e serialização, sem trocar a CPU deles para produzir templates aparentemente compatíveis.
 
-A biblioteca ainda não está completa. Esta etapa acrescenta os blocos nativos READ_VAR, WRITE_VAR e WRITE_READ_VAR e um modelo/protocolo local. O editor e o hardware continuam necessários para validar os candidatos.
+A biblioteca cobre os blocos nativos READ_VAR, WRITE_VAR e WRITE_READ_VAR em perfis estáticos delimitados, com modelo/protocolo local e produtos gerados já salvos e reabertos no editor oficial. A [matriz de conclusão](capabilities/COMPLETION-MATRIX.json) registra os perfis implementados e as lacunas restantes; transações nativas e comunicação física são etapas distintas.
 
 ## API C++
 
@@ -30,7 +30,7 @@ O caminho inverso usa um construtor adicional com índice nativo como primeiro p
 
 O template deve ser autêntico do seu TM200CE40T e configurar o canal. O compilador não inventa endereços de equipamentos nem ativa uma porta de forma implícita. A SL1 requer o perfil explícito RS485/RTU/master. ETH1 requer um RemoteServer correspondente. A validação de funcionalidade suporta o formato de nível `FunctLevelManN_N`, com 16 instâncias por tipo antes de 10.1 e 32 a partir de 10.1. Nomes legados de nível ainda podem ser recusados.
 
-O XML comprovado cobre ReadVarBasic/WriteVarBasic e os enums de objeto MW/IW. Para serial foram observados 9600/19200 baud, ParityEven/ParityNone, DataBits8, StopBits1 e RS485/RTU. Outros recursos existentes no PLC podem continuar bloqueados pelo exportador até obter evidência do formato. WRITE_READ_VAR, enums de bit/single e ABORT gráfico permanecem explicitamente bloqueados em SMBP; sua IL/modelo/PDU não é bloqueada por essa falta de prova gráfica. Parâmetros dinâmicos nativos como `.QUANTITY` ainda não têm API de escrita.
+O XML admitido inclui READ de holding/input words e coils/discrete inputs, WRITE de holding words/coils e single coil/register, além de WRITE_READ_VAR com buffers MW assimétricos. Os perfis adicionais observados usam Man21 e SL1 master estática. READ I, WRITE Q e WRITE_READ MW admitem Execute/Abort com contatos M normais e as formas full-pin de status comprovadas; status parciais, reordenados ou intercalados permanecem rungs separados, na ordem original. Para serial foram observados 9600/19200 baud, ParityEven/ParityNone, DataBits8, StopBits1 e RS485/RTU. Outros canais, propriedades e formas gráficas precisam de seus próprios perfis. Parâmetros dinâmicos nativos como `.QUANTITY` ainda não têm API de escrita. Os [produtos bare gerados](validation/MODBUS-BARE-ABORT-GENERATED-PROJECT-RESULTS.md) e [full-pin](validation/MODBUS-FULL-PIN-GENERATED-PROJECT-RESULTS.md) passaram save/fresh reopen com No error; isso não registra uma transação nativa bem-sucedida.
 
 A configuração .NET é validada por tipo, posição e cardinalidade. Objetos desconhecidos não são instanciados nem ignorados. Alocações manuais precisam cobrir as referências e buffers; também são conferidos limites de bits/timers. Um candidato é relido antes de substituir o destino, preservando o arquivo anterior se a validação falhar. Isso não é uma validação do software oficial.
 

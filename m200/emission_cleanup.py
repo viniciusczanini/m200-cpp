@@ -54,7 +54,7 @@ def cleanup(program, registers, members, groups, names, constants, reference):
         if (
             len(load) != 2
             or load[0] != "LD"
-            or not private(load[1], "bool")
+            or not (load[1] in ("0", "1") or private(load[1], "bool"))
             or assignment is None
         ):
             continue
@@ -81,9 +81,7 @@ def cleanup(program, registers, members, groups, names, constants, reference):
     # Native M-edge history belongs to the physical cell, not a virtual root.
     # An unread scratch can still share a cell sampled by such an edge.
     memory_edges = any(
-        len(parts) == 2
-        and parts[0] in EDGE_OPS
-        and re.fullmatch(r"%M[0-9]+", parts[1])
+        len(parts) == 2 and parts[0] in EDGE_OPS and re.fullmatch(r"%M[0-9]+", parts[1])
         for rung in program.rungs
         for line in rung
         for parts in [line.split(maxsplit=1)]

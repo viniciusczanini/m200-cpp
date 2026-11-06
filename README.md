@@ -104,7 +104,7 @@ void scan() {
 }
 ```
 
-The [architecture and semantics guide](docs/ARCHITECTURE.md) explains memory aliases, scan order, flags, block behavior, and exporter gates. The [capability inventory](docs/capabilities/README.md) tracks the larger target: **250 documentary records are not 250 implemented features**.
+The [architecture and semantics guide](docs/ARCHITECTURE.md) explains memory aliases, scan order, flags, block behavior, and exporter gates. The [capability matrix](docs/capabilities/README.md) assigns scoped evidence and finite remaining work to every inventory ID: **250 documentary records are not 250 implemented features**.
 
 ```sh
 ./m200c capabilities          # Inventory summary + implemented library subset
@@ -112,7 +112,7 @@ The [architecture and semantics guide](docs/ARCHITECTURE.md) explains memory ali
 ./m200c capabilities --all    # Full source-backed catalogue
 ```
 
-Generic [compiler optimization](docs/OPTIMIZATION.md) uses native process images, dead private-store elimination, low-address allocation, repeated-guard fusion and proved private no-op cleanup. The unchanged clock example now compiles to **48 rungs/108 IL lines**, down from 122/261; seven used words require extent 181 instead of 4006. Source algorithms and loops are preserved. The exact artifact passed official save/fresh reopen with No error and bounded simulator movement/STOP observations. Ten frozen generic benchmarks enforce code-size and memory ceilings; physical timing remains unverified.
+Generic [compiler optimization](docs/OPTIMIZATION.md) uses native process images, dead private-store elimination, low-address allocation, repeated-guard fusion, proved private no-op cleanup, and native SHORT/OPEN constants. The unchanged clock example now compiles to **46 rungs/103 IL lines**, down from 122/261; seven used words require extent 181 instead of 4006. Source algorithms and loops are preserved. The exact artifact passed official save/fresh reopen with No error and bounded simulator movement/STOP observations. Ten frozen generic benchmarks enforce code-size and memory ceilings; physical timing remains unverified.
 
 ## Validation
 
@@ -120,7 +120,7 @@ The recorded **2026-11-06 validation rounds** contain:
 
 | Evidence | Recorded result |
 |---|---:|
-| Latest combined unit/regression suite | 724 passing tests / 214.974 s / zero skips |
+| Latest combined unit/regression suite | 741 passing tests / 205.817 s / zero skips |
 | Earlier baseline unit/regression suite | 417 passing tests |
 | Historical stress and public-program traces | 288,372 base scan frames |
 | Combined state/array, timer/counter and numeric candidates | 276 distinct candidate frames |

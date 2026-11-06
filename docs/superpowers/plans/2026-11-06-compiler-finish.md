@@ -61,15 +61,15 @@
 - [x] Open/save/fresh-reopen the exact 51/114 CLI output with No error; observe RUN, movement, STOP and held-START no-rearm in the official simulator. Record parser refusals separately from those bounded observations.
 - [x] Publish the guard checkpoint and its portable size budgets: `ecdafe98b3fda9c6ac2eb0e1c4132b4a1f50ff62` verified on remote `main`, Actions disabled. The two named emission overheads above remain priority 0 afterwards.
 - [x] Validate the exact 48/108 cleanup artifact: official save/fresh reopen No error, bounded RUN/Q0→Q5/STOP/held-START observations, saved reverse 55/123 with local trace parity. The backward-jump advisory remains; all 65536 phase values terminate in at most nine shifts under the local VM test, without a physical watchdog guarantee.
-- [ ] Publish the final724 cleanup checkpoint and its warning/bound evidence.
+- [x] Publish the final724 cleanup checkpoint and its warning/bound evidence: `7ee136c2409b4b5620652123fa67e92c1af715d0` verified on remote main; Actions disabled.
 
 ### Required capacity follow-up discovered by the requested documentation study
 
 This is a concrete capacity defect under this task's existing exception, not an open-ended size search: `BitMemory{1024}` plus `write_word(0,1)` currently fails because boolean constants require private M cells. The documented native form `LD 1; [%MW0:=1]` needs no M. It still needs authentic SHORT/OPEN graph capture in the installed profile.
 
-- [ ] Capture, save and freshly reopen the literal LD0/LD1 diagnostic as native Ladder; retain exact graphs and scope.
-- [ ] Add a failing capacity regression and closed literal-contact graph tests; implement direct native constants across generation/import/reverse while preserving evaluation effects and memory-image declarations.
-- [ ] Re-run the fixed budgets and same-source behavior, independent review, one frozen full local suite and exact editor gates; publish.
+- [x] Capture, save and freshly reopen the literal LD0/LD1 diagnostic as native Ladder; exact native saves bind Short/Open in ordinary series positions. Negated digit opcodes were rejected and are canonicalized before export.
+- [x] Add a failing full-M-bank capacity regression and closed literal-contact graph tests; direct ordinary constants now emit zero scratch cells for that program. Preserve block/SR profile gates and evaluation effects; independent focused review passed.
+- [x] Fixed budgets/examples and same-source9845+14 traces passed; independent review and final741-test frozen suite passed after correcting Modbus mixed-normalization admission. Exact46/103 saved/reopened and simulator RUN/movement/STOP passed; publication is the final step of this increment.
 
 **Done when:** The named redundant patterns are eliminated, benchmark ceilings pass, same-source behavior and reverse conversion pass, and the frozen artifact passes the editor gate. Global optimality, a smaller program found by changing the application, and unmeasured physical scan time are not release criteria. Further optional optimizations move after Task 7; a capacity failure in a valid native program remains a required compiler defect.
 
@@ -79,10 +79,10 @@ This is a concrete capacity defect under this task's existing exception, not an 
 
 **Interface:** Each existing capability ID maps to its target applicability, applicable modes/operands, implementation phases, test references and exact remaining blocker. Preserve original IDs and source references.
 
-- [ ] Pin the current official target/editor/functional-level/hardware profile from authentic fixtures. Record physical firmware as unknown until read from the actual PLC.
-- [ ] Reconcile the existing 161 instruction and 89 hardware records; merge overlapping work items without dropping their IDs. Enumerate modes under their parent item instead of inventing a percentage from record counts.
-- [ ] Reconcile actual implementation and evidence with the matrix; remove stale claims that SR or 10 ms timer export is entirely absent.
-- [ ] Add a test that every existing inventory ID is represented, phase values are valid and every claimed completed phase links to a real test/evidence file.
+- [x] Pin the current official target/editor/functional-level/hardware profile from authentic fixtures. Record physical firmware as unknown until read from the actual PLC.
+- [x] Reconcile the existing 161 instruction and 89 hardware records; merge overlapping work items without dropping their IDs. Enumerate modes under their parent item instead of inventing a percentage from record counts.
+- [x] Reconcile actual implementation and evidence with the matrix; remove stale claims that SR or 10 ms timer export is entirely absent.
+- [x] Add a test that every existing inventory ID is represented, phase values are valid and every claimed completed phase links to a real test/evidence file.
 
 **Done when:** Every pinned in-scope item has an assigned task below and an explicit remaining test. An inapplicable item requires model-specific evidence; an unsupported feature is not silently removed.
 

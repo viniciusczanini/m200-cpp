@@ -1,0 +1,4048 @@
+{
+  "schema": "m200.completion-matrix.v1",
+  "as_of": "2026-11-06",
+  "implementation_reference": "7ee136c2409b4b5620652123fa67e92c1af715d0",
+  "target": {
+    "model": "TM200CE40T",
+    "editor": "EcoStruxure Machine Expert Basic1.4 build484",
+    "functional_level_token": "FunctLevelMan21_0",
+    "fixture": "tests/fixtures/official_tm200ce40t_memory.smbp",
+    "hardware_semantic_sha256": "e2e66ad46d542f4a9fb3061b7c32a749ebdeb2bbbb051a9b2999bcb4211fab20",
+    "simulator_firmware_display": "1.14.1.0",
+    "physical_firmware": "unknown",
+    "evidence": "docs/validation/OFFICIAL-EDITOR-RESULTS.json"
+  },
+  "rules": [
+    "All161 instruction and89 hardware IDs are retained. Overlap/work-package counts are not independent features or a completion percentage.",
+    "A row resolves phase states, exact support scope, code/tests/evidence and its next test through its profile; its work package assigns the finite release task. Catalogue arguments, operands, constraints and original primary sources remain authoritative through domain+ID and pinned catalogue/record hashes.",
+    "No profile claims full family completion. Each newly admitted mode/operand/context needs its own scope and evidence; documentary manual_only/documented status cannot promote implementation.",
+    "Source-equivalent C++ lowering, exact native-opcode import, standalone codec foundation and integrated whole-project support are distinct states.",
+    "Editor and simulator observations are tied to exact historical artifacts. Handbuilt diagnostics do not establish generated-product support or successful native communication.",
+    "Missing compiler support remains toolchain work under PARITY.md. Model absence/unknown eligibility requires target-specific primary evidence and does not erase other inventory rows.",
+    "Existing catalogue API defaults remain documentary missing/pending. This matrix is the separately scoped implementation/evidence overlay; it does not change the CLI catalogue API."
+  ],
+  "catalogues": {
+    "instruction": "docs/capabilities/instructions.json",
+    "hardware": "docs/capabilities/hardware.json"
+  },
+  "phases": {
+    "cpp_sdk": "Restricted source/API representation; source_equivalent_subset explicitly distinguishes lowered algorithm from literal native opcode.",
+    "il_vm": "Exact native/typed IL validation and execution domains.",
+    "smbp_graph": "Strict native config/graph import/export; standalone codec is not whole-project admission.",
+    "reverse": "Reconstruct actual admitted IL/config; exact native opcode versus lowered-form scope stated.",
+    "local_oracle": "Existing scoped local tests/reports, not a new run in this audit.",
+    "editor": "Artifact-scoped native/generated open/save/reopen observations.",
+    "simulator": "Bounded actual official runtime observations, distinct from editor save; Modbus transaction proof is separate.",
+    "physical": "Actual TM200CE40T/driver/I/O/timing/persistence/communication proof."
+  },
+  "states": {
+    "codec_only": "Existing tests validate the isolated serialization component, not native runtime.",
+    "covered_subset": "Implemented/tested only within the profile scope; not the complete source record.",
+    "handbuilt_diagnostic_only": "Official observations exist for a manually authored diagnostic, not generated-product support.",
+    "inactive_defaults_only": "Only inactive/default native configuration is admitted or preserved.",
+    "lowered_form_only": "Reverse supports the admitted lowered form, not the named native construct itself.",
+    "native_opcode_not_implemented": "The exact native spelling/context is not admitted; source-level equivalent may exist.",
+    "not_applicable": "Model-specific primary evidence establishes absence; no broader family exclusion.",
+    "not_implemented": "No integrated implementation in this documented profile.",
+    "not_transaction_validated": "Editor acceptance/local transport exists but successful native transactions remain unobserved.",
+    "observed_subset": "Existing official artifact-scoped observations within the stated profile.",
+    "pending": "This gate has not been observed for the applicable target/profile.",
+    "refusal_only": "Existing local check covers explicit unsupported-active refusal.",
+    "source_equivalent_subset": "C++ algorithm has a bounded lowering; exact native opcode admission is not implied.",
+    "standalone_foundation_only": "Isolated codec exists, not whole-project/SDK/VM integration.",
+    "target_eligibility_unresolved": "Target-specific support/absence has not been established.",
+    "unassessed_row_specific": "The broad row needs a named service/setting audit; related implementations do not prove it."
+  },
+  "work_packages": {
+    "G01": {
+      "title": "Boolean banks, native contacts, edge histories and stack",
+      "release_task": 4,
+      "next_test": "Close one named operand-bank/edge/stack gap with exact address/state boundaries and order-preserving forward/reverse traces.",
+      "ids": [
+        "bool.ld",
+        "bool.ldn",
+        "bool.and",
+        "bool.andn",
+        "bool.or",
+        "bool.orn",
+        "bool.xor",
+        "bool.xorn",
+        "bool.ldr",
+        "bool.ldf",
+        "bool.andr",
+        "bool.andf",
+        "bool.orr",
+        "bool.orf",
+        "bool.xorr",
+        "bool.xorf",
+        "bool.st",
+        "bool.stn",
+        "bool.s",
+        "bool.r",
+        "bool.not_accumulator",
+        "bool.expression_rising",
+        "bool.expression_falling",
+        "stack.mps",
+        "stack.mrd",
+        "stack.mpp"
+      ]
+    },
+    "G02": {
+      "title": "Scalar numeric operations and flags",
+      "release_task": 4,
+      "next_test": "Close one named numeric operation/operand/flag/error domain with independent literal boundary and native recovery controls.",
+      "ids": [
+        "compare.gt",
+        "compare.ge",
+        "compare.lt",
+        "compare.le",
+        "compare.eq",
+        "compare.ne",
+        "assign.scalar",
+        "assign.bitstring",
+        "integer.add",
+        "integer.subtract",
+        "integer.multiply",
+        "integer.divide",
+        "integer.rem",
+        "integer.sqrt",
+        "integer.inc",
+        "integer.dec",
+        "integer.abs",
+        "word.and",
+        "word.or",
+        "word.xor",
+        "word.not",
+        "bits.shl",
+        "bits.shr",
+        "bits.rol",
+        "bits.ror",
+        "float.add",
+        "float.subtract",
+        "float.multiply",
+        "float.divide",
+        "float.log",
+        "float.ln",
+        "float.sqrt",
+        "float.abs",
+        "float.trunc",
+        "float.exp",
+        "float.expt",
+        "float.sin",
+        "float.cos",
+        "float.tan",
+        "float.asin",
+        "float.acos",
+        "float.atan",
+        "float.deg_to_rad",
+        "float.rad_to_deg"
+      ]
+    },
+    "G03": {
+      "title": "Typed/BCD conversions",
+      "release_task": 4,
+      "next_test": "Close the next conversion bank/signedness/error-recovery gap with exact words/flags and reverse identity.",
+      "ids": [
+        "convert.bti",
+        "convert.itb",
+        "convert.lw",
+        "convert.hw",
+        "convert.concatw",
+        "convert.dword",
+        "convert.int_to_real",
+        "convert.dint_to_real",
+        "convert.real_to_int",
+        "convert.real_to_dint"
+      ]
+    },
+    "G04": {
+      "title": "ASCII, strings and native tables",
+      "release_task": 4,
+      "next_test": "Implement exact native ASCII/string/table row semantics with buffer/alias/encoding/length error controls.",
+      "ids": [
+        "assign.table",
+        "ascii.round",
+        "ascii.ascii_to_int",
+        "ascii.int_to_ascii",
+        "ascii.ascii_to_float",
+        "ascii.float_to_ascii",
+        "ascii.ascii_to_dint",
+        "ascii.dint_to_ascii",
+        "table.sum_arr",
+        "table.equal_arr",
+        "table.find_eqr",
+        "table.find_gtr",
+        "table.find_ltr",
+        "table.max_arr",
+        "table.min_arr",
+        "table.occur_arr",
+        "table.rol_arr",
+        "table.ror_arr",
+        "table.sort_arr",
+        "table.mean",
+        "table.swap",
+        "table.lkup",
+        "string.literal",
+        "string.length",
+        "string.concat",
+        "string.equal_str"
+      ]
+    },
+    "G05": {
+      "title": "Master control flow and exact native structure semantics",
+      "release_task": 4,
+      "next_test": "Prove native structure-to-C++ control equivalence or implement the missing strict opcode/context; test exits, labels and side-effect order.",
+      "ids": [
+        "control.end",
+        "control.endc",
+        "control.endcn",
+        "control.endt",
+        "control.nop",
+        "control.jmp",
+        "control.jmpc",
+        "control.jmpcn",
+        "control.if",
+        "control.else",
+        "control.endif",
+        "control.for",
+        "control.endfor"
+      ]
+    },
+    "G06": {
+      "title": "Subroutine contexts and native layouts",
+      "release_task": 4,
+      "next_test": "Expand exactly one named SR layout/context beyond current one-stateless-leaf export, preserving metadata and local-return scope.",
+      "ids": [
+        "control.subroutine"
+      ]
+    },
+    "G07": {
+      "title": "Timer bases, modes, properties and lifecycle",
+      "release_task": 4,
+      "next_test": "Expand one named timer base/mode/property/lifecycle case using matched native controls and independent temporal traces.",
+      "ids": [
+        "fb.tm",
+        "fb.timer_retention",
+        "fb.timer_dynamic_preset"
+      ]
+    },
+    "G08": {
+      "title": "Counter, Register, drum/step/shift native blocks",
+      "release_task": 4,
+      "next_test": "Integrate Register FIFO/LIFO, then remaining drum/step/shift blocks, with exact state/edge/reset/call-history oracles.",
+      "ids": [
+        "block.blk",
+        "block.out_blk",
+        "block.end_blk",
+        "fb.c",
+        "fb.r",
+        "fb.dr",
+        "fb.sbr",
+        "fb.sc"
+      ]
+    },
+    "G09": {
+      "title": "RTC, calendar and schedules",
+      "release_task": 4,
+      "next_test": "Implement RTC/calendar/schedule/system-word operations with calendar/rollover/atomicity and lifecycle controls.",
+      "ids": [
+        "fb.rtc",
+        "fb.schedule",
+        "clock.snapshot",
+        "clock.set",
+        "clock.adjust",
+        "clock.absolute_counter",
+        "HW.RTC",
+        "HW.RTC_SYSTEM_WORDS",
+        "HW.RTC_SCHEDULE"
+      ]
+    },
+    "G10": {
+      "title": "Immediate I/O and image synchronization",
+      "release_task": 5,
+      "next_test": "Implement immediate embedded/HSC image services with explicit ownership/error codes and before/after image tests.",
+      "ids": [
+        "io.read_imm_in",
+        "io.write_imm_out",
+        "io.read_imm",
+        "io.write_imm"
+      ]
+    },
+    "G11": {
+      "title": "Communication function blocks and messages",
+      "release_task": 5,
+      "next_test": "Complete named native communication block/config/pin gaps, local PDU/async error tests and separate native transaction observations.",
+      "ids": [
+        "comm.exch1",
+        "comm.exch2",
+        "comm.exch3",
+        "fb.message",
+        "comm.read_var",
+        "comm.write_var",
+        "comm.write_read_var",
+        "comm.send_recv_msg",
+        "comm.send_recv_sms",
+        "HW.COMM_READ_VAR",
+        "HW.COMM_WRITE_VAR",
+        "HW.COMM_WRITE_READ_VAR",
+        "HW.COMM_SEND_RECV_MSG",
+        "HW.COMM_EXCH"
+      ]
+    },
+    "G12": {
+      "title": "User functions, user blocks and Grafcet",
+      "release_task": 4,
+      "next_test": "Implement the exact UDF/UDFB/Grafcet context semantics, graph/config and full reverse with independent control/state oracles.",
+      "ids": [
+        "user.udf",
+        "user.udfb",
+        "grafcet.initial",
+        "grafcet.step",
+        "grafcet.post",
+        "grafcet.next",
+        "grafcet.deactivate_current",
+        "grafcet.deactivate_pair",
+        "grafcet.activate",
+        "grafcet.deactivate",
+        "grafcet.sfc"
+      ]
+    },
+    "G13": {
+      "title": "Embedded digital modes and configuration",
+      "release_task": 5,
+      "next_test": "Implement each active digital mode with pin ownership, settings/readback and defined state/lifecycle controls.",
+      "ids": [
+        "HW.DIGITAL_INPUTS",
+        "HW.DIGITAL_INPUT_FILTER",
+        "HW.DIGITAL_INPUT_LATCH",
+        "HW.RUN_STOP_INPUT",
+        "HW.DIGITAL_OUTPUTS",
+        "HW.STATUS_ALARM_OUTPUT",
+        "HW.OUTPUT_FALLBACK"
+      ]
+    },
+    "G14": {
+      "title": "Fast I/O, pulse resources, PTO and pin conflicts",
+      "release_task": 5,
+      "next_test": "Implement each actual fast/pulse/PTO mode with target limits, shared resource conflicts and safe native configuration tests.",
+      "ids": [
+        "HW.FAST_COUNTER",
+        "HW.HSC",
+        "HW.HSC_AUX",
+        "HW.HSC_FREQUENCY_METER",
+        "HW.PULSE_RESOURCES",
+        "HW.PLS",
+        "HW.PWM",
+        "HW.FREQGEN",
+        "HW.PTO_AXIS",
+        "HW.PTO_AUX_INPUTS",
+        "HW.PTO_HOME",
+        "HW.PTO_QUEUE",
+        "HW.PTO_MOTION_TABLES",
+        "HW.PTO_BLOCK.MC_MOTIONTASK_PTO",
+        "HW.PTO_BLOCK.MC_POWER_PTO",
+        "HW.PTO_BLOCK.MC_MOVEVEL_PTO",
+        "HW.PTO_BLOCK.MC_MOVEREL_PTO",
+        "HW.PTO_BLOCK.MC_MOVEABS_PTO",
+        "HW.PTO_BLOCK.MC_HOME_PTO",
+        "HW.PTO_BLOCK.MC_SETPOS_PTO",
+        "HW.PTO_BLOCK.MC_STOP_PTO",
+        "HW.PTO_BLOCK.MC_HALT_PTO",
+        "HW.PTO_BLOCK.MC_READACTVEL_PTO",
+        "HW.PTO_BLOCK.MC_READACTPOS_PTO",
+        "HW.PTO_BLOCK.MC_READSTS_PTO",
+        "HW.PTO_BLOCK.MC_READMOTIONSTATE_PTO",
+        "HW.PTO_BLOCK.MC_READAXISERROR_PTO",
+        "HW.PTO_BLOCK.MC_RESET_PTO",
+        "HW.PTO_BLOCK.MC_TOUCHPROBE_PTO",
+        "HW.PTO_BLOCK.MC_ABORTTRIGGER_PTO",
+        "HW.PTO_BLOCK.MC_READPAR_PTO",
+        "HW.PTO_BLOCK.MC_WRITEPAR_PTO",
+        "HW.PTO_PARAMETER_ACCESS"
+      ]
+    },
+    "G15": {
+      "title": "Expansion/cartridge/analog configuration",
+      "release_task": 5,
+      "next_test": "Implement actual supported expansion/cartridge profiles and diagnostics; retain model-specific absence only for embedded analog.",
+      "ids": [
+        "HW.ANALOG_EMBEDDED",
+        "HW.EXPANSION_BUS",
+        "HW.EXPANSION_BUS_ERRORS",
+        "HW.CARTRIDGE_SLOTS",
+        "HW.CARTRIDGE_DIGITAL",
+        "HW.CARTRIDGE_AI2",
+        "HW.CARTRIDGE_AQ2V",
+        "HW.CARTRIDGE_AQ2C",
+        "HW.CARTRIDGE_AM3",
+        "HW.CARTRIDGE_TI2",
+        "HW.ANALOG_DIAGNOSTICS"
+      ]
+    },
+    "G16": {
+      "title": "Network services, mapping and interface configuration",
+      "release_task": 5,
+      "next_test": "Audit/admit each named native networking/configuration service with typed roles/mappings, target limits and separate endpoint tests.",
+      "ids": [
+        "HW.ETHERNET",
+        "HW.ETHERNET_ADDRESSING",
+        "HW.ETHERNET_RATE_OVERRIDE",
+        "HW.MODBUS_TCP_CONNECTIONS",
+        "HW.MODBUS_TCP_MAPPING",
+        "HW.MODBUS_SERIAL",
+        "HW.SERIAL_OPTIONAL",
+        "HW.MODBUS_FUNCTION_CODES",
+        "HW.MODBUS_IOSCANNER",
+        "HW.MODBUS_IOSCANNER_LIMITS",
+        "HW.ETHERNET_IP_ADAPTER",
+        "HW.USB_PROGRAMMING"
+      ]
+    },
+    "G17": {
+      "title": "Retention, removable storage and post-configuration",
+      "release_task": 5,
+      "next_test": "Implement power-loss retention/flash/SD/post-configuration lifecycle and region boundaries with concrete future hardware readback cases.",
+      "ids": [
+        "HW.PERSISTENT_AUTO",
+        "HW.PERSISTENT_REQUEST",
+        "HW.SD",
+        "HW.SD_FILE_LAYOUT",
+        "HW.POST_CONFIGURATION"
+      ]
+    },
+    "G18": {
+      "title": "Tasks, watchdog, events and diagnostic services",
+      "release_task": 5,
+      "next_test": "Implement nondefault scheduling/events/watchdog and remaining diagnostics; preserve the isolated-MAST image boundary until widened.",
+      "ids": [
+        "HW.TASKS",
+        "HW.WATCHDOG",
+        "HW.EVENT_QUEUE_CONTROL",
+        "HW.DIAGNOSTICS"
+      ]
+    },
+    "G19": {
+      "title": "Drive blocks and PID",
+      "release_task": 4,
+      "next_test": "Implement exact documented drive/PID block ports/state/config, limits and independent fault/control traces.",
+      "ids": [
+        "HW.ATV_BLOCK.MC_POWER_ATV",
+        "HW.ATV_BLOCK.MC_JOG_ATV",
+        "HW.ATV_BLOCK.MC_MOVEVEL_ATV",
+        "HW.ATV_BLOCK.MC_STOP_ATV",
+        "HW.ATV_BLOCK.MC_READSTATUS_ATV",
+        "HW.ATV_BLOCK.MC_READMOTIONSTATE_ATV",
+        "HW.ATV_BLOCK.MC_RESET_ATV",
+        "HW.PID_PROCESS_CONTROL"
+      ]
+    },
+    "G20": {
+      "title": "Model eligibility unresolved",
+      "release_task": 3,
+      "next_test": "Resolve primary CE40T eligibility per named currently undocumented service before implementing or excluding it.",
+      "ids": [
+        "HW.OTHER_NETWORK_PROTOCOLS"
+      ]
+    }
+  },
+  "profiles": {
+    "boolean": {
+      "scope": "Normal embedded I0.0..23/Q0.0..15, M0..1023, allowlisted S bits, MW bit selectors; ordinary Boolean lowering and serial graphs. Native process images only in admitted isolated MAST execution.",
+      "remaining": "Close remaining BOOL_READ/WRITE banks, writable-system permissions, graph variants, first-scan/STOP/RUN/edge lifecycle and all operand-specific semantics. Ordinary image access is not immediate physical access.",
+      "code": [
+        "m200/il.py",
+        "m200/native_logic.py",
+        "m200/io_lowering.py",
+        "m200/project.py",
+        "sdk/plc.hpp"
+      ],
+      "tests": [
+        "tests/test_toolchain.py",
+        "tests/test_bit_objects.py",
+        "tests/test_direct_io.py",
+        "tests/test_native_logic.py"
+      ],
+      "evidence": [
+        "docs/validation/DIGITAL-IO-STRESS-RESULTS.json",
+        "docs/validation/BIT-OBJECT-LOCAL-RESULTS.json",
+        "docs/validation/OFFICIAL-EDITOR-RESULTS.json"
+      ],
+      "phases": {
+        "cpp_sdk": "covered_subset",
+        "il_vm": "covered_subset",
+        "smbp_graph": "covered_subset",
+        "reverse": "covered_subset",
+        "local_oracle": "covered_subset",
+        "editor": "observed_subset",
+        "simulator": "observed_subset",
+        "physical": "pending"
+      },
+      "next_test": "Exercise each remaining BOOL_READ/BOOL_WRITE bank and writable-system permission with valid endpoints, read-after-write/alias and rejected-store controls; bind each new graph shape to an exact native save.",
+      "phase_evidence": {
+        "cpp_sdk": [
+          "tests/test_toolchain.py",
+          "tests/test_bit_objects.py",
+          "tests/test_direct_io.py",
+          "tests/test_native_logic.py"
+        ],
+        "il_vm": [
+          "tests/test_toolchain.py",
+          "tests/test_bit_objects.py",
+          "tests/test_direct_io.py",
+          "tests/test_native_logic.py"
+        ],
+        "smbp_graph": [
+          "tests/test_toolchain.py",
+          "tests/test_bit_objects.py",
+          "tests/test_direct_io.py",
+          "tests/test_native_logic.py"
+        ],
+        "reverse": [
+          "tests/test_toolchain.py",
+          "tests/test_bit_objects.py",
+          "tests/test_direct_io.py",
+          "tests/test_native_logic.py"
+        ],
+        "local_oracle": [
+          "tests/test_toolchain.py",
+          "tests/test_bit_objects.py",
+          "tests/test_direct_io.py",
+          "tests/test_native_logic.py"
+        ],
+        "editor": [
+          "docs/validation/DIGITAL-IO-STRESS-RESULTS.json",
+          "docs/validation/BIT-OBJECT-LOCAL-RESULTS.json",
+          "docs/validation/OFFICIAL-EDITOR-RESULTS.json"
+        ],
+        "simulator": [
+          "docs/validation/DIGITAL-IO-STRESS-RESULTS.json",
+          "docs/validation/BIT-OBJECT-LOCAL-RESULTS.json",
+          "docs/validation/OFFICIAL-EDITOR-RESULTS.json"
+        ]
+      },
+      "whole_record_complete": false
+    },
+    "native_edges": {
+      "scope": "LDR/LDF/ANDR/ANDF/ORR/ORF/XORR/XORF on admitted I0/M operands; local execution history, reverse and serial normalization.",
+      "remaining": "Prove startup, held/repeated evaluation and skipped-call lifecycle in native runtime; other operand banks and physical edge semantics remain open.",
+      "code": [
+        "m200/edges.py",
+        "m200/native_logic.py"
+      ],
+      "tests": [
+        "tests/test_native_edges.py"
+      ],
+      "evidence": [
+        "docs/validation/NATIVE-EDGE-LOCAL-RESULTS.json",
+        "docs/validation/NATIVE-EDGE-STRESS-RESULTS.json"
+      ],
+      "phases": {
+        "cpp_sdk": "covered_subset",
+        "il_vm": "covered_subset",
+        "smbp_graph": "covered_subset",
+        "reverse": "covered_subset",
+        "local_oracle": "covered_subset",
+        "editor": "not_implemented",
+        "simulator": "not_implemented",
+        "physical": "pending"
+      },
+      "next_test": "Compare first-RUN, held/repeated, skipped and fresh-edge I/M traces against native observed outputs; test each newly admitted operand bank separately.",
+      "phase_evidence": {
+        "cpp_sdk": [
+          "tests/test_native_edges.py"
+        ],
+        "il_vm": [
+          "tests/test_native_edges.py"
+        ],
+        "smbp_graph": [
+          "tests/test_native_edges.py"
+        ],
+        "reverse": [
+          "tests/test_native_edges.py"
+        ],
+        "local_oracle": [
+          "tests/test_native_edges.py"
+        ]
+      },
+      "whole_record_complete": false
+    },
+    "expression_edges": {
+      "scope": "Identified RISINGn/FALLINGn source/IL/local models; SMBP uses persistent M/gates rather than admitting arbitrary raw block graph enums.",
+      "remaining": "Raw expression-edge XML/functional-level profile and lifecycle equivalence require proof; local identity/history policies do not establish physical behavior.",
+      "code": [
+        "m200/edge_functions.py"
+      ],
+      "tests": [
+        "tests/test_expression_edges.py"
+      ],
+      "evidence": [
+        "docs/validation/EXPRESSION-EDGE-LOCAL-RESULTS.json"
+      ],
+      "phases": {
+        "cpp_sdk": "covered_subset",
+        "il_vm": "covered_subset",
+        "smbp_graph": "covered_subset",
+        "reverse": "covered_subset",
+        "local_oracle": "covered_subset",
+        "editor": "not_implemented",
+        "simulator": "not_implemented",
+        "physical": "pending"
+      },
+      "next_test": "Capture one exact native RISING/FALLING graph/functional-level binding, then compare skipped/repeated-site histories and current M/gate expansion to independent traces.",
+      "phase_evidence": {
+        "cpp_sdk": [
+          "tests/test_expression_edges.py"
+        ],
+        "il_vm": [
+          "tests/test_expression_edges.py"
+        ],
+        "smbp_graph": [
+          "tests/test_expression_edges.py"
+        ],
+        "reverse": [
+          "tests/test_expression_edges.py"
+        ],
+        "local_oracle": [
+          "tests/test_expression_edges.py"
+        ]
+      },
+      "whole_record_complete": false
+    },
+    "stack": {
+      "scope": "Native MPS/MRD/MPP and supported parenthesized Boolean expressions decode/execute/reverse; normalized serial graph export.",
+      "remaining": "Resolve documented native stack depth 11/32 conflict and remaining parentheses/operator restrictions; no new explicit C++ stack API is claimed.",
+      "code": [
+        "m200/native_logic.py"
+      ],
+      "tests": [
+        "tests/test_native_logic.py"
+      ],
+      "evidence": [
+        "docs/validation/NATIVE-LOGIC-LOCAL-RESULTS.json"
+      ],
+      "phases": {
+        "cpp_sdk": "source_equivalent_subset",
+        "il_vm": "covered_subset",
+        "smbp_graph": "covered_subset",
+        "reverse": "covered_subset",
+        "local_oracle": "covered_subset",
+        "editor": "not_implemented",
+        "simulator": "not_implemented",
+        "physical": "pending"
+      },
+      "next_test": "Resolve the documented stack-depth boundary with an exact native boundary/overflow control; test remaining parenthesized operators without changing evaluation order.",
+      "phase_evidence": {
+        "cpp_sdk": [
+          "tests/test_native_logic.py"
+        ],
+        "il_vm": [
+          "tests/test_native_logic.py"
+        ],
+        "smbp_graph": [
+          "tests/test_native_logic.py"
+        ],
+        "reverse": [
+          "tests/test_native_logic.py"
+        ],
+        "local_oracle": [
+          "tests/test_native_logic.py"
+        ]
+      },
+      "whole_record_complete": false
+    },
+    "numeric": {
+      "scope": "Explicit i16/i32/f32 APIs; MW/MD/MF shared cells, admitted comparisons/operations, numeric graph serialization; operations are individually selected below, not inferred from one numeric fixture.",
+      "remaining": "Remaining banks/constants/table operands, complex native expressions, numeric error recovery/SW17, operation-specific flags/indeterminate results and physical rounding/overflow remain open. Export existence is not proof every operation was opened/run.",
+      "code": [
+        "m200/numeric.py",
+        "m200/arithmetic.py",
+        "sdk/plc.hpp"
+      ],
+      "tests": [
+        "tests/test_numeric.py",
+        "tests/test_numeric_stress.py"
+      ],
+      "evidence": [
+        "docs/validation/INTEGER-FLAG-LOCAL-RESULTS.json",
+        "docs/validation/COMPLEX-LOCAL-RESULTS.json"
+      ],
+      "phases": {
+        "cpp_sdk": "covered_subset",
+        "il_vm": "covered_subset",
+        "smbp_graph": "covered_subset",
+        "reverse": "covered_subset",
+        "local_oracle": "covered_subset",
+        "editor": "not_implemented",
+        "simulator": "not_implemented",
+        "physical": "pending"
+      },
+      "next_test": "For each unsupported operand/flag/error domain, add a literal signed/float boundary oracle and actual post-error flag/recovery trace, then forward/reverse the exact operation and graph.",
+      "phase_evidence": {
+        "cpp_sdk": [
+          "tests/test_numeric.py",
+          "tests/test_numeric_stress.py"
+        ],
+        "il_vm": [
+          "tests/test_numeric.py",
+          "tests/test_numeric_stress.py"
+        ],
+        "smbp_graph": [
+          "tests/test_numeric.py",
+          "tests/test_numeric_stress.py"
+        ],
+        "reverse": [
+          "tests/test_numeric.py",
+          "tests/test_numeric_stress.py"
+        ],
+        "local_oracle": [
+          "tests/test_numeric.py",
+          "tests/test_numeric_stress.py"
+        ]
+      },
+      "whole_record_complete": false
+    },
+    "conversion": {
+      "scope": "BTI/ITB 16/32, LW/HW, CONCATW low-word first, DWORD and four REAL/integer conversions in the exact local operand/error domains.",
+      "remaining": "Invalid/indeterminate native result recovery, other banks, signed DWORD interpretation and physical conversion/rounding need completion. BCD vectors are not scans or native PLC proof.",
+      "code": [
+        "m200/conversions.py",
+        "m200/numeric.py"
+      ],
+      "tests": [
+        "tests/test_conversions.py"
+      ],
+      "evidence": [
+        "docs/validation/CONVERSION-LOCAL-RESULTS.json",
+        "docs/validation/CONVERSION-STRESS-RESULTS.json"
+      ],
+      "phases": {
+        "cpp_sdk": "covered_subset",
+        "il_vm": "covered_subset",
+        "smbp_graph": "covered_subset",
+        "reverse": "covered_subset",
+        "local_oracle": "covered_subset",
+        "editor": "not_implemented",
+        "simulator": "not_implemented",
+        "physical": "pending"
+      },
+      "next_test": "Add signed DWORD/CONCATW alias and invalid-BCD/error-recovery native controls; assert exact output words/flags and reverse identity for each newly admitted bank.",
+      "phase_evidence": {
+        "cpp_sdk": [
+          "tests/test_conversions.py"
+        ],
+        "il_vm": [
+          "tests/test_conversions.py"
+        ],
+        "smbp_graph": [
+          "tests/test_conversions.py"
+        ],
+        "reverse": [
+          "tests/test_conversions.py"
+        ],
+        "local_oracle": [
+          "tests/test_conversions.py"
+        ]
+      },
+      "whole_record_complete": false
+    },
+    "incdec": {
+      "scope": "INC/DEC canonical MW/MD native IL parse/reverse; explicit source add/sub expresses increment/decrement without promising preservation of native INC/DEC spelling.",
+      "remaining": "Other banks/operands and native flag/error equivalence; retain source-equivalent versus exact opcode distinction.",
+      "code": [
+        "m200/numeric.py",
+        "m200/reverse.py"
+      ],
+      "tests": [
+        "tests/test_numeric.py"
+      ],
+      "evidence": [
+        "docs/validation/INTEGER-FLAG-LOCAL-RESULTS.json"
+      ],
+      "phases": {
+        "cpp_sdk": "source_equivalent_subset",
+        "il_vm": "covered_subset",
+        "smbp_graph": "covered_subset",
+        "reverse": "covered_subset",
+        "local_oracle": "covered_subset",
+        "editor": "not_implemented",
+        "simulator": "not_implemented",
+        "physical": "pending"
+      },
+      "next_test": "Compare native INC/DEC versus explicit typed add/sub at signed boundaries and aliases, including exact flags and error recovery.",
+      "phase_evidence": {
+        "cpp_sdk": [
+          "tests/test_numeric.py"
+        ],
+        "il_vm": [
+          "tests/test_numeric.py"
+        ],
+        "smbp_graph": [
+          "tests/test_numeric.py"
+        ],
+        "reverse": [
+          "tests/test_numeric.py"
+        ],
+        "local_oracle": [
+          "tests/test_numeric.py"
+        ]
+      },
+      "whole_record_complete": false
+    },
+    "unimplemented_numeric": {
+      "scope": "Documented operation remains outside the closed numeric API/opcode set inspected in numeric.OPS.",
+      "remaining": "Implement each named operation, typed operand/flag/error domain, reverse and graph path with independent boundary oracle. Do not silently substitute host math.",
+      "code": [
+        "m200/numeric.py"
+      ],
+      "tests": [],
+      "evidence": [],
+      "phases": {
+        "cpp_sdk": "not_implemented",
+        "il_vm": "not_implemented",
+        "smbp_graph": "not_implemented",
+        "reverse": "not_implemented",
+        "local_oracle": "not_implemented",
+        "editor": "not_implemented",
+        "simulator": "not_implemented",
+        "physical": "pending"
+      },
+      "next_test": "Add a RED typed/API/native-IL/reverse case for the exact operation in this row, with finite valid/invalid-domain literal values and an exact native graph candidate.",
+      "phase_evidence": {},
+      "whole_record_complete": false
+    },
+    "table_string": {
+      "scope": "Native ASCII/string/table instruction family is documented; generic C++ arrays and bounded loops do not imply these exact native operations are decoded or reverse-supported.",
+      "remaining": "Define typed buffers/lengths/overlap/encoding/error semantics, API/state and complete native/reverse path. Determine which algorithms can use an explicitly proven lowering instead of native opcode preservation.",
+      "code": [
+        "m200/numeric.py",
+        "m200/frontend.py",
+        "m200/il.py"
+      ],
+      "tests": [],
+      "evidence": [],
+      "phases": {
+        "cpp_sdk": "not_implemented",
+        "il_vm": "not_implemented",
+        "smbp_graph": "not_implemented",
+        "reverse": "not_implemented",
+        "local_oracle": "not_implemented",
+        "editor": "not_implemented",
+        "simulator": "not_implemented",
+        "physical": "pending"
+      },
+      "next_test": "Select the exact row opcode and define buffer length/encoding/overlap/error rules; add independent zero/max-length/alias/error vectors and native forward/reverse admission tests.",
+      "phase_evidence": {},
+      "whole_record_complete": false
+    },
+    "control": {
+      "scope": "Master while/for/do, break/continue, labels/goto and native JMP/JMPC/JMPCN, per-context source maps; closed graph bindings and semantic lowering.",
+      "remaining": "Complete remaining flow/operator/graph profiles, prove budget/watchdog distinction and broader contexts; native control source constructs are classified separately.",
+      "code": [
+        "m200/frontend.py",
+        "m200/flow.py",
+        "m200/il.py",
+        "m200/project.py"
+      ],
+      "tests": [
+        "tests/test_control_flow.py"
+      ],
+      "evidence": [
+        "docs/validation/CONTROL-FLOW-STRESS-RESULTS.json"
+      ],
+      "phases": {
+        "cpp_sdk": "covered_subset",
+        "il_vm": "covered_subset",
+        "smbp_graph": "covered_subset",
+        "reverse": "covered_subset",
+        "local_oracle": "covered_subset",
+        "editor": "not_implemented",
+        "simulator": "not_implemented",
+        "physical": "pending"
+      },
+      "next_test": "Add one previously refused native flow/graph pattern with entry, exit, loop/alias and label-preservation traces; distinguish tool execution budgets from native watchdog behavior.",
+      "phase_evidence": {
+        "cpp_sdk": [
+          "tests/test_control_flow.py"
+        ],
+        "il_vm": [
+          "tests/test_control_flow.py"
+        ],
+        "smbp_graph": [
+          "tests/test_control_flow.py"
+        ],
+        "reverse": [
+          "tests/test_control_flow.py"
+        ],
+        "local_oracle": [
+          "tests/test_control_flow.py"
+        ]
+      },
+      "whole_record_complete": false
+    },
+    "source_structures": {
+      "scope": "C++ if/else and bounded/unbounded loops lower to ordinary branch IL; this is source-level algorithm support, not native textual IF/ELSE/ENDIF/FOR/ENDFOR decoding.",
+      "remaining": "Audit exact native construct semantics and reverse import; prove equivalent lowered form or add strict native opcode support where necessary.",
+      "code": [
+        "m200/frontend.py",
+        "m200/flow.py"
+      ],
+      "tests": [
+        "tests/test_control_flow.py"
+      ],
+      "evidence": [
+        "docs/validation/CONTROL-FLOW-STRESS-RESULTS.json"
+      ],
+      "phases": {
+        "cpp_sdk": "source_equivalent_subset",
+        "il_vm": "native_opcode_not_implemented",
+        "smbp_graph": "source_equivalent_subset",
+        "reverse": "lowered_form_only",
+        "local_oracle": "covered_subset",
+        "editor": "not_implemented",
+        "simulator": "not_implemented",
+        "physical": "pending"
+      },
+      "next_test": "Compare each native IF/ELSE/ENDIF/FOR/ENDFOR construct to its explicit C++/JMP lowering, including zero iterations, nesting and stateful evaluation order; either prove equivalence or implement strict import.",
+      "phase_evidence": {
+        "cpp_sdk": [
+          "tests/test_control_flow.py"
+        ],
+        "smbp_graph": [
+          "tests/test_control_flow.py"
+        ],
+        "reverse": [
+          "tests/test_control_flow.py"
+        ],
+        "local_oracle": [
+          "tests/test_control_flow.py"
+        ]
+      },
+      "whole_record_complete": false
+    },
+    "end": {
+      "scope": "Master END/ENDC/ENDCN local execution and strict native END/EndCn graph import; Master export uses semantic Jump normalization. Callee current-level END/ENDC is a separately bounded subroutine profile.",
+      "remaining": "Do not infer callee ENDCN admission from Master EndCn fixtures. Native unconditional END must stand alone. Broader runtime/graph combinations and physical behavior remain open.",
+      "code": [
+        "m200/native_logic.py",
+        "m200/project.py",
+        "m200/subroutine_contexts.py"
+      ],
+      "tests": [
+        "tests/test_native_end_graphs.py",
+        "tests/test_control_flow.py"
+      ],
+      "evidence": [
+        "docs/validation/NATIVE-END-TIMER-10MS-RESULTS.json",
+        "docs/validation/SCAN-EXIT-INTEGRATION-RESULTS.json",
+        "docs/validation/SUBROUTINE-COMPILER-RESULTS.json"
+      ],
+      "phases": {
+        "cpp_sdk": "covered_subset",
+        "il_vm": "covered_subset",
+        "smbp_graph": "covered_subset",
+        "reverse": "covered_subset",
+        "local_oracle": "covered_subset",
+        "editor": "observed_subset",
+        "simulator": "observed_subset",
+        "physical": "pending"
+      },
+      "next_test": "Keep Master END/ENDC/ENDCN and leaf return cases separate; bind raw leaf ENDCN and reject prefix-LD unconditional END, with caller-continuation and skipped-leaf suffix controls.",
+      "phase_evidence": {
+        "cpp_sdk": [
+          "tests/test_native_end_graphs.py",
+          "tests/test_control_flow.py"
+        ],
+        "il_vm": [
+          "tests/test_native_end_graphs.py",
+          "tests/test_control_flow.py"
+        ],
+        "smbp_graph": [
+          "tests/test_native_end_graphs.py",
+          "tests/test_control_flow.py"
+        ],
+        "reverse": [
+          "tests/test_native_end_graphs.py",
+          "tests/test_control_flow.py"
+        ],
+        "local_oracle": [
+          "tests/test_native_end_graphs.py",
+          "tests/test_control_flow.py"
+        ],
+        "editor": [
+          "docs/validation/NATIVE-END-TIMER-10MS-RESULTS.json",
+          "docs/validation/SCAN-EXIT-INTEGRATION-RESULTS.json",
+          "docs/validation/SUBROUTINE-COMPILER-RESULTS.json"
+        ],
+        "simulator": [
+          "docs/validation/NATIVE-END-TIMER-10MS-RESULTS.json",
+          "docs/validation/SCAN-EXIT-INTEGRATION-RESULTS.json",
+          "docs/validation/SUBROUTINE-COMPILER-RESULTS.json"
+        ]
+      },
+      "whole_record_complete": false
+    },
+    "subroutine": {
+      "scope": "C++ Subroutine descriptor 2/4 literal args; IDs0..63, independent number/name/section; JSONv2/context origins, shared scan I/O/clock, current-level returns, reverse. Native export only actual Man21, Master section0 plus one stateless leaf section2, supported direct series leaves; normal M0..1023/observed I0.0 call predicates.",
+      "remaining": "Nested/stateful leaves, leaf loops/labels/indexed access, multiple native leaves/layouts and raw leaf ENDCN/constant/compound graphs remain gated. Local multi-context capability is broader than native export. Physical firmware/PLC remains unknown.",
+      "code": [
+        "m200/subroutine_contexts.py",
+        "m200/subroutine_xml.py",
+        "m200/subroutine_graph.py",
+        "m200/frontend.py",
+        "m200/reverse.py",
+        "m200/project.py",
+        "sdk/plc.hpp"
+      ],
+      "tests": [
+        "tests/test_sr_context_prototype.py",
+        "tests/test_sr_frontend_reverse_prototype.py",
+        "tests/test_sr_project_export_prototype.py",
+        "tests/test_sr_project_import_prototype.py"
+      ],
+      "evidence": [
+        "docs/SUBROUTINES.md",
+        "docs/validation/SUBROUTINE-COMPILER-RESULTS.json",
+        "docs/validation/NATIVE-M-CONTACT-BINDING-OBSERVATIONS.json"
+      ],
+      "phases": {
+        "cpp_sdk": "covered_subset",
+        "il_vm": "covered_subset",
+        "smbp_graph": "covered_subset",
+        "reverse": "covered_subset",
+        "local_oracle": "covered_subset",
+        "editor": "observed_subset",
+        "simulator": "observed_subset",
+        "physical": "pending"
+      },
+      "next_test": "Add one named wider native profile at a time: multiple leaf sections, then a stateful/control-flow leaf; test independent metadata, shared images/clock, local returns, unreachable invalid bodies and atomic export refusal.",
+      "phase_evidence": {
+        "cpp_sdk": [
+          "tests/test_sr_context_prototype.py",
+          "tests/test_sr_frontend_reverse_prototype.py",
+          "tests/test_sr_project_export_prototype.py",
+          "tests/test_sr_project_import_prototype.py"
+        ],
+        "il_vm": [
+          "tests/test_sr_context_prototype.py",
+          "tests/test_sr_frontend_reverse_prototype.py",
+          "tests/test_sr_project_export_prototype.py",
+          "tests/test_sr_project_import_prototype.py"
+        ],
+        "smbp_graph": [
+          "tests/test_sr_context_prototype.py",
+          "tests/test_sr_frontend_reverse_prototype.py",
+          "tests/test_sr_project_export_prototype.py",
+          "tests/test_sr_project_import_prototype.py"
+        ],
+        "reverse": [
+          "tests/test_sr_context_prototype.py",
+          "tests/test_sr_frontend_reverse_prototype.py",
+          "tests/test_sr_project_export_prototype.py",
+          "tests/test_sr_project_import_prototype.py"
+        ],
+        "local_oracle": [
+          "tests/test_sr_context_prototype.py",
+          "tests/test_sr_frontend_reverse_prototype.py",
+          "tests/test_sr_project_export_prototype.py",
+          "tests/test_sr_project_import_prototype.py"
+        ],
+        "editor": [
+          "docs/validation/SUBROUTINE-COMPILER-RESULTS.json",
+          "docs/validation/NATIVE-M-CONTACT-BINDING-OBSERVATIONS.json"
+        ],
+        "simulator": [
+          "docs/validation/SUBROUTINE-COMPILER-RESULTS.json",
+          "docs/validation/NATIVE-M-CONTACT-BINDING-OBSERVATIONS.json"
+        ]
+      },
+      "native_profile": {
+        "level": "FunctLevelMan21_0",
+        "master_section": 0,
+        "leaf_count": 1,
+        "leaf_section": 2,
+        "leaf": "stateless direct series subset",
+        "call_predicates": "normalM0..1023 or observedI0.0",
+        "metadata": "number/name/section independent",
+        "local_layouts": "broader than native export"
+      },
+      "whole_record_complete": false
+    },
+    "timer": {
+      "scope": "TON/TOF/TP IDs0..254, bases1/10/100/1000ms plus native omitted-minute default; 1ms restricted TM0..5. TenMilliSeconds is admitted and backed by exact Man21 TON/TOF/TP false-option fixture save/fresh reopen. True options use separate narrow profiles.",
+      "remaining": "Complete remaining graph/operand/timer lifecycle/phase/START/STOP/skipped-repeat boundaries and native physical timing. A 10ms serialization proof is not a 10ms physical accuracy measurement.",
+      "code": [
+        "m200/timers.py",
+        "m200/timer_profile.py",
+        "m200/project.py"
+      ],
+      "tests": [
+        "tests/test_timer_xml_bindings.py",
+        "tests/test_timer_modes.py",
+        "tests/test_timer_properties.py"
+      ],
+      "evidence": [
+        "docs/validation/NATIVE-END-TIMER-10MS-RESULTS.json",
+        "docs/validation/TIMER-PROPERTY-10MS-RESULTS.json",
+        "docs/validation/OFFICIAL-EDITOR-RESULTS.json"
+      ],
+      "phases": {
+        "cpp_sdk": "covered_subset",
+        "il_vm": "covered_subset",
+        "smbp_graph": "covered_subset",
+        "reverse": "covered_subset",
+        "local_oracle": "covered_subset",
+        "editor": "observed_subset",
+        "simulator": "observed_subset",
+        "physical": "pending"
+      },
+      "next_test": "For each remaining timer base/mode/property/lifecycle case, compare independent boundary/held/reset/skipped-call traces and exact native words/Q; retain the separately proven 10ms serialization case.",
+      "phase_evidence": {
+        "cpp_sdk": [
+          "tests/test_timer_xml_bindings.py",
+          "tests/test_timer_modes.py",
+          "tests/test_timer_properties.py"
+        ],
+        "il_vm": [
+          "tests/test_timer_xml_bindings.py",
+          "tests/test_timer_modes.py",
+          "tests/test_timer_properties.py"
+        ],
+        "smbp_graph": [
+          "tests/test_timer_xml_bindings.py",
+          "tests/test_timer_modes.py",
+          "tests/test_timer_properties.py"
+        ],
+        "reverse": [
+          "tests/test_timer_xml_bindings.py",
+          "tests/test_timer_modes.py",
+          "tests/test_timer_properties.py"
+        ],
+        "local_oracle": [
+          "tests/test_timer_xml_bindings.py",
+          "tests/test_timer_modes.py",
+          "tests/test_timer_properties.py"
+        ],
+        "editor": [
+          "docs/validation/NATIVE-END-TIMER-10MS-RESULTS.json",
+          "docs/validation/TIMER-PROPERTY-10MS-RESULTS.json",
+          "docs/validation/OFFICIAL-EDITOR-RESULTS.json"
+        ],
+        "simulator": [
+          "docs/validation/NATIVE-END-TIMER-10MS-RESULTS.json",
+          "docs/validation/TIMER-PROPERTY-10MS-RESULTS.json",
+          "docs/validation/OFFICIAL-EDITOR-RESULTS.json"
+        ]
+      },
+      "variants": {
+        "base10ms": {
+          "scope": "TON/TOF/TP, preset5, false option flags, actualMan21",
+          "xml": "TenMilliSeconds",
+          "editor": "saved_and_freshly_reopened",
+          "runtime_tick_accuracy": "not_claimed",
+          "fixture": "tests/fixtures/official_tm200ce40t_timer_10ms.smbp"
+        },
+        "base1ms": {
+          "scope": "TM0..5 only; later IDs refused",
+          "local": "covered_subset"
+        },
+        "other_bases": {
+          "scope": "100ms/1000ms and native omitted-minute default; mode/property contexts remain separately bounded",
+          "local": "covered_subset"
+        }
+      },
+      "whole_record_complete": false
+    },
+    "timer_retention": {
+      "scope": "Local TON/TOF retention. Product XML only (TON,true,false,1000ms,Man21) and (TOF,true,false,1000ms,Man21), validated from actual template token; separate generated watch product native runtime observations and false-flag controls.",
+      "remaining": "Other bases/levels/combined flags and lifecycle cases are unqualified tool gaps; TP retention is not established. Do not lift all timer-option gates from one context.",
+      "code": [
+        "m200/timer_profile.py",
+        "m200/timers.py"
+      ],
+      "tests": [
+        "tests/test_timer_option_bindings.py",
+        "tests/test_timer_modes.py"
+      ],
+      "evidence": [
+        "docs/validation/TIMER-OPTION-POLICY-RESULTS.json",
+        "docs/validation/TIMER-OPTIONS-OFFICIAL-OBSERVATIONS.json",
+        "docs/validation/TIMER-GENERATED-PROJECT-RESULTS.json"
+      ],
+      "phases": {
+        "cpp_sdk": "covered_subset",
+        "il_vm": "covered_subset",
+        "smbp_graph": "covered_subset",
+        "reverse": "covered_subset",
+        "local_oracle": "covered_subset",
+        "editor": "observed_subset",
+        "simulator": "observed_subset",
+        "physical": "pending"
+      },
+      "next_test": "Qualify one currently refused base/level/flag combination with a flags-off control and paused/resumed/completed/reset trace before widening the exact context allowlist.",
+      "phase_evidence": {
+        "cpp_sdk": [
+          "tests/test_timer_option_bindings.py",
+          "tests/test_timer_modes.py"
+        ],
+        "il_vm": [
+          "tests/test_timer_option_bindings.py",
+          "tests/test_timer_modes.py"
+        ],
+        "smbp_graph": [
+          "tests/test_timer_option_bindings.py",
+          "tests/test_timer_modes.py"
+        ],
+        "reverse": [
+          "tests/test_timer_option_bindings.py",
+          "tests/test_timer_modes.py"
+        ],
+        "local_oracle": [
+          "tests/test_timer_option_bindings.py",
+          "tests/test_timer_modes.py"
+        ],
+        "editor": [
+          "docs/validation/TIMER-OPTION-POLICY-RESULTS.json",
+          "docs/validation/TIMER-OPTIONS-OFFICIAL-OBSERVATIONS.json",
+          "docs/validation/TIMER-GENERATED-PROJECT-RESULTS.json"
+        ],
+        "simulator": [
+          "docs/validation/TIMER-OPTION-POLICY-RESULTS.json",
+          "docs/validation/TIMER-OPTIONS-OFFICIAL-OBSERVATIONS.json",
+          "docs/validation/TIMER-GENERATED-PROJECT-RESULTS.json"
+        ]
+      },
+      "admitted_native_contexts": [
+        [
+          "TON",
+          true,
+          false,
+          1000,
+          "FunctLevelMan21_0"
+        ],
+        [
+          "TOF",
+          true,
+          false,
+          1000,
+          "FunctLevelMan21_0"
+        ]
+      ],
+      "whole_record_complete": false
+    },
+    "timer_dynamic": {
+      "scope": "Local dynamic TON/TOF/TP model. Product XML only (TON,false,true,1000ms,Man21), actual token authority; generated watch product separately observed completing after preset reduction.",
+      "remaining": "TOF/TP product XML, other bases/levels/combined flags, active-tick/clamp semantics and lifecycle require explicit proof. Separate GUI samples are not exact same-scan/tick measurements.",
+      "code": [
+        "m200/timer_profile.py",
+        "m200/timers.py"
+      ],
+      "tests": [
+        "tests/test_timer_option_bindings.py",
+        "tests/test_timer_modes.py"
+      ],
+      "evidence": [
+        "docs/validation/TIMER-OPTION-POLICY-RESULTS.json",
+        "docs/validation/TIMER-GENERATED-PROJECT-RESULTS.json"
+      ],
+      "phases": {
+        "cpp_sdk": "covered_subset",
+        "il_vm": "covered_subset",
+        "smbp_graph": "covered_subset",
+        "reverse": "covered_subset",
+        "local_oracle": "covered_subset",
+        "editor": "observed_subset",
+        "simulator": "observed_subset",
+        "physical": "pending"
+      },
+      "next_test": "Qualify dynamic TOF or TP with a flags-off control and active preset increase/decrease/disable/rearm trace; do not combine retention without its own collision oracle.",
+      "phase_evidence": {
+        "cpp_sdk": [
+          "tests/test_timer_option_bindings.py",
+          "tests/test_timer_modes.py"
+        ],
+        "il_vm": [
+          "tests/test_timer_option_bindings.py",
+          "tests/test_timer_modes.py"
+        ],
+        "smbp_graph": [
+          "tests/test_timer_option_bindings.py",
+          "tests/test_timer_modes.py"
+        ],
+        "reverse": [
+          "tests/test_timer_option_bindings.py",
+          "tests/test_timer_modes.py"
+        ],
+        "local_oracle": [
+          "tests/test_timer_option_bindings.py",
+          "tests/test_timer_modes.py"
+        ],
+        "editor": [
+          "docs/validation/TIMER-OPTION-POLICY-RESULTS.json",
+          "docs/validation/TIMER-GENERATED-PROJECT-RESULTS.json"
+        ],
+        "simulator": [
+          "docs/validation/TIMER-OPTION-POLICY-RESULTS.json",
+          "docs/validation/TIMER-GENERATED-PROJECT-RESULTS.json"
+        ]
+      },
+      "admitted_native_contexts": [
+        [
+          "TON",
+          false,
+          true,
+          1000,
+          "FunctLevelMan21_0"
+        ]
+      ],
+      "whole_record_complete": false
+    },
+    "counter": {
+      "scope": "Native C IDs0..254, P/V/E/D/F and R/S/CU/CD local state model/API/config/reverse; strict observed raw Counter Boolean-port graph subset and serial export.",
+      "remaining": "Resolve documented E/reset/input-collision/lifecycle questions against exact native observations, extend remaining graph/numeric-effect variants, validate physical behavior. One combined counter diagnostic does not close every counter mode.",
+      "code": [
+        "m200/counters.py",
+        "m200/counter_graph.py",
+        "m200/project.py"
+      ],
+      "tests": [
+        "tests/test_counters.py",
+        "tests/test_counter_graphs.py"
+      ],
+      "evidence": [
+        "docs/validation/COUNTER-LOCAL-RESULTS.json",
+        "docs/validation/COUNTER-GRAPH-LOCAL-RESULTS.json",
+        "docs/validation/OFFICIAL-EDITOR-RESULTS.json"
+      ],
+      "phases": {
+        "cpp_sdk": "covered_subset",
+        "il_vm": "covered_subset",
+        "smbp_graph": "covered_subset",
+        "reverse": "covered_subset",
+        "local_oracle": "covered_subset",
+        "editor": "observed_subset",
+        "simulator": "observed_subset",
+        "physical": "pending"
+      },
+      "next_test": "Resolve E/reset/load/CU/CD collision and first-RUN behavior with exact native status/word latches, then match independent VM/SDK traces and graph port order.",
+      "phase_evidence": {
+        "cpp_sdk": [
+          "tests/test_counters.py",
+          "tests/test_counter_graphs.py"
+        ],
+        "il_vm": [
+          "tests/test_counters.py",
+          "tests/test_counter_graphs.py"
+        ],
+        "smbp_graph": [
+          "tests/test_counters.py",
+          "tests/test_counter_graphs.py"
+        ],
+        "reverse": [
+          "tests/test_counters.py",
+          "tests/test_counter_graphs.py"
+        ],
+        "local_oracle": [
+          "tests/test_counters.py",
+          "tests/test_counter_graphs.py"
+        ],
+        "editor": [
+          "docs/validation/COUNTER-LOCAL-RESULTS.json",
+          "docs/validation/COUNTER-GRAPH-LOCAL-RESULTS.json",
+          "docs/validation/OFFICIAL-EDITOR-RESULTS.json"
+        ],
+        "simulator": [
+          "docs/validation/COUNTER-LOCAL-RESULTS.json",
+          "docs/validation/COUNTER-GRAPH-LOCAL-RESULTS.json",
+          "docs/validation/OFFICIAL-EDITOR-RESULTS.json"
+        ]
+      },
+      "whole_record_complete": false
+    },
+    "register_foundation": {
+      "scope": "Standalone strict Register config/graph codecs only: four IDs, explicit Lifo/Fifo/default Fifo; canonical three plain-LD input graph. Actual FIFO/LIFO projects have separate handbuilt editor/simulator research evidence; no C++/Program/VM/reverse whole-project integration.",
+      "remaining": "Integrate typed state/IR/SDK/VM/reverse and exact graphs; resolve evaluation/reset/edge/call-history/lifecycle scope with bounded native evidence. Preserve whole-project active-R refusal until coherent support exists.",
+      "code": [
+        "m200/register_xml.py",
+        "m200/register_graph.py",
+        "m200/config.py"
+      ],
+      "tests": [
+        "tests/test_register_xml.py",
+        "tests/test_register_graph.py"
+      ],
+      "evidence": [
+        "docs/validation/REGISTER-CONFIG-FOUNDATION-RESULTS.json",
+        "docs/validation/REGISTER-GRAPH-FOUNDATION-RESULTS.json",
+        "docs/validation/REGISTER-NATIVE-OBSERVATIONS.json",
+        "docs/validation/REGISTER-COLLISION-OBSERVATIONS.json"
+      ],
+      "phases": {
+        "cpp_sdk": "not_implemented",
+        "il_vm": "not_implemented",
+        "smbp_graph": "standalone_foundation_only",
+        "reverse": "not_implemented",
+        "local_oracle": "codec_only",
+        "editor": "handbuilt_diagnostic_only",
+        "simulator": "handbuilt_diagnostic_only",
+        "physical": "pending"
+      },
+      "next_test": "Integrate the canonical FIFO/LIFO profile through API/IR/VM/reverse/project first; test capacity16, empty/full, simultaneous requests, reset/consumed edges, self-status and skipped/repeated calls using the existing bounded native observations.",
+      "phase_evidence": {
+        "smbp_graph": [
+          "tests/test_register_xml.py",
+          "tests/test_register_graph.py"
+        ],
+        "local_oracle": [
+          "tests/test_register_xml.py",
+          "tests/test_register_graph.py"
+        ],
+        "editor": [
+          "docs/validation/REGISTER-CONFIG-FOUNDATION-RESULTS.json",
+          "docs/validation/REGISTER-GRAPH-FOUNDATION-RESULTS.json",
+          "docs/validation/REGISTER-NATIVE-OBSERVATIONS.json",
+          "docs/validation/REGISTER-COLLISION-OBSERVATIONS.json"
+        ],
+        "simulator": [
+          "docs/validation/REGISTER-CONFIG-FOUNDATION-RESULTS.json",
+          "docs/validation/REGISTER-GRAPH-FOUNDATION-RESULTS.json",
+          "docs/validation/REGISTER-NATIVE-OBSERVATIONS.json",
+          "docs/validation/REGISTER-COLLISION-OBSERVATIONS.json"
+        ]
+      },
+      "whole_record_complete": false
+    },
+    "generic_block": {
+      "scope": "BLK/OUT_BLK/END_BLK are implemented only through admitted Timer/Counter/communication schemas, not arbitrary resource classes.",
+      "remaining": "Add each missing owned block family with typed ports/config/state, strict closed graph grammar and complete reverse/runtime path.",
+      "code": [
+        "m200/il.py",
+        "m200/project.py"
+      ],
+      "tests": [
+        "tests/test_toolchain.py",
+        "tests/test_counter_graphs.py",
+        "tests/test_communication_compiler.py"
+      ],
+      "evidence": [],
+      "phases": {
+        "cpp_sdk": "covered_subset",
+        "il_vm": "covered_subset",
+        "smbp_graph": "covered_subset",
+        "reverse": "covered_subset",
+        "local_oracle": "covered_subset",
+        "editor": "not_implemented",
+        "simulator": "not_implemented",
+        "physical": "pending"
+      },
+      "next_test": "For the exact new block kind, test owned port order/config/state and raw graph closure; reject unknown block classes and partial or mismatched IL/graph without changing the destination.",
+      "phase_evidence": {
+        "cpp_sdk": [
+          "tests/test_toolchain.py",
+          "tests/test_counter_graphs.py",
+          "tests/test_communication_compiler.py"
+        ],
+        "il_vm": [
+          "tests/test_toolchain.py",
+          "tests/test_counter_graphs.py",
+          "tests/test_communication_compiler.py"
+        ],
+        "smbp_graph": [
+          "tests/test_toolchain.py",
+          "tests/test_counter_graphs.py",
+          "tests/test_communication_compiler.py"
+        ],
+        "reverse": [
+          "tests/test_toolchain.py",
+          "tests/test_counter_graphs.py",
+          "tests/test_communication_compiler.py"
+        ],
+        "local_oracle": [
+          "tests/test_toolchain.py",
+          "tests/test_counter_graphs.py",
+          "tests/test_communication_compiler.py"
+        ]
+      },
+      "whole_record_complete": false
+    },
+    "native_block_missing": {
+      "scope": "Documented target native resource has no integrated typed compiler path. Existing configuration parser refuses active unsupported collections rather than erasing them.",
+      "remaining": "Implement bounded config/state/ports/API/IL/VM/reverse/graphs, independent collision/error oracle and exact editor candidate. Preserve object budget and actual mode restrictions.",
+      "code": [
+        "m200/config.py",
+        "m200/il.py",
+        "m200/frontend.py"
+      ],
+      "tests": [],
+      "evidence": [],
+      "phases": {
+        "cpp_sdk": "not_implemented",
+        "il_vm": "not_implemented",
+        "smbp_graph": "not_implemented",
+        "reverse": "not_implemented",
+        "local_oracle": "not_implemented",
+        "editor": "not_implemented",
+        "simulator": "not_implemented",
+        "physical": "pending"
+      },
+      "next_test": "Use this row source operands/config to define one closed typed block/opcode; add valid boundary and invalid-state/operand controls, complete reverse and exact native graph admission before enabling it.",
+      "phase_evidence": {},
+      "whole_record_complete": false
+    },
+    "clock_calendar": {
+      "scope": "RTC/calendar/schedule/system-word services are documentary only. plc::Clock and periodic S4/S5/S6 Boolean bits are not these calendar services.",
+      "remaining": "Implement coherent RTC image/set/adjust/schedule/absolute-counter semantics and writable permissions; rollover/calendar/invalid/battery/lifecycle/physical proof required.",
+      "code": [
+        "m200/il.py",
+        "m200/config.py"
+      ],
+      "tests": [],
+      "evidence": [],
+      "phases": {
+        "cpp_sdk": "not_implemented",
+        "il_vm": "not_implemented",
+        "smbp_graph": "not_implemented",
+        "reverse": "not_implemented",
+        "local_oracle": "not_implemented",
+        "editor": "not_implemented",
+        "simulator": "not_implemented",
+        "physical": "pending"
+      },
+      "next_test": "Add literal valid/invalid calendar, rollover, atomic snapshot and lifecycle cases for the exact RTC/schedule/system-word service; bind writable permissions and actual native configuration.",
+      "phase_evidence": {},
+      "whole_record_complete": false
+    },
+    "immediate": {
+      "scope": "Native immediate embedded/HSC I/O services are not implemented. Ordinary native process-image direct I/Q optimization does not satisfy READ_IMM/WRITE_IMM semantics.",
+      "remaining": "Define typed return/error codes, actual ownership/forcing and image-update rules, HSC mode eligibility and graph binding, then test physical timing separately.",
+      "code": [
+        "m200/io_lowering.py",
+        "m200/numeric.py",
+        "m200/config.py"
+      ],
+      "tests": [],
+      "evidence": [],
+      "phases": {
+        "cpp_sdk": "not_implemented",
+        "il_vm": "not_implemented",
+        "smbp_graph": "not_implemented",
+        "reverse": "not_implemented",
+        "local_oracle": "not_implemented",
+        "editor": "not_implemented",
+        "simulator": "not_implemented",
+        "physical": "pending"
+      },
+      "next_test": "Add index/forcing/dedicated-output error-code controls and before/after image synchronization traces; verify target HSC-mode eligibility before native admission.",
+      "phase_evidence": {},
+      "whole_record_complete": false
+    },
+    "communication": {
+      "scope": "READ_VAR/WRITE_VAR/WRITE_READ_VAR typed static config, asynchronous local state, reverse and literal protocol FC1/2/3/4/5/6/15/16/23. Native XML at observed actual Man21/SL1 master static profiles; bare normal-M Execute/Abort and complete ordered M full-pin status graphs. Per-ID object variants remain bounded below.",
+      "remaining": "Dynamic properties/native port/profile variants, IOScanner/message/ETH ownership/serial electrical behavior, native transaction scheduling/errors/abort recovery and physical interoperability remain open. Editor save/reopen is not successful Modbus communication.",
+      "code": [
+        "m200/communication.py",
+        "m200/communication_xml.py",
+        "m200/communication_graph.py",
+        "m200/modbus.py",
+        "m200/project.py",
+        "sdk/plc.hpp"
+      ],
+      "tests": [
+        "tests/test_communication_compiler.py",
+        "tests/test_modbus.py",
+        "tests/test_modbus_bare_abort_native_profile.py",
+        "tests/test_modbus_full_pin_native_profile.py",
+        "tests/test_modbus_write_read_native_profile.py"
+      ],
+      "evidence": [
+        "docs/validation/MODBUS-BARE-ABORT-GENERATED-PROJECT-RESULTS.json",
+        "docs/validation/MODBUS-FULL-PIN-GENERATED-PROJECT-RESULTS.json",
+        "docs/validation/MODBUS-WRITE-READ-PROFILE-RESULTS.json",
+        "docs/validation/MODBUS-COMPLEX-FULL-PIN-LOCAL-RESULTS.json"
+      ],
+      "phases": {
+        "cpp_sdk": "covered_subset",
+        "il_vm": "covered_subset",
+        "smbp_graph": "covered_subset",
+        "reverse": "covered_subset",
+        "local_oracle": "covered_subset",
+        "editor": "observed_subset",
+        "simulator": "not_transaction_validated",
+        "physical": "pending"
+      },
+      "next_test": "Add one missing native parameter/link/pin profile with local literal PDU and timeout/abort/status/alias controls; execute a known native transaction separately from already-passed editor save/reopen.",
+      "phase_evidence": {
+        "cpp_sdk": [
+          "tests/test_communication_compiler.py",
+          "tests/test_modbus.py",
+          "tests/test_modbus_bare_abort_native_profile.py",
+          "tests/test_modbus_full_pin_native_profile.py",
+          "tests/test_modbus_write_read_native_profile.py"
+        ],
+        "il_vm": [
+          "tests/test_communication_compiler.py",
+          "tests/test_modbus.py",
+          "tests/test_modbus_bare_abort_native_profile.py",
+          "tests/test_modbus_full_pin_native_profile.py",
+          "tests/test_modbus_write_read_native_profile.py"
+        ],
+        "smbp_graph": [
+          "tests/test_communication_compiler.py",
+          "tests/test_modbus.py",
+          "tests/test_modbus_bare_abort_native_profile.py",
+          "tests/test_modbus_full_pin_native_profile.py",
+          "tests/test_modbus_write_read_native_profile.py"
+        ],
+        "reverse": [
+          "tests/test_communication_compiler.py",
+          "tests/test_modbus.py",
+          "tests/test_modbus_bare_abort_native_profile.py",
+          "tests/test_modbus_full_pin_native_profile.py",
+          "tests/test_modbus_write_read_native_profile.py"
+        ],
+        "local_oracle": [
+          "tests/test_communication_compiler.py",
+          "tests/test_modbus.py",
+          "tests/test_modbus_bare_abort_native_profile.py",
+          "tests/test_modbus_full_pin_native_profile.py",
+          "tests/test_modbus_write_read_native_profile.py"
+        ],
+        "editor": [
+          "docs/validation/MODBUS-BARE-ABORT-GENERATED-PROJECT-RESULTS.json",
+          "docs/validation/MODBUS-FULL-PIN-GENERATED-PROJECT-RESULTS.json",
+          "docs/validation/MODBUS-WRITE-READ-PROFILE-RESULTS.json",
+          "docs/validation/MODBUS-COMPLEX-FULL-PIN-LOCAL-RESULTS.json"
+        ]
+      },
+      "native_profiles": {
+        "READ_VAR": "static MW/IW/I/Q, actualMan21/SL1 master; bare normal-M Execute/Abort and bounded full-pin status forms",
+        "WRITE_VAR": "static MW/Q plus single coil/register, actualMan21/SL1 master; bounded bare/full-pin forms",
+        "WRITE_READ_VAR": "static asymmetric MW buffers, actualMan21/SL1 master; bounded bare/full-pin forms",
+        "local_protocol": "FC1/2/3/4/5/6/15/16/23; not a statement of every native server/client role"
+      },
+      "whole_record_complete": false
+    },
+    "digital_config": {
+      "scope": "Default embedded 24 inputs/16 transistor outputs and ordinary process-image access supported; unsupported active filter/latch/run-stop/alarm/fallback configuration is not inferred from pin existence.",
+      "remaining": "Implement the specific active configuration and resource conflicts for this row, native reload/reverse/config ownership, then exact editor and physical behavior checks.",
+      "code": [
+        "m200/config.py",
+        "m200/io_lowering.py"
+      ],
+      "tests": [
+        "tests/test_toolchain.py"
+      ],
+      "evidence": [],
+      "phases": {
+        "cpp_sdk": "not_implemented",
+        "il_vm": "not_implemented",
+        "smbp_graph": "inactive_defaults_only",
+        "reverse": "not_implemented",
+        "local_oracle": "refusal_only",
+        "editor": "not_implemented",
+        "simulator": "not_implemented",
+        "physical": "pending"
+      },
+      "next_test": "For this exact filter/latch/run-stop/alarm/fallback setting, test ownership conflicts and boundary values, preserve all other hardware, and qualify the native configured candidate.",
+      "phase_evidence": {
+        "smbp_graph": [
+          "tests/test_toolchain.py"
+        ],
+        "local_oracle": [
+          "tests/test_toolchain.py"
+        ]
+      },
+      "whole_record_complete": false
+    },
+    "hardware_inactive": {
+      "scope": "Documented hardware family currently has only inactive/default template preservation and explicit active configuration refusal, if present in config.py; this is not executable feature support.",
+      "remaining": "Implement owned active typed configuration, mode/operand/state/graph/port conflicts and native reverse; resolve catalogue primary conflicts, then exact editor and physical validation.",
+      "code": [
+        "m200/config.py"
+      ],
+      "tests": [
+        "tests/test_toolchain.py"
+      ],
+      "evidence": [],
+      "phases": {
+        "cpp_sdk": "not_implemented",
+        "il_vm": "not_implemented",
+        "smbp_graph": "not_implemented",
+        "reverse": "not_implemented",
+        "local_oracle": "not_implemented",
+        "editor": "not_implemented",
+        "simulator": "not_implemented",
+        "physical": "pending"
+      },
+      "next_test": "Define active typed settings for this row, including its model-specific limits and shared pin/resource conflicts; test valid endpoints, conflict rejection and lossless native reverse before enabling active configuration.",
+      "phase_evidence": {},
+      "whole_record_complete": false
+    },
+    "network_config": {
+      "scope": "Supported ordinary template communication settings and local Modbus protocol are narrower than the complete embedded networking/configuration service in this row.",
+      "remaining": "Audit each row actual config admission and add exact native typed settings/roles/remote mapping and resource conflicts. Host loopback sockets do not prove PLC protocol/server/physical capability.",
+      "code": [
+        "m200/config.py",
+        "m200/communication_xml.py"
+      ],
+      "tests": [
+        "tests/test_communication_xml.py"
+      ],
+      "evidence": [],
+      "phases": {
+        "cpp_sdk": "not_implemented",
+        "il_vm": "not_implemented",
+        "smbp_graph": "unassessed_row_specific",
+        "reverse": "not_implemented",
+        "local_oracle": "unassessed_row_specific",
+        "editor": "not_implemented",
+        "simulator": "not_implemented",
+        "physical": "pending"
+      },
+      "next_test": "Audit this exact service against admitted template settings; add typed active configuration, valid/invalid role/address/remote-map controls and exact native readback. Keep host transport and native endpoint tests separate.",
+      "phase_evidence": {},
+      "whole_record_complete": false
+    },
+    "tasks": {
+      "scope": "Strict normal/freewheeling isolated MAST profile; active periodic/fast/event tasks remain refused. Shared I/O image optimization relies on this admitted scheduling boundary.",
+      "remaining": "Add periodic/event contexts, priorities, triggering, update/interrupt image semantics and watchdog configuration. Tool instruction budget is not the physical controller watchdog.",
+      "code": [
+        "m200/config.py",
+        "m200/io_lowering.py"
+      ],
+      "tests": [
+        "tests/test_mast_task_profile.py"
+      ],
+      "evidence": [
+        "docs/validation/MAST-TASK-PROFILE-RESULTS.json"
+      ],
+      "phases": {
+        "cpp_sdk": "covered_subset",
+        "il_vm": "covered_subset",
+        "smbp_graph": "covered_subset",
+        "reverse": "covered_subset",
+        "local_oracle": "covered_subset",
+        "editor": "unassessed_row_specific",
+        "simulator": "unassessed_row_specific",
+        "physical": "pending"
+      },
+      "next_test": "Add the next native periodic/event scheduling profile with priority, image-update, interrupted-context and watchdog controls; verify ordinary isolated-MAST behavior remains identical.",
+      "phase_evidence": {
+        "cpp_sdk": [
+          "tests/test_mast_task_profile.py"
+        ],
+        "il_vm": [
+          "tests/test_mast_task_profile.py"
+        ],
+        "smbp_graph": [
+          "tests/test_mast_task_profile.py"
+        ],
+        "reverse": [
+          "tests/test_mast_task_profile.py"
+        ],
+        "local_oracle": [
+          "tests/test_mast_task_profile.py"
+        ]
+      },
+      "whole_record_complete": false
+    },
+    "retention_storage": {
+      "scope": "Cold initialization/persistent source globals in the local scan model do not implement PLC power-loss retention, explicit flash request, SD clone or post-configuration services.",
+      "remaining": "Model distinct power-up/download/INIT/STOP/RUN and retention regions; implement native controls/config and storage semantics. Physical persistence/storage checks are mandatory and unavailable now.",
+      "code": [
+        "m200/il.py",
+        "m200/config.py"
+      ],
+      "tests": [],
+      "evidence": [],
+      "phases": {
+        "cpp_sdk": "not_implemented",
+        "il_vm": "not_implemented",
+        "smbp_graph": "not_implemented",
+        "reverse": "not_implemented",
+        "local_oracle": "not_implemented",
+        "editor": "not_implemented",
+        "simulator": "not_implemented",
+        "physical": "pending"
+      },
+      "next_test": "Specify exact power-up/download/INIT/STOP/RUN or SD/post-configuration transitions for this row; add independent region/boundary traces and future physical persistence/readback cases.",
+      "phase_evidence": {},
+      "whole_record_complete": false
+    },
+    "absence": {
+      "scope": "TM200CE40T has no embedded analog inputs or outputs according to the model-specific audited source. Optional cartridge/expansion analog resources remain separate inventory rows.",
+      "remaining": "No embedded analog feature to implement. Keep explicit refusal; do not remove expansion/cartridge work or label the entire analog family inapplicable.",
+      "code": [],
+      "tests": [],
+      "evidence": [
+        "docs/capabilities/hardware.json"
+      ],
+      "phases": {
+        "cpp_sdk": "not_applicable",
+        "il_vm": "not_applicable",
+        "smbp_graph": "not_applicable",
+        "reverse": "not_applicable",
+        "local_oracle": "not_applicable",
+        "editor": "not_applicable",
+        "simulator": "not_applicable",
+        "physical": "not_applicable"
+      },
+      "next_test": "Retain model-specific embedded-analog absence and reject an attempted embedded channel; optional analog cartridges/expansion remain separately assigned.",
+      "phase_evidence": {},
+      "whole_record_complete": false
+    },
+    "unknown_model_eligibility": {
+      "scope": "Catalogue explicitly says not established by reviewed target documents; absence of documentation is not proof the PLC cannot implement it.",
+      "remaining": "Obtain model-specific primary eligibility proof before creating an implementation task or asserting model impossibility. Do not promote generic/future firmware or external gateway services.",
+      "code": [],
+      "tests": [],
+      "evidence": [
+        "docs/capabilities/hardware.json"
+      ],
+      "phases": {
+        "cpp_sdk": "target_eligibility_unresolved",
+        "il_vm": "target_eligibility_unresolved",
+        "smbp_graph": "target_eligibility_unresolved",
+        "reverse": "target_eligibility_unresolved",
+        "local_oracle": "target_eligibility_unresolved",
+        "editor": "target_eligibility_unresolved",
+        "simulator": "target_eligibility_unresolved",
+        "physical": "target_eligibility_unresolved"
+      },
+      "next_test": "Resolve one named protocol eligibility from a model-specific primary source or actual target capability; until then retain the unresolved row without claiming support or impossibility.",
+      "phase_evidence": {},
+      "whole_record_complete": false
+    }
+  },
+  "records": [
+    {
+      "id": "bool.ld",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "boolean",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "7b9bcbad0a56460bb3cfe4cec2c5e71243b15e0bdf68a2c066dda57a42227d7e"
+    },
+    {
+      "id": "bool.ldn",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "boolean",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "890121381e5a63d5b0ff99409ea88cada955ff3c555136b32bca71ce276aa58e"
+    },
+    {
+      "id": "bool.and",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "boolean",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "53183b0f11119b86ce453f67a679f67770e69f22a5fa83ce4fc4263eba1b7d19"
+    },
+    {
+      "id": "bool.andn",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "boolean",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "6ca973b388d798a117c29e0a58426e750c36ec1d4012cd0b60e74e1c778a4bf4"
+    },
+    {
+      "id": "bool.or",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "boolean",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "00132d7baefdfb3c87a1a2838f72d9e0d24c6387da3e94af08526b0f09b62b5b"
+    },
+    {
+      "id": "bool.orn",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "boolean",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "b0c733c292e4dea927d32e1365f2f68ccf41d81ba03bc6ce3c00124d6953d6b2"
+    },
+    {
+      "id": "bool.xor",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "boolean",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "991b3d137689dca05578b2318280feb0e7ed682a3a4da5ee94fd412906fa2220"
+    },
+    {
+      "id": "bool.xorn",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "boolean",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "260d5394c1569136405c9da35efa243ec5f04b3af46a68a185a5ddcd831e5200"
+    },
+    {
+      "id": "bool.ldr",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "native_edges",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "6f80d83304d7db788b2e1673da7095e809f249f4866632a9a21bf92b498e997c"
+    },
+    {
+      "id": "bool.ldf",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "native_edges",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "a411eebd23348569559f310e1330b512b80c91f3e8c7077d224d11053b3ac1d4"
+    },
+    {
+      "id": "bool.andr",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "native_edges",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "5b1fd3e77ec78f55461ea2740b9615df5cab926cc718916b7e8f8b0a15683f05"
+    },
+    {
+      "id": "bool.andf",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "native_edges",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "b5f3a5f0e46f113af9eb2d2a8d87106afc437d47c3b4ccb17173928255029d95"
+    },
+    {
+      "id": "bool.orr",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "native_edges",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "bc3e9e0f442c2825a4d15677a5e0a7d97b0b5d70d0fde4de582c243f9bc839ca"
+    },
+    {
+      "id": "bool.orf",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "native_edges",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "f1a683912fc9914b9f068bf60bafaf320c70de33111b486cdadc82fdd6698347"
+    },
+    {
+      "id": "bool.xorr",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "native_edges",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "761dc193e3ffa30f57c5c46e25861db7706d1c085c0bf24311e09015a18f7e23"
+    },
+    {
+      "id": "bool.xorf",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "native_edges",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "41aa3188f8098d45fa484165069c52e187b08a6e884c9a94f52bb9186b7f142f"
+    },
+    {
+      "id": "bool.st",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "boolean",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "154f339255fc6eb30ece6ed2c89236b38ba3c835017adb5fa581aed31806e0ba"
+    },
+    {
+      "id": "bool.stn",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "boolean",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "4872f1538941100a4f70e15fd16e47aa5bcead3a101ade543f523be6dda98d88"
+    },
+    {
+      "id": "bool.s",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "boolean",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "09fac8b39da24d888932c1bab06b9d00f86091b969b3eed9af7aaf9789e6db9c"
+    },
+    {
+      "id": "bool.r",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "boolean",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "4173de5c231ee596b8378350ebe312d90014bb869db03ac13c5fbd2f45462ce0"
+    },
+    {
+      "id": "bool.not_accumulator",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "boolean",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "24024c61a379aaadf2a6564dcba507462e8010072d3de4f6efb18f7a61eed6f9"
+    },
+    {
+      "id": "bool.expression_rising",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "expression_edges",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "11a517a137b5863a8765a7b5a1b5de33a10940d2347d1211535679653a089272"
+    },
+    {
+      "id": "bool.expression_falling",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "expression_edges",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "ee3a3ce4de0ed26b29ba35297732e5879f13816f3fd0d738ac8dc055fd34d349"
+    },
+    {
+      "id": "compare.gt",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "280a65c35523224467e1623b47bcdbdc67fc74b1c648d955af68563a87f8f03d"
+    },
+    {
+      "id": "compare.ge",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "c75f467983527e5fa2dba15ede43afa093817c132032fbf178064da5e8292a59"
+    },
+    {
+      "id": "compare.lt",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "54b717fcd77a673ca0352314d96cab176dd98caed1c8fd9a76d58c6e89e2087b"
+    },
+    {
+      "id": "compare.le",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "cd4ed95e29b243eb1417faf13ddf0a5b1c625b718da570268c690d9e7ac98f84"
+    },
+    {
+      "id": "compare.eq",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "e4fa46cdf4d014e8533b2c94be996bd48924e2fad58fc12ca09275ce4cf78fed"
+    },
+    {
+      "id": "compare.ne",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "15325a861d6cf94c79dfc617c0e46c8a5fc174c39cfe3ca3dbfed60cf695e810"
+    },
+    {
+      "id": "assign.scalar",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "285e34b11085ded067553edff8968a3ec99377f0804266d80a636bb94ed1305b"
+    },
+    {
+      "id": "assign.bitstring",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "d2f389e5185d72d811af0a5bb42e3e8c57b6c1aaf63e841b03024e16dc257ab1",
+      "scope_note": "Packed M/I/Q groups via supported 16/32-bit carriers; other native bit banks/overlap shapes are not complete."
+    },
+    {
+      "id": "assign.table",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "564ec4174c9d7aefddfaa0868cae6131710e23bdaa54063a665a93efd64d4b87"
+    },
+    {
+      "id": "integer.add",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "91d21d638053ea67a38f2b49da57c530cf45e42b15d9196b855c6d79ad0e7732"
+    },
+    {
+      "id": "integer.subtract",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "df8282ca665e17e610720df2118099214fd2205be29dd776c244e2bb8413325c"
+    },
+    {
+      "id": "integer.multiply",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "064ae6c04523300a0e4144c42296c9ec8c245778c08e8cc60bc55c983d9984b5"
+    },
+    {
+      "id": "integer.divide",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "08d3881330021b25a87578ce5143910364b11564cec7ffaf478ce9b37d56c5c5"
+    },
+    {
+      "id": "integer.rem",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "3164bc72a50942ae6aea5515f08d28b05c0431689cdfc962bfe9c17a9848198a"
+    },
+    {
+      "id": "integer.sqrt",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "253aea8d88bce8c7aecb5f8aa89ba9db46b599a3d5dfb869635e6f915bbed565"
+    },
+    {
+      "id": "integer.inc",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "incdec",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "8319e3945bc0469dab801dbbcb0cbcdd6fc770ce8ac9fa030de90a315aec585d"
+    },
+    {
+      "id": "integer.dec",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "incdec",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "125f6d6ae2eef5f5c5ef8ea16962c9320c72e39048b325c25f418d62e03c4149"
+    },
+    {
+      "id": "integer.abs",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "60ab095777c73ee887f2b9b7c1a3b9bc4c71286be0f1d8d0718396d238bac7ca",
+      "scope_note": "Only explicit ABS_i32 is present; do not imply ABS_i16 support."
+    },
+    {
+      "id": "word.and",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "5309abe0956343b66fad1ed95ee9e5b16d553f81a63fb43cfd73bd83500f3697",
+      "scope_note": "Explicit bitwise API is i16; broader documented word/dword operand forms are not implied."
+    },
+    {
+      "id": "word.or",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "12428ecdef4dd3cd669853e5b95a943496988293ec4358d15ada3c28eeb3fef1",
+      "scope_note": "Explicit bitwise API is i16; broader documented word/dword operand forms are not implied."
+    },
+    {
+      "id": "word.xor",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "8e65215516f1f8f6329d079739ddff369f78c18e61a98a8b090b1160c8113796",
+      "scope_note": "Explicit bitwise API is i16; broader documented word/dword operand forms are not implied."
+    },
+    {
+      "id": "word.not",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "3d0c2065af50794c90e72490aaa674fdddd1b2e2c24803daeb5d3cff29fd840c",
+      "scope_note": "Explicit bitwise API is i16; broader documented word/dword operand forms are not implied."
+    },
+    {
+      "id": "bits.shl",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "cb355fccdd74fb7f80fe162f60945f2ed060c4e4834665450454ef6dff442892",
+      "scope_note": "Count is literal and bounded (16/32 width). A source bounded loop of SHL1 can express a dynamic count; raw dynamic-count native opcode is not admitted."
+    },
+    {
+      "id": "bits.shr",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "721dea20842e86f1ab5d3843cec64aa136e5affafe4257482d059993e582f1cb",
+      "scope_note": "Literal bounded count and S17 local last-bit policy only."
+    },
+    {
+      "id": "bits.rol",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "8f6c82d69685a1b254c79d3011d13572f4a594cac469c1773c070b256dd1ef6b",
+      "scope_note": "Literal bounded count and S17 local last-bit policy only."
+    },
+    {
+      "id": "bits.ror",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "0500bbf213b69986ede5c3d094e03c2fdcc5fbfd07e67e154409b3e5f1300a82",
+      "scope_note": "Literal bounded count and S17 local last-bit policy only."
+    },
+    {
+      "id": "convert.bti",
+      "domain": "instruction",
+      "work_package": "G03",
+      "profile": "conversion",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "1a4468c63157a5136556cee91ee07a93f3a04c111867e43961119673d6563b99"
+    },
+    {
+      "id": "convert.itb",
+      "domain": "instruction",
+      "work_package": "G03",
+      "profile": "conversion",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "4937e29f33d4a431bae3917289a1f68fc1e37b3bac74e73eee7b9d5006062304"
+    },
+    {
+      "id": "convert.lw",
+      "domain": "instruction",
+      "work_package": "G03",
+      "profile": "conversion",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "53457318520ef9b1c18a59dcf084745b346ff79a2b0cba1b6d5a78577c12a070"
+    },
+    {
+      "id": "convert.hw",
+      "domain": "instruction",
+      "work_package": "G03",
+      "profile": "conversion",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "bb76757d1f4bc1fdb5c23f993d80ca3791e7556f50828c751d9413e7d276bd5a"
+    },
+    {
+      "id": "convert.concatw",
+      "domain": "instruction",
+      "work_package": "G03",
+      "profile": "conversion",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "0d8d49cb8552f305458a53e60afc39c06c4a37a72199cdfec568ed27fca5b695"
+    },
+    {
+      "id": "convert.dword",
+      "domain": "instruction",
+      "work_package": "G03",
+      "profile": "conversion",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "21b4c765a0b4633b55abad356b590824b1e5d33552abee35737d6442f1003c8c"
+    },
+    {
+      "id": "float.add",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "1aa9ef3bc8f835bc2ee701951f661dde3800fcf8921ab19222a9f74c1dd8dba7"
+    },
+    {
+      "id": "float.subtract",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "8a0d462b54088c2497f3894fba8864d7a289283dabaf54c6c0a13c236ae2db85"
+    },
+    {
+      "id": "float.multiply",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "dedce9fa701c298a2b37a8d48c5991d44a23066937538a2eef09cae4c46deb33"
+    },
+    {
+      "id": "float.divide",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "126c4ac5d1d7da394a95bc67639027f050553b9d5a22cd9faa236d3f835d4322"
+    },
+    {
+      "id": "float.log",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "8247e33ba08cc3585562d876162b282d03d9036a30b21f7c11b030fb8cc710ac"
+    },
+    {
+      "id": "float.ln",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "182be7f1186485ab7f225ccafc7908da0403071879d312638164a501a6b2f312"
+    },
+    {
+      "id": "float.sqrt",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "1d8d1c635b240ccd3f2c13482c31c03c919e44d7fbd24855ef75d0ecca57625b"
+    },
+    {
+      "id": "float.abs",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "1302c0d34cddf7dc94058757759b5f84508e670ef06d560313223ceb4e1b1ae4"
+    },
+    {
+      "id": "float.trunc",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "fd957aaf41a5d4f2b7edb21f0566fddec904e2b53da9e7ac595a1bbf7900704a"
+    },
+    {
+      "id": "float.exp",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "b3c3bc525f205da68da0742dfa0a9356eada1ded2a8d784436b0c7c42758f352"
+    },
+    {
+      "id": "float.expt",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "unimplemented_numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "af79508f910ae979308f8a804e555fa7306a3cd23449214a661e8e7af4d28844"
+    },
+    {
+      "id": "float.sin",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "c176176b03825d6388416f555f8711112ee5635f679192eeeed4504989a27348"
+    },
+    {
+      "id": "float.cos",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "88eca2a08eab12f646e42d5c8221976157947d9d7ff71fadb4ee63fd61336258"
+    },
+    {
+      "id": "float.tan",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "5075d24b5f7da9468926c2350416ad838fdcd40b16d300cec9e20c5e743640a8"
+    },
+    {
+      "id": "float.asin",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "5550f4060e44aa273d3d3de80a253d0358f722a4052f853586eb6bb90713c032"
+    },
+    {
+      "id": "float.acos",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "6e4e0198e2f0953d2b092bc7821c8c3a47c4e77f35cb4b0c6a27252bff6ec67c"
+    },
+    {
+      "id": "float.atan",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "01f77992a424a57ea283b135cabb36c646fbc38adadf6915ee147ca4d806a403"
+    },
+    {
+      "id": "float.deg_to_rad",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "unimplemented_numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "3056fdd09346bb9b1511db08751d6772c418245968860ceb112c71a7ad8e3e70"
+    },
+    {
+      "id": "float.rad_to_deg",
+      "domain": "instruction",
+      "work_package": "G02",
+      "profile": "unimplemented_numeric",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "458501908df8d30227badde6ff2f89746c319c120c049365a843a5071a5494f8"
+    },
+    {
+      "id": "convert.int_to_real",
+      "domain": "instruction",
+      "work_package": "G03",
+      "profile": "conversion",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "9224bb1e867ed3e7157d48c6f181d991d515f82cc0e48d831940e5576ca6fd22"
+    },
+    {
+      "id": "convert.dint_to_real",
+      "domain": "instruction",
+      "work_package": "G03",
+      "profile": "conversion",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "c337e783ab842d56862d09f9d091357841fda0b800d912895f09662a91c2dcc8"
+    },
+    {
+      "id": "convert.real_to_int",
+      "domain": "instruction",
+      "work_package": "G03",
+      "profile": "conversion",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "bc67a88b147b2f2ef5bb9d16a4394f0257064b5486325fc5ea8c2ad8e820b20c"
+    },
+    {
+      "id": "convert.real_to_dint",
+      "domain": "instruction",
+      "work_package": "G03",
+      "profile": "conversion",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "e6645fbb9a57660dba65e706131e25af83690e283963340c82e6469d96a6fcf7"
+    },
+    {
+      "id": "ascii.round",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "4e06e0b83d1fc759f95407b5f74aff84265404d6e8b85edad2b746ca2401470d"
+    },
+    {
+      "id": "ascii.ascii_to_int",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "10d0977ad2c412d1c0ddb85e9a7d34ccbf75a3a466f989ccf30e72f3aae3cc4a"
+    },
+    {
+      "id": "ascii.int_to_ascii",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "d83bb786056efd89eb79128ad54552c9e81ccebdd1bb4949a9965eada5346eb2"
+    },
+    {
+      "id": "ascii.ascii_to_float",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "fe786196c28b545c3f57687df8bac6bf752b4affa16fb28c807bd74617615778"
+    },
+    {
+      "id": "ascii.float_to_ascii",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "440d68ad51538dd592aafc374d4a2558a88e9fe73a95c966281af9e715aa59b7"
+    },
+    {
+      "id": "ascii.ascii_to_dint",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "02efb1d173dd50669459b71aaecd4afe13c53197308a8593214173c7d57c71b0"
+    },
+    {
+      "id": "ascii.dint_to_ascii",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "9ca7c03667150791d91a78ab606603f2600b8a010b9d1e31a7b5343a9dc88abf"
+    },
+    {
+      "id": "table.sum_arr",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "43ffcd59b40c97f3049b881083e4f6ca3eee129233a48b73984d186454c46471"
+    },
+    {
+      "id": "table.equal_arr",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "770f7e8e20b703c0227b7bc8810c1b1c43cb28617357b06cb4a17b23c42d0a07"
+    },
+    {
+      "id": "table.find_eqr",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "7f9e6d9d933f22823f962a38f93af43dccf4fae1eda894459944bce1c891ee74"
+    },
+    {
+      "id": "table.find_gtr",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "74dbd139f6c16861081418d5e9cbc864560647981e8780fcf6e11088175381df"
+    },
+    {
+      "id": "table.find_ltr",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "1f626e821b44443ea11874c4e7151db4f2c5fbc5a3af27316fb0df138d16915f"
+    },
+    {
+      "id": "table.max_arr",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "5620481de527b4ba19f9e81bfebd729ecc1dfa746f02c05d05d422086b05f5a4"
+    },
+    {
+      "id": "table.min_arr",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "106cb8a17c4be626201e116367ef21dca0c8b44f452ae9ae6034dfa604cff0d0"
+    },
+    {
+      "id": "table.occur_arr",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "56ca6c22b43a00f14c220ea72a6bd6bbb95afe4b2d90115bdd38c99ff2eff2fb"
+    },
+    {
+      "id": "table.rol_arr",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "31501c60476506ad555246b3083c38059665feb958110a9991fd641e04723717"
+    },
+    {
+      "id": "table.ror_arr",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "1c521c2aeb22a14dcae87a13960f206fdbe50081e889b11a022fe7df50d0daca"
+    },
+    {
+      "id": "table.sort_arr",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "4503fa1b0f6f22cec1b24860aebc6e4c169b1beec0f09265941eb868287e219b"
+    },
+    {
+      "id": "table.mean",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "e6beaa00c48ff99d09ae0eb189234abe93a5ec4e05406ecb2cebbbdcd30a9179"
+    },
+    {
+      "id": "table.swap",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "079137f932e2aad837b7381e7919a956d1f8306a0699a88bbd4ed1b4c8d8b12a"
+    },
+    {
+      "id": "table.lkup",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "01419e37ab8f0426caf5bca481167e822dc109e94848d392322752ead565b7ca"
+    },
+    {
+      "id": "string.literal",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "0bfb64f3cb7c0def588cda31245a89b6dd65a922c3d33f1c60972316a5f76469"
+    },
+    {
+      "id": "string.length",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "f3237d71b43fc7702c29c6180771f0fc2fcbba9cc6eb97bdfdc8a6c27e300fa1"
+    },
+    {
+      "id": "string.concat",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "d637d7092e55fce1bfa10f1737224a4ee6ffa025ebaa5d764b606a56df55a42c"
+    },
+    {
+      "id": "string.equal_str",
+      "domain": "instruction",
+      "work_package": "G04",
+      "profile": "table_string",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "80644e8b437f30928630bb4d6a3688c90d6dacfc39caea2653e5c1feb0876415"
+    },
+    {
+      "id": "control.end",
+      "domain": "instruction",
+      "work_package": "G05",
+      "profile": "end",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "dcb09bcc5852b84e6ac88b968dfbad4b0dfaa0d34125c986d78f1a1c60fb6e35"
+    },
+    {
+      "id": "control.endc",
+      "domain": "instruction",
+      "work_package": "G05",
+      "profile": "end",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "91713ebafdbb19675e0445148ffd4d6a74d8c2fcea9559374b43235ae5e809bb"
+    },
+    {
+      "id": "control.endcn",
+      "domain": "instruction",
+      "work_package": "G05",
+      "profile": "end",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "3b210726bbc24a9fe6d4723f20180b54da19711778af447a3768dad94f5663fb",
+      "scope_note": "Native Master EndCn graph import is proven; raw leaf EndCn export is separately refused."
+    },
+    {
+      "id": "control.endt",
+      "domain": "instruction",
+      "work_package": "G05",
+      "profile": "native_block_missing",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "6741fa813fda5cfdeef1be04dc129ad3b45b72639663871fed9ef0eb38accfc9",
+      "scope_note": "Specific SFC-transition opcode, not equivalent to ordinary END; Grafcet context absent."
+    },
+    {
+      "id": "control.nop",
+      "domain": "instruction",
+      "work_package": "G05",
+      "profile": "native_block_missing",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "12f65780f577d44910087e78e28d150d6202dfdfc5dec4e1ef86774e37c1e13b",
+      "scope_note": "No-op semantics do not establish decoder/export/reverse support for this literal native opcode."
+    },
+    {
+      "id": "control.jmp",
+      "domain": "instruction",
+      "work_package": "G05",
+      "profile": "control",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "67d124093455be4835ed29cccbc52e9188b23c221a08694fa9a6471354219e62"
+    },
+    {
+      "id": "control.jmpc",
+      "domain": "instruction",
+      "work_package": "G05",
+      "profile": "control",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "f66228b2a08534f791d546a15770c0d4754bc4579c48ca1136aca52ab6e7f85d"
+    },
+    {
+      "id": "control.jmpcn",
+      "domain": "instruction",
+      "work_package": "G05",
+      "profile": "control",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "3d4c4a6fc25605d92e565eea67f4daa70766ad6789c2649b2f9018696651e88d"
+    },
+    {
+      "id": "control.subroutine",
+      "domain": "instruction",
+      "work_package": "G06",
+      "profile": "subroutine",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "697413febb9513bbecfb294619dd47533f1c77502f5bdbb7c02b51a9d287fac8"
+    },
+    {
+      "id": "control.if",
+      "domain": "instruction",
+      "work_package": "G05",
+      "profile": "source_structures",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "98cecffe28153fc053adfc3fbfd10afceb295c311e1dc7d1fef2b4c1c9ec9287"
+    },
+    {
+      "id": "control.else",
+      "domain": "instruction",
+      "work_package": "G05",
+      "profile": "source_structures",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "17febbff4fb8c0b9697574de9973a67a3eb7dd620cbb428bf03d794e3035f40f"
+    },
+    {
+      "id": "control.endif",
+      "domain": "instruction",
+      "work_package": "G05",
+      "profile": "source_structures",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "0f995ef0f8ec0d9dd3ae51dc2b8ccc9fb8068839266b47dc5c9abb7c071b5b1e"
+    },
+    {
+      "id": "control.for",
+      "domain": "instruction",
+      "work_package": "G05",
+      "profile": "source_structures",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "24239ba6a607363f19134bf689eb40d101a1df95349ee1fa2498eb78622e2a84"
+    },
+    {
+      "id": "control.endfor",
+      "domain": "instruction",
+      "work_package": "G05",
+      "profile": "source_structures",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "fb99fd1be91e0844101c5c53ef2974587be65ac1a38159d031128724faffbddb"
+    },
+    {
+      "id": "stack.mps",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "stack",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "5cd6a3e55d1c0ceae99d4a6d113226225083e21d500bebc86af2b1c4c611537f"
+    },
+    {
+      "id": "stack.mrd",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "stack",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "d5262ab128bbddb4f27e2b5bf994f3e55f1ef4b7b0fe1488b7958fae05aa97f1"
+    },
+    {
+      "id": "stack.mpp",
+      "domain": "instruction",
+      "work_package": "G01",
+      "profile": "stack",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "e688a367a708e0443f9e1f78a41a8af59d51c21b0456f8e6cb784c3a25b3fbdb"
+    },
+    {
+      "id": "block.blk",
+      "domain": "instruction",
+      "work_package": "G08",
+      "profile": "generic_block",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "b7050227feb1dcb92180c8d95635113082dc5dac856f8a2b13f6c2bbe3e3823f"
+    },
+    {
+      "id": "block.out_blk",
+      "domain": "instruction",
+      "work_package": "G08",
+      "profile": "generic_block",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "76e8a55cd129e8c5761de9c14bc314b0aacbb31d9cd96eee6825f0857d3fc763"
+    },
+    {
+      "id": "block.end_blk",
+      "domain": "instruction",
+      "work_package": "G08",
+      "profile": "generic_block",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "c2bd9b9921ee8dcfec16a4806121b1f3d4edc2cd1ed43751c3b0233095a94964"
+    },
+    {
+      "id": "fb.tm",
+      "domain": "instruction",
+      "work_package": "G07",
+      "profile": "timer",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "c2657278bece422f461c034c2a09399028a715a2b044e2044e83966ac514aec7"
+    },
+    {
+      "id": "fb.c",
+      "domain": "instruction",
+      "work_package": "G08",
+      "profile": "counter",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "3e5395d7f10c61e003ca4c6999c2bf7cc6729cbdf4a382037a2683f95a22a038"
+    },
+    {
+      "id": "fb.r",
+      "domain": "instruction",
+      "work_package": "G08",
+      "profile": "register_foundation",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "bbb7881e7e4948f5189e57bc9783cd06474fea95c676e3c8bac69fec8bbfc8f6"
+    },
+    {
+      "id": "fb.dr",
+      "domain": "instruction",
+      "work_package": "G08",
+      "profile": "native_block_missing",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "d6b41198d0ebdb0ce466a531b101d24ac44b1ea989e5f04395d53bb860530072"
+    },
+    {
+      "id": "fb.sbr",
+      "domain": "instruction",
+      "work_package": "G08",
+      "profile": "native_block_missing",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "6a2fe723522e089ef2c06b4f234298d99674412c695e962de13dd09eb0152fd2"
+    },
+    {
+      "id": "fb.sc",
+      "domain": "instruction",
+      "work_package": "G08",
+      "profile": "native_block_missing",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "fda6d587183dacdfce9d5706a7bbca94ecd790bfcc335761875c7520cf738e4f"
+    },
+    {
+      "id": "fb.rtc",
+      "domain": "instruction",
+      "work_package": "G09",
+      "profile": "clock_calendar",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "1c37e83d964be8e237f00785fbab64b255ef4ed90574eda4354b2291f808a6d1"
+    },
+    {
+      "id": "fb.timer_retention",
+      "domain": "instruction",
+      "work_package": "G07",
+      "profile": "timer_retention",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "a1d3aa56e21cee75f3c5c658c3ecc5837d94072b1d4cd4c7200620ebf566f3b8"
+    },
+    {
+      "id": "fb.timer_dynamic_preset",
+      "domain": "instruction",
+      "work_package": "G07",
+      "profile": "timer_dynamic",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "fdfead24a80e8a296bb420cbd0ee9bc3dc8a36c67a37e75ad35ba836bb6a31f5"
+    },
+    {
+      "id": "fb.schedule",
+      "domain": "instruction",
+      "work_package": "G09",
+      "profile": "clock_calendar",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "0e3dad4cd74f2a370fd11470e82d6e728fa3dc42aa1fac0e633ab3f80b839fc2"
+    },
+    {
+      "id": "io.read_imm_in",
+      "domain": "instruction",
+      "work_package": "G10",
+      "profile": "immediate",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "133013f1c4d5465cc3252b7141c3ba01b6bd9c71897b44cccde77a777022c49b"
+    },
+    {
+      "id": "io.write_imm_out",
+      "domain": "instruction",
+      "work_package": "G10",
+      "profile": "immediate",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "3c366ae65c3ba92da5bf077fedb43364685a53cf2b88e51ad446f03e0084d926"
+    },
+    {
+      "id": "io.read_imm",
+      "domain": "instruction",
+      "work_package": "G10",
+      "profile": "immediate",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "68703acfa54ff1c66f472cfad20bef8483f9c72c5fd73b73c0363afeb61b32c6"
+    },
+    {
+      "id": "io.write_imm",
+      "domain": "instruction",
+      "work_package": "G10",
+      "profile": "immediate",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "d703743ac65c9d00955cfc33cf79e0f00ec0b7c4effd925c76d0b4f23ff6584a"
+    },
+    {
+      "id": "comm.exch1",
+      "domain": "instruction",
+      "work_package": "G11",
+      "profile": "native_block_missing",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "fc32a0f2dbdd1cbf8049758465b521cbf1b5b973d6d0b62bee559fc08a2fab2e"
+    },
+    {
+      "id": "comm.exch2",
+      "domain": "instruction",
+      "work_package": "G11",
+      "profile": "native_block_missing",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "14121440e623719d57640b73de98af65074414a221d7f8a5673d373010044a92"
+    },
+    {
+      "id": "comm.exch3",
+      "domain": "instruction",
+      "work_package": "G11",
+      "profile": "native_block_missing",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "c8efbb66c8d667d0aeb7faf8369cb5a4b0765c5ee38af6b7a0803dda25aa3014"
+    },
+    {
+      "id": "fb.message",
+      "domain": "instruction",
+      "work_package": "G11",
+      "profile": "native_block_missing",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "431955bd2771d518541c8d244da4a394fa531a96a03d997e40add2af8a1ce5fc"
+    },
+    {
+      "id": "comm.read_var",
+      "domain": "instruction",
+      "work_package": "G11",
+      "profile": "communication",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "93495e1d1ff2027aecd7ce5d381e04724ab7cbf7f338386115276d7713030184",
+      "scope_note": "Native read MW/IW/I/Q static objects; full/bare graph variants are separately bounded; no native transaction proof."
+    },
+    {
+      "id": "comm.write_var",
+      "domain": "instruction",
+      "work_package": "G11",
+      "profile": "communication",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "080e681d691804b3d8aefb6c75180b586e423c433c8d269276d41aec39ec7758",
+      "scope_note": "Native write MW/Q and single coil/register static profiles; no native transaction proof."
+    },
+    {
+      "id": "comm.write_read_var",
+      "domain": "instruction",
+      "work_package": "G11",
+      "profile": "communication",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "81619aec590389cbc24e5aa13d1c12fd0b04e2a7a4a707f23ddfc4c9fe4a6950",
+      "scope_note": "FC23 static asymmetric MW output/input buffers; native Man21/SL1 actual profile; no native transaction proof."
+    },
+    {
+      "id": "comm.send_recv_msg",
+      "domain": "instruction",
+      "work_package": "G11",
+      "profile": "native_block_missing",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "62bdf6558a42575e5881a51ae2a9933e6bdf8980e4e5f93dadba4d336b0b6404"
+    },
+    {
+      "id": "comm.send_recv_sms",
+      "domain": "instruction",
+      "work_package": "G11",
+      "profile": "native_block_missing",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "43c2f26a9e39acb3b65bf6e11212857136050370ef15a590978799ae36aac653"
+    },
+    {
+      "id": "user.udf",
+      "domain": "instruction",
+      "work_package": "G12",
+      "profile": "native_block_missing",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "f1468bff8226ab597287ef2ff4cd4e1f3a2ce7fcf7a470d5b186391744b29037"
+    },
+    {
+      "id": "user.udfb",
+      "domain": "instruction",
+      "work_package": "G12",
+      "profile": "native_block_missing",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "8a947443283f0aab79c9d19454fb1705654e279ce1b8a08b82b246a172c2bb11"
+    },
+    {
+      "id": "grafcet.initial",
+      "domain": "instruction",
+      "work_package": "G12",
+      "profile": "native_block_missing",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "bb633c92eff7df0a62e5999f004bdfc3eac4f8a29696437f1af946c40209bf93"
+    },
+    {
+      "id": "grafcet.step",
+      "domain": "instruction",
+      "work_package": "G12",
+      "profile": "native_block_missing",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "25bcaf7c1a182cd9624dbb105c8af5be78986ae0a8ae4a84e89a6fdd0fa5964c"
+    },
+    {
+      "id": "grafcet.post",
+      "domain": "instruction",
+      "work_package": "G12",
+      "profile": "native_block_missing",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "d503d33afc1b45a62a42dd4435c2cffd5e95bbbeb733dbaf59b95ee5ce3b9059"
+    },
+    {
+      "id": "grafcet.next",
+      "domain": "instruction",
+      "work_package": "G12",
+      "profile": "native_block_missing",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "528e6969432bb234afe93d76a236cb7319ede98e14665b867f6aa0eb73dafe82"
+    },
+    {
+      "id": "grafcet.deactivate_current",
+      "domain": "instruction",
+      "work_package": "G12",
+      "profile": "native_block_missing",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "64ed56df3144ed8f029d0286027edcac26d49fafe1ade8d39ee92a39105515a4"
+    },
+    {
+      "id": "grafcet.deactivate_pair",
+      "domain": "instruction",
+      "work_package": "G12",
+      "profile": "native_block_missing",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "345dacbee92444d8949e3f63864576e11b0033cb52b8a50961b1c408ffaf6384"
+    },
+    {
+      "id": "grafcet.activate",
+      "domain": "instruction",
+      "work_package": "G12",
+      "profile": "native_block_missing",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "b94ff78929dca0087d52bdd6d40de6f72dd30b9fcbb7e5e5097dae82f662514e"
+    },
+    {
+      "id": "grafcet.deactivate",
+      "domain": "instruction",
+      "work_package": "G12",
+      "profile": "native_block_missing",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "5a9d2b5b50476feddfbd1449eefe1db668cad7bc194519f29be770fba7d3ea6b"
+    },
+    {
+      "id": "grafcet.sfc",
+      "domain": "instruction",
+      "work_package": "G12",
+      "profile": "native_block_missing",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "eef4c0f942c9795a2bb40c4323ea188dc5ef634e54061135851907c46f1c18cf"
+    },
+    {
+      "id": "clock.snapshot",
+      "domain": "instruction",
+      "work_package": "G09",
+      "profile": "clock_calendar",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "f62900f199999d11df1345d012c31157e73fa06421d35e7a0bcbe86975cbe228"
+    },
+    {
+      "id": "clock.set",
+      "domain": "instruction",
+      "work_package": "G09",
+      "profile": "clock_calendar",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "48251066d45ae1b5fe5188a435b54ab35c901f59a1c66e704599f5dae9318c97"
+    },
+    {
+      "id": "clock.adjust",
+      "domain": "instruction",
+      "work_package": "G09",
+      "profile": "clock_calendar",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "16e2df143e5f10c28c48b69159da3de03e8f6f484daa95bf2ab687a89daffc07"
+    },
+    {
+      "id": "clock.absolute_counter",
+      "domain": "instruction",
+      "work_package": "G09",
+      "profile": "clock_calendar",
+      "applicability": "target_documented_with_record_constraints",
+      "source_record_sha256": "2da488bc9568a4e6a9fffab39aa410ae8932460bac3990d7b7ba9c6f4c4de088"
+    },
+    {
+      "id": "HW.DIGITAL_INPUTS",
+      "domain": "hardware",
+      "work_package": "G13",
+      "profile": "boolean",
+      "applicability": "embedded",
+      "source_record_sha256": "d234966eb6a75f91eb25f2efb7d1f3727c92e2e389b8124f52c42bcb6021a989"
+    },
+    {
+      "id": "HW.DIGITAL_INPUT_FILTER",
+      "domain": "hardware",
+      "work_package": "G13",
+      "profile": "digital_config",
+      "applicability": "embedded",
+      "source_record_sha256": "5cdf747c5bd7020cb99921672070b1fa16ef31facf9bb41f10e0dcb9a5dc09f7"
+    },
+    {
+      "id": "HW.DIGITAL_INPUT_LATCH",
+      "domain": "hardware",
+      "work_package": "G13",
+      "profile": "digital_config",
+      "applicability": "embedded",
+      "source_record_sha256": "d72ac5a42e1faa765ea89abfabb575d4bf1cb03952d98cb1f49ef53dc4e7388b"
+    },
+    {
+      "id": "HW.RUN_STOP_INPUT",
+      "domain": "hardware",
+      "work_package": "G13",
+      "profile": "digital_config",
+      "applicability": "embedded",
+      "source_record_sha256": "57e793abd2c22a3f435c54a8fe01ba2fe28b564f0e4cc042c35c5868b17d0914"
+    },
+    {
+      "id": "HW.DIGITAL_OUTPUTS",
+      "domain": "hardware",
+      "work_package": "G13",
+      "profile": "boolean",
+      "applicability": "embedded",
+      "source_record_sha256": "05eb5f76f7e560cc4792c04fa3a487db86fd5e08b94d1e63faf31e8c46eedf73"
+    },
+    {
+      "id": "HW.STATUS_ALARM_OUTPUT",
+      "domain": "hardware",
+      "work_package": "G13",
+      "profile": "digital_config",
+      "applicability": "embedded",
+      "source_record_sha256": "417232037bc0faab299138750bcc4aeaf9d5c6d3fcd6fd7280a1dc3633688133"
+    },
+    {
+      "id": "HW.OUTPUT_FALLBACK",
+      "domain": "hardware",
+      "work_package": "G13",
+      "profile": "digital_config",
+      "applicability": "embedded",
+      "source_record_sha256": "8f393bb3dda143681dfd3072552bfe3edff38503cb9f1b14837a83e2e6bd0264"
+    },
+    {
+      "id": "HW.FAST_COUNTER",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "a919743363720d14ca5e869f854ebfddba4ce5882e184e9e642e2ea1547ecbf5"
+    },
+    {
+      "id": "HW.HSC",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "363092a83c39a788e286907812f60f149a22b7c42860f9e8765a4af90947a1ac"
+    },
+    {
+      "id": "HW.HSC_AUX",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "c1c474c731dd92c4ab8ee9df2f3df08e90bcf2675c2db36dd957dcf683b4f8e6"
+    },
+    {
+      "id": "HW.HSC_FREQUENCY_METER",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "838d9b4798d927121ec5f1e0b248ed4c472b79c0cabe04e4068b0854acfdfd47"
+    },
+    {
+      "id": "HW.PULSE_RESOURCES",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "a4b11b23a697ce9364c5e04ffb2bdf1f9df84c8014735bc37e066051716247a7"
+    },
+    {
+      "id": "HW.PLS",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "f0f4b3aed9b385c01ba3d93429373c464da755488b6a8f82bc41222db234157b"
+    },
+    {
+      "id": "HW.PWM",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "80d3a764bcd13f4ec4244bd77ce5edaf33685491fd66713a7a630a33cb5fb24a"
+    },
+    {
+      "id": "HW.FREQGEN",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "2f4e0539b74ed1378318713da7827a58406ab8eaf8223ad533a440fd26fac4dc"
+    },
+    {
+      "id": "HW.PTO_AXIS",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "6814d2db5935a02b566bdb7891f61125473dbb03a2ec88d0948b2e1648f4ac21"
+    },
+    {
+      "id": "HW.PTO_AUX_INPUTS",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "ee294aa10f53cf20ed1e6e9f20c16d68cc983a62f46c8f0e5d08aa7046f5f654"
+    },
+    {
+      "id": "HW.PTO_HOME",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "2a64e4992c0ba5c75e3b74750adb5abe2342e3670096d72beea2ffc8755ada78"
+    },
+    {
+      "id": "HW.PTO_QUEUE",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "d3bcc7c1183b5b1d195c74809c1b1f52e265c8a408438c33decc5cdc47a53ab2"
+    },
+    {
+      "id": "HW.PTO_MOTION_TABLES",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "a783e862848a74f113b91f1d09ddabf825d784e1c3105005aa9d443a9fe0208e"
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_MOTIONTASK_PTO",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "acdc0e9002f217f6c823cd4c6de40e077bbf59b65a0f442102d78aed310add9c"
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_POWER_PTO",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "33e54ef39a575eae28bcfbb9a9f27faf546b21274afd5b4adcb075ad8648e0ee"
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_MOVEVEL_PTO",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "fa9e3ea72678de362a0213aabbc5411ae802fb66ab60bfa106500761dad842d3"
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_MOVEREL_PTO",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "89d3221ce23124136c168dba659e97b649168a3c93bb60636ec89e4ff4318757"
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_MOVEABS_PTO",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "2f380e42b02185d00fb01c5909670e661089dbd8ace2ac8c03f646b737763c68"
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_HOME_PTO",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "f1f9573087361136405730edf496804c140dff2b4475bba0aa26144e2b93b841"
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_SETPOS_PTO",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "d3bdb01dea2054ae3ea9e8f2d780e77a36301bb0b0c3528709786225156813cb"
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_STOP_PTO",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "b779e7235c476ac1411de2c37a503c78a93f50ad83934b0c388bfe87ea3d0e6e"
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_HALT_PTO",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "4bad36dc791c12efc6c81fab2c2667326f9e08b56e6090a201df1ebc272009b5"
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_READACTVEL_PTO",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "deeec1d3e64038fd689b505d21f8056920b2dbe6d9817116f0ec21c709c07be1"
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_READACTPOS_PTO",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "a42ca47039e5c23be9314ce15a5d7f161f8e09466aac169b1618361a600611b6"
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_READSTS_PTO",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "09b51c5f712642aa9791cb3c0706d8d159feb610ef91d9ff1e3f873175890416"
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_READMOTIONSTATE_PTO",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "03352173ff9300f90469426773d2120e987fab629b6c1c59d26dbe4f7650422e"
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_READAXISERROR_PTO",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "ed7bef0391790f3f5e4fa6e6d577068e88bbc445739ea90e9556fa22a500156e"
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_RESET_PTO",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "f0efacbbacda7f6f1ae3bbef1fe67ca4231c0d05c025ed9a0da9188f72bb9cfc"
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_TOUCHPROBE_PTO",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "2a7cdad779d6266c72bd3dd3b47acbea0c8ef3473ff53358f82667f61490a994"
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_ABORTTRIGGER_PTO",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "fc29fafc8f3e9527c8deb01a700019cc348cc3617361af6e89858e858c76c01a"
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_READPAR_PTO",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "03a8096a97c554ef1841afb0d3ed6f56e2347b8217393f0ee4da7ee7cd442f5b"
+    },
+    {
+      "id": "HW.PTO_BLOCK.MC_WRITEPAR_PTO",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "0aa7b58ce1846c5fa8bb3661474b58ae4a60695cf32231dc7bf987f103af7882"
+    },
+    {
+      "id": "HW.PTO_PARAMETER_ACCESS",
+      "domain": "hardware",
+      "work_package": "G14",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "8416559f36c25e8b99bdb7393744c4e35a6bff1754de29b2b6649f0e50cfc124"
+    },
+    {
+      "id": "HW.ANALOG_EMBEDDED",
+      "domain": "hardware",
+      "work_package": "G15",
+      "profile": "absence",
+      "applicability": "unsupported_embedded",
+      "source_record_sha256": "acccfb58d2159ab6e889affff394d29b25a962972de5cb13f1e6d03d20f1cb4f"
+    },
+    {
+      "id": "HW.EXPANSION_BUS",
+      "domain": "hardware",
+      "work_package": "G15",
+      "profile": "hardware_inactive",
+      "applicability": "optional_expansion",
+      "source_record_sha256": "403184627f647d3cb4760fe6a55bad956560a74193d9884746491ce91a60b2db"
+    },
+    {
+      "id": "HW.EXPANSION_BUS_ERRORS",
+      "domain": "hardware",
+      "work_package": "G15",
+      "profile": "hardware_inactive",
+      "applicability": "optional_expansion",
+      "source_record_sha256": "b527a550ed5827115346090f490ff940f8cc50de48c8083023245a4c4e8d9764"
+    },
+    {
+      "id": "HW.CARTRIDGE_SLOTS",
+      "domain": "hardware",
+      "work_package": "G15",
+      "profile": "hardware_inactive",
+      "applicability": "optional_cartridge",
+      "source_record_sha256": "392581994711021a4c6c943fd286725c6f1745866688f568214a7268900132c9"
+    },
+    {
+      "id": "HW.CARTRIDGE_DIGITAL",
+      "domain": "hardware",
+      "work_package": "G15",
+      "profile": "hardware_inactive",
+      "applicability": "optional_cartridge",
+      "source_record_sha256": "6183c0140e9e2b26a45889347b68cdd8d2dd0e1b0a9ea9a33e8b560ec0412335"
+    },
+    {
+      "id": "HW.CARTRIDGE_AI2",
+      "domain": "hardware",
+      "work_package": "G15",
+      "profile": "hardware_inactive",
+      "applicability": "optional_cartridge",
+      "source_record_sha256": "6537390cea74825ef5830712738f771aa18e8ffc2edb1b8da0310589b39d28cf"
+    },
+    {
+      "id": "HW.CARTRIDGE_AQ2V",
+      "domain": "hardware",
+      "work_package": "G15",
+      "profile": "hardware_inactive",
+      "applicability": "optional_cartridge",
+      "source_record_sha256": "09c0e7b7a1e5cf7489f2f1c1afc8f8a1c0250d26eff054a713a8d8de004f9aff"
+    },
+    {
+      "id": "HW.CARTRIDGE_AQ2C",
+      "domain": "hardware",
+      "work_package": "G15",
+      "profile": "hardware_inactive",
+      "applicability": "optional_cartridge",
+      "source_record_sha256": "3c112ac65532b39de02619df18d1a9648fb9ae5d8278057278d085bf18399678"
+    },
+    {
+      "id": "HW.CARTRIDGE_AM3",
+      "domain": "hardware",
+      "work_package": "G15",
+      "profile": "hardware_inactive",
+      "applicability": "optional_cartridge",
+      "source_record_sha256": "0c6d80d9b111f02eb16cb66abc64d207f03c10be3039ae2013b779c974664b1a"
+    },
+    {
+      "id": "HW.CARTRIDGE_TI2",
+      "domain": "hardware",
+      "work_package": "G15",
+      "profile": "hardware_inactive",
+      "applicability": "optional_cartridge",
+      "source_record_sha256": "ef7aed3efc9ce41b158d084bad264423ba65dd0a80a6f554c04226780a321296"
+    },
+    {
+      "id": "HW.ANALOG_DIAGNOSTICS",
+      "domain": "hardware",
+      "work_package": "G15",
+      "profile": "hardware_inactive",
+      "applicability": "optional_cartridge_or_expansion",
+      "source_record_sha256": "3a6f5f67717727236801df89b5b604d458e6301925419773e74ce8dbaa51f3c3"
+    },
+    {
+      "id": "HW.ETHERNET",
+      "domain": "hardware",
+      "work_package": "G16",
+      "profile": "network_config",
+      "applicability": "embedded",
+      "source_record_sha256": "bcb4858a49b06ff1388e09578dde4c9ccef4100186ce7ba2d239ce3ce11a5dee",
+      "scope_note": "Port presence is documentary; local loopback TCP is not evidence of PLC physical Ethernet operation."
+    },
+    {
+      "id": "HW.ETHERNET_ADDRESSING",
+      "domain": "hardware",
+      "work_package": "G16",
+      "profile": "network_config",
+      "applicability": "embedded",
+      "source_record_sha256": "214989b7e1adf2bd3adbb730894148d9df5100bda24e64d62658fb2e6275512c"
+    },
+    {
+      "id": "HW.ETHERNET_RATE_OVERRIDE",
+      "domain": "hardware",
+      "work_package": "G16",
+      "profile": "network_config",
+      "applicability": "unsupported_embedded",
+      "source_record_sha256": "da07b5142a810f664a96a6be8813fdfe8aaf4ba0b2de5b04853a6db97d1eebc6"
+    },
+    {
+      "id": "HW.MODBUS_TCP_CONNECTIONS",
+      "domain": "hardware",
+      "work_package": "G16",
+      "profile": "network_config",
+      "applicability": "embedded",
+      "source_record_sha256": "1f24826b1e15582e19a62a11d246eb43b9fa350e9da4479be00d815acc4948fc"
+    },
+    {
+      "id": "HW.MODBUS_TCP_MAPPING",
+      "domain": "hardware",
+      "work_package": "G16",
+      "profile": "network_config",
+      "applicability": "embedded",
+      "source_record_sha256": "92caaa32bc580f7c6c0bdbefb22b515451725428ca260d108bbd0985887f448b"
+    },
+    {
+      "id": "HW.MODBUS_SERIAL",
+      "domain": "hardware",
+      "work_package": "G16",
+      "profile": "network_config",
+      "applicability": "embedded",
+      "source_record_sha256": "2d1b8e2e39fc5942c4216fd1b1e50d38382e6032512f9ef1f1744962b60e6c4a"
+    },
+    {
+      "id": "HW.SERIAL_OPTIONAL",
+      "domain": "hardware",
+      "work_package": "G16",
+      "profile": "network_config",
+      "applicability": "optional_cartridge",
+      "source_record_sha256": "db95cf9782c500f82f81979316de6057f80647e8b788f96227118ebd5abfdeb5"
+    },
+    {
+      "id": "HW.MODBUS_FUNCTION_CODES",
+      "domain": "hardware",
+      "work_package": "G16",
+      "profile": "network_config",
+      "applicability": "embedded",
+      "source_record_sha256": "2f86c51ec38c0a577edca6df8f9732eae47939fa952ee17226e2398fad54a743",
+      "scope_note": "Local PDU support is not native support for every server/client function code or mapping listed here."
+    },
+    {
+      "id": "HW.MODBUS_IOSCANNER",
+      "domain": "hardware",
+      "work_package": "G16",
+      "profile": "network_config",
+      "applicability": "embedded_or_optional_serial",
+      "source_record_sha256": "84191cb4d4d9d7d8eb51bfe352f027bcddfb4ea329eaf47911d232ba09481da2"
+    },
+    {
+      "id": "HW.MODBUS_IOSCANNER_LIMITS",
+      "domain": "hardware",
+      "work_package": "G16",
+      "profile": "network_config",
+      "applicability": "embedded_or_optional_serial",
+      "source_record_sha256": "f34ec0e9d27fb3d5cc81277002c11b67b69391a93ac5859a5c996a2b9ed968ce"
+    },
+    {
+      "id": "HW.COMM_READ_VAR",
+      "domain": "hardware",
+      "work_package": "G11",
+      "profile": "communication",
+      "applicability": "embedded_or_optional_serial",
+      "source_record_sha256": "8ece48964f1fbda43f00ee6c8a6f38cc75a444c4c1728b5c63482b322f4b978b",
+      "scope_note": "Overlaps comm.read_var; same work item/evidence, not an extra independent implemented feature."
+    },
+    {
+      "id": "HW.COMM_WRITE_VAR",
+      "domain": "hardware",
+      "work_package": "G11",
+      "profile": "communication",
+      "applicability": "embedded_or_optional_serial",
+      "source_record_sha256": "8a821f4fe58bf6b29df2d9e474fca9af7a0f4ab52de63258a256fd310c0827ea",
+      "scope_note": "Overlaps comm.write_var; same work item/evidence, not an extra independent implemented feature."
+    },
+    {
+      "id": "HW.COMM_WRITE_READ_VAR",
+      "domain": "hardware",
+      "work_package": "G11",
+      "profile": "communication",
+      "applicability": "embedded_or_optional_serial",
+      "source_record_sha256": "2d8afd84a5e6561aafc1928397872962a5d7a5e662081d7dfcf9109403417d1e",
+      "scope_note": "Overlaps comm.write_read_var; same work item/evidence, not an extra independent implemented feature."
+    },
+    {
+      "id": "HW.COMM_SEND_RECV_MSG",
+      "domain": "hardware",
+      "work_package": "G11",
+      "profile": "native_block_missing",
+      "applicability": "embedded_or_optional_serial",
+      "source_record_sha256": "b3c5394fe994824b0bea4d7788493f73672066b96dcbcffb33cf4ac6f59cff9d"
+    },
+    {
+      "id": "HW.COMM_EXCH",
+      "domain": "hardware",
+      "work_package": "G11",
+      "profile": "native_block_missing",
+      "applicability": "embedded_or_optional_serial",
+      "source_record_sha256": "b1082afd0a0662b320622ca24efd8c36c6dacd6df4a49b55088d1da9d867f20e"
+    },
+    {
+      "id": "HW.ETHERNET_IP_ADAPTER",
+      "domain": "hardware",
+      "work_package": "G16",
+      "profile": "network_config",
+      "applicability": "embedded_documentation_claim",
+      "source_record_sha256": "ae32da076e5110de1873939eadf9054d5ac8d496dda43e631f643a7ed36bca28"
+    },
+    {
+      "id": "HW.OTHER_NETWORK_PROTOCOLS",
+      "domain": "hardware",
+      "work_package": "G20",
+      "profile": "unknown_model_eligibility",
+      "applicability": "unknown_not_documented",
+      "source_record_sha256": "318b119cc10bfa3c7878b649e0390c1bfb77a19dd711efc97bfc0a10fcdde159"
+    },
+    {
+      "id": "HW.USB_PROGRAMMING",
+      "domain": "hardware",
+      "work_package": "G16",
+      "profile": "network_config",
+      "applicability": "embedded",
+      "source_record_sha256": "899ebad4bad2a93400fa2e865e281edc1076135afd232bc41709aeeb372a7b83",
+      "scope_note": "The official editor works under Wine; Windows/USB driver transfer and physical PLC remain untested."
+    },
+    {
+      "id": "HW.RTC",
+      "domain": "hardware",
+      "work_package": "G09",
+      "profile": "clock_calendar",
+      "applicability": "embedded_requires_optional_battery",
+      "source_record_sha256": "b891c807f560b6341a05210dd1690d838c287a1cc7bbd08fd1c99ef2e9a3ae77"
+    },
+    {
+      "id": "HW.RTC_SYSTEM_WORDS",
+      "domain": "hardware",
+      "work_package": "G09",
+      "profile": "clock_calendar",
+      "applicability": "embedded_requires_optional_battery",
+      "source_record_sha256": "1d0bf50db9e95278c3befb23e882ec451a328f4daca6b02aab25b8f5044cdab8"
+    },
+    {
+      "id": "HW.RTC_SCHEDULE",
+      "domain": "hardware",
+      "work_package": "G09",
+      "profile": "clock_calendar",
+      "applicability": "embedded_requires_optional_battery",
+      "source_record_sha256": "a883207d0a31cfd5433d5364a6161d064da891071982201a0edfa8fc46863570"
+    },
+    {
+      "id": "HW.PERSISTENT_AUTO",
+      "domain": "hardware",
+      "work_package": "G17",
+      "profile": "retention_storage",
+      "applicability": "embedded",
+      "source_record_sha256": "b467ba716fe82fe2b0e5d864fef39e897fef4700da170e9048036b6dfc6bde53"
+    },
+    {
+      "id": "HW.PERSISTENT_REQUEST",
+      "domain": "hardware",
+      "work_package": "G17",
+      "profile": "retention_storage",
+      "applicability": "embedded_with_optional_sd",
+      "source_record_sha256": "e4a8793fcd9e8070f94c6330912973b3b841d8754c4a43c70ee3487d0eafe5fe"
+    },
+    {
+      "id": "HW.SD",
+      "domain": "hardware",
+      "work_package": "G17",
+      "profile": "retention_storage",
+      "applicability": "embedded_with_optional_sd",
+      "source_record_sha256": "d9b29b784d9175dbbfb6f729bf85652b010508312121b8105c38d0004437b403"
+    },
+    {
+      "id": "HW.SD_FILE_LAYOUT",
+      "domain": "hardware",
+      "work_package": "G17",
+      "profile": "retention_storage",
+      "applicability": "embedded_with_optional_sd",
+      "source_record_sha256": "28f023c6f1e670b79522f983c5d6dd69aab05b98f0ccbef0bdf78272aeed00eb"
+    },
+    {
+      "id": "HW.POST_CONFIGURATION",
+      "domain": "hardware",
+      "work_package": "G17",
+      "profile": "retention_storage",
+      "applicability": "embedded_or_optional_serial",
+      "source_record_sha256": "0a5f4f2de802ac132c6e75e88fd9cecb8346b3632fcca85af988e6e7e4d90f1b"
+    },
+    {
+      "id": "HW.TASKS",
+      "domain": "hardware",
+      "work_package": "G18",
+      "profile": "tasks",
+      "applicability": "embedded",
+      "source_record_sha256": "d52a481eb205e0dc6c430866492c0f9cdd28b9d3dfd61154c0c7c13012d9b11c"
+    },
+    {
+      "id": "HW.WATCHDOG",
+      "domain": "hardware",
+      "work_package": "G18",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "91865d67debf826992a9e6f87eb9d866b6da231e68becc6be578b74fdda7e0c0"
+    },
+    {
+      "id": "HW.EVENT_QUEUE_CONTROL",
+      "domain": "hardware",
+      "work_package": "G18",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "b1ae9e8421d2b31c6f75a2f167b5ad8e1a25e22161723be21f2875beda016562"
+    },
+    {
+      "id": "HW.DIAGNOSTICS",
+      "domain": "hardware",
+      "work_package": "G18",
+      "profile": "hardware_inactive",
+      "applicability": "embedded",
+      "source_record_sha256": "1c0c8052b09daee0d810d4d5f37a545c691b0af8a2d853b5b742bad8d6ee7ae0",
+      "scope_note": "Some S4/5/6/7/13/17/18/20 APIs exist, but this hardware/system-word/diagnostic-service record is broader and needs per-service audit."
+    },
+    {
+      "id": "HW.ATV_BLOCK.MC_POWER_ATV",
+      "domain": "hardware",
+      "work_package": "G19",
+      "profile": "native_block_missing",
+      "applicability": "optional_remote_drive",
+      "source_record_sha256": "450c99ea96d8861a4ce5439610ec573586823ce026b7e92ad3d03e668fde6067"
+    },
+    {
+      "id": "HW.ATV_BLOCK.MC_JOG_ATV",
+      "domain": "hardware",
+      "work_package": "G19",
+      "profile": "native_block_missing",
+      "applicability": "optional_remote_drive",
+      "source_record_sha256": "393d521241130b0fdf290a5cc0ad527e48d928619166d33640d7fa4d3f864199"
+    },
+    {
+      "id": "HW.ATV_BLOCK.MC_MOVEVEL_ATV",
+      "domain": "hardware",
+      "work_package": "G19",
+      "profile": "native_block_missing",
+      "applicability": "optional_remote_drive",
+      "source_record_sha256": "20b8716b39592d2778a72e2edc5a890c0b90aed87558a20cc97b7ec8b8a2e912"
+    },
+    {
+      "id": "HW.ATV_BLOCK.MC_STOP_ATV",
+      "domain": "hardware",
+      "work_package": "G19",
+      "profile": "native_block_missing",
+      "applicability": "optional_remote_drive",
+      "source_record_sha256": "52c705c3918c4611fae5cf891d1aefe9c28dd7f2b0e60f3856fd564c100d6f9d"
+    },
+    {
+      "id": "HW.ATV_BLOCK.MC_READSTATUS_ATV",
+      "domain": "hardware",
+      "work_package": "G19",
+      "profile": "native_block_missing",
+      "applicability": "optional_remote_drive",
+      "source_record_sha256": "f6e0074499861c9b9c19c0fbc4fdf79c3e7bf621c6c7193076b27167350a9035"
+    },
+    {
+      "id": "HW.ATV_BLOCK.MC_READMOTIONSTATE_ATV",
+      "domain": "hardware",
+      "work_package": "G19",
+      "profile": "native_block_missing",
+      "applicability": "optional_remote_drive",
+      "source_record_sha256": "adb146870e682461949058ed86aba2673f99f4f06e9c7ed4d2658c410239c8aa"
+    },
+    {
+      "id": "HW.ATV_BLOCK.MC_RESET_ATV",
+      "domain": "hardware",
+      "work_package": "G19",
+      "profile": "native_block_missing",
+      "applicability": "optional_remote_drive",
+      "source_record_sha256": "7a856b5ebbaa45d2672a5d37f3e7963e6592a0f73f16e26b1593d154fee00466"
+    },
+    {
+      "id": "HW.PID_PROCESS_CONTROL",
+      "domain": "hardware",
+      "work_package": "G19",
+      "profile": "native_block_missing",
+      "applicability": "embedded_software_optional_physical_io",
+      "source_record_sha256": "752f07e289294402cdeaff1664e9b9e56382d30e8ff35efbd6169a6db864d4e8"
+    }
+  ],
+  "pinned_inputs": [
+    {
+      "path": "docs/capabilities/hardware.json",
+      "bytes": 142670,
+      "sha256": "48586d35de4beacc315eb84f8d0c56f9dbea9ccc97622d614c77216701c3b8e0"
+    },
+    {
+      "path": "docs/capabilities/instructions.json",
+      "bytes": 134927,
+      "sha256": "7b6b6f4bdfa18d02ff1a1ae88c02fe439edda94e9c8c5c33579137df4c40229d"
+    },
+    {
+      "path": "docs/validation/BIT-OBJECT-LOCAL-RESULTS.json",
+      "bytes": 10759,
+      "sha256": "49a799dc2bb72492cc5e5be4cb76e9d0626df5dd3fa53d4784703e91257d8181"
+    },
+    {
+      "path": "docs/validation/COMPLEX-LOCAL-RESULTS.json",
+      "bytes": 76824,
+      "sha256": "1b94c620f87e27e584108d76b850073be76a212544f11d7b7e6d1eb17de01491"
+    },
+    {
+      "path": "docs/validation/CONTROL-FLOW-STRESS-RESULTS.json",
+      "bytes": 5140,
+      "sha256": "0e8d49991b31faac415fc00813a4c525f0f5240d503ae5caeee93b5807d858f7"
+    },
+    {
+      "path": "docs/validation/CONVERSION-LOCAL-RESULTS.json",
+      "bytes": 27575,
+      "sha256": "7b97f2cd54ff1a06b86ffe19d6aab7b514ee11e6bda4b0b4c7345ab78053d5bd"
+    },
+    {
+      "path": "docs/validation/CONVERSION-STRESS-RESULTS.json",
+      "bytes": 6924,
+      "sha256": "df55396f8620da18cd04621e11182343969a23fcd5454c645bd6ef347f17c162"
+    },
+    {
+      "path": "docs/validation/COUNTER-GRAPH-LOCAL-RESULTS.json",
+      "bytes": 21000,
+      "sha256": "13f49ab8112f3915ac33a9d41db8759a2ec5efc35fcf7209c38d98c5fdb7adfb"
+    },
+    {
+      "path": "docs/validation/COUNTER-LOCAL-RESULTS.json",
+      "bytes": 19781,
+      "sha256": "0de86eb445e2f9ef2550bb119ddd6593ecba90177883547d8f336c4ea21885cc"
+    },
+    {
+      "path": "docs/validation/DIGITAL-IO-STRESS-RESULTS.json",
+      "bytes": 8980,
+      "sha256": "9c10d03f6bef4be81092b0bb0a43ff40fe1ac76d46b6b5076e07fc41416d586a"
+    },
+    {
+      "path": "docs/validation/EXPRESSION-EDGE-LOCAL-RESULTS.json",
+      "bytes": 17683,
+      "sha256": "a7166fb11e07b5a7fcb7c5213970ac055ad8e47a43697b1edc5ab8ee94960455"
+    },
+    {
+      "path": "docs/validation/INTEGER-FLAG-LOCAL-RESULTS.json",
+      "bytes": 22996,
+      "sha256": "c2a50cd06a85b8b4c0750fa98423859b041728fe9fc8680589f7f03f7f633d5b"
+    },
+    {
+      "path": "docs/validation/MAST-TASK-PROFILE-RESULTS.json",
+      "bytes": 5256,
+      "sha256": "3912f627771fc0aaa0d17dd54516ebb9886a2d67e6ebe184751c9915f1311ee8"
+    },
+    {
+      "path": "docs/validation/MODBUS-BARE-ABORT-GENERATED-PROJECT-RESULTS.json",
+      "bytes": 162639,
+      "sha256": "68dd4b58c76e2928a7c8dc15b20563636d3c2c0e90406a48a2cf3e645780cccc"
+    },
+    {
+      "path": "docs/validation/MODBUS-COMPLEX-FULL-PIN-LOCAL-RESULTS.json",
+      "bytes": 22771,
+      "sha256": "0e4e98f966dc92253162cd99111be9df3dddcfae9a37a7db3da0125e731db53e"
+    },
+    {
+      "path": "docs/validation/MODBUS-FULL-PIN-GENERATED-PROJECT-RESULTS.json",
+      "bytes": 60460,
+      "sha256": "b656aea25d747a5a218726d193d4edd031a2bc0622c4d677752cd73edba4ad2f"
+    },
+    {
+      "path": "docs/validation/MODBUS-WRITE-READ-PROFILE-RESULTS.json",
+      "bytes": 30114,
+      "sha256": "7e49f818645c9610ffecab6b0bd4b8685789a98fab31e229e2a77a02f6a6eccd"
+    },
+    {
+      "path": "docs/validation/NATIVE-EDGE-LOCAL-RESULTS.json",
+      "bytes": 13126,
+      "sha256": "f52b3f769cd489906addf73a13e812f89a8bae543cbbc06d56b11638014cd241"
+    },
+    {
+      "path": "docs/validation/NATIVE-EDGE-STRESS-RESULTS.json",
+      "bytes": 11010,
+      "sha256": "3429e58d97648c1411abce400582a70be798ea2484b1bfb37395a1c410564dd4"
+    },
+    {
+      "path": "docs/validation/NATIVE-END-TIMER-10MS-RESULTS.json",
+      "bytes": 24616,
+      "sha256": "01fc08069b0341ddc072a722860e4ce959518c37b8eaf1404fbfa8eb84f2a7ee"
+    },
+    {
+      "path": "docs/validation/NATIVE-LOGIC-LOCAL-RESULTS.json",
+      "bytes": 11161,
+      "sha256": "8a853f1ba869e277429de29ab71fd8b3d2ea75b21507e64f19ef268633919aa1"
+    },
+    {
+      "path": "docs/validation/NATIVE-M-CONTACT-BINDING-OBSERVATIONS.json",
+      "bytes": 190458,
+      "sha256": "978cd3d3c59d5db3ed9ff8fde1f981b7b0b365eb9d904b93b31ff20de9bcdc68"
+    },
+    {
+      "path": "docs/validation/OFFICIAL-EDITOR-RESULTS.json",
+      "bytes": 28284,
+      "sha256": "0a694085cca507b5a73533375ecd3b310c1f8cdb1ad8782eb98ef08820e3d667"
+    },
+    {
+      "path": "docs/validation/REGISTER-COLLISION-OBSERVATIONS.json",
+      "bytes": 53998,
+      "sha256": "755ec806e10e2239113b627add070ec166862c78fead2367258586aaddc05cbb"
+    },
+    {
+      "path": "docs/validation/REGISTER-CONFIG-FOUNDATION-RESULTS.json",
+      "bytes": 9885,
+      "sha256": "1e9dbec4a6a206b5e43a899d1e644798f4fd8bfcfe9a45c3b9c867837752479b"
+    },
+    {
+      "path": "docs/validation/REGISTER-GRAPH-FOUNDATION-RESULTS.json",
+      "bytes": 32851,
+      "sha256": "59ec76abdedd54d6f91df6d98e04bdf584b18e346021b49327bfb106e25f0f13"
+    },
+    {
+      "path": "docs/validation/REGISTER-NATIVE-OBSERVATIONS.json",
+      "bytes": 119899,
+      "sha256": "d9da07f22b38a4c3734e3aeb3a4bd15e7ac4b0bc1307c8e352ffe168fc6c2fef"
+    },
+    {
+      "path": "docs/validation/SCAN-EXIT-INTEGRATION-RESULTS.json",
+      "bytes": 31222,
+      "sha256": "62246bfcc23c93c593a81501d428e87f43582988fa69921fc3a97ed06af94efe"
+    },
+    {
+      "path": "docs/validation/SUBROUTINE-COMPILER-RESULTS.json",
+      "bytes": 3738,
+      "sha256": "a2200389aca6c76c8c6c26bde34a21e3e985c02af39a9c71ae3584306a70bfbc"
+    },
+    {
+      "path": "docs/validation/TIMER-GENERATED-PROJECT-RESULTS.json",
+      "bytes": 73654,
+      "sha256": "3a699383f084bca465602f945b625c8f9daf1981605421a4f5460fb3111fd2bb"
+    },
+    {
+      "path": "docs/validation/TIMER-OPTION-POLICY-RESULTS.json",
+      "bytes": 11876,
+      "sha256": "88fa466a348fb3240c662918cb0c4b2de31ae012dd5f44be7623345dfce4d94d"
+    },
+    {
+      "path": "docs/validation/TIMER-OPTIONS-OFFICIAL-OBSERVATIONS.json",
+      "bytes": 28920,
+      "sha256": "bb40907602f9b7bbc374b3bb14b0af74db61bd877a511f6008c6103d3c3ac2a3"
+    },
+    {
+      "path": "docs/validation/TIMER-PROPERTY-10MS-RESULTS.json",
+      "bytes": 6197,
+      "sha256": "d2a4f7d154de609ee9c16855522644814cb9a01eecd7239720571a90f356a72b"
+    },
+    {
+      "path": "tests/fixtures/official_tm200ce40t_memory.provenance.json",
+      "bytes": 763,
+      "sha256": "b9826924298610100516b075c671362c87b85ff35e2489e0df661ea8cdd89730"
+    },
+    {
+      "path": "tests/fixtures/official_tm200ce40t_memory.smbp",
+      "bytes": 83391,
+      "sha256": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf"
+    },
+    {
+      "path": "tests/fixtures/official_tm200ce40t_subroutine_sr0.smbp",
+      "bytes": 137327,
+      "sha256": "49438bcbed59cde889547869d8c033f377dfb7e60153136a57cb48e135b0e21a"
+    },
+    {
+      "path": "tests/fixtures/official_tm200ce40t_subroutine_sr0_m20.smbp",
+      "bytes": 141240,
+      "sha256": "b850091e79c974dec8be14de36694428091d5a82ad6257a6ddfe5f1d882cc692"
+    },
+    {
+      "path": "tests/fixtures/official_tm200ce40t_subroutine_sr63.smbp",
+      "bytes": 157411,
+      "sha256": "ff05369c686e8bc1887612afdbfcfd57d24e0e4e1e51d8d2b2b443824a2fa652"
+    },
+    {
+      "path": "tests/fixtures/official_tm200ce40t_timer_10ms.provenance.json",
+      "bytes": 2809,
+      "sha256": "3b6c2e9f09e8da42c4e68e86fb03e417d11b33372d97fe069164121615bb2971"
+    },
+    {
+      "path": "tests/fixtures/official_tm200ce40t_timer_10ms.smbp",
+      "bytes": 96342,
+      "sha256": "934affc43bd7e3d918b529b5cbfaee5aabd6bc062006edcd5c3cacf0d7f2bc45"
+    },
+    {
+      "path": "tests/fixtures/official_tm200ce40t_timer_options_behavior.smbp",
+      "bytes": 471237,
+      "sha256": "5358e5334696e1838e8b34b9efaa84fafb2a7bd97802d2d2ee32ae94a7f52214"
+    }
+  ]
+}

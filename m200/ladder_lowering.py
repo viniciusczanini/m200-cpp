@@ -33,6 +33,14 @@ def needed(program):
                 continue
             return True
         if rung[0].startswith("BLK "):
+            if rung[0].startswith("BLK %TM") and any(
+                len(parts) == 2
+                and parts[0] in ("LD", "LDN", "AND", "ANDN")
+                and parts[1] in ("0", "1")
+                for line in rung
+                for parts in [line.split(maxsplit=1)]
+            ):
+                return True  # Timer-pin SHORT/OPEN graphs are not yet bound.
             if rung[0].startswith("BLK %C"):
                 if simple_counter(rung):
                     continue
@@ -81,20 +89,36 @@ def normalize(program):
     from .il import validate
 
     validate(program)
+    original_rungs = program.rungs
+    # LDN/ANDN digit operands are valid in the local IR, but the installed
+    # editor accepts native SHORT/OPEN only with positive LD/AND opcodes.
+    canonical = []
+    for rung in program.rungs:
+        lines = []
+        for line in rung:
+            parts = line.split()
+            if (
+                len(parts) == 2
+                and parts[0] in ("LDN", "ANDN")
+                and parts[1] in ("0", "1")
+            ):
+                parts = [parts[0][:-1], "1" if parts[1] == "0" else "0"]
+            lines.append(" ".join(parts))
+        canonical.append(lines)
+    if canonical != program.rungs:
+        program = copy.deepcopy(program)
+        program.rungs = canonical
     if not needed(program):
-        canonical = [
-            [" ".join(line.split()) for line in rung] for rung in program.rungs
-        ]
-        if canonical == program.rungs:
-            return program
-        normalized = copy.deepcopy(program)
-        normalized.rungs = canonical
-        return normalized
+        return program
     if has_indexed_bits(program):
         fail("indexed-bit normalization bounds/profile are unverified")
     resources = static_operand_view(program)
     bits = memory_bits_used(resources)
-    lower = Lowerer(bits, memory_words_used(resources))
+    lower = Lowerer(
+        bits,
+        memory_words_used(resources),
+        materialize_constants=bool(program.subroutines),
+    )
     used_labels = set(destinations(program))
     free_labels = iter(f"%L{i}" for i in range(64) if f"%L{i}" not in used_labels)
 
@@ -137,7 +161,15 @@ def normalize(program):
         )
         probe = copy.copy(program)
         probe.rungs = [raw]
-        if not needed(probe):
+        if (
+            rung[0].startswith("BLK ")
+            and rung[0].split(maxsplit=1)[1] in program.communications
+        ):
+            # Native communication pin profiles remain authoritative. A copied
+            # raw digit must not become an accepted M contact just because an
+            # unrelated expression requires whole-program normalization.
+            lower.append(rung)
+        elif not needed(probe):
             # Each rung begins with a load/block, so its accumulator is not
             # live into the next one. Preserve already-canonical rungs.
             lower.rung(*rung)
@@ -158,11 +190,6 @@ def normalize(program):
                 rung[2],
             )
             lower.rung("LD " + snapshot, "ST " + state)
-        elif (
-            rung[0].startswith("BLK ")
-            and rung[0].split(maxsplit=1)[1] in program.communications
-        ):
-            lower.rung(*rung)
         else:
             saved = []
             groups = []
@@ -273,10 +300,10 @@ def normalize(program):
     lower.program.symbols.update(program.symbols)
     normalized = lower.storage.finalize(lower.program, lower.constants)
     normalized.metadata["native_logic_normalization"] = {
-        "original_rungs": len(program.rungs),
+        "original_rungs": len(original_rungs),
         "expanded_rungs": len(normalized.rungs),
         "original_il_sha256": hashlib.sha256(
-            json.dumps(program.rungs, separators=(",", ":")).encode()
+            json.dumps(original_rungs, separators=(",", ":")).encode()
         ).hexdigest(),
         "method": "explicit accumulator/stack snapshots; existing series contacts, coils and Timer blocks",
     }
