@@ -1,0 +1,1462 @@
+{
+  "format": "m200-register-collision-observations-v1",
+  "date": "2026-11-06",
+  "target": "TM200CE40T",
+  "actual_management_token": "FunctLevelMan21_0",
+  "editor": "EcoStruxure Machine Expert Basic 1.4 build 484, local Mac Wine lab",
+  "scope": "Hand-built native FIFO R0 diagnostic, official editor save/reopen and root-operated simulator observations only. Not compiler-generated output or implemented Register C++/IR/SDK/VM/graph support; no physical controller.",
+  "observers": {
+    "execution_and_GUI": "Root personally operated/viewed",
+    "independent_review": "Child independently read all21 exact seven-value records and28 chosen panels, saved/reopen/cleanup images; no GUI operation"
+  },
+  "artifacts": {
+    "baseline": {
+      "path": "tests/fixtures/official_tm200ce40t_memory.smbp",
+      "bytes": 83391,
+      "sha256": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf"
+    },
+    "IL_only_candidate": {
+      "path": "output/editor-validation/native-register-collision-latches/register_fifo_il_collision_latches.smbp",
+      "bytes": 94849,
+      "sha256": "e4d668085e47677d1ef2d59e3560319e8f3cc6ff3e04412d6f191bbcd26d6b1f"
+    },
+    "watch_candidate": {
+      "path": "output/editor-validation/native-register-collision-latches/watch-candidates/register_fifo_collision_watch.smbp",
+      "bytes": 96430,
+      "sha256": "6f3e15d9caec3f295ae4439d6adc76c2f89733f473739e862365ed5cf4b7ca5b"
+    },
+    "editor_saved_and_executed": {
+      "path": "output/editor-validation/native-register-collision-latches/editor-saved/register_fifo_collision_watch_editor_saved.smbp",
+      "bytes": 192588,
+      "sha256": "f845b2ba9920aecc25be7c9fde40fc4fd75fd6d26c9da6f424d906c2d9b3e51b"
+    }
+  },
+  "editor_readback": {
+    "hardware_typed_tree_equal": true,
+    "all_73_lexical_IL_lines_equal": true,
+    "rungs": 26,
+    "all_selected_Ladder": true,
+    "graph_entities_per_rung": [
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      13,
+      10,
+      10,
+      10,
+      28,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      10,
+      10,
+      10,
+      10,
+      10,
+      11,
+      11,
+      11
+    ],
+    "native_Register_rung_index": 10,
+    "native_Register_graph_entities": 28,
+    "mode": "Default FIFO R0 omitted as an empty Registers collection",
+    "save_and_other_project_then_fresh_reopen": "Root observed No error; exact saved-byte clone",
+    "captures": {
+      "save": {
+        "path": "docs/validation/editor-evidence/register-collisions/fifo-save.png",
+        "bytes": 401034,
+        "sha256": "6e41ec3af8e61c99eddda464014a8a30750cb53c2fb096de7609493f171fcb42",
+        "original_capture_basename": "fifo-save.png",
+        "exact_byte_copy": true
+      },
+      "fresh_reopen_programming": {
+        "path": "docs/validation/editor-evidence/register-collisions/fifo-reopen.png",
+        "bytes": 393821,
+        "sha256": "c3ae2fca4f21a3b82506a12ea47ef745ac60b1363194eb0466f951b5ba379061",
+        "original_capture_basename": "fifo-reopen.png",
+        "exact_byte_copy": true
+      },
+      "fresh_reopen_target": {
+        "path": "docs/validation/editor-evidence/register-collisions/fifo-reopen-configuration.png",
+        "bytes": 499386,
+        "sha256": "4a4a26d6af2e1dcb542f04289ef9530c1134dfe18103fd844868c5b25b7ec4eb",
+        "original_capture_basename": "fifo-reopen-configuration.png",
+        "exact_byte_copy": true
+      },
+      "fresh_cleanup": {
+        "path": "docs/validation/editor-evidence/register-collisions/fifo-collision-simulator-stopped.png",
+        "bytes": 287288,
+        "sha256": "54f048234f48c98ffb6b7c5271449e3a6465353f0955b66f73d251a7b1b34f26",
+        "original_capture_basename": "skill-1793961428765310000-2146.png",
+        "exact_byte_copy": true
+      }
+    },
+    "historical_readback_runtime_pending_string": "Historical, superseded only by this later bounded observation report; original file preserved"
+  },
+  "instrumentation": {
+    "watch_order": [
+      "R0.I",
+      "R0.O",
+      "R0.E",
+      "R0.F",
+      "MW10",
+      "MW11",
+      "MW12"
+    ],
+    "current_Q0_Q1": [
+      "R0.E",
+      "R0.F"
+    ],
+    "latched_Q2_Q3_Q4": [
+      "first-call E",
+      "first-call F",
+      "valid"
+    ],
+    "latched_MW10_MW11_MW12": [
+      "case6/7/8",
+      "first-call R0.O",
+      "first-call R0.I"
+    ],
+    "capture_event": "One LDR of each I6/I7/I8 before BLK; ORed event captures flags and words after BLK; sample persists while driver held",
+    "reset_valid": "I0 clears snapshot flags/valid, not stale sample words; disregard words when Q4false",
+    "GUI_refresh_seconds": 5,
+    "effective_R": "I0 OR I6 OR I7 OR I8",
+    "effective_I_request": "I1 OR I5 OR I6 OR I8",
+    "effective_O_request": "I2 OR I5 OR I7 OR I8"
+  },
+  "observations": [
+    {
+      "label": "fifo-collision-programming",
+      "displayed_watch_values": [
+        11,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/fifo-collision-programming.png",
+      "sha256": "f165db74fc070bddf2343d4fe9136880c07df8cc28a6378b2efd7adc8a1a9706",
+      "root_personally_observed": true,
+      "independent_record_and_exact_PNG_reading_agree": true,
+      "reading_basis": "Direct personal view of each distinct exact image; byte-identical repeats inherit the same verified reading."
+    },
+    {
+      "label": "fifo-C6-empty-sentinel-off",
+      "displayed_watch_values": [
+        11,
+        42,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/fifo-C6-empty-sentinel-off.png",
+      "sha256": "d40dd53e5356b7333e2c70e9f915437db10a2088c9b1ddb2fb1e034be8ec18d1",
+      "root_personally_observed": true,
+      "independent_record_and_exact_PNG_reading_agree": true,
+      "reading_basis": "Direct personal view of each distinct exact image; byte-identical repeats inherit the same verified reading."
+    },
+    {
+      "label": "fifo-C6-empty-held",
+      "displayed_watch_values": [
+        0,
+        0,
+        1,
+        0,
+        6,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/fifo-C6-empty-held.png",
+      "sha256": "9cc7b3fec016a8a8b178acbb34407133c41786ec58e36b7673b8fd0fb506f2ca",
+      "root_personally_observed": true,
+      "independent_record_and_exact_PNG_reading_agree": true,
+      "reading_basis": "Direct personal view of each distinct exact image; byte-identical repeats inherit the same verified reading."
+    },
+    {
+      "label": "fifo-E-reset-store-reset-falls",
+      "displayed_watch_values": [
+        11,
+        0,
+        0,
+        0,
+        6,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/fifo-E-reset-store-reset-falls.png",
+      "sha256": "7f9aa84a9149830a040146a754421aab4e0c70fc4cb6e73c26b6d9675301dbac",
+      "root_personally_observed": true,
+      "independent_record_and_exact_PNG_reading_agree": true,
+      "reading_basis": "Direct personal view of each distinct exact image; byte-identical repeats inherit the same verified reading."
+    },
+    {
+      "label": "fifo-E-reset-store-new-edge-off",
+      "displayed_watch_values": [
+        11,
+        0,
+        0,
+        0,
+        6,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/fifo-E-reset-store-new-edge-off.png",
+      "sha256": "7f9aa84a9149830a040146a754421aab4e0c70fc4cb6e73c26b6d9675301dbac",
+      "root_personally_observed": true,
+      "independent_record_and_exact_PNG_reading_agree": true,
+      "reading_basis": "Direct personal view of each distinct exact image; byte-identical repeats inherit the same verified reading."
+    },
+    {
+      "label": "fifo-E-reset-store-drain-1-off",
+      "displayed_watch_values": [
+        11,
+        11,
+        0,
+        0,
+        6,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/fifo-E-reset-store-drain-1-off.png",
+      "sha256": "cf674cfe74a4abfbbcdf5acada5b4f39e0fab72093f62b1e411bcfbd00e8a98c",
+      "root_personally_observed": true,
+      "independent_record_and_exact_PNG_reading_agree": true,
+      "reading_basis": "Direct personal view of each distinct exact image; byte-identical repeats inherit the same verified reading."
+    },
+    {
+      "label": "fifo-E-reset-store-drain-2-off",
+      "displayed_watch_values": [
+        11,
+        11,
+        1,
+        0,
+        6,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/fifo-E-reset-store-drain-2-off.png",
+      "sha256": "39ff10086edc2c8cfcd5104c8337e8381f8ac32f0caf5ebb2ff040b2377f5f02",
+      "root_personally_observed": true,
+      "independent_record_and_exact_PNG_reading_agree": true,
+      "reading_basis": "Direct personal view of each distinct exact image; byte-identical repeats inherit the same verified reading."
+    },
+    {
+      "label": "fifo-E-reset-store-drain-3-off",
+      "displayed_watch_values": [
+        11,
+        11,
+        1,
+        0,
+        6,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/fifo-E-reset-store-drain-3-off.png",
+      "sha256": "39ff10086edc2c8cfcd5104c8337e8381f8ac32f0caf5ebb2ff040b2377f5f02",
+      "root_personally_observed": true,
+      "independent_record_and_exact_PNG_reading_agree": true,
+      "reading_basis": "Direct personal view of each distinct exact image; byte-identical repeats inherit the same verified reading."
+    },
+    {
+      "label": "fifo-C6-two-held",
+      "displayed_watch_values": [
+        0,
+        0,
+        1,
+        0,
+        6,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/fifo-C6-two-held.png",
+      "sha256": "9cc7b3fec016a8a8b178acbb34407133c41786ec58e36b7673b8fd0fb506f2ca",
+      "root_personally_observed": true,
+      "independent_record_and_exact_PNG_reading_agree": true,
+      "reading_basis": "Direct personal view of each distinct exact image; byte-identical repeats inherit the same verified reading."
+    },
+    {
+      "label": "fifo-C7-two-sentinel-off",
+      "displayed_watch_values": [
+        22,
+        42,
+        0,
+        0,
+        6,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/fifo-C7-two-sentinel-off.png",
+      "sha256": "2c50955ff40bb01f48acf87dc126d747aa3c090d8abc40334e7e003f21dcc131",
+      "root_personally_observed": true,
+      "independent_record_and_exact_PNG_reading_agree": true,
+      "reading_basis": "Direct personal view of each distinct exact image; byte-identical repeats inherit the same verified reading."
+    },
+    {
+      "label": "fifo-C7-two-held",
+      "displayed_watch_values": [
+        0,
+        0,
+        1,
+        0,
+        7,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/fifo-C7-two-held.png",
+      "sha256": "ace492aac7f6a030ae876a0259630d8e11d7cb716ea8c37d8fa57259496e963c",
+      "root_personally_observed": true,
+      "independent_record_and_exact_PNG_reading_agree": true,
+      "reading_basis": "Direct personal view of each distinct exact image; byte-identical repeats inherit the same verified reading."
+    },
+    {
+      "label": "fifo-E-reset-retrieve-reset-falls",
+      "displayed_watch_values": [
+        22,
+        0,
+        1,
+        0,
+        7,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/fifo-E-reset-retrieve-reset-falls.png",
+      "sha256": "c335a3badab8c1afdf3a43b7e5bb838c01c602195ad50df385d81a0c38a05600",
+      "root_personally_observed": true,
+      "independent_record_and_exact_PNG_reading_agree": true,
+      "reading_basis": "Direct personal view of each distinct exact image; byte-identical repeats inherit the same verified reading."
+    },
+    {
+      "label": "fifo-E-empty-pop-store-off",
+      "displayed_watch_values": [
+        22,
+        0,
+        0,
+        0,
+        7,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/fifo-E-empty-pop-store-off.png",
+      "sha256": "ed2b6a12abe6b49ed485d7ca6709f63020a7cda9184bcd67f457aba0f4b07271",
+      "root_personally_observed": true,
+      "independent_record_and_exact_PNG_reading_agree": true,
+      "reading_basis": "Direct personal view of each distinct exact image; byte-identical repeats inherit the same verified reading."
+    },
+    {
+      "label": "fifo-E-empty-pop-retrieve-new-off",
+      "displayed_watch_values": [
+        22,
+        22,
+        1,
+        0,
+        7,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/fifo-E-empty-pop-retrieve-new-off.png",
+      "sha256": "140c813f93ca3bfa7ce10775173fbd94d169d573e0e61aca9af0e7f1503d535d",
+      "root_personally_observed": true,
+      "independent_record_and_exact_PNG_reading_agree": true,
+      "reading_basis": "Direct personal view of each distinct exact image; byte-identical repeats inherit the same verified reading."
+    },
+    {
+      "label": "fifo-C8-two-held",
+      "displayed_watch_values": [
+        0,
+        0,
+        1,
+        0,
+        8,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/fifo-C8-two-held.png",
+      "sha256": "65ba1198fa4da8e14b0c96b9b8f5f7542f2c28d0917aa44a0b15858056dbcb01",
+      "root_personally_observed": true,
+      "independent_record_and_exact_PNG_reading_agree": true,
+      "reading_basis": "Direct personal view of each distinct exact image; byte-identical repeats inherit the same verified reading."
+    },
+    {
+      "label": "fifo-full-history-store-16-off",
+      "displayed_watch_values": [
+        22,
+        0,
+        0,
+        1,
+        8,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/fifo-full-history-store-16-off.png",
+      "sha256": "159085185ab23143be7d0eb11f54d5e39db38d0f782247515587053e97eec143",
+      "root_personally_observed": true,
+      "independent_record_and_exact_PNG_reading_agree": true,
+      "reading_basis": "Direct personal view of each distinct exact image; byte-identical repeats inherit the same verified reading."
+    },
+    {
+      "label": "fifo-E-full-ignored-store-held",
+      "displayed_watch_values": [
+        11,
+        0,
+        0,
+        1,
+        8,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/fifo-E-full-ignored-store-held.png",
+      "sha256": "34fbfd3bddc8f52915fd09ef64dae31fd6ca82a15f421a322e7e6c5ea1625030",
+      "root_personally_observed": true,
+      "independent_record_and_exact_PNG_reading_agree": true,
+      "reading_basis": "Direct personal view of each distinct exact image; byte-identical repeats inherit the same verified reading."
+    },
+    {
+      "label": "fifo-E-full-retrieve-off",
+      "displayed_watch_values": [
+        11,
+        22,
+        0,
+        0,
+        8,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/fifo-E-full-retrieve-off.png",
+      "sha256": "68b3a3f08b001fb47d0d11fca0e4097464e69822bd355f1bc57cbf61b7fcf7b4",
+      "root_personally_observed": true,
+      "independent_record_and_exact_PNG_reading_agree": true,
+      "reading_basis": "Direct personal view of each distinct exact image; byte-identical repeats inherit the same verified reading."
+    },
+    {
+      "label": "fifo-E-full-new-store-off",
+      "displayed_watch_values": [
+        11,
+        22,
+        0,
+        1,
+        8,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/fifo-E-full-new-store-off.png",
+      "sha256": "f7b0fe5eb3243d23a56ace42fac4ea27b195e042f865c2f608c1fd36b87b185a",
+      "root_personally_observed": true,
+      "independent_record_and_exact_PNG_reading_agree": true,
+      "reading_basis": "Direct personal view of each distinct exact image; byte-identical repeats inherit the same verified reading."
+    },
+    {
+      "label": "fifo-C6-full-sentinel-off",
+      "displayed_watch_values": [
+        11,
+        42,
+        0,
+        1,
+        8,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/fifo-C6-full-sentinel-off.png",
+      "sha256": "750e2e213b8d0e6d03bab7a3bdad949093334c47e3ddffb7a6bc48d7a2700256",
+      "root_personally_observed": true,
+      "independent_record_and_exact_PNG_reading_agree": true,
+      "reading_basis": "Direct personal view of each distinct exact image; byte-identical repeats inherit the same verified reading."
+    },
+    {
+      "label": "fifo-C6-full-held",
+      "displayed_watch_values": [
+        0,
+        0,
+        1,
+        0,
+        6,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/fifo-C6-full-held.png",
+      "sha256": "9cc7b3fec016a8a8b178acbb34407133c41786ec58e36b7673b8fd0fb506f2ca",
+      "root_personally_observed": true,
+      "independent_record_and_exact_PNG_reading_agree": true,
+      "reading_basis": "Direct personal view of each distinct exact image; byte-identical repeats inherit the same verified reading."
+    }
+  ],
+  "direct_panel_checks": [
+    {
+      "label": "fifo-collision-programming",
+      "visibly_green_inputs": [],
+      "visibly_green_outputs": [
+        0
+      ],
+      "latched_Q2_Q3_Q4": [
+        0,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-collision-programming.png",
+      "sha256": "5619ec37209d61f7aed7ddb75f3c39b4e9148442faae2a29418a5bcde63574ae",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-C6-empty-sentinel-off",
+      "visibly_green_inputs": [],
+      "visibly_green_outputs": [
+        0
+      ],
+      "latched_Q2_Q3_Q4": [
+        0,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-C6-empty-sentinel-off.png",
+      "sha256": "5619ec37209d61f7aed7ddb75f3c39b4e9148442faae2a29418a5bcde63574ae",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-C6-empty-held",
+      "visibly_green_inputs": [
+        6
+      ],
+      "visibly_green_outputs": [
+        0,
+        2,
+        4
+      ],
+      "latched_Q2_Q3_Q4": [
+        1,
+        0,
+        1
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-C6-empty-held.png",
+      "sha256": "61af59cf390c95882173c927848159edc0d4d3521f31df9741192155af49ff5f",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-E-reset-store-I1-held",
+      "visibly_green_inputs": [
+        1,
+        6
+      ],
+      "visibly_green_outputs": [
+        0,
+        2,
+        4
+      ],
+      "latched_Q2_Q3_Q4": [
+        1,
+        0,
+        1
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-reset-store-I1-held.png",
+      "sha256": "1d69f4dc7b2831e46898602459f9caf483f5f9e460145f4c9a73deb3c1d8cfe6",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-E-reset-store-reset-falls",
+      "visibly_green_inputs": [
+        1
+      ],
+      "visibly_green_outputs": [
+        2,
+        4
+      ],
+      "latched_Q2_Q3_Q4": [
+        1,
+        0,
+        1
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-reset-store-reset-falls.png",
+      "sha256": "d348d32ec7c173b8a8a0e09292b90d8b1a2843518a4a6112112bf2490411f3b2",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-E-reset-store-new-edge-off",
+      "visibly_green_inputs": [],
+      "visibly_green_outputs": [
+        2,
+        4
+      ],
+      "latched_Q2_Q3_Q4": [
+        1,
+        0,
+        1
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-reset-store-new-edge-off.png",
+      "sha256": "5346a0819a2726d56006ba65465bf9d6616d9fbc6ead5e6c1504ff6b72791b7d",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-E-reset-store-drain-1-off",
+      "visibly_green_inputs": [],
+      "visibly_green_outputs": [
+        2,
+        4
+      ],
+      "latched_Q2_Q3_Q4": [
+        1,
+        0,
+        1
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-reset-store-drain-1-off.png",
+      "sha256": "5346a0819a2726d56006ba65465bf9d6616d9fbc6ead5e6c1504ff6b72791b7d",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-E-reset-store-drain-2-off",
+      "visibly_green_inputs": [],
+      "visibly_green_outputs": [
+        0,
+        2,
+        4
+      ],
+      "latched_Q2_Q3_Q4": [
+        1,
+        0,
+        1
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-reset-store-drain-2-off.png",
+      "sha256": "977f0343d31e4eb75506a610d6a24b4cd9868ed94da0f3431d6ecb1976bb76a3",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-E-reset-store-drain-3-off",
+      "visibly_green_inputs": [],
+      "visibly_green_outputs": [
+        0,
+        2,
+        4
+      ],
+      "latched_Q2_Q3_Q4": [
+        1,
+        0,
+        1
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-reset-store-drain-3-off.png",
+      "sha256": "977f0343d31e4eb75506a610d6a24b4cd9868ed94da0f3431d6ecb1976bb76a3",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-C6-two-held",
+      "visibly_green_inputs": [
+        3,
+        6
+      ],
+      "visibly_green_outputs": [
+        0,
+        2,
+        4
+      ],
+      "latched_Q2_Q3_Q4": [
+        1,
+        0,
+        1
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-C6-two-held.png",
+      "sha256": "58501c3134e7006f930334523dba32d08b77bacca471989d9c4d87b77fef9066",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-C7-two-sentinel-off",
+      "visibly_green_inputs": [
+        3
+      ],
+      "visibly_green_outputs": [],
+      "latched_Q2_Q3_Q4": [
+        0,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-C7-two-sentinel-off.png",
+      "sha256": "4ef269847cb3fce0ecca77f57cdc7e9e110deffd7c89c252982b6dcf4d2c239d",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-C7-two-held",
+      "visibly_green_inputs": [
+        3,
+        7
+      ],
+      "visibly_green_outputs": [
+        0,
+        2,
+        4
+      ],
+      "latched_Q2_Q3_Q4": [
+        1,
+        0,
+        1
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-C7-two-held.png",
+      "sha256": "9cbebe01bf487290757e7e5380d1e1f7678a49ff7e56b0f192f66b512208df41",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-E-reset-retrieve-reset-falls",
+      "visibly_green_inputs": [
+        2,
+        3
+      ],
+      "visibly_green_outputs": [
+        0,
+        2,
+        4
+      ],
+      "latched_Q2_Q3_Q4": [
+        1,
+        0,
+        1
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-reset-retrieve-reset-falls.png",
+      "sha256": "5387fc45c1c7b4fd5b7febe4324034e7352772f87f0573cd0e69937a96aa6e8c",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-E-empty-pop-store-on",
+      "visibly_green_inputs": [
+        1,
+        2,
+        3
+      ],
+      "visibly_green_outputs": [
+        2,
+        4
+      ],
+      "latched_Q2_Q3_Q4": [
+        1,
+        0,
+        1
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-empty-pop-store-on.png",
+      "sha256": "04403d3d3d73cbf477c507f13bcb280b29c07edf7186a8674d38fef84f193942",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-E-empty-pop-store-off",
+      "visibly_green_inputs": [
+        2,
+        3
+      ],
+      "visibly_green_outputs": [
+        2,
+        4
+      ],
+      "latched_Q2_Q3_Q4": [
+        1,
+        0,
+        1
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-empty-pop-store-off.png",
+      "sha256": "1a6bf1533abf8dab89d9b0d4d0563dc1ffcdaca7529524c894cca914edef7a4a",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-E-empty-pop-retrieve-release",
+      "visibly_green_inputs": [
+        3
+      ],
+      "visibly_green_outputs": [
+        2,
+        4
+      ],
+      "latched_Q2_Q3_Q4": [
+        1,
+        0,
+        1
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-empty-pop-retrieve-release.png",
+      "sha256": "89fa6be28c301104b9d6cd678b3580d38ea58da869edcb4cb3e1a06589146d0a",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-E-empty-pop-retrieve-new-on",
+      "visibly_green_inputs": [
+        2,
+        3
+      ],
+      "visibly_green_outputs": [
+        0,
+        2,
+        4
+      ],
+      "latched_Q2_Q3_Q4": [
+        1,
+        0,
+        1
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-empty-pop-retrieve-new-on.png",
+      "sha256": "5387fc45c1c7b4fd5b7febe4324034e7352772f87f0573cd0e69937a96aa6e8c",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-E-empty-pop-retrieve-new-off",
+      "visibly_green_inputs": [
+        3
+      ],
+      "visibly_green_outputs": [
+        0,
+        2,
+        4
+      ],
+      "latched_Q2_Q3_Q4": [
+        1,
+        0,
+        1
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-empty-pop-retrieve-new-off.png",
+      "sha256": "dc11db629ef0718ed68d7ae6ba15dd5f0bed9b2909aa8a0bda0c8e672ee55b23",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-C8-two-held",
+      "visibly_green_inputs": [
+        3,
+        8
+      ],
+      "visibly_green_outputs": [
+        0,
+        2,
+        4
+      ],
+      "latched_Q2_Q3_Q4": [
+        1,
+        0,
+        1
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-C8-two-held.png",
+      "sha256": "33208d575879544d6d745330fb2c6c952d59303ac73e06011049ce60717ea1c2",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-full-history-store-16-off",
+      "visibly_green_inputs": [
+        3
+      ],
+      "visibly_green_outputs": [
+        1
+      ],
+      "latched_Q2_Q3_Q4": [
+        0,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-full-history-store-16-off.png",
+      "sha256": "aa000860dc6b65aa856930e2eb32999f3ca855e7e159abfd5c3d983b69eda599",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-E-full-ignored-store-held",
+      "visibly_green_inputs": [
+        1
+      ],
+      "visibly_green_outputs": [
+        1
+      ],
+      "latched_Q2_Q3_Q4": [
+        0,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-full-ignored-store-held.png",
+      "sha256": "a8bd4b002e26ba31fb6a8736e03de06c48b91e611037bdd1fbe5b6d5c1fb4057",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-E-full-retrieve-on",
+      "visibly_green_inputs": [
+        1,
+        2
+      ],
+      "visibly_green_outputs": [],
+      "latched_Q2_Q3_Q4": [
+        0,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-full-retrieve-on.png",
+      "sha256": "ca4e46cb2dfbf5012dac93577cb75222d64dc99662ca1455bd6ffa51de9d0f14",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-E-full-retrieve-off",
+      "visibly_green_inputs": [
+        1
+      ],
+      "visibly_green_outputs": [],
+      "latched_Q2_Q3_Q4": [
+        0,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-full-retrieve-off.png",
+      "sha256": "57f7bb597b99dbb21c56da7ec6257cd47dc9b3d5f5a1680e9c62dd8d6142e450",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-E-full-store-release",
+      "visibly_green_inputs": [],
+      "visibly_green_outputs": [],
+      "latched_Q2_Q3_Q4": [
+        0,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-full-store-release.png",
+      "sha256": "9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-E-full-new-store-on",
+      "visibly_green_inputs": [
+        1
+      ],
+      "visibly_green_outputs": [
+        1
+      ],
+      "latched_Q2_Q3_Q4": [
+        0,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-full-new-store-on.png",
+      "sha256": "a8bd4b002e26ba31fb6a8736e03de06c48b91e611037bdd1fbe5b6d5c1fb4057",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-E-full-new-store-off",
+      "visibly_green_inputs": [],
+      "visibly_green_outputs": [
+        1
+      ],
+      "latched_Q2_Q3_Q4": [
+        0,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-full-new-store-off.png",
+      "sha256": "7926037ab6928d83e59bca60c5813c33481d5e05ee45ea2209b56fbe74589b67",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-C6-full-sentinel-off",
+      "visibly_green_inputs": [],
+      "visibly_green_outputs": [
+        1
+      ],
+      "latched_Q2_Q3_Q4": [
+        0,
+        0,
+        0
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-C6-full-sentinel-off.png",
+      "sha256": "7926037ab6928d83e59bca60c5813c33481d5e05ee45ea2209b56fbe74589b67",
+      "independently_personally_viewed": true
+    },
+    {
+      "label": "fifo-C6-full-held",
+      "visibly_green_inputs": [
+        6
+      ],
+      "visibly_green_outputs": [
+        0,
+        2,
+        4
+      ],
+      "latched_Q2_Q3_Q4": [
+        1,
+        0,
+        1
+      ],
+      "capture": "docs/validation/editor-evidence/register-collisions/panel-fifo-C6-full-held.png",
+      "sha256": "61af59cf390c95882173c927848159edc0d4d3521f31df9741192155af49ff5f",
+      "independently_personally_viewed": true
+    }
+  ],
+  "bounded_observed_sequences": [
+    {
+      "id": "C6_empty_two_full",
+      "controls": "I6 drives Reset+Store together, individual requests low; empty/two/full preparations use O42 before driver",
+      "recorded_result": "First-call I0/O0/E1/F0, case6, valid1; current held values also0/0/1/0; snapshot Q2/Q3/Q4=1/0/1"
+    },
+    {
+      "id": "C7_two",
+      "controls": "I7 drives Reset+Retrieve together after two-item preparation and O42",
+      "recorded_result": "First-call I0/O0/E1/F0, case7, valid1; held current empty"
+    },
+    {
+      "id": "C8_two",
+      "controls": "I8 drives Reset+Store+Retrieve together after two-item preparation and O42",
+      "recorded_result": "First-call I0/O0/E1/F0, case8, valid1; held current empty"
+    },
+    {
+      "id": "Store_held_when_Reset_drops",
+      "controls": "While I6 held assert I1, then release I6 alone; later release/reassert I1",
+      "recorded_result": "I1+I6 becomes I1 alone; I11/O0/E0 follows. After later fresh Store edge, two fresh pops return11 then11 with E0 thenE1; third empty pop retains11"
+    },
+    {
+      "id": "Empty_Retrieve_held",
+      "controls": "While I7 held assert I2, then release I7 alone; fresh Store22 pulse with I2 held; later release/reassert I2",
+      "recorded_result": "After Store22, I22/O0/E0 with Retrieve still held. No automatic retrieval visible in those held observations; fresh Retrieve returns22/E1"
+    },
+    {
+      "id": "Full_ignored_Store_held",
+      "controls": "Sixteen Store22 pulses, then attempt Store11 and hold I1; fresh Retrieve pulse while I1 stays high; later release/reassert I1",
+      "recorded_result": "F1 after fill and attempted17th. Retrieve returns22 and F0 remains after Retrieve release while Store stays held. Fresh Store edge restoresF1"
+    }
+  ],
+  "inferences_not_direct_internal_state_observations": [
+    "The two later pops support two queued11 values after the Reset-drop/fresh-Store sequence; no native depth operand was observed.",
+    "Held-request cases constrain a future edge-history model for these paths. They do not reveal or prove a universal internal previous-pin update/reset algorithm.",
+    "The observed reset collisions do not establish all FIFO/LIFO priority rules or self-status evaluation timing."
+  ],
+  "cleanup": {
+    "root_recorded_official_Stop_simulator": true,
+    "root_recorded_panel_absent": true,
+    "root_recorded_specific_host_PID_absent": true,
+    "root_recorded_TCP502_listener_absent": true,
+    "independent_fresh_PNG_reading": "No error / Not Connected; Launch simulator available, Stop simulator disabled",
+    "fresh_capture": "docs/validation/editor-evidence/register-collisions/fifo-collision-simulator-stopped.png",
+    "fresh_capture_sha256": "54f048234f48c98ffb6b7c5271449e3a6465353f0955b66f73d251a7b1b34f26",
+    "earlier_stop_action_capture": "Can precede asynchronous completion; not used as terminal cleanup proof",
+    "PID_listener_checks_attribution": "Root's completed cleanup record; not rerun during this documentary review, and not claims about a listener while RUN",
+    "specific_host_PID": 31667
+  },
+  "source_records": {
+    "runtime_observations": {
+      "path": "output/editor-validation/native-register-collision-latches/runtime-observations.json",
+      "bytes": 13080,
+      "sha256": "d18564930af0e9cfb33add1287cc2d7b633603e9f042c09812968dc9fbb8775e"
+    },
+    "runtime_actions": {
+      "path": "output/editor-validation/native-register-collision-latches/runtime-actions.jsonl",
+      "bytes": 81296,
+      "sha256": "ce93a63761655b74d450d1d6ed7e19e00233cfa42bd15fae6021c55aca209ed4"
+    },
+    "helper": {
+      "path": "output/editor-validation/native-register-collision-latches/runtime-step.py",
+      "bytes": 560,
+      "sha256": "ab78821e48a08cfb34316520ee9b57ab7889ede5b7d35ed7270534b77d6bcb49"
+    },
+    "editor_readback": {
+      "path": "output/editor-validation/native-register-collision-latches/editor-saved/fifo-readback.json",
+      "bytes": 1044,
+      "sha256": "771c63833ecf7f9cc782d29e680f36157b146bb3c9c946b6efd67a7aac30ba05"
+    },
+    "prior_independent_review": {
+      "path": "output/reports/register-collisions-independent-review-2026-11-06/review.json",
+      "bytes": 24534,
+      "sha256": "2ad4572c1e71f0f6fd9b9eb1f00aca8552f344e8190fad4bd9eaff7811f719dd"
+    },
+    "journal_entries": 109,
+    "with_command_arguments": 13,
+    "without_command_arguments": 96,
+    "first_arguments_label": "fifo-E-full-select11",
+    "last_arguments_label": "fifo-collision-stop-simulator",
+    "argument_history_limit": "Only later entries capture arguments. Earlier input transitions are supported by labels, source IL, root observation and listed panel states, not a complete replayable command log."
+  },
+  "evidence_counts": {
+    "main_runtime_records": 21,
+    "distinct_main_runtime_PNG_hashes": 17,
+    "chosen_direct_panel_records": 28,
+    "PNG_files_copied": 53,
+    "PNG_total_bytes": 11043975,
+    "counts_mean": "Evidence records/copies only, not unit tests or distinct controller scans; repeated exact images retained with their action labels"
+  },
+  "exact_public_PNG_copies": [
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-collision-programming.png",
+      "bytes": 425764,
+      "sha256": "f165db74fc070bddf2343d4fe9136880c07df8cc28a6378b2efd7adc8a1a9706",
+      "original_capture_basename": "skill-1793959695220107000-2146.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-C6-empty-sentinel-off.png",
+      "bytes": 425537,
+      "sha256": "d40dd53e5356b7333e2c70e9f915437db10a2088c9b1ddb2fb1e034be8ec18d1",
+      "original_capture_basename": "skill-1793959746239907000-2146.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-C6-empty-held.png",
+      "bytes": 426264,
+      "sha256": "9cc7b3fec016a8a8b178acbb34407133c41786ec58e36b7673b8fd0fb506f2ca",
+      "original_capture_basename": "skill-1793959750425399000-2146.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-E-reset-store-reset-falls.png",
+      "bytes": 426016,
+      "sha256": "7f9aa84a9149830a040146a754421aab4e0c70fc4cb6e73c26b6d9675301dbac",
+      "original_capture_basename": "skill-1793959849776950000-2146.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-E-reset-store-new-edge-off.png",
+      "bytes": 426016,
+      "sha256": "7f9aa84a9149830a040146a754421aab4e0c70fc4cb6e73c26b6d9675301dbac",
+      "original_capture_basename": "skill-1793959862374316000-2146.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-E-reset-store-drain-1-off.png",
+      "bytes": 425970,
+      "sha256": "cf674cfe74a4abfbbcdf5acada5b4f39e0fab72093f62b1e411bcfbd00e8a98c",
+      "original_capture_basename": "skill-1793959923480682000-2146.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-E-reset-store-drain-2-off.png",
+      "bytes": 425895,
+      "sha256": "39ff10086edc2c8cfcd5104c8337e8381f8ac32f0caf5ebb2ff040b2377f5f02",
+      "original_capture_basename": "skill-1793959931972556000-2146.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-E-reset-store-drain-3-off.png",
+      "bytes": 425895,
+      "sha256": "39ff10086edc2c8cfcd5104c8337e8381f8ac32f0caf5ebb2ff040b2377f5f02",
+      "original_capture_basename": "skill-1793959940396992000-2146.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-C6-two-held.png",
+      "bytes": 426264,
+      "sha256": "9cc7b3fec016a8a8b178acbb34407133c41786ec58e36b7673b8fd0fb506f2ca",
+      "original_capture_basename": "skill-1793960026893298000-2146.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-C7-two-sentinel-off.png",
+      "bytes": 425712,
+      "sha256": "2c50955ff40bb01f48acf87dc126d747aa3c090d8abc40334e7e003f21dcc131",
+      "original_capture_basename": "skill-1793960189217142000-2146.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-C7-two-held.png",
+      "bytes": 426228,
+      "sha256": "ace492aac7f6a030ae876a0259630d8e11d7cb716ea8c37d8fa57259496e963c",
+      "original_capture_basename": "skill-1793960193447603000-2146.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-E-reset-retrieve-reset-falls.png",
+      "bytes": 425958,
+      "sha256": "c335a3badab8c1afdf3a43b7e5bb838c01c602195ad50df385d81a0c38a05600",
+      "original_capture_basename": "skill-1793960263468896000-2146.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-E-empty-pop-store-off.png",
+      "bytes": 426029,
+      "sha256": "ed2b6a12abe6b49ed485d7ca6709f63020a7cda9184bcd67f457aba0f4b07271",
+      "original_capture_basename": "skill-1793960271832759000-2146.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-E-empty-pop-retrieve-new-off.png",
+      "bytes": 426014,
+      "sha256": "140c813f93ca3bfa7ce10775173fbd94d169d573e0e61aca9af0e7f1503d535d",
+      "original_capture_basename": "skill-1793960284320745000-2146.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-C8-two-held.png",
+      "bytes": 426306,
+      "sha256": "65ba1198fa4da8e14b0c96b9b8f5f7542f2c28d0917aa44a0b15858056dbcb01",
+      "original_capture_basename": "skill-1793960470268681000-2146.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-full-history-store-16-off.png",
+      "bytes": 425522,
+      "sha256": "159085185ab23143be7d0eb11f54d5e39db38d0f782247515587053e97eec143",
+      "original_capture_basename": "skill-1793960857931126000-2146.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-E-full-ignored-store-held.png",
+      "bytes": 425467,
+      "sha256": "34fbfd3bddc8f52915fd09ef64dae31fd6ca82a15f421a322e7e6c5ea1625030",
+      "original_capture_basename": "skill-1793961059419868000-2146.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-E-full-retrieve-off.png",
+      "bytes": 425606,
+      "sha256": "68b3a3f08b001fb47d0d11fca0e4097464e69822bd355f1bc57cbf61b7fcf7b4",
+      "original_capture_basename": "skill-1793961067835958000-2146.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-E-full-new-store-off.png",
+      "bytes": 425528,
+      "sha256": "f7b0fe5eb3243d23a56ace42fac4ea27b195e042f865c2f608c1fd36b87b185a",
+      "original_capture_basename": "skill-1793961080395868000-2146.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-C6-full-sentinel-off.png",
+      "bytes": 425597,
+      "sha256": "750e2e213b8d0e6d03bab7a3bdad949093334c47e3ddffb7a6bc48d7a2700256",
+      "original_capture_basename": "skill-1793961088819431000-2146.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-C6-full-held.png",
+      "bytes": 426264,
+      "sha256": "9cc7b3fec016a8a8b178acbb34407133c41786ec58e36b7673b8fd0fb506f2ca",
+      "original_capture_basename": "skill-1793961093004255000-2146.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-collision-programming.png",
+      "bytes": 18241,
+      "sha256": "5619ec37209d61f7aed7ddb75f3c39b4e9148442faae2a29418a5bcde63574ae",
+      "original_capture_basename": "skill-1793959695038451000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-C6-empty-sentinel-off.png",
+      "bytes": 18241,
+      "sha256": "5619ec37209d61f7aed7ddb75f3c39b4e9148442faae2a29418a5bcde63574ae",
+      "original_capture_basename": "skill-1793959746059099000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-C6-empty-held.png",
+      "bytes": 18830,
+      "sha256": "61af59cf390c95882173c927848159edc0d4d3521f31df9741192155af49ff5f",
+      "original_capture_basename": "skill-1793959750240054000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-reset-store-I1-held.png",
+      "bytes": 18900,
+      "sha256": "1d69f4dc7b2831e46898602459f9caf483f5f9e460145f4c9a73deb3c1d8cfe6",
+      "original_capture_basename": "skill-1793959845403388000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-reset-store-reset-falls.png",
+      "bytes": 18536,
+      "sha256": "d348d32ec7c173b8a8a0e09292b90d8b1a2843518a4a6112112bf2490411f3b2",
+      "original_capture_basename": "skill-1793959849598210000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-reset-store-new-edge-off.png",
+      "bytes": 18468,
+      "sha256": "5346a0819a2726d56006ba65465bf9d6616d9fbc6ead5e6c1504ff6b72791b7d",
+      "original_capture_basename": "skill-1793959862197106000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-reset-store-drain-1-off.png",
+      "bytes": 18468,
+      "sha256": "5346a0819a2726d56006ba65465bf9d6616d9fbc6ead5e6c1504ff6b72791b7d",
+      "original_capture_basename": "skill-1793959923303340000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-reset-store-drain-2-off.png",
+      "bytes": 18589,
+      "sha256": "977f0343d31e4eb75506a610d6a24b4cd9868ed94da0f3431d6ecb1976bb76a3",
+      "original_capture_basename": "skill-1793959931781333000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-reset-store-drain-3-off.png",
+      "bytes": 18589,
+      "sha256": "977f0343d31e4eb75506a610d6a24b4cd9868ed94da0f3431d6ecb1976bb76a3",
+      "original_capture_basename": "skill-1793959940221825000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-C6-two-held.png",
+      "bytes": 19026,
+      "sha256": "58501c3134e7006f930334523dba32d08b77bacca471989d9c4d87b77fef9066",
+      "original_capture_basename": "skill-1793960026717209000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-C7-two-sentinel-off.png",
+      "bytes": 18320,
+      "sha256": "4ef269847cb3fce0ecca77f57cdc7e9e110deffd7c89c252982b6dcf4d2c239d",
+      "original_capture_basename": "skill-1793960189029798000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-C7-two-held.png",
+      "bytes": 18922,
+      "sha256": "9cbebe01bf487290757e7e5380d1e1f7678a49ff7e56b0f192f66b512208df41",
+      "original_capture_basename": "skill-1793960193256704000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-reset-retrieve-reset-falls.png",
+      "bytes": 18665,
+      "sha256": "5387fc45c1c7b4fd5b7febe4324034e7352772f87f0573cd0e69937a96aa6e8c",
+      "original_capture_basename": "skill-1793960263291204000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-empty-pop-store-on.png",
+      "bytes": 18613,
+      "sha256": "04403d3d3d73cbf477c507f13bcb280b29c07edf7186a8674d38fef84f193942",
+      "original_capture_basename": "skill-1793960267455708000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-empty-pop-store-off.png",
+      "bytes": 18545,
+      "sha256": "1a6bf1533abf8dab89d9b0d4d0563dc1ffcdaca7529524c894cca914edef7a4a",
+      "original_capture_basename": "skill-1793960271655508000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-empty-pop-retrieve-release.png",
+      "bytes": 18662,
+      "sha256": "89fa6be28c301104b9d6cd678b3580d38ea58da869edcb4cb3e1a06589146d0a",
+      "original_capture_basename": "skill-1793960275811065000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-empty-pop-retrieve-new-on.png",
+      "bytes": 18665,
+      "sha256": "5387fc45c1c7b4fd5b7febe4324034e7352772f87f0573cd0e69937a96aa6e8c",
+      "original_capture_basename": "skill-1793960279973832000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-empty-pop-retrieve-new-off.png",
+      "bytes": 18784,
+      "sha256": "dc11db629ef0718ed68d7ae6ba15dd5f0bed9b2909aa8a0bda0c8e672ee55b23",
+      "original_capture_basename": "skill-1793960284144341000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-C8-two-held.png",
+      "bytes": 18904,
+      "sha256": "33208d575879544d6d745330fb2c6c952d59303ac73e06011049ce60717ea1c2",
+      "original_capture_basename": "skill-1793960470082366000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-full-history-store-16-off.png",
+      "bytes": 18390,
+      "sha256": "aa000860dc6b65aa856930e2eb32999f3ca855e7e159abfd5c3d983b69eda599",
+      "original_capture_basename": "skill-1793960857743026000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-full-ignored-store-held.png",
+      "bytes": 18162,
+      "sha256": "a8bd4b002e26ba31fb6a8736e03de06c48b91e611037bdd1fbe5b6d5c1fb4057",
+      "original_capture_basename": "skill-1793961059240819000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-full-retrieve-on.png",
+      "bytes": 18388,
+      "sha256": "ca4e46cb2dfbf5012dac93577cb75222d64dc99662ca1455bd6ffa51de9d0f14",
+      "original_capture_basename": "skill-1793961063443077000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-full-retrieve-off.png",
+      "bytes": 18189,
+      "sha256": "57f7bb597b99dbb21c56da7ec6257cd47dc9b3d5f5a1680e9c62dd8d6142e450",
+      "original_capture_basename": "skill-1793961067652638000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-full-store-release.png",
+      "bytes": 18119,
+      "sha256": "9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026",
+      "original_capture_basename": "skill-1793961071843312000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-full-new-store-on.png",
+      "bytes": 18162,
+      "sha256": "a8bd4b002e26ba31fb6a8736e03de06c48b91e611037bdd1fbe5b6d5c1fb4057",
+      "original_capture_basename": "skill-1793961076016847000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-E-full-new-store-off.png",
+      "bytes": 18193,
+      "sha256": "7926037ab6928d83e59bca60c5813c33481d5e05ee45ea2209b56fbe74589b67",
+      "original_capture_basename": "skill-1793961080214716000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-C6-full-sentinel-off.png",
+      "bytes": 18193,
+      "sha256": "7926037ab6928d83e59bca60c5813c33481d5e05ee45ea2209b56fbe74589b67",
+      "original_capture_basename": "skill-1793961088638224000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/panel-fifo-C6-full-held.png",
+      "bytes": 18830,
+      "sha256": "61af59cf390c95882173c927848159edc0d4d3521f31df9741192155af49ff5f",
+      "original_capture_basename": "skill-1793961092820042000-3946.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-save.png",
+      "bytes": 401034,
+      "sha256": "6e41ec3af8e61c99eddda464014a8a30750cb53c2fb096de7609493f171fcb42",
+      "original_capture_basename": "fifo-save.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-reopen.png",
+      "bytes": 393821,
+      "sha256": "c3ae2fca4f21a3b82506a12ea47ef745ac60b1363194eb0466f951b5ba379061",
+      "original_capture_basename": "fifo-reopen.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-reopen-configuration.png",
+      "bytes": 499386,
+      "sha256": "4a4a26d6af2e1dcb542f04289ef9530c1134dfe18103fd844868c5b25b7ec4eb",
+      "original_capture_basename": "fifo-reopen-configuration.png",
+      "exact_byte_copy": true
+    },
+    {
+      "path": "docs/validation/editor-evidence/register-collisions/fifo-collision-simulator-stopped.png",
+      "bytes": 287288,
+      "sha256": "54f048234f48c98ffb6b7c5271449e3a6465353f0955b66f73d251a7b1b34f26",
+      "original_capture_basename": "skill-1793961428765310000-2146.png",
+      "exact_byte_copy": true
+    }
+  ],
+  "remaining": [
+    "LIFO collision and held-request history repetitions",
+    "Reset+Retrieve and Reset+Store+Retrieve with a full FIFO",
+    "First call with a request already TRUE",
+    "Self-status inputs and their evaluation order",
+    "Skipped or repeated calls",
+    "Cold/warm restart and STOP lifecycle",
+    "Register C++/IR/SDK/VM/native graph integration",
+    "Physical controller/firmware/load behavior"
+  ],
+  "limits": [
+    "FIFO R0 only, specific values11/22 and output sentinel42; no LIFO collision inference.",
+    "GUI refresh and latches do not establish physical timing or all same-scan coherence.",
+    "No new full suite, CI or GitHub Actions was run for this observation report; historical regression manifests are unchanged.",
+    "The existing Wine lab Untrusted DLL detected banner is visible in the exact captures; no integrity validation was bypassed by this reporting step."
+  ]
+}
