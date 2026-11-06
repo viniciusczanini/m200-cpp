@@ -1,0 +1,1402 @@
+{
+  "format": "m200-modbus-full-pin-generated-project-results-v1",
+  "date": "2026-11-06",
+  "target": "TM200CE40T",
+  "actual_management_level": "FunctLevelMan21_0",
+  "actual_link": "SL1 master",
+  "editor": "EcoStruxure Machine Expert Basic 1.4 build 484, local Mac Wine lab",
+  "observed_by": "Root personally viewed clean saves and all three Programming No error fresh reopens; report author verified existing files and copied exact PNGs only",
+  "stage": "Three genuine public-CLI products, official editor saves and exact saved-clone fresh reopens; no RUN or transaction",
+  "cases": [
+    {
+      "id": "read",
+      "function_code": 2,
+      "CLI": {
+        "argv_verbatim": [
+          "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+          "-m",
+          "m200",
+          "compile",
+          "/Users/tommy/Offline/projects/m200-cpp/output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/sources/modbus_generated_full_pin_read.cpp",
+          "--template",
+          "/Users/tommy/Offline/projects/m200-cpp/output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/inputs/official_tm200ce40t_modbus_full_pin_read.smbp",
+          "-o",
+          "/Users/tommy/Offline/projects/m200-cpp/output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_read"
+        ],
+        "cwd_verbatim": "/Users/tommy/Offline/projects/m200-cpp",
+        "source": {
+          "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/sources/modbus_generated_full_pin_read.cpp",
+          "bytes": 489,
+          "sha256": "8063f6e712a2d47787943085b6c8225f32dda50dced1a19b020d1b4dbaa87b73",
+          "text": "#include <plc.hpp>\n\n// Official editor serialization candidate only. Do not RUN or trigger Execute.\n// Only memory inputs and status stores; no physical I/O or transport callback.\nplc::ReadVar remote{0,plc::Link::Serial1,1,100,plc::Object::DiscreteInputs,17,17,200};\n\nvoid scan() {\n    remote.update(plc::read_m(10), plc::read_m(13));\n    plc::write_m(14, remote.done());\n    plc::write_m(15, remote.busy());\n    plc::write_m(16, remote.aborted());\n    plc::write_m(17, remote.error());\n}\n"
+        },
+        "template": {
+          "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/inputs/official_tm200ce40t_modbus_full_pin_read.smbp",
+          "bytes": 97080,
+          "sha256": "8154e130ce73b6a1b6e90f5876264437ec36778207fc38c3a3661152059f9e50"
+        },
+        "reverse": {
+          "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_read/program.audit.cpp",
+          "bytes": 877,
+          "sha256": "4aee90db476602207918c3e7f71e833c1373ed217fc4f8b6f80f6d9b9baeae3d"
+        }
+      },
+      "original_product": {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_read/program.smbp",
+        "bytes": 102546,
+        "sha256": "afa4c24d14329fdc2f58a2fdba5c5be7a2249a916975cd6666c5138780723fa5"
+      },
+      "editor_saved": {
+        "path": "output/editor-validation/modbus-generated-full-pin/read/modbus_generated_full_pin_read_editor_saved.smbp",
+        "bytes": 105182,
+        "sha256": "36638d068813dba25eb80a0eaab856c407fa534d8b204dc3e45fff0b83d386c4"
+      },
+      "configuration": {
+        "kind": "READ_VAR",
+        "link": "SL1",
+        "id": 1,
+        "timeout_100ms": 100,
+        "obj_type": 1,
+        "first_obj": 17,
+        "quantity": 17,
+        "index_data": 200,
+        "first_read_obj": 0,
+        "read_quantity": 1,
+        "index_data_in": 0
+      },
+      "counts": {
+        "canonical_rungs_original": 7,
+        "canonical_rungs_saved": 7,
+        "canonical_instructions_original": 18,
+        "canonical_instructions_saved": 18,
+        "native_rungs_original": 3,
+        "native_rungs_saved": 3,
+        "native_instructions_original": 19,
+        "native_instructions_saved": 19,
+        "graph_entities_per_native_rung": [
+          11,
+          11,
+          27
+        ],
+        "function_blocks": 1
+      },
+      "canonical_normalized_IL": [
+        [
+          "LD %M10",
+          "ST %M500"
+        ],
+        [
+          "LD %M13",
+          "ST %M501"
+        ],
+        [
+          "BLK %READ_VAR0",
+          "LD %M500",
+          "EXECUTE",
+          "LD %M501",
+          "ABORT",
+          "END_BLK"
+        ],
+        [
+          "LD %READ_VAR0.DONE",
+          "ST %M14"
+        ],
+        [
+          "LD %READ_VAR0.BUSY",
+          "ST %M15"
+        ],
+        [
+          "LD %READ_VAR0.ABORTED",
+          "ST %M16"
+        ],
+        [
+          "LD %READ_VAR0.ERROR",
+          "ST %M17"
+        ]
+      ],
+      "native_normalized_IL": [
+        [
+          "LD %M10",
+          "ST %M500"
+        ],
+        [
+          "LD %M13",
+          "ST %M501"
+        ],
+        [
+          "BLK %READ_VAR0",
+          "LD %M500",
+          "EXECUTE",
+          "LD %M501",
+          "ABORT",
+          "OUT_BLK",
+          "LD DONE",
+          "ST %M14",
+          "LD BUSY",
+          "ST %M15",
+          "LD ABORTED",
+          "ST %M16",
+          "LD ERROR",
+          "ST %M17",
+          "END_BLK"
+        ]
+      ],
+      "checks": {
+        "both_projects_load_through_product": true,
+        "canonical_normalized_IL_equal": true,
+        "canonical_typed_IL_equal": true,
+        "ordered_native_IL_equal": true,
+        "canonical_7_rungs_18_instructions": true,
+        "native_3_rungs_19_instructions": true,
+        "typed_FB_configuration_equal": true,
+        "exact_FB_wrappers_equal": true,
+        "hardware_equal_to_original_and_template": true,
+        "graph_geometry_bindings_connections_equal": true,
+        "graph_counts_11_11_27": true,
+        "program_symbols_equal": true,
+        "effective_allocation_modes_and_counts_equal": true,
+        "grouped_five_source_origins_match_frozen_CPP_IR": true,
+        "all_three_MainComments_and_origin_payload_equal": true,
+        "one_group_at_canonical_start2": true,
+        "whole_XML_equal_after_only_reported_normalizations": true,
+        "all_real_deltas_classified": true,
+        "original_and_saved_bytes_preserved": true
+      },
+      "effective_allocations": {
+        "original": {
+          "MemoryBitsMemoryAllocation": {
+            "allocation": "Automatic",
+            "forced_count": null
+          },
+          "TimersMemoryAllocation": {
+            "allocation": "Automatic",
+            "forced_count": null
+          },
+          "MemoryWordsMemoryAllocation": {
+            "allocation": "Manual",
+            "forced_count": "202"
+          }
+        },
+        "saved": {
+          "MemoryBitsMemoryAllocation": {
+            "allocation": "Automatic",
+            "forced_count": null
+          },
+          "TimersMemoryAllocation": {
+            "allocation": "Automatic",
+            "forced_count": null
+          },
+          "MemoryWordsMemoryAllocation": {
+            "allocation": "Manual",
+            "forced_count": "202"
+          }
+        }
+      },
+      "grouped_five_CPP_origins": [
+        {
+          "file": "modbus_generated_full_pin_read.cpp",
+          "line": 8,
+          "column": 5
+        },
+        {
+          "file": "modbus_generated_full_pin_read.cpp",
+          "line": 9,
+          "column": 5
+        },
+        {
+          "file": "modbus_generated_full_pin_read.cpp",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "file": "modbus_generated_full_pin_read.cpp",
+          "line": 11,
+          "column": 5
+        },
+        {
+          "file": "modbus_generated_full_pin_read.cpp",
+          "line": 12,
+          "column": 5
+        }
+      ],
+      "origin_note": "Five exact grouped CPP origins and all three MainComments survive. Ordinary imported snapshot origin filenames are artifact-derived and are not compared as original CPP locations.",
+      "real_XML_field_differences": [
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/FullName",
+          "before": "program.smbp",
+          "after": "P:\\modbus_generated_full_pin_read.smbp",
+          "classification": "saved-project identity/path metadata"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/Name",
+          "before": "m200-cpp EXPERIMENTAL",
+          "after": "modbus_generated_full_pin_read",
+          "classification": "saved-project identity/path metadata"
+        },
+        {
+          "kind": "removed_element",
+          "path": "ProjectDescriptor/SoftwareConfiguration/MemoryBitsMemoryAllocation/Allocation",
+          "before": {
+            "tag": "Allocation",
+            "attributes": {},
+            "text": "Automatic",
+            "tail": "",
+            "children": {}
+          },
+          "after": null,
+          "classification": "observed omission of Automatic allocation default"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[0]/LadderElements/LadderEntity[row=0,column=10,type=Coil]/Symbol",
+          "before": "",
+          "after": "TEMPORARY_500",
+          "classification": "editor fills existing graphical Symbol text; operand unchanged"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[1]/LadderElements/LadderEntity[row=0,column=10,type=Coil]/Symbol",
+          "before": "",
+          "after": "TEMPORARY_501",
+          "classification": "editor fills existing graphical Symbol text; operand unchanged"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[2]/LadderElements/LadderEntity[row=0,column=0,type=NormalContact]/Symbol",
+          "before": "",
+          "after": "TEMPORARY_500",
+          "classification": "editor fills existing graphical Symbol text; operand unchanged"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[2]/LadderElements/LadderEntity[row=1,column=0,type=NormalContact]/Symbol",
+          "before": "",
+          "after": "TEMPORARY_501",
+          "classification": "editor fills existing graphical Symbol text; operand unchanged"
+        },
+        {
+          "kind": "removed_element",
+          "path": "ProjectDescriptor/SoftwareConfiguration/TimersMemoryAllocation/Allocation",
+          "before": {
+            "tag": "Allocation",
+            "attributes": {},
+            "text": "Automatic",
+            "tail": "",
+            "children": {}
+          },
+          "after": null,
+          "classification": "observed omission of Automatic allocation default"
+        }
+      ],
+      "real_XML_field_difference_count": 8,
+      "readback": {
+        "path": "output/editor-validation/modbus-generated-full-pin/read/readback.json",
+        "bytes": 11967,
+        "sha256": "bf26bfa3f4048d4386014f8efce6650a0aac7513bdf6b76f405444f1df8faa69"
+      },
+      "root_GUI_record": {
+        "path": "output/editor-validation/modbus-generated-full-pin/read/root-gui-observations.json",
+        "bytes": 788,
+        "sha256": "30647a60d0ad2cc6d6bc8303ed25daba2c44860034647922cb5d30718062c9ab",
+        "record": {
+          "case": "read",
+          "saved_sha256": "36638d068813dba25eb80a0eaab856c407fa534d8b204dc3e45fff0b83d386c4",
+          "saved_bytes": 105182,
+          "root_personally_viewed_save_png": true,
+          "save_no_error": true,
+          "saved_clean_title": "modbus_generated_full_pin_read - EcoStruxure Machine Expert - Basic",
+          "fresh_reopen_pending": false,
+          "simulator_run": false,
+          "communication_execution": false,
+          "fresh_reopen_no_error": true,
+          "root_personally_viewed_reopen_png": true,
+          "fresh_reopen_title": "modbus_generated_full_pin_read_editor_saved - EcoStruxure Machine Expert - Basic",
+          "other_project_opened_before_reopen": "modbus_generated_full_pin_write",
+          "reopen_stage": "Programming",
+          "saved_clone_sha256_after_reopen": "36638d068813dba25eb80a0eaab856c407fa534d8b204dc3e45fff0b83d386c4"
+        }
+      },
+      "control": {
+        "Execute": "%M10",
+        "Abort": "%M13",
+        "private_snapshots": [
+          "%M500",
+          "%M501"
+        ],
+        "DONE_BUSY_ABORTED_ERROR": [
+          "%M14",
+          "%M15",
+          "%M16",
+          "%M17"
+        ],
+        "physical_IO_operands": false,
+        "RUN_or_request_triggered": false
+      },
+      "captures": [
+        {
+          "source": "output/editor-validation/modbus-generated-full-pin/read/save.png",
+          "path": "docs/validation/editor-evidence/modbus-full-pin-generated/read-save.png",
+          "relative_link_from_report": "editor-evidence/modbus-full-pin-generated/read-save.png",
+          "bytes": 358724,
+          "sha256": "e54ad55eb3f720bad97d74819d0668b08b9dcb39bcd8b435dc8f54dbaa1a46d9",
+          "root_personally_viewed": true,
+          "phase": "Programming No error / completed clean save"
+        },
+        {
+          "source": "output/editor-validation/modbus-generated-full-pin/read/reopen.png",
+          "path": "docs/validation/editor-evidence/modbus-full-pin-generated/read-reopen.png",
+          "relative_link_from_report": "editor-evidence/modbus-full-pin-generated/read-reopen.png",
+          "bytes": 359724,
+          "sha256": "cc6d23d0857c3f756f2526199db24a5e9957ba0f21f91073bec70821b742d4ab",
+          "root_personally_viewed": true,
+          "phase": "Programming No error on exact saved clone fresh reopen after another project"
+        }
+      ]
+    },
+    {
+      "id": "write",
+      "function_code": 15,
+      "CLI": {
+        "argv_verbatim": [
+          "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+          "-m",
+          "m200",
+          "compile",
+          "/Users/tommy/Offline/projects/m200-cpp/output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/sources/modbus_generated_full_pin_write.cpp",
+          "--template",
+          "/Users/tommy/Offline/projects/m200-cpp/output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/inputs/official_tm200ce40t_modbus_full_pin_write.smbp",
+          "-o",
+          "/Users/tommy/Offline/projects/m200-cpp/output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_write"
+        ],
+        "cwd_verbatim": "/Users/tommy/Offline/projects/m200-cpp",
+        "source": {
+          "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/sources/modbus_generated_full_pin_write.cpp",
+          "bytes": 481,
+          "sha256": "6eca2c4564aeedce2b80697c8044d506493e263194d0d0a5f3b96a8768f0d403",
+          "text": "#include <plc.hpp>\n\n// Official editor serialization candidate only. Do not RUN or trigger Execute.\n// Only memory inputs and status stores; no physical I/O or transport callback.\nplc::WriteVar remote{0,plc::Link::Serial1,1,100,plc::Object::Coils,73,17,240};\n\nvoid scan() {\n    remote.update(plc::read_m(10), plc::read_m(13));\n    plc::write_m(14, remote.done());\n    plc::write_m(15, remote.busy());\n    plc::write_m(16, remote.aborted());\n    plc::write_m(17, remote.error());\n}\n"
+        },
+        "template": {
+          "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/inputs/official_tm200ce40t_modbus_full_pin_write.smbp",
+          "bytes": 97089,
+          "sha256": "ae6ffad294a36e79656f36845f2a0bebf19df6f3e60b8aa7b82597b867b79af3"
+        },
+        "reverse": {
+          "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_write/program.audit.cpp",
+          "bytes": 875,
+          "sha256": "dd0be27ab3f438d4452a09aafe4d2e29fc88cec138e1764c12e30c26ea522282"
+        }
+      },
+      "original_product": {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_write/program.smbp",
+        "bytes": 102558,
+        "sha256": "4535d3f02aea9855c04294ce548b697bf53953b22788415a0aba8a9ba33cc07f"
+      },
+      "editor_saved": {
+        "path": "output/editor-validation/modbus-generated-full-pin/write/modbus_generated_full_pin_write_editor_saved.smbp",
+        "bytes": 105196,
+        "sha256": "cdcc3324d68a08341fd8987477aac94f938913643a326aee041d1b7c07ef99c6"
+      },
+      "configuration": {
+        "kind": "WRITE_VAR",
+        "link": "SL1",
+        "id": 1,
+        "timeout_100ms": 100,
+        "obj_type": 2,
+        "first_obj": 73,
+        "quantity": 17,
+        "index_data": 240,
+        "first_read_obj": 0,
+        "read_quantity": 1,
+        "index_data_in": 0
+      },
+      "counts": {
+        "canonical_rungs_original": 7,
+        "canonical_rungs_saved": 7,
+        "canonical_instructions_original": 18,
+        "canonical_instructions_saved": 18,
+        "native_rungs_original": 3,
+        "native_rungs_saved": 3,
+        "native_instructions_original": 19,
+        "native_instructions_saved": 19,
+        "graph_entities_per_native_rung": [
+          11,
+          11,
+          27
+        ],
+        "function_blocks": 1
+      },
+      "canonical_normalized_IL": [
+        [
+          "LD %M10",
+          "ST %M500"
+        ],
+        [
+          "LD %M13",
+          "ST %M501"
+        ],
+        [
+          "BLK %WRITE_VAR0",
+          "LD %M500",
+          "EXECUTE",
+          "LD %M501",
+          "ABORT",
+          "END_BLK"
+        ],
+        [
+          "LD %WRITE_VAR0.DONE",
+          "ST %M14"
+        ],
+        [
+          "LD %WRITE_VAR0.BUSY",
+          "ST %M15"
+        ],
+        [
+          "LD %WRITE_VAR0.ABORTED",
+          "ST %M16"
+        ],
+        [
+          "LD %WRITE_VAR0.ERROR",
+          "ST %M17"
+        ]
+      ],
+      "native_normalized_IL": [
+        [
+          "LD %M10",
+          "ST %M500"
+        ],
+        [
+          "LD %M13",
+          "ST %M501"
+        ],
+        [
+          "BLK %WRITE_VAR0",
+          "LD %M500",
+          "EXECUTE",
+          "LD %M501",
+          "ABORT",
+          "OUT_BLK",
+          "LD DONE",
+          "ST %M14",
+          "LD BUSY",
+          "ST %M15",
+          "LD ABORTED",
+          "ST %M16",
+          "LD ERROR",
+          "ST %M17",
+          "END_BLK"
+        ]
+      ],
+      "checks": {
+        "both_projects_load_through_product": true,
+        "canonical_normalized_IL_equal": true,
+        "canonical_typed_IL_equal": true,
+        "ordered_native_IL_equal": true,
+        "canonical_7_rungs_18_instructions": true,
+        "native_3_rungs_19_instructions": true,
+        "typed_FB_configuration_equal": true,
+        "exact_FB_wrappers_equal": true,
+        "hardware_equal_to_original_and_template": true,
+        "graph_geometry_bindings_connections_equal": true,
+        "graph_counts_11_11_27": true,
+        "program_symbols_equal": true,
+        "effective_allocation_modes_and_counts_equal": true,
+        "grouped_five_source_origins_match_frozen_CPP_IR": true,
+        "all_three_MainComments_and_origin_payload_equal": true,
+        "one_group_at_canonical_start2": true,
+        "whole_XML_equal_after_only_reported_normalizations": true,
+        "all_real_deltas_classified": true,
+        "original_and_saved_bytes_preserved": true
+      },
+      "effective_allocations": {
+        "original": {
+          "MemoryBitsMemoryAllocation": {
+            "allocation": "Automatic",
+            "forced_count": null
+          },
+          "TimersMemoryAllocation": {
+            "allocation": "Automatic",
+            "forced_count": null
+          },
+          "MemoryWordsMemoryAllocation": {
+            "allocation": "Manual",
+            "forced_count": "242"
+          }
+        },
+        "saved": {
+          "MemoryBitsMemoryAllocation": {
+            "allocation": "Automatic",
+            "forced_count": null
+          },
+          "TimersMemoryAllocation": {
+            "allocation": "Automatic",
+            "forced_count": null
+          },
+          "MemoryWordsMemoryAllocation": {
+            "allocation": "Manual",
+            "forced_count": "242"
+          }
+        }
+      },
+      "grouped_five_CPP_origins": [
+        {
+          "file": "modbus_generated_full_pin_write.cpp",
+          "line": 8,
+          "column": 5
+        },
+        {
+          "file": "modbus_generated_full_pin_write.cpp",
+          "line": 9,
+          "column": 5
+        },
+        {
+          "file": "modbus_generated_full_pin_write.cpp",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "file": "modbus_generated_full_pin_write.cpp",
+          "line": 11,
+          "column": 5
+        },
+        {
+          "file": "modbus_generated_full_pin_write.cpp",
+          "line": 12,
+          "column": 5
+        }
+      ],
+      "origin_note": "Five exact grouped CPP origins and all three MainComments survive. Ordinary imported snapshot origin filenames are artifact-derived and are not compared as original CPP locations.",
+      "real_XML_field_differences": [
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/FullName",
+          "before": "program.smbp",
+          "after": "P:\\modbus_generated_full_pin_write.smbp",
+          "classification": "saved-project identity/path metadata"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/Name",
+          "before": "m200-cpp EXPERIMENTAL",
+          "after": "modbus_generated_full_pin_write",
+          "classification": "saved-project identity/path metadata"
+        },
+        {
+          "kind": "removed_element",
+          "path": "ProjectDescriptor/SoftwareConfiguration/MemoryBitsMemoryAllocation/Allocation",
+          "before": {
+            "tag": "Allocation",
+            "attributes": {},
+            "text": "Automatic",
+            "tail": "",
+            "children": {}
+          },
+          "after": null,
+          "classification": "observed omission of Automatic allocation default"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[0]/LadderElements/LadderEntity[row=0,column=10,type=Coil]/Symbol",
+          "before": "",
+          "after": "TEMPORARY_500",
+          "classification": "editor fills existing graphical Symbol text; operand unchanged"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[1]/LadderElements/LadderEntity[row=0,column=10,type=Coil]/Symbol",
+          "before": "",
+          "after": "TEMPORARY_501",
+          "classification": "editor fills existing graphical Symbol text; operand unchanged"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[2]/LadderElements/LadderEntity[row=0,column=0,type=NormalContact]/Symbol",
+          "before": "",
+          "after": "TEMPORARY_500",
+          "classification": "editor fills existing graphical Symbol text; operand unchanged"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[2]/LadderElements/LadderEntity[row=1,column=0,type=NormalContact]/Symbol",
+          "before": "",
+          "after": "TEMPORARY_501",
+          "classification": "editor fills existing graphical Symbol text; operand unchanged"
+        },
+        {
+          "kind": "removed_element",
+          "path": "ProjectDescriptor/SoftwareConfiguration/TimersMemoryAllocation/Allocation",
+          "before": {
+            "tag": "Allocation",
+            "attributes": {},
+            "text": "Automatic",
+            "tail": "",
+            "children": {}
+          },
+          "after": null,
+          "classification": "observed omission of Automatic allocation default"
+        }
+      ],
+      "real_XML_field_difference_count": 8,
+      "readback": {
+        "path": "output/editor-validation/modbus-generated-full-pin/write/readback.json",
+        "bytes": 12002,
+        "sha256": "b0da62c2f2b1cbb3ec5025be87005f49403e97c9628a7560ebf9f9c5de1b4671"
+      },
+      "root_GUI_record": {
+        "path": "output/editor-validation/modbus-generated-full-pin/write/root-gui-observations.json",
+        "bytes": 796,
+        "sha256": "61946409dc45767bb0baec87d5fdf9688adee847fd6ac890a372074e811c556b",
+        "record": {
+          "case": "write",
+          "saved_sha256": "cdcc3324d68a08341fd8987477aac94f938913643a326aee041d1b7c07ef99c6",
+          "saved_bytes": 105196,
+          "root_personally_viewed_save_png": true,
+          "save_no_error": true,
+          "saved_clean_title": "modbus_generated_full_pin_write - EcoStruxure Machine Expert - Basic",
+          "fresh_reopen_pending": false,
+          "simulator_run": false,
+          "communication_execution": false,
+          "fresh_reopen_no_error": true,
+          "root_personally_viewed_reopen_png": true,
+          "fresh_reopen_title": "modbus_generated_full_pin_write_editor_saved - EcoStruxure Machine Expert - Basic",
+          "other_project_opened_before_reopen": "modbus_generated_full_pin_write_read",
+          "reopen_stage": "Programming",
+          "saved_clone_sha256_after_reopen": "cdcc3324d68a08341fd8987477aac94f938913643a326aee041d1b7c07ef99c6"
+        }
+      },
+      "control": {
+        "Execute": "%M10",
+        "Abort": "%M13",
+        "private_snapshots": [
+          "%M500",
+          "%M501"
+        ],
+        "DONE_BUSY_ABORTED_ERROR": [
+          "%M14",
+          "%M15",
+          "%M16",
+          "%M17"
+        ],
+        "physical_IO_operands": false,
+        "RUN_or_request_triggered": false
+      },
+      "captures": [
+        {
+          "source": "output/editor-validation/modbus-generated-full-pin/write/save.png",
+          "path": "docs/validation/editor-evidence/modbus-full-pin-generated/write-save.png",
+          "relative_link_from_report": "editor-evidence/modbus-full-pin-generated/write-save.png",
+          "bytes": 359098,
+          "sha256": "dced91be9738b56afd6d37acede7ff16185ee1d38480a22b4284ac6194a4c32d",
+          "root_personally_viewed": true,
+          "phase": "Programming No error / completed clean save"
+        },
+        {
+          "source": "output/editor-validation/modbus-generated-full-pin/write/reopen.png",
+          "path": "docs/validation/editor-evidence/modbus-full-pin-generated/write-reopen.png",
+          "relative_link_from_report": "editor-evidence/modbus-full-pin-generated/write-reopen.png",
+          "bytes": 360163,
+          "sha256": "59f75356f92161fcca393967efc88f8b38b3dd0dce59aee2609833c8fa2e3ba3",
+          "root_personally_viewed": true,
+          "phase": "Programming No error on exact saved clone fresh reopen after another project"
+        }
+      ]
+    },
+    {
+      "id": "write_read",
+      "function_code": 23,
+      "CLI": {
+        "argv_verbatim": [
+          "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+          "-m",
+          "m200",
+          "compile",
+          "/Users/tommy/Offline/projects/m200-cpp/output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/sources/modbus_generated_full_pin_write_read.cpp",
+          "--template",
+          "/Users/tommy/Offline/projects/m200-cpp/output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/inputs/official_tm200ce40t_modbus_full_pin_write_read.smbp",
+          "-o",
+          "/Users/tommy/Offline/projects/m200-cpp/output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_write_read"
+        ],
+        "cwd_verbatim": "/Users/tommy/Offline/projects/m200-cpp",
+        "source": {
+          "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/sources/modbus_generated_full_pin_write_read.cpp",
+          "bytes": 474,
+          "sha256": "7824d360d3c464a4f532cd12ad1b2319b52c94bd6109a1090531e19aa11fd70d",
+          "text": "#include <plc.hpp>\n\n// Official editor serialization candidate only. Do not RUN or trigger Execute.\n// Only memory inputs and status stores; no physical I/O or transport callback.\nplc::WriteReadVar remote{0,plc::Link::Serial1,1,100,17,2,300,41,3,400};\n\nvoid scan() {\n    remote.update(plc::read_m(10), plc::read_m(13));\n    plc::write_m(14, remote.done());\n    plc::write_m(15, remote.busy());\n    plc::write_m(16, remote.aborted());\n    plc::write_m(17, remote.error());\n}\n"
+        },
+        "template": {
+          "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/inputs/official_tm200ce40t_modbus_full_pin_write_read.smbp",
+          "bytes": 98503,
+          "sha256": "9e7a3359a99c433bdebe7eaca21235960de806fdfb8151a678e39345e4b3588f"
+        },
+        "reverse": {
+          "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_write_read/program.audit.cpp",
+          "bytes": 898,
+          "sha256": "4b3715041653de92f488b8e4d63a6c596737ed33690aeaee73d06f867fb74e54"
+        }
+      },
+      "original_product": {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_write_read/program.smbp",
+        "bytes": 103927,
+        "sha256": "57c8f1739fafb8341049dc472f0727591876168e5354fa80d400a350bbc3297f"
+      },
+      "editor_saved": {
+        "path": "output/editor-validation/modbus-generated-full-pin/write_read/modbus_generated_full_pin_write_read_editor_saved.smbp",
+        "bytes": 106590,
+        "sha256": "1b5b8d6f7b9a17b373872bbf4e28609adadf1c7b52586991ec9b72631c9a0fe8"
+      },
+      "configuration": {
+        "kind": "WRITE_READ_VAR",
+        "link": "SL1",
+        "id": 1,
+        "timeout_100ms": 100,
+        "obj_type": 0,
+        "first_obj": 17,
+        "quantity": 2,
+        "index_data": 300,
+        "first_read_obj": 41,
+        "read_quantity": 3,
+        "index_data_in": 400
+      },
+      "counts": {
+        "canonical_rungs_original": 7,
+        "canonical_rungs_saved": 7,
+        "canonical_instructions_original": 18,
+        "canonical_instructions_saved": 18,
+        "native_rungs_original": 3,
+        "native_rungs_saved": 3,
+        "native_instructions_original": 19,
+        "native_instructions_saved": 19,
+        "graph_entities_per_native_rung": [
+          11,
+          11,
+          27
+        ],
+        "function_blocks": 1
+      },
+      "canonical_normalized_IL": [
+        [
+          "LD %M10",
+          "ST %M500"
+        ],
+        [
+          "LD %M13",
+          "ST %M501"
+        ],
+        [
+          "BLK %WRITE_READ_VAR0",
+          "LD %M500",
+          "EXECUTE",
+          "LD %M501",
+          "ABORT",
+          "END_BLK"
+        ],
+        [
+          "LD %WRITE_READ_VAR0.DONE",
+          "ST %M14"
+        ],
+        [
+          "LD %WRITE_READ_VAR0.BUSY",
+          "ST %M15"
+        ],
+        [
+          "LD %WRITE_READ_VAR0.ABORTED",
+          "ST %M16"
+        ],
+        [
+          "LD %WRITE_READ_VAR0.ERROR",
+          "ST %M17"
+        ]
+      ],
+      "native_normalized_IL": [
+        [
+          "LD %M10",
+          "ST %M500"
+        ],
+        [
+          "LD %M13",
+          "ST %M501"
+        ],
+        [
+          "BLK %WRITE_READ_VAR0",
+          "LD %M500",
+          "EXECUTE",
+          "LD %M501",
+          "ABORT",
+          "OUT_BLK",
+          "LD DONE",
+          "ST %M14",
+          "LD BUSY",
+          "ST %M15",
+          "LD ABORTED",
+          "ST %M16",
+          "LD ERROR",
+          "ST %M17",
+          "END_BLK"
+        ]
+      ],
+      "checks": {
+        "both_projects_load_through_product": true,
+        "canonical_normalized_IL_equal": true,
+        "canonical_typed_IL_equal": true,
+        "ordered_native_IL_equal": true,
+        "canonical_7_rungs_18_instructions": true,
+        "native_3_rungs_19_instructions": true,
+        "typed_FB_configuration_equal": true,
+        "exact_FB_wrappers_equal": true,
+        "hardware_equal_to_original_and_template": true,
+        "graph_geometry_bindings_connections_equal": true,
+        "graph_counts_11_11_27": true,
+        "program_symbols_equal": true,
+        "effective_allocation_modes_and_counts_equal": true,
+        "grouped_five_source_origins_match_frozen_CPP_IR": true,
+        "all_three_MainComments_and_origin_payload_equal": true,
+        "one_group_at_canonical_start2": true,
+        "whole_XML_equal_after_only_reported_normalizations": true,
+        "all_real_deltas_classified": true,
+        "original_and_saved_bytes_preserved": true
+      },
+      "effective_allocations": {
+        "original": {
+          "MemoryBitsMemoryAllocation": {
+            "allocation": "Automatic",
+            "forced_count": null
+          },
+          "TimersMemoryAllocation": {
+            "allocation": "Automatic",
+            "forced_count": null
+          },
+          "MemoryWordsMemoryAllocation": {
+            "allocation": "Manual",
+            "forced_count": "403"
+          }
+        },
+        "saved": {
+          "MemoryBitsMemoryAllocation": {
+            "allocation": "Automatic",
+            "forced_count": null
+          },
+          "TimersMemoryAllocation": {
+            "allocation": "Automatic",
+            "forced_count": null
+          },
+          "MemoryWordsMemoryAllocation": {
+            "allocation": "Manual",
+            "forced_count": "403"
+          }
+        }
+      },
+      "grouped_five_CPP_origins": [
+        {
+          "file": "modbus_generated_full_pin_write_read.cpp",
+          "line": 8,
+          "column": 5
+        },
+        {
+          "file": "modbus_generated_full_pin_write_read.cpp",
+          "line": 9,
+          "column": 5
+        },
+        {
+          "file": "modbus_generated_full_pin_write_read.cpp",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "file": "modbus_generated_full_pin_write_read.cpp",
+          "line": 11,
+          "column": 5
+        },
+        {
+          "file": "modbus_generated_full_pin_write_read.cpp",
+          "line": 12,
+          "column": 5
+        }
+      ],
+      "origin_note": "Five exact grouped CPP origins and all three MainComments survive. Ordinary imported snapshot origin filenames are artifact-derived and are not compared as original CPP locations.",
+      "real_XML_field_differences": [
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/FullName",
+          "before": "program.smbp",
+          "after": "P:\\modbus_generated_full_pin_write_read.smbp",
+          "classification": "saved-project identity/path metadata"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/Name",
+          "before": "m200-cpp EXPERIMENTAL",
+          "after": "modbus_generated_full_pin_write_read",
+          "classification": "saved-project identity/path metadata"
+        },
+        {
+          "kind": "removed_element",
+          "path": "ProjectDescriptor/SoftwareConfiguration/MemoryBitsMemoryAllocation/Allocation",
+          "before": {
+            "tag": "Allocation",
+            "attributes": {},
+            "text": "Automatic",
+            "tail": "",
+            "children": {}
+          },
+          "after": null,
+          "classification": "observed omission of Automatic allocation default"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[0]/LadderElements/LadderEntity[row=0,column=10,type=Coil]/Symbol",
+          "before": "",
+          "after": "TEMPORARY_500",
+          "classification": "editor fills existing graphical Symbol text; operand unchanged"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[1]/LadderElements/LadderEntity[row=0,column=10,type=Coil]/Symbol",
+          "before": "",
+          "after": "TEMPORARY_501",
+          "classification": "editor fills existing graphical Symbol text; operand unchanged"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[2]/LadderElements/LadderEntity[row=0,column=0,type=NormalContact]/Symbol",
+          "before": "",
+          "after": "TEMPORARY_500",
+          "classification": "editor fills existing graphical Symbol text; operand unchanged"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[2]/LadderElements/LadderEntity[row=1,column=0,type=NormalContact]/Symbol",
+          "before": "",
+          "after": "TEMPORARY_501",
+          "classification": "editor fills existing graphical Symbol text; operand unchanged"
+        },
+        {
+          "kind": "removed_element",
+          "path": "ProjectDescriptor/SoftwareConfiguration/TimersMemoryAllocation/Allocation",
+          "before": {
+            "tag": "Allocation",
+            "attributes": {},
+            "text": "Automatic",
+            "tail": "",
+            "children": {}
+          },
+          "after": null,
+          "classification": "observed omission of Automatic allocation default"
+        }
+      ],
+      "real_XML_field_difference_count": 8,
+      "readback": {
+        "path": "output/editor-validation/modbus-generated-full-pin/write_read/readback.json",
+        "bytes": 12179,
+        "sha256": "0ab64e3b32aade858e5db31952d18410eb88694eab54d39ed6c68dc607422b15"
+      },
+      "root_GUI_record": {
+        "path": "output/editor-validation/modbus-generated-full-pin/write_read/root-gui-observations.json",
+        "bytes": 819,
+        "sha256": "df62c249346012ff81de22917d231cebe69b7811de3ffadf399d60eed9b7b219",
+        "record": {
+          "case": "write_read",
+          "saved_sha256": "1b5b8d6f7b9a17b373872bbf4e28609adadf1c7b52586991ec9b72631c9a0fe8",
+          "saved_bytes": 106590,
+          "root_personally_viewed_save_png": true,
+          "save_no_error": true,
+          "saved_clean_title": "modbus_generated_full_pin_write_read - EcoStruxure Machine Expert - Basic",
+          "fresh_reopen_pending": false,
+          "simulator_run": false,
+          "communication_execution": false,
+          "fresh_reopen_no_error": true,
+          "root_personally_viewed_reopen_png": true,
+          "fresh_reopen_title": "modbus_generated_full_pin_write_read_editor_saved - EcoStruxure Machine Expert - Basic",
+          "other_project_opened_before_reopen": "modbus_generated_full_pin_write_editor_saved",
+          "reopen_stage": "Programming",
+          "saved_clone_sha256_after_reopen": "1b5b8d6f7b9a17b373872bbf4e28609adadf1c7b52586991ec9b72631c9a0fe8"
+        }
+      },
+      "control": {
+        "Execute": "%M10",
+        "Abort": "%M13",
+        "private_snapshots": [
+          "%M500",
+          "%M501"
+        ],
+        "DONE_BUSY_ABORTED_ERROR": [
+          "%M14",
+          "%M15",
+          "%M16",
+          "%M17"
+        ],
+        "physical_IO_operands": false,
+        "RUN_or_request_triggered": false
+      },
+      "captures": [
+        {
+          "source": "output/editor-validation/modbus-generated-full-pin/write_read/save.png",
+          "path": "docs/validation/editor-evidence/modbus-full-pin-generated/write_read-save.png",
+          "relative_link_from_report": "editor-evidence/modbus-full-pin-generated/write_read-save.png",
+          "bytes": 364560,
+          "sha256": "96b12dd466092fbac30e04c4952ac34d3ce0fc5c3b5a9846e5fa35dd3e826a3d",
+          "root_personally_viewed": true,
+          "phase": "Programming No error / completed clean save"
+        },
+        {
+          "source": "output/editor-validation/modbus-generated-full-pin/write_read/reopen.png",
+          "path": "docs/validation/editor-evidence/modbus-full-pin-generated/write_read-reopen.png",
+          "relative_link_from_report": "editor-evidence/modbus-full-pin-generated/write_read-reopen.png",
+          "bytes": 365525,
+          "sha256": "52a934e66bec0e4ef55302eda3d2010eb98afb865ad124b314f671021dc77eaa",
+          "root_personally_viewed": true,
+          "phase": "Programming No error on exact saved clone fresh reopen after another project"
+        }
+      ]
+    }
+  ],
+  "frozen_preparation": {
+    "manifest": {
+      "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/MANIFEST.json",
+      "bytes": 13938,
+      "sha256": "2b0b08bd237db802d3641e5be9f3e028afbfdcb77174818bed785d8bc354b1e4"
+    },
+    "checksums": {
+      "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/SHA256SUMS",
+      "bytes": 4189,
+      "sha256": "d8a2429fce41aeb747671cfd7d484086d75ba1d489d763a7123edd768354961f"
+    },
+    "inventory_entries_verified": 36,
+    "inventory": [
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/GUI-GUIDE.md",
+        "sha256": "b4d6d214e4d22ea35e728043fdfe0e4364bfd11dcbc5fbe3e9d46e4ed6bb6b97",
+        "bytes": 913
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/MANIFEST.json",
+        "sha256": "2b0b08bd237db802d3641e5be9f3e028afbfdcb77174818bed785d8bc354b1e4",
+        "bytes": 13938
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_read/program.audit.cpp",
+        "sha256": "4aee90db476602207918c3e7f71e833c1373ed217fc4f8b6f80f6d9b9baeae3d",
+        "bytes": 877
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_read/program.il",
+        "sha256": "f09a80ac3ae48383d3f508718bc87c2fad5891040605e59124be7780d1d195e5",
+        "bytes": 270
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_read/program.m200.json",
+        "sha256": "f413f61ea2fe9d678202a1d9c71dec188996ada6d9ffc37610064e7fad70186a",
+        "bytes": 2369
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_read/program.smbp",
+        "sha256": "afa4c24d14329fdc2f58a2fdba5c5be7a2249a916975cd6666c5138780723fa5",
+        "bytes": 102546
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_read/report.json",
+        "sha256": "893ae36802d807d4335240e99b0c9b557962f8643b8325dfc2d7e94dae25849a",
+        "bytes": 4862
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_read/source-map.json",
+        "sha256": "22c5af8c9501bd321ca8d346ffc63ab97c7599b7db8fe20a618c9589f1afbfc8",
+        "bytes": 1274
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_write/program.audit.cpp",
+        "sha256": "dd0be27ab3f438d4452a09aafe4d2e29fc88cec138e1764c12e30c26ea522282",
+        "bytes": 875
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_write/program.il",
+        "sha256": "2489cddfcd88315b7084ce1a21716d2b25b7133903585b50ffba8621a5314539",
+        "bytes": 275
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_write/program.m200.json",
+        "sha256": "2ca86c26e9f7b692ed80bfd5c85f24f37884bcd2cc8148bfd8f27b9ccdd9df2a",
+        "bytes": 2384
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_write/program.smbp",
+        "sha256": "4535d3f02aea9855c04294ce548b697bf53953b22788415a0aba8a9ba33cc07f",
+        "bytes": 102558
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_write/report.json",
+        "sha256": "824a7b8c99424ce0aca81c5cc08bd1eefb3e1c7fe37510a176fa2a07b08189c3",
+        "bytes": 4872
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_write/source-map.json",
+        "sha256": "f1464f47bcd51d17c90f78283de90b032b148f819d916604ac35bed2a539b5e5",
+        "bytes": 1282
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_write_read/program.audit.cpp",
+        "sha256": "4b3715041653de92f488b8e4d63a6c596737ed33690aeaee73d06f867fb74e54",
+        "bytes": 898
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_write_read/program.il",
+        "sha256": "b9c7436ecdcffcf76bfa9099853d9e5ed369a2a4c78bfb1c42cd288ca7120aa4",
+        "bytes": 300
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_write_read/program.m200.json",
+        "sha256": "f7a0f2e883850c8e03a5c5cd28abdbd14c69c380953b3af8dcd8694677d1fdc5",
+        "bytes": 2461
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_write_read/program.smbp",
+        "sha256": "57c8f1739fafb8341049dc472f0727591876168e5354fa80d400a350bbc3297f",
+        "bytes": 103927
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_write_read/report.json",
+        "sha256": "b0fecc54bf05d9af997347d3d905328408fb48c4fb2dfe886b2e310b8a6737ba",
+        "bytes": 4924
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/builds/modbus_generated_full_pin_write_read/source-map.json",
+        "sha256": "4d9d8b501e5449203b816238aa87cd8aa7835dbfb41f192fb99691c2c7024953",
+        "bytes": 1322
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/inputs/official_tm200ce40t_modbus_full_pin_read.provenance.json",
+        "sha256": "8d30908043d3bd1d4a66bd4bcb0f86c050ca6999451303c3f9c91f4db92d79fd",
+        "bytes": 2770
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/inputs/official_tm200ce40t_modbus_full_pin_read.smbp",
+        "sha256": "8154e130ce73b6a1b6e90f5876264437ec36778207fc38c3a3661152059f9e50",
+        "bytes": 97080
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/inputs/official_tm200ce40t_modbus_full_pin_write.provenance.json",
+        "sha256": "f5c556d3896a6e824509c25ca50b70e8c2dca2c71c5d4b80331fbaacbe2ef7dc",
+        "bytes": 2775
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/inputs/official_tm200ce40t_modbus_full_pin_write.smbp",
+        "sha256": "ae6ffad294a36e79656f36845f2a0bebf19df6f3e60b8aa7b82597b867b79af3",
+        "bytes": 97089
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/inputs/official_tm200ce40t_modbus_full_pin_write_read.provenance.json",
+        "sha256": "5c7d0e2ef28bc3bfd34fe2e8e858b3db939edf1e64f271fd33449e2ca01d97b8",
+        "bytes": 2800
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/inputs/official_tm200ce40t_modbus_full_pin_write_read.smbp",
+        "sha256": "9e7a3359a99c433bdebe7eaca21235960de806fdfb8151a678e39345e4b3588f",
+        "bytes": 98503
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/modbus_generated_full_pin_read.cli.log",
+        "sha256": "893ae36802d807d4335240e99b0c9b557962f8643b8325dfc2d7e94dae25849a",
+        "bytes": 4862
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/modbus_generated_full_pin_write.cli.log",
+        "sha256": "824a7b8c99424ce0aca81c5cc08bd1eefb3e1c7fe37510a176fa2a07b08189c3",
+        "bytes": 4872
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/modbus_generated_full_pin_write_read.cli.log",
+        "sha256": "b0fecc54bf05d9af997347d3d905328408fb48c4fb2dfe886b2e310b8a6737ba",
+        "bytes": 4924
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/named-projects/modbus_generated_full_pin_read.smbp",
+        "sha256": "afa4c24d14329fdc2f58a2fdba5c5be7a2249a916975cd6666c5138780723fa5",
+        "bytes": 102546
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/named-projects/modbus_generated_full_pin_write.smbp",
+        "sha256": "4535d3f02aea9855c04294ce548b697bf53953b22788415a0aba8a9ba33cc07f",
+        "bytes": 102558
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/named-projects/modbus_generated_full_pin_write_read.smbp",
+        "sha256": "57c8f1739fafb8341049dc472f0727591876168e5354fa80d400a350bbc3297f",
+        "bytes": 103927
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/prepare.py",
+        "sha256": "6237482a38f48e2e79156a8410a3d71dfe6751b63e750430b6b7b77566700148",
+        "bytes": 10167
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/sources/modbus_generated_full_pin_read.cpp",
+        "sha256": "8063f6e712a2d47787943085b6c8225f32dda50dced1a19b020d1b4dbaa87b73",
+        "bytes": 489
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/sources/modbus_generated_full_pin_write.cpp",
+        "sha256": "6eca2c4564aeedce2b80697c8044d506493e263194d0d0a5f3b96a8768f0d403",
+        "bytes": 481
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-full-pin-candidates-2026-11-06/sources/modbus_generated_full_pin_write_read.cpp",
+        "sha256": "7824d360d3c464a4f532cd12ad1b2319b52c94bd6109a1090531e19aa11fd70d",
+        "bytes": 474
+      }
+    ],
+    "compiler_base_HEAD": "e7cf0f2d3ceaa4ef2b4e6e6b9011bd2d385a3c22",
+    "compiler_source_hashes_at_generation": {
+      "m200/__init__.py": "77c5815a3596eebca3e939d1ad39abba46fa4edc4df148aaa7e47f13e5eda0ab",
+      "m200/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "m200/allocation.py": "f21e8753757ebf1c54874c18c3385a7d79ce52992514725920c29a1ca6281be9",
+      "m200/arithmetic.py": "bd0a83b4cc3257d2734a2ad1131137ce0608c2688a0565842b41759c336df75a",
+      "m200/arrays.py": "d4574f6e48ab98f70feb3f474f30bbf387117f5db3ddde395525a21a77da42ed",
+      "m200/bits.py": "d76ca8b8bb587a6811cfb3e157c00385ba0a836b8eb669afdda9af4e635b6a61",
+      "m200/boolean_bdd.py": "b3de9c79a5b14953256117afa22df8aaf2b37eb71689f224ca2d66e78a02882f",
+      "m200/capabilities.py": "e94e59743ee0eae98c476938f8eafe04966c0823b825b1d070980d15d41348a0",
+      "m200/cli.py": "22110f728cd456b9fae20a2ae1c2f9a03ba3fede808ee220318071c09a9d6a14",
+      "m200/communication.py": "105c1aef50e7ee00bc7c7142a5b6805d4ddf5f18fc04c5e60a52b78841a6b3b0",
+      "m200/communication_graph.py": "3589d930316fa8f916d2de2c5e9ceb8f2b4997ac463df7ec7ba97e403ce7cc2a",
+      "m200/communication_xml.py": "2762f0fd89552de18e21bb632e536eb4c1a9449702cdfb6444dfb58bb606aac2",
+      "m200/config.py": "5411e6a28bd67da9a45c1660f1c62673443b249ac76948ede80b57c6e322f73e",
+      "m200/conversions.py": "0922116a83ef1bcacda5fb9a588f2bc10d522a7c1ca7f301148ea88e6e370250",
+      "m200/copy_fusion.py": "39c8f498518c46d35ad61ec2c53564a61748a4957eae25e8d241a3c7e4b98816",
+      "m200/counter_graph.py": "80abf1241ee5095a121c47e1a196de03f1e7ed37fe0c54626b2a3f3eba4a9e8c",
+      "m200/counter_xml.py": "a87177f18a698b1f442a7c16eb66748a6d2c06c9c966ac199c6275bb1e326554",
+      "m200/counters.py": "0e4ed9d8fe6f4356f3d6b6986558a0f9caa019daa3f741b12522d1fdd6f376ce",
+      "m200/edge_functions.py": "c58b059d15ee7387ed7e65f841ad549f3b30c3781a258c0a6340a96e9cd92a24",
+      "m200/edges.py": "e590a801d00b94d20a2dd1f428635aa299e3bd59bcbfe2442f5ffa4fd3d64713",
+      "m200/flow.py": "090035e4abc84354287c934898430c0da038a81a11452526e4d87a70def55607",
+      "m200/frontend.py": "2b56e3ca231ccb3cbb9a5371051928b360559400566c771a4cd678db07c0504a",
+      "m200/il.py": "f177243b0b658414b8e2f3da7eac7a7ed62b7996f5faa2154b96377f9538db83",
+      "m200/indexed.py": "0b8ca542e2be87392d8de2a75ef8ad0d48534b28d7f82d1e24fd1bf38fc8343b",
+      "m200/jsonio.py": "c4d8447354b4f48205a8d5bfc58e1a3919656ba2073ecc5982b2f8fd6253fd70",
+      "m200/ladder_lowering.py": "66bffd608bc2e554b61f56eacf608efe7749b89d19dc5c9d4fc13e004913fb52",
+      "m200/levels.py": "439eba12b9bf189795449983755b55d92f77261678a983c4ed9e94b5eb341149",
+      "m200/lower.py": "d9cc4e13b0e886a0c0d7bd85880d621d76f8c371943f4d4d1549f111ab1aa657",
+      "m200/modbus.py": "a391ce5ff71520cea4f6b74d9ae984ba6cb4d6fff36b9d44fe05396e68c2e32b",
+      "m200/model.py": "e786ea2d03ea7d9c98c641fe6ed84a00a2076f51a1974ce1209355ef4dad0e11",
+      "m200/native.py": "016a6af7d7f7b1de11dab9bee1477faa9f4d393f75bbf09e1b3bf5daa5e6ac4f",
+      "m200/native_logic.py": "6a5990a9b75186ca678172491605a8485747ec004c685a3c4d22b025be8a53de",
+      "m200/numeric.py": "b29de2050a070dcbf23ab4e942642f45ad22a580d70b078f5b74111dfde629c5",
+      "m200/project.py": "92251c8012bd84373ba4afa64399bc2ff067ab8482a857e15abf013a2d9cf4d8",
+      "m200/register_xml.py": "8cccf50926e13978df2389afb48cf37409b451e8b4b80be86e1f3299dd292f71",
+      "m200/reverse.py": "a84be951d8f3e113fb74065c024198408efd584c3b16794a3f88e1f04507a0d1",
+      "m200/timer_profile.py": "ca3f7855752418db88698ab0a6fff8ead02f67d8c63c767baeb7b0f985fd346e",
+      "m200/timers.py": "384e3c26facd76ed8da5449d001348fe1c1dd818a73532ab9c782e6a9b0fedf6",
+      "sdk/plc.hpp": "b1d6f04ab2ce88d4e37ac781a299f134c5882971f2d593ead502be3877e784b3"
+    },
+    "no_hand_edited_XML": true,
+    "historical_GUI_pending_fields_retained": [
+      {
+        "case": "modbus_generated_full_pin_read",
+        "official_GUI_open": "pending",
+        "official_save_reopen": "pending"
+      },
+      {
+        "case": "modbus_generated_full_pin_write",
+        "official_GUI_open": "pending",
+        "official_save_reopen": "pending"
+      },
+      {
+        "case": "modbus_generated_full_pin_write_read",
+        "official_GUI_open": "pending",
+        "official_save_reopen": "pending"
+      }
+    ]
+  },
+  "readback_tool": {
+    "path": "output/diagnostics/modbus-generated-full-pin-editor-readback-2026-11-06/verify.py",
+    "bytes": 19469,
+    "sha256": "a2d9c4f3696fa801df421e69ef31b56ab5eecd99604f025fcf226a9c3f02ed26"
+  },
+  "original_readback_baseline": {
+    "path": "output/diagnostics/modbus-generated-full-pin-editor-readback-2026-11-06/original-baseline.json",
+    "bytes": 16182,
+    "sha256": "88d05913d97d4370ec0d050102168232dc2f111887fd55ac4452648b875a855d"
+  },
+  "comparator_controls": {
+    "path": "output/diagnostics/modbus-generated-full-pin-editor-readback-2026-11-06/comparator-controls.json",
+    "bytes": 634,
+    "sha256": "9724d750041f906d753d62ab23d2c99ac2f301048426eeb1edb6166cdce56cb8"
+  },
+  "counting": "Each product has7canonical rungs/18instructions and3native rungs/19instructions; native graph counts11+11+27. Counts describe representations, not extra scans or unit tests.",
+  "normalization": "Every real XML delta remains listed: two project Name/FullName metadata changes, two omitted Automatic Allocation children and four existing Symbol text fills. Named-field order is ignored; native/canonical rung and instruction sequences remain ordered.",
+  "not_claimed": [
+    "RUN, Execute/Abort actuation or native compilation",
+    "Official simulator communication, FC2/FC15/FC23 transactions, serial/network delivery or port scheduling",
+    "Physical PLC/firmware/load behavior or other profile/graph forms",
+    "New full suite or changes to the historical568-test implementation checkpoint"
+  ],
+  "no_activities_by_report_author": [
+    "Product/core edits",
+    "GUI/Wine/input",
+    "Forcing/request execution",
+    "External network or TCP502",
+    "CI/GitHub Actions"
+  ],
+  "copied_PNG_count": 6,
+  "copied_PNG_bytes": 2167794,
+  "capture_copy_manifest": [
+    {
+      "source": "output/editor-validation/modbus-generated-full-pin/read/save.png",
+      "path": "docs/validation/editor-evidence/modbus-full-pin-generated/read-save.png",
+      "relative_link_from_report": "editor-evidence/modbus-full-pin-generated/read-save.png",
+      "bytes": 358724,
+      "sha256": "e54ad55eb3f720bad97d74819d0668b08b9dcb39bcd8b435dc8f54dbaa1a46d9",
+      "root_personally_viewed": true,
+      "phase": "Programming No error / completed clean save"
+    },
+    {
+      "source": "output/editor-validation/modbus-generated-full-pin/read/reopen.png",
+      "path": "docs/validation/editor-evidence/modbus-full-pin-generated/read-reopen.png",
+      "relative_link_from_report": "editor-evidence/modbus-full-pin-generated/read-reopen.png",
+      "bytes": 359724,
+      "sha256": "cc6d23d0857c3f756f2526199db24a5e9957ba0f21f91073bec70821b742d4ab",
+      "root_personally_viewed": true,
+      "phase": "Programming No error on exact saved clone fresh reopen after another project"
+    },
+    {
+      "source": "output/editor-validation/modbus-generated-full-pin/write/save.png",
+      "path": "docs/validation/editor-evidence/modbus-full-pin-generated/write-save.png",
+      "relative_link_from_report": "editor-evidence/modbus-full-pin-generated/write-save.png",
+      "bytes": 359098,
+      "sha256": "dced91be9738b56afd6d37acede7ff16185ee1d38480a22b4284ac6194a4c32d",
+      "root_personally_viewed": true,
+      "phase": "Programming No error / completed clean save"
+    },
+    {
+      "source": "output/editor-validation/modbus-generated-full-pin/write/reopen.png",
+      "path": "docs/validation/editor-evidence/modbus-full-pin-generated/write-reopen.png",
+      "relative_link_from_report": "editor-evidence/modbus-full-pin-generated/write-reopen.png",
+      "bytes": 360163,
+      "sha256": "59f75356f92161fcca393967efc88f8b38b3dd0dce59aee2609833c8fa2e3ba3",
+      "root_personally_viewed": true,
+      "phase": "Programming No error on exact saved clone fresh reopen after another project"
+    },
+    {
+      "source": "output/editor-validation/modbus-generated-full-pin/write_read/save.png",
+      "path": "docs/validation/editor-evidence/modbus-full-pin-generated/write_read-save.png",
+      "relative_link_from_report": "editor-evidence/modbus-full-pin-generated/write_read-save.png",
+      "bytes": 364560,
+      "sha256": "96b12dd466092fbac30e04c4952ac34d3ce0fc5c3b5a9846e5fa35dd3e826a3d",
+      "root_personally_viewed": true,
+      "phase": "Programming No error / completed clean save"
+    },
+    {
+      "source": "output/editor-validation/modbus-generated-full-pin/write_read/reopen.png",
+      "path": "docs/validation/editor-evidence/modbus-full-pin-generated/write_read-reopen.png",
+      "relative_link_from_report": "editor-evidence/modbus-full-pin-generated/write_read-reopen.png",
+      "bytes": 365525,
+      "sha256": "52a934e66bec0e4ef55302eda3d2010eb98afb865ad124b314f671021dc77eaa",
+      "root_personally_viewed": true,
+      "phase": "Programming No error on exact saved clone fresh reopen after another project"
+    }
+  ],
+  "independent_copied_PNG_visual_review": {
+    "reviewed_all_six": true,
+    "observed": "Matching clean original/saved titles; Programming No error; Not Connected; both M500/M501 snapshots and all four connected status coils. Visible parameter values match each READ/WRITE/WR configuration.",
+    "environment_banner_retained": "Untrusted DLL detected",
+    "scope": "Read-only inspection of exact copied local PNGs; no GUI operation or execution inference."
+  }
+}
