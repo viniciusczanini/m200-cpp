@@ -10,7 +10,7 @@ The full TM200CE40T parity goal remains active. Work is pulled from this queue w
 | P1 | Publish validated increments with English documentation | Main agent | 506-test scheduling guard and exact Modbus observations published; 516-test FC5/6 implementation reviewed | Validate actual new CLI products; Actions stays disabled |
 | P2 | Native END/ENDC/ENDCN and C++ early-scan exit parity | Compiler lane | Published in 8ce9264; native graph import implemented; Jump export retained | Extend actual native runtime controls separately |
 | P2 | Reconcile timer bases, retentive/dynamic modes and functional-level gates | Capability/schema lane | 10 ms binding saved/reopened; one-second retTON/retTOF and dynamicTON admitted at observed Man21; genuine compiler products now in official GUI lane | Real editor-created configuration plus exact generated candidate validation; no enum-only promotion |
-| P2 | Complete local Modbus coverage with official configured projects | Protocol/runtime lane | Ten native binding cases and three CLI-generated bit products saved/fresh-reopened with No error; single-write Man21/SL1 implementation passes516 tests; its genuine products await GUI | READ/WRITE/WRITE_READ and transport/status edge cases; separate local protocol, editor, simulator and hardware evidence |
+| P2 | Complete local Modbus coverage with official configured projects | Protocol/runtime lane | Ten native binding cases and three CLI-generated bit products saved/fresh-reopened with No error; single-write Man21/SL1 implementation passes516 tests; its two genuine products saved/fresh-reopened with No error | READ/WRITE/WRITE_READ and transport/status edge cases; separate local protocol, editor, simulator and hardware evidence |
 | P3 | Native program structure: subroutines, tasks/events, UDF/UDFB and Grafcet | Compiler lane | Primary research complete; 506-test MastTask guard closes silent scheduling loss; native scheduling/calls remain | Closed parser/lowering/reverse/runtime support and negative tests |
 | P3 | Numeric gaps: native expressions, constant tables, float/system flags and error recovery | Compiler lane | Queued | Supported domains and flags from sources, independent oracles, real editor/simulator tests |
 | P3 | Remaining native blocks: registers, drum/SBR/SC, RTC/schedule and PID | Library lane | Primary research complete; exact CE40T FIFO/LIFO IL diagnostics saved/fresh-reopened No error; runtime prepared | Complete operands/configuration semantics, roundtrip and runtime checks |
@@ -39,6 +39,13 @@ See [official artifact evidence](docs/validation/OFFICIAL-EDITOR-RESULTS.json), 
 
 - Single-coil/single-register native Modbus bindings: compiler lane, exact official fixtures and negative cases.
 - WRITE_READ_VAR: independent implementation plan and literal FC23 protocol oracles.
-- Compiler-generated timer products: save/fresh reopen and local simulator button/watch tests in the serial GUI lane.
+- Compiler-generated timer products: save/fresh reopen and local simulator button/watch tests completed for the saved watch product; see TIMER-GENERATED-PROJECT-RESULTS.
 - Native FIFO/LIFO: two IL-only exact CE40T diagnostics, including one physical simulated input for simultaneous I/O requests; acceptance and runtime pending.
 - Dynamic TOF/TP and combined timer options: prepared paired controls; unobserved contexts remain gated.
+
+## Current execution checkpoint
+
+- Published: 516-test FC5/6 profile checkpoint; genuine timer products have separate editor/simulator evidence; full contract translated to English.
+- GUI: native LIFO order, empty retention, held controls, simultaneous requests, 16-item capacity, overflow and draining observed; FIFO runtime is active; collision probes remain queued. Both exact generated FC5/6 products passed save/fresh-reopen validation; no transaction was executed.
+- Compiler: Execute-only WRITE_READ_VAR binding implementation, with independent review.
+- Library foundation: strict Register configuration codec only, coordinated before the next frozen combined suite; full Register compilation/execution stays unsupported until integrated and validated.

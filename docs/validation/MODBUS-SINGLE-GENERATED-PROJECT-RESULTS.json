@@ -1,0 +1,621 @@
+{
+  "format": "m200-modbus-single-generated-project-results-v1",
+  "date": "2026-11-06",
+  "target": "TM200CE40T",
+  "actual_management_level": "FunctLevelMan21_0",
+  "actual_link": "SL1 master",
+  "editor": "EcoStruxure Machine Expert Basic 1.4 build 484, local Mac Wine lab",
+  "observed_by": "Root personally viewed Programming No error/actual parameters, completed Ctrl+S saves, and freshly reopened both saved-byte clones after another project",
+  "procedure": "Exact CLI bytes cloned to writable P: file; official Ctrl+S completed; filesystem-copy saved bytes; open another project; fresh reopen exact saved clone No error",
+  "stage_distinction": "Actual generated products; separate from the earlier exact binding fixtures and the historical 516-test implementation checkpoint",
+  "frozen_preparation": {
+    "manifest_path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/MANIFEST.json",
+    "manifest_sha256": "ae5a4554fa30c78915185a041cd6c5e5545c2d88536177bddfb09e27801c09bc",
+    "checksum_path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/SHA256SUMS",
+    "checksum_sha256": "0519f2553bb096fa87f6fae140cbab917217504f92beb3070eed03c517cfb76a",
+    "verified_inventory_entries": 25,
+    "inventory": [
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/GUIDE.md",
+        "sha256": "d294d4b6f1bee24433fa22735463a19200801e28476f6780430a8da9835511ba",
+        "bytes": 2147
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/MANIFEST.json",
+        "sha256": "ae5a4554fa30c78915185a041cd6c5e5545c2d88536177bddfb09e27801c09bc",
+        "bytes": 8734
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/builds/modbus_generated_single_coil/program.audit.cpp",
+        "sha256": "ef39f3281f0a4ac8f55c2d0ebcd24c54c5dbbf193f7a94856922fa83e3551b33",
+        "bytes": 462
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/builds/modbus_generated_single_coil/program.il",
+        "sha256": "e55a20672752882a944363c9a7e17e509d560bb9c2dd8efdfd96d3afc89c47c3",
+        "bytes": 77
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/builds/modbus_generated_single_coil/program.m200.json",
+        "sha256": "9725d2edd56d0d8953c10e614bca5c47caa9d3979493c0901fa317ed63e49624",
+        "bytes": 1475
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/builds/modbus_generated_single_coil/program.smbp",
+        "sha256": "6d9e10277a9b8311afd6ac61d7e309eba1ba35d1b535c53c75aa9434645002b6",
+        "bytes": 90257
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/builds/modbus_generated_single_coil/report.json",
+        "sha256": "a05430427181d94c9afc1290a7fa1567fac57062cb4cdd8564407c8f17d34c4a",
+        "bytes": 4303
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/builds/modbus_generated_single_coil/source-map.json",
+        "sha256": "1a7b301885bf1da2f48feb2bcbc41398728ae9be6b1d915f7fe96899687cb7ec",
+        "bytes": 494
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/builds/modbus_generated_single_reg/program.audit.cpp",
+        "sha256": "e94ee73caf1561c2d97df683eb3b3fd601b42df6fb5b9a2184b945d39f9f72fa",
+        "bytes": 466
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/builds/modbus_generated_single_reg/program.il",
+        "sha256": "4f9fcc141f6e10a095ae317275d4e546ebde015ebe7b4835479cbc8f30b68ce6",
+        "bytes": 77
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/builds/modbus_generated_single_reg/program.m200.json",
+        "sha256": "341c284ee32e4819a71726ef6a3a46aa6fdd2fce298938e9490c50bcdb214930",
+        "bytes": 1472
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/builds/modbus_generated_single_reg/program.smbp",
+        "sha256": "4cb9b48c207d2ceef3d5b1d295cbfcbc9b3e9355c2926523e1a2ad7da638d9c5",
+        "bytes": 90254
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/builds/modbus_generated_single_reg/report.json",
+        "sha256": "9f84ce2d1b6c52d9d88ed0ceae45c24ef59aac77d83163324c878594b6a88757",
+        "bytes": 4300
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/builds/modbus_generated_single_reg/source-map.json",
+        "sha256": "2c928560610d5af696dc95b8fbd03be7fcb2e22d31d0bbd95e9c1548ea02310d",
+        "bytes": 491
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/inputs/official_tm200ce40t_modbus_single_coil.provenance.json",
+        "sha256": "082e0e4424bad622c62a77ea8ae9775029670c188890ee7179d5a68bd4b69180",
+        "bytes": 2908
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/inputs/official_tm200ce40t_modbus_single_coil.smbp",
+        "sha256": "4b72a0380555290934a4eea0492e3f9c0491b08f0741bd9f7ded49666845ef8f",
+        "bytes": 88741
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/inputs/official_tm200ce40t_modbus_single_reg.provenance.json",
+        "sha256": "9190f49a2bb35c59ebf47344388d4d02e9b8eede5b9f279dd2bfcbb0edbc8c22",
+        "bytes": 2903
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/inputs/official_tm200ce40t_modbus_single_reg.smbp",
+        "sha256": "d24a3b572bc565d9d1cb9d4111ffd231d28422384e7b08bd977c85198b995ed8",
+        "bytes": 88736
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/modbus_generated_single_coil.cli.log",
+        "sha256": "a05430427181d94c9afc1290a7fa1567fac57062cb4cdd8564407c8f17d34c4a",
+        "bytes": 4303
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/modbus_generated_single_reg.cli.log",
+        "sha256": "9f84ce2d1b6c52d9d88ed0ceae45c24ef59aac77d83163324c878594b6a88757",
+        "bytes": 4300
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/named-projects/modbus_generated_single_coil.smbp",
+        "sha256": "6d9e10277a9b8311afd6ac61d7e309eba1ba35d1b535c53c75aa9434645002b6",
+        "bytes": 90257
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/named-projects/modbus_generated_single_reg.smbp",
+        "sha256": "4cb9b48c207d2ceef3d5b1d295cbfcbc9b3e9355c2926523e1a2ad7da638d9c5",
+        "bytes": 90254
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/prepare.py",
+        "sha256": "4f7b5869c16379c0c9b6fce703b921e4b0a5302e1fc9c22838d0ad2f43216532",
+        "bytes": 7034
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/sources/modbus_generated_single_coil.cpp",
+        "sha256": "27326b2522caa78e70174622f58bf6dfc20fa24b33130401cbc6c290eea7983a",
+        "bytes": 322
+      },
+      {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/sources/modbus_generated_single_reg.cpp",
+        "sha256": "3fd57c56925dce0439d552cccaf0eb604b45ec08e4e0f3ef6e31a916ae1bd4e3",
+        "bytes": 326
+      }
+    ],
+    "compiler_base_HEAD": "d9c5a55b35ff479bd3a364d0f03afb7f286c1f3d",
+    "compiler_source_hashes_at_generation": {
+      "m200/__init__.py": "77c5815a3596eebca3e939d1ad39abba46fa4edc4df148aaa7e47f13e5eda0ab",
+      "m200/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "m200/allocation.py": "f21e8753757ebf1c54874c18c3385a7d79ce52992514725920c29a1ca6281be9",
+      "m200/arithmetic.py": "bd0a83b4cc3257d2734a2ad1131137ce0608c2688a0565842b41759c336df75a",
+      "m200/arrays.py": "d4574f6e48ab98f70feb3f474f30bbf387117f5db3ddde395525a21a77da42ed",
+      "m200/bits.py": "d76ca8b8bb587a6811cfb3e157c00385ba0a836b8eb669afdda9af4e635b6a61",
+      "m200/boolean_bdd.py": "b3de9c79a5b14953256117afa22df8aaf2b37eb71689f224ca2d66e78a02882f",
+      "m200/capabilities.py": "e94e59743ee0eae98c476938f8eafe04966c0823b825b1d070980d15d41348a0",
+      "m200/cli.py": "22110f728cd456b9fae20a2ae1c2f9a03ba3fede808ee220318071c09a9d6a14",
+      "m200/communication.py": "105c1aef50e7ee00bc7c7142a5b6805d4ddf5f18fc04c5e60a52b78841a6b3b0",
+      "m200/communication_xml.py": "27a2527e5be5243c670cfd137884d90ef4099003a9d93aacb6556de7b7c579ed",
+      "m200/config.py": "5411e6a28bd67da9a45c1660f1c62673443b249ac76948ede80b57c6e322f73e",
+      "m200/conversions.py": "0922116a83ef1bcacda5fb9a588f2bc10d522a7c1ca7f301148ea88e6e370250",
+      "m200/copy_fusion.py": "39c8f498518c46d35ad61ec2c53564a61748a4957eae25e8d241a3c7e4b98816",
+      "m200/counter_graph.py": "80abf1241ee5095a121c47e1a196de03f1e7ed37fe0c54626b2a3f3eba4a9e8c",
+      "m200/counter_xml.py": "a87177f18a698b1f442a7c16eb66748a6d2c06c9c966ac199c6275bb1e326554",
+      "m200/counters.py": "0e4ed9d8fe6f4356f3d6b6986558a0f9caa019daa3f741b12522d1fdd6f376ce",
+      "m200/edge_functions.py": "c58b059d15ee7387ed7e65f841ad549f3b30c3781a258c0a6340a96e9cd92a24",
+      "m200/edges.py": "e590a801d00b94d20a2dd1f428635aa299e3bd59bcbfe2442f5ffa4fd3d64713",
+      "m200/flow.py": "090035e4abc84354287c934898430c0da038a81a11452526e4d87a70def55607",
+      "m200/frontend.py": "2b56e3ca231ccb3cbb9a5371051928b360559400566c771a4cd678db07c0504a",
+      "m200/il.py": "f177243b0b658414b8e2f3da7eac7a7ed62b7996f5faa2154b96377f9538db83",
+      "m200/indexed.py": "0b8ca542e2be87392d8de2a75ef8ad0d48534b28d7f82d1e24fd1bf38fc8343b",
+      "m200/jsonio.py": "c4d8447354b4f48205a8d5bfc58e1a3919656ba2073ecc5982b2f8fd6253fd70",
+      "m200/ladder_lowering.py": "804361acf89064fca90722fd1459d2db968d9c3bc2235fa84478c487767a009b",
+      "m200/levels.py": "439eba12b9bf189795449983755b55d92f77261678a983c4ed9e94b5eb341149",
+      "m200/lower.py": "d9cc4e13b0e886a0c0d7bd85880d621d76f8c371943f4d4d1549f111ab1aa657",
+      "m200/modbus.py": "a391ce5ff71520cea4f6b74d9ae984ba6cb4d6fff36b9d44fe05396e68c2e32b",
+      "m200/model.py": "e786ea2d03ea7d9c98c641fe6ed84a00a2076f51a1974ce1209355ef4dad0e11",
+      "m200/native.py": "016a6af7d7f7b1de11dab9bee1477faa9f4d393f75bbf09e1b3bf5daa5e6ac4f",
+      "m200/native_logic.py": "6a5990a9b75186ca678172491605a8485747ec004c685a3c4d22b025be8a53de",
+      "m200/numeric.py": "b29de2050a070dcbf23ab4e942642f45ad22a580d70b078f5b74111dfde629c5",
+      "m200/project.py": "3299d4cbecb3acaffbb6c222c1a178861b99c044a650af37648bba02306258e5",
+      "m200/reverse.py": "a84be951d8f3e113fb74065c024198408efd584c3b16794a3f88e1f04507a0d1",
+      "m200/timer_profile.py": "ca3f7855752418db88698ab0a6fff8ead02f67d8c63c767baeb7b0f985fd346e",
+      "m200/timers.py": "384e3c26facd76ed8da5449d001348fe1c1dd818a73532ab9c782e6a9b0fedf6",
+      "sdk/plc.hpp": "b1d6f04ab2ce88d4e37ac781a299f134c5882971f2d593ead502be3877e784b3"
+    },
+    "no_hand_edited_XML": true,
+    "original_GUI_pending_fields_retained": [
+      {
+        "case": "modbus_generated_single_coil",
+        "official_GUI_open": "pending",
+        "official_save_reopen": "pending"
+      },
+      {
+        "case": "modbus_generated_single_reg",
+        "official_GUI_open": "pending",
+        "official_save_reopen": "pending"
+      }
+    ],
+    "note": "Preparation and historical implementation reports are unchanged. These later observations do not imply a current-revision rebuild."
+  },
+  "products": [
+    {
+      "id": "single_coil",
+      "function_code": 5,
+      "object_SDK": "SingleCoil",
+      "CLI": {
+        "argv_verbatim": [
+          "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+          "-m",
+          "m200",
+          "compile",
+          "/Users/tommy/Offline/projects/m200-cpp/output/diagnostics/modbus-generated-single-candidates-2026-11-06/sources/modbus_generated_single_coil.cpp",
+          "--template",
+          "/Users/tommy/Offline/projects/m200-cpp/output/diagnostics/modbus-generated-single-candidates-2026-11-06/inputs/official_tm200ce40t_modbus_single_coil.smbp",
+          "-o",
+          "/Users/tommy/Offline/projects/m200-cpp/output/diagnostics/modbus-generated-single-candidates-2026-11-06/builds/modbus_generated_single_coil"
+        ],
+        "cwd_verbatim": "/Users/tommy/Offline/projects/m200-cpp",
+        "successful_exit_record": "Frozen prepare.py asserts returncode == 0 before producing this manifest",
+        "log": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/modbus_generated_single_coil.cli.log",
+        "log_sha256": "a05430427181d94c9afc1290a7fa1567fac57062cb4cdd8564407c8f17d34c4a"
+      },
+      "source": {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/sources/modbus_generated_single_coil.cpp",
+        "sha256": "27326b2522caa78e70174622f58bf6dfc20fa24b33130401cbc6c290eea7983a",
+        "text": "#include <plc.hpp>\n\n// GUI serialization candidate only. Do not RUN or trigger an exchange.\n// No code writes the memory Execute bit; no output/status pins are added.\nplc::WriteVar remote{0, plc::Link::Serial1, 1, 100,\n    plc::Object::SingleCoil, 107, 1, 260};\n\nvoid scan() {\n    remote.update(plc::read_m(11), false);\n}\n",
+        "SDK_constructor": "plc::WriteVar remote{0, plc::Link::Serial1, 1, 100,\n    plc::Object::SingleCoil, 107, 1, 260};"
+      },
+      "template": {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/inputs/official_tm200ce40t_modbus_single_coil.smbp",
+        "sha256": "4b72a0380555290934a4eea0492e3f9c0491b08f0741bd9f7ded49666845ef8f"
+      },
+      "reverse": {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/builds/modbus_generated_single_coil/program.audit.cpp",
+        "sha256": "ef39f3281f0a4ac8f55c2d0ebcd24c54c5dbbf193f7a94856922fa83e3551b33",
+        "configuration_equal_in_frozen_preparation": true
+      },
+      "original_product": {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/named-projects/modbus_generated_single_coil.smbp",
+        "sha256": "6d9e10277a9b8311afd6ac61d7e309eba1ba35d1b535c53c75aa9434645002b6",
+        "bytes": 90257,
+        "named_clone_equals_build_bytes": true,
+        "rungs": 2,
+        "IL_lines": 6,
+        "normalized_IL": [
+          "LD %M11",
+          "ST %M500",
+          "BLK %WRITE_VAR0",
+          "LD %M500",
+          "EXECUTE",
+          "END_BLK"
+        ],
+        "blocks": [
+          {
+            "address": "%WRITE_VAR0",
+            "index": "0",
+            "xml_type": "SchneiderElectric.Automation.SoMachineBasic.Entities.PLCObjects.FunctionBlocks.Com.WriteVarBasic, SchneiderElectric.SoMachineBasic.Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5beddbc0114a5f07",
+            "parameters": {
+              "Link": "SerialLine1",
+              "RemoteDeviceId": "1",
+              "Timeout": "100",
+              "ObjType": "SINGLE_COIL",
+              "FirstObj": "107",
+              "Quantity": "1",
+              "IndexData": "260"
+            }
+          }
+        ],
+        "graph_entity_counts": [
+          11,
+          4
+        ],
+        "graph_shape_excluding_Symbol_Comment_sha256": "3b5e2ea4a0796894a5fb7afc1464acbe780e664692f79a1a93b01edb71b77f1d"
+      },
+      "editor_saved": {
+        "path": "output/editor-validation/modbus-generated-single/modbus_generated_single_coil_editor_saved.smbp",
+        "sha256": "a07db925c8b84cccf1d7d53087fbdb96a733f2ae3871bd7b11c51e59847fe8ce",
+        "bytes": 92537,
+        "rungs": 2,
+        "IL_lines": 6,
+        "normalized_IL": [
+          "LD %M11",
+          "ST %M500",
+          "BLK %WRITE_VAR0",
+          "LD %M500",
+          "EXECUTE",
+          "END_BLK"
+        ],
+        "blocks": [
+          {
+            "address": "%WRITE_VAR0",
+            "index": "0",
+            "xml_type": "SchneiderElectric.Automation.SoMachineBasic.Entities.PLCObjects.FunctionBlocks.Com.WriteVarBasic, SchneiderElectric.SoMachineBasic.Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5beddbc0114a5f07",
+            "parameters": {
+              "Link": "SerialLine1",
+              "RemoteDeviceId": "1",
+              "Timeout": "100",
+              "ObjType": "SINGLE_COIL",
+              "FirstObj": "107",
+              "Quantity": "1",
+              "IndexData": "260"
+            }
+          }
+        ],
+        "graph_entity_counts": [
+          11,
+          4
+        ],
+        "graph_shape_excluding_Symbol_Comment_sha256": "3b5e2ea4a0796894a5fb7afc1464acbe780e664692f79a1a93b01edb71b77f1d"
+      },
+      "preserved": {
+        "normalized_IL": true,
+        "exact_template_hardware": true,
+        "typed_FB_parameters_and_wrappers": true,
+        "graph_geometry_excluding_Symbol_Comment": true
+      },
+      "editor_normalization": {
+        "software_field_changes": [
+          {
+            "path": "/SoftwareConfiguration[1]/MemoryBitsMemoryAllocation",
+            "candidate": null,
+            "saved": ""
+          },
+          {
+            "path": "/SoftwareConfiguration[1]/MemoryBitsMemoryAllocation[1]/Allocation",
+            "candidate": "Automatic",
+            "saved": null
+          },
+          {
+            "path": "/SoftwareConfiguration[1]/Pous[1]/ProgramOrganizationUnits[1]/Rungs[1]/RungEntity[1]/LadderElements[11]/LadderEntity[1]/Symbol",
+            "candidate": "",
+            "saved": "TEMPORARY_500"
+          },
+          {
+            "path": "/SoftwareConfiguration[1]/Pous[1]/ProgramOrganizationUnits[1]/Rungs[2]/RungEntity[1]/LadderElements[1]/LadderEntity[1]/Symbol",
+            "candidate": "",
+            "saved": "TEMPORARY_500"
+          },
+          {
+            "path": "/SoftwareConfiguration[1]/TimersMemoryAllocation",
+            "candidate": null,
+            "saved": ""
+          },
+          {
+            "path": "/SoftwareConfiguration[1]/TimersMemoryAllocation[1]/Allocation",
+            "candidate": "Automatic",
+            "saved": null
+          }
+        ],
+        "allocation_default_fields": 4,
+        "graph_Symbol_fields": 2
+      },
+      "control": {
+        "execute": "%M11",
+        "snapshot": "%M500",
+        "abort_argument": false,
+        "status_pins_added": false,
+        "program_RUN": false,
+        "execute_asserted_or_forced": false,
+        "exchange_triggered": false
+      },
+      "root_open_save_observation": "Programming Ladder No error and clean CtrlS save",
+      "root_fresh_reopen_observation": "Root personally observed No error after another project; exact saved clone fresh reopen",
+      "readback": {
+        "path": "output/editor-validation/modbus-generated-single/single_coil-readback.json",
+        "sha256": "4e2e99b06b9cc1306c2083192c55fad593c4c37c679337f27ddbc9b62bbd9f68"
+      },
+      "captures": [
+        {
+          "source": "output/editor-validation/modbus-generated-single/single_coil-save.png",
+          "path": "docs/validation/editor-evidence/modbus-single-generated/single_coil-save.png",
+          "relative_link_from_report": "editor-evidence/modbus-single-generated/single_coil-save.png",
+          "bytes": 339166,
+          "sha256": "330c7d948fdeb7c301b45c5668007e8e74907d8bbda8e1e6328f0d78b6a19c78",
+          "phase": "Root personally viewed Programming/actual parameters and completed Ctrl+S save"
+        },
+        {
+          "source": "output/editor-validation/modbus-generated-single/single_coil-reopen.png",
+          "path": "docs/validation/editor-evidence/modbus-single-generated/single_coil-reopen.png",
+          "relative_link_from_report": "editor-evidence/modbus-single-generated/single_coil-reopen.png",
+          "bytes": 499333,
+          "sha256": "4c4c906305c6b4c5c9eb636275045a548ed0f900dc5416ac2e0b491234da4974",
+          "phase": "Root personally viewed No error on exact saved clone fresh reopen after another project"
+        }
+      ]
+    },
+    {
+      "id": "single_reg",
+      "function_code": 6,
+      "object_SDK": "SingleRegister",
+      "CLI": {
+        "argv_verbatim": [
+          "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+          "-m",
+          "m200",
+          "compile",
+          "/Users/tommy/Offline/projects/m200-cpp/output/diagnostics/modbus-generated-single-candidates-2026-11-06/sources/modbus_generated_single_reg.cpp",
+          "--template",
+          "/Users/tommy/Offline/projects/m200-cpp/output/diagnostics/modbus-generated-single-candidates-2026-11-06/inputs/official_tm200ce40t_modbus_single_reg.smbp",
+          "-o",
+          "/Users/tommy/Offline/projects/m200-cpp/output/diagnostics/modbus-generated-single-candidates-2026-11-06/builds/modbus_generated_single_reg"
+        ],
+        "cwd_verbatim": "/Users/tommy/Offline/projects/m200-cpp",
+        "successful_exit_record": "Frozen prepare.py asserts returncode == 0 before producing this manifest",
+        "log": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/modbus_generated_single_reg.cli.log",
+        "log_sha256": "9f84ce2d1b6c52d9d88ed0ceae45c24ef59aac77d83163324c878594b6a88757"
+      },
+      "source": {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/sources/modbus_generated_single_reg.cpp",
+        "sha256": "3fd57c56925dce0439d552cccaf0eb604b45ec08e4e0f3ef6e31a916ae1bd4e3",
+        "text": "#include <plc.hpp>\n\n// GUI serialization candidate only. Do not RUN or trigger an exchange.\n// No code writes the memory Execute bit; no output/status pins are added.\nplc::WriteVar remote{0, plc::Link::Serial1, 1, 100,\n    plc::Object::SingleRegister, 131, 1, 280};\n\nvoid scan() {\n    remote.update(plc::read_m(12), false);\n}\n",
+        "SDK_constructor": "plc::WriteVar remote{0, plc::Link::Serial1, 1, 100,\n    plc::Object::SingleRegister, 131, 1, 280};"
+      },
+      "template": {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/inputs/official_tm200ce40t_modbus_single_reg.smbp",
+        "sha256": "d24a3b572bc565d9d1cb9d4111ffd231d28422384e7b08bd977c85198b995ed8"
+      },
+      "reverse": {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/builds/modbus_generated_single_reg/program.audit.cpp",
+        "sha256": "e94ee73caf1561c2d97df683eb3b3fd601b42df6fb5b9a2184b945d39f9f72fa",
+        "configuration_equal_in_frozen_preparation": true
+      },
+      "original_product": {
+        "path": "output/diagnostics/modbus-generated-single-candidates-2026-11-06/named-projects/modbus_generated_single_reg.smbp",
+        "sha256": "4cb9b48c207d2ceef3d5b1d295cbfcbc9b3e9355c2926523e1a2ad7da638d9c5",
+        "bytes": 90254,
+        "named_clone_equals_build_bytes": true,
+        "rungs": 2,
+        "IL_lines": 6,
+        "normalized_IL": [
+          "LD %M12",
+          "ST %M500",
+          "BLK %WRITE_VAR0",
+          "LD %M500",
+          "EXECUTE",
+          "END_BLK"
+        ],
+        "blocks": [
+          {
+            "address": "%WRITE_VAR0",
+            "index": "0",
+            "xml_type": "SchneiderElectric.Automation.SoMachineBasic.Entities.PLCObjects.FunctionBlocks.Com.WriteVarBasic, SchneiderElectric.SoMachineBasic.Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5beddbc0114a5f07",
+            "parameters": {
+              "Link": "SerialLine1",
+              "RemoteDeviceId": "1",
+              "Timeout": "100",
+              "ObjType": "SINGLE_REG",
+              "FirstObj": "131",
+              "Quantity": "1",
+              "IndexData": "280"
+            }
+          }
+        ],
+        "graph_entity_counts": [
+          11,
+          4
+        ],
+        "graph_shape_excluding_Symbol_Comment_sha256": "f5a80a459fbbf96df3804cab6e440fbbe7dd61822b29ee29c467ba7a41994b13"
+      },
+      "editor_saved": {
+        "path": "output/editor-validation/modbus-generated-single/modbus_generated_single_reg_editor_saved.smbp",
+        "sha256": "3ccfb61c5351f7d9064f575dfa041f78ea00bae40a43406ae3222fddeeb581ba",
+        "bytes": 92532,
+        "rungs": 2,
+        "IL_lines": 6,
+        "normalized_IL": [
+          "LD %M12",
+          "ST %M500",
+          "BLK %WRITE_VAR0",
+          "LD %M500",
+          "EXECUTE",
+          "END_BLK"
+        ],
+        "blocks": [
+          {
+            "address": "%WRITE_VAR0",
+            "index": "0",
+            "xml_type": "SchneiderElectric.Automation.SoMachineBasic.Entities.PLCObjects.FunctionBlocks.Com.WriteVarBasic, SchneiderElectric.SoMachineBasic.Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5beddbc0114a5f07",
+            "parameters": {
+              "Link": "SerialLine1",
+              "RemoteDeviceId": "1",
+              "Timeout": "100",
+              "ObjType": "SINGLE_REG",
+              "FirstObj": "131",
+              "Quantity": "1",
+              "IndexData": "280"
+            }
+          }
+        ],
+        "graph_entity_counts": [
+          11,
+          4
+        ],
+        "graph_shape_excluding_Symbol_Comment_sha256": "f5a80a459fbbf96df3804cab6e440fbbe7dd61822b29ee29c467ba7a41994b13"
+      },
+      "preserved": {
+        "normalized_IL": true,
+        "exact_template_hardware": true,
+        "typed_FB_parameters_and_wrappers": true,
+        "graph_geometry_excluding_Symbol_Comment": true
+      },
+      "editor_normalization": {
+        "software_field_changes": [
+          {
+            "path": "/SoftwareConfiguration[1]/MemoryBitsMemoryAllocation",
+            "candidate": null,
+            "saved": ""
+          },
+          {
+            "path": "/SoftwareConfiguration[1]/MemoryBitsMemoryAllocation[1]/Allocation",
+            "candidate": "Automatic",
+            "saved": null
+          },
+          {
+            "path": "/SoftwareConfiguration[1]/Pous[1]/ProgramOrganizationUnits[1]/Rungs[1]/RungEntity[1]/LadderElements[11]/LadderEntity[1]/Symbol",
+            "candidate": "",
+            "saved": "TEMPORARY_500"
+          },
+          {
+            "path": "/SoftwareConfiguration[1]/Pous[1]/ProgramOrganizationUnits[1]/Rungs[2]/RungEntity[1]/LadderElements[1]/LadderEntity[1]/Symbol",
+            "candidate": "",
+            "saved": "TEMPORARY_500"
+          },
+          {
+            "path": "/SoftwareConfiguration[1]/TimersMemoryAllocation",
+            "candidate": null,
+            "saved": ""
+          },
+          {
+            "path": "/SoftwareConfiguration[1]/TimersMemoryAllocation[1]/Allocation",
+            "candidate": "Automatic",
+            "saved": null
+          }
+        ],
+        "allocation_default_fields": 4,
+        "graph_Symbol_fields": 2
+      },
+      "control": {
+        "execute": "%M12",
+        "snapshot": "%M500",
+        "abort_argument": false,
+        "status_pins_added": false,
+        "program_RUN": false,
+        "execute_asserted_or_forced": false,
+        "exchange_triggered": false
+      },
+      "root_open_save_observation": "Programming Ladder No error and clean CtrlS save",
+      "root_fresh_reopen_observation": "Root personally observed No error after another project; exact saved clone fresh reopen",
+      "readback": {
+        "path": "output/editor-validation/modbus-generated-single/single_reg-readback.json",
+        "sha256": "f84ef3d6ebe967afde1ecfab8732285d7edc78b90cfce6fdf9bd47df8083a149"
+      },
+      "captures": [
+        {
+          "source": "output/editor-validation/modbus-generated-single/single_reg-save.png",
+          "path": "docs/validation/editor-evidence/modbus-single-generated/single_reg-save.png",
+          "relative_link_from_report": "editor-evidence/modbus-single-generated/single_reg-save.png",
+          "bytes": 339248,
+          "sha256": "9fe86654faf2f84e1fd3e8346cba159207ebf1c5425be7ee08cc5b05118c1de9",
+          "phase": "Root personally viewed Programming/actual parameters and completed Ctrl+S save"
+        },
+        {
+          "source": "output/editor-validation/modbus-generated-single/single_reg-reopen.png",
+          "path": "docs/validation/editor-evidence/modbus-single-generated/single_reg-reopen.png",
+          "relative_link_from_report": "editor-evidence/modbus-single-generated/single_reg-reopen.png",
+          "bytes": 499296,
+          "sha256": "6f7fa94e12fcada087bf9a701d10eb80a6b4d43f5d28ea9db0a92c82bf427a02",
+          "phase": "Root personally viewed No error on exact saved clone fresh reopen after another project"
+        }
+      ]
+    }
+  ],
+  "copied_PNG_count": 4,
+  "copied_PNG_bytes": 1677043,
+  "capture_copy_manifest": [
+    {
+      "source": "output/editor-validation/modbus-generated-single/single_coil-save.png",
+      "path": "docs/validation/editor-evidence/modbus-single-generated/single_coil-save.png",
+      "relative_link_from_report": "editor-evidence/modbus-single-generated/single_coil-save.png",
+      "bytes": 339166,
+      "sha256": "330c7d948fdeb7c301b45c5668007e8e74907d8bbda8e1e6328f0d78b6a19c78",
+      "phase": "Root personally viewed Programming/actual parameters and completed Ctrl+S save"
+    },
+    {
+      "source": "output/editor-validation/modbus-generated-single/single_coil-reopen.png",
+      "path": "docs/validation/editor-evidence/modbus-single-generated/single_coil-reopen.png",
+      "relative_link_from_report": "editor-evidence/modbus-single-generated/single_coil-reopen.png",
+      "bytes": 499333,
+      "sha256": "4c4c906305c6b4c5c9eb636275045a548ed0f900dc5416ac2e0b491234da4974",
+      "phase": "Root personally viewed No error on exact saved clone fresh reopen after another project"
+    },
+    {
+      "source": "output/editor-validation/modbus-generated-single/single_reg-save.png",
+      "path": "docs/validation/editor-evidence/modbus-single-generated/single_reg-save.png",
+      "relative_link_from_report": "editor-evidence/modbus-single-generated/single_reg-save.png",
+      "bytes": 339248,
+      "sha256": "9fe86654faf2f84e1fd3e8346cba159207ebf1c5425be7ee08cc5b05118c1de9",
+      "phase": "Root personally viewed Programming/actual parameters and completed Ctrl+S save"
+    },
+    {
+      "source": "output/editor-validation/modbus-generated-single/single_reg-reopen.png",
+      "path": "docs/validation/editor-evidence/modbus-single-generated/single_reg-reopen.png",
+      "relative_link_from_report": "editor-evidence/modbus-single-generated/single_reg-reopen.png",
+      "bytes": 499296,
+      "sha256": "6f7fa94e12fcada087bf9a701d10eb80a6b4d43f5d28ea9db0a92c82bf427a02",
+      "phase": "Root personally viewed No error on exact saved clone fresh reopen after another project"
+    }
+  ],
+  "established": "Offline official editor acceptance, completed save and fresh reopen for these exact two public-CLI products with executable IL, hardware and FB configuration preserved",
+  "not_claimed": [
+    "Program RUN, native simulator behavior, Execute request or Modbus transaction",
+    "Serial/network delivery, physical PLC, firmware or output-load proof",
+    "Other functional levels/links, non-1 Quantity editor acceptance or native connected Abort/status graphs",
+    "New full-suite run or change to historical 516-test results"
+  ],
+  "no_activities_in_this_stage": [
+    "GUI/runtime control by report author",
+    "Forcing or asserting Execute",
+    "External network or port 502",
+    "CI/GitHub Actions",
+    "Physical-controller operations"
+  ]
+}
