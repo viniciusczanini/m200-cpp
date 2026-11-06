@@ -24,9 +24,9 @@ remains incomplete; this release priority does not erase the remaining inventory
 
 ## Current checkpoint
 
-- Public code checkpoint `0b687ac` contains the Register integration; `74dd910`
-  documents the narrowed Natal release scope. The newer seven-package candidate
-  is local and has not passed its final release gates.
+- Public checkpoint `c706f6b` contains all seven Natal priority packages,
+  portable regressions, examples and the exact local validation reports.
+  Official editor/simulator acceptance is still in progress.
 - The integrated Register checkpoint has **799 passing tests**, zero skips, in
   220.444 s, with330 pinned inputs unchanged. Its exact dual output was saved and
   freshly reopened with No error; separate repeated-call FIFO runtime is recorded.
@@ -36,17 +36,26 @@ remains incomplete; this release priority does not erase the remaining inventory
   Ten generic programs enforce code-size and memory budgets.
 - The new dual FIFO/LIFO example fell from 34/80 to **22/56**, using one M bit
   and no ordinary MW scratch. Its native queues use separate Register storage.
-- All seven priority packages are now integrated in the local candidate:
+- All seven priority packages are integrated and published:
   Boolean/scan, numeric flags/constants, stateful SRs, timers, native sequences,
-  RTC/calendar/schedules and Modbus properties. Composed and focused tests have
-  passed, but the first combined full regression failed. Concrete defect fixes,
-  contract assertions and prepared adapters are being resolved in parallel.
+  RTC/calendar/schedules and Modbus properties. Concrete defects found in the
+  first combined regression have focused fixes and portable regression cases.
   [Exact candidate evidence](validation/NATAL-INTEGRATION-PROGRESS.md) preserves
   the failed run and does not turn focused passes into a complete-suite claim.
 - The final closed local gate ran 1,017 tests: 1,009 passed and eight explicit
   oracle/adapter cases remain failures, with zero errors/skips and zero input
   drift. The final 24-case/seven-route batch and ten optimization budgets passed.
-  Exact expanded native acceptance is the next gate; the release is incomplete.
+  Exact expanded native acceptance is running; the release is incomplete.
+- The finite native campaign contains eleven composed projects and three
+  sequence observation probes. Generated files and official saves are kept
+  separately; editor acceptance, saved-content readback and simulator execution
+  are recorded as distinct results. Opening or saving is not a runtime pass.
+- The first fourteen-project editor batch is complete: twelve fresh official
+  reopens show **No error**; both schedule projects show program errors. The
+  schedule-memory messages reject negative direct `%SW114` literals, whose
+  native range is 0–65535. Saved-content checks also found omitted default SBR/SC
+  entries that the importer still requires. Both defects remain required fixes;
+  the simulator batch is not complete.
 
 ## Delivered and working
 
@@ -56,7 +65,8 @@ remains incomplete; this release priority does not erase the remaining inventory
 - Ordinary embedded digital I/O, Boolean logic, fixed arrays, indexed access,
   loops, jumps, conditions and early exits within the documented profiles.
 - Explicit i16/i32/f32 operations and conversions; implemented timer, edge and
-  counter subsets; stateless subroutine support in the admitted native layout.
+  counter subsets; multiple stateful subroutines, loops and local returns in
+  the admitted native layout.
 - Modbus READ/WRITE/WRITE_READ APIs, local protocol execution and multiple
   accepted native graph/configuration profiles.
 - Real official-editor/simulator observations for selected exact generated
@@ -72,10 +82,10 @@ does not complete every mode, lifecycle, configuration or transaction case.
 
 | Step | Remaining work | Owner |
 |---|---|---|
-| 1 | Correction/contract integration executed; preserve portable regression cases for the concrete Boolean and SR bugs | Coordinator and two test agents |
-| 2 | Local regression/composition/optimization runs executed; eight explicit pending cases remain visible | Results recorded; no unchanged full-suite repeat |
-| 3 | Restore editor visibility, then check, display Ladder, save/reopen and observe the finite exact-project batch in Schneider | Wine recovery chat, then coordinator as sole GUI operator |
-| 4 | Publish validated code, usage, supported scope and exact results | Coordinator; no remote CI |
+| 1 | Integration and fourteen portable Boolean/SR regression methods completed and published | Done at `c706f6b` |
+| 2 | Local regression/composition/optimization executed; classify and close required pending acceptance cases | Eight explicit failures remain visible; no unchanged full-suite repeat |
+| 3 | Complete the fixed fourteen-project editor campaign and its simulator scenarios | Coordinator owns GUI; independent agents check saved content and acceptance gaps |
+| 4 | Publish the final native results and precise supported limits | Source/docs/local results already public; native report remains pending; no remote CI |
 
 Physical acceptance remains a later external gate. The thirteen stopped
 packages are not prerequisites for this release and must not be restarted by
@@ -95,7 +105,7 @@ the remaining-work list below.
 | 8 | Windows and physical TM200CE40T acceptance | Waiting for the future Windows/SSH/controller access described by the user. | Verify transfer, physical ports, timing/watchdog, retention, real communication and configured peripherals against release hashes. |
 
 Future milestones 2–6 contain substantial work beyond this release. Natal is
-currently in correction, contract review and acceptance preparation. The future
+currently in final official editor/simulator acceptance. The future
 Windows/controller dependency does not prevent those local steps.
 
 ## Completion rules
@@ -117,5 +127,7 @@ Passed gates are not repeated without changed inputs or a concrete defect.
 Optimization remains a release priority: preserve algorithmic native code and
 the existing budgets, and fix demonstrated correctness or capacity failures.
 
-Full completion requires closing every applicable phase in the capability
-matrix and the physical acceptance cases. The goal stays active until then.
+Future full-parity completion requires closing every applicable phase in the
+capability matrix and the physical acceptance cases. The current Natal release
+uses the finite acceptance criteria in [GOAL.md](GOAL.md); physical access and
+the thirteen stopped packages remain later gates.
