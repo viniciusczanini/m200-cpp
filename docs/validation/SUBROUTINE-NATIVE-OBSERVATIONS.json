@@ -1,0 +1,1212 @@
+{
+  "date": "2026-11-06",
+  "scope": "Bounded actual native-editor/local-simulator observations; handbuilt diagnostics, not compiler products",
+  "target": "TM200CE40T",
+  "editor": "EcoStruxure Machine Expert Basic 1.4 build484 under the existing Mac Wine lab",
+  "SR0": {
+    "root_record": {
+      "path": "output/editor-validation/native-subroutines-2026-11-06/observed/sr0/ROOT-OBSERVATIONS.json",
+      "bytes": 6135,
+      "sha256": "a8db060289391cc58e9e307943d1c98becab44299edfd478ced983c56c53ae12"
+    },
+    "source_saved": {
+      "path": "output/editor-validation/native-subroutines-2026-11-06/observed/sr0/subroutine_sr0_editor_saved.smbp",
+      "bytes": 137327,
+      "sha256": "49438bcbed59cde889547869d8c033f377dfb7e60153136a57cb48e135b0e21a"
+    },
+    "shared_copy_after_cleanup": {
+      "path": "/Users/tommy/Offline/projects/shared-folder/plc/compiler-validation-2026-11-06/subroutine_sr0_editor_saved.smbp",
+      "bytes": 137327,
+      "sha256": "49438bcbed59cde889547869d8c033f377dfb7e60153136a57cb48e135b0e21a"
+    },
+    "saved_bytes_unchanged": true,
+    "watch_input": {
+      "path": "output/editor-validation/native-subroutines-2026-11-06/watch-candidates/subroutine_sr0_watch3.smbp",
+      "bytes": 88891,
+      "sha256": "6f408a96222793918c4548e82949e4b9b336ae886a30f6a7de38318af95f307c"
+    },
+    "offline_stage": "Native all-master/callee IL-to-Ladder conversion, Ctrl+S, filesystem preservation of actual saved bytes and fresh saved-clone Programming reopen No error",
+    "save_capture": {
+      "path": "docs/validation/editor-evidence/subroutine-native/sr0-save.png",
+      "bytes": 339628,
+      "sha256": "e9068b12ebace609f695f967116c8656d7b68fc4f8af4f324269d481528fb839"
+    },
+    "fresh_reopen_capture": {
+      "path": "docs/validation/editor-evidence/subroutine-native/sr0-reopen.png",
+      "bytes": 368135,
+      "sha256": "90a130476d3e6d13dc7b4683399f35e1f3055316f44e1e6da98e117a40412abc"
+    },
+    "runtime_stage": "Online / Run; Program advisory(s) detected",
+    "root_and_independent_settled_phase_agreement": true,
+    "watch_order": [
+      "%MW0",
+      "%MW1",
+      "%MW2"
+    ],
+    "phases": [
+      {
+        "label": "SR0-watch3-baseline",
+        "I0_I1": [
+          false,
+          false
+        ],
+        "MW0_MW1_MW2": [
+          30,
+          0,
+          10
+        ],
+        "Q0_through_Q3": "0010",
+        "captures": [
+          {
+            "path": "docs/validation/editor-evidence/subroutine-native/sr0-phase-0-watch.png",
+            "bytes": 419225,
+            "sha256": "a46495d9936f81d81cf0b3b3a23f4b03efeb97089df5c3f6412cd30599e4334c"
+          },
+          {
+            "path": "docs/validation/editor-evidence/subroutine-native/sr0-phase-0-panel.png",
+            "bytes": 18323,
+            "sha256": "b3d8df80d660c1fa967d19e3a68eeff518eb366910240e0fb57a2c64ed10a247"
+          }
+        ],
+        "root_personally_viewed": true,
+        "independently_visually_checked": true
+      },
+      {
+        "label": "SR0-call-true",
+        "I0_I1": [
+          true,
+          false
+        ],
+        "MW0_MW1_MW2": [
+          30,
+          1,
+          20
+        ],
+        "Q0_through_Q3": "1110",
+        "captures": [
+          {
+            "path": "docs/validation/editor-evidence/subroutine-native/sr0-phase-1-watch.png",
+            "bytes": 419299,
+            "sha256": "0a125cf1a36a057acb43af9bfe6e4a57bad30ca3415476f4b8e9b284883e20fd"
+          },
+          {
+            "path": "docs/validation/editor-evidence/subroutine-native/sr0-phase-1-panel.png",
+            "bytes": 18378,
+            "sha256": "7c76a061116165c23546a70bb5697290c6f0ab0891171ef58e7b711fea64364b"
+          }
+        ],
+        "root_personally_viewed": true,
+        "independently_visually_checked": true
+      },
+      {
+        "label": "SR0-call-held-I1-true",
+        "I0_I1": [
+          true,
+          true
+        ],
+        "MW0_MW1_MW2": [
+          30,
+          1,
+          20
+        ],
+        "Q0_through_Q3": "1110",
+        "captures": [
+          {
+            "path": "docs/validation/editor-evidence/subroutine-native/sr0-phase-2-watch.png",
+            "bytes": 417970,
+            "sha256": "3efef6af2ea42696c3ddd4bf6592822747b77d7863cec11637b0d243136e8d68"
+          },
+          {
+            "path": "docs/validation/editor-evidence/subroutine-native/sr0-phase-2-panel.png",
+            "bytes": 18352,
+            "sha256": "4573ff1bffae3990babb497b252a6da1b7f0b982243bd234e44c4d1471923ce7"
+          }
+        ],
+        "root_personally_viewed": true,
+        "independently_visually_checked": true
+      },
+      {
+        "label": "SR0-call-false-I1-true",
+        "I0_I1": [
+          false,
+          true
+        ],
+        "MW0_MW1_MW2": [
+          30,
+          0,
+          10
+        ],
+        "Q0_through_Q3": "0010",
+        "captures": [
+          {
+            "path": "docs/validation/editor-evidence/subroutine-native/sr0-phase-3-watch.png",
+            "bytes": 418500,
+            "sha256": "25eb2ea9e60b08291eeeaa82cfe2054e18209e12bd93379be67342c03aeaebc5"
+          },
+          {
+            "path": "docs/validation/editor-evidence/subroutine-native/sr0-phase-3-panel.png",
+            "bytes": 18392,
+            "sha256": "813437ce77d85c511fbbe7cb9c7e08a4ea26c9f903521b4e114004e5fb11bddd"
+          }
+        ],
+        "root_personally_viewed": true,
+        "independently_visually_checked": true
+      },
+      {
+        "label": "SR0-controls-released",
+        "I0_I1": [
+          false,
+          false
+        ],
+        "MW0_MW1_MW2": [
+          30,
+          0,
+          10
+        ],
+        "Q0_through_Q3": "0010",
+        "captures": [
+          {
+            "path": "docs/validation/editor-evidence/subroutine-native/sr0-phase-4-watch.png",
+            "bytes": 419015,
+            "sha256": "dc6b8adeca51814e3963b61f48570e1b845899a6b4da09009398eb3b1b011fc9"
+          },
+          {
+            "path": "docs/validation/editor-evidence/subroutine-native/sr0-phase-4-panel.png",
+            "bytes": 18323,
+            "sha256": "b3d8df80d660c1fa967d19e3a68eeff518eb366910240e0fb57a2c64ed10a247"
+          }
+        ],
+        "root_personally_viewed": true,
+        "independently_visually_checked": true
+      }
+    ],
+    "sampled_phases": 5,
+    "distinct_control_combinations": 4,
+    "not_scan_count": true,
+    "static_readback": {
+      "scope": "Independent typed whole-tree comparison; no runtime or product execution",
+      "source": {
+        "path": "output/editor-validation/native-subroutines-2026-11-06/watch-candidates/subroutine_sr0_watch3.smbp",
+        "bytes": 88891,
+        "sha256": "6f408a96222793918c4548e82949e4b9b336ae886a30f6a7de38318af95f307c"
+      },
+      "saved": {
+        "path": "output/editor-validation/native-subroutines-2026-11-06/observed/sr0/subroutine_sr0_editor_saved.smbp",
+        "bytes": 137327,
+        "sha256": "49438bcbed59cde889547869d8c033f377dfb7e60153136a57cb48e135b0e21a"
+      },
+      "only_root_identity_deltas_outside_native_graph_and_selection": [
+        {
+          "tag": "FullName",
+          "before": "C:\\lab-tests\\m200-gui-smoke.smbp",
+          "after": "P:\\compiler-validation-2026-11-06\\subroutine_sr0_watch3.smbp"
+        },
+        {
+          "tag": "Name",
+          "before": "m200-gui-smoke",
+          "after": "subroutine_sr0_watch3"
+        }
+      ],
+      "all_other_scalars_attributes_and_ordered_collections_equal": true,
+      "significant_mixed_content_absent": true,
+      "hardware_tasks_allocations_watchlists_comments_equal": true,
+      "allocation_nodes": [
+        "ConstantWordsMemoryAllocation",
+        "MemoryBitsMemoryAllocation",
+        "MemoryWordsMemoryAllocation",
+        "TimersMemoryAllocation",
+        "CountersMemoryAllocation",
+        "RegistersMemoryAllocation",
+        "DrumsMemoryAllocation",
+        "SbrsMemoryAllocation",
+        "ScsMemoryAllocation",
+        "FcsMemoryAllocation",
+        "SchsMemoryAllocation",
+        "HscsMemoryAllocation",
+        "PtosMemoryAllocation"
+      ],
+      "master_rungs": 10,
+      "callee_rungs": 3,
+      "total_rungs": 13,
+      "lexical_IL_lines": 37,
+      "graph_counts": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        12,
+        11,
+        11,
+        11,
+        12
+      ],
+      "call_graph": [
+        [
+          "NormalContact",
+          "%I0.0",
+          "0",
+          "0",
+          "Left, Right"
+        ],
+        [
+          "Line",
+          "",
+          "0",
+          "1",
+          "Left, Right"
+        ],
+        [
+          "Line",
+          "",
+          "0",
+          "2",
+          "Left, Right"
+        ],
+        [
+          "Line",
+          "",
+          "0",
+          "3",
+          "Left, Right"
+        ],
+        [
+          "Line",
+          "",
+          "0",
+          "4",
+          "Left, Right"
+        ],
+        [
+          "Line",
+          "",
+          "0",
+          "5",
+          "Left, Right"
+        ],
+        [
+          "Line",
+          "",
+          "0",
+          "6",
+          "Left, Right"
+        ],
+        [
+          "Line",
+          "",
+          "0",
+          "7",
+          "Left, Right"
+        ],
+        [
+          "Line",
+          "",
+          "0",
+          "8",
+          "Left, Right"
+        ],
+        [
+          "Line",
+          "",
+          "0",
+          "9",
+          "Left, Right"
+        ],
+        [
+          "Jump",
+          "SR0",
+          "0",
+          "10",
+          "Left"
+        ]
+      ],
+      "subroutine_identity": {
+        "Name": "LAB_SR0_LEAF",
+        "SectionNumber": "2",
+        "Number": "0"
+      },
+      "master_section": "0",
+      "actual_level": "FunctLevelMan21_0",
+      "CPU": "TM200CE40T"
+    },
+    "original_independent_readback": {
+      "path": "output/reports/subroutine-native-integration-plan-2026-11-06/SR0-READBACK.json",
+      "bytes": 32991,
+      "sha256": "8220dd0f946719946ca482a2c621bc8826fee79e2b4cbe5b9ba88f6dafe8d71e"
+    },
+    "call_graph_scope": "Literal saved SR0 Jump descriptor; does not enable product native graph import",
+    "journal": {
+      "record": {
+        "path": "output/editor-validation/native-subroutines-2026-11-06/observed/sr0/runtime-actions-SR0.jsonl",
+        "bytes": 19656,
+        "sha256": "d0bbe411922fe804edfc042e63b9bfa4c56887bfe85771533a5d365e8f486930"
+      },
+      "complete_argument_entries": 23,
+      "all_recorded_commands_exit0": true,
+      "all_arguments_preserved_in_frozen_source": true,
+      "labels": [
+        "SR0-programming",
+        "SR0-master-native-LD",
+        "SR0-tasks",
+        "SR0-free-pou",
+        "SR0-callee-native-LD",
+        "SR0-save-native-LD",
+        "SR0-save-completed",
+        "SR0-fresh-reopen-programming",
+        "SR0-commissioning",
+        "SR0-launch-simulator",
+        "SR0-simulator-ready",
+        "SR0-request-RUN",
+        "SR0-confirm-local-RUN",
+        "SR0-programming-RUN",
+        "SR0-tools-RUN",
+        "SR0-watch3-baseline",
+        "SR0-call-true",
+        "SR0-call-held-I1-true",
+        "SR0-call-false-I1-true",
+        "SR0-controls-released",
+        "SR0-commissioning-cleanup",
+        "SR0-official-stop",
+        "SR0-cleanup-completed"
+      ]
+    },
+    "cleanup": {
+      "official_stop": [
+        {
+          "path": "docs/validation/editor-evidence/subroutine-native/sr0-official-stop.png",
+          "bytes": 288157,
+          "sha256": "275ac71b33393dd551cc5377594f3127c63b6b9116ac46b19ef9f2ff05692891"
+        }
+      ],
+      "fresh_completed": [
+        {
+          "path": "docs/validation/editor-evidence/subroutine-native/sr0-cleanup.png",
+          "bytes": 288107,
+          "sha256": "e18e7bb3714b4e97001a79dd2b6c6d5f50d12de29b81e59030206ef11b168793"
+        }
+      ],
+      "fresh_status": "Not Connected / Program advisory(s) detected, simulator panel absent",
+      "exact_ps_pid_9006_exit": 1,
+      "TCP502_lsof_exit": 1,
+      "root_personally_viewed": true,
+      "host_checks_are_root_reported_historical_results_not_reprobed": true
+    },
+    "advisories": "Commissioning displayed No protocol is enabled and application protection inactive; no claim of an advisory-free runtime",
+    "untrusted_DLL_banner": "Visible unchanged in pre-runtime, runtime and cleanup images; no cause or resolution inferred",
+    "password_fields": "all blank",
+    "portable_fixture": {
+      "path": "tests/fixtures/official_tm200ce40t_subroutine_sr0.smbp",
+      "bytes": 137327,
+      "sha256": "49438bcbed59cde889547869d8c033f377dfb7e60153136a57cb48e135b0e21a"
+    },
+    "fixture_provenance": {
+      "path": "tests/fixtures/official_tm200ce40t_subroutine_sr0.provenance.json",
+      "bytes": 4797,
+      "sha256": "f22502f3be85dcf6ff8cf1c4fcee8c9dece406ef92ca99064b7dd6b0c2f6f42f"
+    }
+  },
+  "SR63": {
+    "root_record": {
+      "path": "output/editor-validation/native-subroutines-2026-11-06/observed/sr63/ROOT-OBSERVATIONS.json",
+      "bytes": 6194,
+      "sha256": "6eb80a960c87defa687680e12f70ad2920755546e78030cdb479e9b0d5f23915"
+    },
+    "source_saved": {
+      "path": "output/editor-validation/native-subroutines-2026-11-06/observed/sr63/subroutine_sr63_editor_saved.smbp",
+      "bytes": 157411,
+      "sha256": "ff05369c686e8bc1887612afdbfcfd57d24e0e4e1e51d8d2b2b443824a2fa652"
+    },
+    "shared_copy_after_cleanup": {
+      "path": "/Users/tommy/Offline/projects/shared-folder/plc/compiler-validation-2026-11-06/subroutine_sr63_editor_saved.smbp",
+      "bytes": 157411,
+      "sha256": "ff05369c686e8bc1887612afdbfcfd57d24e0e4e1e51d8d2b2b443824a2fa652"
+    },
+    "portable_fixture": {
+      "path": "tests/fixtures/official_tm200ce40t_subroutine_sr63.smbp",
+      "bytes": 157411,
+      "sha256": "ff05369c686e8bc1887612afdbfcfd57d24e0e4e1e51d8d2b2b443824a2fa652"
+    },
+    "fixture_provenance": {
+      "path": "tests/fixtures/official_tm200ce40t_subroutine_sr63.provenance.json",
+      "bytes": 4865,
+      "sha256": "300ddc9bc3a7b76b0e70cfe2cfe9a0017ae902dac0626e2531c44b5ec52c43b8"
+    },
+    "saved_bytes_unchanged": true,
+    "watch_input": {
+      "path": "output/editor-validation/native-subroutines-2026-11-06/watch-candidates/subroutine_sr63_watch3.smbp",
+      "bytes": 91531,
+      "sha256": "e0ba01812ca868ad1ffc75e0eb3fb5c12b49c1419cd3a584ec5e13bea3756408"
+    },
+    "offline_stage": "Native all-master/callee IL-to-Ladder conversion, Ctrl+S, filesystem preservation of actual saved bytes and fresh saved-clone Programming reopen No error",
+    "save_capture": {
+      "path": "docs/validation/editor-evidence/subroutine-native/sr63-save.png",
+      "bytes": 370674,
+      "sha256": "ea8685b348ea92a4e60ba0b6f1c82671d72c4ff6efb65e1ca7b1838c270439c0"
+    },
+    "fresh_reopen_capture": {
+      "path": "docs/validation/editor-evidence/subroutine-native/sr63-reopen.png",
+      "bytes": 388668,
+      "sha256": "84431073ce2da2b0cbc0d79bd5dcf5b508aabb0aa2779f107f5fa4b876ee46d2"
+    },
+    "runtime_stage": "Online / Run; Program advisory(s) detected",
+    "root_and_independent_settled_phase_agreement": true,
+    "watch_order": [
+      "%MW0",
+      "%MW1",
+      "%MW2"
+    ],
+    "phases": [
+      {
+        "label": "SR63-watch3-baseline",
+        "I0_I1": [
+          false,
+          false
+        ],
+        "MW0_MW1_MW2": [
+          30,
+          0,
+          10
+        ],
+        "Q0_through_Q3": "0010",
+        "captures": [
+          {
+            "path": "docs/validation/editor-evidence/subroutine-native/sr63-phase-0-panel.png",
+            "bytes": 18323,
+            "sha256": "b3d8df80d660c1fa967d19e3a68eeff518eb366910240e0fb57a2c64ed10a247"
+          },
+          {
+            "path": "docs/validation/editor-evidence/subroutine-native/sr63-phase-0-watch.png",
+            "bytes": 419246,
+            "sha256": "8d16b16e82712713fd9faf3f67ad278768ff971d4a069d3ab9b3f461f7087c52"
+          }
+        ],
+        "root_personally_viewed": true,
+        "independently_visually_checked": true
+      },
+      {
+        "label": "SR63-call-true-END-path",
+        "I0_I1": [
+          true,
+          false
+        ],
+        "MW0_MW1_MW2": [
+          30,
+          2,
+          25
+        ],
+        "Q0_through_Q3": "1111",
+        "captures": [
+          {
+            "path": "docs/validation/editor-evidence/subroutine-native/sr63-phase-1-panel.png",
+            "bytes": 18576,
+            "sha256": "cac12d7ebad742b4838928f6524de7c60b42577a617167cf75f8f8ab6e6c850d"
+          },
+          {
+            "path": "docs/validation/editor-evidence/subroutine-native/sr63-phase-1-watch.png",
+            "bytes": 419781,
+            "sha256": "5acab18adf3cd225fdb8331a7fb18bcef1813e5e9941702c1f8a0f2f9ef94e97"
+          }
+        ],
+        "root_personally_viewed": true,
+        "independently_visually_checked": true
+      },
+      {
+        "label": "SR63-call-held-ENDC-path",
+        "I0_I1": [
+          true,
+          true
+        ],
+        "MW0_MW1_MW2": [
+          30,
+          1,
+          20
+        ],
+        "Q0_through_Q3": "1110",
+        "captures": [
+          {
+            "path": "docs/validation/editor-evidence/subroutine-native/sr63-phase-2-panel.png",
+            "bytes": 18352,
+            "sha256": "4573ff1bffae3990babb497b252a6da1b7f0b982243bd234e44c4d1471923ce7"
+          },
+          {
+            "path": "docs/validation/editor-evidence/subroutine-native/sr63-phase-2-watch.png",
+            "bytes": 417994,
+            "sha256": "b9fe32eca687dcc41436b12636bd77b92014505f1c73ecdc0da6ca936a1c6904"
+          }
+        ],
+        "root_personally_viewed": true,
+        "independently_visually_checked": true
+      },
+      {
+        "label": "SR63-call-false-I1-true",
+        "I0_I1": [
+          false,
+          true
+        ],
+        "MW0_MW1_MW2": [
+          30,
+          0,
+          10
+        ],
+        "Q0_through_Q3": "0010",
+        "captures": [
+          {
+            "path": "docs/validation/editor-evidence/subroutine-native/sr63-phase-3-panel.png",
+            "bytes": 18392,
+            "sha256": "813437ce77d85c511fbbe7cb9c7e08a4ea26c9f903521b4e114004e5fb11bddd"
+          },
+          {
+            "path": "docs/validation/editor-evidence/subroutine-native/sr63-phase-3-watch.png",
+            "bytes": 418525,
+            "sha256": "84a41d5cb23ee7a8cc491fbda248e1339f5308f1d40ae2a13b89339a22158d82"
+          }
+        ],
+        "root_personally_viewed": true,
+        "independently_visually_checked": true
+      },
+      {
+        "label": "SR63-controls-released",
+        "I0_I1": [
+          false,
+          false
+        ],
+        "MW0_MW1_MW2": [
+          30,
+          0,
+          10
+        ],
+        "Q0_through_Q3": "0010",
+        "captures": [
+          {
+            "path": "docs/validation/editor-evidence/subroutine-native/sr63-phase-4-panel.png",
+            "bytes": 18323,
+            "sha256": "b3d8df80d660c1fa967d19e3a68eeff518eb366910240e0fb57a2c64ed10a247"
+          },
+          {
+            "path": "docs/validation/editor-evidence/subroutine-native/sr63-phase-4-watch.png",
+            "bytes": 419030,
+            "sha256": "201ca842f5f8642b1f9d366c684ba1745e40b378a1a3e00466dcb0e825a3f937"
+          }
+        ],
+        "root_personally_viewed": true,
+        "independently_visually_checked": true
+      }
+    ],
+    "sampled_phases": 5,
+    "distinct_control_combinations": 4,
+    "not_scan_count": true,
+    "static_readback": {
+      "scope": "Independent typed whole-tree comparison; no runtime or product execution",
+      "source": {
+        "path": "output/editor-validation/native-subroutines-2026-11-06/watch-candidates/subroutine_sr63_watch3.smbp",
+        "bytes": 91531,
+        "sha256": "e0ba01812ca868ad1ffc75e0eb3fb5c12b49c1419cd3a584ec5e13bea3756408"
+      },
+      "saved": {
+        "path": "output/editor-validation/native-subroutines-2026-11-06/observed/sr63/subroutine_sr63_editor_saved.smbp",
+        "bytes": 157411,
+        "sha256": "ff05369c686e8bc1887612afdbfcfd57d24e0e4e1e51d8d2b2b443824a2fa652"
+      },
+      "only_root_identity_deltas_outside_native_graph_and_selection": [
+        {
+          "tag": "FullName",
+          "before": "C:\\lab-tests\\m200-gui-smoke.smbp",
+          "after": "P:\\compiler-validation-2026-11-06\\subroutine_sr63_watch3.smbp"
+        },
+        {
+          "tag": "Name",
+          "before": "m200-gui-smoke",
+          "after": "subroutine_sr63_watch3"
+        }
+      ],
+      "all_other_scalars_attributes_and_ordered_collections_equal": true,
+      "significant_mixed_content_absent": true,
+      "hardware_tasks_allocations_watchlists_comments_equal": true,
+      "allocation_nodes": [
+        "ConstantWordsMemoryAllocation",
+        "MemoryBitsMemoryAllocation",
+        "MemoryWordsMemoryAllocation",
+        "TimersMemoryAllocation",
+        "CountersMemoryAllocation",
+        "RegistersMemoryAllocation",
+        "DrumsMemoryAllocation",
+        "SbrsMemoryAllocation",
+        "ScsMemoryAllocation",
+        "FcsMemoryAllocation",
+        "SchsMemoryAllocation",
+        "HscsMemoryAllocation",
+        "PtosMemoryAllocation"
+      ],
+      "master_rungs": 10,
+      "callee_rungs": 8,
+      "total_rungs": 18,
+      "lexical_IL_lines": 49,
+      "graph_counts": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        12,
+        11,
+        11,
+        11,
+        12,
+        11,
+        11,
+        11,
+        12,
+        11
+      ],
+      "call_graph": [
+        [
+          "NormalContact",
+          "%I0.0",
+          "0",
+          "0",
+          "Left, Right"
+        ],
+        [
+          "Line",
+          "",
+          "0",
+          "1",
+          "Left, Right"
+        ],
+        [
+          "Line",
+          "",
+          "0",
+          "2",
+          "Left, Right"
+        ],
+        [
+          "Line",
+          "",
+          "0",
+          "3",
+          "Left, Right"
+        ],
+        [
+          "Line",
+          "",
+          "0",
+          "4",
+          "Left, Right"
+        ],
+        [
+          "Line",
+          "",
+          "0",
+          "5",
+          "Left, Right"
+        ],
+        [
+          "Line",
+          "",
+          "0",
+          "6",
+          "Left, Right"
+        ],
+        [
+          "Line",
+          "",
+          "0",
+          "7",
+          "Left, Right"
+        ],
+        [
+          "Line",
+          "",
+          "0",
+          "8",
+          "Left, Right"
+        ],
+        [
+          "Line",
+          "",
+          "0",
+          "9",
+          "Left, Right"
+        ],
+        [
+          "Jump",
+          "SR63",
+          "0",
+          "10",
+          "Left"
+        ]
+      ],
+      "subroutine_identity": {
+        "Name": "LAB_SR63_CONDITIONAL_RETURN",
+        "SectionNumber": "2",
+        "Number": "63"
+      },
+      "master_section": "0",
+      "actual_level": "FunctLevelMan21_0",
+      "CPU": "TM200CE40T"
+    },
+    "original_independent_readback": {
+      "path": "output/reports/subroutine-native-integration-plan-2026-11-06/SR63-READBACK.json",
+      "bytes": 44640,
+      "sha256": "864efd8b227ef9d421118e6e1500c1564c924e2ea4887fcad1d1e17c1e24bfd2"
+    },
+    "call_graph_scope": "Literal saved SR63 Jump descriptor, with bounded callee END/ENDC return; does not enable product native graph import",
+    "journal": {
+      "record": {
+        "path": "output/editor-validation/native-subroutines-2026-11-06/observed/sr63/runtime-actions-SR63.jsonl",
+        "bytes": 18309,
+        "sha256": "c3dc4427a74b18d19ff97b051af54ef66b5c8799ef8d0770c24da969fc7695f9"
+      },
+      "complete_argument_entries": 21,
+      "all_recorded_commands_exit0": true,
+      "all_arguments_preserved_in_frozen_source": true,
+      "labels": [
+        "SR63-programming",
+        "SR63-master-native-LD",
+        "SR63-free-pou",
+        "SR63-callee-native-LD",
+        "SR63-save-native-LD",
+        "SR63-save-completed",
+        "SR63-fresh-reopen-programming",
+        "SR63-commissioning",
+        "SR63-launch-simulator",
+        "SR63-simulator-ready",
+        "SR63-request-RUN",
+        "SR63-confirm-local-RUN",
+        "SR63-programming-RUN",
+        "SR63-watch3-baseline",
+        "SR63-call-true-END-path",
+        "SR63-call-held-ENDC-path",
+        "SR63-call-false-I1-true",
+        "SR63-controls-released",
+        "SR63-commissioning-cleanup",
+        "SR63-official-stop",
+        "SR63-cleanup-completed"
+      ]
+    },
+    "cleanup": {
+      "official_stop": [
+        {
+          "path": "docs/validation/editor-evidence/subroutine-native/sr63-official-stop.png",
+          "bytes": 288192,
+          "sha256": "de7eefc2670ca8bef7675eb2643c12e3da1f556ed34fb5624d18a155ab3a8a09"
+        }
+      ],
+      "fresh_completed": [
+        {
+          "path": "docs/validation/editor-evidence/subroutine-native/sr63-cleanup.png",
+          "bytes": 288149,
+          "sha256": "99b80dfc5f72ec5ddac746b017d2419e052e71c571a3e39114517bad2be477a7"
+        }
+      ],
+      "fresh_status": "Not Connected / Program advisory(s) detected, simulator panel absent",
+      "exact_ps_pid_17448_exit": 1,
+      "TCP502_lsof_exit": 1,
+      "root_personally_viewed": true,
+      "host_checks_are_root_reported_historical_results_not_reprobed": true
+    },
+    "advisories": "Commissioning displayed No protocol is enabled and application protection inactive; no advisory-free runtime claim",
+    "untrusted_DLL_banner": "Visible unchanged in pre-runtime, runtime and cleanup images; no cause or resolution inferred",
+    "password_fields": "all blank",
+    "bounded_runtime_conclusion": "Current-level callee END/ENDC return and subsequent fresh-load caller continuation observed in this exact diagnostic; no ENDCN, same-rung accumulator, repeated/skip history or stateful callee inference"
+  },
+  "public_PNGs": [
+    {
+      "purpose": "SR0-watch3-baseline",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793970778210942000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr0-phase-0-watch.png",
+      "bytes": 419225,
+      "sha256": "a46495d9936f81d81cf0b3b3a23f4b03efeb97089df5c3f6412cd30599e4334c",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "SR0-watch3-baseline",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793970778470624000-4523.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr0-phase-0-panel.png",
+      "bytes": 18323,
+      "sha256": "b3d8df80d660c1fa967d19e3a68eeff518eb366910240e0fb57a2c64ed10a247",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "SR0-call-true",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793970960362522000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr0-phase-1-watch.png",
+      "bytes": 419299,
+      "sha256": "0a125cf1a36a057acb43af9bfe6e4a57bad30ca3415476f4b8e9b284883e20fd",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "SR0-call-true",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793970960625154000-4523.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr0-phase-1-panel.png",
+      "bytes": 18378,
+      "sha256": "7c76a061116165c23546a70bb5697290c6f0ab0891171ef58e7b711fea64364b",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "SR0-call-held-I1-true",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793971023213303000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr0-phase-2-watch.png",
+      "bytes": 417970,
+      "sha256": "3efef6af2ea42696c3ddd4bf6592822747b77d7863cec11637b0d243136e8d68",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "SR0-call-held-I1-true",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793971023475063000-4523.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr0-phase-2-panel.png",
+      "bytes": 18352,
+      "sha256": "4573ff1bffae3990babb497b252a6da1b7f0b982243bd234e44c4d1471923ce7",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "SR0-call-false-I1-true",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793971076263758000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr0-phase-3-watch.png",
+      "bytes": 418500,
+      "sha256": "25eb2ea9e60b08291eeeaa82cfe2054e18209e12bd93379be67342c03aeaebc5",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "SR0-call-false-I1-true",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793971076527397000-4523.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr0-phase-3-panel.png",
+      "bytes": 18392,
+      "sha256": "813437ce77d85c511fbbe7cb9c7e08a4ea26c9f903521b4e114004e5fb11bddd",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "SR0-controls-released",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793971155584728000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr0-phase-4-watch.png",
+      "bytes": 419015,
+      "sha256": "dc6b8adeca51814e3963b61f48570e1b845899a6b4da09009398eb3b1b011fc9",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "SR0-controls-released",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793971155843468000-4523.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr0-phase-4-panel.png",
+      "bytes": 18323,
+      "sha256": "b3d8df80d660c1fa967d19e3a68eeff518eb366910240e0fb57a2c64ed10a247",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "fresh saved-clone Programming reopen: No error",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793969891485927000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr0-reopen.png",
+      "bytes": 368135,
+      "sha256": "90a130476d3e6d13dc7b4683399f35e1f3055316f44e1e6da98e117a40412abc",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "official Stop simulator action completed; Program advisories remain",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793971273527097000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr0-official-stop.png",
+      "bytes": 288157,
+      "sha256": "275ac71b33393dd551cc5377594f3127c63b6b9116ac46b19ef9f2ff05692891",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "fresh completed cleanup: Not Connected, Program advisories, panel absent",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793971288843515000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr0-cleanup.png",
+      "bytes": 288107,
+      "sha256": "e18e7bb3714b4e97001a79dd2b6c6d5f50d12de29b81e59030206ef11b168793",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "clean Ctrl+S save, Free POU Ladder, No error",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793969488254835000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr0-save.png",
+      "bytes": 339628,
+      "sha256": "e9068b12ebace609f695f967116c8656d7b68fc4f8af4f324269d481528fb839",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "native callee IL-to-Ladder conversion, dirty title",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793969435620693000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr0-callee-native-ladder.png",
+      "bytes": 339796,
+      "sha256": "c1a1b638a28ff1bce33b32cc3ac109d65c8fe3e289ecb8c6fea3c9c40765e9b3",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "native callee IL and number0 before conversion",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793969330456442000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr0-callee-il.png",
+      "bytes": 328803,
+      "sha256": "a8cf5dccf9a2248dfcb8a5488e57bba62343a87b131dafa1fbe4cfba70c127fe",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "native master IL-to-Ladder conversion, dirty title",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793969268256185000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr0-master-native-ladder.png",
+      "bytes": 395906,
+      "sha256": "fd271c0795676897addd7ca64b614c3966dcb114cc6102cad54aeb11d01074dd",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "Master Task and Free POUs tree",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793969287715197000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr0-tasks.png",
+      "bytes": 367272,
+      "sha256": "73d6a47fa22994575acd64d468066f38126e928677ed819878b6086a69ade7b5",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "Online/Stop, identical application, protocol/protection advisories",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793970253117218000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr0-commissioning-stop-advisories.png",
+      "bytes": 311789,
+      "sha256": "e026c46e36ff196d452594233ff87b9c5567876a86e54b6022095814c608d17f",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "Online/Run with unchanged commissioning advisories before cleanup",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793971174513146000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr0-commissioning-run-advisories.png",
+      "bytes": 301065,
+      "sha256": "b08ecf48d26e7153313d3b06311948986484e9ed1e5f4efe8528a77b156ed868",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "SR63-watch3-baseline",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793972060572832000-4578.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr63-phase-0-panel.png",
+      "bytes": 18323,
+      "sha256": "b3d8df80d660c1fa967d19e3a68eeff518eb366910240e0fb57a2c64ed10a247",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "SR63-watch3-baseline",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793972060758693000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr63-phase-0-watch.png",
+      "bytes": 419246,
+      "sha256": "8d16b16e82712713fd9faf3f67ad278768ff971d4a069d3ab9b3f461f7087c52",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "SR63-call-true-END-path",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793972139775260000-4578.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr63-phase-1-panel.png",
+      "bytes": 18576,
+      "sha256": "cac12d7ebad742b4838928f6524de7c60b42577a617167cf75f8f8ab6e6c850d",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "SR63-call-true-END-path",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793972139957758000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr63-phase-1-watch.png",
+      "bytes": 419781,
+      "sha256": "5acab18adf3cd225fdb8331a7fb18bcef1813e5e9941702c1f8a0f2f9ef94e97",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "SR63-call-held-ENDC-path",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793972404592292000-4578.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr63-phase-2-panel.png",
+      "bytes": 18352,
+      "sha256": "4573ff1bffae3990babb497b252a6da1b7f0b982243bd234e44c4d1471923ce7",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "SR63-call-held-ENDC-path",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793972404775150000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr63-phase-2-watch.png",
+      "bytes": 417994,
+      "sha256": "b9fe32eca687dcc41436b12636bd77b92014505f1c73ecdc0da6ca936a1c6904",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "SR63-call-false-I1-true",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793972498594554000-4578.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr63-phase-3-panel.png",
+      "bytes": 18392,
+      "sha256": "813437ce77d85c511fbbe7cb9c7e08a4ea26c9f903521b4e114004e5fb11bddd",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "SR63-call-false-I1-true",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793972498776386000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr63-phase-3-watch.png",
+      "bytes": 418525,
+      "sha256": "84a41d5cb23ee7a8cc491fbda248e1339f5308f1d40ae2a13b89339a22158d82",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "SR63-controls-released",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793972740614331000-4578.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr63-phase-4-panel.png",
+      "bytes": 18323,
+      "sha256": "b3d8df80d660c1fa967d19e3a68eeff518eb366910240e0fb57a2c64ed10a247",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "SR63-controls-released",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793972740805256000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr63-phase-4-watch.png",
+      "bytes": 419030,
+      "sha256": "201ca842f5f8642b1f9d366c684ba1745e40b378a1a3e00466dcb0e825a3f937",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "fresh saved-clone Programming reopen No error",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793971512235294000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr63-reopen.png",
+      "bytes": 388668,
+      "sha256": "84431073ce2da2b0cbc0d79bd5dcf5b508aabb0aa2779f107f5fa4b876ee46d2",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "official Stop simulator completed",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793972846294281000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr63-official-stop.png",
+      "bytes": 288192,
+      "sha256": "de7eefc2670ca8bef7675eb2643c12e3da1f556ed34fb5624d18a155ab3a8a09",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "fresh completed cleanup Not Connected with Program advisories",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793972864553621000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr63-cleanup.png",
+      "bytes": 288149,
+      "sha256": "99b80dfc5f72ec5ddac746b017d2419e052e71c571a3e39114517bad2be477a7",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "clean Ctrl+S native callee Ladder save No error",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793969700202847000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr63-save.png",
+      "bytes": 370674,
+      "sha256": "ea8685b348ea92a4e60ba0b6f1c82671d72c4ff6efb65e1ca7b1838c270439c0",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "native callee IL-to-Ladder conversion, dirty title",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793969635845585000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr63-callee-native-ladder.png",
+      "bytes": 370821,
+      "sha256": "b74f0cbe79a2189e6bedcf9bb0b8089e52eb6b1777702667b0582897ad565e1c",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "native callee IL and Number63 before conversion",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793969603163233000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr63-callee-il.png",
+      "bytes": 372737,
+      "sha256": "80f4cf70d7ec7b4110a27f5b439070e4171b648ed0000669f34c91d1ed2ce188",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "Online/Stop identical application and commissioning advisories",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793971752185171000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr63-commissioning-stop-advisories.png",
+      "bytes": 311834,
+      "sha256": "047a4669861bba788458d732b741ada623b927d75a916536c37ef1ff4d00d3c0",
+      "independently_visually_reviewed": true
+    },
+    {
+      "purpose": "Online/Run identical application and commissioning advisories",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793972778561454000-2146.png",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr63-commissioning-run-advisories.png",
+      "bytes": 301122,
+      "sha256": "94d0170a1b4c96c1771686d3e42d5bf138ff8d69b48f0581d88a4c7103f301a3",
+      "independently_visually_reviewed": true
+    }
+  ],
+  "public_PNG_count": 38,
+  "PNG_transforms": "None; filesystem byte copies only",
+  "independent_review": {
+    "all16_initial_root_artifact_records_verified": true,
+    "all20_public_SR0_PNGs_visually_viewed": true,
+    "whole_typed_XML_checked": true,
+    "readback_code": {
+      "path": "output/reports/subroutine-observation-review-2026-11-06/readback.py",
+      "bytes": 3551,
+      "sha256": "04793698fb491f4ed393b3cf1810356c9735ff6bcbc5ec10d2b68622b6929d23"
+    },
+    "readback_log": {
+      "path": "output/reports/subroutine-observation-review-2026-11-06/readback.log",
+      "bytes": 2824,
+      "sha256": "1589549bc5e9ef76575bbe0e72b14e5be13de424e1331d5dd161d2d5d1638647"
+    },
+    "readback_result": {
+      "path": "output/reports/subroutine-observation-review-2026-11-06/SR0-independent-readback.json",
+      "bytes": 2824,
+      "sha256": "1589549bc5e9ef76575bbe0e72b14e5be13de424e1331d5dd161d2d5d1638647"
+    },
+    "no_product_GUI_runtime_or_port_process_probe_by_reviewer": true,
+    "all16_SR63_root_artifact_records_verified": true,
+    "all18_public_SR63_PNGs_visually_viewed": true,
+    "SR63_readback_code": {
+      "path": "output/reports/subroutine-observation-review-2026-11-06/readback-sr63.py",
+      "bytes": 3556,
+      "sha256": "37f525d640946287edabbb10aef342364d3e3fe4d607029d2a39673c32599470"
+    },
+    "SR63_readback_log": {
+      "path": "output/reports/subroutine-observation-review-2026-11-06/readback-sr63.log",
+      "bytes": 2886,
+      "sha256": "a77904c13de934af679afd77ba3c5aeb1697d332b897393df1af0061941ea9b0"
+    },
+    "SR63_readback_result": {
+      "path": "output/reports/subroutine-observation-review-2026-11-06/SR63-independent-readback.json",
+      "bytes": 2886,
+      "sha256": "a77904c13de934af679afd77ba3c5aeb1697d332b897393df1af0061941ea9b0"
+    }
+  },
+  "historical_preparation": {
+    "manifest": {
+      "path": "output/editor-validation/native-subroutines-2026-11-06/manifest.json",
+      "bytes": 4646,
+      "sha256": "c784af4479e534ffa91454ff5e904d1686d98510af2872311f466b3e1786379a"
+    },
+    "guide": {
+      "path": "output/editor-validation/native-subroutines-2026-11-06/GUIDE.md",
+      "bytes": 4293,
+      "sha256": "b974eaf448bf3c00b3b511531f94bfdda5197212ab982500db1f15bd5ec33344"
+    },
+    "product_gate_check": {
+      "path": "output/editor-validation/native-subroutines-2026-11-06/product-gate-check.json",
+      "bytes": 464,
+      "sha256": "b627fa8d379b4a50e5356c3520b754e92415570e06eb6a098bf7329179d407fd"
+    },
+    "pending_labels_remain_historical_not_current_runtime_facts": true
+  },
+  "limits": [
+    "Ten settled phases/eight project-control combinations, not scan frames or a timing trace",
+    "Only SR0 implicit return and SR63 END/ENDC paths observed; ENDCN remains unobserved",
+    "No same-rung caller-accumulator continuation proof",
+    "No nested/dynamic call, SR1..62, multiple calls per scan, stateful callee or repeated/skip-history/lifecycle/preemption inference",
+    "No whole compiler SR integration or generated product acceptance claim",
+    "Standalone codec foundation unit/regression evidence belongs to its separate implementation report",
+    "No physical controller, external communications, firmware or remoteCI",
+    "Earlier simulator crash remains unresolved separately"
+  ],
+  "publication_actions_by_this_lane": "No staging, commit or push; root reviews publication",
+  "aggregate_counting": {
+    "projects": 2,
+    "sampled_phases": 10,
+    "distinct_project_control_combinations": 8,
+    "distinct_raw_control_combinations_reused": 4,
+    "not_scans_or_timing_trace": true,
+    "no_addition_to_unittest_or_historical_stress_frame_totals": true,
+    "journal_complete_argument_entries": {
+      "SR0": 23,
+      "SR63": 21
+    },
+    "public_PNGs": {
+      "SR0": 20,
+      "SR63": 18,
+      "total": 38
+    }
+  }
+}

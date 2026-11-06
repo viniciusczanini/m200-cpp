@@ -117,7 +117,7 @@ The recorded **2026-11-06 validation rounds** contain:
 
 | Evidence | Recorded result |
 |---|---:|
-| Latest combined unit/regression suite | 602 passing tests |
+| Latest combined unit/regression suite | 628 passing tests |
 | Earlier baseline unit/regression suite | 417 passing tests |
 | Historical stress and public-program traces | 288,372 base scan frames |
 | Combined state/array, timer/counter and numeric candidates | 276 distinct candidate frames |
@@ -129,9 +129,11 @@ The BCD vectors are **not scans** and are excluded from the scan total. Repeated
 
 Exact [generated single-write products](docs/validation/MODBUS-SINGLE-GENERATED-PROJECT-RESULTS.md), [generated WRITE_READ_VAR product](docs/validation/MODBUS-WRITE-READ-GENERATED-PROJECT-RESULTS.md) and [generated timer products](docs/validation/TIMER-GENERATED-PROJECT-RESULTS.md) have separate official-editor evidence; only the saved timer/watch artifact has the runtime observations recorded there. [Native FIFO/LIFO diagnostics](docs/validation/REGISTER-NATIVE-OBSERVATIONS.md) also have bounded simulator evidence; they are hand-built research inputs, and Register compilation remains unfinished. Separate [FIFO reset and held-request observations](docs/validation/REGISTER-COLLISION-OBSERVATIONS.md) preserve first-call latches and the limits of the recorded evidence. Two [FIFO self-status trials](docs/validation/REGISTER-SELF-STATUS-OBSERVATIONS.md) separately record the first-call sample, later held state and refresh limits.
 
+The [standalone subroutine foundation](docs/validation/SUBROUTINE-FOUNDATION-RESULTS.md) records the latest 628-test checkpoint and exact SR0/SR63 saved fixtures. Its wrapper and call-graph codecs are isolated components: subroutines remain unsupported in C++, SDK, VM, reverse and whole-project import/export. Native diagnostic observations and an ignored integration prototype are separate from this product checkpoint.
+
 The [standalone Register graph foundation](docs/validation/REGISTER-GRAPH-FOUNDATION-RESULTS.md) records the earlier 587-test checkpoint and exact FIFO/LIFO graphical fixtures. It remains separate from whole-project Register compilation and execution support.
 
-The [bare Execute/Abort checkpoint](docs/validation/MODBUS-BARE-ABORT-PROFILE-RESULTS.md) records the latest 602-test suite and three exact six-line/three-entity native fixtures. Complete ordered M status quartets still prefer the full-pin form; partial, reordered, labelled or interleaved ordinary status rungs remain separate and retain their order. The [native binding observations](docs/validation/MODBUS-BARE-ABORT-NATIVE-OBSERVATIONS.md) record official conversion/save/fresh reopen; generated bare-product editor acceptance and actual communication are separate validation stages.
+The [bare Execute/Abort checkpoint](docs/validation/MODBUS-BARE-ABORT-PROFILE-RESULTS.md) records the earlier 602-test suite and three exact six-line/three-entity native fixtures. Complete ordered M status quartets still prefer the full-pin form; partial, reordered, labelled or interleaved ordinary status rungs remain separate and retain their order. The [native binding observations](docs/validation/MODBUS-BARE-ABORT-NATIVE-OBSERVATIONS.md) record official conversion/save/fresh reopen; generated bare-product editor acceptance and actual communication are separate validation stages.
 
 The [earlier native full-pin checkpoint](docs/validation/MODBUS-FULL-PIN-PROFILE-RESULTS.md) records 568 local tests, including connected Execute/Abort and four ordered status coils in the observed profiles. Exact original IL and graphics are checked before normalization; source origins and human comments are preserved. All three [genuine full-pin CLI products](docs/validation/MODBUS-FULL-PIN-GENERATED-PROJECT-RESULTS.md) subsequently passed official-editor save and fresh reopen; communication execution remains unverified.
 

@@ -1,0 +1,157 @@
+{
+  "source": "User local Schneider Basic lab; handbuilt IL-only CE40T diagnostic converted and saved by the official editor, then filesystem-cloned and freshly reopened after another project.",
+  "editor": "EcoStruxure Machine Expert Basic 1.4 build484",
+  "target": "TM200CE40T",
+  "file": "official_tm200ce40t_subroutine_sr63.smbp",
+  "sha256": "ff05369c686e8bc1887612afdbfcfd57d24e0e4e1e51d8d2b2b443824a2fa652",
+  "bytes": 157411,
+  "copied_date": "2026-11-06",
+  "original_modified": false,
+  "source_saved": {
+    "path": "output/editor-validation/native-subroutines-2026-11-06/observed/sr63/subroutine_sr63_editor_saved.smbp",
+    "sha256": "ff05369c686e8bc1887612afdbfcfd57d24e0e4e1e51d8d2b2b443824a2fa652",
+    "bytes": 157411
+  },
+  "parent_watch_candidate": {
+    "path": "output/editor-validation/native-subroutines-2026-11-06/watch-candidates/subroutine_sr63_watch3.smbp",
+    "sha256": "e0ba01812ca868ad1ffc75e0eb3fb5c12b49c1419cd3a584ec5e13bea3756408"
+  },
+  "procedure": "Exact handbuilt IL-only candidate opened; native Master and Free POU IL-to-Ladder conversion applied to all rungs; clean No error observed; Ctrl+S; actual saved bytes preserved using a filesystem clone. Another project opened before fresh reopen of the saved clone in Programming, No error. No GUI Save As operation or compiler generation of this diagnostic is claimed.",
+  "root_observation": {
+    "clean_save_No_error": true,
+    "all_master_and_callee_rungs_native_Ladder": true,
+    "fresh_reopen_pending": false,
+    "fresh_reopen_Programming_No_error": true,
+    "other_project_before_reopen": "SR0 saved project, bounded native trial and official cleanup",
+    "saved_sha256_after_reopen": "ff05369c686e8bc1887612afdbfcfd57d24e0e4e1e51d8d2b2b443824a2fa652"
+  },
+  "Free_POU_identity": {
+    "Name": "LAB_SR63_CONDITIONAL_RETURN",
+    "SectionNumber": "2",
+    "Number": "63"
+  },
+  "master_rungs": 10,
+  "callee_rungs": 8,
+  "master_IL_lines": 28,
+  "callee_IL_lines": 21,
+  "binding_scope": "Four-field wrapper and terminal plain LD %I0.0 / SRn eleven-entity native call graph; no M-contact/other input predicate binding. Standalone codecs only; active whole-project Subroutines remain refused.",
+  "call_native_IL": [
+    "LD %I0.0",
+    "SR63"
+  ],
+  "call_native_graph": [
+    [
+      "NormalContact",
+      "%I0.0",
+      0,
+      0,
+      "Left, Right"
+    ],
+    [
+      "Line",
+      "",
+      0,
+      1,
+      "Left, Right"
+    ],
+    [
+      "Line",
+      "",
+      0,
+      2,
+      "Left, Right"
+    ],
+    [
+      "Line",
+      "",
+      0,
+      3,
+      "Left, Right"
+    ],
+    [
+      "Line",
+      "",
+      0,
+      4,
+      "Left, Right"
+    ],
+    [
+      "Line",
+      "",
+      0,
+      5,
+      "Left, Right"
+    ],
+    [
+      "Line",
+      "",
+      0,
+      6,
+      "Left, Right"
+    ],
+    [
+      "Line",
+      "",
+      0,
+      7,
+      "Left, Right"
+    ],
+    [
+      "Line",
+      "",
+      0,
+      8,
+      "Left, Right"
+    ],
+    [
+      "Line",
+      "",
+      0,
+      9,
+      "Left, Right"
+    ],
+    [
+      "Jump",
+      "SR63",
+      0,
+      10,
+      "Left"
+    ]
+  ],
+  "captures": [
+    {
+      "phase": "save",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr63-save.png",
+      "original_capture_filename": "skill-1793969700202847000-2146.png",
+      "bytes": 370674,
+      "sha256": "ea8685b348ea92a4e60ba0b6f1c82671d72c4ff6efb65e1ca7b1838c270439c0",
+      "root_personally_viewed_Programming_No_error": true,
+      "codec_author_independently_viewed": true
+    },
+    {
+      "phase": "reopen",
+      "path": "docs/validation/editor-evidence/subroutine-native/sr63-reopen.png",
+      "original_capture_filename": "skill-1793971512235294000-2146.png",
+      "bytes": 388668,
+      "sha256": "84431073ce2da2b0cbc0d79bd5dcf5b508aabb0aa2779f107f5fa4b876ee46d2",
+      "root_personally_viewed_Programming_No_error": true,
+      "codec_author_independently_viewed": true
+    }
+  ],
+  "preservation": {
+    "hardware_unchanged": true,
+    "all_13_allocations_unchanged": true,
+    "task_CpuBehavior_WatchLists_unchanged": true,
+    "all_IL_lexical_tokens_and_comments_unchanged": true,
+    "outside_native_graph_and_selection_changes_only_root_Name_FullName_differ": true,
+    "typed_readback": "output/reports/subroutine-native-integration-plan-2026-11-06/SR63-READBACK.json"
+  },
+  "native_runtime": "Not claimed by the foundation codec/fixture. Separately recorded bounded handbuilt diagnostic observations must retain their own scope.",
+  "compiler_SDK_VM_support": "Not enabled or claimed",
+  "public_evidence": "docs/validation/SUBROUTINE-NATIVE-OBSERVATIONS.md",
+  "password_fields": {
+    "count": 3,
+    "all_blank": true
+  },
+  "portable_test_basis": "Exact saved SMBP bytes included. Tests use this fixture directly; ignored lab/captures are provenance references, not test dependencies."
+}
