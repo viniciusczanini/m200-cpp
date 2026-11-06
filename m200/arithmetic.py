@@ -22,6 +22,12 @@ INTEGER_STEMS = frozenset(
         "ror",
         "low_word",
         "high_word",
+        "bcd_to_int",
+        "bcd_to_dint",
+        "int_to_bcd",
+        "dint_to_bcd",
+        "concat_words",
+        "int_to_dint",
     )
 )
 

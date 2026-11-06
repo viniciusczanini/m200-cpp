@@ -85,12 +85,13 @@ def alu_result(stem, a, b, width):
     return signed(raw, width), None, error
 
 
-def array_case(kind, a, b, results, operation, controls):
+def array_case(kind, a, b, results, operation, controls, operand_kind=None):
     # A separate expected-value table makes all32 result bits observable, instead
     # of comparing only the low output byte or sharing the operation's evaluator.
-    arrays = f"plc::{kind} values[128]={{" + ",".join(map(str, a)) + "};\n"
+    operand_kind = operand_kind or kind
+    arrays = f"plc::{operand_kind} values[128]={{" + ",".join(map(str, a)) + "};\n"
     if b is not None:
-        arrays += f"plc::{kind} others[128]={{" + ",".join(map(str, b)) + "};\n"
+        arrays += f"plc::{operand_kind} others[128]={{" + ",".join(map(str, b)) + "};\n"
     arrays += (
         f"plc::{kind} expected[128]={{" + ",".join(str(v[0]) for v in results) + "};\n"
     )

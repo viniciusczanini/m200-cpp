@@ -1,0 +1,132 @@
+{
+  "seed": 20020261120,
+  "target": "TM200CE40T",
+  "cases": [
+    {
+      "case": "word_domain_BTI",
+      "scans": 10000,
+      "status": "pass",
+      "scope": "all10000 valid word values; whole16-bit results observed directly. Flags checked independently in table cases/SDK to avoid masking a wrong result. BTI includes exact G59 rung with explicit harness"
+    },
+    {
+      "case": "word_domain_ITB",
+      "scans": 10000,
+      "status": "pass",
+      "scope": "all10000 valid word values; whole16-bit results observed directly. Flags checked independently in table cases/SDK to avoid masking a wrong result. BTI includes exact G59 rung with explicit harness"
+    },
+    {
+      "case": "bcd_to_int",
+      "scans": 512,
+      "status": "pass",
+      "scope": "fullwidth expected tables, inactive calls and flags before/after clears"
+    },
+    {
+      "case": "int_to_bcd",
+      "scans": 512,
+      "status": "pass",
+      "scope": "fullwidth expected tables, inactive calls and flags before/after clears"
+    },
+    {
+      "case": "bcd_to_dint",
+      "scans": 512,
+      "status": "pass",
+      "scope": "fullwidth expected tables, inactive calls and flags before/after clears"
+    },
+    {
+      "case": "dint_to_bcd",
+      "scans": 512,
+      "status": "pass",
+      "scope": "fullwidth expected tables, inactive calls and flags before/after clears"
+    },
+    {
+      "case": "concat_pair",
+      "scans": 512,
+      "status": "pass",
+      "scope": "low/high byte oracle, walking bits, fullwidth tables and flags"
+    },
+    {
+      "case": "concat_swap",
+      "scans": 512,
+      "status": "pass",
+      "scope": "low/high byte oracle, walking bits, fullwidth tables and flags"
+    },
+    {
+      "case": "concat_same",
+      "scans": 512,
+      "status": "pass",
+      "scope": "low/high byte oracle, walking bits, fullwidth tables and flags"
+    },
+    {
+      "case": "signed_widen",
+      "scans": 512,
+      "status": "pass",
+      "scope": "explicit local sign-extension policy, not independent physical DWORD proof"
+    }
+  ],
+  "scans": 24096,
+  "sdk_exhaustive": {
+    "status": "pass",
+    "word_widen_concat_vectors": 65536,
+    "bcd_word_vectors": 10000,
+    "bcd_dword_vectors": 100000000,
+    "hardware_proof": false,
+    "seconds": 1.335,
+    "compiler": "/usr/bin/clang++",
+    "compile_flags": [
+      "-std=c++17",
+      "-O2",
+      "-DPLC_NATIVE",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=undefined"
+    ],
+    "oracle": "decimal-corrected packed-digit increment, independent of SDK divide/modulo codec; volatile value prevents constant propagation",
+    "counted_as_scan_frames": false
+  },
+  "source_sha256": {
+    "m200/__init__.py": "77c5815a3596eebca3e939d1ad39abba46fa4edc4df148aaa7e47f13e5eda0ab",
+    "m200/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "m200/allocation.py": "f21e8753757ebf1c54874c18c3385a7d79ce52992514725920c29a1ca6281be9",
+    "m200/arithmetic.py": "bd0a83b4cc3257d2734a2ad1131137ce0608c2688a0565842b41759c336df75a",
+    "m200/arrays.py": "d4574f6e48ab98f70feb3f474f30bbf387117f5db3ddde395525a21a77da42ed",
+    "m200/bits.py": "d76ca8b8bb587a6811cfb3e157c00385ba0a836b8eb669afdda9af4e635b6a61",
+    "m200/boolean_bdd.py": "b3de9c79a5b14953256117afa22df8aaf2b37eb71689f224ca2d66e78a02882f",
+    "m200/capabilities.py": "e94e59743ee0eae98c476938f8eafe04966c0823b825b1d070980d15d41348a0",
+    "m200/cli.py": "22110f728cd456b9fae20a2ae1c2f9a03ba3fede808ee220318071c09a9d6a14",
+    "m200/communication.py": "105c1aef50e7ee00bc7c7142a5b6805d4ddf5f18fc04c5e60a52b78841a6b3b0",
+    "m200/communication_xml.py": "954e0fb861fef56381b204936c47f2f760dbcb3840dd018bb1d2a1b13bfc319f",
+    "m200/config.py": "536cde246108b3357f094757efc2c4e1e6290f667baa86c355d92305e25014b8",
+    "m200/conversions.py": "0922116a83ef1bcacda5fb9a588f2bc10d522a7c1ca7f301148ea88e6e370250",
+    "m200/copy_fusion.py": "39c8f498518c46d35ad61ec2c53564a61748a4957eae25e8d241a3c7e4b98816",
+    "m200/counter_graph.py": "80abf1241ee5095a121c47e1a196de03f1e7ed37fe0c54626b2a3f3eba4a9e8c",
+    "m200/counter_xml.py": "a87177f18a698b1f442a7c16eb66748a6d2c06c9c966ac199c6275bb1e326554",
+    "m200/counters.py": "0e4ed9d8fe6f4356f3d6b6986558a0f9caa019daa3f741b12522d1fdd6f376ce",
+    "m200/edge_functions.py": "c58b059d15ee7387ed7e65f841ad549f3b30c3781a258c0a6340a96e9cd92a24",
+    "m200/edges.py": "e590a801d00b94d20a2dd1f428635aa299e3bd59bcbfe2442f5ffa4fd3d64713",
+    "m200/flow.py": "a61ed946937daa4e54002dc29664c0ef6c02617eb1abb8faa0d0169e06244dc6",
+    "m200/frontend.py": "d2696e3a7f732608baf4eff2da56f85881772971a23a7f2423ef84f2493f24ba",
+    "m200/il.py": "461668d0e23dd7a449efc963db8ad0a886d97eb9036a935225dbbb7b31244cd0",
+    "m200/indexed.py": "0b8ca542e2be87392d8de2a75ef8ad0d48534b28d7f82d1e24fd1bf38fc8343b",
+    "m200/jsonio.py": "c4d8447354b4f48205a8d5bfc58e1a3919656ba2073ecc5982b2f8fd6253fd70",
+    "m200/ladder_lowering.py": "6ded10d59e90334b2a128123a1a354fefb72d188a09196aa71f8878c3b78a822",
+    "m200/lower.py": "83e993a70d113820769cf7240be997e34a058bf1de4e3113ffe9151ef658549b",
+    "m200/modbus.py": "62e98577eba6e2de938bc2292dd6cb16f22f64e1101fabdf5ea0f33fd009e92c",
+    "m200/model.py": "e786ea2d03ea7d9c98c641fe6ed84a00a2076f51a1974ce1209355ef4dad0e11",
+    "m200/native.py": "016a6af7d7f7b1de11dab9bee1477faa9f4d393f75bbf09e1b3bf5daa5e6ac4f",
+    "m200/native_logic.py": "10d4b0d4ce3aa98e5c5f35b2f83f9c6aa4d92f3bb7cbc05887a895a1b60dbe3f",
+    "m200/numeric.py": "b29de2050a070dcbf23ab4e942642f45ad22a580d70b078f5b74111dfde629c5",
+    "m200/project.py": "83c5e0405b2a7d10f2b53d33a4df3cc08fac1286430849e8a571fe8eda205d39",
+    "m200/reverse.py": "bb0923cc94eced0856a222de2e8f44997b1641788afaa3e3f06034b9253870d8",
+    "m200/timers.py": "384e3c26facd76ed8da5449d001348fe1c1dd818a73532ab9c782e6a9b0fedf6",
+    "sdk/plc.hpp": "b1d6f04ab2ce88d4e37ac781a299f134c5882971f2d593ead502be3877e784b3",
+    "tests/stress/conversions.py": "da56e75ab3d233470151c3efbd4a9c836e1dcfd3c5469945bdbebb0c61f073d0",
+    "tests/stress/conversion_sdk.cpp": "9079c8a93f7b8dcd839d4f3d6304eba9110c6583a90160aef09f6a396fbdf38b",
+    "tests/stress/integer_flags.py": "1f26ac9b9adcb349c381ae03288ed6588c2fb6eda691003089e85072f9a2b689",
+    "tests/stress/expression_edges.py": "d8dc293380b5aa3de06c3d764dab8324a974fd8d7f9d6962dbd776b9abc5d82a",
+    "tests/stress/bit_objects.py": "a39468f5ae36159b378cda34f2bfbe81abdf42fa1cb1fbf5cca0e6325b9c0489",
+    "tests/fixtures/synthetic.smbp": "5c04625cb62d03bd8d2982430970bbb3fb81070205c302d4e39f5a5b78a7f515"
+  },
+  "policy": "CONCATW low-first corroborated by official FAQ; signed DWORD is local emulation policy requiring external proof; invalid BCD sets S18 and stops local model without fabricated result",
+  "whole_original_projects_imported": 0,
+  "official_editor": "pending",
+  "physical_plc": "pending"
+}

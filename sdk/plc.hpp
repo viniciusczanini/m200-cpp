@@ -324,6 +324,17 @@ inline i16 real_to_int(f32 a){double v=__builtin_rint((double)a);if(!__builtin_i
 inline i32 real_to_dint(f32 a){double v=__builtin_rint((double)a);if(!__builtin_isfinite(v)||v<-2147483648.0||v>2147483647.0)__builtin_trap();return (i32)v;}
 inline i16 low_word(i32 a){return detail::bits_i16((unsigned)a);}
 inline i16 high_word(i32 a){return detail::bits_i16((unsigned)a>>16);}
+namespace detail {
+inline unsigned bcd_decode(unsigned raw,int digits){unsigned result=0,place=1;for(int i=0;i<digits;++i){unsigned digit=raw&15u;if(digit>9u){arithmetic_error=true;__builtin_trap();}result+=digit*place;place*=10u;raw>>=4;}return result;}
+inline unsigned bcd_encode(i32 value,int digits){unsigned limit=1;for(int i=0;i<digits;++i)limit*=10u;if(value<0||(unsigned)value>=limit){arithmetic_error=true;__builtin_trap();}unsigned result=0,raw=(unsigned)value;for(int shift=0;shift<digits*4;shift+=4){result|=(raw%10u)<<shift;raw/=10u;}return result;}
+}
+inline i16 bcd_to_int(i16 a){return (i16)detail::bcd_decode((unsigned short)a,4);}
+inline i32 bcd_to_dint(i32 a){return (i32)detail::bcd_decode((unsigned)a,8);}
+inline i16 int_to_bcd(i16 a){return detail::bits_i16(detail::bcd_encode(a,4));}
+inline i32 dint_to_bcd(i32 a){return detail::bits_i32(detail::bcd_encode(a,8));}
+inline i32 concat_words(i16 low,i16 high){return detail::bits_i32((unsigned)(unsigned short)low|((unsigned)(unsigned short)high<<16));}
+// Local signed-widening policy; native DWORD negative semantics pending proof.
+inline i32 int_to_dint(i16 a){return (i32)a;}
 #else
 i16 read_word(int);
 void write_word(int,i16);
@@ -398,6 +409,12 @@ i16 real_to_int(f32);
 i32 real_to_dint(f32);
 i16 low_word(i32);
 i16 high_word(i32);
+i16 bcd_to_int(i16);
+i32 bcd_to_dint(i32);
+i16 int_to_bcd(i16);
+i32 dint_to_bcd(i32);
+i32 concat_words(i16,i16);
+i32 int_to_dint(i16);
 #endif
 // Native Modbus function blocks. Ports/endpoints are configured in the template.
 enum class Link : int { Serial1=1, Ethernet=2 };

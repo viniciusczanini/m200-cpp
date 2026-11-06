@@ -3,6 +3,7 @@ from .allocation import Storage
 from .indexed import is_indexed, is_bit_indexed
 from .numeric import Number, TYPES, boolean, expect, OPS, evaluate, read as read_number
 from .arithmetic import ArithmeticState
+from .conversions import needs_word_snapshot
 
 
 class Lowerer:
@@ -236,6 +237,8 @@ class Lowerer:
                 value = expect(value, argkind)
                 if is_indexed(value.code):
                     value = self.copy(value, "indexed_operand_snapshot")
+                if needs_word_snapshot(token, value.code):
+                    value = self.copy(value, "conversion_operand_snapshot")
                 # Object operands are required by several native functions.
                 if shape != "binary" and not value.code.startswith("%"):
                     value = self.copy(value)

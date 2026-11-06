@@ -342,6 +342,18 @@ def main(argv=None):
                     "reset": ["clear_shift_carry", "clear_arithmetic_error"],
                     "scope": "S17 assigned the last ejected bit on shifts/rotates; S18 sticky signed integer overflow with explicit reset, snapshots and guarded execution. Modular overflow bits beyond G55 ADDword are a local policy. DIV0/SQRTnegative stop local model after S18; float SW17 and unknown-result recovery remain gaps. Official editor/PLC pending.",
                 },
+                "word_conversions": {
+                    "api": [
+                        "bcd_to_int",
+                        "bcd_to_dint",
+                        "int_to_bcd",
+                        "dint_to_bcd",
+                        "concat_words",
+                        "int_to_dint",
+                    ],
+                    "il": ["BTI", "ITB", "CONCATW", "DWORD"],
+                    "scope": "Four/eight unsigned BCD digits in signed carriers; valid conversions preserve S17/S18. Invalid BCD sets S18 and stops local model without inventing a result; recovery remains a gap. CONCATW low-first has official corroboration. DWORD negative sign extension is a local policy still requiring editor/PLC proof. Other operand banks and nested native expressions remain gaps.",
+                },
                 "stateful_types": [
                     "Ton",
                     "Tof",

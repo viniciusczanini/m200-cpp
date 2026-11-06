@@ -537,7 +537,7 @@ class Frontend:
                 typ = READS[key]
                 index = self.index(args[0], 8000 - TYPES[typ][1] + 1, node)
                 return Number(typ, "%" + TYPES[typ][0] + str(index))
-            if key in OPS:
+            if key in OPS and name == "plc::" + key:
                 typ, argtypes, _, _ = OPS[key]
                 values = []
                 for arg, argkind in zip(args, argtypes):

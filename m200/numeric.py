@@ -1,6 +1,6 @@
 """Typed numeric IL subset, independently evaluated with explicit error domains.
 
-Sources: EIO0000003289.04 pp49-59,67-72; EIO0000002019.06 pp322-323.
+Sources: EIO0000003289.04 pp49-60,67-72; EIO0000002019.06 pp322-323.
 Integer context models sticky S18 and S17/last-bit with signed modular results.
 Exact overflow bits beyond the G55 ADDword example remain a local policy.
 Unmodeled arithmetic domains stop simulation rather than inventing a result.
@@ -13,6 +13,7 @@ from dataclasses import dataclass
 
 from .model import fail, CompileError
 from .arithmetic import INTEGER_STEMS
+from .conversions import NUMERIC_CONVERSIONS, evaluate_conversion, needs_word_snapshot
 from .communication import status_reference, NUM_FIELDS, NUM_REFERENCE, cpp_name
 from .indexed import WORD_PATTERN, is_indexed, parse as parse_indexed
 from .bits import STRING_PATTERN, is_string, bit_string
@@ -70,7 +71,7 @@ for name, dest, src, token in [
     ("high_word", "i16", "i32", "HW"),
 ]:
     OPS[name] = (dest, (src,), token, "function")
-# CONCATW ordering is left out until its two-word order has independent proof.
+OPS.update(NUMERIC_CONVERSIONS)
 
 
 @dataclass(frozen=True)
@@ -189,7 +190,7 @@ def operand(text, kind):
 
 
 def operation(line):
-    """Parse one closed, side-effect-free operation (never eval source text)."""
+    """Parse one closed operation (never eval source text)."""
     unary = re.fullmatch(r"\[\s*(INC|DEC)\s+(%(?:MW|MD)[0-9]+)\s*\]", line)
     if unary:
         token, target = unary.groups()
@@ -272,7 +273,19 @@ def operation(line):
                 parsed.append(int(value))
             else:
                 parsed.append(operand(value, argkind))
-        if shape == "function" and not parsed[0].code.startswith("%"):
+        if any(
+            isinstance(v, Number) and needs_word_snapshot(token, v.code) for v in parsed
+        ):
+            fail(
+                "native "
+                + token
+                + " requires word operands; copy the value to MW first"
+            )
+        if (
+            shape == "function"
+            and token != "CONCATW"
+            and not parsed[0].code.startswith("%")
+        ):
             fail("numeric function requires an object operand")
         if (
             is_indexed(target)
@@ -329,6 +342,8 @@ def evaluate(name, values, kind, flags=None):
     try:
         if name == "copy":
             result = values[0]
+        elif name in NUMERIC_CONVERSIONS:
+            result = evaluate_conversion(name, values)
         else:
             stem = name.rsplit("_", 1)[0] if name.rsplit("_", 1)[-1] in TYPES else name
             a = values[0]

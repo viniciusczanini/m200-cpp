@@ -1,0 +1,37 @@
+{
+  "target": "TM200CE40T",
+  "retrieved_utc": "2026-11-06",
+  "sources": [
+    {
+      "id": "G",
+      "file": "research/downloads/manuals/EIO0000003289.pdf",
+      "bytes": 2674700,
+      "sha256": "d2c8af0598276e7a0bb4f30770e4529282962bc6ee3944dee0645cb9a3186595",
+      "url": "https://www.se.com/us/en/download/document/EIO0000003289/"
+    },
+    {
+      "id": "P",
+      "file": "research/downloads/manuals/EIO0000002019.pdf",
+      "bytes": 24872820,
+      "sha256": "fb4f684e7efbb46e3e38e61ed532d99bf623bedffe447b5c379dd3dd6c4434df",
+      "url": "https://www.se.com/ph/en/download/document/EIO0000002019/"
+    },
+    {
+      "id": "F",
+      "url": "https://www.se.com/sk/sk/faqs/FA297976/",
+      "title": "How to manage 16-bit UINT variables inside a SoMachine/Machine Expert Basic application?",
+      "verified": "web page opened2026-11-06; examples2000/45000 and low-first CONCATW",
+      "raw_http_cache": "403; no cached HTML or invented digest",
+      "scope": "official Basic corroboration, not physical M200 proof"
+    },
+    {
+      "id": "T",
+      "url": "https://product-help.schneider-electric.com/Machine%20Expert/V1.1/en/TwiEmSup/TwiEmSup/Twido_Functions/Twido_Functions.htm",
+      "title": "Twido Functions / FC_ConcatOfInt",
+      "verified": "official search result retrieved2026-11-06, inputs low then high; direct URL redirects to inaccessible product-help.se.com",
+      "raw_http_cache": "unavailable; no invented digest",
+      "scope": "compatibility mapping corroboration; not native M200 differential evidence"
+    }
+  ],
+  "negative_dword_extension": "local policy; no physical proof"
+}

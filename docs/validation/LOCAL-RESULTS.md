@@ -666,3 +666,76 @@ referenciados. Relatórios locais anteriores são históricos. Biblioteca comple
 continua false; meta integral ativa. Perfil/firmware/schema, editor Schneider,
 PLC e comportamento elétrico/temporal permanecem pendentes. Tudo local, sem CI,
 push, transmissão ao PLC ou acionamento de cargas.
+
+
+## Conversões BCD e de palavras — 2026-11-06
+
+Etapa após bd5bcf3. Foram acrescentados seis intrínsecos nativos à biblioteca:
+BTI/ITB word/dword (`bcd_to_int`, `bcd_to_dint`, `int_to_bcd`, `dint_to_bcd`),
+CONCATW (`concat_words`) e DWORD (`int_to_dint`). A matriz pública contém agora
+53 intrínsecos com respostas declaradas e conferência de cobertura exata.
+Contrato/fontes em `../capabilities/CONVERSIONS.md` e `CONVERSION-SOURCES.json`.
+
+BCD usa quatro/oito dígitos; portadores negativos com nibble alto 8/9 são válidos
+sem overflow causado pelo sinal do portador. S17 e S18 anteriores são preservados
+no sucesso. BCD inválido assinala S18 e interrompe o modelo antes de escrever o
+destino, sem fabricar resultado. A recuperação de valores indeterminados segue
+pendente. CONCATW recebe low primeiro/high depois, corroborado oficialmente.
+DWORD usa extensão de sinal no modelo local; o manual não resolve os negativos,
+e essa política continua exigindo teste no editor/PLC.
+
+A revisão independente encontrou dois P2, reproduzidos e corrigidos por testes
+RED→GREEN: helpers globais com nomes dos intrínsecos eram capturados como APIs;
+propriedades de bloco podiam ser emitidas diretamente em DWORD/CONCATW, fora da
+tabela de operandos do manual. O despacho exige plc:: e o lowering materializa
+MW para essas fontes; o importador recusa a forma raw indevida. Um teste com
+ReadVar/configuração serial explícita percorre SDK/VM/JSON/normalização/XML e
+C++ do XML até novo XML sem tráfego. BTI/ITB com propriedades válidas permanecem
+aceitos. A prova de alias foi fortalecida com fontes invertidas: resultado 65538,
+enquanto uma escrita prematura daria 131074. Ver `CONVERSION-REVIEW.md`.
+
+Rodada final: **402 testes em 182,478 s**, exemplos, públicos, originais, lint,
+formatação, capabilities e diff passaram. Os 15 scripts da receita stress foram
+executados como comandos independentes com quatro workers externos, além dos
+quatro processos internos de integer_flags. O novo stress foi repetido após
+separar a observação integral dos resultados word da observação de flags;
+somente a rodada final entra nas contagens. `make stress` não foi invocado como
+comando único. Nenhuma implementação mudou durante a rodada final.
+
+Novo stress: **10 casos / 24.096 scans**. Dois casos percorrem os 10.000 valores
+válidos de BTI/ITB word e observam diretamente todos os 16 bits. Os outros oito
+usam tabelas independentes de largura completa, valores extremos/walking bits,
+operandos trocados, widening, guardas e flags antes/depois de clears. O caminho
+inclui IL/JSON/normalização, SDK, reversão/recompilação e C++ do XML efetivamente
+emitido até outro XML. O rung BTI de G59 é exemplo publicado com harness,
+não um projeto BCD original baixado. O corpus existente só continha DWORD
+composto; nenhum suporte novo a expressões nativas compostas foi alegado.
+
+Um harness separado do SDK, compilado com UBSan e recuperação desativada,
+percorreu **65.536 vetores de widening/concat, 10.000 BCD word e 100.000.000 BCD
+dword válidos**. Seu oracle incrementa dígitos packed com correção decimal,
+independente da divisão/módulo usados no codec. Um valor volatile impede
+propagação de constantes. O harness verifica resultados e preservação de flags;
+seus 100.075.536 vetores não são scans e ficam fora do total abaixo.
+
+Os unitários também esgotam os 65.536 portadores BTI word (exatamente 10.000
+válidos), 10.000 ITB word e 65.536 valores de widening no avaliador, além de
+amostras de 32 bits, cada posição de nibble inválido e limites de entrada. Esses vetores
+unitários e os reruns focados igualmente não entram nos scans finais.
+
+Total: **270.196 scans de stress +18.176 públicos =288.372**, cada frame-base
+contado uma vez. Modbus, temporizadores, contadores, memória, bordas, controle
+de fluxo e a matriz das 24 entradas/16 saídas digitais passaram novamente:
+49 casos / 12.800 scans e 768 bindings de I/O/polaridade, sem ensaio elétrico.
+
+Resultados/hashes atuais: `CONVERSION-LOCAL-RESULTS.json`,
+`CONVERSION-STRESS-RESULTS.json` e os 15 relatórios de stress/públicos
+referenciados. Relatórios locais anteriores são históricos. O índice de fontes
+registra os hashes dos PDFs; as páginas web foram conferidas por busca/leitura,
+mas o download direto devolveu 403/redirect inacessível, sem inventar cache ou
+hash de HTML. Não houve reescrita de CPU ou modificação dos originais.
+
+Biblioteca completa permanece false e meta integral ativa. Outros bancos,
+expressões compostas, flags/recuperação completos, recursos de hardware,
+configuração/perfil/schema exatos, editor e PLC ainda faltam. Tudo local, sem
+CI, push, upload ou atuação em cargas.

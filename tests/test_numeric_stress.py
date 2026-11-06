@@ -55,9 +55,21 @@ def cpp_literal(value, kind):
 
 
 def argument_kind(operation, index):
-    if operation in ("int_to_real",):
+    if operation in (
+        "int_to_real",
+        "int_to_dint",
+        "concat_words",
+        "bcd_to_int",
+        "int_to_bcd",
+    ):
         return "i16"
-    if operation in ("dint_to_real", "low_word", "high_word"):
+    if operation in (
+        "dint_to_real",
+        "low_word",
+        "high_word",
+        "bcd_to_dint",
+        "dint_to_bcd",
+    ):
         return "i32"
     if operation in ("real_to_int", "real_to_dint"):
         return "f32"
@@ -117,6 +129,12 @@ def fixed_vectors():
         Vector("real_to_dint", "i32", (-10.5,), -10),
         Vector("low_word", "i16", (0x12348000,), -32768),
         Vector("high_word", "i16", (-2147418113,), -32768),
+        Vector("bcd_to_int", "i16", (-26215,), 9999),
+        Vector("bcd_to_dint", "i32", (-1717986919,), 99999999),
+        Vector("int_to_bcd", "i16", (9999,), -26215),
+        Vector("dint_to_bcd", "i32", (99999999,), -1717986919),
+        Vector("concat_words", "i32", (-20536, 0), 45000),
+        Vector("int_to_dint", "i32", (-32768,), -32768),
     ]
 
 
