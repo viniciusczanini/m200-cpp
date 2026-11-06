@@ -1,0 +1,2424 @@
+{
+  "format": "m200-modbus-official-binding-observations-v1",
+  "date": "2026-11-06",
+  "editor": "EcoStruxure Machine Expert Basic 1.4 build 484",
+  "target": "TM200CE40T",
+  "observed_by": "root, personally operating the local official editor; report author performed read-only file/PNG inspection and byte-copy verification",
+  "procedure": "Writable lab P: clone opened; parameters or IL-to-Ladder conversion viewed No error; Ctrl+S; saved bytes copied after save completion; another project opened before exact saved-file fresh reopen No error",
+  "scope": "Seven basic binding saves/reopens plus three authentic full-pin conversions/saves/reopens; no program exchange or runtime proof",
+  "case_count": 10,
+  "basic_cases": 7,
+  "full_pin_cases": 3,
+  "xml_type_catalog": {
+    "T1": "SchneiderElectric.Automation.SoMachineBasic.Entities.PLCObjects.FunctionBlocks.Com.ReadVarBasic, SchneiderElectric.SoMachineBasic.Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5beddbc0114a5f07",
+    "T2": "SchneiderElectric.Automation.SoMachineBasic.Entities.PLCObjects.FunctionBlocks.Com.WriteReadVarBasic, SchneiderElectric.SoMachineBasic.Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5beddbc0114a5f07",
+    "T3": "SchneiderElectric.Automation.SoMachineBasic.Entities.PLCObjects.FunctionBlocks.Com.WriteVarBasic, SchneiderElectric.SoMachineBasic.Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5beddbc0114a5f07",
+    "T4": "SchneiderElectric.Automation.SoMachineBasic.Entities.PLCObjects.FunctionBlocks.FbParameterElementEnumType`1[[SchneiderElectric.Automation.SoMachineBasic.Entities.PLCObjects.FunctionBlocks.Enums.FBComLinkParameterEnums, SchneiderElectric.SoMachineBasic.Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5beddbc0114a5f07]], SchneiderElectric.SoMachineBasic.Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5beddbc0114a5f07",
+    "T5": "SchneiderElectric.Automation.SoMachineBasic.Entities.PLCObjects.FunctionBlocks.FbParameterElementEnumType`1[[SchneiderElectric.Automation.SoMachineBasic.Entities.PLCObjects.FunctionBlocks.Enums.FBComObjTypeParameterEnums, SchneiderElectric.SoMachineBasic.Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5beddbc0114a5f07]], SchneiderElectric.SoMachineBasic.Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5beddbc0114a5f07",
+    "T6": "SchneiderElectric.Automation.SoMachineBasic.Entities.PLCObjects.FunctionBlocks.FbParameterElementRangeType`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], SchneiderElectric.SoMachineBasic.Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5beddbc0114a5f07"
+  },
+  "cases": [
+    {
+      "id": "01",
+      "group": "basic",
+      "source_readback": {
+        "lab_relative_path": "editor-saved/01_readback.json",
+        "sha256": "40c5520cb91ac323d6cc05a5e7a3ff79d66707f2925f534edaffa660b9fa9156"
+      },
+      "original": {
+        "lab_relative_path": "candidates/01_word_control_read_write_mw.smbp",
+        "sha256": "67db35db9a2369e776147edfd6510cf030028ee8ff04bb005be6668dc689773f",
+        "bytes": 92271
+      },
+      "saved": {
+        "lab_relative_path": "editor-saved/01_word_control_read_write_mw_editor_saved.smbp",
+        "sha256": "1ecabeb09cf6c6ab8f3c1f13e6ebc557890483795af3c48f21565e6fd35fe38c",
+        "bytes": 94505,
+        "target": "TM200CE40T",
+        "management_level": "FunctLevelMan21_0",
+        "blocks": [
+          {
+            "address": "%READ_VAR0",
+            "index": "0",
+            "block_xml_type_id": "T1",
+            "parameters": {
+              "Link": {
+                "value": "SerialLine1",
+                "value_xml_tag": "FBComLinkParameterEnums",
+                "xml_type_id": "T4"
+              },
+              "RemoteDeviceId": {
+                "value": "1",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "Timeout": {
+                "value": "100",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "ObjType": {
+                "value": "MW",
+                "value_xml_tag": "FBComObjTypeParameterEnums",
+                "xml_type_id": "T5"
+              },
+              "FirstObj": {
+                "value": "17",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "Quantity": {
+                "value": "2",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "IndexData": {
+                "value": "200",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              }
+            },
+            "documented_function_code_not_transaction_observation": 3
+          },
+          {
+            "address": "%WRITE_VAR0",
+            "index": "0",
+            "block_xml_type_id": "T3",
+            "parameters": {
+              "Link": {
+                "value": "SerialLine1",
+                "value_xml_tag": "FBComLinkParameterEnums",
+                "xml_type_id": "T4"
+              },
+              "RemoteDeviceId": {
+                "value": "1",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "Timeout": {
+                "value": "100",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "ObjType": {
+                "value": "MW",
+                "value_xml_tag": "FBComObjTypeParameterEnums",
+                "xml_type_id": "T5"
+              },
+              "FirstObj": {
+                "value": "41",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "Quantity": {
+                "value": "3",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "IndexData": {
+                "value": "240",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              }
+            },
+            "documented_function_code_not_transaction_observation": 16
+          }
+        ],
+        "rungs": [
+          {
+            "is_ladder_selected": "true",
+            "normalized_IL": [
+              "BLK %READ_VAR0",
+              "LD %M10",
+              "EXECUTE",
+              "END_BLK"
+            ],
+            "entity_count": 3,
+            "entity_type_counts": {
+              "ReadVarBasic": 1,
+              "NormalContact": 1,
+              "Line": 1
+            },
+            "entities": [
+              {
+                "ElementType": "ReadVarBasic",
+                "Descriptor": "%READ_VAR0",
+                "Comment": "",
+                "Symbol": "",
+                "Row": "0",
+                "Column": "2",
+                "ChosenConnection": "Left"
+              },
+              {
+                "ElementType": "NormalContact",
+                "Descriptor": "%M10",
+                "Comment": "",
+                "Symbol": "",
+                "Row": "0",
+                "Column": "0",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Row": "0",
+                "Column": "1",
+                "ChosenConnection": "Left, Right"
+              }
+            ]
+          },
+          {
+            "is_ladder_selected": "true",
+            "normalized_IL": [
+              "BLK %WRITE_VAR0",
+              "LD %M11",
+              "EXECUTE",
+              "END_BLK"
+            ],
+            "entity_count": 4,
+            "entity_type_counts": {
+              "WriteVarBasic": 1,
+              "NormalContact": 1,
+              "Line": 2
+            },
+            "entities": [
+              {
+                "ElementType": "WriteVarBasic",
+                "Descriptor": "%WRITE_VAR0",
+                "Comment": "",
+                "Symbol": "",
+                "Row": "0",
+                "Column": "3",
+                "ChosenConnection": "Left"
+              },
+              {
+                "ElementType": "NormalContact",
+                "Descriptor": "%M11",
+                "Comment": "",
+                "Symbol": "",
+                "Row": "0",
+                "Column": "1",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Row": "0",
+                "Column": "2",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Row": "0",
+                "Column": "0",
+                "ChosenConnection": "Left, Right"
+              }
+            ]
+          }
+        ],
+        "serial_configuration": {
+          "Addressing": "MasterAddressing",
+          "TransmissionMode": "TransmissionModeModbusRtu",
+          "PhysicalMedium": "PhysicalMediumRs485",
+          "Baud": "Baud19200",
+          "Parity": "ParityEven",
+          "DataBits": "DataBits8",
+          "StopBits": "StopBits1",
+          "ResponseTime": "10"
+        }
+      },
+      "root_observation": "Root personally reported No error, save and fresh reopen for this exact case",
+      "fresh_reopen_status": "No error observed after another project",
+      "captures": [
+        {
+          "phase": "fresh reopen after another project: No error",
+          "path": "editor-evidence/modbus-bindings/01_reopen.png",
+          "sha256": "2e33067073f3b084e7ae355a2223353684e2bda80c13bdd5b00deaa6ac620a92",
+          "bytes": 500200
+        }
+      ],
+      "preservation": {
+        "normalized_IL_sequence_equal": true,
+        "hardware_semantics_equal": true,
+        "typed_function_block_semantics_equal": true,
+        "hardware_canonical_sha256": "a3f0dc223eac3387b7ea387076aa025d3efb13adfede6a93844a7257495a2c8a",
+        "function_blocks_canonical_sha256": "3c00ec1e5fec382b313989a8817edd97b0a528a336328add5faf09122de9af02",
+        "reported_software_field_delta_count": 4,
+        "software_field_delta_categories": {
+          "default allocation serialization": 4
+        }
+      },
+      "runtime_exchange": "not attempted",
+      "native_compile": "not claimed"
+    },
+    {
+      "id": "02",
+      "group": "basic",
+      "source_readback": {
+        "lab_relative_path": "editor-saved/02_read_i_fc2_readback.json",
+        "sha256": "f0f9dc4d8ea8c2a7567f9aa930ad9d5d9d0ef377800ce9add4126dec2d4155de"
+      },
+      "original": {
+        "lab_relative_path": "candidates/02_read_i_fc2.smbp",
+        "sha256": "112f98745711d0d97c4a5f42553a73c4d228161badbce7463b6ea4536aab5f72",
+        "bytes": 86302
+      },
+      "saved": {
+        "lab_relative_path": "editor-saved/02_read_i_fc2_editor_saved.smbp",
+        "sha256": "1c857a39e418d602b30f132ebc311f60521eb70fdb44ddbe94fc39ff9430d214",
+        "bytes": 88441,
+        "target": "TM200CE40T",
+        "management_level": "FunctLevelMan21_0",
+        "blocks": [
+          {
+            "address": "%READ_VAR0",
+            "index": "0",
+            "block_xml_type_id": "T1",
+            "parameters": {
+              "Link": {
+                "value": "SerialLine1",
+                "value_xml_tag": "FBComLinkParameterEnums",
+                "xml_type_id": "T4"
+              },
+              "RemoteDeviceId": {
+                "value": "1",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "Timeout": {
+                "value": "100",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "ObjType": {
+                "value": "I",
+                "value_xml_tag": "FBComObjTypeParameterEnums",
+                "xml_type_id": "T5"
+              },
+              "FirstObj": {
+                "value": "17",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "Quantity": {
+                "value": "17",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "IndexData": {
+                "value": "200",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              }
+            },
+            "documented_function_code_not_transaction_observation": 2
+          }
+        ],
+        "rungs": [
+          {
+            "is_ladder_selected": "true",
+            "normalized_IL": [
+              "BLK %READ_VAR0",
+              "LD %M10",
+              "EXECUTE",
+              "END_BLK"
+            ],
+            "entity_count": 3,
+            "entity_type_counts": {
+              "ReadVarBasic": 1,
+              "NormalContact": 1,
+              "Line": 1
+            },
+            "entities": [
+              {
+                "ElementType": "ReadVarBasic",
+                "Descriptor": "%READ_VAR0",
+                "Comment": "",
+                "Symbol": "",
+                "Row": "0",
+                "Column": "2",
+                "ChosenConnection": "Left"
+              },
+              {
+                "ElementType": "NormalContact",
+                "Descriptor": "%M10",
+                "Comment": "",
+                "Symbol": "",
+                "Row": "0",
+                "Column": "0",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Row": "0",
+                "Column": "1",
+                "ChosenConnection": "Left, Right"
+              }
+            ]
+          }
+        ],
+        "serial_configuration": {
+          "Addressing": "MasterAddressing",
+          "TransmissionMode": "TransmissionModeModbusRtu",
+          "PhysicalMedium": "PhysicalMediumRs485",
+          "Baud": "Baud19200",
+          "Parity": "ParityEven",
+          "DataBits": "DataBits8",
+          "StopBits": "StopBits1",
+          "ResponseTime": "10"
+        }
+      },
+      "root_observation": "No error; Programming block parameters viewed by GUI operator",
+      "fresh_reopen_status": "No error observed after another project",
+      "captures": [
+        {
+          "phase": "conversion/parameter view; saved-byte identity is recorded separately",
+          "path": "editor-evidence/modbus-bindings/02_read_i_fc2_save.png",
+          "sha256": "46982368c7c2a8e5b18d5b963da53b524f35bc8aca0712d84cc60dda46481914",
+          "bytes": 319225
+        },
+        {
+          "phase": "fresh reopen after another project: No error",
+          "path": "editor-evidence/modbus-bindings/02_reopen.png",
+          "sha256": "2cc576533ffa96c97ac5af22e75a4761781348a877e78786fc0d0dd2cde9847b",
+          "bytes": 498865
+        }
+      ],
+      "preservation": {
+        "normalized_IL_sequence_equal": true,
+        "hardware_semantics_equal": true,
+        "typed_function_block_semantics_equal": true,
+        "hardware_canonical_sha256": "a3f0dc223eac3387b7ea387076aa025d3efb13adfede6a93844a7257495a2c8a",
+        "function_blocks_canonical_sha256": "9a4b9994eb26bbc0c3e86f7a9c8f23b786773fb4d4f8cace5924dffa914c1758",
+        "reported_software_field_delta_count": 4,
+        "software_field_delta_categories": {
+          "default allocation serialization": 4
+        }
+      },
+      "runtime_exchange": "not attempted",
+      "native_compile": "not claimed"
+    },
+    {
+      "id": "03",
+      "group": "basic",
+      "source_readback": {
+        "lab_relative_path": "editor-saved/03_read_q_fc1_readback.json",
+        "sha256": "6f04518657cb41e6353f39d6825aec0d4c5601e9850860bff80ed538363435e6"
+      },
+      "original": {
+        "lab_relative_path": "candidates/03_read_q_fc1.smbp",
+        "sha256": "d5e83d5d0d8ecdb92958316e7854a07dd85d2b77ad6723c0be72546b6f2233fa",
+        "bytes": 86302
+      },
+      "saved": {
+        "lab_relative_path": "editor-saved/03_read_q_fc1_editor_saved.smbp",
+        "sha256": "4994ba0c7aee1ffc5127f15e673215dc9a5b9ef521877255e243b3cb3cef8d4f",
+        "bytes": 88441,
+        "target": "TM200CE40T",
+        "management_level": "FunctLevelMan21_0",
+        "blocks": [
+          {
+            "address": "%READ_VAR0",
+            "index": "0",
+            "block_xml_type_id": "T1",
+            "parameters": {
+              "Link": {
+                "value": "SerialLine1",
+                "value_xml_tag": "FBComLinkParameterEnums",
+                "xml_type_id": "T4"
+              },
+              "RemoteDeviceId": {
+                "value": "1",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "Timeout": {
+                "value": "100",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "ObjType": {
+                "value": "Q",
+                "value_xml_tag": "FBComObjTypeParameterEnums",
+                "xml_type_id": "T5"
+              },
+              "FirstObj": {
+                "value": "41",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "Quantity": {
+                "value": "17",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "IndexData": {
+                "value": "220",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              }
+            },
+            "documented_function_code_not_transaction_observation": 1
+          }
+        ],
+        "rungs": [
+          {
+            "is_ladder_selected": "true",
+            "normalized_IL": [
+              "BLK %READ_VAR0",
+              "LD %M10",
+              "EXECUTE",
+              "END_BLK"
+            ],
+            "entity_count": 3,
+            "entity_type_counts": {
+              "ReadVarBasic": 1,
+              "NormalContact": 1,
+              "Line": 1
+            },
+            "entities": [
+              {
+                "ElementType": "ReadVarBasic",
+                "Descriptor": "%READ_VAR0",
+                "Comment": "",
+                "Symbol": "",
+                "Row": "0",
+                "Column": "2",
+                "ChosenConnection": "Left"
+              },
+              {
+                "ElementType": "NormalContact",
+                "Descriptor": "%M10",
+                "Comment": "",
+                "Symbol": "",
+                "Row": "0",
+                "Column": "0",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Row": "0",
+                "Column": "1",
+                "ChosenConnection": "Left, Right"
+              }
+            ]
+          }
+        ],
+        "serial_configuration": {
+          "Addressing": "MasterAddressing",
+          "TransmissionMode": "TransmissionModeModbusRtu",
+          "PhysicalMedium": "PhysicalMediumRs485",
+          "Baud": "Baud19200",
+          "Parity": "ParityEven",
+          "DataBits": "DataBits8",
+          "StopBits": "StopBits1",
+          "ResponseTime": "10"
+        }
+      },
+      "root_observation": "No error; Programming block parameters viewed by GUI operator",
+      "fresh_reopen_status": "No error observed after another project",
+      "captures": [
+        {
+          "phase": "conversion/parameter view; saved-byte identity is recorded separately",
+          "path": "editor-evidence/modbus-bindings/03_read_q_fc1_save.png",
+          "sha256": "8768380fba12791b2c52dec2120be54f89c61cee51d031390a025ea10a764880",
+          "bytes": 319307
+        },
+        {
+          "phase": "fresh reopen after another project: No error",
+          "path": "editor-evidence/modbus-bindings/03_reopen.png",
+          "sha256": "79a8162e7bb719ea6f4d5ba61f5243448023d7114912f26b4518e5bedc49777f",
+          "bytes": 498515
+        }
+      ],
+      "preservation": {
+        "normalized_IL_sequence_equal": true,
+        "hardware_semantics_equal": true,
+        "typed_function_block_semantics_equal": true,
+        "hardware_canonical_sha256": "a3f0dc223eac3387b7ea387076aa025d3efb13adfede6a93844a7257495a2c8a",
+        "function_blocks_canonical_sha256": "a0d9b8c0ef9573b3fd07dcba6e3ba4c168c684807d80d8656014ea392fc2a744",
+        "reported_software_field_delta_count": 4,
+        "software_field_delta_categories": {
+          "default allocation serialization": 4
+        }
+      },
+      "runtime_exchange": "not attempted",
+      "native_compile": "not claimed"
+    },
+    {
+      "id": "04",
+      "group": "basic",
+      "source_readback": {
+        "lab_relative_path": "editor-saved/04_write_q_fc15_readback.json",
+        "sha256": "020f0d58c76bec6c2c709fd56826aab1f763c2723888ba6f73d007112741ef4d"
+      },
+      "original": {
+        "lab_relative_path": "candidates/04_write_q_fc15.smbp",
+        "sha256": "d1122e705dd867d78858e198d98229a4f3f4b0662095a1417545c5acfcbf27fd",
+        "bytes": 86550
+      },
+      "saved": {
+        "lab_relative_path": "editor-saved/04_write_q_fc15_editor_saved.smbp",
+        "sha256": "da5f8bb39369d888f86c09b136222756a42127410d0c867574c80dacb66c465e",
+        "bytes": 88695,
+        "target": "TM200CE40T",
+        "management_level": "FunctLevelMan21_0",
+        "blocks": [
+          {
+            "address": "%WRITE_VAR0",
+            "index": "0",
+            "block_xml_type_id": "T3",
+            "parameters": {
+              "Link": {
+                "value": "SerialLine1",
+                "value_xml_tag": "FBComLinkParameterEnums",
+                "xml_type_id": "T4"
+              },
+              "RemoteDeviceId": {
+                "value": "1",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "Timeout": {
+                "value": "100",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "ObjType": {
+                "value": "Q",
+                "value_xml_tag": "FBComObjTypeParameterEnums",
+                "xml_type_id": "T5"
+              },
+              "FirstObj": {
+                "value": "73",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "Quantity": {
+                "value": "17",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "IndexData": {
+                "value": "240",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              }
+            },
+            "documented_function_code_not_transaction_observation": 15
+          }
+        ],
+        "rungs": [
+          {
+            "is_ladder_selected": "true",
+            "normalized_IL": [
+              "BLK %WRITE_VAR0",
+              "LD %M11",
+              "EXECUTE",
+              "END_BLK"
+            ],
+            "entity_count": 4,
+            "entity_type_counts": {
+              "WriteVarBasic": 1,
+              "NormalContact": 1,
+              "Line": 2
+            },
+            "entities": [
+              {
+                "ElementType": "WriteVarBasic",
+                "Descriptor": "%WRITE_VAR0",
+                "Comment": "",
+                "Symbol": "",
+                "Row": "0",
+                "Column": "3",
+                "ChosenConnection": "Left"
+              },
+              {
+                "ElementType": "NormalContact",
+                "Descriptor": "%M11",
+                "Comment": "",
+                "Symbol": "",
+                "Row": "0",
+                "Column": "1",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Row": "0",
+                "Column": "2",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Row": "0",
+                "Column": "0",
+                "ChosenConnection": "Left, Right"
+              }
+            ]
+          }
+        ],
+        "serial_configuration": {
+          "Addressing": "MasterAddressing",
+          "TransmissionMode": "TransmissionModeModbusRtu",
+          "PhysicalMedium": "PhysicalMediumRs485",
+          "Baud": "Baud19200",
+          "Parity": "ParityEven",
+          "DataBits": "DataBits8",
+          "StopBits": "StopBits1",
+          "ResponseTime": "10"
+        }
+      },
+      "root_observation": "No error; Programming block parameters viewed by GUI operator",
+      "fresh_reopen_status": "No error observed after another project",
+      "captures": [
+        {
+          "phase": "conversion/parameter view; saved-byte identity is recorded separately",
+          "path": "editor-evidence/modbus-bindings/04_write_q_fc15_save.png",
+          "sha256": "5bda6d694b6c39d2f4a72dfab69a8622b2dbb64f00f084a413048d0a978a9a08",
+          "bytes": 320948
+        },
+        {
+          "phase": "fresh reopen after another project: No error",
+          "path": "editor-evidence/modbus-bindings/04_reopen.png",
+          "sha256": "9df9de76ca06064c0097952dae582cd1a4ed14b0b719b0f50c7e991b621fd89c",
+          "bytes": 498845
+        }
+      ],
+      "preservation": {
+        "normalized_IL_sequence_equal": true,
+        "hardware_semantics_equal": true,
+        "typed_function_block_semantics_equal": true,
+        "hardware_canonical_sha256": "a3f0dc223eac3387b7ea387076aa025d3efb13adfede6a93844a7257495a2c8a",
+        "function_blocks_canonical_sha256": "8aec4ba47d50d47c056f35228c1f01dc72e8c9119e6518b5d6eeed9840c89235",
+        "reported_software_field_delta_count": 4,
+        "software_field_delta_categories": {
+          "default allocation serialization": 4
+        }
+      },
+      "runtime_exchange": "not attempted",
+      "native_compile": "not claimed"
+    },
+    {
+      "id": "05",
+      "group": "basic",
+      "source_readback": {
+        "lab_relative_path": "editor-saved/05_write_single_coil_fc5_readback.json",
+        "sha256": "c84257b86ff1220e0e39a3f25a7db518322eec71999a11df3a2eaf05dc946273"
+      },
+      "original": {
+        "lab_relative_path": "candidates/05_write_single_coil_fc5.smbp",
+        "sha256": "bcb58cfdc7779d27ffa59de79810990d0d12b97c337ac764b7f0fe20c389344e",
+        "bytes": 86596
+      },
+      "saved": {
+        "lab_relative_path": "editor-saved/05_write_single_coil_fc5_editor_saved.smbp",
+        "sha256": "4b72a0380555290934a4eea0492e3f9c0491b08f0741bd9f7ded49666845ef8f",
+        "bytes": 88741,
+        "target": "TM200CE40T",
+        "management_level": "FunctLevelMan21_0",
+        "blocks": [
+          {
+            "address": "%WRITE_VAR0",
+            "index": "0",
+            "block_xml_type_id": "T3",
+            "parameters": {
+              "Link": {
+                "value": "SerialLine1",
+                "value_xml_tag": "FBComLinkParameterEnums",
+                "xml_type_id": "T4"
+              },
+              "RemoteDeviceId": {
+                "value": "1",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "Timeout": {
+                "value": "100",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "ObjType": {
+                "value": "SINGLE_COIL",
+                "value_xml_tag": "FBComObjTypeParameterEnums",
+                "xml_type_id": "T5"
+              },
+              "FirstObj": {
+                "value": "107",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "Quantity": {
+                "value": "1",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "IndexData": {
+                "value": "260",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              }
+            },
+            "documented_function_code_not_transaction_observation": 5
+          }
+        ],
+        "rungs": [
+          {
+            "is_ladder_selected": "true",
+            "normalized_IL": [
+              "BLK %WRITE_VAR0",
+              "LD %M11",
+              "EXECUTE",
+              "END_BLK"
+            ],
+            "entity_count": 4,
+            "entity_type_counts": {
+              "WriteVarBasic": 1,
+              "NormalContact": 1,
+              "Line": 2
+            },
+            "entities": [
+              {
+                "ElementType": "WriteVarBasic",
+                "Descriptor": "%WRITE_VAR0",
+                "Comment": "",
+                "Symbol": "",
+                "Row": "0",
+                "Column": "3",
+                "ChosenConnection": "Left"
+              },
+              {
+                "ElementType": "NormalContact",
+                "Descriptor": "%M11",
+                "Comment": "",
+                "Symbol": "",
+                "Row": "0",
+                "Column": "1",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Row": "0",
+                "Column": "2",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Row": "0",
+                "Column": "0",
+                "ChosenConnection": "Left, Right"
+              }
+            ]
+          }
+        ],
+        "serial_configuration": {
+          "Addressing": "MasterAddressing",
+          "TransmissionMode": "TransmissionModeModbusRtu",
+          "PhysicalMedium": "PhysicalMediumRs485",
+          "Baud": "Baud19200",
+          "Parity": "ParityEven",
+          "DataBits": "DataBits8",
+          "StopBits": "StopBits1",
+          "ResponseTime": "10"
+        }
+      },
+      "root_observation": "No error; Programming block parameters viewed by GUI operator",
+      "fresh_reopen_status": "No error observed after another project",
+      "captures": [
+        {
+          "phase": "conversion/parameter view; saved-byte identity is recorded separately",
+          "path": "editor-evidence/modbus-bindings/05_write_single_coil_fc5_save.png",
+          "sha256": "0e81688545aa4fef3d94a8f7edd2e96235f862345c55a8c72ac977e1ac9d5147",
+          "bytes": 445518
+        },
+        {
+          "phase": "fresh reopen after another project: No error",
+          "path": "editor-evidence/modbus-bindings/05_reopen.png",
+          "sha256": "3919496c45a37db055699366702a794396cb0042620a80329b9684d3e0260ed4",
+          "bytes": 499300
+        }
+      ],
+      "preservation": {
+        "normalized_IL_sequence_equal": true,
+        "hardware_semantics_equal": true,
+        "typed_function_block_semantics_equal": true,
+        "hardware_canonical_sha256": "a3f0dc223eac3387b7ea387076aa025d3efb13adfede6a93844a7257495a2c8a",
+        "function_blocks_canonical_sha256": "4516ba5321759695df8502fa0dd5e7a62685ef318a2c59a474664a4d53d1758a",
+        "reported_software_field_delta_count": 4,
+        "software_field_delta_categories": {
+          "default allocation serialization": 4
+        }
+      },
+      "runtime_exchange": "not attempted",
+      "native_compile": "not claimed"
+    },
+    {
+      "id": "06",
+      "group": "basic",
+      "source_readback": {
+        "lab_relative_path": "editor-saved/06_write_single_reg_fc6_readback.json",
+        "sha256": "4c5142afbc19c5ee0f5cf3d04de6a9ec1255a8357ee14a22a6d51f141619321d"
+      },
+      "original": {
+        "lab_relative_path": "candidates/06_write_single_reg_fc6.smbp",
+        "sha256": "d4f464dd518bb3af4908c670911c6a708fb450e6206ac07db3c0d477900a4d25",
+        "bytes": 86591
+      },
+      "saved": {
+        "lab_relative_path": "editor-saved/06_write_single_reg_fc6_editor_saved.smbp",
+        "sha256": "d24a3b572bc565d9d1cb9d4111ffd231d28422384e7b08bd977c85198b995ed8",
+        "bytes": 88736,
+        "target": "TM200CE40T",
+        "management_level": "FunctLevelMan21_0",
+        "blocks": [
+          {
+            "address": "%WRITE_VAR0",
+            "index": "0",
+            "block_xml_type_id": "T3",
+            "parameters": {
+              "Link": {
+                "value": "SerialLine1",
+                "value_xml_tag": "FBComLinkParameterEnums",
+                "xml_type_id": "T4"
+              },
+              "RemoteDeviceId": {
+                "value": "1",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "Timeout": {
+                "value": "100",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "ObjType": {
+                "value": "SINGLE_REG",
+                "value_xml_tag": "FBComObjTypeParameterEnums",
+                "xml_type_id": "T5"
+              },
+              "FirstObj": {
+                "value": "131",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "Quantity": {
+                "value": "1",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "IndexData": {
+                "value": "280",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              }
+            },
+            "documented_function_code_not_transaction_observation": 6
+          }
+        ],
+        "rungs": [
+          {
+            "is_ladder_selected": "true",
+            "normalized_IL": [
+              "BLK %WRITE_VAR0",
+              "LD %M11",
+              "EXECUTE",
+              "END_BLK"
+            ],
+            "entity_count": 4,
+            "entity_type_counts": {
+              "WriteVarBasic": 1,
+              "NormalContact": 1,
+              "Line": 2
+            },
+            "entities": [
+              {
+                "ElementType": "WriteVarBasic",
+                "Descriptor": "%WRITE_VAR0",
+                "Comment": "",
+                "Symbol": "",
+                "Row": "0",
+                "Column": "3",
+                "ChosenConnection": "Left"
+              },
+              {
+                "ElementType": "NormalContact",
+                "Descriptor": "%M11",
+                "Comment": "",
+                "Symbol": "",
+                "Row": "0",
+                "Column": "1",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Row": "0",
+                "Column": "2",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Row": "0",
+                "Column": "0",
+                "ChosenConnection": "Left, Right"
+              }
+            ]
+          }
+        ],
+        "serial_configuration": {
+          "Addressing": "MasterAddressing",
+          "TransmissionMode": "TransmissionModeModbusRtu",
+          "PhysicalMedium": "PhysicalMediumRs485",
+          "Baud": "Baud19200",
+          "Parity": "ParityEven",
+          "DataBits": "DataBits8",
+          "StopBits": "StopBits1",
+          "ResponseTime": "10"
+        }
+      },
+      "root_observation": "No error; Programming block parameters viewed by GUI operator",
+      "fresh_reopen_status": "No error observed after another project",
+      "captures": [
+        {
+          "phase": "conversion/parameter view; saved-byte identity is recorded separately",
+          "path": "editor-evidence/modbus-bindings/06_write_single_reg_fc6_save.png",
+          "sha256": "2d4f39a00817b99343bde6fcd8d6a721df8b099cd1fc10503079fa10236bfe58",
+          "bytes": 445876
+        },
+        {
+          "phase": "fresh reopen after another project: No error",
+          "path": "editor-evidence/modbus-bindings/06_reopen.png",
+          "sha256": "1e54f0e7ecd1f7a7369b8828bc41f4b897312658fdba7061ad6f010a63c7672e",
+          "bytes": 499376
+        }
+      ],
+      "preservation": {
+        "normalized_IL_sequence_equal": true,
+        "hardware_semantics_equal": true,
+        "typed_function_block_semantics_equal": true,
+        "hardware_canonical_sha256": "a3f0dc223eac3387b7ea387076aa025d3efb13adfede6a93844a7257495a2c8a",
+        "function_blocks_canonical_sha256": "a0d5249ed3297cdc088e13e91dd1e452c1e761f79c609128d06a1eef7b08e9aa",
+        "reported_software_field_delta_count": 4,
+        "software_field_delta_categories": {
+          "default allocation serialization": 4
+        }
+      },
+      "runtime_exchange": "not attempted",
+      "native_compile": "not claimed"
+    },
+    {
+      "id": "07",
+      "group": "basic",
+      "source_readback": {
+        "lab_relative_path": "editor-saved/07_write_read_mw_fc23_il_only_readback.json",
+        "sha256": "f7b3a37ecd937f79b53b8ea7afb9737b6c9e876744af6b1965948e2c44f54f97"
+      },
+      "original": {
+        "lab_relative_path": "candidates/07_write_read_mw_fc23_il_only.smbp",
+        "sha256": "f0620597497aa9fae11ef0ab2f881412815cdf5cb3001a816b9c1f205efae745",
+        "bytes": 86776
+      },
+      "saved": {
+        "lab_relative_path": "editor-saved/07_write_read_mw_fc23_il_only_editor_saved.smbp",
+        "sha256": "6a7edd820fcaee97cc4c1c783005f0a88a0409c98934e7b6964fbce1004bb52e",
+        "bytes": 89601,
+        "target": "TM200CE40T",
+        "management_level": "FunctLevelMan21_0",
+        "blocks": [
+          {
+            "address": "%WRITE_READ_VAR0",
+            "index": "0",
+            "block_xml_type_id": "T2",
+            "parameters": {
+              "Link": {
+                "value": "SerialLine1",
+                "value_xml_tag": "FBComLinkParameterEnums",
+                "xml_type_id": "T4"
+              },
+              "RemoteDeviceId": {
+                "value": "1",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "Timeout": {
+                "value": "100",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "ObjType": {
+                "value": "MW",
+                "value_xml_tag": "FBComObjTypeParameterEnums",
+                "xml_type_id": "T5"
+              },
+              "FirstWriteObj": {
+                "value": "17",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "WriteQuantity": {
+                "value": "2",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "IndexDataOut": {
+                "value": "300",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "FirstReadObj": {
+                "value": "41",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "ReadQuantity": {
+                "value": "3",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "IndexDataIn": {
+                "value": "400",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              }
+            },
+            "documented_function_code_not_transaction_observation": 23
+          }
+        ],
+        "rungs": [
+          {
+            "is_ladder_selected": "true",
+            "normalized_IL": [
+              "BLK %WRITE_READ_VAR0",
+              "LD %M12",
+              "EXECUTE",
+              "END_BLK"
+            ],
+            "entity_count": 2,
+            "entity_type_counts": {
+              "NormalContact": 1,
+              "WriteReadVarBasic": 1
+            },
+            "entities": [
+              {
+                "ElementType": "NormalContact",
+                "Descriptor": "%M12",
+                "Comment": "",
+                "Row": "0",
+                "Column": "0",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "WriteReadVarBasic",
+                "Descriptor": "%WRITE_READ_VAR0",
+                "Comment": "",
+                "Row": "0",
+                "Column": "1",
+                "ChosenConnection": "Left"
+              }
+            ]
+          }
+        ],
+        "serial_configuration": {
+          "Addressing": "MasterAddressing",
+          "TransmissionMode": "TransmissionModeModbusRtu",
+          "PhysicalMedium": "PhysicalMediumRs485",
+          "Baud": "Baud19200",
+          "Parity": "ParityEven",
+          "DataBits": "DataBits8",
+          "StopBits": "StopBits1",
+          "ResponseTime": "10"
+        }
+      },
+      "root_observation": "No error; Programming block parameters viewed by GUI operator",
+      "fresh_reopen_status": "No error observed after another project",
+      "captures": [
+        {
+          "phase": "conversion/parameter view; saved-byte identity is recorded separately",
+          "path": "editor-evidence/modbus-bindings/07_write_read_mw_fc23_il_only_save.png",
+          "sha256": "4b375102d02a10e6e958fc4f53f4c04fbb98d1f6c46db320e115a9f73bc6f0d6",
+          "bytes": 334898
+        },
+        {
+          "phase": "fresh reopen after another project: No error",
+          "path": "editor-evidence/modbus-bindings/07_reopen.png",
+          "sha256": "7be78a4a396440645926e04386a189be5ca15db8e38e3a8cf230c052e8dcc6d6",
+          "bytes": 499953
+        }
+      ],
+      "preservation": {
+        "normalized_IL_sequence_equal": true,
+        "hardware_semantics_equal": true,
+        "typed_function_block_semantics_equal": true,
+        "hardware_canonical_sha256": "a3f0dc223eac3387b7ea387076aa025d3efb13adfede6a93844a7257495a2c8a",
+        "function_blocks_canonical_sha256": "810b088809009b477e88001341f9ca0f517d226962b8020496687155b290cb25",
+        "reported_software_field_delta_count": 20,
+        "software_field_delta_categories": {
+          "default allocation serialization": 4,
+          "IL text spacing": 2,
+          "editor view selection": 1,
+          "Ladder graph fields": 13
+        }
+      },
+      "runtime_exchange": "not attempted",
+      "native_compile": "not claimed"
+    },
+    {
+      "id": "full-read",
+      "group": "full-pin",
+      "source_readback": {
+        "lab_relative_path": "full-pin-candidates/editor-saved/modbus_full_pin_read_editor_saved.json",
+        "sha256": "da89ff187311b3ba026fe8b9b67698fc337080b4dd8612d22119286461572c18"
+      },
+      "original": {
+        "lab_relative_path": "full-pin-candidates/modbus_full_pin_read.smbp",
+        "sha256": "593ecda1e75537699a03e56ccab0c0073b65e740458e14a32dc81f56fc447f57",
+        "bytes": 86039
+      },
+      "saved": {
+        "lab_relative_path": "full-pin-candidates/editor-saved/modbus_full_pin_read_editor_saved.smbp",
+        "sha256": "8154e130ce73b6a1b6e90f5876264437ec36778207fc38c3a3661152059f9e50",
+        "bytes": 97080,
+        "target": "TM200CE40T",
+        "management_level": "FunctLevelMan21_0",
+        "blocks": [
+          {
+            "address": "%READ_VAR0",
+            "index": "0",
+            "block_xml_type_id": "T1",
+            "parameters": {
+              "Link": {
+                "value": "SerialLine1",
+                "value_xml_tag": "FBComLinkParameterEnums",
+                "xml_type_id": "T4"
+              },
+              "RemoteDeviceId": {
+                "value": "1",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "Timeout": {
+                "value": "100",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "ObjType": {
+                "value": "I",
+                "value_xml_tag": "FBComObjTypeParameterEnums",
+                "xml_type_id": "T5"
+              },
+              "FirstObj": {
+                "value": "17",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "Quantity": {
+                "value": "17",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "IndexData": {
+                "value": "200",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              }
+            },
+            "documented_function_code_not_transaction_observation": 2
+          }
+        ],
+        "rungs": [
+          {
+            "is_ladder_selected": "true",
+            "normalized_IL": [
+              "BLK %READ_VAR0",
+              "LD %M10",
+              "EXECUTE",
+              "LD %M13",
+              "ABORT",
+              "OUT_BLK",
+              "LD DONE",
+              "ST %M14",
+              "LD BUSY",
+              "ST %M15",
+              "LD ABORTED",
+              "ST %M16",
+              "LD ERROR",
+              "ST %M17",
+              "END_BLK"
+            ],
+            "entity_count": 27,
+            "entity_type_counts": {
+              "NormalContact": 2,
+              "ReadVarBasic": 1,
+              "Line": 20,
+              "Coil": 4
+            },
+            "entities": [
+              {
+                "ElementType": "NormalContact",
+                "Descriptor": "%M10",
+                "Comment": "",
+                "Row": "0",
+                "Column": "0",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "NormalContact",
+                "Descriptor": "%M13",
+                "Comment": "",
+                "Row": "1",
+                "Column": "0",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "ReadVarBasic",
+                "Descriptor": "%READ_VAR0",
+                "Comment": "",
+                "Row": "0",
+                "Column": "1",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "0",
+                "Column": "5",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "1",
+                "Column": "5",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "2",
+                "Column": "5",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "3",
+                "Column": "5",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "0",
+                "Column": "6",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "1",
+                "Column": "6",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "2",
+                "Column": "6",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "3",
+                "Column": "6",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "0",
+                "Column": "7",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "1",
+                "Column": "7",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "2",
+                "Column": "7",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "3",
+                "Column": "7",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "0",
+                "Column": "8",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "1",
+                "Column": "8",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "2",
+                "Column": "8",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "3",
+                "Column": "8",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "0",
+                "Column": "9",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "1",
+                "Column": "9",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "2",
+                "Column": "9",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "3",
+                "Column": "9",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Coil",
+                "Descriptor": "%M14",
+                "Comment": "",
+                "Row": "0",
+                "Column": "10",
+                "ChosenConnection": "Left"
+              },
+              {
+                "ElementType": "Coil",
+                "Descriptor": "%M15",
+                "Comment": "",
+                "Row": "1",
+                "Column": "10",
+                "ChosenConnection": "Left"
+              },
+              {
+                "ElementType": "Coil",
+                "Descriptor": "%M16",
+                "Comment": "",
+                "Row": "2",
+                "Column": "10",
+                "ChosenConnection": "Left"
+              },
+              {
+                "ElementType": "Coil",
+                "Descriptor": "%M17",
+                "Comment": "",
+                "Row": "3",
+                "Column": "10",
+                "ChosenConnection": "Left"
+              }
+            ]
+          }
+        ],
+        "serial_configuration": {
+          "Addressing": "MasterAddressing",
+          "TransmissionMode": "TransmissionModeModbusRtu",
+          "PhysicalMedium": "PhysicalMediumRs485",
+          "Baud": "Baud19200",
+          "Parity": "ParityEven",
+          "DataBits": "DataBits8",
+          "StopBits": "StopBits1",
+          "ResponseTime": "10"
+        }
+      },
+      "root_observation": "No error; actual editor IL-to-Ladder conversion with Execute, Abort and allfourstatuscoils",
+      "fresh_reopen_status": "No error observed after another project",
+      "captures": [
+        {
+          "phase": "conversion/parameter view; saved-byte identity is recorded separately",
+          "path": "editor-evidence/modbus-bindings/modbus_full_pin_read_editor_saved.png",
+          "sha256": "1abb8bb3d9bfdf20669d0769932be7f31507545605697a2f679e783b90f7e2cd",
+          "bytes": 334294
+        },
+        {
+          "phase": "fresh reopen after another project: No error",
+          "path": "editor-evidence/modbus-bindings/modbus_full_pin_read_reopen.png",
+          "sha256": "d0daec17b232f0cdc7acfe3c1e87c6f9382fd1fd1b54869ca621ffeae0aa7f2b",
+          "bytes": 498083
+        }
+      ],
+      "preservation": {
+        "normalized_IL_sequence_equal": true,
+        "hardware_semantics_equal": true,
+        "typed_function_block_semantics_equal": true,
+        "hardware_canonical_sha256": "a3f0dc223eac3387b7ea387076aa025d3efb13adfede6a93844a7257495a2c8a",
+        "function_blocks_canonical_sha256": "9a4b9994eb26bbc0c3e86f7a9c8f23b786773fb4d4f8cace5924dffa914c1758",
+        "reported_software_field_delta_count": 155,
+        "software_field_delta_categories": {
+          "IL text spacing": 11,
+          "editor view selection": 1,
+          "Ladder graph fields": 143
+        }
+      },
+      "runtime_exchange": "not attempted",
+      "native_compile": "not claimed"
+    },
+    {
+      "id": "full-write",
+      "group": "full-pin",
+      "source_readback": {
+        "lab_relative_path": "full-pin-candidates/editor-saved/modbus_full_pin_write_editor_saved.json",
+        "sha256": "390f9e281aa7654120a63c5d2d2376f8f10186dda75f379fcb5eea386e52dbd6"
+      },
+      "original": {
+        "lab_relative_path": "full-pin-candidates/modbus_full_pin_write.smbp",
+        "sha256": "a6bbb7b609b24b5a9b9b3b0ccdd13c94812d8bc291f2140543d8110e4e4f575e",
+        "bytes": 86046
+      },
+      "saved": {
+        "lab_relative_path": "full-pin-candidates/editor-saved/modbus_full_pin_write_editor_saved.smbp",
+        "sha256": "ae6ffad294a36e79656f36845f2a0bebf19df6f3e60b8aa7b82597b867b79af3",
+        "bytes": 97089,
+        "target": "TM200CE40T",
+        "management_level": "FunctLevelMan21_0",
+        "blocks": [
+          {
+            "address": "%WRITE_VAR0",
+            "index": "0",
+            "block_xml_type_id": "T3",
+            "parameters": {
+              "Link": {
+                "value": "SerialLine1",
+                "value_xml_tag": "FBComLinkParameterEnums",
+                "xml_type_id": "T4"
+              },
+              "RemoteDeviceId": {
+                "value": "1",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "Timeout": {
+                "value": "100",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "ObjType": {
+                "value": "Q",
+                "value_xml_tag": "FBComObjTypeParameterEnums",
+                "xml_type_id": "T5"
+              },
+              "FirstObj": {
+                "value": "73",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "Quantity": {
+                "value": "17",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "IndexData": {
+                "value": "240",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              }
+            },
+            "documented_function_code_not_transaction_observation": 15
+          }
+        ],
+        "rungs": [
+          {
+            "is_ladder_selected": "true",
+            "normalized_IL": [
+              "BLK %WRITE_VAR0",
+              "LD %M10",
+              "EXECUTE",
+              "LD %M13",
+              "ABORT",
+              "OUT_BLK",
+              "LD DONE",
+              "ST %M14",
+              "LD BUSY",
+              "ST %M15",
+              "LD ABORTED",
+              "ST %M16",
+              "LD ERROR",
+              "ST %M17",
+              "END_BLK"
+            ],
+            "entity_count": 27,
+            "entity_type_counts": {
+              "NormalContact": 2,
+              "WriteVarBasic": 1,
+              "Line": 20,
+              "Coil": 4
+            },
+            "entities": [
+              {
+                "ElementType": "NormalContact",
+                "Descriptor": "%M10",
+                "Comment": "",
+                "Row": "0",
+                "Column": "0",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "NormalContact",
+                "Descriptor": "%M13",
+                "Comment": "",
+                "Row": "1",
+                "Column": "0",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "WriteVarBasic",
+                "Descriptor": "%WRITE_VAR0",
+                "Comment": "",
+                "Row": "0",
+                "Column": "1",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "0",
+                "Column": "5",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "1",
+                "Column": "5",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "2",
+                "Column": "5",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "3",
+                "Column": "5",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "0",
+                "Column": "6",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "1",
+                "Column": "6",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "2",
+                "Column": "6",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "3",
+                "Column": "6",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "0",
+                "Column": "7",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "1",
+                "Column": "7",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "2",
+                "Column": "7",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "3",
+                "Column": "7",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "0",
+                "Column": "8",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "1",
+                "Column": "8",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "2",
+                "Column": "8",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "3",
+                "Column": "8",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "0",
+                "Column": "9",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "1",
+                "Column": "9",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "2",
+                "Column": "9",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "3",
+                "Column": "9",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Coil",
+                "Descriptor": "%M14",
+                "Comment": "",
+                "Row": "0",
+                "Column": "10",
+                "ChosenConnection": "Left"
+              },
+              {
+                "ElementType": "Coil",
+                "Descriptor": "%M15",
+                "Comment": "",
+                "Row": "1",
+                "Column": "10",
+                "ChosenConnection": "Left"
+              },
+              {
+                "ElementType": "Coil",
+                "Descriptor": "%M16",
+                "Comment": "",
+                "Row": "2",
+                "Column": "10",
+                "ChosenConnection": "Left"
+              },
+              {
+                "ElementType": "Coil",
+                "Descriptor": "%M17",
+                "Comment": "",
+                "Row": "3",
+                "Column": "10",
+                "ChosenConnection": "Left"
+              }
+            ]
+          }
+        ],
+        "serial_configuration": {
+          "Addressing": "MasterAddressing",
+          "TransmissionMode": "TransmissionModeModbusRtu",
+          "PhysicalMedium": "PhysicalMediumRs485",
+          "Baud": "Baud19200",
+          "Parity": "ParityEven",
+          "DataBits": "DataBits8",
+          "StopBits": "StopBits1",
+          "ResponseTime": "10"
+        }
+      },
+      "root_observation": "No error; actual editor IL-to-Ladder conversion with Execute, Abort and allfourstatuscoils",
+      "fresh_reopen_status": "No error observed after another project",
+      "captures": [
+        {
+          "phase": "conversion/parameter view; saved-byte identity is recorded separately",
+          "path": "editor-evidence/modbus-bindings/modbus_full_pin_write_editor_saved.png",
+          "sha256": "53e99b17f2bd8632817ac4a7e7b1dfdcd038e20a4119e641b2f7019707d08487",
+          "bytes": 334891
+        },
+        {
+          "phase": "fresh reopen after another project: No error",
+          "path": "editor-evidence/modbus-bindings/modbus_full_pin_write_reopen.png",
+          "sha256": "6f70be7bb3c408a7322e28c741c7a7764ba2e87b9b0c5b5acc3ed77a48f0682d",
+          "bytes": 498214
+        }
+      ],
+      "preservation": {
+        "normalized_IL_sequence_equal": true,
+        "hardware_semantics_equal": true,
+        "typed_function_block_semantics_equal": true,
+        "hardware_canonical_sha256": "a3f0dc223eac3387b7ea387076aa025d3efb13adfede6a93844a7257495a2c8a",
+        "function_blocks_canonical_sha256": "8aec4ba47d50d47c056f35228c1f01dc72e8c9119e6518b5d6eeed9840c89235",
+        "reported_software_field_delta_count": 155,
+        "software_field_delta_categories": {
+          "IL text spacing": 11,
+          "editor view selection": 1,
+          "Ladder graph fields": 143
+        }
+      },
+      "runtime_exchange": "not attempted",
+      "native_compile": "not claimed"
+    },
+    {
+      "id": "full-write-read",
+      "group": "full-pin",
+      "source_readback": {
+        "lab_relative_path": "full-pin-candidates/editor-saved/modbus_full_pin_write_read_editor_saved.json",
+        "sha256": "5d566a0c73d58901fb4ac68e740c3bd909518417e7714a7bf1c5594f613359cc"
+      },
+      "original": {
+        "lab_relative_path": "full-pin-candidates/modbus_full_pin_write_read.smbp",
+        "sha256": "3c9989304b7767c8d66d67d8f91906aa0e92bb8495b4e99ea46e840c65482c9c",
+        "bytes": 87436
+      },
+      "saved": {
+        "lab_relative_path": "full-pin-candidates/editor-saved/modbus_full_pin_write_read_editor_saved.smbp",
+        "sha256": "9e7a3359a99c433bdebe7eaca21235960de806fdfb8151a678e39345e4b3588f",
+        "bytes": 98503,
+        "target": "TM200CE40T",
+        "management_level": "FunctLevelMan21_0",
+        "blocks": [
+          {
+            "address": "%WRITE_READ_VAR0",
+            "index": "0",
+            "block_xml_type_id": "T2",
+            "parameters": {
+              "Link": {
+                "value": "SerialLine1",
+                "value_xml_tag": "FBComLinkParameterEnums",
+                "xml_type_id": "T4"
+              },
+              "RemoteDeviceId": {
+                "value": "1",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "Timeout": {
+                "value": "100",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "ObjType": {
+                "value": "MW",
+                "value_xml_tag": "FBComObjTypeParameterEnums",
+                "xml_type_id": "T5"
+              },
+              "FirstWriteObj": {
+                "value": "17",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "WriteQuantity": {
+                "value": "2",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "IndexDataOut": {
+                "value": "300",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "FirstReadObj": {
+                "value": "41",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "ReadQuantity": {
+                "value": "3",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              },
+              "IndexDataIn": {
+                "value": "400",
+                "value_xml_tag": "int",
+                "xml_type_id": "T6"
+              }
+            },
+            "documented_function_code_not_transaction_observation": 23
+          }
+        ],
+        "rungs": [
+          {
+            "is_ladder_selected": "true",
+            "normalized_IL": [
+              "BLK %WRITE_READ_VAR0",
+              "LD %M10",
+              "EXECUTE",
+              "LD %M13",
+              "ABORT",
+              "OUT_BLK",
+              "LD DONE",
+              "ST %M14",
+              "LD BUSY",
+              "ST %M15",
+              "LD ABORTED",
+              "ST %M16",
+              "LD ERROR",
+              "ST %M17",
+              "END_BLK"
+            ],
+            "entity_count": 27,
+            "entity_type_counts": {
+              "NormalContact": 2,
+              "WriteReadVarBasic": 1,
+              "Line": 20,
+              "Coil": 4
+            },
+            "entities": [
+              {
+                "ElementType": "NormalContact",
+                "Descriptor": "%M10",
+                "Comment": "",
+                "Row": "0",
+                "Column": "0",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "NormalContact",
+                "Descriptor": "%M13",
+                "Comment": "",
+                "Row": "1",
+                "Column": "0",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "WriteReadVarBasic",
+                "Descriptor": "%WRITE_READ_VAR0",
+                "Comment": "",
+                "Row": "0",
+                "Column": "1",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "0",
+                "Column": "5",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "1",
+                "Column": "5",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "2",
+                "Column": "5",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "3",
+                "Column": "5",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "0",
+                "Column": "6",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "1",
+                "Column": "6",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "2",
+                "Column": "6",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "3",
+                "Column": "6",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "0",
+                "Column": "7",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "1",
+                "Column": "7",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "2",
+                "Column": "7",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "3",
+                "Column": "7",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "0",
+                "Column": "8",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "1",
+                "Column": "8",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "2",
+                "Column": "8",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "3",
+                "Column": "8",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "0",
+                "Column": "9",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "1",
+                "Column": "9",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "2",
+                "Column": "9",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Line",
+                "Descriptor": "",
+                "Row": "3",
+                "Column": "9",
+                "ChosenConnection": "Left, Right"
+              },
+              {
+                "ElementType": "Coil",
+                "Descriptor": "%M14",
+                "Comment": "",
+                "Row": "0",
+                "Column": "10",
+                "ChosenConnection": "Left"
+              },
+              {
+                "ElementType": "Coil",
+                "Descriptor": "%M15",
+                "Comment": "",
+                "Row": "1",
+                "Column": "10",
+                "ChosenConnection": "Left"
+              },
+              {
+                "ElementType": "Coil",
+                "Descriptor": "%M16",
+                "Comment": "",
+                "Row": "2",
+                "Column": "10",
+                "ChosenConnection": "Left"
+              },
+              {
+                "ElementType": "Coil",
+                "Descriptor": "%M17",
+                "Comment": "",
+                "Row": "3",
+                "Column": "10",
+                "ChosenConnection": "Left"
+              }
+            ]
+          }
+        ],
+        "serial_configuration": {
+          "Addressing": "MasterAddressing",
+          "TransmissionMode": "TransmissionModeModbusRtu",
+          "PhysicalMedium": "PhysicalMediumRs485",
+          "Baud": "Baud19200",
+          "Parity": "ParityEven",
+          "DataBits": "DataBits8",
+          "StopBits": "StopBits1",
+          "ResponseTime": "10"
+        }
+      },
+      "root_observation": "No error; actual editor IL-to-Ladder conversion with Execute, Abort and allfourstatuscoils",
+      "fresh_reopen_status": "No error observed after another project",
+      "captures": [
+        {
+          "phase": "conversion/parameter view; saved-byte identity is recorded separately",
+          "path": "editor-evidence/modbus-bindings/modbus_full_pin_write_read_editor_saved.png",
+          "sha256": "2093940e1a152210837bfa269e058f0590113add18aed70a2532e804552a8779",
+          "bytes": 342832
+        },
+        {
+          "phase": "fresh reopen after another project: No error",
+          "path": "editor-evidence/modbus-bindings/modbus_full_pin_write_read_reopen.png",
+          "sha256": "9870946975ae1334871b0eea829ab377453a613bee97013271b35fe193effd88",
+          "bytes": 498682
+        }
+      ],
+      "preservation": {
+        "normalized_IL_sequence_equal": true,
+        "hardware_semantics_equal": true,
+        "typed_function_block_semantics_equal": true,
+        "hardware_canonical_sha256": "a3f0dc223eac3387b7ea387076aa025d3efb13adfede6a93844a7257495a2c8a",
+        "function_blocks_canonical_sha256": "810b088809009b477e88001341f9ca0f517d226962b8020496687155b290cb25",
+        "reported_software_field_delta_count": 155,
+        "software_field_delta_categories": {
+          "IL text spacing": 11,
+          "editor view selection": 1,
+          "Ladder graph fields": 143
+        }
+      },
+      "runtime_exchange": "not attempted",
+      "native_compile": "not claimed"
+    }
+  ],
+  "excluded_artifacts": [
+    {
+      "lab_relative_path": "full-pin-candidates/editor-saved/modbus_full_pin_write_before_save_completed.smbp",
+      "sha256": "a6bbb7b609b24b5a9b9b3b0ccdd13c94812d8bc291f2140543d8110e4e4f575e",
+      "bytes": 86046,
+      "ladder_entity_count": 0,
+      "reason": "Copy made before editor save completed; retained unchanged and explicitly excluded from final official graph/persistence evidence",
+      "superseded_by_case": "full-write",
+      "superseded_by_saved_sha256": "ae6ffad294a36e79656f36845f2a0bebf19df6f3e60b8aa7b82597b867b79af3"
+    }
+  ],
+  "full_pin_row_rules": {
+    "block": {
+      "row": 0,
+      "column": 1,
+      "chosen_connection": "Left, Right"
+    },
+    "Execute": {
+      "contact": "%M10",
+      "row": 0,
+      "column": 0,
+      "chosen_connection": "Left, Right"
+    },
+    "Abort": {
+      "contact": "%M13",
+      "row": 1,
+      "column": 0,
+      "chosen_connection": "Left, Right"
+    },
+    "statuses": [
+      {
+        "pin": "DONE",
+        "coil": "%M14",
+        "row": 0,
+        "column": 10,
+        "chosen_connection": "Left"
+      },
+      {
+        "pin": "BUSY",
+        "coil": "%M15",
+        "row": 1,
+        "column": 10,
+        "chosen_connection": "Left"
+      },
+      {
+        "pin": "ABORTED",
+        "coil": "%M16",
+        "row": 2,
+        "column": 10,
+        "chosen_connection": "Left"
+      },
+      {
+        "pin": "ERROR",
+        "coil": "%M17",
+        "row": 3,
+        "column": 10,
+        "chosen_connection": "Left"
+      }
+    ],
+    "lines": {
+      "rows": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "columns": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "chosen_connection": "Left, Right"
+    },
+    "counts": {
+      "contacts": 2,
+      "block": 1,
+      "lines": 20,
+      "coils": 4,
+      "total": 27
+    },
+    "scope": "Observed in all three saved full-pin graphs; not inferred from enum bit flags or a generic diagram"
+  },
+  "capture_note": "Conversion/parameter images may show an unsaved-title asterisk. They illustrate the native graph/parameters, not completion of persistence; final saved-file hashes/readback plus separate clean fresh-reopen images establish persistence. Case01 has only its fresh-reopen capture in the readback.",
+  "current_product_scope": {
+    "READ_VAR_XML": [
+      "MW",
+      "I",
+      "Q",
+      "IW"
+    ],
+    "WRITE_VAR_XML": [
+      "MW",
+      "Q"
+    ],
+    "still_pending_despite_this_binding_evidence": [
+      "WRITE_VAR SINGLE_COIL/SINGLE_REG XML",
+      "WRITE_READ_VAR XML",
+      "ABORT/connected-status full-pin graph implementation"
+    ],
+    "no_product_gate_or_code_change_in_this_report": true
+  },
+  "not_claimed": [
+    "Compiler-generated CLI product export GUI acceptance (root is testing separately)",
+    "Native compilation or program exchange",
+    "Official Modbus transaction, serial delivery or simulator communication",
+    "Physical controller/firmware/hardware compatibility",
+    "Minimum functional-level support; only exact Man21 cases observed"
+  ],
+  "copied_PNG_count": 19,
+  "copied_PNG_bytes": 8187822,
+  "capture_copy_manifest": [
+    {
+      "source_lab_relative": "editor-saved/01_reopen.png",
+      "repository_path": "docs/validation/editor-evidence/modbus-bindings/01_reopen.png",
+      "relative_link_from_report": "editor-evidence/modbus-bindings/01_reopen.png",
+      "bytes": 500200,
+      "sha256": "2e33067073f3b084e7ae355a2223353684e2bda80c13bdd5b00deaa6ac620a92"
+    },
+    {
+      "source_lab_relative": "editor-saved/02_read_i_fc2_save.png",
+      "repository_path": "docs/validation/editor-evidence/modbus-bindings/02_read_i_fc2_save.png",
+      "relative_link_from_report": "editor-evidence/modbus-bindings/02_read_i_fc2_save.png",
+      "bytes": 319225,
+      "sha256": "46982368c7c2a8e5b18d5b963da53b524f35bc8aca0712d84cc60dda46481914"
+    },
+    {
+      "source_lab_relative": "editor-saved/02_reopen.png",
+      "repository_path": "docs/validation/editor-evidence/modbus-bindings/02_reopen.png",
+      "relative_link_from_report": "editor-evidence/modbus-bindings/02_reopen.png",
+      "bytes": 498865,
+      "sha256": "2cc576533ffa96c97ac5af22e75a4761781348a877e78786fc0d0dd2cde9847b"
+    },
+    {
+      "source_lab_relative": "editor-saved/03_read_q_fc1_save.png",
+      "repository_path": "docs/validation/editor-evidence/modbus-bindings/03_read_q_fc1_save.png",
+      "relative_link_from_report": "editor-evidence/modbus-bindings/03_read_q_fc1_save.png",
+      "bytes": 319307,
+      "sha256": "8768380fba12791b2c52dec2120be54f89c61cee51d031390a025ea10a764880"
+    },
+    {
+      "source_lab_relative": "editor-saved/03_reopen.png",
+      "repository_path": "docs/validation/editor-evidence/modbus-bindings/03_reopen.png",
+      "relative_link_from_report": "editor-evidence/modbus-bindings/03_reopen.png",
+      "bytes": 498515,
+      "sha256": "79a8162e7bb719ea6f4d5ba61f5243448023d7114912f26b4518e5bedc49777f"
+    },
+    {
+      "source_lab_relative": "editor-saved/04_write_q_fc15_save.png",
+      "repository_path": "docs/validation/editor-evidence/modbus-bindings/04_write_q_fc15_save.png",
+      "relative_link_from_report": "editor-evidence/modbus-bindings/04_write_q_fc15_save.png",
+      "bytes": 320948,
+      "sha256": "5bda6d694b6c39d2f4a72dfab69a8622b2dbb64f00f084a413048d0a978a9a08"
+    },
+    {
+      "source_lab_relative": "editor-saved/04_reopen.png",
+      "repository_path": "docs/validation/editor-evidence/modbus-bindings/04_reopen.png",
+      "relative_link_from_report": "editor-evidence/modbus-bindings/04_reopen.png",
+      "bytes": 498845,
+      "sha256": "9df9de76ca06064c0097952dae582cd1a4ed14b0b719b0f50c7e991b621fd89c"
+    },
+    {
+      "source_lab_relative": "editor-saved/05_write_single_coil_fc5_save.png",
+      "repository_path": "docs/validation/editor-evidence/modbus-bindings/05_write_single_coil_fc5_save.png",
+      "relative_link_from_report": "editor-evidence/modbus-bindings/05_write_single_coil_fc5_save.png",
+      "bytes": 445518,
+      "sha256": "0e81688545aa4fef3d94a8f7edd2e96235f862345c55a8c72ac977e1ac9d5147"
+    },
+    {
+      "source_lab_relative": "editor-saved/05_reopen.png",
+      "repository_path": "docs/validation/editor-evidence/modbus-bindings/05_reopen.png",
+      "relative_link_from_report": "editor-evidence/modbus-bindings/05_reopen.png",
+      "bytes": 499300,
+      "sha256": "3919496c45a37db055699366702a794396cb0042620a80329b9684d3e0260ed4"
+    },
+    {
+      "source_lab_relative": "editor-saved/06_write_single_reg_fc6_save.png",
+      "repository_path": "docs/validation/editor-evidence/modbus-bindings/06_write_single_reg_fc6_save.png",
+      "relative_link_from_report": "editor-evidence/modbus-bindings/06_write_single_reg_fc6_save.png",
+      "bytes": 445876,
+      "sha256": "2d4f39a00817b99343bde6fcd8d6a721df8b099cd1fc10503079fa10236bfe58"
+    },
+    {
+      "source_lab_relative": "editor-saved/06_reopen.png",
+      "repository_path": "docs/validation/editor-evidence/modbus-bindings/06_reopen.png",
+      "relative_link_from_report": "editor-evidence/modbus-bindings/06_reopen.png",
+      "bytes": 499376,
+      "sha256": "1e54f0e7ecd1f7a7369b8828bc41f4b897312658fdba7061ad6f010a63c7672e"
+    },
+    {
+      "source_lab_relative": "editor-saved/07_write_read_mw_fc23_il_only_save.png",
+      "repository_path": "docs/validation/editor-evidence/modbus-bindings/07_write_read_mw_fc23_il_only_save.png",
+      "relative_link_from_report": "editor-evidence/modbus-bindings/07_write_read_mw_fc23_il_only_save.png",
+      "bytes": 334898,
+      "sha256": "4b375102d02a10e6e958fc4f53f4c04fbb98d1f6c46db320e115a9f73bc6f0d6"
+    },
+    {
+      "source_lab_relative": "editor-saved/07_reopen.png",
+      "repository_path": "docs/validation/editor-evidence/modbus-bindings/07_reopen.png",
+      "relative_link_from_report": "editor-evidence/modbus-bindings/07_reopen.png",
+      "bytes": 499953,
+      "sha256": "7be78a4a396440645926e04386a189be5ca15db8e38e3a8cf230c052e8dcc6d6"
+    },
+    {
+      "source_lab_relative": "full-pin-candidates/editor-saved/modbus_full_pin_read_editor_saved.png",
+      "repository_path": "docs/validation/editor-evidence/modbus-bindings/modbus_full_pin_read_editor_saved.png",
+      "relative_link_from_report": "editor-evidence/modbus-bindings/modbus_full_pin_read_editor_saved.png",
+      "bytes": 334294,
+      "sha256": "1abb8bb3d9bfdf20669d0769932be7f31507545605697a2f679e783b90f7e2cd"
+    },
+    {
+      "source_lab_relative": "full-pin-candidates/editor-saved/modbus_full_pin_read_reopen.png",
+      "repository_path": "docs/validation/editor-evidence/modbus-bindings/modbus_full_pin_read_reopen.png",
+      "relative_link_from_report": "editor-evidence/modbus-bindings/modbus_full_pin_read_reopen.png",
+      "bytes": 498083,
+      "sha256": "d0daec17b232f0cdc7acfe3c1e87c6f9382fd1fd1b54869ca621ffeae0aa7f2b"
+    },
+    {
+      "source_lab_relative": "full-pin-candidates/editor-saved/modbus_full_pin_write_editor_saved.png",
+      "repository_path": "docs/validation/editor-evidence/modbus-bindings/modbus_full_pin_write_editor_saved.png",
+      "relative_link_from_report": "editor-evidence/modbus-bindings/modbus_full_pin_write_editor_saved.png",
+      "bytes": 334891,
+      "sha256": "53e99b17f2bd8632817ac4a7e7b1dfdcd038e20a4119e641b2f7019707d08487"
+    },
+    {
+      "source_lab_relative": "full-pin-candidates/editor-saved/modbus_full_pin_write_reopen.png",
+      "repository_path": "docs/validation/editor-evidence/modbus-bindings/modbus_full_pin_write_reopen.png",
+      "relative_link_from_report": "editor-evidence/modbus-bindings/modbus_full_pin_write_reopen.png",
+      "bytes": 498214,
+      "sha256": "6f70be7bb3c408a7322e28c741c7a7764ba2e87b9b0c5b5acc3ed77a48f0682d"
+    },
+    {
+      "source_lab_relative": "full-pin-candidates/editor-saved/modbus_full_pin_write_read_editor_saved.png",
+      "repository_path": "docs/validation/editor-evidence/modbus-bindings/modbus_full_pin_write_read_editor_saved.png",
+      "relative_link_from_report": "editor-evidence/modbus-bindings/modbus_full_pin_write_read_editor_saved.png",
+      "bytes": 342832,
+      "sha256": "2093940e1a152210837bfa269e058f0590113add18aed70a2532e804552a8779"
+    },
+    {
+      "source_lab_relative": "full-pin-candidates/editor-saved/modbus_full_pin_write_read_reopen.png",
+      "repository_path": "docs/validation/editor-evidence/modbus-bindings/modbus_full_pin_write_read_reopen.png",
+      "relative_link_from_report": "editor-evidence/modbus-bindings/modbus_full_pin_write_read_reopen.png",
+      "bytes": 498682,
+      "sha256": "9870946975ae1334871b0eea829ab377453a613bee97013271b35fe193effd88"
+    }
+  ],
+  "environment": "Local Mac Wine editor lab; offline Not Connected captures. GUI actions and statuses were observed by root."
+}
