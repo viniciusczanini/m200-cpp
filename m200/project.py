@@ -29,6 +29,15 @@ from .numeric import (
 )
 from .communication import parse_block
 from .communication_xml import read_blocks, write_blocks, check_template_channels
+from .communication_graph import (
+    import_rung as import_full_communication,
+    import_origins as import_full_communication_origins,
+    origin_comment as full_communication_origin_comment,
+    human_comment as full_communication_human_comment,
+    source_human_comment as full_communication_source_human_comment,
+    serialized_rungs as communication_serialized_rungs,
+    graphics as full_communication_graphics,
+)
 from .counter_xml import (
     read_configs as read_counters,
     write_configs as write_counters,
@@ -387,6 +396,8 @@ def load_project(path):
     p = Program()
     p.counters = read_counters(sw)
     graph_nodes = []
+    origins = []
+    full_groups = []
     p.communications = read_blocks(sw)
     check_template_channels(root, p.communications)
     timer_nodes = sw.find("Timers")
@@ -444,7 +455,7 @@ def load_project(path):
             rungs = pou.find("Rungs")
             if rungs is None:
                 continue
-            for r in rungs:
+            for native_index, r in enumerate(rungs):
                 if r.tag != "RungEntity" or any(
                     c.tag
                     not in (
@@ -480,8 +491,36 @@ def load_project(path):
                 label, _ = split_label(lines)
                 if r.findtext("Label", "") != (label or ""):
                     fail("rung label field and actual instruction label disagree")
-                p.rungs.append(lines)
-                graph_nodes.append((r, lines))
+                native_origin = {
+                    "section": section,
+                    "native_rung": native_index,
+                    "name": r.findtext("Name", ""),
+                    "main_comment": full_communication_human_comment(r),
+                }
+                origin = {
+                    "file": Path(path).name,
+                    "generated": "native section %s rung %s | %s"
+                    % (section, native_index, native_origin["name"]),
+                }
+                canonical = import_full_communication(r, lines, root, p.communications)
+                if canonical is None:
+                    p.rungs.append(lines)
+                    origins.append(origin)
+                    graph_nodes.append((r, lines))
+                else:
+                    group_origins = import_full_communication_origins(r, origin)
+                    full_groups.append(
+                        {
+                            "key": split_label(lines)[1][0].split(maxsplit=1)[1],
+                            "canonical_start": len(p.rungs),
+                            "canonical_rungs": 5,
+                            "source_instruction_lines": len(lines),
+                            "origin": native_origin,
+                            "source_origins": group_origins,
+                        }
+                    )
+                    p.rungs.extend(canonical)
+                    origins.extend(group_origins)
     for bit in sw.findall("MemoryBits/MemoryBit"):
         addr = bit.findtext("Address", "")
         address(addr, True)
@@ -493,22 +532,26 @@ def load_project(path):
     ):
         for word in sw.findall(collection + "/" + entry):
             p.symbols[word.findtext("Address")] = word.findtext("Symbol", "")
+    if full_groups:
+        p.metadata.update(rung_origins=origins, native_full_pin_groups=full_groups)
     validate(p)
     # Validate the complete IL before examining its graphics. A status may be
     # read before its configured FB is called later in the same scan.
     validate_allocations(sw, p, root.findtext("ManagementLevel"))
     for node, lines in graph_nodes:
         check_graph(node, lines, p)
-    p.metadata = {
-        "official_editor": "pending",
-        "physical_plc": "pending",
-        "project_sha256": hashlib.sha256(Path(path).read_bytes()).hexdigest(),
-        "project_version": root.findtext("ProjectVersion", ""),
-        "synthetic_template": root.findtext("Name", "").startswith("SYNTHETIC")
-        or root.findtext("HardwareConfiguration/Plc/Cpu/Name", "").startswith(
-            "SYNTHETIC"
-        ),
-    }
+    p.metadata.update(
+        {
+            "official_editor": "pending",
+            "physical_plc": "pending",
+            "project_sha256": hashlib.sha256(Path(path).read_bytes()).hexdigest(),
+            "project_version": root.findtext("ProjectVersion", ""),
+            "synthetic_template": root.findtext("Name", "").startswith("SYNTHETIC")
+            or root.findtext("HardwareConfiguration/Plc/Cpu/Name", "").startswith(
+                "SYNTHETIC"
+            ),
+        }
+    )
     return p
 
 
@@ -590,12 +633,16 @@ def write_project(program, template, destination):
     element(pou, "Name", "Generated C++ - EXPERIMENTAL")
     element(pou, "SectionNumber", first_section)
     rungs = element(pou, "Rungs")
-    for i, lines in enumerate(program.rungs):
+    for i, lines, full_communication, consumed in communication_serialized_rungs(
+        program, root
+    ):
         r = element(rungs, "RungEntity")
         graph = element(r, "LadderElements")
         _, body = split_label(lines)
         items = (
-            counter_graphics(body)
+            full_communication_graphics(full_communication)
+            if full_communication is not None
+            else counter_graphics(body)
             if body[0].startswith("BLK %C")
             else [
                 (t, a, 0, c, "Left" if t in LEFT_ONLY else "Left, Right")
@@ -605,13 +652,13 @@ def write_project(program, template, destination):
         for typ, arg, row, column, connection in items:
             e = element(graph, "LadderEntity")
             element(e, "ElementType", typ)
-            if arg:
+            if arg or full_communication is not None:
                 field = {
                     "Comparison": "ComparisonExpression",
                     "Operation": "OperationExpression",
                 }.get(typ, "Descriptor")
                 element(e, field, arg)
-                if field == "Descriptor":
+                if field == "Descriptor" and arg:
                     element(e, "Comment", "")
                     element(e, "Symbol", "")
             element(e, "Row", row)
@@ -627,18 +674,27 @@ def write_project(program, template, destination):
             element(instruction, "InstructionLine", line)
             element(instruction, "Comment", "")
         origin = program.metadata.get("rung_origins", [])
-        location = origin[i] if i < len(origin) else {}
-        source = "%s:%s:%s" % (
-            location.get("file", "generated"),
-            location.get("line", ""),
-            location.get("column", ""),
+        source = "; ".join(
+            "%s:%s:%s"
+            % (
+                location.get("file", "generated"),
+                location.get("line", ""),
+                location.get("column", ""),
+            )
+            for location in (
+                origin[j] if j < len(origin) else {} for j in range(i, i + consumed)
+            )
         )
         element(r, "Name", "cpp_%04d" % i)
-        element(
-            r,
-            "MainComment",
-            source + " | Experimental generated logic; official validation pending",
+        comment = (
+            full_communication_source_human_comment(program, full_communication)
+            + full_communication_origin_comment(
+                [origin[j] if j < len(origin) else {} for j in range(i, i + consumed)]
+            )
+            if full_communication is not None
+            else source + " | Experimental generated logic; official validation pending"
         )
+        element(r, "MainComment", comment)
         label, _ = split_label(lines)
         element(r, "Label", label or "")
         element(r, "IsLadderSelected", "true")

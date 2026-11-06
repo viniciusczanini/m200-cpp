@@ -1,0 +1,53 @@
+{
+  "source": "User local Schneider Basic lab; root official conversion, Ctrl+S and fresh reopen of preserved actual saved-byte clone",
+  "editor": "EcoStruxure Machine Expert Basic 1.4 build 484",
+  "target": "TM200CE40T",
+  "file": "official_tm200ce40t_modbus_full_pin_read.smbp",
+  "sha256": "8154e130ce73b6a1b6e90f5876264437ec36778207fc38c3a3661152059f9e50",
+  "bytes": 97080,
+  "copied_date": "2026-11-06",
+  "original_modified": false,
+  "parent_candidate": {
+    "lab_relative_path": "full-pin-candidates/modbus_full_pin_read.smbp",
+    "sha256": "593ecda1e75537699a03e56ccab0c0073b65e740458e14a32dc81f56fc447f57",
+    "bytes": 86039
+  },
+  "procedure": "Writable lab P: clone opened; parameters or IL-to-Ladder conversion viewed No error; Ctrl+S; saved bytes copied after save completion; another project opened before exact saved-file fresh reopen No error",
+  "root_observation": "No error; actual editor IL-to-Ladder conversion with Execute, Abort and allfourstatuscoils",
+  "fresh_reopen_status": "No error observed after another project",
+  "captures": [
+    {
+      "phase": "conversion/parameter view; saved-byte identity is recorded separately",
+      "path": "docs/validation/editor-evidence/modbus-bindings/modbus_full_pin_read_editor_saved.png",
+      "sha256": "1abb8bb3d9bfdf20669d0769932be7f31507545605697a2f679e783b90f7e2cd",
+      "bytes": 334294
+    },
+    {
+      "phase": "fresh reopen after another project: No error",
+      "path": "docs/validation/editor-evidence/modbus-bindings/modbus_full_pin_read_reopen.png",
+      "sha256": "d0daec17b232f0cdc7acfe3c1e87c6f9382fd1fd1b54869ca621ffeae0aa7f2b",
+      "bytes": 498083
+    }
+  ],
+  "preservation": {
+    "normalized_IL_sequence_equal": true,
+    "hardware_semantics_equal": true,
+    "typed_function_block_semantics_equal": true,
+    "hardware_canonical_sha256": "a3f0dc223eac3387b7ea387076aa025d3efb13adfede6a93844a7257495a2c8a",
+    "function_blocks_canonical_sha256": "9a4b9994eb26bbc0c3e86f7a9c8f23b786773fb4d4f8cace5924dffa914c1758",
+    "reported_software_field_delta_count": 155,
+    "software_field_delta_categories": {
+      "IL text spacing": 11,
+      "editor view selection": 1,
+      "Ladder graph fields": 143
+    }
+  },
+  "source_readback": {
+    "lab_relative_path": "full-pin-candidates/editor-saved/modbus_full_pin_read_editor_saved.json",
+    "sha256": "da89ff187311b3ba026fe8b9b67698fc337080b4dd8612d22119286461572c18"
+  },
+  "source_observation_report": "docs/validation/MODBUS-OFFICIAL-BINDING-OBSERVATIONS.json",
+  "binding_scope": "Exact fifteen-line Execute/Abort/DONE/BUSY/ABORTED/ERROR body and 27-entity graph at actual Man21/SL1; no official compilation or runtime transaction proof",
+  "runtime_exchange": "not attempted",
+  "native_compile": "not claimed"
+}

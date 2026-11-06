@@ -114,7 +114,12 @@ def normalize(program):
         label, rung = split_label(raw)
         rung = [" ".join(line.split()) for line in rung]
         first = len(lower.program.rungs)
-        lower.origin = {"generated": f"native logic source rung {index}"}
+        origins = program.metadata.get("rung_origins")
+        lower.origin = (
+            copy.copy(origins[index])
+            if origins is not None
+            else {"generated": f"native logic source rung {index}"}
+        )
         probe = copy.copy(program)
         probe.rungs = [rung]
         if not needed(probe):
