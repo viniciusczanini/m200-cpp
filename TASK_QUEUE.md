@@ -7,7 +7,7 @@ The full TM200CE40T parity goal remains active. Work is pulled from this queue w
 | P0 | Diagnose three-timer simulator crash in ProcessMbitsEdges | GUI operator + separate Wine runtime chat | Unresolved; controlled probes ready | Crash preserved; exact original reached Online/identical/RUN; compare bounded candidates before changes |
 | P1 | Exercise TON/TP/TOF sequence, held/repeated buttons, STOP/RESET/permissive interactions | Official GUI operator | Completion, held/fresh START, TON abort and RESET passed; further cases queued | Observe TP abort/drain, permission loss and rejected busy edges with direct words |
 | P1 | Save/reopen I/O and complex projects; validate normal launcher persistence | Official GUI operator | Sequence save/readback/reopen passed; other projects and launcher restart queued | Preserve original bytes; compare editor-saved IL/configuration and reverse C++ |
-| P1 | Publish validated increments with English documentation | Main agent | 544-test WR/Register foundation checkpoint reviewed; publishing exact bounded evidence | Validate actual new CLI products; Actions stays disabled |
+| P1 | Publish validated increments with English documentation | Main agent | 544-test WR/Register foundation checkpoint published; exact bounded evidence documented | Validate actual new CLI products; Actions stays disabled |
 | P2 | Native END/ENDC/ENDCN and C++ early-scan exit parity | Compiler lane | Published in 8ce9264; native graph import implemented; Jump export retained | Extend actual native runtime controls separately |
 | P2 | Reconcile timer bases, retentive/dynamic modes and functional-level gates | Capability/schema lane | 10 ms binding saved/reopened; one-second retTON/retTOF and dynamicTON admitted at observed Man21; genuine compiler products now in official GUI lane | Real editor-created configuration plus exact generated candidate validation; no enum-only promotion |
 | P2 | Complete local Modbus coverage with official configured projects | Protocol/runtime lane | Ten native binding cases and three CLI-generated bit products saved/fresh-reopened with No error; single-write Man21/SL1 implementation passes516 tests; its two genuine products saved/fresh-reopened with No error | Native connected Abort/status graphs next; separate protocol, editor, simulator and hardware evidence |
@@ -45,7 +45,7 @@ See [official artifact evidence](docs/validation/OFFICIAL-EDITOR-RESULTS.json), 
 
 ## Current execution checkpoint
 
-- Publishing: 544-test WRITE_READ_VAR and Register configuration foundation checkpoint; genuine timer/single-write products have separate official evidence.
+- Published: 544-test WRITE_READ_VAR and Register configuration foundation checkpoint; genuine timer/single-write products have separate official evidence.
 - GUI: bounded FIFO/LIFO cases completed and simulator stopped; reset/edge-history collision probes next. Generated FC5/6 and WRITE_READ_VAR products passed save/fresh-reopen No error; no communication transaction was executed.
 - Compiler: WRITE_READ_VAR graph/export binding passed independent review; connected native Abort/status graph integration is next.
 - Library foundation: strict Register configuration codec passed the combined frozen suite; full Register compilation/execution stays unsupported until integrated and validated.

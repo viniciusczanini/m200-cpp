@@ -1,0 +1,3310 @@
+{
+  "format": "m200-register-native-observations-v1",
+  "date": "2026-11-06",
+  "target": "TM200CE40T",
+  "actual_management_token": "FunctLevelMan21_0",
+  "editor": "EcoStruxure Machine Expert Basic 1.4 build 484, local Mac Wine lab",
+  "scope": "Hand-built disposable native IL diagnostics, converted/saved by the official editor and run by root in its local simulator. Not compiler-generated products or implemented Register C++/IR/SDK/runtime support.",
+  "observed_by": "Root personally operated/viewed the GUI; report author read existing files/PNGs and copied evidence only",
+  "baseline": {
+    "path": "tests/fixtures/official_tm200ce40t_memory.smbp",
+    "bytes": 83391,
+    "sha256": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf"
+  },
+  "bindings": [
+    {
+      "mode": "FIFO",
+      "candidate": {
+        "path": "output/editor-validation/native-register-shared-request/register_fifo_il_shared_request.smbp",
+        "bytes": 84240,
+        "sha256": "d3b49518e94a245c5d89069ad4d40a80ffde34acf951aff35c761606ccf2e04c"
+      },
+      "editor_saved": {
+        "path": "output/editor-validation/native-register-shared-request/editor-saved/register_fifo_editor_saved.smbp",
+        "bytes": 106489,
+        "sha256": "85219725709cbe90641e25bedddd6bfa4f13011a55e01be4ba087f8f42b09189",
+        "rungs": 6,
+        "IL_lines": 20,
+        "IL_by_rung": [
+          [
+            "LDN   %I0.3",
+            "[ %R0.I := 11 ]"
+          ],
+          [
+            "LD    %I0.3",
+            "[ %R0.I := 22 ]"
+          ],
+          [
+            "LD    %I0.4",
+            "[ %R0.O := 42 ]"
+          ],
+          [
+            "BLK   %R0",
+            "LD    %I0.0",
+            "R",
+            "LD    %I0.1",
+            "OR    %I0.5",
+            "I",
+            "LD    %I0.2",
+            "OR    %I0.5",
+            "O",
+            "END_BLK"
+          ],
+          [
+            "LD    %R0.E",
+            "ST    %Q0.0"
+          ],
+          [
+            "LD    %R0.F",
+            "ST    %Q0.1"
+          ]
+        ],
+        "IL_lexical_projection": [
+          [
+            "LDN%I0.3",
+            "[%R0.I:=11]"
+          ],
+          [
+            "LD%I0.3",
+            "[%R0.I:=22]"
+          ],
+          [
+            "LD%I0.4",
+            "[%R0.O:=42]"
+          ],
+          [
+            "BLK%R0",
+            "LD%I0.0",
+            "R",
+            "LD%I0.1",
+            "OR%I0.5",
+            "I",
+            "LD%I0.2",
+            "OR%I0.5",
+            "O",
+            "END_BLK"
+          ],
+          [
+            "LD%R0.E",
+            "ST%Q0.0"
+          ],
+          [
+            "LD%R0.F",
+            "ST%Q0.1"
+          ]
+        ],
+        "graph_entity_counts": [
+          10,
+          10,
+          10,
+          10,
+          11,
+          11
+        ],
+        "selected_Ladder": [
+          "true",
+          "true",
+          "true",
+          "true",
+          "true",
+          "true"
+        ],
+        "Register_configuration_rows": []
+      },
+      "preserved": {
+        "baseline_hardware": true,
+        "lexical_IL": true
+      },
+      "native_editor_procedure": "Root personally observed offline No error, actual conversion to Ladder, clean save; Root viewed No error after LIFO project, exact saved clone freshly reopened",
+      "captures": [
+        {
+          "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/editor-saved/fifo-save.png",
+          "path": "docs/validation/editor-evidence/register-native/fifo-save.png",
+          "relative_link_from_report": "editor-evidence/register-native/fifo-save.png",
+          "sha256": "fb5337b51d15371afd005f775ca4ff0ee2c246d54b3ba2b301e2bcb19358b0a9",
+          "bytes": 372548,
+          "phase": "Root viewed native conversion to Ladder / No error / completed save"
+        },
+        {
+          "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/editor-saved/fifo-reopen.png",
+          "path": "docs/validation/editor-evidence/register-native/fifo-reopen.png",
+          "relative_link_from_report": "editor-evidence/register-native/fifo-reopen.png",
+          "sha256": "4f6f957f4a52050b99a685fa742395a70f43e65d37c182a0b84f4e83bb53ce41",
+          "bytes": 498660,
+          "phase": "Root freshly reopened exact native editor save after the other mode / No error"
+        }
+      ],
+      "readback": {
+        "path": "output/editor-validation/native-register-shared-request/editor-saved/fifo-readback.json",
+        "bytes": 888,
+        "sha256": "fa50663cc11012863ce3b7342c1ad1432d84de1f73bb988c161331ce43ea83cc"
+      },
+      "runtime_watch": {
+        "candidate": {
+          "path": "output/editor-validation/native-register-shared-request/runtime-candidates/register_fifo_runtime_watch.smbp",
+          "bytes": 104727,
+          "sha256": "0945b46d4842757f360af312c10b45e90798c24f26f7e6b0e60f131f0d7456b1"
+        },
+        "editor_saved": {
+          "path": "output/editor-validation/native-register-shared-request/runtime-candidates/register_fifo_runtime_watch_editor_saved.smbp",
+          "bytes": 107500,
+          "sha256": "2cb137138e7163ec69363017d11c40ec5f0f8e558cb60ad052c6c365a71c1963"
+        },
+        "watch_addresses": [
+          "%R0.I",
+          "%R0.O",
+          "%R0.E",
+          "%R0.F"
+        ],
+        "derivative_only_changes_WatchLists": true,
+        "editor_saved_raw_IL_and_hardware_preserved": true,
+        "root_observed_No_error": true,
+        "readback": {
+          "path": "output/editor-validation/native-register-shared-request/runtime-candidates/fifo-runtime-readback.json",
+          "bytes": 391,
+          "sha256": "767e639dd04e077a86b4ef56e769820a681daeb6fe99c6faf4d71495aaa4019b"
+        },
+        "earlier_runtime_field_retained": "pending"
+      }
+    },
+    {
+      "mode": "LIFO",
+      "candidate": {
+        "path": "output/editor-validation/native-register-shared-request/register_lifo_il_shared_request.smbp",
+        "bytes": 84240,
+        "sha256": "6a2fc9bd4be0ef27291cf148b6facd0b2a0760147d4e5337b332b05ca12bd968"
+      },
+      "editor_saved": {
+        "path": "output/editor-validation/native-register-shared-request/editor-saved/register_lifo_editor_saved.smbp",
+        "bytes": 106627,
+        "sha256": "8d04a2bc22bc2466a928ea185d41641f53c5493e26a2a19d690ef8e55822c1ab",
+        "rungs": 6,
+        "IL_lines": 20,
+        "IL_by_rung": [
+          [
+            "LDN   %I0.3",
+            "[ %R0.I := 11 ]"
+          ],
+          [
+            "LD    %I0.3",
+            "[ %R0.I := 22 ]"
+          ],
+          [
+            "LD    %I0.4",
+            "[ %R0.O := 42 ]"
+          ],
+          [
+            "BLK   %R0",
+            "LD    %I0.0",
+            "R",
+            "LD    %I0.1",
+            "OR    %I0.5",
+            "I",
+            "LD    %I0.2",
+            "OR    %I0.5",
+            "O",
+            "END_BLK"
+          ],
+          [
+            "LD    %R0.E",
+            "ST    %Q0.0"
+          ],
+          [
+            "LD    %R0.F",
+            "ST    %Q0.1"
+          ]
+        ],
+        "IL_lexical_projection": [
+          [
+            "LDN%I0.3",
+            "[%R0.I:=11]"
+          ],
+          [
+            "LD%I0.3",
+            "[%R0.I:=22]"
+          ],
+          [
+            "LD%I0.4",
+            "[%R0.O:=42]"
+          ],
+          [
+            "BLK%R0",
+            "LD%I0.0",
+            "R",
+            "LD%I0.1",
+            "OR%I0.5",
+            "I",
+            "LD%I0.2",
+            "OR%I0.5",
+            "O",
+            "END_BLK"
+          ],
+          [
+            "LD%R0.E",
+            "ST%Q0.0"
+          ],
+          [
+            "LD%R0.F",
+            "ST%Q0.1"
+          ]
+        ],
+        "graph_entity_counts": [
+          10,
+          10,
+          10,
+          10,
+          11,
+          11
+        ],
+        "selected_Ladder": [
+          "true",
+          "true",
+          "true",
+          "true",
+          "true",
+          "true"
+        ],
+        "Register_configuration_rows": [
+          {
+            "Address": "%R0",
+            "Index": "0",
+            "Type": "Lifo"
+          }
+        ]
+      },
+      "preserved": {
+        "baseline_hardware": true,
+        "lexical_IL": true
+      },
+      "native_editor_procedure": "Root personally observed offline No error, global toolbar >LD converted all6rungs, clean save; Root viewed No error after FIFO project, exact saved clone freshly reopened",
+      "captures": [
+        {
+          "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/editor-saved/lifo-save.png",
+          "path": "docs/validation/editor-evidence/register-native/lifo-save.png",
+          "relative_link_from_report": "editor-evidence/register-native/lifo-save.png",
+          "sha256": "b4babf13e27abdac9261f1e3944963032f404c4bbdceabcb566e0e99d2a1417e",
+          "bytes": 372866,
+          "phase": "Root viewed native conversion to Ladder / No error / completed save"
+        },
+        {
+          "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/editor-saved/lifo-reopen.png",
+          "path": "docs/validation/editor-evidence/register-native/lifo-reopen.png",
+          "relative_link_from_report": "editor-evidence/register-native/lifo-reopen.png",
+          "sha256": "922a75d3b747e9c2db0894bcca0f1cd87166ec7399452faac439cdf246a675a3",
+          "bytes": 498672,
+          "phase": "Root freshly reopened exact native editor save after the other mode / No error"
+        }
+      ],
+      "readback": {
+        "path": "output/editor-validation/native-register-shared-request/editor-saved/lifo-readback.json",
+        "bytes": 815,
+        "sha256": "838c58c5d9edddd4b691971735acfc8eba2775d1a649f6125adfe8dfdeb9034f"
+      },
+      "runtime_watch": {
+        "candidate": {
+          "path": "output/editor-validation/native-register-shared-request/runtime-candidates/register_lifo_runtime_watch.smbp",
+          "bytes": 104859,
+          "sha256": "7e0452f621d6ff19f43debb9de1327f709e379dc9f1f3a01c585d7fe6f1e6197"
+        },
+        "editor_saved": {
+          "path": "output/editor-validation/native-register-shared-request/runtime-candidates/register_lifo_runtime_watch_editor_saved.smbp",
+          "bytes": 107638,
+          "sha256": "d330f04acc04925c19c43553f607cf9483c543614cababa4ae2292a710dd5ba4"
+        },
+        "watch_addresses": [
+          "%R0.I",
+          "%R0.O",
+          "%R0.E",
+          "%R0.F"
+        ],
+        "derivative_only_changes_WatchLists": true,
+        "editor_saved_raw_IL_and_hardware_preserved": true,
+        "root_observed_No_error": true,
+        "readback": {
+          "path": "output/editor-validation/native-register-shared-request/runtime-candidates/lifo-runtime-readback.json",
+          "bytes": 668,
+          "sha256": "df9556b5206e2af71557b51477b0f9400c323d0ba5a0f2a8fa9bf6a02bd3bcc0"
+        },
+        "earlier_runtime_field_retained": "Root observed localSimulatorRUN, LIFO22then11, O42emptyretention, heldstore, sharedI5no-op,16capacity+17thignored/drain16/extrapopretains22"
+      }
+    }
+  ],
+  "source_controls": {
+    "I0.0": "exclusive reset for known-domain cases",
+    "I0.1": "store",
+    "I0.2": "retrieve",
+    "I0.3": "input22 when true, input11 otherwise",
+    "I0.4": "write output sentinel42 before Register block",
+    "I0.5": "shared store+retrieve condition in the same Register call"
+  },
+  "diagnostics": {
+    "Q0.0": "R0.E",
+    "Q0.1": "R0.F",
+    "watch_order": [
+      "R0.I",
+      "R0.O",
+      "R0.E",
+      "R0.F"
+    ],
+    "MW_queue_storage_added": false,
+    "public_depth_operand": false
+  },
+  "observations": [
+    {
+      "label": "lifo-initial",
+      "mode": "LIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        11,
+        0,
+        1,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793955624399120000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-initial.png",
+        "path": "docs/validation/editor-evidence/register-native/lifo-initial.png",
+        "relative_link_from_report": "editor-evidence/register-native/lifo-initial.png",
+        "sha256": "df6a7f33f5dc67898d71e9c30409f47048cec22f70bbe3ce49e569a4c8fa38bb",
+        "bytes": 395650,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "lifo-output-sentinel",
+      "mode": "LIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        11,
+        42,
+        1,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793955671256023000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-output-sentinel.png",
+        "path": "docs/validation/editor-evidence/register-native/lifo-output-sentinel.png",
+        "relative_link_from_report": "editor-evidence/register-native/lifo-output-sentinel.png",
+        "sha256": "ceb5cfcdecd8899c14ab9af02fb8a23f7b40b41716d490a9cbf525d9edd910c1",
+        "bytes": 395641,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "lifo-empty-pop-retains-sentinel",
+      "mode": "LIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        11,
+        42,
+        1,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793955679619291000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-empty-pop-retains-sentinel.png",
+        "path": "docs/validation/editor-evidence/register-native/lifo-empty-pop-retains-sentinel.png",
+        "relative_link_from_report": "editor-evidence/register-native/lifo-empty-pop-retains-sentinel.png",
+        "sha256": "ceb5cfcdecd8899c14ab9af02fb8a23f7b40b41716d490a9cbf525d9edd910c1",
+        "bytes": 395641,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "lifo-after-held-store-data-change-and-release",
+      "mode": "LIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        22,
+        42,
+        0,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793955713279889000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-input22-held-store.png",
+        "path": "docs/validation/editor-evidence/register-native/lifo-after-held-store-data-change-and-release.png",
+        "relative_link_from_report": "editor-evidence/register-native/lifo-after-held-store-data-change-and-release.png",
+        "sha256": "aff71646a58c2fbec8166f73715240c32a138e893a6da4571ef4ca6cf8b1048c",
+        "bytes": 395501,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "lifo-after-shared-both-edges",
+      "mode": "LIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        22,
+        42,
+        0,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793955730055300000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-after-shared-both-edges.png",
+        "path": "docs/validation/editor-evidence/register-native/lifo-after-shared-both-edges.png",
+        "relative_link_from_report": "editor-evidence/register-native/lifo-after-shared-both-edges.png",
+        "sha256": "aff71646a58c2fbec8166f73715240c32a138e893a6da4571ef4ca6cf8b1048c",
+        "bytes": 395501,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "lifo-pop22",
+      "mode": "LIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        22,
+        22,
+        0,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793955767039177000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-pop22.png",
+        "path": "docs/validation/editor-evidence/register-native/lifo-pop22.png",
+        "relative_link_from_report": "editor-evidence/register-native/lifo-pop22.png",
+        "sha256": "de33ec9db7c478b3237ef4e101d9c4fbd78b7af534adf31e5603ac7d5e7a95ac",
+        "bytes": 395446,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "lifo-pop11-empty",
+      "mode": "LIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        22,
+        11,
+        1,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793955775416895000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-pop11-empty.png",
+        "path": "docs/validation/editor-evidence/register-native/lifo-pop11-empty.png",
+        "relative_link_from_report": "editor-evidence/register-native/lifo-pop11-empty.png",
+        "sha256": "c1b60b4d9b0c351f4a1a80e0a6ba1b52bac5e4f9a2a41f7a5b233a351c28c6e3",
+        "bytes": 395237,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "lifo-extra-empty-pop",
+      "mode": "LIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        22,
+        11,
+        1,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793955783784803000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-extra-empty-pop.png",
+        "path": "docs/validation/editor-evidence/register-native/lifo-extra-empty-pop.png",
+        "relative_link_from_report": "editor-evidence/register-native/lifo-extra-empty-pop.png",
+        "sha256": "c1b60b4d9b0c351f4a1a80e0a6ba1b52bac5e4f9a2a41f7a5b233a351c28c6e3",
+        "bytes": 395237,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "lifo-capacity15",
+      "mode": "LIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        22,
+        0,
+        0,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793956046832263000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-capacity15.png",
+        "path": "docs/validation/editor-evidence/register-native/lifo-capacity15.png",
+        "relative_link_from_report": "editor-evidence/register-native/lifo-capacity15.png",
+        "sha256": "5ea5b56cec66e52e405726ed69be3442a736f4769f354a80baaeb67d41943ea9",
+        "bytes": 395287,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "lifo-capacity16-full",
+      "mode": "LIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        22,
+        0,
+        0,
+        1
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793956055261919000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-capacity16-full.png",
+        "path": "docs/validation/editor-evidence/register-native/lifo-capacity16-full.png",
+        "relative_link_from_report": "editor-evidence/register-native/lifo-capacity16-full.png",
+        "sha256": "6422d8289ccdae7a29b18ed5517b2c816cffae5bc4b73adf9dca24895552c152",
+        "bytes": 395219,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "lifo-seventeenth11-ignored-full",
+      "mode": "LIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        11,
+        0,
+        0,
+        1
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793956134657529000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-seventeenth11-ignored-full.png",
+        "path": "docs/validation/editor-evidence/register-native/lifo-seventeenth11-ignored-full.png",
+        "relative_link_from_report": "editor-evidence/register-native/lifo-seventeenth11-ignored-full.png",
+        "sha256": "dbf1bb2723282508f6b8d07f1e2079dc1c789ffdbfebb414e2ed817230cddfe6",
+        "bytes": 395423,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "lifo-pop01-after-full-both",
+      "mode": "LIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        11,
+        22,
+        0,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793956151417369000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-pop01-after-full-both.png",
+        "path": "docs/validation/editor-evidence/register-native/lifo-pop01-after-full-both.png",
+        "relative_link_from_report": "editor-evidence/register-native/lifo-pop01-after-full-both.png",
+        "sha256": "72f800a9631c489e0f88d088cda87af60ca9325fecaf7fb1812588d051ea654c",
+        "bytes": 395654,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "lifo-capacity-pop15",
+      "mode": "LIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        11,
+        22,
+        0,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793956334352218000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-capacity-pop15.png",
+        "path": "docs/validation/editor-evidence/register-native/lifo-capacity-pop15.png",
+        "relative_link_from_report": "editor-evidence/register-native/lifo-capacity-pop15.png",
+        "sha256": "72f800a9631c489e0f88d088cda87af60ca9325fecaf7fb1812588d051ea654c",
+        "bytes": 395654,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "lifo-capacity-pop16-empty",
+      "mode": "LIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        11,
+        22,
+        1,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793956342737004000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-capacity-pop16-empty.png",
+        "path": "docs/validation/editor-evidence/register-native/lifo-capacity-pop16-empty.png",
+        "relative_link_from_report": "editor-evidence/register-native/lifo-capacity-pop16-empty.png",
+        "sha256": "87ca2a668757af7d500439781b535406dcf894c55c01c22ed51caf6708eb0fc5",
+        "bytes": 395585,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "lifo-capacity-pop17-retains22",
+      "mode": "LIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        11,
+        22,
+        1,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793956351080161000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-capacity-pop17-retains22.png",
+        "path": "docs/validation/editor-evidence/register-native/lifo-capacity-pop17-retains22.png",
+        "relative_link_from_report": "editor-evidence/register-native/lifo-capacity-pop17-retains22.png",
+        "sha256": "87ca2a668757af7d500439781b535406dcf894c55c01c22ed51caf6708eb0fc5",
+        "bytes": 395585,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "fifo-output-sentinel",
+      "mode": "FIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        11,
+        42,
+        1,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793957167542763000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-output-sentinel.png",
+        "path": "docs/validation/editor-evidence/register-native/fifo-output-sentinel.png",
+        "relative_link_from_report": "editor-evidence/register-native/fifo-output-sentinel.png",
+        "sha256": "def1625ee599a3b12bccec71bca6a1b4e4c6c6a08646fafe1f7fa9f56eee8fac",
+        "bytes": 395596,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "fifo-empty-pop-retains-sentinel",
+      "mode": "FIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        11,
+        42,
+        1,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793957175904561000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-empty-pop-retains-sentinel.png",
+        "path": "docs/validation/editor-evidence/register-native/fifo-empty-pop-retains-sentinel.png",
+        "relative_link_from_report": "editor-evidence/register-native/fifo-empty-pop-retains-sentinel.png",
+        "sha256": "def1625ee599a3b12bccec71bca6a1b4e4c6c6a08646fafe1f7fa9f56eee8fac",
+        "bytes": 395596,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "fifo-held-store-data-change",
+      "mode": "FIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        22,
+        42,
+        0,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793957270392200000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-held-store-data-change.png",
+        "path": "docs/validation/editor-evidence/register-native/fifo-held-store-data-change.png",
+        "relative_link_from_report": "editor-evidence/register-native/fifo-held-store-data-change.png",
+        "sha256": "9ba578763f89cff4332620f6f72139d796bfbbfcd711b059e0322378cba95ab3",
+        "bytes": 395323,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "fifo-after-shared-both-edges",
+      "mode": "FIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        22,
+        42,
+        0,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793957291308172000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-after-shared-both-edges.png",
+        "path": "docs/validation/editor-evidence/register-native/fifo-after-shared-both-edges.png",
+        "relative_link_from_report": "editor-evidence/register-native/fifo-after-shared-both-edges.png",
+        "sha256": "5f121acbbfda24a88df8f7e6a003627a990a66f19398e6d7f840df3dc18dff56",
+        "bytes": 395462,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "fifo-pop11",
+      "mode": "FIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        22,
+        11,
+        0,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793957614922795000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-pop11.png",
+        "path": "docs/validation/editor-evidence/register-native/fifo-pop11.png",
+        "relative_link_from_report": "editor-evidence/register-native/fifo-pop11.png",
+        "sha256": "216a4d8b8b53a8cd5899e8cb569b7284c31bf64befdeca3f9ba12a6ea9eb1ec7",
+        "bytes": 395268,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "fifo-pop22-empty",
+      "mode": "FIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        22,
+        22,
+        1,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793957623279135000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-pop22-empty.png",
+        "path": "docs/validation/editor-evidence/register-native/fifo-pop22-empty.png",
+        "relative_link_from_report": "editor-evidence/register-native/fifo-pop22-empty.png",
+        "sha256": "d86c2e7a3667fd5f58a459df6149b6492c9d9586f07f88393f63a514ec948bfc",
+        "bytes": 395338,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "fifo-extra-empty-pop",
+      "mode": "FIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        22,
+        22,
+        1,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793957631661591000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-extra-empty-pop.png",
+        "path": "docs/validation/editor-evidence/register-native/fifo-extra-empty-pop.png",
+        "relative_link_from_report": "editor-evidence/register-native/fifo-extra-empty-pop.png",
+        "sha256": "d86c2e7a3667fd5f58a459df6149b6492c9d9586f07f88393f63a514ec948bfc",
+        "bytes": 395338,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "fifo-capacity15",
+      "mode": "FIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        22,
+        0,
+        0,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793957792848837000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-capacity15.png",
+        "path": "docs/validation/editor-evidence/register-native/fifo-capacity15.png",
+        "relative_link_from_report": "editor-evidence/register-native/fifo-capacity15.png",
+        "sha256": "d641de5d7ee0611fa4f34e57a09a3b33db8b2990ce93aa511a743de3c4f80b43",
+        "bytes": 395248,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "fifo-capacity16-full",
+      "mode": "FIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        22,
+        0,
+        0,
+        1
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793957801260977000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-capacity16-full.png",
+        "path": "docs/validation/editor-evidence/register-native/fifo-capacity16-full.png",
+        "relative_link_from_report": "editor-evidence/register-native/fifo-capacity16-full.png",
+        "sha256": "91ebb7eeb1a32bf81ed421bf10873f32c27fa913c83c36f749857c7d90368440",
+        "bytes": 395179,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "fifo-seventeenth11-ignored-full",
+      "mode": "FIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        11,
+        0,
+        0,
+        1
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793957813834038000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-seventeenth11-ignored-full.png",
+        "path": "docs/validation/editor-evidence/register-native/fifo-seventeenth11-ignored-full.png",
+        "relative_link_from_report": "editor-evidence/register-native/fifo-seventeenth11-ignored-full.png",
+        "sha256": "f68223a8ab09cb0f9aebe053a3a92f9a010f133eb72311cfb2e3964c187ce7bf",
+        "bytes": 395381,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "fifo-capacity-shared-on",
+      "mode": "FIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        11,
+        0,
+        0,
+        1
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793957818000316000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-capacity-shared-on.png",
+        "path": "docs/validation/editor-evidence/register-native/fifo-capacity-shared-on.png",
+        "relative_link_from_report": "editor-evidence/register-native/fifo-capacity-shared-on.png",
+        "sha256": "6f3291c28fb48c1e7a4dced42e23165222dfb234a99806008f7349b84699559b",
+        "bytes": 395177,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "fifo-capacity-shared-release-still-full",
+      "mode": "FIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        11,
+        0,
+        0,
+        1
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793957822256447000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-capacity-shared-release-unresolved-flags.png",
+        "path": "docs/validation/editor-evidence/register-native/fifo-capacity-shared-release-still-full.png",
+        "relative_link_from_report": "editor-evidence/register-native/fifo-capacity-shared-release-still-full.png",
+        "sha256": "f68223a8ab09cb0f9aebe053a3a92f9a010f133eb72311cfb2e3964c187ce7bf",
+        "bytes": 395381,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "fifo-capacity-pop01",
+      "mode": "FIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        11,
+        22,
+        0,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793957916848384000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-capacity-pop01.png",
+        "path": "docs/validation/editor-evidence/register-native/fifo-capacity-pop01.png",
+        "relative_link_from_report": "editor-evidence/register-native/fifo-capacity-pop01.png",
+        "sha256": "32c5751006e8bca446c3a61c23f9301f230970c70558dd42414a690925c8dcad",
+        "bytes": 395608,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "fifo-capacity-pop15",
+      "mode": "FIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        11,
+        22,
+        0,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793958110366225000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-capacity-pop15.png",
+        "path": "docs/validation/editor-evidence/register-native/fifo-capacity-pop15.png",
+        "relative_link_from_report": "editor-evidence/register-native/fifo-capacity-pop15.png",
+        "sha256": "32c5751006e8bca446c3a61c23f9301f230970c70558dd42414a690925c8dcad",
+        "bytes": 395608,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "fifo-capacity-pop16-empty",
+      "mode": "FIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        11,
+        22,
+        1,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793958118814795000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-capacity-pop16-empty.png",
+        "path": "docs/validation/editor-evidence/register-native/fifo-capacity-pop16-empty.png",
+        "relative_link_from_report": "editor-evidence/register-native/fifo-capacity-pop16-empty.png",
+        "sha256": "9e5f87f544c6fb66905718478d05275b46c222a0c9c3313b19c610988bc51791",
+        "bytes": 395540,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    },
+    {
+      "label": "fifo-capacity-pop17-retains22",
+      "mode": "FIFO",
+      "display_order": [
+        "R0.I",
+        "R0.O",
+        "R0.E",
+        "R0.F"
+      ],
+      "displayed": [
+        11,
+        22,
+        1,
+        0
+      ],
+      "root_personally_viewed": true,
+      "host_capture_epoch_ns": "1793958127287217000",
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-capacity-pop17-retains22.png",
+        "path": "docs/validation/editor-evidence/register-native/fifo-capacity-pop17-retains22.png",
+        "relative_link_from_report": "editor-evidence/register-native/fifo-capacity-pop17-retains22.png",
+        "sha256": "9e5f87f544c6fb66905718478d05275b46c222a0c9c3313b19c610988bc51791",
+        "bytes": 395540,
+        "phase": "Root personally viewed settled native local-simulator checkpoint"
+      }
+    }
+  ],
+  "observation_labels": 31,
+  "unique_runtime_PNG_hashes": 21,
+  "bounded_cases": {
+    "LIFO": [
+      "Exclusive reset, writableO42 and empty retrieval retention",
+      "Store11 then hold while inputchanges22, releaseandstore22",
+      "Single I5 creates simultaneousnewI/Orequests; subsequentLIFOdrain22then11 andemptyextraO11",
+      "16freshstore22pulses; Ffalseafter15,trueafter16; seventeenth11ignored",
+      "FullsharedI/O pulse then16retrievals22; Efalseafter15,trueafter16; extra17retains22"
+    ],
+    "FIFO": [
+      "Empty retrieve preserves O42",
+      "Store11 held while input changes22, release then freshstore22; I5commonboth then FIFO11/22",
+      "16store22 pulses Ffalse15/Ftrue16; seventeenth11 whilefull",
+      "After full I5 pulse, 16fresh retrievals; selected O22, Efalse15/Etrue16; extra17retains22"
+    ]
+  },
+  "reading_correction": {
+    "status": "resolved transcription error; not a native or monitor defect",
+    "initial_transcription_is_historical": true,
+    "source_record": {
+      "initial_transcription": {
+        "scope": "Displayed status versus retained queue after full common I/O request",
+        "both_on_display": [
+          11,
+          0,
+          0,
+          1
+        ],
+        "both_off_display": [
+          11,
+          0,
+          1,
+          0
+        ],
+        "later_drain": "Fresh retrieve1 O22/E0/F0; Efalseafter15/Etrueafter16; queue was retained, notempty",
+        "cause": "Unresolved; monitor/status consistency or native behavior requires a separate latched reproduction. No compiler Register semantics admitted."
+      },
+      "resolution": "Root/reviewer original-resolution visual readback reads E0/F1. Overflow and shared-release exact PNGs byte-identical SHA f68223a8ab09cb0f9aebe053a3a92f9a010f133eb72311cfb2e3964c187ce7bf. Initial E1/F0 transcription was wrong, no native defect observed."
+    },
+    "corrected_release_display_I_O_E_F": [
+      11,
+      0,
+      0,
+      1
+    ],
+    "exact_release_capture": {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-capacity-shared-release-unresolved-flags.png",
+      "path": "docs/validation/editor-evidence/register-native/fifo-capacity-shared-release-still-full.png",
+      "relative_link_from_report": "editor-evidence/register-native/fifo-capacity-shared-release-still-full.png",
+      "sha256": "f68223a8ab09cb0f9aebe053a3a92f9a010f133eb72311cfb2e3964c187ce7bf",
+      "bytes": 395381,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    }
+  },
+  "timing_and_counting": {
+    "GUI_refresh_seconds": 5,
+    "precise_scan_or_same_scan_claim": false,
+    "capacity_fill_values": "Sixteen fresh stores of22; seventeenth attempted11; selected drain checkpoints22",
+    "two_item_order": "FIFO11then22; LIFO22then11",
+    "preparation_literal_positions_per_mode": 89,
+    "preparation_oracle_executed_as_trace": false,
+    "note": "Documentary oracle rows are not native observations. Repeated PNG bytes and journal release actions are not unique scans."
+  },
+  "cleanup": [
+    {
+      "mode": "LIFO",
+      "record": {
+        "officialStopSimulator": true,
+        "panelgone": true,
+        "exactPID69384gone": true,
+        "localTCP502listenergone": true
+      },
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-simulator-stopped.png",
+        "path": "docs/validation/editor-evidence/register-native/lifo-simulator-stopped.png",
+        "relative_link_from_report": "editor-evidence/register-native/lifo-simulator-stopped.png",
+        "sha256": "47369e2cf5e535ae7e04fe8b4cb1a38a0905eb2e140ee1a6f8d864583a550139",
+        "bytes": 286310,
+        "phase": "Root stopped official simulator and personally viewed panel absent"
+      }
+    },
+    {
+      "mode": "FIFO",
+      "record": {
+        "official_stop_simulator": true,
+        "panel_absent": true,
+        "mac_simulator_pid": 96992,
+        "mac_simulator_pid_absent": true,
+        "tcp502_listener_absent": true,
+        "capture": "output/editor-validation/native-register-shared-request/fifo-simulator-stopped.png",
+        "sha256": "2edc2248ab606ea748a3333f50308d10d6ff8900aa46f04d13f0010dab9c53ea"
+      },
+      "capture": {
+        "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-simulator-stopped.png",
+        "path": "docs/validation/editor-evidence/register-native/fifo-simulator-stopped.png",
+        "relative_link_from_report": "editor-evidence/register-native/fifo-simulator-stopped.png",
+        "sha256": "2edc2248ab606ea748a3333f50308d10d6ff8900aa46f04d13f0010dab9c53ea",
+        "bytes": 286378,
+        "phase": "Root stopped official simulator and personally viewed panel absent"
+      }
+    }
+  ],
+  "journal": {
+    "path": "output/editor-validation/native-register-shared-request/runtime-actions.jsonl",
+    "bytes": 133784,
+    "sha256": "81839b85d3fc8ada48c623df195bc65c1968b6d17acd6bd322e1237ced8d56d5",
+    "rows": 186,
+    "LIFO_rows": 92,
+    "FIFO_rows": 94,
+    "actions": [
+      {
+        "label": "lifo-exclusive-reset-on",
+        "started_epoch": 1793955654.947916,
+        "ended_epoch": 1793955659.120725,
+        "exit": 0
+      },
+      {
+        "label": "lifo-exclusive-reset-off",
+        "started_epoch": 1793955659.156978,
+        "ended_epoch": 1793955663.3358989,
+        "exit": 0
+      },
+      {
+        "label": "lifo-write-sentinel-on",
+        "started_epoch": 1793955663.371051,
+        "ended_epoch": 1793955667.5094578,
+        "exit": 0
+      },
+      {
+        "label": "lifo-write-sentinel-off",
+        "started_epoch": 1793955667.544372,
+        "ended_epoch": 1793955671.7096589,
+        "exit": 0
+      },
+      {
+        "label": "lifo-empty-pop-on",
+        "started_epoch": 1793955671.7448099,
+        "ended_epoch": 1793955675.8901272,
+        "exit": 0
+      },
+      {
+        "label": "lifo-empty-pop-off",
+        "started_epoch": 1793955675.926507,
+        "ended_epoch": 1793955680.062855,
+        "exit": 0
+      },
+      {
+        "label": "lifo-store11-on",
+        "started_epoch": 1793955701.153829,
+        "ended_epoch": 1793955705.3662841,
+        "exit": 0
+      },
+      {
+        "label": "lifo-held-store-change-input22",
+        "started_epoch": 1793955705.401957,
+        "ended_epoch": 1793955709.552447,
+        "exit": 0
+      },
+      {
+        "label": "lifo-store-release",
+        "started_epoch": 1793955709.587183,
+        "ended_epoch": 1793955713.730313,
+        "exit": 0
+      },
+      {
+        "label": "lifo-store22-on",
+        "started_epoch": 1793955713.768317,
+        "ended_epoch": 1793955717.933194,
+        "exit": 0
+      },
+      {
+        "label": "lifo-store22-release",
+        "started_epoch": 1793955717.9687722,
+        "ended_epoch": 1793955722.079742,
+        "exit": 0
+      },
+      {
+        "label": "lifo-both-new-edges-on",
+        "started_epoch": 1793955722.114593,
+        "ended_epoch": 1793955726.268037,
+        "exit": 0
+      },
+      {
+        "label": "lifo-both-new-edges-off",
+        "started_epoch": 1793955726.304906,
+        "ended_epoch": 1793955730.504629,
+        "exit": 0
+      },
+      {
+        "label": "lifo-pop-first-on",
+        "started_epoch": 1793955759.109257,
+        "ended_epoch": 1793955763.304651,
+        "exit": 0
+      },
+      {
+        "label": "lifo-pop-first-off",
+        "started_epoch": 1793955763.3393888,
+        "ended_epoch": 1793955767.495271,
+        "exit": 0
+      },
+      {
+        "label": "lifo-pop-second-on",
+        "started_epoch": 1793955767.529372,
+        "ended_epoch": 1793955771.664348,
+        "exit": 0
+      },
+      {
+        "label": "lifo-pop-second-off",
+        "started_epoch": 1793955771.699847,
+        "ended_epoch": 1793955775.8596768,
+        "exit": 0
+      },
+      {
+        "label": "lifo-pop-empty-again-on",
+        "started_epoch": 1793955775.8936,
+        "ended_epoch": 1793955780.0295548,
+        "exit": 0
+      },
+      {
+        "label": "lifo-pop-empty-again-off",
+        "started_epoch": 1793955780.063595,
+        "ended_epoch": 1793955784.239986,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-reset-on",
+        "started_epoch": 1793955913.020639,
+        "ended_epoch": 1793955917.189217,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-reset-off",
+        "started_epoch": 1793955917.224884,
+        "ended_epoch": 1793955921.3923042,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-01-on",
+        "started_epoch": 1793955921.429091,
+        "ended_epoch": 1793955925.565297,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-01-off",
+        "started_epoch": 1793955925.600384,
+        "ended_epoch": 1793955929.7586482,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-02-on",
+        "started_epoch": 1793955929.7928588,
+        "ended_epoch": 1793955933.957938,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-02-off",
+        "started_epoch": 1793955933.995269,
+        "ended_epoch": 1793955938.1394172,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-03-on",
+        "started_epoch": 1793955938.173501,
+        "ended_epoch": 1793955942.3254,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-03-off",
+        "started_epoch": 1793955942.3624399,
+        "ended_epoch": 1793955946.509808,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-04-on",
+        "started_epoch": 1793955946.5451698,
+        "ended_epoch": 1793955950.676749,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-04-off",
+        "started_epoch": 1793955950.71346,
+        "ended_epoch": 1793955954.861712,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-05-on",
+        "started_epoch": 1793955954.8964741,
+        "ended_epoch": 1793955959.0527098,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-05-off",
+        "started_epoch": 1793955959.086731,
+        "ended_epoch": 1793955963.26015,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-06-on",
+        "started_epoch": 1793955963.29669,
+        "ended_epoch": 1793955967.473113,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-06-off",
+        "started_epoch": 1793955967.508239,
+        "ended_epoch": 1793955971.651361,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-07-on",
+        "started_epoch": 1793955971.688017,
+        "ended_epoch": 1793955975.8564422,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-07-off",
+        "started_epoch": 1793955975.8940501,
+        "ended_epoch": 1793955980.037246,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-08-on",
+        "started_epoch": 1793955980.073091,
+        "ended_epoch": 1793955984.2362082,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-08-off",
+        "started_epoch": 1793955984.271651,
+        "ended_epoch": 1793955988.440646,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-09-on",
+        "started_epoch": 1793955988.4757252,
+        "ended_epoch": 1793955992.624083,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-09-off",
+        "started_epoch": 1793955992.658806,
+        "ended_epoch": 1793955996.831109,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-10-on",
+        "started_epoch": 1793955996.866517,
+        "ended_epoch": 1793956001.011473,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-10-off",
+        "started_epoch": 1793956001.048277,
+        "ended_epoch": 1793956005.186058,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-11-on",
+        "started_epoch": 1793956005.220834,
+        "ended_epoch": 1793956009.391083,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-11-off",
+        "started_epoch": 1793956009.429129,
+        "ended_epoch": 1793956013.652066,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-12-on",
+        "started_epoch": 1793956013.687788,
+        "ended_epoch": 1793956017.861121,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-12-off",
+        "started_epoch": 1793956017.897622,
+        "ended_epoch": 1793956022.051011,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-13-on",
+        "started_epoch": 1793956022.086653,
+        "ended_epoch": 1793956026.254386,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-13-off",
+        "started_epoch": 1793956026.2910988,
+        "ended_epoch": 1793956030.449951,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-14-on",
+        "started_epoch": 1793956030.486264,
+        "ended_epoch": 1793956034.6260228,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-14-off",
+        "started_epoch": 1793956034.662505,
+        "ended_epoch": 1793956038.8651881,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-15-on",
+        "started_epoch": 1793956038.9010072,
+        "ended_epoch": 1793956043.08341,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-15-off",
+        "started_epoch": 1793956043.1195142,
+        "ended_epoch": 1793956047.2990022,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-16-on",
+        "started_epoch": 1793956047.334635,
+        "ended_epoch": 1793956051.5243578,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-store-16-off",
+        "started_epoch": 1793956051.560478,
+        "ended_epoch": 1793956055.70613,
+        "exit": 0
+      },
+      {
+        "label": "lifo-overflow-select11",
+        "started_epoch": 1793956122.554646,
+        "ended_epoch": 1793956126.741288,
+        "exit": 0
+      },
+      {
+        "label": "lifo-overflow-store17-on",
+        "started_epoch": 1793956126.778021,
+        "ended_epoch": 1793956130.928582,
+        "exit": 0
+      },
+      {
+        "label": "lifo-overflow-store17-off",
+        "started_epoch": 1793956130.964052,
+        "ended_epoch": 1793956135.10836,
+        "exit": 0
+      },
+      {
+        "label": "lifo-full-both-new-edges-on",
+        "started_epoch": 1793956135.144533,
+        "ended_epoch": 1793956139.3005161,
+        "exit": 0
+      },
+      {
+        "label": "lifo-full-both-new-edges-off",
+        "started_epoch": 1793956139.3353322,
+        "ended_epoch": 1793956143.490015,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop01-on",
+        "started_epoch": 1793956143.5246139,
+        "ended_epoch": 1793956147.684603,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop01-off",
+        "started_epoch": 1793956147.720103,
+        "ended_epoch": 1793956151.864994,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop02-on",
+        "started_epoch": 1793956217.4634209,
+        "ended_epoch": 1793956221.672958,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop02-off",
+        "started_epoch": 1793956221.710397,
+        "ended_epoch": 1793956225.899231,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop03-on",
+        "started_epoch": 1793956225.934518,
+        "ended_epoch": 1793956230.090834,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop03-off",
+        "started_epoch": 1793956230.125889,
+        "ended_epoch": 1793956234.2739289,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop04-on",
+        "started_epoch": 1793956234.3099039,
+        "ended_epoch": 1793956238.458029,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop04-off",
+        "started_epoch": 1793956238.492783,
+        "ended_epoch": 1793956242.643119,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop05-on",
+        "started_epoch": 1793956242.679543,
+        "ended_epoch": 1793956246.8378549,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop05-off",
+        "started_epoch": 1793956246.8743958,
+        "ended_epoch": 1793956251.02333,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop06-on",
+        "started_epoch": 1793956251.0594492,
+        "ended_epoch": 1793956255.2048829,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop06-off",
+        "started_epoch": 1793956255.2405992,
+        "ended_epoch": 1793956259.361498,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop07-on",
+        "started_epoch": 1793956259.397602,
+        "ended_epoch": 1793956263.5473092,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop07-off",
+        "started_epoch": 1793956263.581513,
+        "ended_epoch": 1793956267.732723,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop08-on",
+        "started_epoch": 1793956267.7710562,
+        "ended_epoch": 1793956271.930457,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop08-off",
+        "started_epoch": 1793956271.965898,
+        "ended_epoch": 1793956276.120495,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop09-on",
+        "started_epoch": 1793956276.155841,
+        "ended_epoch": 1793956280.288692,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop09-off",
+        "started_epoch": 1793956280.325699,
+        "ended_epoch": 1793956284.479574,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop10-on",
+        "started_epoch": 1793956284.514891,
+        "ended_epoch": 1793956288.6543639,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop10-off",
+        "started_epoch": 1793956288.689893,
+        "ended_epoch": 1793956292.8156679,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop11-on",
+        "started_epoch": 1793956292.851499,
+        "ended_epoch": 1793956297.007741,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop11-off",
+        "started_epoch": 1793956297.044161,
+        "ended_epoch": 1793956301.183166,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop12-on",
+        "started_epoch": 1793956301.219344,
+        "ended_epoch": 1793956305.3648481,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop12-off",
+        "started_epoch": 1793956305.399702,
+        "ended_epoch": 1793956309.5609019,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop13-on",
+        "started_epoch": 1793956309.5960262,
+        "ended_epoch": 1793956313.768708,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop13-off",
+        "started_epoch": 1793956313.805231,
+        "ended_epoch": 1793956317.981502,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop14-on",
+        "started_epoch": 1793956318.0177972,
+        "ended_epoch": 1793956322.229032,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop14-off",
+        "started_epoch": 1793956322.2645419,
+        "ended_epoch": 1793956326.431264,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop15-on",
+        "started_epoch": 1793956326.467515,
+        "ended_epoch": 1793956330.63153,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop15-off",
+        "started_epoch": 1793956330.6663811,
+        "ended_epoch": 1793956334.815449,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop16-on",
+        "started_epoch": 1793956334.850549,
+        "ended_epoch": 1793956339.004834,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop16-off",
+        "started_epoch": 1793956339.041512,
+        "ended_epoch": 1793956343.175785,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop17-on",
+        "started_epoch": 1793956343.2112792,
+        "ended_epoch": 1793956347.339013,
+        "exit": 0
+      },
+      {
+        "label": "lifo-capacity-pop17-off",
+        "started_epoch": 1793956347.374621,
+        "ended_epoch": 1793956351.539603,
+        "exit": 0
+      },
+      {
+        "label": "fifo-exclusive-reset-on",
+        "started_epoch": 1793957151.025888,
+        "ended_epoch": 1793957155.2384021,
+        "exit": 0
+      },
+      {
+        "label": "fifo-exclusive-reset-off",
+        "started_epoch": 1793957155.2748759,
+        "ended_epoch": 1793957159.429701,
+        "exit": 0
+      },
+      {
+        "label": "fifo-write-sentinel-on",
+        "started_epoch": 1793957159.463818,
+        "ended_epoch": 1793957163.625154,
+        "exit": 0
+      },
+      {
+        "label": "fifo-write-sentinel-off",
+        "started_epoch": 1793957163.660179,
+        "ended_epoch": 1793957167.826826,
+        "exit": 0
+      },
+      {
+        "label": "fifo-empty-pop-on",
+        "started_epoch": 1793957167.861057,
+        "ended_epoch": 1793957172.001733,
+        "exit": 0
+      },
+      {
+        "label": "fifo-empty-pop-off",
+        "started_epoch": 1793957172.0365381,
+        "ended_epoch": 1793957176.177643,
+        "exit": 0
+      },
+      {
+        "label": "fifo-store11-on",
+        "started_epoch": 1793957262.245677,
+        "ended_epoch": 1793957266.4629939,
+        "exit": 0
+      },
+      {
+        "label": "fifo-held-store-change-input22",
+        "started_epoch": 1793957266.5010931,
+        "ended_epoch": 1793957270.659913,
+        "exit": 0
+      },
+      {
+        "label": "fifo-store-release",
+        "started_epoch": 1793957270.6962078,
+        "ended_epoch": 1793957274.836024,
+        "exit": 0
+      },
+      {
+        "label": "fifo-store22-on",
+        "started_epoch": 1793957274.870444,
+        "ended_epoch": 1793957279.015681,
+        "exit": 0
+      },
+      {
+        "label": "fifo-store22-release",
+        "started_epoch": 1793957279.0532491,
+        "ended_epoch": 1793957283.2058198,
+        "exit": 0
+      },
+      {
+        "label": "fifo-both-new-edges-on",
+        "started_epoch": 1793957283.2427049,
+        "ended_epoch": 1793957287.3913422,
+        "exit": 0
+      },
+      {
+        "label": "fifo-both-new-edges-off",
+        "started_epoch": 1793957287.4264011,
+        "ended_epoch": 1793957291.5768561,
+        "exit": 0
+      },
+      {
+        "label": "fifo-retrieve-1-on",
+        "started_epoch": 1793957606.802263,
+        "ended_epoch": 1793957611.0069818,
+        "exit": 0
+      },
+      {
+        "label": "fifo-retrieve-1-off",
+        "started_epoch": 1793957611.043139,
+        "ended_epoch": 1793957615.1881568,
+        "exit": 0
+      },
+      {
+        "label": "fifo-retrieve-2-on",
+        "started_epoch": 1793957615.223433,
+        "ended_epoch": 1793957619.336789,
+        "exit": 0
+      },
+      {
+        "label": "fifo-retrieve-2-off",
+        "started_epoch": 1793957619.371485,
+        "ended_epoch": 1793957623.555479,
+        "exit": 0
+      },
+      {
+        "label": "fifo-retrieve-3-on",
+        "started_epoch": 1793957623.59247,
+        "ended_epoch": 1793957627.752459,
+        "exit": 0
+      },
+      {
+        "label": "fifo-retrieve-3-off",
+        "started_epoch": 1793957627.788343,
+        "ended_epoch": 1793957631.937372,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-reset-on",
+        "started_epoch": 1793957658.712277,
+        "ended_epoch": 1793957662.8736482,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-reset-off",
+        "started_epoch": 1793957662.9107761,
+        "ended_epoch": 1793957667.060021,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-1-on",
+        "started_epoch": 1793957667.097152,
+        "ended_epoch": 1793957671.240014,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-1-off",
+        "started_epoch": 1793957671.276205,
+        "ended_epoch": 1793957675.463125,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-2-on",
+        "started_epoch": 1793957675.49918,
+        "ended_epoch": 1793957679.6901278,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-2-off",
+        "started_epoch": 1793957679.726388,
+        "ended_epoch": 1793957683.912677,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-3-on",
+        "started_epoch": 1793957683.950285,
+        "ended_epoch": 1793957688.090848,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-3-off",
+        "started_epoch": 1793957688.125142,
+        "ended_epoch": 1793957692.317464,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-4-on",
+        "started_epoch": 1793957692.350841,
+        "ended_epoch": 1793957696.588064,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-4-off",
+        "started_epoch": 1793957696.6240902,
+        "ended_epoch": 1793957700.785853,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-5-on",
+        "started_epoch": 1793957700.8201149,
+        "ended_epoch": 1793957705.008457,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-5-off",
+        "started_epoch": 1793957705.044388,
+        "ended_epoch": 1793957709.166382,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-6-on",
+        "started_epoch": 1793957709.20275,
+        "ended_epoch": 1793957713.3665159,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-6-off",
+        "started_epoch": 1793957713.4003341,
+        "ended_epoch": 1793957717.552882,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-7-on",
+        "started_epoch": 1793957717.59005,
+        "ended_epoch": 1793957721.737194,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-7-off",
+        "started_epoch": 1793957721.772753,
+        "ended_epoch": 1793957725.9184058,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-8-on",
+        "started_epoch": 1793957725.953286,
+        "ended_epoch": 1793957730.089203,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-8-off",
+        "started_epoch": 1793957730.125267,
+        "ended_epoch": 1793957734.299849,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-9-on",
+        "started_epoch": 1793957734.336876,
+        "ended_epoch": 1793957738.500457,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-9-off",
+        "started_epoch": 1793957738.534451,
+        "ended_epoch": 1793957742.6498969,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-10-on",
+        "started_epoch": 1793957742.6869602,
+        "ended_epoch": 1793957746.853408,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-10-off",
+        "started_epoch": 1793957746.889157,
+        "ended_epoch": 1793957751.073901,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-11-on",
+        "started_epoch": 1793957751.111507,
+        "ended_epoch": 1793957755.261046,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-11-off",
+        "started_epoch": 1793957755.296032,
+        "ended_epoch": 1793957759.469725,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-12-on",
+        "started_epoch": 1793957759.506748,
+        "ended_epoch": 1793957763.695457,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-12-off",
+        "started_epoch": 1793957763.7295308,
+        "ended_epoch": 1793957767.912862,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-13-on",
+        "started_epoch": 1793957767.9484942,
+        "ended_epoch": 1793957772.135814,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-13-off",
+        "started_epoch": 1793957772.1706188,
+        "ended_epoch": 1793957776.367139,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-14-on",
+        "started_epoch": 1793957776.401821,
+        "ended_epoch": 1793957780.566719,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-14-off",
+        "started_epoch": 1793957780.601241,
+        "ended_epoch": 1793957784.739151,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-15-on",
+        "started_epoch": 1793957784.7744598,
+        "ended_epoch": 1793957788.936131,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-15-off",
+        "started_epoch": 1793957788.971869,
+        "ended_epoch": 1793957793.119898,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-16-on",
+        "started_epoch": 1793957793.1548958,
+        "ended_epoch": 1793957797.334107,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-store-16-off",
+        "started_epoch": 1793957797.370042,
+        "ended_epoch": 1793957801.538384,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-input11",
+        "started_epoch": 1793957801.575264,
+        "ended_epoch": 1793957805.703927,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-overflow-on",
+        "started_epoch": 1793957805.740584,
+        "ended_epoch": 1793957809.9270568,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-overflow-off",
+        "started_epoch": 1793957809.963487,
+        "ended_epoch": 1793957814.1111948,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-both-on",
+        "started_epoch": 1793957814.145926,
+        "ended_epoch": 1793957818.2813098,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-both-off",
+        "started_epoch": 1793957818.3169332,
+        "ended_epoch": 1793957822.529197,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-1-on",
+        "started_epoch": 1793957908.757579,
+        "ended_epoch": 1793957912.937304,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-1-off",
+        "started_epoch": 1793957912.9728708,
+        "ended_epoch": 1793957917.1202738,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-2-on",
+        "started_epoch": 1793957917.157133,
+        "ended_epoch": 1793957921.330538,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-2-off",
+        "started_epoch": 1793957921.365236,
+        "ended_epoch": 1793957925.546541,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-3-on",
+        "started_epoch": 1793957925.5817778,
+        "ended_epoch": 1793957929.7369752,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-3-off",
+        "started_epoch": 1793957929.773529,
+        "ended_epoch": 1793957933.926425,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-4-on",
+        "started_epoch": 1793958008.686913,
+        "ended_epoch": 1793958012.901919,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-4-off",
+        "started_epoch": 1793958012.9363,
+        "ended_epoch": 1793958017.15152,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-5-on",
+        "started_epoch": 1793958017.18535,
+        "ended_epoch": 1793958021.384717,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-5-off",
+        "started_epoch": 1793958021.419323,
+        "ended_epoch": 1793958025.6027598,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-6-on",
+        "started_epoch": 1793958025.637582,
+        "ended_epoch": 1793958029.877378,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-6-off",
+        "started_epoch": 1793958029.913881,
+        "ended_epoch": 1793958034.115361,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-7-on",
+        "started_epoch": 1793958034.149589,
+        "ended_epoch": 1793958038.371428,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-7-off",
+        "started_epoch": 1793958038.407796,
+        "ended_epoch": 1793958042.619122,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-8-on",
+        "started_epoch": 1793958042.656503,
+        "ended_epoch": 1793958046.8702972,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-8-off",
+        "started_epoch": 1793958046.90715,
+        "ended_epoch": 1793958051.113266,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-9-on",
+        "started_epoch": 1793958051.148203,
+        "ended_epoch": 1793958055.365238,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-9-off",
+        "started_epoch": 1793958055.3994,
+        "ended_epoch": 1793958059.61556,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-10-on",
+        "started_epoch": 1793958059.650822,
+        "ended_epoch": 1793958063.902882,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-10-off",
+        "started_epoch": 1793958063.940491,
+        "ended_epoch": 1793958068.1506088,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-11-on",
+        "started_epoch": 1793958068.186062,
+        "ended_epoch": 1793958072.3950531,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-11-off",
+        "started_epoch": 1793958072.4321,
+        "ended_epoch": 1793958076.647777,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-12-on",
+        "started_epoch": 1793958076.684098,
+        "ended_epoch": 1793958080.925162,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-12-off",
+        "started_epoch": 1793958080.9604201,
+        "ended_epoch": 1793958085.16363,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-13-on",
+        "started_epoch": 1793958085.198414,
+        "ended_epoch": 1793958089.418625,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-13-off",
+        "started_epoch": 1793958089.454703,
+        "ended_epoch": 1793958093.67071,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-14-on",
+        "started_epoch": 1793958093.712478,
+        "ended_epoch": 1793958097.918923,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-14-off",
+        "started_epoch": 1793958097.9530911,
+        "ended_epoch": 1793958102.182681,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-15-on",
+        "started_epoch": 1793958102.218776,
+        "ended_epoch": 1793958106.4092648,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-15-off",
+        "started_epoch": 1793958106.445238,
+        "ended_epoch": 1793958110.6397839,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-16-on",
+        "started_epoch": 1793958110.675219,
+        "ended_epoch": 1793958114.869706,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-16-off",
+        "started_epoch": 1793958114.9053109,
+        "ended_epoch": 1793958119.090698,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-17-on",
+        "started_epoch": 1793958119.1272871,
+        "ended_epoch": 1793958123.305035,
+        "exit": 0
+      },
+      {
+        "label": "fifo-capacity-probe-pop-17-off",
+        "started_epoch": 1793958123.340204,
+        "ended_epoch": 1793958127.562801,
+        "exit": 0
+      },
+      {
+        "label": "fifo-commissioning",
+        "started_epoch": 1793958159.1184971,
+        "ended_epoch": 1793958163.686771,
+        "exit": 0
+      },
+      {
+        "label": "fifo-stop-simulator",
+        "started_epoch": 1793958234.3011332,
+        "ended_epoch": 1793958238.4026802,
+        "exit": 0
+      }
+    ]
+  },
+  "runtime_record": {
+    "path": "output/editor-validation/native-register-shared-request/runtime-observations.json",
+    "bytes": 18084,
+    "sha256": "f7f92c876a5e4ed818f9e418be3ee96656cf02d97ce8eacae5cfabb3d7b9c186"
+  },
+  "runtime_derivative_manifest": {
+    "path": "output/editor-validation/native-register-shared-request/runtime-candidates/manifest.json",
+    "bytes": 1597,
+    "sha256": "074a0ef918393a1a645a0f9fc8bbefa9348df5ed09366e66cf78c13b3e2b8c76"
+  },
+  "preparation": {
+    "manifest": {
+      "path": "output/editor-validation/native-register-shared-request/manifest.json",
+      "bytes": 3976,
+      "sha256": "268e5c9336e5aac045f3a7dd03bc9b75e9e76a5c67c0d1e3b6def46500b261e9"
+    },
+    "earlier_pending_fields_retained": [
+      "official parse/No error",
+      "native IL-to-Ladder conversion",
+      "active Register Type/default binding",
+      "official save/reopen",
+      "runtime oracle",
+      "reset with store/retrieve edges",
+      "edge consumption following ignored requests",
+      "skipped/repeated calls",
+      "cold/warm/STOP behavior",
+      "physical controller"
+    ],
+    "note": "Original preparation and earlier typed runtime readbacks retain historical pending strings; later completed-case and cleanup records establish this stage. None were rewritten by this report."
+  },
+  "installed_default_evidence": {
+    "assembly_sha256": "bf7b33a79356dbfd9839891b00e61695b5af3b5ee7ce121def37e3e973a9455e",
+    "type": "SchneiderElectric.Automation.SoMachineBasic.Entities.PLCObjects.FunctionBlocks.Register",
+    "enum": {
+      "Lifo": 0,
+      "Fifo": 1
+    },
+    "configuration_default": "Fifo=1",
+    "method_identifiers": [
+      {
+        "token": "0x06001391",
+        "name": ".ctor"
+      },
+      {
+        "token": "0x06001389",
+        "name": "IsConfigurationByDefault"
+      },
+      {
+        "token": "0x06001390",
+        "name": "LoadConfiguration"
+      }
+    ],
+    "proof_artifact": {
+      "path": "output/diagnostics/native-blocks-research-2026-11-06/register-default-proof.json",
+      "bytes": 1900,
+      "sha256": "6b06a05f24250e6e15a75387f89f6813095b203e98d04e91e30b79a8d2145e31"
+    },
+    "scope": "Configuration/default serialization facts only, not CPU reset behavior"
+  },
+  "input_inventory": [
+    {
+      "path": "output/editor-validation/native-register-shared-request/GUIDE.md",
+      "bytes": 4327,
+      "sha256": "6752f7ff35efecb0927c4a41a3d24c6a0a261f33e1ea383fcfd00ad14e21b2b9"
+    },
+    {
+      "path": "output/editor-validation/native-register-shared-request/fifo-oracle.json",
+      "bytes": 34586,
+      "sha256": "b987e1b5242c72c852221adecec9fbec7002a09a73d4869129047251ed1c2486"
+    },
+    {
+      "path": "output/editor-validation/native-register-shared-request/fifo.il",
+      "bytes": 246,
+      "sha256": "1675b7abb6cf541a326184720d2e2c7025ea6c116d28a53dc1998b64b05e8fff"
+    },
+    {
+      "path": "output/editor-validation/native-register-shared-request/lifo-oracle.json",
+      "bytes": 34586,
+      "sha256": "954a1f8b443abc67cf9491435755360d61a301b98e1efe0ec3e8e97717060801"
+    },
+    {
+      "path": "output/editor-validation/native-register-shared-request/lifo.il",
+      "bytes": 246,
+      "sha256": "1675b7abb6cf541a326184720d2e2c7025ea6c116d28a53dc1998b64b05e8fff"
+    },
+    {
+      "path": "output/editor-validation/native-register-shared-request/oracle-sanity.json",
+      "bytes": 893,
+      "sha256": "6c0c45a09e6d2c1da8fb74750dfef612c26f8410fcafc91511e3b005213e78fd"
+    },
+    {
+      "path": "output/editor-validation/native-register-shared-request/product-gate-check.json",
+      "bytes": 472,
+      "sha256": "e657fd69c6ad0998bbb818d4bc5b1f82be43ddc8dfa0c2a943a7fe1543882111"
+    },
+    {
+      "path": "output/editor-validation/native-register-shared-request/register_fifo_il_shared_request.smbp",
+      "bytes": 84240,
+      "sha256": "d3b49518e94a245c5d89069ad4d40a80ffde34acf951aff35c761606ccf2e04c"
+    },
+    {
+      "path": "output/editor-validation/native-register-shared-request/register_lifo_il_shared_request.smbp",
+      "bytes": 84240,
+      "sha256": "6a2fc9bd4be0ef27291cf148b6facd0b2a0760147d4e5337b332b05ca12bd968"
+    },
+    {
+      "path": "tests/fixtures/official_tm200ce40t_memory.smbp",
+      "bytes": 83391,
+      "sha256": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf"
+    },
+    {
+      "path": "output/diagnostics/native-blocks-research-2026-11-06/register-default-proof.json",
+      "bytes": 1900,
+      "sha256": "6b06a05f24250e6e15a75387f89f6813095b203e98d04e91e30b79a8d2145e31"
+    },
+    {
+      "path": "output/editor-validation/native-register-shared-request/editor-saved/register_fifo_editor_saved.smbp",
+      "bytes": 106489,
+      "sha256": "85219725709cbe90641e25bedddd6bfa4f13011a55e01be4ba087f8f42b09189"
+    },
+    {
+      "path": "output/editor-validation/native-register-shared-request/editor-saved/fifo-readback.json",
+      "bytes": 888,
+      "sha256": "fa50663cc11012863ce3b7342c1ad1432d84de1f73bb988c161331ce43ea83cc"
+    },
+    {
+      "path": "output/editor-validation/native-register-shared-request/runtime-candidates/register_fifo_runtime_watch.smbp",
+      "bytes": 104727,
+      "sha256": "0945b46d4842757f360af312c10b45e90798c24f26f7e6b0e60f131f0d7456b1"
+    },
+    {
+      "path": "output/editor-validation/native-register-shared-request/runtime-candidates/register_fifo_runtime_watch_editor_saved.smbp",
+      "bytes": 107500,
+      "sha256": "2cb137138e7163ec69363017d11c40ec5f0f8e558cb60ad052c6c365a71c1963"
+    },
+    {
+      "path": "output/editor-validation/native-register-shared-request/runtime-candidates/fifo-runtime-readback.json",
+      "bytes": 391,
+      "sha256": "767e639dd04e077a86b4ef56e769820a681daeb6fe99c6faf4d71495aaa4019b"
+    },
+    {
+      "path": "output/editor-validation/native-register-shared-request/editor-saved/register_lifo_editor_saved.smbp",
+      "bytes": 106627,
+      "sha256": "8d04a2bc22bc2466a928ea185d41641f53c5493e26a2a19d690ef8e55822c1ab"
+    },
+    {
+      "path": "output/editor-validation/native-register-shared-request/editor-saved/lifo-readback.json",
+      "bytes": 815,
+      "sha256": "838c58c5d9edddd4b691971735acfc8eba2775d1a649f6125adfe8dfdeb9034f"
+    },
+    {
+      "path": "output/editor-validation/native-register-shared-request/runtime-candidates/register_lifo_runtime_watch.smbp",
+      "bytes": 104859,
+      "sha256": "7e0452f621d6ff19f43debb9de1327f709e379dc9f1f3a01c585d7fe6f1e6197"
+    },
+    {
+      "path": "output/editor-validation/native-register-shared-request/runtime-candidates/register_lifo_runtime_watch_editor_saved.smbp",
+      "bytes": 107638,
+      "sha256": "d330f04acc04925c19c43553f607cf9483c543614cababa4ae2292a710dd5ba4"
+    },
+    {
+      "path": "output/editor-validation/native-register-shared-request/runtime-candidates/lifo-runtime-readback.json",
+      "bytes": 668,
+      "sha256": "df9556b5206e2af71557b51477b0f9400c323d0ba5a0f2a8fa9bf6a02bd3bcc0"
+    },
+    {
+      "path": "output/editor-validation/native-register-shared-request/runtime-actions.jsonl",
+      "bytes": 133784,
+      "sha256": "81839b85d3fc8ada48c623df195bc65c1968b6d17acd6bd322e1237ced8d56d5"
+    },
+    {
+      "path": "output/editor-validation/native-register-shared-request/runtime-observations.json",
+      "bytes": 18084,
+      "sha256": "f7f92c876a5e4ed818f9e418be3ee96656cf02d97ce8eacae5cfabb3d7b9c186"
+    },
+    {
+      "path": "output/editor-validation/native-register-shared-request/runtime-candidates/manifest.json",
+      "bytes": 1597,
+      "sha256": "074a0ef918393a1a645a0f9fc8bbefa9348df5ed09366e66cf78c13b3e2b8c76"
+    },
+    {
+      "path": "output/editor-validation/native-register-shared-request/manifest.json",
+      "bytes": 3976,
+      "sha256": "268e5c9336e5aac045f3a7dd03bc9b75e9e76a5c67c0d1e3b6def46500b261e9"
+    },
+    {
+      "path": "output/editor-validation/native-register-shared-request/capacity-all-retrieval-capture-audit.json",
+      "bytes": 18345,
+      "sha256": "d1bc5e5a6e6591a8c17d0ec5996680a3903adf6a46d5c1ba5c97623cc7fd05f4"
+    }
+  ],
+  "visible_environment_status": "Captured No error/Online/RUN views retain the existing Untrusted DLL detected lab banner; no validation/integrity bypass was performed by this report.",
+  "limits": [
+    "Only R0, values11/22/sentinel42 and the bounded released-control cases in these exact hand-built diagnostics were observed.",
+    "Reset/store/retrieve collisions, ignored-edge history under held controls, first-call TRUE, skipped/repeated calls and cold/warm/STOP lifecycle remain pending.",
+    "Observed initial/reset output0 in these samples is not generalized as an unconditional reset-output rule.",
+    "No physical PLC, controller firmware, load or network/serial transaction proof.",
+    "The standalone Register configuration codec is not whole-project, C++/IR/SDK, graphics or execution support.",
+    "No full suite was run for this GUI stage; historical regression reports and preparation oracles remain separate."
+  ],
+  "copied_PNG_count": 37,
+  "copied_PNG_bytes": 14574278,
+  "capture_copy_manifest": [
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/editor-saved/fifo-save.png",
+      "path": "docs/validation/editor-evidence/register-native/fifo-save.png",
+      "relative_link_from_report": "editor-evidence/register-native/fifo-save.png",
+      "sha256": "fb5337b51d15371afd005f775ca4ff0ee2c246d54b3ba2b301e2bcb19358b0a9",
+      "bytes": 372548,
+      "phase": "Root viewed native conversion to Ladder / No error / completed save"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/editor-saved/fifo-reopen.png",
+      "path": "docs/validation/editor-evidence/register-native/fifo-reopen.png",
+      "relative_link_from_report": "editor-evidence/register-native/fifo-reopen.png",
+      "sha256": "4f6f957f4a52050b99a685fa742395a70f43e65d37c182a0b84f4e83bb53ce41",
+      "bytes": 498660,
+      "phase": "Root freshly reopened exact native editor save after the other mode / No error"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/editor-saved/lifo-save.png",
+      "path": "docs/validation/editor-evidence/register-native/lifo-save.png",
+      "relative_link_from_report": "editor-evidence/register-native/lifo-save.png",
+      "sha256": "b4babf13e27abdac9261f1e3944963032f404c4bbdceabcb566e0e99d2a1417e",
+      "bytes": 372866,
+      "phase": "Root viewed native conversion to Ladder / No error / completed save"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/editor-saved/lifo-reopen.png",
+      "path": "docs/validation/editor-evidence/register-native/lifo-reopen.png",
+      "relative_link_from_report": "editor-evidence/register-native/lifo-reopen.png",
+      "sha256": "922a75d3b747e9c2db0894bcca0f1cd87166ec7399452faac439cdf246a675a3",
+      "bytes": 498672,
+      "phase": "Root freshly reopened exact native editor save after the other mode / No error"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-initial.png",
+      "path": "docs/validation/editor-evidence/register-native/lifo-initial.png",
+      "relative_link_from_report": "editor-evidence/register-native/lifo-initial.png",
+      "sha256": "df6a7f33f5dc67898d71e9c30409f47048cec22f70bbe3ce49e569a4c8fa38bb",
+      "bytes": 395650,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-output-sentinel.png",
+      "path": "docs/validation/editor-evidence/register-native/lifo-output-sentinel.png",
+      "relative_link_from_report": "editor-evidence/register-native/lifo-output-sentinel.png",
+      "sha256": "ceb5cfcdecd8899c14ab9af02fb8a23f7b40b41716d490a9cbf525d9edd910c1",
+      "bytes": 395641,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-empty-pop-retains-sentinel.png",
+      "path": "docs/validation/editor-evidence/register-native/lifo-empty-pop-retains-sentinel.png",
+      "relative_link_from_report": "editor-evidence/register-native/lifo-empty-pop-retains-sentinel.png",
+      "sha256": "ceb5cfcdecd8899c14ab9af02fb8a23f7b40b41716d490a9cbf525d9edd910c1",
+      "bytes": 395641,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-input22-held-store.png",
+      "path": "docs/validation/editor-evidence/register-native/lifo-after-held-store-data-change-and-release.png",
+      "relative_link_from_report": "editor-evidence/register-native/lifo-after-held-store-data-change-and-release.png",
+      "sha256": "aff71646a58c2fbec8166f73715240c32a138e893a6da4571ef4ca6cf8b1048c",
+      "bytes": 395501,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-after-shared-both-edges.png",
+      "path": "docs/validation/editor-evidence/register-native/lifo-after-shared-both-edges.png",
+      "relative_link_from_report": "editor-evidence/register-native/lifo-after-shared-both-edges.png",
+      "sha256": "aff71646a58c2fbec8166f73715240c32a138e893a6da4571ef4ca6cf8b1048c",
+      "bytes": 395501,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-pop22.png",
+      "path": "docs/validation/editor-evidence/register-native/lifo-pop22.png",
+      "relative_link_from_report": "editor-evidence/register-native/lifo-pop22.png",
+      "sha256": "de33ec9db7c478b3237ef4e101d9c4fbd78b7af534adf31e5603ac7d5e7a95ac",
+      "bytes": 395446,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-pop11-empty.png",
+      "path": "docs/validation/editor-evidence/register-native/lifo-pop11-empty.png",
+      "relative_link_from_report": "editor-evidence/register-native/lifo-pop11-empty.png",
+      "sha256": "c1b60b4d9b0c351f4a1a80e0a6ba1b52bac5e4f9a2a41f7a5b233a351c28c6e3",
+      "bytes": 395237,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-extra-empty-pop.png",
+      "path": "docs/validation/editor-evidence/register-native/lifo-extra-empty-pop.png",
+      "relative_link_from_report": "editor-evidence/register-native/lifo-extra-empty-pop.png",
+      "sha256": "c1b60b4d9b0c351f4a1a80e0a6ba1b52bac5e4f9a2a41f7a5b233a351c28c6e3",
+      "bytes": 395237,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-capacity15.png",
+      "path": "docs/validation/editor-evidence/register-native/lifo-capacity15.png",
+      "relative_link_from_report": "editor-evidence/register-native/lifo-capacity15.png",
+      "sha256": "5ea5b56cec66e52e405726ed69be3442a736f4769f354a80baaeb67d41943ea9",
+      "bytes": 395287,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-capacity16-full.png",
+      "path": "docs/validation/editor-evidence/register-native/lifo-capacity16-full.png",
+      "relative_link_from_report": "editor-evidence/register-native/lifo-capacity16-full.png",
+      "sha256": "6422d8289ccdae7a29b18ed5517b2c816cffae5bc4b73adf9dca24895552c152",
+      "bytes": 395219,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-seventeenth11-ignored-full.png",
+      "path": "docs/validation/editor-evidence/register-native/lifo-seventeenth11-ignored-full.png",
+      "relative_link_from_report": "editor-evidence/register-native/lifo-seventeenth11-ignored-full.png",
+      "sha256": "dbf1bb2723282508f6b8d07f1e2079dc1c789ffdbfebb414e2ed817230cddfe6",
+      "bytes": 395423,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-pop01-after-full-both.png",
+      "path": "docs/validation/editor-evidence/register-native/lifo-pop01-after-full-both.png",
+      "relative_link_from_report": "editor-evidence/register-native/lifo-pop01-after-full-both.png",
+      "sha256": "72f800a9631c489e0f88d088cda87af60ca9325fecaf7fb1812588d051ea654c",
+      "bytes": 395654,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-capacity-pop15.png",
+      "path": "docs/validation/editor-evidence/register-native/lifo-capacity-pop15.png",
+      "relative_link_from_report": "editor-evidence/register-native/lifo-capacity-pop15.png",
+      "sha256": "72f800a9631c489e0f88d088cda87af60ca9325fecaf7fb1812588d051ea654c",
+      "bytes": 395654,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-capacity-pop16-empty.png",
+      "path": "docs/validation/editor-evidence/register-native/lifo-capacity-pop16-empty.png",
+      "relative_link_from_report": "editor-evidence/register-native/lifo-capacity-pop16-empty.png",
+      "sha256": "87ca2a668757af7d500439781b535406dcf894c55c01c22ed51caf6708eb0fc5",
+      "bytes": 395585,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-capacity-pop17-retains22.png",
+      "path": "docs/validation/editor-evidence/register-native/lifo-capacity-pop17-retains22.png",
+      "relative_link_from_report": "editor-evidence/register-native/lifo-capacity-pop17-retains22.png",
+      "sha256": "87ca2a668757af7d500439781b535406dcf894c55c01c22ed51caf6708eb0fc5",
+      "bytes": 395585,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-output-sentinel.png",
+      "path": "docs/validation/editor-evidence/register-native/fifo-output-sentinel.png",
+      "relative_link_from_report": "editor-evidence/register-native/fifo-output-sentinel.png",
+      "sha256": "def1625ee599a3b12bccec71bca6a1b4e4c6c6a08646fafe1f7fa9f56eee8fac",
+      "bytes": 395596,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-empty-pop-retains-sentinel.png",
+      "path": "docs/validation/editor-evidence/register-native/fifo-empty-pop-retains-sentinel.png",
+      "relative_link_from_report": "editor-evidence/register-native/fifo-empty-pop-retains-sentinel.png",
+      "sha256": "def1625ee599a3b12bccec71bca6a1b4e4c6c6a08646fafe1f7fa9f56eee8fac",
+      "bytes": 395596,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-held-store-data-change.png",
+      "path": "docs/validation/editor-evidence/register-native/fifo-held-store-data-change.png",
+      "relative_link_from_report": "editor-evidence/register-native/fifo-held-store-data-change.png",
+      "sha256": "9ba578763f89cff4332620f6f72139d796bfbbfcd711b059e0322378cba95ab3",
+      "bytes": 395323,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-after-shared-both-edges.png",
+      "path": "docs/validation/editor-evidence/register-native/fifo-after-shared-both-edges.png",
+      "relative_link_from_report": "editor-evidence/register-native/fifo-after-shared-both-edges.png",
+      "sha256": "5f121acbbfda24a88df8f7e6a003627a990a66f19398e6d7f840df3dc18dff56",
+      "bytes": 395462,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-pop11.png",
+      "path": "docs/validation/editor-evidence/register-native/fifo-pop11.png",
+      "relative_link_from_report": "editor-evidence/register-native/fifo-pop11.png",
+      "sha256": "216a4d8b8b53a8cd5899e8cb569b7284c31bf64befdeca3f9ba12a6ea9eb1ec7",
+      "bytes": 395268,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-pop22-empty.png",
+      "path": "docs/validation/editor-evidence/register-native/fifo-pop22-empty.png",
+      "relative_link_from_report": "editor-evidence/register-native/fifo-pop22-empty.png",
+      "sha256": "d86c2e7a3667fd5f58a459df6149b6492c9d9586f07f88393f63a514ec948bfc",
+      "bytes": 395338,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-extra-empty-pop.png",
+      "path": "docs/validation/editor-evidence/register-native/fifo-extra-empty-pop.png",
+      "relative_link_from_report": "editor-evidence/register-native/fifo-extra-empty-pop.png",
+      "sha256": "d86c2e7a3667fd5f58a459df6149b6492c9d9586f07f88393f63a514ec948bfc",
+      "bytes": 395338,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-capacity15.png",
+      "path": "docs/validation/editor-evidence/register-native/fifo-capacity15.png",
+      "relative_link_from_report": "editor-evidence/register-native/fifo-capacity15.png",
+      "sha256": "d641de5d7ee0611fa4f34e57a09a3b33db8b2990ce93aa511a743de3c4f80b43",
+      "bytes": 395248,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-capacity16-full.png",
+      "path": "docs/validation/editor-evidence/register-native/fifo-capacity16-full.png",
+      "relative_link_from_report": "editor-evidence/register-native/fifo-capacity16-full.png",
+      "sha256": "91ebb7eeb1a32bf81ed421bf10873f32c27fa913c83c36f749857c7d90368440",
+      "bytes": 395179,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-seventeenth11-ignored-full.png",
+      "path": "docs/validation/editor-evidence/register-native/fifo-seventeenth11-ignored-full.png",
+      "relative_link_from_report": "editor-evidence/register-native/fifo-seventeenth11-ignored-full.png",
+      "sha256": "f68223a8ab09cb0f9aebe053a3a92f9a010f133eb72311cfb2e3964c187ce7bf",
+      "bytes": 395381,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-capacity-shared-on.png",
+      "path": "docs/validation/editor-evidence/register-native/fifo-capacity-shared-on.png",
+      "relative_link_from_report": "editor-evidence/register-native/fifo-capacity-shared-on.png",
+      "sha256": "6f3291c28fb48c1e7a4dced42e23165222dfb234a99806008f7349b84699559b",
+      "bytes": 395177,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-capacity-shared-release-unresolved-flags.png",
+      "path": "docs/validation/editor-evidence/register-native/fifo-capacity-shared-release-still-full.png",
+      "relative_link_from_report": "editor-evidence/register-native/fifo-capacity-shared-release-still-full.png",
+      "sha256": "f68223a8ab09cb0f9aebe053a3a92f9a010f133eb72311cfb2e3964c187ce7bf",
+      "bytes": 395381,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-capacity-pop01.png",
+      "path": "docs/validation/editor-evidence/register-native/fifo-capacity-pop01.png",
+      "relative_link_from_report": "editor-evidence/register-native/fifo-capacity-pop01.png",
+      "sha256": "32c5751006e8bca446c3a61c23f9301f230970c70558dd42414a690925c8dcad",
+      "bytes": 395608,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-capacity-pop15.png",
+      "path": "docs/validation/editor-evidence/register-native/fifo-capacity-pop15.png",
+      "relative_link_from_report": "editor-evidence/register-native/fifo-capacity-pop15.png",
+      "sha256": "32c5751006e8bca446c3a61c23f9301f230970c70558dd42414a690925c8dcad",
+      "bytes": 395608,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-capacity-pop16-empty.png",
+      "path": "docs/validation/editor-evidence/register-native/fifo-capacity-pop16-empty.png",
+      "relative_link_from_report": "editor-evidence/register-native/fifo-capacity-pop16-empty.png",
+      "sha256": "9e5f87f544c6fb66905718478d05275b46c222a0c9c3313b19c610988bc51791",
+      "bytes": 395540,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-capacity-pop17-retains22.png",
+      "path": "docs/validation/editor-evidence/register-native/fifo-capacity-pop17-retains22.png",
+      "relative_link_from_report": "editor-evidence/register-native/fifo-capacity-pop17-retains22.png",
+      "sha256": "9e5f87f544c6fb66905718478d05275b46c222a0c9c3313b19c610988bc51791",
+      "bytes": 395540,
+      "phase": "Root personally viewed settled native local-simulator checkpoint"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/lifo-simulator-stopped.png",
+      "path": "docs/validation/editor-evidence/register-native/lifo-simulator-stopped.png",
+      "relative_link_from_report": "editor-evidence/register-native/lifo-simulator-stopped.png",
+      "sha256": "47369e2cf5e535ae7e04fe8b4cb1a38a0905eb2e140ee1a6f8d864583a550139",
+      "bytes": 286310,
+      "phase": "Root stopped official simulator and personally viewed panel absent"
+    },
+    {
+      "source": "/Users/tommy/Offline/projects/m200-cpp/output/editor-validation/native-register-shared-request/fifo-simulator-stopped.png",
+      "path": "docs/validation/editor-evidence/register-native/fifo-simulator-stopped.png",
+      "relative_link_from_report": "editor-evidence/register-native/fifo-simulator-stopped.png",
+      "sha256": "2edc2248ab606ea748a3333f50308d10d6ff8900aa46f04d13f0010dab9c53ea",
+      "bytes": 286378,
+      "phase": "Root stopped official simulator and personally viewed panel absent"
+    }
+  ],
+  "capacity_capture_audit": {
+    "path": "output/editor-validation/native-register-shared-request/capacity-all-retrieval-capture-audit.json",
+    "bytes": 18345,
+    "sha256": "d1bc5e5a6e6591a8c17d0ec5996680a3903adf6a46d5c1ba5c97623cc7fd05f4",
+    "scope": "Root post-capture hash audit of released controls only; not extra personally viewed checkpoints or unique scans",
+    "journal_on_off_rows": 68,
+    "post_release_known_hash_matches": 34,
+    "pressed_input_rows_value_audited": false,
+    "new_PNG_copies": 0,
+    "new_unique_observation_count": 0,
+    "released_records": [
+      {
+        "label": "lifo-capacity-pop01-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "72f800a9631c489e0f88d088cda87af60ca9325fecaf7fb1812588d051ea654c",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793956151417369000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/lifo-capacity-pop15.png"
+      },
+      {
+        "label": "lifo-capacity-pop02-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "72f800a9631c489e0f88d088cda87af60ca9325fecaf7fb1812588d051ea654c",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793956225447345000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/lifo-capacity-pop15.png"
+      },
+      {
+        "label": "lifo-capacity-pop03-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "72f800a9631c489e0f88d088cda87af60ca9325fecaf7fb1812588d051ea654c",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793956233821716000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/lifo-capacity-pop15.png"
+      },
+      {
+        "label": "lifo-capacity-pop04-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "72f800a9631c489e0f88d088cda87af60ca9325fecaf7fb1812588d051ea654c",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793956242193937000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/lifo-capacity-pop15.png"
+      },
+      {
+        "label": "lifo-capacity-pop05-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "72f800a9631c489e0f88d088cda87af60ca9325fecaf7fb1812588d051ea654c",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793956250577867000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/lifo-capacity-pop15.png"
+      },
+      {
+        "label": "lifo-capacity-pop06-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "72f800a9631c489e0f88d088cda87af60ca9325fecaf7fb1812588d051ea654c",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793956258913741000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/lifo-capacity-pop15.png"
+      },
+      {
+        "label": "lifo-capacity-pop07-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "72f800a9631c489e0f88d088cda87af60ca9325fecaf7fb1812588d051ea654c",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793956267280108000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/lifo-capacity-pop15.png"
+      },
+      {
+        "label": "lifo-capacity-pop08-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "72f800a9631c489e0f88d088cda87af60ca9325fecaf7fb1812588d051ea654c",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793956275673798000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/lifo-capacity-pop15.png"
+      },
+      {
+        "label": "lifo-capacity-pop09-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "72f800a9631c489e0f88d088cda87af60ca9325fecaf7fb1812588d051ea654c",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793956284030748000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/lifo-capacity-pop15.png"
+      },
+      {
+        "label": "lifo-capacity-pop10-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "72f800a9631c489e0f88d088cda87af60ca9325fecaf7fb1812588d051ea654c",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793956292368627000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/lifo-capacity-pop15.png"
+      },
+      {
+        "label": "lifo-capacity-pop11-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "72f800a9631c489e0f88d088cda87af60ca9325fecaf7fb1812588d051ea654c",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793956300743576000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/lifo-capacity-pop15.png"
+      },
+      {
+        "label": "lifo-capacity-pop12-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "72f800a9631c489e0f88d088cda87af60ca9325fecaf7fb1812588d051ea654c",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793956309110026000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/lifo-capacity-pop15.png"
+      },
+      {
+        "label": "lifo-capacity-pop13-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "72f800a9631c489e0f88d088cda87af60ca9325fecaf7fb1812588d051ea654c",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793956317530927000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/lifo-capacity-pop15.png"
+      },
+      {
+        "label": "lifo-capacity-pop14-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "72f800a9631c489e0f88d088cda87af60ca9325fecaf7fb1812588d051ea654c",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793956325976481000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/lifo-capacity-pop15.png"
+      },
+      {
+        "label": "lifo-capacity-pop15-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "72f800a9631c489e0f88d088cda87af60ca9325fecaf7fb1812588d051ea654c",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793956334352218000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/lifo-capacity-pop15.png"
+      },
+      {
+        "label": "lifo-capacity-pop16-off",
+        "known_display": [
+          11,
+          22,
+          1,
+          0
+        ],
+        "sha256": "87ca2a668757af7d500439781b535406dcf894c55c01c22ed51caf6708eb0fc5",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793956342737004000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/lifo-capacity-pop17-retains22.png"
+      },
+      {
+        "label": "lifo-capacity-pop17-off",
+        "known_display": [
+          11,
+          22,
+          1,
+          0
+        ],
+        "sha256": "87ca2a668757af7d500439781b535406dcf894c55c01c22ed51caf6708eb0fc5",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793956351080161000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/lifo-capacity-pop17-retains22.png"
+      },
+      {
+        "label": "fifo-capacity-probe-pop-1-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "32c5751006e8bca446c3a61c23f9301f230970c70558dd42414a690925c8dcad",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793957916848384000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/fifo-capacity-pop15.png"
+      },
+      {
+        "label": "fifo-capacity-probe-pop-2-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "32c5751006e8bca446c3a61c23f9301f230970c70558dd42414a690925c8dcad",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793957925269248000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/fifo-capacity-pop15.png"
+      },
+      {
+        "label": "fifo-capacity-probe-pop-3-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "32c5751006e8bca446c3a61c23f9301f230970c70558dd42414a690925c8dcad",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793957933658810000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/fifo-capacity-pop15.png"
+      },
+      {
+        "label": "fifo-capacity-probe-pop-4-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "32c5751006e8bca446c3a61c23f9301f230970c70558dd42414a690925c8dcad",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793958016879667000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/fifo-capacity-pop15.png"
+      },
+      {
+        "label": "fifo-capacity-probe-pop-5-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "32c5751006e8bca446c3a61c23f9301f230970c70558dd42414a690925c8dcad",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793958025328927000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/fifo-capacity-pop15.png"
+      },
+      {
+        "label": "fifo-capacity-probe-pop-6-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "32c5751006e8bca446c3a61c23f9301f230970c70558dd42414a690925c8dcad",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793958033845814000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/fifo-capacity-pop15.png"
+      },
+      {
+        "label": "fifo-capacity-probe-pop-7-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "32c5751006e8bca446c3a61c23f9301f230970c70558dd42414a690925c8dcad",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793958042349777000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/fifo-capacity-pop15.png"
+      },
+      {
+        "label": "fifo-capacity-probe-pop-8-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "32c5751006e8bca446c3a61c23f9301f230970c70558dd42414a690925c8dcad",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793958050839867000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/fifo-capacity-pop15.png"
+      },
+      {
+        "label": "fifo-capacity-probe-pop-9-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "32c5751006e8bca446c3a61c23f9301f230970c70558dd42414a690925c8dcad",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793958059342116000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/fifo-capacity-pop15.png"
+      },
+      {
+        "label": "fifo-capacity-probe-pop-10-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "32c5751006e8bca446c3a61c23f9301f230970c70558dd42414a690925c8dcad",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793958067883502000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/fifo-capacity-pop15.png"
+      },
+      {
+        "label": "fifo-capacity-probe-pop-11-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "32c5751006e8bca446c3a61c23f9301f230970c70558dd42414a690925c8dcad",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793958076373747000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/fifo-capacity-pop15.png"
+      },
+      {
+        "label": "fifo-capacity-probe-pop-12-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "32c5751006e8bca446c3a61c23f9301f230970c70558dd42414a690925c8dcad",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793958084879761000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/fifo-capacity-pop15.png"
+      },
+      {
+        "label": "fifo-capacity-probe-pop-13-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "32c5751006e8bca446c3a61c23f9301f230970c70558dd42414a690925c8dcad",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793958093399875000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/fifo-capacity-pop15.png"
+      },
+      {
+        "label": "fifo-capacity-probe-pop-14-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "32c5751006e8bca446c3a61c23f9301f230970c70558dd42414a690925c8dcad",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793958101900736000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/fifo-capacity-pop15.png"
+      },
+      {
+        "label": "fifo-capacity-probe-pop-15-off",
+        "known_display": [
+          11,
+          22,
+          0,
+          0
+        ],
+        "sha256": "32c5751006e8bca446c3a61c23f9301f230970c70558dd42414a690925c8dcad",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793958110366225000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/fifo-capacity-pop15.png"
+      },
+      {
+        "label": "fifo-capacity-probe-pop-16-off",
+        "known_display": [
+          11,
+          22,
+          1,
+          0
+        ],
+        "sha256": "9e5f87f544c6fb66905718478d05275b46c222a0c9c3313b19c610988bc51791",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793958118814795000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/fifo-capacity-pop17-retains22.png"
+      },
+      {
+        "label": "fifo-capacity-probe-pop-17-off",
+        "known_display": [
+          11,
+          22,
+          1,
+          0
+        ],
+        "sha256": "9e5f87f544c6fb66905718478d05275b46c222a0c9c3313b19c610988bc51791",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793958127287217000-2146.png",
+        "matching_public_capture": "editor-evidence/register-native/fifo-capacity-pop17-retains22.png"
+      }
+    ]
+  }
+}
