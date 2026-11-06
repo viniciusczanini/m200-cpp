@@ -1,5 +1,8 @@
 # Complex editor/simulator candidates
 
+For several timers, conditional stages and START/STOP/RESET interactions, see
+the separate [three-timer sequence walkthrough](SEQUENCE_TIMERS.md).
+
 These are deterministic test programs, not hardware-ready applications. The
 local runner checks SDK and VM results, explicit word values, actual exported
 XML, reconstructed C++, recompilation and a second XML project:
@@ -81,3 +84,10 @@ M704..719) should stay true in both I0.0/M800 modes.
 
 Negative packed BCD carriers are intentional. This program avoids the unresolved
 negative DWORD-widening hypothesis and invalid arithmetic-result domains.
+
+## Early scan exit
+
+[`scan_exit.cpp`](scan_exit.cpp) writes Q0.0 before a conditional `return;`, then
+updates Q0.2 and an edge counter after it. The [feature guide](../../docs/capabilities/SCAN-EXIT.md)
+explains the semantics; [official observations](../../docs/validation/OFFICIAL-EDITOR-RESULTS.json)
+record eleven input/output phases, including skipped edges, retained outputs and RESET.

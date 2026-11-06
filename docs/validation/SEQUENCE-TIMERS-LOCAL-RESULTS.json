@@ -1,0 +1,2820 @@
+{
+  "format": "m200-sequence-timers-local-validation-v1",
+  "target": "TM200CE40T",
+  "status": "local_checks_passed",
+  "runner": "tests/editor_validation/sequence_timers.py",
+  "cases": [
+    {
+      "case": "sequence_timers",
+      "status": "local_checks_passed",
+      "source": "examples/editor_validation/sequence_timers.cpp",
+      "project": "output/editor-validation/sequence-timers-verified/sequence_timers/program.smbp",
+      "scans": 2417,
+      "rungs": 191,
+      "instructions": 440,
+      "template": "tests/fixtures/official_tm200ce40t_memory.smbp",
+      "template_sha256": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf",
+      "artifact_sha256": {
+        "examples/editor_validation/sequence_timers.cpp": "4dea1158fd7518e315c18e66833874fbe4243d60b28df4b54d7048a07615a824",
+        "output/editor-validation/sequence-timers-verified/sequence_timers/program.smbp": "ddc2150a010e99b988a0ffc21807fce229190cf88e25d8d731c45afd10ad920b",
+        "output/editor-validation/sequence-timers-verified/sequence_timers/program.audit.cpp": "94142016582de609bd6be5f70a0b6362c0d1e51b7039007f435ad1365565fa9c",
+        "output/editor-validation/sequence-timers-verified/sequence_timers/recompiled.smbp": "fd9812f968baddfb12d8d403c4a514238c900703ecfc2a0ffd5697588915bee5",
+        "output/editor-validation/sequence-timers-verified/sequence_timers/trace.json": "57e3c12e5d8d0e57f7b2d2a784d73cd169356ccd441ed4260d193d392ad5cfac",
+        "output/editor-validation/sequence-timers-verified/sequence_timers/expected.json": "a29082538f998bffd8568a19033368d4a5638e10b17b572c52c681d9f05523f7"
+      },
+      "commands": [
+        "I0.0",
+        "I0.1",
+        "I0.2",
+        "I0.3"
+      ],
+      "phases": [
+        {
+          "phase": "initial_reset",
+          "last_frame": 2,
+          "controls": [
+            false,
+            false,
+            false,
+            true
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.12"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 0,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 0,
+            "MW188": 0,
+            "MW189": 4,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "initial_idle",
+          "last_frame": 5,
+          "controls": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 0,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 0,
+            "MW188": 0,
+            "MW189": 4,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "start_without_permissive",
+          "last_frame": 8,
+          "controls": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.9",
+            "Q0.13"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 0,
+            "MW188": 0,
+            "MW189": 5,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "held_start_after_permission",
+          "last_frame": 138,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.9",
+            "Q0.10",
+            "Q0.13"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 0,
+            "MW188": 0,
+            "MW189": 5,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "release_before_cycle1",
+          "last_frame": 141,
+          "controls": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.9",
+            "Q0.10"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 0,
+            "MW188": 0,
+            "MW189": 5,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "cycle1_complete_while_start_held",
+          "last_frame": 471,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.9",
+            "Q0.10",
+            "Q0.13"
+          ],
+          "word_values": {
+            "MW180": 4,
+            "MW181": 1,
+            "MW182": 1,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 6,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "held_start_does_not_repeat_completed_cycle",
+          "last_frame": 501,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.9",
+            "Q0.10",
+            "Q0.13"
+          ],
+          "word_values": {
+            "MW180": 4,
+            "MW181": 1,
+            "MW182": 1,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 6,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "release_before_cycle2",
+          "last_frame": 504,
+          "controls": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.9",
+            "Q0.10"
+          ],
+          "word_values": {
+            "MW180": 4,
+            "MW181": 1,
+            "MW182": 1,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 6,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "cycle2_partial_ton",
+          "last_frame": 544,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.1",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.9",
+            "Q0.10",
+            "Q0.13"
+          ],
+          "word_values": {
+            "MW180": 1,
+            "MW181": 2,
+            "MW182": 1,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 3,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 0,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "stop_dominates_held_start",
+          "last_frame": 547,
+          "controls": [
+            true,
+            true,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.11",
+            "Q0.13"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 2,
+            "MW182": 1,
+            "MW183": 1,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 2,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "held_after_stop_does_not_restart",
+          "last_frame": 577,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.13"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 2,
+            "MW182": 1,
+            "MW183": 1,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 2,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "release_before_cycle3",
+          "last_frame": 580,
+          "controls": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 2,
+            "MW182": 1,
+            "MW183": 1,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 2,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "cycle3_partial_ton",
+          "last_frame": 620,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.1",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.13"
+          ],
+          "word_values": {
+            "MW180": 1,
+            "MW181": 3,
+            "MW182": 1,
+            "MW183": 1,
+            "MW184": 1,
+            "MW185": 3,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 0,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "permission_loss_aborts_ton",
+          "last_frame": 623,
+          "controls": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.13"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 3,
+            "MW182": 1,
+            "MW183": 2,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 3,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "held_after_permission_returns",
+          "last_frame": 653,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.13"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 3,
+            "MW182": 1,
+            "MW183": 2,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 3,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "release_before_cycle4",
+          "last_frame": 656,
+          "controls": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 3,
+            "MW182": 1,
+            "MW183": 2,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 3,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "cycle4_inside_tp",
+          "last_frame": 781,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.2",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW180": 2,
+            "MW181": 4,
+            "MW182": 1,
+            "MW183": 2,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 2,
+            "MW187": 0,
+            "MW188": 1,
+            "MW189": 0,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "release_while_tp_active",
+          "last_frame": 783,
+          "controls": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.2",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW180": 2,
+            "MW181": 4,
+            "MW182": 1,
+            "MW183": 2,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 2,
+            "MW187": 0,
+            "MW188": 1,
+            "MW189": 0,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "fresh_start_rejected_while_active",
+          "last_frame": 785,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.2",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW180": 2,
+            "MW181": 4,
+            "MW182": 1,
+            "MW183": 2,
+            "MW184": 2,
+            "MW185": 0,
+            "MW186": 2,
+            "MW187": 0,
+            "MW188": 1,
+            "MW189": 5,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "stop_during_tp",
+          "last_frame": 788,
+          "controls": [
+            true,
+            true,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.11",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 4,
+            "MW182": 1,
+            "MW183": 3,
+            "MW184": 2,
+            "MW185": 0,
+            "MW186": 3,
+            "MW187": 0,
+            "MW188": 1,
+            "MW189": 2,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "held_after_stop_until_tp_tof_settle",
+          "last_frame": 918,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.13"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 4,
+            "MW182": 1,
+            "MW183": 3,
+            "MW184": 2,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 2,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "release_before_cycle5",
+          "last_frame": 921,
+          "controls": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 4,
+            "MW182": 1,
+            "MW183": 3,
+            "MW184": 2,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 2,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "cycle5_partial_ton",
+          "last_frame": 961,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.1",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.13"
+          ],
+          "word_values": {
+            "MW180": 1,
+            "MW181": 5,
+            "MW182": 1,
+            "MW183": 3,
+            "MW184": 2,
+            "MW185": 3,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 0,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "reset_during_ton",
+          "last_frame": 964,
+          "controls": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.10",
+            "Q0.11",
+            "Q0.12",
+            "Q0.13"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 0,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 4,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "held_after_ton_reset",
+          "last_frame": 1094,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.10",
+            "Q0.13"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 0,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 4,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "release_before_cycle6",
+          "last_frame": 1097,
+          "controls": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.10"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 0,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 4,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "cycle6_inside_tp",
+          "last_frame": 1222,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.2",
+            "Q0.5",
+            "Q0.6",
+            "Q0.10",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW180": 2,
+            "MW181": 1,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 0,
+            "MW185": 0,
+            "MW186": 2,
+            "MW187": 0,
+            "MW188": 1,
+            "MW189": 0,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "reset_during_tp",
+          "last_frame": 1225,
+          "controls": [
+            true,
+            true,
+            false,
+            true
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.10",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 0,
+            "MW185": 0,
+            "MW186": 2,
+            "MW187": 0,
+            "MW188": 1,
+            "MW189": 4,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "release_while_internal_tp_draining",
+          "last_frame": 1227,
+          "controls": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.10",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 0,
+            "MW185": 0,
+            "MW186": 2,
+            "MW187": 0,
+            "MW188": 1,
+            "MW189": 4,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "fresh_start_rejected_while_tp_tof_busy",
+          "last_frame": 1229,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.9",
+            "Q0.10",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 3,
+            "MW187": 0,
+            "MW188": 1,
+            "MW189": 5,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "held_after_internal_timers_drain",
+          "last_frame": 1359,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.9",
+            "Q0.10",
+            "Q0.13"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 5,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "release_before_cycle7",
+          "last_frame": 1362,
+          "controls": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.9",
+            "Q0.10"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 5,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "cycle7_complete_after_fresh_edge",
+          "last_frame": 1692,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.9",
+            "Q0.10",
+            "Q0.13"
+          ],
+          "word_values": {
+            "MW180": 4,
+            "MW181": 1,
+            "MW182": 1,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 6,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "release_before_cycle8",
+          "last_frame": 1695,
+          "controls": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.9",
+            "Q0.10"
+          ],
+          "word_values": {
+            "MW180": 4,
+            "MW181": 1,
+            "MW182": 1,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 6,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "cycle8_inside_tof",
+          "last_frame": 1920,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.3",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.9",
+            "Q0.10",
+            "Q0.13",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW180": 3,
+            "MW181": 2,
+            "MW182": 1,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 2,
+            "MW188": 1,
+            "MW189": 0,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "stop_during_tof",
+          "last_frame": 1923,
+          "controls": [
+            true,
+            true,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.11",
+            "Q0.13",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 2,
+            "MW182": 1,
+            "MW183": 1,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 2,
+            "MW188": 1,
+            "MW189": 2,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "held_until_tof_drains",
+          "last_frame": 2053,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.13"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 2,
+            "MW182": 1,
+            "MW183": 1,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 2,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "release_before_cycle9",
+          "last_frame": 2056,
+          "controls": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 2,
+            "MW182": 1,
+            "MW183": 1,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 2,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "cycle9_complete_after_fresh_edge",
+          "last_frame": 2386,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.13"
+          ],
+          "word_values": {
+            "MW180": 4,
+            "MW181": 3,
+            "MW182": 2,
+            "MW183": 1,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 6,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "final_held_no_repeat",
+          "last_frame": 2416,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.13"
+          ],
+          "word_values": {
+            "MW180": 4,
+            "MW181": 3,
+            "MW182": 2,
+            "MW183": 1,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 6,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        }
+      ],
+      "mutations_rejected": {
+        "short_ton": "short_ton frame232 cycle1_complete_while_start_held: {'bits': [False, False, True, False, False, True, True, False, False, True, True, False, False, True, True, True], 'memory': {'MW180': 2, 'MW181': 1, 'MW182': 0, 'MW183': 0, 'MW184': 1, 'MW185': 9, 'MW186': 0, 'MW187': 0, 'MW188': 1, 'MW189': 0, 'MW190': 10, 'MW191': 10, 'MW192': 10}} != {'bits': [False, True, False, False, False, False, False, False, False, True, True, False, False, True, False, False], 'memory': {'MW180': 1, 'MW181': 1, 'MW182': 0, 'MW183': 0, 'MW184': 1, 'MW185': 9, 'MW186': 0, 'MW187': 0, 'MW188': 0, 'MW189': 0, 'MW190': 10, 'MW191': 10, 'MW192': 10}}",
+        "start_level_instead_of_edge": "start_level_instead_of_edge frame7 start_without_permissive: {'bits': [True, False, False, False, False, False, False, False, False, True, False, False, False, True, False, False], 'memory': {'MW180': 0, 'MW181': 0, 'MW182': 0, 'MW183': 0, 'MW184': 2, 'MW185': 0, 'MW186': 0, 'MW187': 0, 'MW188': 0, 'MW189': 5, 'MW190': 10, 'MW191': 10, 'MW192': 10}} != {'bits': [True, False, False, False, False, False, False, False, False, True, False, False, False, True, False, False], 'memory': {'MW180': 0, 'MW181': 0, 'MW182': 0, 'MW183': 0, 'MW184': 1, 'MW185': 0, 'MW186': 0, 'MW187': 0, 'MW188': 0, 'MW189': 5, 'MW190': 10, 'MW191': 10, 'MW192': 10}}",
+        "stop_overrides_reset": "stop_overrides_reset frame962 reset_during_ton: {'bits': [True, False, False, False, True, True, True, True, True, True, True, True, True, True, False, False], 'memory': {'MW180': 0, 'MW181': 5, 'MW182': 1, 'MW183': 4, 'MW184': 2, 'MW185': 0, 'MW186': 0, 'MW187': 10, 'MW188': 0, 'MW189': 2, 'MW190': 10, 'MW191': 10, 'MW192': 10}} != {'bits': [True, False, False, False, False, False, False, False, False, False, True, True, True, True, False, False], 'memory': {'MW180': 0, 'MW181': 0, 'MW182': 0, 'MW183': 0, 'MW184': 0, 'MW185': 0, 'MW186': 0, 'MW187': 10, 'MW188': 0, 'MW189': 4, 'MW190': 10, 'MW191': 10, 'MW192': 10}}"
+      },
+      "official_editor": "pending",
+      "official_simulator": "pending",
+      "physical_plc": "pending"
+    },
+    {
+      "case": "sequence_timers_memory",
+      "status": "local_checks_passed",
+      "source": "examples/editor_validation/sequence_timers_memory.cpp",
+      "project": "output/editor-validation/sequence-timers-verified/sequence_timers_memory/program.smbp",
+      "scans": 2417,
+      "rungs": 139,
+      "instructions": 336,
+      "template": "tests/fixtures/official_tm200ce40t_memory.smbp",
+      "template_sha256": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf",
+      "artifact_sha256": {
+        "examples/editor_validation/sequence_timers_memory.cpp": "843bef70f709c9dcc432ce661ddc91c2b4dd572bbb0b851f9a2a150bbe0048fd",
+        "output/editor-validation/sequence-timers-verified/sequence_timers_memory/program.smbp": "47f2b9590d1dad398bea779b5ca88c7b0a5e665809d13c7c9501bde19b34b6a4",
+        "output/editor-validation/sequence-timers-verified/sequence_timers_memory/program.audit.cpp": "80748efecfb6f6dd183d7f60718d1a4c48fa6ea76c2a45eb30cba0d7de63bfe9",
+        "output/editor-validation/sequence-timers-verified/sequence_timers_memory/recompiled.smbp": "af76ce6a013997d8597be5597da300b356b976e3c17322bbae0311dc7d2143af",
+        "output/editor-validation/sequence-timers-verified/sequence_timers_memory/trace.json": "57e3c12e5d8d0e57f7b2d2a784d73cd169356ccd441ed4260d193d392ad5cfac",
+        "output/editor-validation/sequence-timers-verified/sequence_timers_memory/expected.json": "a29082538f998bffd8568a19033368d4a5638e10b17b572c52c681d9f05523f7"
+      },
+      "commands": [
+        "M800",
+        "M801",
+        "M802",
+        "M803"
+      ],
+      "phases": [
+        {
+          "phase": "initial_reset",
+          "last_frame": 2,
+          "controls": [
+            false,
+            false,
+            false,
+            true
+          ],
+          "indicators_on": [
+            "M704",
+            "M716"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 0,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 0,
+            "MW188": 0,
+            "MW189": 4,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "initial_idle",
+          "last_frame": 5,
+          "controls": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 0,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 0,
+            "MW188": 0,
+            "MW189": 4,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "start_without_permissive",
+          "last_frame": 8,
+          "controls": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M713",
+            "M717"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 0,
+            "MW188": 0,
+            "MW189": 5,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "held_start_after_permission",
+          "last_frame": 138,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M713",
+            "M714",
+            "M717"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 0,
+            "MW188": 0,
+            "MW189": 5,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "release_before_cycle1",
+          "last_frame": 141,
+          "controls": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M713",
+            "M714"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 0,
+            "MW188": 0,
+            "MW189": 5,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "cycle1_complete_while_start_held",
+          "last_frame": 471,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M713",
+            "M714",
+            "M717"
+          ],
+          "word_values": {
+            "MW180": 4,
+            "MW181": 1,
+            "MW182": 1,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 6,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "held_start_does_not_repeat_completed_cycle",
+          "last_frame": 501,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M713",
+            "M714",
+            "M717"
+          ],
+          "word_values": {
+            "MW180": 4,
+            "MW181": 1,
+            "MW182": 1,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 6,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "release_before_cycle2",
+          "last_frame": 504,
+          "controls": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M713",
+            "M714"
+          ],
+          "word_values": {
+            "MW180": 4,
+            "MW181": 1,
+            "MW182": 1,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 6,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "cycle2_partial_ton",
+          "last_frame": 544,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M705",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M713",
+            "M714",
+            "M717"
+          ],
+          "word_values": {
+            "MW180": 1,
+            "MW181": 2,
+            "MW182": 1,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 3,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 0,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "stop_dominates_held_start",
+          "last_frame": 547,
+          "controls": [
+            true,
+            true,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M715",
+            "M717"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 2,
+            "MW182": 1,
+            "MW183": 1,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 2,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "held_after_stop_does_not_restart",
+          "last_frame": 577,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M717"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 2,
+            "MW182": 1,
+            "MW183": 1,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 2,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "release_before_cycle3",
+          "last_frame": 580,
+          "controls": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 2,
+            "MW182": 1,
+            "MW183": 1,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 2,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "cycle3_partial_ton",
+          "last_frame": 620,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M705",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M717"
+          ],
+          "word_values": {
+            "MW180": 1,
+            "MW181": 3,
+            "MW182": 1,
+            "MW183": 1,
+            "MW184": 1,
+            "MW185": 3,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 0,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "permission_loss_aborts_ton",
+          "last_frame": 623,
+          "controls": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M717"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 3,
+            "MW182": 1,
+            "MW183": 2,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 3,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "held_after_permission_returns",
+          "last_frame": 653,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M717"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 3,
+            "MW182": 1,
+            "MW183": 2,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 3,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "release_before_cycle4",
+          "last_frame": 656,
+          "controls": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 3,
+            "MW182": 1,
+            "MW183": 2,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 3,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "cycle4_inside_tp",
+          "last_frame": 781,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M706",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW180": 2,
+            "MW181": 4,
+            "MW182": 1,
+            "MW183": 2,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 2,
+            "MW187": 0,
+            "MW188": 1,
+            "MW189": 0,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "release_while_tp_active",
+          "last_frame": 783,
+          "controls": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M706",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW180": 2,
+            "MW181": 4,
+            "MW182": 1,
+            "MW183": 2,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 2,
+            "MW187": 0,
+            "MW188": 1,
+            "MW189": 0,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "fresh_start_rejected_while_active",
+          "last_frame": 785,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M706",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW180": 2,
+            "MW181": 4,
+            "MW182": 1,
+            "MW183": 2,
+            "MW184": 2,
+            "MW185": 0,
+            "MW186": 2,
+            "MW187": 0,
+            "MW188": 1,
+            "MW189": 5,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "stop_during_tp",
+          "last_frame": 788,
+          "controls": [
+            true,
+            true,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M715",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 4,
+            "MW182": 1,
+            "MW183": 3,
+            "MW184": 2,
+            "MW185": 0,
+            "MW186": 3,
+            "MW187": 0,
+            "MW188": 1,
+            "MW189": 2,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "held_after_stop_until_tp_tof_settle",
+          "last_frame": 918,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M717"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 4,
+            "MW182": 1,
+            "MW183": 3,
+            "MW184": 2,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 2,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "release_before_cycle5",
+          "last_frame": 921,
+          "controls": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 4,
+            "MW182": 1,
+            "MW183": 3,
+            "MW184": 2,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 2,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "cycle5_partial_ton",
+          "last_frame": 961,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M705",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M717"
+          ],
+          "word_values": {
+            "MW180": 1,
+            "MW181": 5,
+            "MW182": 1,
+            "MW183": 3,
+            "MW184": 2,
+            "MW185": 3,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 0,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "reset_during_ton",
+          "last_frame": 964,
+          "controls": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "indicators_on": [
+            "M704",
+            "M714",
+            "M715",
+            "M716",
+            "M717"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 0,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 4,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "held_after_ton_reset",
+          "last_frame": 1094,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M714",
+            "M717"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 0,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 4,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "release_before_cycle6",
+          "last_frame": 1097,
+          "controls": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M714"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 0,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 4,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "cycle6_inside_tp",
+          "last_frame": 1222,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M706",
+            "M709",
+            "M710",
+            "M714",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW180": 2,
+            "MW181": 1,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 0,
+            "MW185": 0,
+            "MW186": 2,
+            "MW187": 0,
+            "MW188": 1,
+            "MW189": 0,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "reset_during_tp",
+          "last_frame": 1225,
+          "controls": [
+            true,
+            true,
+            false,
+            true
+          ],
+          "indicators_on": [
+            "M704",
+            "M714",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 0,
+            "MW185": 0,
+            "MW186": 2,
+            "MW187": 0,
+            "MW188": 1,
+            "MW189": 4,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "release_while_internal_tp_draining",
+          "last_frame": 1227,
+          "controls": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M714",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 0,
+            "MW185": 0,
+            "MW186": 2,
+            "MW187": 0,
+            "MW188": 1,
+            "MW189": 4,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "fresh_start_rejected_while_tp_tof_busy",
+          "last_frame": 1229,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M713",
+            "M714",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 3,
+            "MW187": 0,
+            "MW188": 1,
+            "MW189": 5,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "held_after_internal_timers_drain",
+          "last_frame": 1359,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M713",
+            "M714",
+            "M717"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 5,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "release_before_cycle7",
+          "last_frame": 1362,
+          "controls": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M713",
+            "M714"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 0,
+            "MW182": 0,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 5,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "cycle7_complete_after_fresh_edge",
+          "last_frame": 1692,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M713",
+            "M714",
+            "M717"
+          ],
+          "word_values": {
+            "MW180": 4,
+            "MW181": 1,
+            "MW182": 1,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 6,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "release_before_cycle8",
+          "last_frame": 1695,
+          "controls": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M713",
+            "M714"
+          ],
+          "word_values": {
+            "MW180": 4,
+            "MW181": 1,
+            "MW182": 1,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 6,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "cycle8_inside_tof",
+          "last_frame": 1920,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M707",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M713",
+            "M714",
+            "M717",
+            "M719"
+          ],
+          "word_values": {
+            "MW180": 3,
+            "MW181": 2,
+            "MW182": 1,
+            "MW183": 0,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 2,
+            "MW188": 1,
+            "MW189": 0,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "stop_during_tof",
+          "last_frame": 1923,
+          "controls": [
+            true,
+            true,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M715",
+            "M717",
+            "M719"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 2,
+            "MW182": 1,
+            "MW183": 1,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 2,
+            "MW188": 1,
+            "MW189": 2,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "held_until_tof_drains",
+          "last_frame": 2053,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M717"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 2,
+            "MW182": 1,
+            "MW183": 1,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 2,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "release_before_cycle9",
+          "last_frame": 2056,
+          "controls": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714"
+          ],
+          "word_values": {
+            "MW180": 0,
+            "MW181": 2,
+            "MW182": 1,
+            "MW183": 1,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 2,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "cycle9_complete_after_fresh_edge",
+          "last_frame": 2386,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M717"
+          ],
+          "word_values": {
+            "MW180": 4,
+            "MW181": 3,
+            "MW182": 2,
+            "MW183": 1,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 6,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        },
+        {
+          "phase": "final_held_no_repeat",
+          "last_frame": 2416,
+          "controls": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M717"
+          ],
+          "word_values": {
+            "MW180": 4,
+            "MW181": 3,
+            "MW182": 2,
+            "MW183": 1,
+            "MW184": 1,
+            "MW185": 0,
+            "MW186": 0,
+            "MW187": 10,
+            "MW188": 0,
+            "MW189": 6,
+            "MW190": 10,
+            "MW191": 10,
+            "MW192": 10
+          }
+        }
+      ],
+      "mutations_rejected": {
+        "short_ton": "short_ton frame232 cycle1_complete_while_start_held: {'bits': [False, False, True, False, False, True, True, False, False, True, True, False, False, True, True, True], 'memory': {'MW180': 2, 'MW181': 1, 'MW182': 0, 'MW183': 0, 'MW184': 1, 'MW185': 9, 'MW186': 0, 'MW187': 0, 'MW188': 1, 'MW189': 0, 'MW190': 10, 'MW191': 10, 'MW192': 10}} != {'bits': [False, True, False, False, False, False, False, False, False, True, True, False, False, True, False, False], 'memory': {'MW180': 1, 'MW181': 1, 'MW182': 0, 'MW183': 0, 'MW184': 1, 'MW185': 9, 'MW186': 0, 'MW187': 0, 'MW188': 0, 'MW189': 0, 'MW190': 10, 'MW191': 10, 'MW192': 10}}",
+        "start_level_instead_of_edge": "start_level_instead_of_edge frame7 start_without_permissive: {'bits': [True, False, False, False, False, False, False, False, False, True, False, False, False, True, False, False], 'memory': {'MW180': 0, 'MW181': 0, 'MW182': 0, 'MW183': 0, 'MW184': 2, 'MW185': 0, 'MW186': 0, 'MW187': 0, 'MW188': 0, 'MW189': 5, 'MW190': 10, 'MW191': 10, 'MW192': 10}} != {'bits': [True, False, False, False, False, False, False, False, False, True, False, False, False, True, False, False], 'memory': {'MW180': 0, 'MW181': 0, 'MW182': 0, 'MW183': 0, 'MW184': 1, 'MW185': 0, 'MW186': 0, 'MW187': 0, 'MW188': 0, 'MW189': 5, 'MW190': 10, 'MW191': 10, 'MW192': 10}}",
+        "stop_overrides_reset": "stop_overrides_reset frame962 reset_during_ton: {'bits': [True, False, False, False, True, True, True, True, True, True, True, True, True, True, False, False], 'memory': {'MW180': 0, 'MW181': 5, 'MW182': 1, 'MW183': 4, 'MW184': 2, 'MW185': 0, 'MW186': 0, 'MW187': 10, 'MW188': 0, 'MW189': 2, 'MW190': 10, 'MW191': 10, 'MW192': 10}} != {'bits': [True, False, False, False, False, False, False, False, False, False, True, True, True, True, False, False], 'memory': {'MW180': 0, 'MW181': 0, 'MW182': 0, 'MW183': 0, 'MW184': 0, 'MW185': 0, 'MW186': 0, 'MW187': 10, 'MW188': 0, 'MW189': 4, 'MW190': 10, 'MW191': 10, 'MW192': 10}}"
+      },
+      "official_editor": "pending",
+      "official_simulator": "pending",
+      "physical_plc": "pending"
+    }
+  ],
+  "distinct_candidate_frames": 4834,
+  "counting": "Each (candidate, trace-position) once; comparison stages/repetitions are not additional frames.",
+  "comparison_stages": [
+    "IL VM",
+    "JSON VM",
+    "normalized VM",
+    "native SDK",
+    "actual XML VM",
+    "reconstructed native SDK",
+    "recompiled VM",
+    "recompiled XML VM"
+  ],
+  "package_files_sha256": {
+    "tests/editor_validation/sequence_timers.py": "eb8700e346af43f3ae53ddf5034e4b7230502da8cc66e6991c7e1712670f8702",
+    "tests/editor_validation/run.py": "d204fa45b64dba7b33fb05c707c2f8f8362ec8f6714d19cc84ac5d4e475e55f6",
+    "examples/editor_validation/sequence_timers.cpp": "4dea1158fd7518e315c18e66833874fbe4243d60b28df4b54d7048a07615a824",
+    "examples/editor_validation/sequence_timers_memory.cpp": "843bef70f709c9dcc432ce661ddc91c2b4dd572bbb0b851f9a2a150bbe0048fd",
+    "tests/fixtures/official_tm200ce40t_memory.smbp": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf"
+  },
+  "package_sha256": "82a0a37c9170c23bba53622ac68dd416ffdc0d69dabeef7176f023efe5857349",
+  "oracle_scope": "Independent elapsed-time/event specification and 14 hand-computed settled checkpoints. Native SDK/VM and compiler conversions still share intended semantics and modules; this agreement is not independent Schneider proof.",
+  "memory_control_scope": "M800..M803 injected before begin_scan; models external writes between scans. Actual official animation-table scheduling remains unverified.",
+  "timer_scope": "Three non-retentive static native timers: TON0, TP1, TOF2 at 1second/preset10. Local 100ms frames are not simulator or hardware timing evidence. TP is not cancelled by reset/abort; app outputs are masked and busy restarts are rejected until timers drain.",
+  "official_editor": "pending",
+  "official_simulator": "pending",
+  "physical_plc": "pending"
+}

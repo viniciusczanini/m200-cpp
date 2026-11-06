@@ -232,6 +232,7 @@ class Frontend:
         self.lower = Lowerer(reserved, reserved_words)
         self.loops = []
         self.source_labels = {}
+        self.scan_exit = None
         if any(len(modes) > 1 for modes in self.communication_modes.values()):
             fail(
                 "do not mix automatic and explicit communication indices of the same kind"
@@ -1004,6 +1005,20 @@ class Frontend:
             if not self.loops:
                 self.error(node, "break/continue requires an enclosing loop")
             self.lower.jump(self.loops[-1][kind], guard if guard is not None else "1")
+        elif kind == "ReturnStmt":
+            if children:
+                self.error(
+                    node,
+                    "scan() supports only a bare return; split void expressions into a statement",
+                )
+            if self.scan_exit is None:
+                if self.lower.next_label >= 64:
+                    self.error(
+                        node,
+                        "scan exit needs a spare native label; compiler overhead limitation",
+                    )
+                self.scan_exit = self.lower.new_label()
+            self.lower.jump(self.scan_exit, guard if guard is not None else "1")
         elif kind == "LabelStmt":
             self.lower.label(self.source_labels[node["declId"]])
             self.statement(children[0], guard)
@@ -1253,6 +1268,10 @@ class Frontend:
             if n.get("kind") == "LabelStmt"
         }
         self.statement(body)
+        if self.scan_exit is not None:
+            # C++ output writes target an image. Every exit must commit it before
+            # the next scan, including writes preceding a conditional return.
+            self.lower.label(self.scan_exit)
         if self.comm_observed - self.calls:
             fail("communication status read without an unconditional update per scan")
         tail = [

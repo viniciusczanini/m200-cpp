@@ -5,6 +5,7 @@ import re
 from .model import fail
 
 JUMPS = ("JMP", "JMPC", "JMPCN")
+ENDS = ("END", "ENDC", "ENDCN")
 
 
 def label_name(value):

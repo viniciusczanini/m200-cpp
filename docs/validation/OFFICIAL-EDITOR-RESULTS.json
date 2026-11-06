@@ -178,6 +178,483 @@
       "direct_numeric_watch": "not performed; equality and checksum-bit indicators observed",
       "save_reopen": "pending",
       "physical_plc": "pending"
+    },
+    {
+      "name": "timed_counter",
+      "artifact": {
+        "path": "output/editor-validation/complex/timed_counter/program.smbp",
+        "bytes": 434187,
+        "sha256": "abf6cb87d043840b5fa4065b4ad69144a6454b34573404edcb02d594d9345581"
+      },
+      "rungs": 102,
+      "instructions": 221,
+      "editor": "No error, Ladder rendered",
+      "simulator": "Online/identical/RUN; TON0 base100ms preset5 and Counter0 preset3",
+      "observed_outputs": [
+        {
+          "phase": "initial",
+          "outputs_on": [
+            5,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "phase": "premature-pulse",
+          "outputs_on": [
+            5,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "phase": "ready-while-held-count0",
+          "outputs_on": [
+            0,
+            5,
+            6,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "phase": "count1",
+          "outputs_on": [
+            0,
+            1,
+            6,
+            8,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "phase": "count2",
+          "outputs_on": [
+            0,
+            2,
+            6,
+            9,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "phase": "count3-done-latch",
+          "outputs_on": [
+            0,
+            3,
+            4,
+            6,
+            8,
+            9,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "phase": "count4-latch",
+          "outputs_on": [
+            0,
+            4,
+            6,
+            10,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "phase": "reset-held",
+          "outputs_on": [
+            5,
+            6,
+            7,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "phase": "ready-after-reset-held-count0",
+          "outputs_on": [
+            0,
+            5,
+            6,
+            12,
+            13,
+            14,
+            15
+          ]
+        }
+      ],
+      "checks": "Premature pulse consumed; held button does not count when timer later becomes ready. Fresh qualified pulses count1..4; DONE at3, latch remains at4. Reset priority clears counter/latch/timer, holding old input through reset does not count again.",
+      "timing": "Settled real-time states only; no millisecond accuracy claim",
+      "direct_numeric_watch": "not performed; count bits/equality and preset checks observed",
+      "save_reopen": "pending",
+      "physical_plc": "pending",
+      "count_basis": "Actual exported SMBP and load_project, including normalization; frontend before normalization has98rungs/205instructions."
+    },
+    {
+      "name": "numeric_diagnostics",
+      "artifact": {
+        "path": "output/editor-validation/complex/numeric_diagnostics/program.smbp",
+        "bytes": 474582,
+        "sha256": "af42029357b2780b9209103f49f119ff18600e5cb1b6ad456e3df0d4ef8f6ff1"
+      },
+      "rungs": 113,
+      "instructions": 231,
+      "editor": "No error on open, Ladder rendered; simulator compiler0errors/2advisories",
+      "advisories": [
+        "Coil %S18 is written several times, rung35",
+        "Coil %S18 is written several times, rung57"
+      ],
+      "simulator": "Online/identical/RUN; all16 output diagnostic indicators remain True for I0.0 False/True/False",
+      "checks": "BCD16/32 conversions including negative packed carriers, word concat/LW/HW, integer overflow/saturation, explicit S18 clearing, carry snapshots and aliased memory comparisons",
+      "direct_numeric_watch": "not performed; all16 comparison indicators observed",
+      "save_reopen": "pending",
+      "physical_plc": "pending"
+    },
+    {
+      "name": "sequence_timers",
+      "artifact": {
+        "path": "output/editor-validation/sequence-timers-verified/sequence_timers/program.smbp",
+        "bytes": 760861,
+        "sha256": "ddc2150a010e99b988a0ffc21807fce229190cf88e25d8d731c45afd10ad920b"
+      },
+      "rungs": 191,
+      "instructions": 440,
+      "editor": "No error, validation enabled; original exact bytes reached local simulator Online/identical/RUN after separate diagnostic derivative startup crash.",
+      "timer_configuration": "TON0, TP1 and TOF2; each base1000ms/preset10.",
+      "method": "Toggled simulated inputs in official panel; observed Q indicators and actual GUI-created animation table MW180..189. No force, external TCP or physical PLC.",
+      "observations": [
+        {
+          "phase": "held START after first complete cycle",
+          "words_MW180_to_MW189": [
+            4,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            10,
+            0,
+            6
+          ],
+          "evidence": "editor-evidence/sequence-official-watch-held-start.png"
+        },
+        {
+          "phase": "fresh second START during TON",
+          "words_MW180_to_MW189": [
+            1,
+            2,
+            1,
+            0,
+            0,
+            0,
+            0,
+            10,
+            0,
+            0
+          ],
+          "evidence": "editor-evidence/sequence-second-start-ton-watch.png"
+        },
+        {
+          "phase": "second cycle during TOF",
+          "words_MW180_to_MW189": [
+            3,
+            2,
+            1,
+            0,
+            0,
+            0,
+            0,
+            3,
+            1,
+            0
+          ],
+          "evidence": "editor-evidence/sequence-second-tof-watch.png"
+        },
+        {
+          "phase": "second complete; STOP asserted after completion",
+          "words_MW180_to_MW189": [
+            4,
+            2,
+            2,
+            0,
+            0,
+            0,
+            0,
+            10,
+            0,
+            6
+          ],
+          "evidence": "editor-evidence/sequence-second-complete-watch.png"
+        },
+        {
+          "phase": "STOP abort during third TON",
+          "words_MW180_to_MW189": [
+            0,
+            3,
+            2,
+            1,
+            0,
+            0,
+            0,
+            10,
+            0,
+            2
+          ],
+          "evidence": "editor-evidence/sequence-stop-abort-ton-watch.png"
+        },
+        {
+          "phase": "RESET while STOP held",
+          "words_MW180_to_MW189": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            10,
+            0,
+            4
+          ],
+          "evidence": "editor-evidence/sequence-reset-dominates-held-stop.png"
+        },
+        {
+          "phase": "RESET/STOP released with START held; no restart",
+          "words_MW180_to_MW189": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            10,
+            0,
+            4
+          ],
+          "evidence": "editor-evidence/sequence-reset-released-held-no-restart.png"
+        }
+      ],
+      "limits": [
+        "Settled GUI states do not measure millisecond timer accuracy.",
+        "TP/TOF abort-drain and permit loss cases still pending official observation.",
+        "Diagnostic derivative startup crash remains unresolved; saved/reopened project has not yet been rerun."
+      ],
+      "physical_plc": "pending",
+      "editor_saved": {
+        "path": "output/editor-validation/sequence-timers-official/editor-saved.smbp",
+        "bytes": 794739,
+        "sha256": "8f34c6b4e5cf44440b444048d3bdc3a1337fc3f380d7b620a8d93832e61aa767"
+      },
+      "save_readback": "Independent2417-position oracle passed; numeric spacing changed, parsed semantics/hardware/2043graphentities unchanged; reverse C++ byte-identical. See SEQUENCE-TIMERS-EDITOR-READBACK.md.",
+      "reopen": "Fresh open of actual editor-saved bytes as sequence_timers_editor_saved.smbp after loading a different project: No error with validation enabled.",
+      "reopen_evidence": "editor-evidence/sequence-editor-saved-reopened.png"
+    },
+    {
+      "name": "sequence_timers_watch",
+      "artifact": {
+        "path": "output/editor-validation/sequence-timers-official/diagnostic-watch.smbp",
+        "bytes": 762859,
+        "sha256": "83b73ea98fee422e230bf9d23f1164696e4e2de361d512916ebcd88abde5da67"
+      },
+      "editor": "No error",
+      "simulator": "FAILED before RUN: AccessViolation ProcessMbitsEdges -> MastTask, write0x07018086. Original launched and ran subsequently, and GUI-added watches ran; root cause unresolved.",
+      "evidence": "editor-evidence/sequence-startup-crash-details.png",
+      "physical_plc": "pending",
+      "derivation": "WatchLists MW180..192 Decimal added to original, all other XML semantics unchanged."
+    },
+    {
+      "name": "scan_exit",
+      "artifact": {
+        "path": "output/editor-validation/scan-exit/scan_exit.smbp",
+        "bytes": 194634,
+        "sha256": "6a5329a46799ff1f4c23a351175f3093d92115cf138324a2e4698f2a0d1e49a4"
+      },
+      "source": "examples/editor_validation/scan_exit.cpp",
+      "rungs": 32,
+      "instructions": 67,
+      "editor": "No error; validation enabled; local simulator Online/identical/RUN.",
+      "method": "Official simulator panel, settled input/output observations; Q3/Q4 diagnose MW220 equals1/2. No direct MW220 watch, Force, external TCP or physical device.",
+      "observations": [
+        {
+          "phase": "cold initialization",
+          "I0_0_to_I0_2": [
+            0,
+            0,
+            0
+          ],
+          "Q_on": [],
+          "evidence": "editor-evidence/scan-exit-00.png"
+        },
+        {
+          "phase": "exit enabled and payload held",
+          "I0_0_to_I0_2": [
+            1,
+            1,
+            0
+          ],
+          "Q_on": [
+            0
+          ],
+          "evidence": "editor-evidence/scan-exit-01.png"
+        },
+        {
+          "phase": "exit released, payload remains held, skipped edge not counted",
+          "I0_0_to_I0_2": [
+            1,
+            0,
+            0
+          ],
+          "Q_on": [
+            0,
+            2
+          ],
+          "evidence": "editor-evidence/scan-exit-02.png"
+        },
+        {
+          "phase": "payload released",
+          "I0_0_to_I0_2": [
+            0,
+            0,
+            0
+          ],
+          "Q_on": [],
+          "evidence": "editor-evidence/scan-exit-03.png"
+        },
+        {
+          "phase": "fresh payload count1",
+          "I0_0_to_I0_2": [
+            1,
+            0,
+            0
+          ],
+          "Q_on": [
+            0,
+            2,
+            3
+          ],
+          "evidence": "editor-evidence/scan-exit-04.png"
+        },
+        {
+          "phase": "exit enabled, payload lowered, later outputs retained",
+          "I0_0_to_I0_2": [
+            0,
+            1,
+            0
+          ],
+          "Q_on": [
+            2,
+            3
+          ],
+          "evidence": "editor-evidence/scan-exit-05.png"
+        },
+        {
+          "phase": "exit released with low payload",
+          "I0_0_to_I0_2": [
+            0,
+            0,
+            0
+          ],
+          "Q_on": [
+            3
+          ],
+          "evidence": "editor-evidence/scan-exit-06.png"
+        },
+        {
+          "phase": "fresh payload count2",
+          "I0_0_to_I0_2": [
+            1,
+            0,
+            0
+          ],
+          "Q_on": [
+            0,
+            2,
+            4
+          ],
+          "evidence": "editor-evidence/scan-exit-07.png"
+        },
+        {
+          "phase": "reset dominates while exit and payload held",
+          "I0_0_to_I0_2": [
+            1,
+            1,
+            1
+          ],
+          "Q_on": [
+            0
+          ],
+          "evidence": "editor-evidence/scan-exit-08.png"
+        },
+        {
+          "phase": "reset and exit released while payload held",
+          "I0_0_to_I0_2": [
+            1,
+            0,
+            0
+          ],
+          "Q_on": [
+            0,
+            2
+          ],
+          "evidence": "editor-evidence/scan-exit-09.png"
+        },
+        {
+          "phase": "fresh post-reset pulse count1",
+          "I0_0_to_I0_2": [
+            1,
+            0,
+            0
+          ],
+          "Q_on": [
+            0,
+            2,
+            3
+          ],
+          "evidence": "editor-evidence/scan-exit-10.png"
+        }
+      ],
+      "scope": "C++ return lowered to supported Jump epilogue; native END graphical binding still unverified.",
+      "physical_plc": "pending"
+    },
+    {
+      "name": "native_endc_diagnostic",
+      "original": {
+        "path": "output/editor-validation/native-end/conditional-il-original.smbp",
+        "bytes": 83510,
+        "sha256": "8693ca1656171845f33f9fe35fde344f30a58b2a5b518dbee327d5cf2bdcba83"
+      },
+      "editor_saved": {
+        "path": "output/editor-validation/native-end/conditional-editor-saved.smbp",
+        "bytes": 86629,
+        "sha256": "10d49746b54f4b8ef14dee3a51e8f08607aabebc5e142ade76f3643a1369451f"
+      },
+      "IL": [
+        "LD %M0",
+        "ENDC"
+      ],
+      "editor": "No error; IL-only diagnostic converted to Ladder and saved by official editor.",
+      "observed_graph": "NormalContact M0 at0/0, Lines columns1..9, End at0/10 with empty Descriptor and Left connection.",
+      "evidence": "editor-evidence/native-endc-converted.png",
+      "limits": "Single observed ENDC graph fixture. Native END-family graph import/export remains explicitly gated pending implementation and full binding/polarity controls. No simulator RUN for this diagnostic.",
+      "physical_plc": "pending"
     }
   ],
   "screenshots": [
@@ -275,6 +752,71 @@
       "path": "docs/validation/editor-evidence/state-arrays-advisories.png",
       "sha256": "ea5a5036b0db7ab44fdbb29c8090424b0f5c9ba6785b3aa068129f5095dea209",
       "original_capture": "skill-1793942147397111000-2146.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/timed-counter-initial.png",
+      "sha256": "9e53c761ebb14dfa54e183abe0b70a67993f5cfaa6963b4d634ab46e1ccadf11",
+      "original_capture": "skill-1793942446733795000-2303.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/timed-counter-premature-pulse.png",
+      "sha256": "1b2f72867312f84724aea18bdbdbd0905f8b80b701764117bf20fce51f3e4288",
+      "original_capture": "skill-1793942484902899000-2303.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/timed-counter-ready-while-held-count0.png",
+      "sha256": "4d4cbe70d5496a43947440c439862df6d5fe67cb3958d31a9418ddb03988a993",
+      "original_capture": "skill-1793942494901267000-2303.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/timed-counter-count1.png",
+      "sha256": "69b2526e7edaf820f4428b8297094ca1f53051f9d7475ff4c115740c04f1580b",
+      "original_capture": "skill-1793942515827824000-2303.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/timed-counter-count2.png",
+      "sha256": "3d02fb2b7ac6901bdfaeacb99ee09b1290fc09c6650cea44960d63450d750185",
+      "original_capture": "skill-1793942537221450000-2303.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/timed-counter-count3-done-latch.png",
+      "sha256": "c8c1c9c0edf0c85156e3066cdf25a8efa39a037cef9256f0564baf8983438096",
+      "original_capture": "skill-1793942556992272000-2303.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/timed-counter-count4-latch.png",
+      "sha256": "511e7e68622e81cf62e31231bf15d9b6d650cbd9387ff0a146306fce3bc90ec7",
+      "original_capture": "skill-1793942577994941000-2303.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/timed-counter-reset-held.png",
+      "sha256": "b282c8a31338cf5a485aae91ffbd4fc2aed8ab57c793273ebbf49b932c90eb1f",
+      "original_capture": "skill-1793942600485836000-2303.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/timed-counter-ready-after-reset-held-count0.png",
+      "sha256": "4d4cbe70d5496a43947440c439862df6d5fe67cb3958d31a9418ddb03988a993",
+      "original_capture": "skill-1793942612018500000-2303.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/numeric-low.png",
+      "sha256": "a488379f27183355f3f479fa9140ac69a48000c2bf96817aec44cb2672739b86",
+      "original_capture": "skill-1793942823366056000-2368.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/numeric-high.png",
+      "sha256": "7aea01f5c5c5fb430fbffe3fe49b95549c0d2b507cf647da1df29d9195c22cdf",
+      "original_capture": "skill-1793942832755688000-2368.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/numeric-return-low.png",
+      "sha256": "a488379f27183355f3f479fa9140ac69a48000c2bf96817aec44cb2672739b86",
+      "original_capture": "skill-1793942842808566000-2368.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/numeric-advisories.png",
+      "sha256": "f2b5b9accb16b5fd0e9d1320d1a0619464a36c095a03764374e0c0c474a8ee8e",
+      "original_capture": "skill-1793942894011585000-2146.png"
     }
   ],
   "validation_policy": "Automatic editor validation stayed enabled. No physical PLC transfer, firmware update or load actuation. Simulator stopped through Commissioning; TCP 502 listener absent afterward.",

@@ -602,14 +602,17 @@ class _TCPExchange:
     connected: bool = False
     sent: int = 0
     response: bytes = b""
+    unmatched_responses: int = 0
 
 
 class LoopbackTCPTransport:
     """Explicit nonblocking TCP reference client restricted to IPv4 loopback.
 
     No connection is made at construction. One exchange is allowed at a time,
-    with no retries, no DNS, a 261-byte receive bound, and a fresh connection per
-    exchange. remote_index selects one configured ETH1 Id; unit_id is separate.
+    with no retries, no DNS, a 260-byte receive bound, and a fresh connection per
+    exchange. At most 16 complete responses for other transaction IDs are
+    discarded; the next one fails closed, including when timeout is disabled.
+    remote_index selects one configured ETH1 Id; unit_id is separate.
     Physical Ethernet/serial operation is deliberately outside this local tool.
     CommunicationEngine supplies the scan clock, timeout, and cancellation.
     """
@@ -694,8 +697,18 @@ class LoopbackTCPTransport:
                 exchange.sent += sent
                 if exchange.sent < len(exchange.request):
                     return None
+            target_size = 7
+            if len(exchange.response) >= 7:
+                _, protocol, length, _ = struct.unpack(">HHHB", exchange.response[:7])
+                if protocol != 0 or not 2 <= length <= 254:
+                    raise ModbusProtocolError(
+                        "incorrect Modbus TCP header or response length"
+                    )
+                target_size = length + 6
             try:
-                part = connection.recv(261 - len(exchange.response))
+                # Read only the current ADU. TCP may combine an unrelated
+                # response and the pending response in one socket write.
+                part = connection.recv(target_size - len(exchange.response))
             except BlockingIOError:
                 return None
             if not part:
@@ -711,8 +724,6 @@ class LoopbackTCPTransport:
             if (
                 protocol != 0
                 or not 2 <= length <= 254
-                or transaction != exchange.transaction
-                or unit != self.unit_id
                 or len(exchange.response) > length + 6
             ):
                 raise ModbusProtocolError(
@@ -720,6 +731,16 @@ class LoopbackTCPTransport:
                 )
             if len(exchange.response) < length + 6:
                 return None
+            if transaction != exchange.transaction:
+                # TCP Implementation Guide V1.0b 4.4.1.3: an unmatched TID
+                # has no pending request and must not complete or fail it.
+                exchange.unmatched_responses += 1
+                if exchange.unmatched_responses > 16:
+                    raise ModbusProtocolError("too many unmatched Modbus TCP responses")
+                exchange.response = b""
+                return None
+            if unit != self.unit_id:
+                raise ModbusProtocolError("incorrect Modbus TCP unit identifier")
             response = decode_tcp(
                 exchange.response,
                 transaction_id=exchange.transaction,

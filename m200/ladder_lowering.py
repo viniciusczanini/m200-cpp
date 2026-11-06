@@ -4,7 +4,7 @@ import copy
 import hashlib
 import json
 
-from .flow import JUMPS, split_label, destinations
+from .flow import JUMPS, ENDS, split_label, destinations
 from .lower import Lowerer
 from .native_logic import decode, STORES, OPEN, timer_index
 from .numeric import memory_words_used
@@ -84,11 +84,11 @@ def normalize(program):
     used_labels = set(destinations(program))
     free_labels = iter(f"%L{i}" for i in range(64) if f"%L{i}" not in used_labels)
 
-    def new_guard_label():
+    def new_guard_label(purpose="safe comparison evaluation"):
         result = next(free_labels, None)
         if result is None:
             fail(
-                "normalization needs a spare label for safe comparison evaluation; compiler overhead limitation"
+                f"normalization needs a spare label for {purpose}; compiler overhead limitation"
             )
         return result
 
@@ -99,6 +99,8 @@ def normalize(program):
     acc = lower.bit("native_accumulator")
     expression_states = {}
     resets = []
+    exit_label = None
+    exit_count = 0
 
     def expression_state(op):
         if op not in expression_states:
@@ -145,6 +147,14 @@ def normalize(program):
             saved = []
             groups = []
             for op, arg in decode(rung):
+                if op in ENDS:
+                    if exit_label is None:
+                        exit_label = new_guard_label("scan exit lowering")
+                    lower.jump(
+                        exit_label, "1" if op == "END" else acc, negate=op == "ENDCN"
+                    )
+                    exit_count += 1
+                    continue
                 if expression_edge(op) is not None:
                     state = expression_state(op)
                     result = lower.bit("expression_edge_result")
@@ -227,6 +237,9 @@ def normalize(program):
                     )
         if label:
             lower.program.rungs[first].insert(0, label + ":")
+    if exit_label is not None:
+        lower.origin = {"generated": "scan exit anchor after all source rungs"}
+        lower.label(exit_label)
     prefix = lower.constant_rungs + resets
     lower.program.rungs = prefix + lower.program.rungs
     lower.program.metadata["rung_origins"] = [
@@ -242,6 +255,13 @@ def normalize(program):
         ).hexdigest(),
         "method": "explicit accumulator/stack snapshots; existing series contacts, coils and Timer blocks",
     }
+    if exit_count:
+        normalized.metadata["scan_exit_lowering"] = {
+            "end_instructions": exit_count,
+            "method": "conditional Jump to one final scan-exit anchor",
+            "native_end_graph_binding": "unverified",
+            "scope": "current master task; no controller STOP or task scheduling model",
+        }
     if expression_states:
         normalized.metadata["expression_edge_expansion"] = {
             "rising": sum(op.startswith("RISING") for op in expression_states),

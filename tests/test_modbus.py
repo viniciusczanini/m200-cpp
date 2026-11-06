@@ -769,7 +769,11 @@ class ModbusLoopbackTests(unittest.TestCase):
                     status = self.exchange(transport)
                     self.assertTrue(status.error)
                     self.assertFalse(status.done)
-                    self.assertEqual((status.comm_error, status.oper_error), (0, 2))
+                    # An unmatched transaction is discarded. This peer then
+                    # closes without answering the pending request: channel
+                    # failure, rather than a malformed matching response.
+                    expected = (255, 6) if name == "transaction" else (0, 2)
+                    self.assertEqual((status.comm_error, status.oper_error), expected)
                     self.assertEqual(self.words[10:12], [0, 0])
                 finally:
                     transport.close()

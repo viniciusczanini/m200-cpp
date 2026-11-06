@@ -31,3 +31,7 @@ the writer retains the chosen template's base. Default4ms filtering/no latch,
 two inactive pulse-output descriptors and capability scalars are preserved;
 unknown/active modes are still rejected. This is independent of physical PLC
 validation, which remains pending.
+
+## Diagnostic watch values
+
+The installed Entities `ValueRepresentationTypeEnum` identifies `Decimal=0` for numeric animation-table values and `BoolNumeric=6` for discrete values. MW values use signed Int16; MD values use signed Int32. The sequence diagnostic copy adds only explicit Decimal watch rows; its executable IL and hardware configuration are compared with the original before opening. Enum identifiers alone do not establish runtime acceptance; exact GUI observations are recorded separately.

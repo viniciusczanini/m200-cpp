@@ -277,5 +277,27 @@
     "writer_policy": "preserve observed template base, contiguous section numbering",
     "editor_baseline": "Root independently reopened exact original with No error; screenshot skill-1793938955148514000-1689.png"
   },
-  "physical_plc": "pending"
+  "physical_plc": "pending",
+  "watch_value_representation": {
+    "assembly": "SchneiderElectric.SoMachineBasic.Entities.dll",
+    "assembly_sha256": "bf7b33a79356dbfd9839891b00e61695b5af3b5ee7ce121def37e3e973a9455e",
+    "type": "SchneiderElectric.Automation.SoMachineBasic.Entities.Program.ValueRepresentationTypeEnum",
+    "type_token": "0x020000EA",
+    "values": {
+      "Decimal": 0,
+      "Binary": 1,
+      "Hexadecimal": 2,
+      "Ascii": 3,
+      "Float": 4,
+      "BoolString": 5,
+      "BoolNumeric": 6,
+      "Enumeration": 7
+    },
+    "word_value_types": {
+      "MW": "Nullable<Int16>",
+      "MD": "Nullable<Int32>"
+    },
+    "watch_xml": "WatchListEntity/WatchListItemEntities/WatchListItemEntity with Address, IsTraced and ValueRepresentation",
+    "scope": "Factual diagnostic display metadata only. Explicit Decimal used for numeric watch candidates; executable IL/hardware unchanged."
+  }
 }

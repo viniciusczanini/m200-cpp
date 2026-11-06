@@ -6,7 +6,7 @@ An experimental C++ → IL → Ladder/SMBP toolchain for the **Schneider Electri
 
 The intended result is a project opened, checked, and transferred by **EcoStruxure Machine Expert Basic**. The reverse path reads the project's actual instructions and configuration; it does not recover a saved copy of the original source.
 
-> **Experimental · partial coverage.** Exact generated memory-copy and digital I/O projects have opened as Ladder and run in the official local simulator under Wine. Memory save/reopen and both logic states were checked. A Wine thread-language mismatch causing false I/O reservation errors was isolated and corrected; broader editor and physical TM200CE40T behavior remain unvalidated. This is an independent project, without Schneider Electric certification or endorsement.
+> **Experimental · partial coverage.** Exact generated projects have run in the official local simulator under Wine: memory/digital I/O, array loops, timer/counter logic, a TON/TP/TOF sequence, numeric diagnostics and early `return;`. The sequence was saved, read back and reopened. One separate diagnostic project's simulator startup crashed and remains under investigation; complete editor and physical TM200CE40T compatibility are unfinished. This independent project has no Schneider Electric certification or endorsement.
 
 [Quick start](#quick-start) · [Workflow](#workflow) · [Current coverage](#current-coverage) · [Validation](#validation) · [Documentation](#documentation)
 
@@ -83,7 +83,7 @@ These are **locally implemented subsets**, not declarations of complete official
 |---|---|---|
 | Boolean logic and I/O | State, sequential assignments, conditions, short-circuit logic, 24 embedded inputs and 16 outputs | Special I/O modes, immediate access, and physical behavior remain open |
 | Typed numbers | `i16`, `i32`, `f32`, 53 explicit numeric intrinsics, comparisons, shared MW/MD/MF memory | Ordinary C++ arithmetic and implicit promotions are restricted; numeric error recovery is incomplete |
-| Arrays and control flow | Fixed-capacity typed arrays, computed indices, `while`/`for`/`do`, `break`, `continue`, labels and `goto` | Loops execute within one scan; allocation overhead and export gates still apply |
+| Arrays and control flow | Fixed-capacity typed arrays, computed indices, `while`/`for`/`do`, `break`, `continue`, labels, `goto`, early `return;` and END-family IL | Returns commit prior output writes; native END graphical binding remains gated; allocation overhead still applies |
 | Timers, edges, counters | TON/TOF/TP, clock and edge APIs, timer properties, native counters | Several modes have local models but blocked SMBP export; timing and lifecycle need external tests |
 | Modbus | READ/WRITE/WRITE_READ models; FC1/2/3/4/5/6/15/16/23; explicit local transports | SMBP export covers proved READ/WRITE word profiles only; physical serial/TCP runtime behavior is unvalidated |
 | Projects and reverse conversion | Conservative SMBP parsing, IL/Ladder consistency checks, source maps, C++ reconstruction | Arbitrary vendor projects are not supported; unknown active constructs fail explicitly |
@@ -113,18 +113,21 @@ The [architecture and semantics guide](docs/ARCHITECTURE.md) explains memory ali
 
 ## Validation
 
-The recorded **2026-11-06 local baseline** contains:
+The recorded **2026-11-06 validation rounds** contain:
 
 | Evidence | Recorded result |
 |---|---:|
-| Unit/regression suite | 417 passing tests |
-| Stress and public-program traces | 288,372 base scan frames |
+| Latest combined unit/regression suite | 441 passing tests |
+| Earlier baseline unit/regression suite | 417 passing tests |
+| Historical stress and public-program traces | 288,372 base scan frames |
 | Combined state/array, timer/counter and numeric candidates | 276 distinct candidate frames |
+| Three-timer sequence and button/priority scenarios | 4,834 distinct candidate frames |
+| Early-return candidate | 114 distinct candidate frames |
 | Separate exhaustive BCD32 SDK oracle | 100,000,000 valid vectors |
 
 The BCD vectors are **not scans** and are excluded from the scan total. Repeated runs and comparison stages are also excluded. The [local results](docs/validation/LOCAL-RESULTS.md) and [conversion result manifest](docs/validation/CONVERSION-LOCAL-RESULTS.json) record the exact scope, commands, and hashes. These are historical results tied to the recorded files, not an automatically refreshed build badge or proof of universal equivalence.
 
-The [current regression manifest](docs/validation/OFFICIAL-EDITOR-LOCAL-RESULTS.json) records the authentic-profile and memory-only constant fixes. The [combined-program manifest](docs/validation/COMPLEX-LOCAL-RESULTS.json) includes independent expected values and six exact candidates; their official execution is tracked separately. Follow the [complex test walkthrough](examples/editor_validation/README.md) to reproduce them locally.
+The [latest integration record](docs/validation/SCAN-EXIT-INTEGRATION-RESULTS.md) records the combined changes and fresh checks. The [earlier regression manifest](docs/validation/OFFICIAL-EDITOR-LOCAL-RESULTS.json) records the authentic-profile and memory-only constant fixes. The [combined-program manifest](docs/validation/COMPLEX-LOCAL-RESULTS.json) includes independent expected values and six exact candidates; their official execution is tracked separately. Follow the [complex test walkthrough](examples/editor_validation/README.md) and [three-timer sequence](examples/editor_validation/SEQUENCE_TIMERS.md) to reproduce them locally; [the sequence manifest](docs/validation/SEQUENCE-TIMERS-LOCAL-RESULTS.json) records its separate timing and button traces.
 
 `check` compares the 16-output traces of native original C++, emitted IL, and reconstructed C++ for the supplied inputs and elapsed times. Deeper tests also inspect memory, flags, aliases, and independent oracles. The implementations share parts of the local model, so agreement does not replace official simulation or hardware measurements. `certify` deliberately refuses to claim certification.
 
@@ -150,6 +153,9 @@ Pinned public-project tests are separate: `make public-fetch` explicitly downloa
 | [Capability inventory](docs/capabilities/README.md) | Implemented coverage, missing families, source conflicts |
 | [SMBP format evidence](docs/FORMAT.md) | Observed serialization, provenance, and unsupported variants |
 | [Modbus](docs/MODBUS.md) | APIs, configuration, status/error semantics, protocol versus exporter coverage |
+| [Early return and END](docs/capabilities/SCAN-EXIT.md) | Scan-exit semantics, output commit and native graph gate |
+| [Timer audit](docs/capabilities/TIMER-PARITY-AUDIT.md) / [Modbus audit](docs/capabilities/MODBUS-PARITY-AUDIT.md) | Documented capabilities, implemented domains and precise remaining tests |
+| [Active task queue](TASK_QUEUE.md) | Work lanes, prerequisites and next evidence |
 | [Local validation record](docs/validation/LOCAL-RESULTS.md) | Dated test history and reproducible result manifests |
 | [Official editor evidence](docs/validation/OFFICIAL-EDITOR-RESULTS.json) | Exact candidates, observed results, screenshots, and unresolved failures |
 | [Windows / official validation plan](docs/validation/WINDOWS.md) | Editor, simulator, and physical-controller acceptance steps |

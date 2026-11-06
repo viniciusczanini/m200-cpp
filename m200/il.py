@@ -10,7 +10,7 @@ from .timers import (
     reference as timer_reference,
     preset_value,
 )
-from .flow import JUMPS, destinations, label_name, split_label
+from .flow import JUMPS, ENDS, destinations, label_name, split_label
 from .native_logic import decode, STORES, OPEN, timer_index
 from .bits import is_string, references as bit_references, signed_pattern
 from .edges import OPS as EDGE_OPS, BASE as EDGE_BASE, LOADS, operand as edge_operand
@@ -169,6 +169,8 @@ def validate(program):
                 bit_operand(abort[1])
                 continue
         for op, arg in decode(rung):
+            if op in ENDS:
+                continue
             if expression_edge(op) is not None:
                 if op in expression_uses:
                     fail("duplicate expression edge instruction identity: " + op)
@@ -445,16 +447,21 @@ class Machine:
             self.edge_events[ref] = (current and not previous, previous and not current)
             self.edge_previous[ref] = current
         executed = 0
-        while pc < len(self.program.rungs):
-            _, rung = split_label(self.program.rungs[pc])
-            pc += 1
-            executed += len(rung)
+
+        def consume(count):
+            nonlocal executed
+            executed += count
             if executed > self.instruction_limit:
                 fail(
                     "local execution limit exceeded; physical watchdog is not simulated"
                 )
+
+        while pc < len(self.program.rungs):
+            _, rung = split_label(self.program.rungs[pc])
+            pc += 1
             if rung[0].startswith("BLK "):
                 if rung[0].split(maxsplit=1)[1] in self.program.communications:
+                    consume(len(rung))  # communication block is one atomic local update
                     key, execute, abort = parse_block(rung)
                     enabled = self.read(execute[1], inputs)
                     cancel = self.read(abort[1], inputs)
@@ -471,6 +478,14 @@ class Machine:
             saved = []
             groups = []
             for op, arg in self.decoded[pc - 1]:
+                consume(1)  # an early END must not consume its skipped suffix
+                if op in ENDS:
+                    if op == "END" or (acc if op == "ENDC" else not acc):
+                        # Finish this task's scan, including the bookkeeping below.
+                        # No controller STOP state or task scheduler is simulated.
+                        pc = len(self.program.rungs)
+                        break
+                    continue
                 if op in self.expression_history:
                     current = acc
                     previous = self.expression_history[op]

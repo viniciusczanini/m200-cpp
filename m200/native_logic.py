@@ -4,7 +4,7 @@ import re
 
 from .model import fail
 from .numeric import is_operation
-from .flow import JUMPS
+from .flow import JUMPS, ENDS
 from .edges import OPS as EDGE_OPS, LOADS
 from .edge_functions import parse as expression_edge
 from .counters import body as counter_body, ACTIONS as COUNTER_ACTIONS
@@ -70,9 +70,18 @@ def decode(rung):
             parts = line.split(maxsplit=1)
             op = parts[0]
             arg = parts[1] if len(parts) == 2 else ""
-        if i == 0 and op not in LOADS and not (len(rung) == 1 and op == "JMP"):
+        if i == 0 and op not in LOADS and not (len(rung) == 1 and op in ("JMP", "END")):
             fail("rung must begin with a supported load")
-        if expression_edge(op) is not None:
+        if op in ENDS:
+            if arg:
+                fail("unexpected operand for " + op)
+            if parentheses or stack:
+                fail(
+                    "END inside parentheses or an open stack is outside the reversible subset"
+                )
+            if op == "END" and i != len(rung) - 1:
+                fail("instructions after unconditional END in the same rung")
+        elif expression_edge(op) is not None:
             if arg:
                 fail("expression edge function takes no operand")
         elif op in (*STACK, "N", ")"):
@@ -122,6 +131,7 @@ def decode(rung):
     if not result or result[-1][0] not in (
         *STORES,
         *JUMPS,
+        *ENDS,
         "IN",
         "NUM",
         *COUNTER_ACTIONS,

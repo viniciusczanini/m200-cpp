@@ -95,6 +95,10 @@ def graphics(rung, timer_column=3, communication_contact_column=0):
     # Deliberately only series contacts, one action, and one optional Timer.
     # Compound expressions are split into boolean gates by the lowerer.
     _, rung = split_label(rung)
+    if any(line.split(maxsplit=1)[0] in ("END", "ENDC", "ENDCN") for line in rung):
+        fail(
+            "native END-family Ladder XML binding is unverified; normalize to supported Jump graphics"
+        )
     if any(line.split(maxsplit=1)[0] in ("JMP", "JMPCN") for line in rung):
         fail("SMBP graphics for JMP/JMPCN are unverified; generate a contact and JMPC")
     if rung[0].startswith("BLK "):
@@ -243,6 +247,10 @@ def check_graph(rung_node, lines, program=None):
         if rung_node.findtext("IsLadderSelected", "false").lower() == "true":
             fail("selected Ladder rung has no graphics")
         return
+    if any(line.split(maxsplit=1)[0] in ("END", "ENDC", "ENDCN") for line in lines):
+        fail(
+            "native END-family Ladder XML binding is unverified; IL-only import remains available"
+        )
     actual = []
     rows = set()
     for e in graph:

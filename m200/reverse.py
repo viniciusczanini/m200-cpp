@@ -1,7 +1,7 @@
 from .il import validate
 from .model import address, fail
 from .timers import reference as timer_reference
-from .flow import JUMPS, split_label
+from .flow import JUMPS, ENDS, split_label
 from .native_logic import decode, STORES, OPEN
 from .bits import word_bit, is_string, bit_string
 from .edges import OPS as EDGE_OPS, BASE as EDGE_BASE, cpp as edge_cpp
@@ -169,6 +169,15 @@ def to_cpp(program):
         saved = []
         groups = []
         for op, arg in decode(rung):
+            if op in ENDS:
+                lines.append(
+                    "  return;"
+                    if op == "END"
+                    else "  if ("
+                    + ("!" if op == "ENDCN" else "")
+                    + "accumulator) { return; }"
+                )
+                continue
             if op in ("R", "S", "CU", "CD") and arg.startswith("%C") and "." not in arg:
                 method = {v: k for k, v in COUNTER_METHODS.items()}[op]
                 lines.append(f"  counter_{counter_index(arg)}.{method}(accumulator);")
