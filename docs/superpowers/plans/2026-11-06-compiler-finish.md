@@ -1,5 +1,12 @@
 # Compiler Completion Implementation Plan
 
+> **User execution override, 2026-11-06:** use the
+> [parallel delivery policy](../../PARALLEL-DELIVERY.md): twenty isolated
+> implementation lanes, three dedicated test agents, and a final batched
+> official editor/simulator campaign. It supersedes the serial ownership and
+> per-family test-first/native-gate sequence below. Existing results and the
+> parity contract remain unchanged.
+
 > **For agentic workers:** Use `superpowers:executing-plans` for the compiler lane; independent agents review bounded patches. Execute the unchecked task with the lowest number first.
 
 **Goal:** Finish the TM200CE40T toolchain against the existing parity contract, with code optimization as the first release gate and explicit local/editor/hardware completion states.
@@ -99,6 +106,15 @@ This is a concrete capacity defect under this task's existing exception, not an 
 - [ ] For each family: write independent positive/boundary/collision/error tests first; implement the full forward/reverse path; run focused tests; review; freeze and run the full local suite; validate an exact exported candidate in the editor; publish.
 
 **Done when:** Task 3 has no missing software-language/block phase. No stub may report success for an unimplemented native behavior.
+
+### Register integration checkpoint
+
+- [x] Native FIFO/LIFO configuration, four shared identities and sixteen internal i16 words; I/O words read/write and E/F read-only, with independent literal SDK/state tests.
+- [x] Add typed Program JSON and operands, C++ methods, raw ordered R/I/O block parsing, pre-call pin snapshots, VM and actual reverse reconstruction.
+- [x] Integrate canonical native I/M-contact graphs and typed Register XML with known omitted FIFO defaults; retain broader profile gates.
+- [x] Exercise signed words, full/empty, held/refused/simultaneous requests, FIFO reset collisions, self-status, repeated/skipped local calls, all four IDs and atomic refusals across all forward/reverse routes.
+- [x] Independent integration and capacity-fix reviews passed; examples and size budgets passed; frozen full local suite799PASS220.444s with330pinned inputs unchanged.
+- [ ] Open/save/fresh-reopen the exact generated dual FIFO/LIFO program, execute native ordered-store/retrieve and button controls, preserve readback and publish the accepted increment.
 
 ## Task 5: Finish tasks, communication and hardware configuration
 

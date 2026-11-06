@@ -172,6 +172,45 @@ public:
         reset(reset_value);set(set_value);count_up(up_value);count_down(down_value);return d;
     }
 };
+namespace detail {inline bool register_used[4]={};}
+class RegisterState {
+    i16 input_value=0,output_value=0,values[16]={};
+    int head=0,count=0;
+    bool stack,previous_store=false,previous_retrieve=false;
+protected:
+    RegisterState(int index,bool lifo):stack(lifo){
+        if(index<0||index>=4||detail::register_used[index])__builtin_trap();
+        detail::register_used[index]=true;
+    }
+public:
+    RegisterState(const RegisterState&)=delete;
+    RegisterState& operator=(const RegisterState&)=delete;
+    i16 input()const{return input_value;}
+    void set_input(i16 value){input_value=value;}
+    i16 output()const{return output_value;}
+    void set_output(i16 value){output_value=value;}
+    bool empty()const{return count==0;}
+    bool full()const{return count==16;}
+    // Local per-call policy: m200/registers.py and REGISTER-*-OBSERVATIONS.md.
+    // Reset clears request history. Lifecycle/repeated-call parity is pending.
+    void update(bool reset,bool store,bool retrieve){
+        if(reset){
+            input_value=output_value=0;head=count=0;
+            for(int i=0;i<16;++i)values[i]=0;
+            previous_store=previous_retrieve=false;return;
+        }
+        bool store_edge=store&&!previous_store,retrieve_edge=retrieve&&!previous_retrieve;
+        previous_store=store;previous_retrieve=retrieve;
+        if(store_edge==retrieve_edge)return;
+        if(store_edge&&count<16){values[(head+count)%16]=input_value;++count;}
+        else if(retrieve_edge&&count){
+            if(stack){--count;output_value=values[(head+count)%16];}
+            else{output_value=values[head];head=(head+1)%16;--count;}
+        }
+    }
+};
+struct Fifo:RegisterState{explicit Fifo(int index):RegisterState(index,false){}};
+struct Lifo:RegisterState{explicit Lifo(int index):RegisterState(index,true){}};
 struct FallingEdge { bool old=false; bool update(bool v){bool q=!v&&old;old=v;return q;} };
 #else
 bool input(int);
@@ -195,6 +234,19 @@ void clear_arithmetic_error();
 bool clock_ms(unsigned);
 struct Ton { explicit Ton(unsigned); Ton(int,int,int); Ton(int,int,int,bool,bool); bool update(bool); i16 preset()const; i16 value(); bool done(); void set_preset(i16); };
 struct Counter { Counter(int,int); i16 preset()const; i16 value()const; bool empty()const; bool done()const; bool full()const; void set_preset(i16); void reset(bool); void set(bool); void count_up(bool); void count_down(bool); bool update(bool,bool,bool,bool); };
+class RegisterState {
+protected:
+    RegisterState(int,bool);
+public:
+    RegisterState(const RegisterState&)=delete;
+    RegisterState& operator=(const RegisterState&)=delete;
+    i16 input()const;void set_input(i16);
+    i16 output()const;void set_output(i16);
+    bool empty()const;bool full()const;
+    void update(bool,bool,bool);
+};
+struct Fifo:RegisterState{explicit Fifo(int);};
+struct Lifo:RegisterState{explicit Lifo(int);};
 struct Tof { explicit Tof(unsigned); Tof(int,int,int); Tof(int,int,int,bool,bool); bool update(bool); i16 preset()const; i16 value(); bool done(); void set_preset(i16); };
 struct Pulse { explicit Pulse(unsigned); Pulse(int,int,int); Pulse(int,int,int,bool,bool); bool update(bool); i16 preset()const; i16 value(); bool done(); void set_preset(i16); };
 struct Clock { explicit Clock(unsigned); bool update(bool); };

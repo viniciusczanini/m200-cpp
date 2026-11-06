@@ -33,6 +33,13 @@ def needed(program):
                 continue
             return True
         if rung[0].startswith("BLK "):
+            if re.fullmatch(r"BLK %R[0-9]+", rung[0]):
+                if len(rung) == 8 and all(
+                    re.fullmatch(r"LD %(?:I0\.[0-9]+|M[0-9]+)", rung[i])
+                    for i in (1, 3, 5)
+                ):
+                    continue
+                return True
             if rung[0].startswith("BLK %TM") and any(
                 len(parts) == 2
                 and parts[0] in ("LD", "LDN", "AND", "ANDN")
@@ -132,6 +139,7 @@ def normalize(program):
 
     lower.program.timers = copy.deepcopy(program.timers)
     lower.program.counters = copy.deepcopy(program.counters)
+    lower.program.registers = copy.deepcopy(program.registers)
     lower.program.communications = copy.deepcopy(program.communications)
     lower.program.metadata = copy.deepcopy(program.metadata)
     lower.program.subroutines = copy.deepcopy(program.subroutines)
@@ -193,7 +201,22 @@ def normalize(program):
         else:
             saved = []
             groups = []
+            register_pins = []
             for op, arg in decoded_rung(rung):
+                if op in ("REG_R", "REG_I", "REG_O"):
+                    register_pins.append(lower.copy(acc, "register_pin"))
+                    if op == "REG_O":
+                        lower.rung(
+                            "BLK " + arg,
+                            "LD " + register_pins[0],
+                            "R",
+                            "LD " + register_pins[1],
+                            "I",
+                            "LD " + register_pins[2],
+                            "O",
+                            "END_BLK",
+                        )
+                    continue
                 if op == "CALL_SR":
                     # The call ends its source rung. Its predicate is captured
                     # before the leaf can mutate shared words/bits or outputs.

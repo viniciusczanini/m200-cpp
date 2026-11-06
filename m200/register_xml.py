@@ -1,9 +1,8 @@
-"""Isolated native Register configuration codec, not wired into the compiler.
+"""Typed native Register configuration used by whole-project import/export.
 
-This foundation does not enable whole-project Register import/export, C++/IR/SDK
-support, graphics or execution. It validates only the owned Registers collection,
-not allocations or hardware. Actual CE40T saves establish an omitted FIFO default
-and an explicit Lifo row; the mode evidence is in REGISTER-IMPLEMENTATION-PLAN.md.
+This codec validates the owned Registers collection; the project/IL layers check
+allocations, hardware and execution. Actual CE40T saves establish an omitted FIFO
+default and an explicit Lifo row; see REGISTER-IMPLEMENTATION-PLAN.md for evidence.
 """
 
 from collections.abc import Mapping

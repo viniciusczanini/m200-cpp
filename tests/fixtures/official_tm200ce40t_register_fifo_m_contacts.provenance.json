@@ -1,0 +1,167 @@
+{
+  "source": "User-authored local CE40T diagnostic; exact actual official save and fresh-reopened saved-byte clone",
+  "editor": "EcoStruxure Machine Expert Basic1.4 build484",
+  "target": "TM200CE40T",
+  "file": "official_tm200ce40t_register_fifo_m_contacts.smbp",
+  "sha256": "e05bf55077084557c9cc11a5237cdb677611c9cedff3cf22f921f19716932639",
+  "bytes": 117097,
+  "copied_date": "2026-11-06",
+  "original_modified": false,
+  "source_saved_file": "output/editor-validation/native-m-contact-bindings-2026-11-06/observed/fifo/register_fifo_m_contacts_editor_saved.smbp",
+  "mode": "Fifo(default omitted)",
+  "management_level": "FunctLevelMan21_0",
+  "raw_rungs": 9,
+  "normalized_instruction_lines": 24,
+  "graph_entity_counts": [
+    10,
+    10,
+    10,
+    11,
+    11,
+    11,
+    4,
+    11,
+    11
+  ],
+  "bare_Register_IL": [
+    "BLK %R0",
+    "LD %M20",
+    "R",
+    "LD %M21",
+    "I",
+    "LD %M22",
+    "O",
+    "END_BLK"
+  ],
+  "bare_graph": [
+    {
+      "ElementType": "NormalContact",
+      "Descriptor": "%M20",
+      "Comment": "",
+      "Row": "0",
+      "Column": "0",
+      "ChosenConnection": "Left, Right"
+    },
+    {
+      "ElementType": "NormalContact",
+      "Descriptor": "%M21",
+      "Comment": "",
+      "Row": "1",
+      "Column": "0",
+      "ChosenConnection": "Left, Right"
+    },
+    {
+      "ElementType": "NormalContact",
+      "Descriptor": "%M22",
+      "Comment": "",
+      "Row": "2",
+      "Column": "0",
+      "ChosenConnection": "Left, Right"
+    },
+    {
+      "ElementType": "Register",
+      "Descriptor": "%R0",
+      "Comment": "",
+      "Row": "0",
+      "Column": "1",
+      "ChosenConnection": "Left"
+    }
+  ],
+  "root_GUI_observation": {
+    "source": "output/editor-validation/native-m-contact-bindings-2026-11-06/register_fifo_m20_m21_m22_contacts_il_only.smbp",
+    "saved": "output/editor-validation/native-m-contact-bindings-2026-11-06/observed/fifo/register_fifo_m_contacts_editor_saved.smbp",
+    "bytes": 117097,
+    "sha256": "e05bf55077084557c9cc11a5237cdb677611c9cedff3cf22f921f19716932639",
+    "all_lexical_IL_equal": true,
+    "all9_rungs_Ladder_selected": true,
+    "block_graph_entities": [
+      {
+        "ElementType": "NormalContact",
+        "Descriptor": "%M20",
+        "Comment": "",
+        "Row": "0",
+        "Column": "0",
+        "ChosenConnection": "Left, Right"
+      },
+      {
+        "ElementType": "NormalContact",
+        "Descriptor": "%M21",
+        "Comment": "",
+        "Row": "1",
+        "Column": "0",
+        "ChosenConnection": "Left, Right"
+      },
+      {
+        "ElementType": "NormalContact",
+        "Descriptor": "%M22",
+        "Comment": "",
+        "Row": "2",
+        "Column": "0",
+        "ChosenConnection": "Left, Right"
+      },
+      {
+        "ElementType": "Register",
+        "Descriptor": "%R0",
+        "Comment": "",
+        "Row": "0",
+        "Column": "1",
+        "ChosenConnection": "Left"
+      }
+    ],
+    "fresh_reopen_pending": false,
+    "not_compiler_output": true,
+    "runtime_not_tested": true,
+    "fresh_reopen_Programming_status": "No error / Not Connected",
+    "fresh_reopen_after": "subroutine_sr0_m20_editor_saved",
+    "fresh_reopen_root_personally_viewed": true,
+    "fresh_reopen_capture": {
+      "path": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793976893450357000-2146.png",
+      "bytes": 400281,
+      "sha256": "da9ae36480c1cfd2ed487551d4f0db81ea7e9fbcf6c3525f4db6003b556a17db"
+    }
+  },
+  "source_observation_file": "docs/validation/NATIVE-M-CONTACT-BINDING-OBSERVATIONS.json",
+  "source_observation_sha256": "978cd3d3c59d5db3ed9ff8fde1f981b7b0b365eb9d904b93b31ff20de9bcdc68",
+  "source_save_record": {
+    "path": "output/editor-validation/native-m-contact-bindings-2026-11-06/observed/fifo/save-record.json",
+    "bytes": 1653,
+    "sha256": "3913f77932549d5e051c9b0e6633a0e8d2003c002bcc4259feda7b824743833b"
+  },
+  "captures": [
+    {
+      "case": "fifo",
+      "stage": "actual saved native full binding graph",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793976725389805000-2146.png",
+      "path": "docs/validation/editor-evidence/native-m-contact/fifo-m-contacts-saved-graph.png",
+      "bytes": 387030,
+      "sha256": "52d32ccc3acef1245a5bdc6c91aecc9969b5cb4c69a43d0a07e5f390d52ac199",
+      "root_personally_viewed": true,
+      "independently_visually_reviewed": true,
+      "visible_status": "No error / Not Connected",
+      "transformation": "None; exact filesystem byte copy"
+    },
+    {
+      "case": "fifo",
+      "stage": "fresh saved-clone Programming reopen after another project",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793976893450357000-2146.png",
+      "path": "docs/validation/editor-evidence/native-m-contact/fifo-m-contacts-reopen.png",
+      "bytes": 400281,
+      "sha256": "da9ae36480c1cfd2ed487551d4f0db81ea7e9fbcf6c3525f4db6003b556a17db",
+      "root_personally_viewed": true,
+      "independently_visually_reviewed": true,
+      "visible_status": "No error / Not Connected",
+      "transformation": "None; exact filesystem byte copy"
+    }
+  ],
+  "unchanged_parent_fixture": "official_tm200ce40t_register_fifo_three_ld.smbp",
+  "protected_configuration": {
+    "HardwareConfiguration": {
+      "bytes": 24116,
+      "sha256": "e4b356c22950df5da97a1c380e150891394bf5b6dc9f7f4b110198e312a4e629"
+    },
+    "all_thirteen_allocation_subtrees_raw_byte_equal_to_parent": true,
+    "all_non_Pous_software_children_exact": true
+  },
+  "comments": "Original diagnostic names and pending-proof comments remain byte-exact. The copied historical root evidence establishes static save/reopen only; this copy adds no GUI observation.",
+  "scope": "Canonical plain-LD normal M-contact Register graph evidence only. The authentic M observation is R0 FIFO M20/M21/M22 at FunctLevelMan21_0; parameterized canonical IDs, bounds and mixed I/M contacts are codec coverage, not new official acceptance. No compiler-generated product, runtime behavior or physical PLC qualification is inferred."
+}

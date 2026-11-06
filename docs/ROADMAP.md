@@ -8,13 +8,25 @@ expression, coherent native Ladder/SMBP output and equivalent reverse C++.
 See the [parity contract](PARITY.md), [execution plan](superpowers/plans/2026-11-06-compiler-finish.md)
 and [250-record capability matrix](capabilities/COMPLETION-MATRIX.json).
 
+**Execution update:** remaining work now runs in twenty isolated implementation
+lanes with three dedicated test agents. Implementation lanes do not execute
+tests; local validation follows integration, and official editor/simulator
+validation runs as one final campaign. See [parallel delivery](PARALLEL-DELIVERY.md).
+This supersedes the per-increment native gate ordering below.
+The user then narrowed active implementation to the Natal priority release: G01,
+G02, G06, G07, G08, G09 (RTC explicitly retained) and G11. The other thirteen
+lanes are stopped with their work preserved for a future version. Full parity
+remains incomplete; this release priority does not erase the remaining inventory.
+
 ## Current checkpoint
 
-- The published checkpoint is `0144475`: native literal contacts, compiler
-  optimizations and the scoped capability matrix, with 741 passing tests.
-- The next local candidate has **799 passing tests**, zero skips, in 220.444 s.
-  Its 330 pinned inputs stayed unchanged during the full run. It is not yet
-  published; the current Register release still needs its final native gate.
+- The preceding published checkpoint is `0144475`: native literal contacts,
+  compiler optimizations and the scoped capability matrix, with741 passing tests.
+- The integrated Register checkpoint has **799 passing tests**, zero skips, in
+  220.444 s, with330 pinned inputs unchanged. Its exact dual output was saved and
+  freshly reopened with No error; separate repeated-call FIFO runtime is recorded.
+  [The report](validation/REGISTER-INTEGRATION-RESULTS.md) keeps the unfinished dual
+  runtime and broader native contexts explicit for the final batch.
 - The unchanged movement example fell from 122 rungs/261 IL to **46/103**.
   Ten generic programs enforce code-size and memory budgets.
 - The new dual FIFO/LIFO example fell from 34/80 to **22/56**, using one M bit
@@ -42,7 +54,7 @@ does not complete every mode, lifecycle, configuration or transaction case.
 
 | Order | Milestone | Current state | Exit criterion |
 |---|---|---|---|
-| 1 | Finish the current FIFO/LIFO increment | C++/SDK/VM/JSON/operands/graphics/reverse are integrated; local tests and independent review passed. Exact dual output opened, saved and freshly reopened with No error. A repeated-call FIFO product ran and showed full/empty transitions. | Finish the dual FIFO/LIFO runtime controls, preserve exact evidence, update coverage and publish the tested increment. |
+| 1 | Finish the current FIFO/LIFO increment | C++/SDK/VM/JSON/operands/graphics/reverse are integrated; local tests and independent review passed. Exact dual output opened, saved and freshly reopened with No error. A repeated-call FIFO product ran and showed full/empty transitions. | Publish the locally tested implementation and preserved observations; run the remaining dual runtime controls in the final batch. |
 | 2 | Remaining native block families | SBR research and native diagnostics are prepared; SBR is not implemented. SC, drum, RTC/schedules and PID remain. | Implement each family's configuration, API, state, native code/graphics and reverse path, then pass local and official gates. |
 | 3 | Complete language and data semantics | The core works; gaps remain in numeric/system flags, error recovery, ASCII/strings, native table instructions and operand domains. | Cover the remaining native algorithms, limits and error handling with independent references and forward/reverse tests. |
 | 4 | Complete program organization | Restricted stateless SR support exists. Wider/stateful SR layouts, user functions/blocks and Grafcet remain. | Preserve shared state, call/return order and native organization across C++, native projects and reverse conversion. |

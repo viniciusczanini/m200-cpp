@@ -5,6 +5,7 @@ from collections import Counter
 from .model import fail
 from .edges import SERIES
 from .numeric import is_operation
+from .indexed import has_indexed
 
 WORD_ASSIGN = re.compile(r"\[\s*(%(?:MW|MD|MF)[0-9]+|%TM[0-9]+\.P)\s*:=\s*(.*?)\s*\]")
 PURE_BIT = re.compile(r"%(?:M[0-9]+|I0\.[0-9]+|Q0\.[0-9]+|S(?:13|20)|MW[0-9]+:X[0-9]+)")
@@ -18,6 +19,15 @@ def fuse(program, registers, members, groups, reference, live_out):
         return Counter(owner(ref) for line in rung for ref in reference.findall(line))
 
     counts = refs([line for rung in program.rungs for line in rung])
+    direct_register_snapshots = not (
+        program.subroutines
+        or has_indexed(program)
+        or any(
+            re.search(r"%MW[0-9]+:X[0-9]+", line)
+            for rung in program.rungs
+            for line in rung
+        )
+    )
 
     def temporary(ref, bank):
         reg = registers.get(ref)
@@ -46,6 +56,27 @@ def fuse(program, registers, members, groups, reference, live_out):
     def combine(a, b, end):
         if not a or not b or a[0].startswith("%L") or b[0].startswith("%L"):
             return None
+        if direct_register_snapshots and len(a) == len(b) == 2 and a[0] == "LD 1":
+            definition = WORD_ASSIGN.fullmatch(a[1])
+            if definition:
+                temp, source = definition.groups()
+                if (
+                    temporary(temp, "word")
+                    and registers[temp].kind == "i16"
+                    and counts[temp] == 2
+                    and re.fullmatch(r"%R[0-3]\.(?:I|O)", source)
+                    and re.fullmatch(
+                        r"LD \[\s*"
+                        + re.escape(temp)
+                        + r"\s*(?:>=|<=|<>|=|>|<)\s*-?[0-9]+\s*\]",
+                        b[0],
+                    )
+                    and b[1].startswith("ST ")
+                ):
+                    # A direct i16 Register read has no flag/index effects. Move
+                    # its single evaluation into the immediately following
+                    # comparison, with no mutation/label/guard between them.
+                    return [b[0].replace(temp, source), b[1]]
         # Forward the one read into the next rung's initial load. It is still
         # evaluated exactly once, before that rung's other effects.
         if len(a) == 2:

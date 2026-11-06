@@ -52,6 +52,13 @@ from .counter_xml import (
     graphics as counter_graphics,
     check_graph as check_counter_graph,
 )
+from .registers import RegisterConfig
+from .register_xml import read_registers, write_registers, RegisterMode
+from .register_graph import (
+    graphics as register_graphics,
+    check_graph as check_register_graph,
+)
+from .register_il import referenced_ids as register_ids
 
 TARGET = "TM200CE40T"
 LEFT_ONLY = {
@@ -281,6 +288,9 @@ def graphics(rung, timer_column=3, communication_contact_column=0):
 
 def check_graph(rung_node, lines, program=None):
     _, lines = split_label(lines)
+    if re.fullmatch(r"BLK %R[0-9]+", lines[0]):
+        check_register_graph(rung_node, lines)
+        return
     if program is not None and program.subroutines:
         _rung_surface(rung_node)
         if call_target(lines) is not None:
@@ -354,16 +364,15 @@ def check_graph(rung_node, lines, program=None):
         if typ in ("Comparison", "Operation"):
             arg = numeric_graph(typ, arg)
         expected_connection = "Left" if typ in LEFT_ONLY else "Left, Right"
-        observed_literal_operation = (
+        observed_operation_connection = (
             typ == "Operation"
-            and len(lines) == 2
-            and lines[0] == "LD 1"
             and column == 9
+            and is_operation(lines[-1])
             and e.findtext("ChosenConnection", "") == "Left, Right"
         )
         if (
             e.findtext("ChosenConnection", "") != expected_connection
-            and not observed_literal_operation
+            and not observed_operation_connection
         ):
             fail("unsupported Ladder connections")
         actual.append((typ, arg, column))
@@ -679,6 +688,11 @@ def load_project(path):
         p.metadata["rung_origins"] = origins
     if full_groups:
         p.metadata["native_full_pin_groups"] = full_groups
+    p.registers = {
+        i: RegisterConfig(mode.value)
+        for i, mode in read_registers(sw, register_ids(p.rungs)).items()
+    }
+    _register_profile(p, root)
     validate(p)
     # Validate the complete IL before examining its graphics. A status may be
     # read before its configured FB is called later in the same scan.
@@ -698,6 +712,19 @@ def load_project(path):
         }
     )
     return p
+
+
+def _register_profile(program, root):
+    if program.registers and (
+        root.findtext("ManagementLevel") != "FunctLevelMan21_0"
+        or root.findtext(
+            "HardwareConfiguration/Plc/Cpu/TechnicalConfiguration/LfRegistersMax"
+        )
+        != "4"
+    ):
+        fail(
+            "unverified native Register profile; require observed Man21 and four-register CE40T capacity"
+        )
 
 
 def validate_timer_profile(program, level_token=None):
@@ -720,6 +747,7 @@ def validate_allocations(sw, program, level_token=None):
         ),
         "MemoryBitsMemoryAllocation": (1024, max(bits, default=-1) + 1),
         "TimersMemoryAllocation": (255, max(program.timers, default=-1) + 1),
+        "RegistersMemoryAllocation": (4, max(program.registers, default=-1) + 1),
     }
     for tag, (capacity, required) in requirements.items():
         node = sw.find(tag)
@@ -837,6 +865,7 @@ def write_project(program, template, destination):
 
     root = parse(template)
     sw = configuration(root)
+    _register_profile(program, root)
     if read_subroutines(sw):
         fail("prototype SR SMBP export is gated for active template Subroutines")
     _sr_export_profile(program, root, sw)
@@ -846,12 +875,16 @@ def write_project(program, template, destination):
     check_template_channels(root, program.communications)
     write_blocks(program, sw)
     write_counters(program, sw)
+    write_registers(
+        {i: RegisterMode(cfg.mode) for i, cfg in program.registers.items()}, sw
+    )
     for name in (
         "Pous",
         "Timers",
         "MemoryBits",
         "MemoryBitsMemoryAllocation",
         "TimersMemoryAllocation",
+        "RegistersMemoryAllocation",
         "MemoryWords",
         "MemoryDoubleWords",
         "MemoryFloats",
@@ -877,6 +910,8 @@ def write_project(program, template, destination):
             if program.subroutines and call_target(body) is not None
             else counter_graphics(body)
             if body[0].startswith("BLK %C")
+            else register_graphics(body)
+            if re.fullmatch(r"BLK %R[0-9]+", body[0])
             else [
                 (t, a, 0, c, "Left" if t in LEFT_ONLY else "Left, Right")
                 for t, a, c in graphics(lines)
@@ -974,6 +1009,8 @@ def write_project(program, template, destination):
     element(allocation, "Allocation", "Automatic")
     allocation = element(sw, "TimersMemoryAllocation")
     element(allocation, "Allocation", "Automatic")
+    allocation = element(sw, "RegistersMemoryAllocation")
+    element(allocation, "Allocation", "Automatic")
     required = (
         max(
             set().union(
@@ -1012,6 +1049,7 @@ def write_project(program, template, destination):
             or loaded.communications != program.communications
             or loaded.timers != program.timers
             or loaded.counters != program.counters
+            or loaded.registers != program.registers
             or _subroutine_semantics(loaded) != _subroutine_semantics(program)
         ):
             fail("internal XML round trip changed program/configuration")

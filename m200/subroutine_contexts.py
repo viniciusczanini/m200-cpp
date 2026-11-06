@@ -65,7 +65,12 @@ def validate_contexts(program, validate_flat):
         return
     if len(program.subroutines) > 64:
         fail("at most64native subroutine identities")
-    if program.timers or program.counters or program.communications:
+    if (
+        program.timers
+        or program.counters
+        or program.communications
+        or program.registers
+    ):
         fail("prototype SR stateful-resource closures are not implemented")
     names, sections = set(), set()
     if not isinstance(program.rungs, list):

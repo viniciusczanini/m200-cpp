@@ -4,6 +4,13 @@ import re
 
 from .model import address, fail, timer_config, SYSTEM_RESETS
 from .arithmetic import ArithmeticState
+from .registers import (
+    RegisterConfig,
+    RegisterState,
+    reference as register_reference,
+    index as register_index,
+)
+from .register_il import referenced_ids as register_ids, PIN_OPS as REGISTER_PINS
 from .timers import (
     TimerState,
     REFERENCE as TIMER_REFERENCE,
@@ -115,6 +122,14 @@ def _validate_flat(program):
     if sum(map(len, program.rungs)) > 10000:
         fail("instruction budget exceeded")
     timer_uses = set()
+    if not isinstance(program.registers, dict):
+        fail("invalid register configuration map")
+    for i, cfg in program.registers.items():
+        if type(i) is not int or not 0 <= i < 4 or not isinstance(cfg, RegisterConfig):
+            fail("invalid register configuration")
+        RegisterConfig(cfg.mode)
+    if register_ids(program.rungs) - program.registers.keys():
+        fail("undefined Register block/property")
     if not isinstance(program.counters, dict):
         fail("invalid counter configuration map")
     for i, c in program.counters.items():
@@ -175,6 +190,10 @@ def _validate_flat(program):
                 bit_operand(abort[1])
                 continue
         for op, arg in decode(rung):
+            if op in REGISTER_PINS:
+                if register_index(arg) not in program.registers:
+                    fail("undefined Register update")
+                continue
             if op in ENDS:
                 continue
             if expression_edge(op) is not None:
@@ -332,9 +351,13 @@ class Machine:
         }
         self.timers = {i: TimerState(t) for i, t in program.timers.items()}
         self.counters = {i: CounterState(c) for i, c in program.counters.items()}
+        self.registers = {i: RegisterState(c) for i, c in program.registers.items()}
         self.arithmetic = ArithmeticState()
 
     def read(self, operand, inputs):
+        register = register_reference(operand)
+        if register:
+            return self.registers[register[0]].read(register[1])
         counter = counter_reference(operand)
         if counter:
             return self.counters[counter[0]].read(counter[1])
@@ -397,6 +420,9 @@ class Machine:
         (self.memory if kind == "M" else self.outputs)[index] = bool(value)
 
     def read_number(self, value):
+        register = register_reference(value.code)
+        if register:
+            return self.registers[register[0]].read(register[1])
         counter = counter_reference(value.code)
         if counter:
             return self.counters[counter[0]].read(counter[1])
@@ -423,6 +449,10 @@ class Machine:
         )
 
     def write_number(self, target, value):
+        register = register_reference(target, True)
+        if register:
+            self.registers[register[0]].write(register[1], value)
+            return
         counter = counter_reference(target, True)
         if counter:
             self.counters[counter[0]].set_preset(value)
@@ -506,8 +536,14 @@ class Machine:
             acc = False
             saved = []
             groups = []
+            register_pins = []
             for op, arg in current_decoded:
                 consume(1)  # an early END must not consume its skipped suffix
+                if op in REGISTER_PINS:
+                    register_pins.append(bool(acc))
+                    if op == "REG_O":
+                        self.registers[register_index(arg)].update(*register_pins)
+                    continue
                 if op in ENDS:
                     if op == "END" or (acc if op == "ENDC" else not acc):
                         # Finish this task's scan, including the bookkeeping below.

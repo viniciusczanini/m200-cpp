@@ -20,7 +20,7 @@ from .emission_cleanup import cleanup as cleanup_emission
 
 REFERENCE = re.compile(r"%M(?:W|D|F)?[0-9]+")
 ASSIGNMENT = re.compile(
-    r"(?:OPER\s+)?\[\s*(%M(?:W|D|F)[0-9]+|%(?:TM|C)[0-9]+\.P|%(?:M[0-9]+|Q0\.[0-9]+):[0-9]+)(?:\[%MW[0-9]+\])?\s*:="
+    r"(?:OPER\s+)?\[\s*(%M(?:W|D|F)[0-9]+|%R[0-9]+\.(?:I|O)|%(?:TM|C)[0-9]+\.P|%(?:M[0-9]+|Q0\.[0-9]+):[0-9]+)(?:\[%MW[0-9]+\])?\s*:="
 )
 UNARY = re.compile(r"(?:OPER\s+)?\[\s*(?:INC|DEC)\s+(%M(?:W|D)[0-9]+)\s*\]")
 
@@ -82,6 +82,8 @@ def effects(rung, registers, constants, aliases=None):
             "END_BLK",
             "EXECUTE",
             "ABORT",
+            "I",
+            "O",
         ):
             fail("unmodelled instruction effects in memory allocation: " + line)
         if op in ("ST", "S", "R"):
@@ -358,7 +360,13 @@ class Storage:
         }
 
         cleanup_emission(
-            program, self.registers, self.members, self.groups, names, constants, REFERENCE
+            program,
+            self.registers,
+            self.members,
+            self.groups,
+            names,
+            constants,
+            REFERENCE,
         )
 
         def rewrite(text):

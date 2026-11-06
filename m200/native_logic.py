@@ -57,7 +57,10 @@ def timer_body(rung):
 def decode(rung):
     if any(not line.strip() for line in rung):
         fail("empty native instruction")
-    body = counter_body(rung)
+    from .register_il import body as register_body, PIN_OPS
+
+    register = register_body(rung)
+    body = counter_body(rung) if register is None else register
     body = timer_body(rung) if body is None else body
     rung = body if body is not None else rung
     result = []
@@ -110,7 +113,9 @@ def decode(rung):
             parentheses += 1
             if parentheses > 32:
                 fail("parenthesis depth exceeds 32")
-        elif op in (*STORES, *JUMPS, "IN", "NUM", *COUNTER_ACTIONS):
+        elif op in (*STORES, *JUMPS, "IN", "NUM", *COUNTER_ACTIONS, *PIN_OPS):
+            if op in PIN_OPS and register is None:
+                fail("internal Register action outside a native Register block")
             if parentheses:
                 fail("action instruction inside parentheses")
             if op in JUMPS and (stack or i != len(rung) - 1):
@@ -123,7 +128,10 @@ def decode(rung):
                 fail("IN accumulator effects before subsequent actions are unverified")
         elif op not in LOGIC:
             fail("unsupported IL instruction/order: " + line)
-        if op in (*LOGIC, *STORES, *JUMPS, "IN", *COUNTER_ACTIONS) and not arg:
+        if (
+            op in (*LOGIC, *STORES, *JUMPS, "IN", *COUNTER_ACTIONS, *PIN_OPS)
+            and not arg
+        ):
             fail("missing operand for " + op)
         result.append((op, arg))
     if stack or parentheses:
@@ -135,6 +143,7 @@ def decode(rung):
         "IN",
         "NUM",
         *COUNTER_ACTIONS,
+        *PIN_OPS,
     ):
         fail("rung has no terminal action")
     return result

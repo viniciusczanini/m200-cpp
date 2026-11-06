@@ -247,11 +247,11 @@ class CompletionMatrixTests(unittest.TestCase):
             ],
         )
         self.assertEqual(
-            profiles["register_foundation"]["phases"]["cpp_sdk"], "not_implemented"
+            profiles["register_foundation"]["phases"]["cpp_sdk"], "covered_subset"
         )
         self.assertEqual(
             profiles["register_foundation"]["phases"]["smbp_graph"],
-            "standalone_foundation_only",
+            "covered_subset",
         )
         self.assertEqual(
             profiles["communication"]["phases"]["simulator"],

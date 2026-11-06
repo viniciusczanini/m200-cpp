@@ -229,7 +229,7 @@
     "G08": {
       "title": "Counter, Register, drum/step/shift native blocks",
       "release_task": 4,
-      "next_test": "Integrate Register FIFO/LIFO, then remaining drum/step/shift blocks, with exact state/edge/reset/call-history oracles.",
+      "next_test": "Qualify exact integrated FIFO/LIFO products and broader native call/lifecycle behavior; then integrate the next native DR/SBR/SC family with the same full pipeline gates.",
       "ids": [
         "block.blk",
         "block.out_blk",
@@ -1359,14 +1359,24 @@
       "whole_record_complete": false
     },
     "register_foundation": {
-      "scope": "Standalone strict Register config/graph codecs only: four IDs, explicit Lifo/Fifo/default Fifo; canonical three plain-LD input graph. Actual FIFO/LIFO projects have separate handbuilt editor/simulator research evidence; no C++/Program/VM/reverse whole-project integration.",
-      "remaining": "Integrate typed state/IR/SDK/VM/reverse and exact graphs; resolve evaluation/reset/edge/call-history/lifecycle scope with bounded native evidence. Preserve whole-project active-R refusal until coherent support exists.",
+      "scope": "Integrated FIFO/LIFO C++/SDK/Program/VM/JSON/native operands/reverse/project support; four shared IDs,16 internal i16 words each, I/O data words read/write and E/F read-only. Canonical R/I/O blocks with normal I0/M contacts at observed Man21; more complex pure inputs lower to captured M pins. Bounded per-call local policy; exact dual generated output saved/freshly reopened No error, plus bounded separate repeated-call FIFO runtime. Broader native lifecycle/call profiles and dual runtime remain pending.",
+      "remaining": "Execute exact generated dual FIFO/LIFO runtime controls in the final batch, then close native first-call/repeated/skipped/lifecycle and wider graph/profile cases. Preserve unresolved contexts as explicit scope, not PLC limitations.",
       "code": [
+        "m200/registers.py",
+        "m200/register_il.py",
+        "sdk/plc.hpp",
+        "m200/model.py",
+        "m200/frontend.py",
+        "m200/il.py",
+        "m200/reverse.py",
+        "m200/project.py",
         "m200/register_xml.py",
-        "m200/register_graph.py",
-        "m200/config.py"
+        "m200/register_graph.py"
       ],
       "tests": [
+        "tests/test_register_runtime.py",
+        "tests/test_register_toolchain.py",
+        "tests/test_register_ir.py",
         "tests/test_register_xml.py",
         "tests/test_register_graph.py"
       ],
@@ -1374,39 +1384,70 @@
         "docs/validation/REGISTER-CONFIG-FOUNDATION-RESULTS.json",
         "docs/validation/REGISTER-GRAPH-FOUNDATION-RESULTS.json",
         "docs/validation/REGISTER-NATIVE-OBSERVATIONS.json",
-        "docs/validation/REGISTER-COLLISION-OBSERVATIONS.json"
+        "docs/validation/REGISTER-COLLISION-OBSERVATIONS.json",
+        "docs/validation/REGISTER-INTEGRATION-RESULTS.json"
       ],
       "phases": {
-        "cpp_sdk": "not_implemented",
-        "il_vm": "not_implemented",
-        "smbp_graph": "standalone_foundation_only",
-        "reverse": "not_implemented",
-        "local_oracle": "codec_only",
-        "editor": "handbuilt_diagnostic_only",
-        "simulator": "handbuilt_diagnostic_only",
+        "cpp_sdk": "covered_subset",
+        "il_vm": "covered_subset",
+        "smbp_graph": "covered_subset",
+        "reverse": "covered_subset",
+        "local_oracle": "covered_subset",
+        "editor": "observed_subset",
+        "simulator": "observed_subset",
         "physical": "pending"
       },
-      "next_test": "Integrate the canonical FIFO/LIFO profile through API/IR/VM/reverse/project first; test capacity16, empty/full, simultaneous requests, reset/consumed edges, self-status and skipped/repeated calls using the existing bounded native observations.",
+      "next_test": "Final batch: run saved22/56 dual FIFO/LIFO ordered-store/retrieve/held/simultaneous/reset states and compare actual saved reverse; qualify wider native repeated/skipped/lifecycle cases separately.",
       "phase_evidence": {
         "smbp_graph": [
+          "tests/test_register_runtime.py",
+          "tests/test_register_toolchain.py",
+          "tests/test_register_ir.py",
           "tests/test_register_xml.py",
           "tests/test_register_graph.py"
         ],
         "local_oracle": [
+          "tests/test_register_runtime.py",
+          "tests/test_register_toolchain.py",
+          "tests/test_register_ir.py",
           "tests/test_register_xml.py",
-          "tests/test_register_graph.py"
+          "tests/test_register_graph.py",
+          "docs/validation/REGISTER-INTEGRATION-RESULTS.json"
         ],
         "editor": [
           "docs/validation/REGISTER-CONFIG-FOUNDATION-RESULTS.json",
           "docs/validation/REGISTER-GRAPH-FOUNDATION-RESULTS.json",
           "docs/validation/REGISTER-NATIVE-OBSERVATIONS.json",
-          "docs/validation/REGISTER-COLLISION-OBSERVATIONS.json"
+          "docs/validation/REGISTER-COLLISION-OBSERVATIONS.json",
+          "docs/validation/REGISTER-INTEGRATION-RESULTS.json"
         ],
         "simulator": [
           "docs/validation/REGISTER-CONFIG-FOUNDATION-RESULTS.json",
           "docs/validation/REGISTER-GRAPH-FOUNDATION-RESULTS.json",
           "docs/validation/REGISTER-NATIVE-OBSERVATIONS.json",
-          "docs/validation/REGISTER-COLLISION-OBSERVATIONS.json"
+          "docs/validation/REGISTER-COLLISION-OBSERVATIONS.json",
+          "docs/validation/REGISTER-INTEGRATION-RESULTS.json"
+        ],
+        "cpp_sdk": [
+          "tests/test_register_runtime.py",
+          "tests/test_register_toolchain.py",
+          "tests/test_register_ir.py",
+          "tests/test_register_xml.py",
+          "tests/test_register_graph.py"
+        ],
+        "il_vm": [
+          "tests/test_register_runtime.py",
+          "tests/test_register_toolchain.py",
+          "tests/test_register_ir.py",
+          "tests/test_register_xml.py",
+          "tests/test_register_graph.py"
+        ],
+        "reverse": [
+          "tests/test_register_runtime.py",
+          "tests/test_register_toolchain.py",
+          "tests/test_register_ir.py",
+          "tests/test_register_xml.py",
+          "tests/test_register_graph.py"
         ]
       },
       "whole_record_complete": false
@@ -4043,6 +4084,11 @@
       "path": "tests/fixtures/official_tm200ce40t_timer_options_behavior.smbp",
       "bytes": 471237,
       "sha256": "5358e5334696e1838e8b34b9efaa84fafb2a7bd97802d2d2ee32ae94a7f52214"
+    },
+    {
+      "path": "docs/validation/REGISTER-INTEGRATION-RESULTS.json",
+      "bytes": 7998,
+      "sha256": "4797bafe791642ff9ed42be04d3b3cf2e752430a1d6f213d49d9b3eb34de0317"
     }
   ]
 }

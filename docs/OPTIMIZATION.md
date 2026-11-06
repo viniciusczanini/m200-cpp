@@ -59,3 +59,9 @@ Block pins and native SR contexts retain their separately qualified memory-conta
 Communication rungs retain their original pins even when another expression forces whole-program normalization. A mixed-path regression keeps unbound raw digit Execute/Abort predicates refused while a normal M-contact control still exports. This prevents constant materialization from widening native Modbus admission.
 
 The frozen release passed **741 tests in 205.817 s, zero skips**, with 286 pinned inputs unchanged. Examples and the ten portable size budgets passed. The exact 46/103 file opened with No error, was saved and freshly reopened, then reached Online/Run with Q0→Q9 movement, STOP and held-START no-rearm. Its actual saved reverse rebuild is 51/113 and passes 2461 sequence positions plus 14 controls locally. All 65536 injected i16 phases terminate within nine shifts under a 185-instruction local VM budget. [Exact artifacts and observations](validation/NATIVE-LITERAL-CONTACT-RESULTS.json) retain the advisory and all scoped limits.
+
+## Native Register capacity
+
+Register calls use stable native I0 pins directly in the isolated MAST profile; mutable expressions remain captured before the update. Adjacent unconditional private i16 snapshots of a Register I/O word can feed a single immediate literal comparison directly. This narrow fusion requires exactly two references and excludes labels, SRs, indexing and word-bit shared views.
+
+Both changes correct real capacity failures: a full 1024-bit user image can still call a Register with native I0 pins, and a full 8000-word image can still compare a Register word without a scratch MW. Captured values that survive a later Register mutation remain stored. The unchanged dual FIFO/LIFO example drops from 34 rungs/80 IL, 3 M/1 MW to **22 rungs/56 IL, 1 M/0 MW**. Its two native sixteen-word queues are separate controller resources.

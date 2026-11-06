@@ -32,6 +32,7 @@ from .counters import (
     GETTERS as COUNTER_GETTERS,
     preset_value as counter_preset,
 )
+from .registers import RegisterConfig, GETTERS as REGISTER_GETTERS
 
 PACK_READS = {
     f"read_{bank}_bits_{kind}": (bank, kind)
@@ -721,6 +722,60 @@ class Frontend:
                     signal = self.lower.binary("&&", self.lower.guard, signal)
                 self.lower.rung("LD " + signal, "SR" + str(self.instances[ref][1]))
                 return None
+            if ref in self.instances and self.instances[ref][0] in ("Fifo", "Lifo"):
+                index = self.instances[ref][1]
+                method = member.get("name")
+                args = children[1:]
+                if method in ("set_input", "set_output", "update"):
+                    if self.active:
+                        self.error(
+                            node,
+                            "stateful Register calls are not allowed inside pure helpers",
+                        )
+                    if method != "update":
+                        field = "I" if method == "set_input" else "O"
+                        value = expect(self.expr(args[0], env), "i16")
+                        self.lower.assign(
+                            Number("i16", f"%R{index}.{field}"), value, self.lower.guard
+                        )
+                    else:
+                        signals = []
+                        for argument in args:
+                            signal = boolean(self.expr(argument, env))
+                            # The isolated MAST input image cannot change while
+                            # evaluating this call. Native Register pins accept
+                            # it directly; all mutable expressions stay captured.
+                            signals.append(
+                                signal
+                                if re.fullmatch(r"%I0\.[0-9]+", signal)
+                                else self.lower.copy(signal, "register_argument")
+                            )
+                        end = None
+                        if self.lower.guard is not None:
+                            end = self.lower.new_label()
+                            self.lower.jump(end, self.lower.guard, negate=True)
+                        self.lower.rung(
+                            f"BLK %R{index}",
+                            "LD " + signals[0],
+                            "R",
+                            "LD " + signals[1],
+                            "I",
+                            "LD " + signals[2],
+                            "O",
+                            "END_BLK",
+                        )
+                        if end is not None:
+                            self.lower.label(end)
+                    return None
+                fields = {name: field for field, name in REGISTER_GETTERS.items()}
+                if method in fields:
+                    field = fields[method]
+                    value = f"%R{index}.{field}"
+                    return self.lower.copy(
+                        Number("i16", value) if field in ("I", "O") else value,
+                        "register_property",
+                    )
+                self.error(node, "unsupported Register method: " + str(method))
             if ref in self.instances and self.instances[ref][0] == "Counter":
                 index = self.instances[ref][1]
                 method = member.get("name")
@@ -942,6 +997,8 @@ class Frontend:
                 "RisingEdge",
                 "FallingEdge",
                 "Counter",
+                "Fifo",
+                "Lifo",
             ):
                 self.error(node, "unsupported library instance")
             ctor = next(
@@ -950,6 +1007,20 @@ class Frontend:
             )
             if ctor is None:
                 self.error(node, "missing constructor")
+            if kind in ("Fifo", "Lifo"):
+                args = ctor.get("inner", [])
+                if len(args) != 1:
+                    self.error(node, "Register requires one explicit native index")
+                index = self.const(args[0])
+                if (
+                    type(index) is not int
+                    or not 0 <= index < 4
+                    or index in self.lower.program.registers
+                ):
+                    self.error(node, "invalid or duplicate native Register index")
+                self.lower.program.registers[index] = RegisterConfig(kind)
+                self.instances[node["id"]] = (kind, index)
+                return
             if kind == "Counter":
                 args = ctor.get("inner", [])
                 if len(args) != 2:

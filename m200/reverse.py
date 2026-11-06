@@ -4,6 +4,11 @@ import json
 from .model import address, fail, Program
 from .subroutine_contexts import decoded_rung, static_operand_view
 from .timers import reference as timer_reference
+from .registers import (
+    reference as register_reference,
+    index as register_index,
+    GETTERS as REGISTER_GETTERS,
+)
 from .flow import JUMPS, ENDS, split_label
 from .native_logic import STORES, OPEN
 from .bits import word_bit, is_string, bit_string
@@ -42,6 +47,9 @@ from .communication import (
 
 
 def read_cpp(arg):
+    register = register_reference(arg)
+    if register:
+        return "register_%d.%s()" % (register[0], REGISTER_GETTERS[register[1]])
     counter = counter_reference(arg)
     if counter:
         return "counter_%d.%s()" % (counter[0], COUNTER_GETTERS[counter[1]])
@@ -124,6 +132,8 @@ def to_cpp(program):
         )
     for i, c in sorted(program.counters.items()):
         lines.append(f"plc::Counter counter_{i}{{{i},{c.preset}}};")
+    for i, cfg in sorted(program.registers.items()):
+        lines.append(f"plc::{cfg.mode} register_{i}{{{i}}};")
     resources = static_operand_view(program)
     if has_indexed(resources):
         lines.append(
@@ -149,6 +159,11 @@ def to_cpp(program):
             % (number, number, number, name, definition.section_number)
         )
     lines += ["", "void scan() {", "  bool accumulator = false;"]
+    for i in sorted(program.registers):
+        lines += [
+            f"  bool register_reset_{i} = false;",
+            f"  bool register_store_{i} = false;",
+        ]
     for i in sorted(program.timers):
         lines.append("  bool timer_%d_result = false;" % i)
     max_saved = max_group = 0
@@ -188,6 +203,16 @@ def to_cpp(program):
         saved = []
         groups = []
         for op, arg in decoded_rung(rung):
+            if op in ("REG_R", "REG_I", "REG_O"):
+                i = register_index(arg)
+                if op == "REG_O":
+                    lines.append(
+                        f"  register_{i}.update(register_reset_{i},register_store_{i},accumulator);"
+                    )
+                else:
+                    pin = "reset" if op == "REG_R" else "store"
+                    lines.append(f"  register_{pin}_{i} = accumulator;")
+                continue
             if op == "CALL_SR":
                 lines.append("  native_subroutine_%s.call(accumulator);" % arg)
                 continue
@@ -212,6 +237,19 @@ def to_cpp(program):
             if op == "NUM":
                 line = arg
                 target, name, values = instruction_operation(line)
+                register = register_reference(target, True)
+                if register:
+                    args = [str(v) if isinstance(v, int) else cpp(v) for v in values]
+                    expression = (
+                        args[0]
+                        if name == "copy"
+                        else "plc::" + name + "(" + ",".join(args) + ")"
+                    )
+                    method = "set_input" if register[1] == "I" else "set_output"
+                    lines.append(
+                        f"  if (accumulator) {{ register_{register[0]}.{method}({expression}); }}"
+                    )
+                    continue
                 counter = counter_reference(target, True)
                 if counter:
                     args = [str(v) if isinstance(v, int) else cpp(v) for v in values]

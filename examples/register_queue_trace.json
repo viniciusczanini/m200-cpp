@@ -1,0 +1,22 @@
+[
+  {"dt_ms": 10, "inputs": {"0": true}},
+  {"dt_ms": 10, "inputs": {"4": true}},
+  {"dt_ms": 10, "inputs": {"1": true}},
+  {"dt_ms": 10, "inputs": {"1": true, "3": true}},
+  {"dt_ms": 10, "inputs": {"3": true}},
+  {"dt_ms": 10, "inputs": {"1": true, "3": true}},
+  {"dt_ms": 10, "inputs": {}},
+  {"dt_ms": 10, "inputs": {"1": true, "2": true}},
+  {"dt_ms": 10, "inputs": {}},
+  {"dt_ms": 10, "inputs": {"2": true}},
+  {"dt_ms": 10, "inputs": {"2": true}},
+  {"dt_ms": 10, "inputs": {}},
+  {"dt_ms": 10, "inputs": {"2": true}},
+  {"dt_ms": 10, "inputs": {}},
+  {"dt_ms": 10, "inputs": {"2": true}},
+  {"dt_ms": 10, "inputs": {}},
+  {"dt_ms": 10, "inputs": {"4": true}},
+  {"dt_ms": 10, "inputs": {}},
+  {"dt_ms": 10, "inputs": {"2": true}},
+  {"dt_ms": 10, "inputs": {}}
+]

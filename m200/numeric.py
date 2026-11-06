@@ -29,7 +29,23 @@ from .counters import (
     GETTERS as COUNTER_GETTERS,
 )
 
-VALUE_PATTERN = "(?:" + WORD_PATTERN + "|" + TIMER_PATTERN + "|" + COUNTER_PATTERN + ")"
+from .registers import (
+    NUMERIC_PATTERN as REGISTER_PATTERN,
+    reference as register_reference,
+    GETTERS as REGISTER_GETTERS,
+)
+
+VALUE_PATTERN = (
+    "(?:"
+    + WORD_PATTERN
+    + "|"
+    + TIMER_PATTERN
+    + "|"
+    + COUNTER_PATTERN
+    + "|"
+    + REGISTER_PATTERN
+    + ")"
+)
 
 TYPES = {"i16": ("MW", 1), "i32": ("MD", 2), "f32": ("MF", 2)}
 READS = {"read_word": "i16", "read_dword": "i32", "read_real": "f32"}
@@ -151,6 +167,11 @@ def word_address(text):
 
 
 def reference_address(text, writable=False):
+    register = register_reference(text, writable)
+    if register:
+        if register[1] not in ("I", "O"):
+            fail("register output is not numeric: " + text)
+        return "i16", register[0]
     counter = counter_reference(text, writable)
     if counter:
         if counter[1] not in ("P", "V"):
@@ -489,6 +510,9 @@ def compare(words, parsed, reader=None):
 
 
 def cpp(value):
+    register = register_reference(value.code)
+    if register:
+        return "register_%d.%s()" % (register[0], REGISTER_GETTERS[register[1]])
     counter = counter_reference(value.code)
     if counter:
         return "counter_%d.%s()" % (counter[0], COUNTER_GETTERS[counter[1]])

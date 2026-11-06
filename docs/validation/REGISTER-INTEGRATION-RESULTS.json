@@ -1,0 +1,194 @@
+{
+  "schema": "m200.register-integration-results.v1",
+  "date": "2026-11-06",
+  "scope": "Integrated four-ID FIFO/LIFO software subset, two capacity fixes and artifact-scoped official observations. Full Register/profile parity is unfinished.",
+  "base_commit": "d95ee2c8ee99695af84248a41d1987d4a25ea36a",
+  "target": {
+    "model": "TM200CE40T",
+    "functional_level": "FunctLevelMan21_0",
+    "editor": "EcoStruxure Machine Expert Basic1.4 build484",
+    "lab": "existing local Mac/Wine",
+    "physical_firmware": "unknown"
+  },
+  "frozen_suite": {
+    "exit": 0,
+    "seconds": 220.628028666,
+    "pinned_inputs": 330,
+    "changed_inputs": [],
+    "all_inputs_unchanged": true,
+    "log_sha256": "a0edac1905532bbe69075dd27bcb1a26ce8cb0e65b15e73608971e42e6bb7337",
+    "inputs_sha256": "a70601ea2074a594b265d6b77fdf65b2af99e6d3ae1b8d891f7957468d177fc0",
+    "tests": 799,
+    "skips": 0,
+    "unittest_seconds": 220.444,
+    "command": "make check",
+    "rerun_for_this_report": false
+  },
+  "other_previous_local_gates": {
+    "register_focused": {
+      "tests": 95,
+      "seconds": 15.49,
+      "result": "PASS"
+    },
+    "make_examples": "PASS",
+    "make_optimization_stress": {
+      "result": "PASS",
+      "cases": 10,
+      "positions": 44
+    },
+    "independent_reviews": "Full integration and two narrow capacity fixes: PASS; no concrete unresolved defect found in those reviews."
+  },
+  "source": {
+    "path": "examples/register_queue.cpp",
+    "bytes": 825,
+    "sha256": "1168d509e974f2c11fa949bbff6fb9ab4ef72dd45db11c9af59cdbbd23843b10"
+  },
+  "trace": {
+    "path": "examples/register_queue_trace.json",
+    "bytes": 773,
+    "sha256": "43abc29148d7d1696e79551ca496bd59dc1048345c7c12e0ac0f1b5ed8d53e3a"
+  },
+  "same_source_optimization": {
+    "before": {
+      "rungs": 34,
+      "il": 80,
+      "m": 3,
+      "mw": 1
+    },
+    "after": {
+      "rungs": 22,
+      "il": 56,
+      "m": 1,
+      "mw": 0
+    },
+    "native_internal_register_words": 32,
+    "rules": [
+      "Stable isolated-MAST I0 pins require no intermediate M captures.",
+      "An adjacent unconditional private i16 Register-word snapshot used only by one literal comparison can fuse; aliases, labels, SRs, indexing and surviving snapshots remain protected."
+    ]
+  },
+  "artifacts": {
+    "dual-generated.smbp": {
+      "path": "docs/validation/editor-evidence/register-generated/dual-generated.smbp",
+      "bytes": 154351,
+      "sha256": "6277b7a6c1355ffb374a594020e853f82fb91ae407a1c4d3bb61321263cbe2be"
+    },
+    "dual-official-saved.smbp": {
+      "path": "docs/validation/editor-evidence/register-generated/dual-official-saved.smbp",
+      "bytes": 158518,
+      "sha256": "34240c1124d9292d1fa6c9fc43661e3049e170363b2d05c27466006c0604d814"
+    },
+    "repeated-generated.smbp": {
+      "path": "docs/validation/editor-evidence/register-generated/repeated-generated.smbp",
+      "bytes": 149533,
+      "sha256": "35b3cefd5f3ff970979f95b4981104e1a2f7de6b7adf0a4a40149b10acf15623"
+    },
+    "repeated-official-saved.smbp": {
+      "path": "docs/validation/editor-evidence/register-generated/repeated-official-saved.smbp",
+      "bytes": 153806,
+      "sha256": "63f0220dcbc8be37d27b11540a0e01153bddc7cdf0e4c46132da036a90ecc315"
+    },
+    "dual-reopened-no-error.png": {
+      "path": "docs/validation/editor-evidence/register-generated/dual-reopened-no-error.png",
+      "bytes": 409227,
+      "sha256": "d6bc1ae3fb9bca4b349d1a8b802df014492c53329ece1ef2633ed15024ed3ecc"
+    },
+    "repeated-run.png": {
+      "path": "docs/validation/editor-evidence/register-generated/repeated-run.png",
+      "bytes": 309306,
+      "sha256": "033e3f568c8453c1316c5efa282f9a01246aa1ad4b70a14380bb1f7cb08cea49"
+    },
+    "repeated-full.png": {
+      "path": "docs/validation/editor-evidence/register-generated/repeated-full.png",
+      "bytes": 18162,
+      "sha256": "a8bd4b002e26ba31fb6a8736e03de06c48b91e611037bdd1fbe5b6d5c1fb4057"
+    },
+    "repeated-reset.png": {
+      "path": "docs/validation/editor-evidence/register-generated/repeated-reset.png",
+      "bytes": 18106,
+      "sha256": "c8b95d0ae6bcefa8fd3e621eeb9a6c6e9feefcb06fb3976997c2684adb9359fd"
+    },
+    "repeated-empty-output11.png": {
+      "path": "docs/validation/editor-evidence/register-generated/repeated-empty-output11.png",
+      "bytes": 18327,
+      "sha256": "63407ca9679248bd7666e8af4a1c61b38335f3f86553a0d82b23f49980acfb2a"
+    },
+    "full-suite.log": {
+      "path": "docs/validation/editor-evidence/register-generated/full-suite.log",
+      "bytes": 88241,
+      "sha256": "a0edac1905532bbe69075dd27bcb1a26ce8cb0e65b15e73608971e42e6bb7337"
+    },
+    "full-suite-inputs.json": {
+      "path": "docs/validation/editor-evidence/register-generated/full-suite-inputs.json",
+      "bytes": 37337,
+      "sha256": "a70601ea2074a594b265d6b77fdf65b2af99e6d3ae1b8d891f7957468d177fc0"
+    },
+    "compiler-pins.json": {
+      "path": "docs/validation/editor-evidence/register-generated/compiler-pins.json",
+      "bytes": 4397,
+      "sha256": "596a983675b88497b0f2b710d11442287dc7445ca7a6a526c15fe91774ee85ca"
+    },
+    "saved-reverse-results.json": {
+      "path": "docs/validation/editor-evidence/register-generated/saved-reverse-results.json",
+      "bytes": 13378,
+      "sha256": "3988e5e1387435e167d0a2ecc45fe91c62c060061cf3ed2b9e9b435795dd49d0"
+    }
+  },
+  "official_editor": {
+    "dual": "Exact22/56 generated project opened, saved and freshly reopened with No error. Saved IL/config and actual reverse matched the generated program.",
+    "repeated": "Exact20/61 generated product opened/saved with No error and ran in the local simulator. Saved IL/config and actual reverse matched generated program.",
+    "reverse_rebuilds_opened_in_editor": false
+  },
+  "official_simulator": {
+    "dual_runtime": "PENDING: deliberately deferred to final batched campaign by user execution policy.",
+    "repeated_observations": [
+      {
+        "inputs": "I1 held, two update calls per nonreset scan",
+        "output_mask": 2,
+        "meaning": "Q1 Full visible after repeated progress; exact scan count not measured."
+      },
+      {
+        "inputs": "I0 exclusive reset",
+        "output_mask": 1,
+        "meaning": "Q0 Empty visible."
+      },
+      {
+        "inputs": "Reset released, I1 held again",
+        "output_mask": 2,
+        "meaning": "Q1 Full visible again."
+      },
+      {
+        "inputs": "I1 released and confirmed off; I2 held",
+        "output_mask": 5,
+        "meaning": "Q0 Empty and Q2 O=11 visible."
+      }
+    ],
+    "startup_note": "Immediate post-RUN panel is not a qualified cold-start observation. Generic guide p143 distinguishes coldS0/INIT from warmS1/STOP. No plain RUN-entry cold-init guarantee inferred.",
+    "cleanup": "First Stop click focused its button without ending simulator. Opening the next project subsequently disconnected/stopped it; specific simulatorPID60864 and TCP502 listener were then verified absent."
+  },
+  "saved_reverse": {
+    "dual_frames": 20,
+    "repeated_frames": 41,
+    "routes_per_case": 6,
+    "result": "PASS with literal expected masks on each route",
+    "rebuilt_dual": {
+      "rungs": 37,
+      "il": 86,
+      "sha256": "1f37557a046dc89a952913281f998b3150d1828d528f989bdb155f6aecef38ca"
+    },
+    "rebuilt_repeated": {
+      "rungs": 41,
+      "il": 103,
+      "sha256": "9139c89205e664459640f58808556affaa452b4cc01db6ad65738448d095cb73"
+    },
+    "native_editor_gate_for_rebuilds": "not_run"
+  },
+  "pending": [
+    "Exact dual native FIFO/LIFO runtime controls in final batch.",
+    "Broader first-call, repeated/skipped LIFO, lifecycle and graph/profile contexts.",
+    "Full source-profile parity across remaining work packages.",
+    "Windows/USB transfer, actual TM200CE40T, electrical ports/load/timing/communication and retention qualification."
+  ],
+  "new_parallel_implementation_tests": "not_run; isolated packages are separate from this frozen799checkpoint",
+  "remote_ci": "disabled; no remote tests/builds/pipelines invoked"
+}

@@ -1,8 +1,8 @@
-"""Isolated observed Register graph codec; not connected to the compiler.
+"""Closed canonical Register graph codec grounded in native saved graphs.
 
-Only the bare R/I/O body with three normal direct input contacts is admitted.
-This foundation describes pin addresses and geometry, not Register execution,
-FIFO/LIFO behavior, allocations, hardware qualification or whole-project support.
+Only the bare R/I/O body with three normal direct I0 or M contacts is admitted.
+This codec describes pin addresses and geometry. The project and execution layers
+own allocations, FIFO/LIFO state and hardware-profile qualification.
 """
 
 from dataclasses import dataclass
@@ -17,11 +17,17 @@ def _index(value):
         fail("register graph index must be an integer in 0..3")
 
 
-def _input(value):
-    if not isinstance(value, str) or not re.fullmatch(r"%I0\.(?:0|[1-9][0-9]?)", value):
-        fail("unverified Register contact domain; use a canonical direct I0 input")
-    if int(value[4:]) >= 24:
-        fail("Register contact exceeds the target input range")
+def _contact(value):
+    if isinstance(value, str):
+        if re.fullmatch(r"%I0\.(?:0|[1-9][0-9]?)", value):
+            if int(value[4:]) < 24:
+                return
+            fail("Register contact exceeds the target input range")
+        if re.fullmatch(r"%M(?:0|[1-9][0-9]{0,3})", value):
+            if int(value[2:]) < 1024:
+                return
+            fail("Register contact exceeds the target memory bit range")
+    fail("unverified Register contact domain; use a canonical direct I0 or M contact")
 
 
 @dataclass(frozen=True)
@@ -36,7 +42,7 @@ class RegisterInputs:
     def __post_init__(self):
         _index(self.index)
         for value in (self.reset, self.store, self.retrieve):
-            _input(value)
+            _contact(value)
 
 
 def parse_block(lines):
@@ -168,6 +174,15 @@ def read_graph(rung):
     """Read only a complete matching graph/body, without changing its tree."""
     lines, inputs, graph = _rung(rung)
     _check_graph(graph, graphics(lines))
+    return inputs
+
+
+def check_graph(rung, lines):
+    """Check a complete graph against both stored IL and the caller's body."""
+    expected = parse_block(lines)
+    inputs = read_graph(rung)
+    if inputs != expected:
+        fail("Register supplied instructions and stored graph body do not agree")
     return inputs
 
 

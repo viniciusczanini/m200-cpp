@@ -43,6 +43,7 @@ class Program:
     communications: dict = field(default_factory=dict)
     counters: dict = field(default_factory=dict)
     subroutines: dict = field(default_factory=dict)
+    registers: dict = field(default_factory=dict)
 
     def as_dict(self):
         result = {
@@ -59,6 +60,8 @@ class Program:
             result["subroutines"] = {
                 str(k): asdict(v) for k, v in self.subroutines.items()
             }
+        if self.registers:
+            result["registers"] = {str(k): asdict(v) for k, v in self.registers.items()}
         return result
 
     @classmethod
@@ -74,6 +77,7 @@ class Program:
             "metadata",
             "communications",
             "counters",
+            "registers",
             *(("subroutines",) if data.get("format") == "m200-cpp-il-v2" else ()),
         }:
             fail("unknown program JSON fields")
@@ -119,6 +123,20 @@ class Program:
         except (TypeError, ValueError):
             fail("invalid counter JSON")
         subroutines = {}
+        from .registers import RegisterConfig
+
+        raw_registers = data.get("registers", {})
+        if not isinstance(raw_registers, dict) or any(
+            key not in ("0", "1", "2", "3")
+            or not isinstance(value, dict)
+            or set(value) != {"mode"}
+            for key, value in raw_registers.items()
+        ):
+            fail("invalid register configuration map")
+        try:
+            registers = {int(k): RegisterConfig(**v) for k, v in raw_registers.items()}
+        except (TypeError, ValueError):
+            fail("invalid register JSON")
         if data.get("format") == "m200-cpp-il-v2":
             raw = data.get("subroutines")
             if not isinstance(raw, dict) or not raw:
@@ -148,10 +166,18 @@ class Program:
             {k: ModbusConfig.from_dict(v) for k, v in comms.items()},
             counters,
             subroutines,
+            registers,
         )
 
 
 def address(text, writable=False):
+    from .registers import reference as register_reference
+
+    register = register_reference(text, writable)
+    if register:
+        if register[1] not in ("E", "F"):
+            fail("numeric register property is not a bit: " + text)
+        return "R." + register[1], register[0]
     if text.startswith("%C"):
         from .counters import reference
 
