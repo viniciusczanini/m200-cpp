@@ -543,3 +543,67 @@ exato e PLC físico pendentes; biblioteca incompleta e objetivo integral ativo.
 FC/HSC, pulsos/movimento, flags e objetos restantes, tarefas, expansões e demais
 lacunas continuam trabalho aberto. Tudo local, sem CI, publicação ou atuação
 em PLC.
+
+
+## Continuação do objetivo: importação de gráficos Counter ramificados
+
+Após `ae5f840`, os gráficos originais B2 e M12 antes recusados passam pela
+reconciliação de portas com o IL; C0 permanece aceito. O importador lê o rung
+completo num envelope sintético declarado, conserva a configuração/identidade
+e reconstrói C++ do programa real. O exportador continua regenerando rungs
+básicos, sem alegar preservação exata da aparência nem aceitar o CPU estrangeiro.
+
+O verificador une portas de fios e interpreta contatos/bobinas e os pinos do
+Counter. Condições são comparadas por BDD reduzido e ordenado, sem depender de
+amostragem. Captura o contato compartilhado antes de seu primeiro destino,
+avança gerações de propriedades Counter entre ações e acompanha memória após
+ST/S/R, inclusive aliases. Isso distingue snapshot de releitura após reset ou
+escrita. Células sobrepostas, portas sem par, componentes sem fonte/destino,
+recursos ausentes e texto/atributos desconhecidos falham explicitamente.
+
+Os status BOOL de comunicação participam como leituras puras e precisam de
+configuração, mesmo quando a expressão absorve sua leitura. A revisão detectou
+uma regressão nesse ponto: READ_VAR.DONE era aceito no baseline, mas a nova
+checagem inicialmente o recusava. A falha foi reproduzida antes da correção e
+passou depois, incluindo as três famílias/quatro campos BOOL, exportação com
+READ_VAR + Counter e recurso ausente absorvido. Não se simulou sucesso de I/O.
+Ver `COUNTER-GRAPH-REVIEW.md`.
+
+A exportação agora informa CountersMemoryAllocation/ForcedCount=maxID+1 para
+contadores usados/configurados, incluindo identidade esparsa254 que requer
+extent255 no modelo. Não foi inventado enum Allocation. A variante ForcedCount
+sem enum é observada em C/L; isso não é certificação de firmware/editor.
+
+Rodada final: **367 testes em125,698 s**, exemplos, públicos, lint, formatação,
+capabilities e diff passaram. Os treze scripts da receita stress foram
+executados como comandos locais: o novo stress acompanhou a suíte e os outros
+doze usaram quatro workers. Os dois primeiros resultados foram mantidos após
+saída zero e conferência de hashes sem mudança de código, sem rerun desnecessário.
+
+O novo stress tem **35 casos/9.728 scans**:32 gráficos gerados de256 scans e os
+três gráficos/IL originais de512 scans cada. Combina OR paralelo, ramificações,
+fan-out1..8, ST/S/R, feedback de Q, propriedades Counter, linhas/colunas e IDs
+esparsos, com harness explícito de inicialização/readback. Percorre importação
+do gráfico real, IL/JSON/normalização, SDK, C++ reconstruído/recompilado e nova
+exportação a partir do C++ do XML efetivamente emitido.
+
+As mutações de predicados usaram tabelas completas de oito variáveis:
+**37.888 avaliações**, com17 alterações equivalentes aceitas e131 diferentes
+recusadas. Também foram recusadas96 mutações estruturais inválidas. Essas
+avaliações/decisões não são scans e não entram no total abaixo. Os18.420 ensaios
+booleanos extras do revisor também ficam fora da contagem.
+
+Total final: **183.636 scans de stress +18.176 públicos =201.812**, sem somar
+reruns, frames unitários ou etapas de comparação. A matriz digital das768
+ligações/12.800 scans, os255 contadores observados em conjunto e todos os
+ensaios anteriores de Modbus, bordas, temporizadores e memória passaram de novo.
+Os originais foram conferidos por hash/tamanho/Git blob e permaneceram intactos.
+
+Resultados/hashes atuais: `COUNTER-GRAPH-LOCAL-RESULTS.json`,
+`COUNTER-GRAPH-STRESS-RESULTS.json` e os treze relatórios de stress/públicos
+referenciados pelo primeiro; relatórios locais anteriores são históricos.
+Contrato: `../capabilities/COUNTER-GRAPHS.md`. A prova é do domínio booleano
+ordenado declarado; não resolve os flags físicos de %C nem seu conflito sobre E.
+Comparações/indexação/efeitos numéricos raw, outras estruturas, perfil exato,
+schema/editor e hardware permanecem pendentes. Biblioteca incompleta e objetivo
+integral ativo. Tudo local, sem CI, publicação ou atuação em PLC.

@@ -1,4 +1,4 @@
-.PHONY: check examples stress digital-io-stress expression-edge-stress counter-stress public-fetch public-check public-flow-fetch public-flow-check public-indexed-fetch public-counter-fetch
+.PHONY: check examples stress digital-io-stress expression-edge-stress counter-stress counter-graph-stress public-fetch public-check public-flow-fetch public-flow-check public-indexed-fetch public-counter-fetch
 check:
 	python3 -m unittest discover -s tests -v
 examples:
@@ -41,6 +41,9 @@ stress:
 	python3 tests/stress/native_edges.py
 	python3 tests/stress/expression_edges.py
 	python3 tests/stress/counters.py
+	python3 tests/stress/counter_graphs.py
+counter-graph-stress:
+	python3 tests/stress/counter_graphs.py
 counter-stress:
 	python3 tests/stress/counters.py
 expression-edge-stress:

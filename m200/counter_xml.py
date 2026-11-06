@@ -76,7 +76,9 @@ def write_configs(program, sw):
         child = ET.SubElement(node, "Counter")
         for name, value in [("Address", f"%C{i}"), ("Index", i), ("Preset", c.preset)]:
             ET.SubElement(child, name).text = str(value)
-    ET.SubElement(sw, "CountersMemoryAllocation")
+    allocation = ET.SubElement(sw, "CountersMemoryAllocation")
+    if program.counters:
+        ET.SubElement(allocation, "ForcedCount").text = str(max(program.counters) + 1)
 
 
 def simple(rung):
@@ -137,14 +139,23 @@ def graphics(raw, column=2):
     return items
 
 
-def check_graph(node, lines):
+def check_graph(node, lines, resources=None):
     graph = node.find("LadderElements")
+    if graph is not None and ((graph.text or "").strip() or graph.attrib):
+        fail("unsupported Counter graph text/attributes")
     if graph is None or not len(graph):
         if node.findtext("IsLadderSelected", "false").lower() == "true":
             fail("selected Counter rung has no graphics")
         return
     actual = []
     for e in graph:
+        if (
+            e.attrib
+            or (e.text or "").strip()
+            or (e.tail or "").strip()
+            or any(c.attrib or (c.tail or "").strip() for c in e)
+        ):
+            fail("unsupported Counter graphical text/attributes")
         if e.tag != "LadderEntity" or any(
             c.tag not in GRAPH_FIELDS or len(c) for c in e
         ):
@@ -170,5 +181,6 @@ def check_graph(node, lines):
     blocks = [x for x in actual if x[0] == "Counter"]
     if len(blocks) != 1:
         fail("counter graph must contain one block")
-    if sorted(actual) != sorted(graphics(lines, blocks[0][3])):
-        fail("Counter IL and Ladder graphics do not agree")
+    from .counter_graph import verify
+
+    return verify(actual, lines, resources)

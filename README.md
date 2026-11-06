@@ -136,8 +136,11 @@ Contadores comuns usam `plc::Counter{id,preset}`, com R/S/CU/CD por
 O projeto usa Counter nativo, com configuração e identidade preservadas, sem
 simular o contador com M/MW. Flags, interação entre entradas e histórico são
 um modelo local provisório, incluindo um conflito no manual sobre E.
-Gráficos com branches/saídas do Counter original ainda requerem trabalho na
-importação; o exportador normaliza a lógica em rungs separados.
+Gráficos puros do Counter com branches/saídas são importados mediante prova
+booleana de conectividade e ordem, incluindo prefixos e bobinas compartilhados;
+comparações/efeitos numéricos dentro desse gráfico raw ainda requerem trabalho.
+O exportador normaliza a lógica em rungs separados e informa a extensão de
+alocação. Ver `docs/capabilities/COUNTER-GRAPHS.md`.
 Contrato `docs/capabilities/COUNTERS.md`; exemplo `examples/counter.cpp`.
 
 ## Números e inventário completo de pesquisa

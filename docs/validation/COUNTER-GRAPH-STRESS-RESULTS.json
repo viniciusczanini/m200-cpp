@@ -1,0 +1,500 @@
+{
+  "seed": 20020261119,
+  "target": "TM200CE40T",
+  "cases": [
+    {
+      "case": "generated_0",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 1,
+        "contacts": 3,
+        "bdd_nodes": 5,
+        "atoms": 4
+      }
+    },
+    {
+      "case": "generated_1",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 1,
+        "contacts": 6,
+        "bdd_nodes": 14,
+        "atoms": 6
+      }
+    },
+    {
+      "case": "generated_2",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 1,
+        "contacts": 7,
+        "bdd_nodes": 14,
+        "atoms": 6
+      }
+    },
+    {
+      "case": "generated_3",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 1,
+        "contacts": 7,
+        "bdd_nodes": 19,
+        "atoms": 7
+      }
+    },
+    {
+      "case": "generated_4",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 2,
+        "contacts": 7,
+        "bdd_nodes": 15,
+        "atoms": 8
+      }
+    },
+    {
+      "case": "generated_5",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 2,
+        "contacts": 4,
+        "bdd_nodes": 13,
+        "atoms": 6
+      }
+    },
+    {
+      "case": "generated_6",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 2,
+        "contacts": 7,
+        "bdd_nodes": 14,
+        "atoms": 8
+      }
+    },
+    {
+      "case": "generated_7",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 2,
+        "contacts": 8,
+        "bdd_nodes": 17,
+        "atoms": 7
+      }
+    },
+    {
+      "case": "generated_8",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 3,
+        "contacts": 3,
+        "bdd_nodes": 12,
+        "atoms": 6
+      }
+    },
+    {
+      "case": "generated_9",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 3,
+        "contacts": 10,
+        "bdd_nodes": 26,
+        "atoms": 10
+      }
+    },
+    {
+      "case": "generated_10",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 3,
+        "contacts": 5,
+        "bdd_nodes": 14,
+        "atoms": 7
+      }
+    },
+    {
+      "case": "generated_11",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 3,
+        "contacts": 7,
+        "bdd_nodes": 23,
+        "atoms": 10
+      }
+    },
+    {
+      "case": "generated_12",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 4,
+        "contacts": 3,
+        "bdd_nodes": 11,
+        "atoms": 6
+      }
+    },
+    {
+      "case": "generated_13",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 4,
+        "contacts": 6,
+        "bdd_nodes": 20,
+        "atoms": 9
+      }
+    },
+    {
+      "case": "generated_14",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 4,
+        "contacts": 13,
+        "bdd_nodes": 32,
+        "atoms": 11
+      }
+    },
+    {
+      "case": "generated_15",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 4,
+        "contacts": 6,
+        "bdd_nodes": 18,
+        "atoms": 9
+      }
+    },
+    {
+      "case": "generated_16",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 5,
+        "contacts": 3,
+        "bdd_nodes": 14,
+        "atoms": 7
+      }
+    },
+    {
+      "case": "generated_17",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 5,
+        "contacts": 6,
+        "bdd_nodes": 23,
+        "atoms": 10
+      }
+    },
+    {
+      "case": "generated_18",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 5,
+        "contacts": 11,
+        "bdd_nodes": 30,
+        "atoms": 12
+      }
+    },
+    {
+      "case": "generated_19",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 5,
+        "contacts": 12,
+        "bdd_nodes": 37,
+        "atoms": 13
+      }
+    },
+    {
+      "case": "generated_20",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 6,
+        "contacts": 3,
+        "bdd_nodes": 16,
+        "atoms": 8
+      }
+    },
+    {
+      "case": "generated_21",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 6,
+        "contacts": 5,
+        "bdd_nodes": 19,
+        "atoms": 8
+      }
+    },
+    {
+      "case": "generated_22",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 6,
+        "contacts": 10,
+        "bdd_nodes": 30,
+        "atoms": 12
+      }
+    },
+    {
+      "case": "generated_23",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 6,
+        "contacts": 14,
+        "bdd_nodes": 39,
+        "atoms": 12
+      }
+    },
+    {
+      "case": "generated_24",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 7,
+        "contacts": 5,
+        "bdd_nodes": 19,
+        "atoms": 10
+      }
+    },
+    {
+      "case": "generated_25",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 7,
+        "contacts": 4,
+        "bdd_nodes": 18,
+        "atoms": 9
+      }
+    },
+    {
+      "case": "generated_26",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 7,
+        "contacts": 6,
+        "bdd_nodes": 22,
+        "atoms": 10
+      }
+    },
+    {
+      "case": "generated_27",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 7,
+        "contacts": 10,
+        "bdd_nodes": 26,
+        "atoms": 12
+      }
+    },
+    {
+      "case": "generated_28",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 8,
+        "contacts": 3,
+        "bdd_nodes": 17,
+        "atoms": 9
+      }
+    },
+    {
+      "case": "generated_29",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 8,
+        "contacts": 5,
+        "bdd_nodes": 23,
+        "atoms": 10
+      }
+    },
+    {
+      "case": "generated_30",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 8,
+        "contacts": 5,
+        "bdd_nodes": 22,
+        "atoms": 11
+      }
+    },
+    {
+      "case": "generated_31",
+      "scans": 256,
+      "status": "pass",
+      "proof": {
+        "method": "exact ordered Boolean/port reconciliation",
+        "inputs": 2,
+        "outputs": 8,
+        "contacts": 8,
+        "bdd_nodes": 32,
+        "atoms": 14
+      }
+    },
+    {
+      "case": "public_B",
+      "scans": 512,
+      "status": "pass",
+      "source_sha256": "836a371e610d37747fe23dbc8a35414f9273ef92dca6c4e7f70e94a2219c86c3",
+      "rung": 2,
+      "scope": "complete original graph/IL imported in declared synthetic envelope; original CPU/file untouched; explicit runtime harness; Counter physical policy pending"
+    },
+    {
+      "case": "public_C",
+      "scans": 512,
+      "status": "pass",
+      "source_sha256": "4e41502503c499291f3d728c03d7815bb3715b9b77d28821e79be52c6766b81a",
+      "rung": 0,
+      "scope": "complete original graph/IL imported in declared synthetic envelope; original CPU/file untouched; explicit runtime harness; Counter physical policy pending"
+    },
+    {
+      "case": "public_M",
+      "scans": 512,
+      "status": "pass",
+      "source_sha256": "808a67dc05578dc0738b2fb0f2b02693655c8a3ee4b0dd32525ac31d852e42fd",
+      "rung": 12,
+      "scope": "complete original graph/IL imported in declared synthetic envelope; original CPU/file untouched; explicit runtime harness; Counter physical policy pending"
+    }
+  ],
+  "scans": 9728,
+  "predicate_mutations": {
+    "equivalent": 17,
+    "different": 131,
+    "structurally_invalid": 96
+  },
+  "truth_assignments_checked": 37888,
+  "source_sha256": {
+    "m200/__init__.py": "77c5815a3596eebca3e939d1ad39abba46fa4edc4df148aaa7e47f13e5eda0ab",
+    "m200/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "m200/allocation.py": "f21e8753757ebf1c54874c18c3385a7d79ce52992514725920c29a1ca6281be9",
+    "m200/arrays.py": "d4574f6e48ab98f70feb3f474f30bbf387117f5db3ddde395525a21a77da42ed",
+    "m200/bits.py": "d76ca8b8bb587a6811cfb3e157c00385ba0a836b8eb669afdda9af4e635b6a61",
+    "m200/boolean_bdd.py": "b3de9c79a5b14953256117afa22df8aaf2b37eb71689f224ca2d66e78a02882f",
+    "m200/capabilities.py": "e94e59743ee0eae98c476938f8eafe04966c0823b825b1d070980d15d41348a0",
+    "m200/cli.py": "de4827ccf3d4f91e75c59069dd3f082689e42d0b5b2bb08dbba03825c7e5d393",
+    "m200/communication.py": "105c1aef50e7ee00bc7c7142a5b6805d4ddf5f18fc04c5e60a52b78841a6b3b0",
+    "m200/communication_xml.py": "954e0fb861fef56381b204936c47f2f760dbcb3840dd018bb1d2a1b13bfc319f",
+    "m200/config.py": "536cde246108b3357f094757efc2c4e1e6290f667baa86c355d92305e25014b8",
+    "m200/copy_fusion.py": "39c8f498518c46d35ad61ec2c53564a61748a4957eae25e8d241a3c7e4b98816",
+    "m200/counter_graph.py": "75afcca7ef1d8444d460b7de96a94e806518ea739daf113f42821998287ccd65",
+    "m200/counter_xml.py": "a87177f18a698b1f442a7c16eb66748a6d2c06c9c966ac199c6275bb1e326554",
+    "m200/counters.py": "0e4ed9d8fe6f4356f3d6b6986558a0f9caa019daa3f741b12522d1fdd6f376ce",
+    "m200/edge_functions.py": "c58b059d15ee7387ed7e65f841ad549f3b30c3781a258c0a6340a96e9cd92a24",
+    "m200/edges.py": "e590a801d00b94d20a2dd1f428635aa299e3bd59bcbfe2442f5ffa4fd3d64713",
+    "m200/flow.py": "a61ed946937daa4e54002dc29664c0ef6c02617eb1abb8faa0d0169e06244dc6",
+    "m200/frontend.py": "eb394863ab161ff5653ed02d81aba57fcb3dcdfda9b1d87fafe803e0c1aa4443",
+    "m200/il.py": "dc7747af981d299566729d97265584739ea685159cec883d53a4ad7de69d54d4",
+    "m200/indexed.py": "0b8ca542e2be87392d8de2a75ef8ad0d48534b28d7f82d1e24fd1bf38fc8343b",
+    "m200/jsonio.py": "c4d8447354b4f48205a8d5bfc58e1a3919656ba2073ecc5982b2f8fd6253fd70",
+    "m200/ladder_lowering.py": "6ded10d59e90334b2a128123a1a354fefb72d188a09196aa71f8878c3b78a822",
+    "m200/lower.py": "e5c96dc27d31fecfce7ad15544c64a4369659e5ce8f6a062061b68d9fdc2c2d4",
+    "m200/modbus.py": "62e98577eba6e2de938bc2292dd6cb16f22f64e1101fabdf5ea0f33fd009e92c",
+    "m200/model.py": "d17fba9dac20e051e9c9c45bacf77bbc90846de926e9dc93839d3143fecad055",
+    "m200/native.py": "016a6af7d7f7b1de11dab9bee1477faa9f4d393f75bbf09e1b3bf5daa5e6ac4f",
+    "m200/native_logic.py": "10d4b0d4ce3aa98e5c5f35b2f83f9c6aa4d92f3bb7cbc05887a895a1b60dbe3f",
+    "m200/numeric.py": "72ef2f9e73a91f5307aa2686ffa08b5d43d46f0dfaec765f70e03f00ceff7005",
+    "m200/project.py": "83c5e0405b2a7d10f2b53d33a4df3cc08fac1286430849e8a571fe8eda205d39",
+    "m200/reverse.py": "8559131c3ff315c2f2e1a4233be426554aa9325abee03f5e6f5760bf3d40516f",
+    "m200/timers.py": "384e3c26facd76ed8da5449d001348fe1c1dd818a73532ab9c782e6a9b0fedf6",
+    "sdk/plc.hpp": "7b4e856d72a48330c789baf22813b1b72a139ba8b52338143ca20f08543932d8",
+    "tests/stress/counter_graphs.py": "455889489bfb813b1ecaa27efbd2cd40592373ec61ea7c2f82618eb3256b1285",
+    "tests/test_counter_graphs.py": "cbcae6b9e643342c6333433b011accc3e97f620d33621df029496d79b523e935",
+    "tests/stress/counters.py": "477b0685314abb2bafa58f27989df132a9b374dac8a4dc4a882a87d5fcd9acd6",
+    "tests/stress/expression_edges.py": "d8dc293380b5aa3de06c3d764dab8324a974fd8d7f9d6962dbd776b9abc5d82a",
+    "tests/stress/bit_objects.py": "a39468f5ae36159b378cda34f2bfbe81abdf42fa1cb1fbf5cca0e6325b9c0489",
+    "docs/capabilities/COUNTER-SOURCES.json": "2da70defcc1c7dedbea5dbf97e3d53df0e74a766cfde231852954af4419ddfbd",
+    "tests/fixtures/synthetic.smbp": "5c04625cb62d03bd8d2982430970bbb3fb81070205c302d4e39f5a5b78a7f515"
+  },
+  "whole_foreign_projects_imported": 0,
+  "originals_modified": false,
+  "official_editor": "pending",
+  "physical_plc": "pending",
+  "counter_semantics": "same provisional policy; graph proof does not establish hardware flag behavior"
+}

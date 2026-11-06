@@ -5,7 +5,7 @@ Meta integral em `../PARITY.md`; pesquisa e originais fixados em
 nativo, sem promover cobertura/certificação integral. Não confundir %C com
 FC/HSC ou contadores IEC saturados: o domínio documentado é circular0..9999.
 
-API proposta: `plc::Counter{id,preset}` (id0..254, preset0..9999), métodos
+API: `plc::Counter{id,preset}` (id0..254, preset0..9999), métodos
 `reset(bool)`, `set(bool)`, `count_up(bool)`, `count_down(bool)`,
 `update(reset,set,up,down)` e getters `preset/value/done/empty/full`;
 `set_preset(i16)` escreve P. update equivale à sequência de quatro instruções
@@ -51,3 +51,9 @@ R/S/CU/CD0/1/2/3 e E/D/F0/1/2 do desenho oficial; R/CU/CD e D possuem amostras
 XML reais. Qualquer layout ainda sem evidência deve permanecer explicitamente
 pendente; roundtrip sintético não comprova aceitação do editor. CPU estrangeira
 não é reescrita nem importada como se fosse TM200CE40T.
+
+Atualização após ae5f840: `COUNTER-GRAPHS.md` descreve a importação dos gráficos
+puros com branches e saídas, conferindo condições, snapshots, recursos e ordem
+de bobinas por prova exata. A exportação informa ForcedCount=maxID+1 sem enum
+inferido. Comparações/indexação/efeitos numéricos raw e validação externa
+permanecem pendentes; isso não altera a política física ainda provisória.

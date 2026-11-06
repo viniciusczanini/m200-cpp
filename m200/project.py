@@ -226,10 +226,17 @@ def graphics(rung, timer_column=3, communication_contact_column=0):
     return items
 
 
-def check_graph(rung_node, lines):
+def check_graph(rung_node, lines, program=None):
     _, lines = split_label(lines)
     if lines[0].startswith("BLK %C"):
-        check_counter_graph(rung_node, lines)
+        resources = (
+            None
+            if program is None
+            else {("C", i) for i in program.counters}
+            | {("TM", i) for i in program.timers}
+            | {("COMM", key) for key in program.communications}
+        )
+        check_counter_graph(rung_node, lines, resources)
         return
     graph = rung_node.find("LadderElements")
     if graph is None or not len(graph):
@@ -443,7 +450,7 @@ def load_project(path):
     # read before its configured FB is called later in the same scan.
     validate_allocations(sw, p)
     for node, lines in graph_nodes:
-        check_graph(node, lines)
+        check_graph(node, lines, p)
     p.metadata = {
         "official_editor": "pending",
         "physical_plc": "pending",
