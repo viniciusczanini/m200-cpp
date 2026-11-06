@@ -1,0 +1,211 @@
+{
+  "date": "2026-11-06",
+  "result": "NOT_REPRODUCED_IN_THIS_SESSION_AND_INTERVAL",
+  "scope": "One bounded original-A simulator launch in STOP in an existing Wine editor session; observation only, no product change.",
+  "experimental_starts": 1,
+  "B_started": false,
+  "A2_started": false,
+  "editor_context": {
+    "host_pid": 24358,
+    "editor_session_restarted": false,
+    "previous_project": "native_modbus_bare_abort_write_q_editor_saved",
+    "offline_predecessor": "Raw original S opened offline and completed validation before final A load; no claim that this resets editor internal state."
+  },
+  "artifacts": [
+    {
+      "role": "S",
+      "filename": "control-sequence_timers.smbp",
+      "logical_Windows_path": "P:\\compiler-validation-2026-11-06\\control-sequence_timers.smbp",
+      "bytes": 760861,
+      "sha256": "ddc2150a010e99b988a0ffc21807fce229190cf88e25d8d731c45afd10ad920b",
+      "after_cleanup_sha256": "ddc2150a010e99b988a0ffc21807fce229190cf88e25d8d731c45afd10ad920b",
+      "independently_read_back_current_exact_bytes": true
+    },
+    {
+      "role": "A",
+      "filename": "sequence_timers_watch.smbp",
+      "logical_Windows_path": "P:\\compiler-validation-2026-11-06\\sequence_timers_watch.smbp",
+      "bytes": 762859,
+      "sha256": "83b73ea98fee422e230bf9d23f1164696e4e2de361d512916ebcd88abde5da67",
+      "after_cleanup_sha256": "83b73ea98fee422e230bf9d23f1164696e4e2de361d512916ebcd88abde5da67",
+      "independently_read_back_current_exact_bytes": true
+    },
+    {
+      "role": "B",
+      "filename": "sequence_timers_watch_mbits1024.smbp",
+      "logical_Windows_path": "P:\\compiler-validation-2026-11-06\\sequence_timers_watch_mbits1024.smbp",
+      "bytes": 762894,
+      "sha256": "9bb6db83edf956a6b1bf0ec36dc30af600cddd6003838017b1efe59ec66e4a0a",
+      "after_cleanup_sha256": "9bb6db83edf956a6b1bf0ec36dc30af600cddd6003838017b1efe59ec66e4a0a",
+      "independently_read_back_current_exact_bytes": true
+    }
+  ],
+  "preparation_correction": {
+    "initial_S_capture": "Validating program68%, Not Connected; not completed No error.",
+    "premature_attribution_corrected": true,
+    "later_S_capture": "No error, Not Connected",
+    "final_A_before_launch": "No error, Not Connected",
+    "no_simulator_start_before_final_A": "Root operator attribution, consistent with the bounded journal/manifest.",
+    "manifest_epoch_fields": "Preparation/cleanup epoch fields were not used to infer exact capture times; precise STOP observation timings below use source capture filenames plus journal launch-request start."
+  },
+  "STOP_observations": [
+    {
+      "label": "A1-observation-1",
+      "capture_epoch": 1793967933.983688,
+      "seconds_after_launch_request": 36.659541,
+      "No_error": true,
+      "Online": true,
+      "STOP": true,
+      "PC_controller_applications_identical": true,
+      "public_capture": {
+        "path": "docs/validation/editor-evidence/sequence-stop-reproduction/A1-observation-1.png",
+        "bytes": 309728,
+        "sha256": "21699176e88da631a9952bc63adc049792281d7a8c8e98982e1b0afa83784587"
+      },
+      "independently_viewed": true
+    },
+    {
+      "label": "A1-observation-2",
+      "capture_epoch": 1793968016.439032,
+      "seconds_after_launch_request": 119.114885,
+      "No_error": true,
+      "Online": true,
+      "STOP": true,
+      "PC_controller_applications_identical": true,
+      "public_capture": {
+        "path": "docs/validation/editor-evidence/sequence-stop-reproduction/A1-observation-2.png",
+        "bytes": 309728,
+        "sha256": "21699176e88da631a9952bc63adc049792281d7a8c8e98982e1b0afa83784587"
+      },
+      "independently_viewed": true
+    }
+  ],
+  "timing": {
+    "basis": "Journal launch click started_epoch to exact source capture timestamp encoded in each filename; not process-ready or scan time.",
+    "launch_request_started_epoch": 1793967897.324147,
+    "capture_delays_seconds": [
+      36.659541,
+      119.114885
+    ],
+    "interval_between_two_captures_seconds": 82.455344,
+    "continuous_monitoring_claim": false,
+    "both_STOP_PNGs_byte_identical": true,
+    "distinct_timestamped_captures": true
+  },
+  "log_audit": {
+    "current_launch_segment_is_exact_substring_of_preserved_editor_log": true,
+    "current_segment_launch_records": 1,
+    "matching_historical_signature_in_current_segment": false,
+    "historical_signature_present_in_earlier_segment": true,
+    "historical_event_local_time": "2026-11-06 02:31:42.7282 launch followed by System.AccessViolationException at ProcessMbitsEdges / MastTask and write0x07018086",
+    "no_cause_or_fix_inferred": true
+  },
+  "cleanup": {
+    "official_Stop_simulator_used": true,
+    "fresh_capture_independently_viewed": "No error, Not Connected; simulator panel absent in root inventory/observation",
+    "specific_host_simulator_pid": 96890,
+    "root_manifest_process_check": {
+      "command_scope": "ps exact PID96890",
+      "exit": 1
+    },
+    "root_manifest_listener_check": {
+      "command_scope": "lsof listenerTCP502",
+      "exit": 1
+    },
+    "attribution": "Shell process/listener absence is root-reported trial evidence; reviewer did not rerun process/network checks.",
+    "public_capture": {
+      "path": "docs/validation/editor-evidence/sequence-stop-reproduction/A1-cleanup-completed.png",
+      "bytes": 286228,
+      "sha256": "56c95c1403b439df363ebeedf513458bcb19361c508661d09d3f9bfde7282c54"
+    }
+  },
+  "operator_action_boundary": {
+    "no_operator_Save_or_XML_rewrite": true,
+    "no_RUN_or_simulated_input_changes": true,
+    "no_external_TCP_client_or_memory_collector": true,
+    "native_editor_may_process_project_in_memory": "Not asserted unchanged; exact on-disk bytes are the boundary"
+  },
+  "journal": {
+    "records": 8,
+    "all_exit_zero": true,
+    "scope": "Wrapper-captured subset of actions; initial S preparation/correction and operator exclusions also rely on preserved manifest/root observations.",
+    "labels": [
+      "S-stabilized",
+      "A1-validation-completed",
+      "A1-commissioning",
+      "A1-launch-simulator",
+      "A1-observation-1",
+      "A1-observation-2",
+      "A1-official-stop",
+      "A1-cleanup-completed"
+    ]
+  },
+  "public_captures": [
+    {
+      "path": "docs/validation/editor-evidence/sequence-stop-reproduction/S-offline-open.png",
+      "bytes": 499838,
+      "sha256": "213971051e9fa6791fc37052d4ef16fb1a1ad30037094709b65e6dd0bb7cea72"
+    },
+    {
+      "path": "docs/validation/editor-evidence/sequence-stop-reproduction/S-stabilized.png",
+      "bytes": 498418,
+      "sha256": "8a15ffda1e715d475d724469d126f969842d36d7c2c279b1e9141d7f848cad92"
+    },
+    {
+      "path": "docs/validation/editor-evidence/sequence-stop-reproduction/A1-validation-completed.png",
+      "bytes": 497862,
+      "sha256": "06f4f037831dea0befdfcdaa60945a8bb01b5cf6f53fcbd7fa23c849547c0e46"
+    },
+    {
+      "path": "docs/validation/editor-evidence/sequence-stop-reproduction/A1-observation-1.png",
+      "bytes": 309728,
+      "sha256": "21699176e88da631a9952bc63adc049792281d7a8c8e98982e1b0afa83784587"
+    },
+    {
+      "path": "docs/validation/editor-evidence/sequence-stop-reproduction/A1-observation-2.png",
+      "bytes": 309728,
+      "sha256": "21699176e88da631a9952bc63adc049792281d7a8c8e98982e1b0afa83784587"
+    },
+    {
+      "path": "docs/validation/editor-evidence/sequence-stop-reproduction/A1-cleanup-completed.png",
+      "bytes": 286228,
+      "sha256": "56c95c1403b439df363ebeedf513458bcb19361c508661d09d3f9bfde7282c54"
+    }
+  ],
+  "source_evidence": [
+    {
+      "path": "output/editor-validation/sequence-stop-aba-2026-11-06/manifest.json",
+      "bytes": 6230,
+      "sha256": "48d15eb3e896eadbf376edaae0c319fdf9370f0688c44884507e051ee6ef165e"
+    },
+    {
+      "path": "output/editor-validation/sequence-stop-aba-2026-11-06/runtime-actions.jsonl",
+      "bytes": 10710,
+      "sha256": "3907d9cc6423784b34fa2d0ce415441573bd3950f7e8e21f7c4655320d932d6b"
+    },
+    {
+      "path": "output/editor-validation/sequence-stop-aba-2026-11-06/runtime-step.py",
+      "bytes": 560,
+      "sha256": "ab78821e48a08cfb34316520ee9b57ab7889ede5b7d35ed7270534b77d6bcb49"
+    },
+    {
+      "path": "output/editor-validation/sequence-stop-aba-2026-11-06/A1-launch-through-observation2.log",
+      "bytes": 1973,
+      "sha256": "8d8130f98815f64878019fe7a6e766c30ba89fd8669c2b4273b29d5b3bcd5369"
+    },
+    {
+      "path": "output/editor-validation/sequence-stop-aba-2026-11-06/editor-log-through-A1-observation2.log",
+      "bytes": 162421,
+      "sha256": "98b59488816cf2d44e6f830acab78d49eb5d489ea78f1d9feb20f4fba376cf7a"
+    }
+  ],
+  "limits": [
+    "Historical access violation remains unexplained; absence of recurrence in this session/interval is not a fix.",
+    "No cold editor/launcher restart; opening S offline is not an internal-state reset proof.",
+    "No RUN, simulated input changes, C/P/Q memory collection, external TCP client or collector; no physical hardware operation.",
+    "No operator Save/XML rewrite and all S/A/B disk hashes preserved; editor in-memory processing is not asserted unchanged.",
+    "B and A2 were not started; no allocation, WatchLists or other causal comparison is inferred.",
+    "Two sampled STOP captures do not establish continuous monitoring or arbitrary later stability.",
+    "No new unittest, scan, compatibility, native runtime-algorithm or physical-controller claim."
+  ]
+}

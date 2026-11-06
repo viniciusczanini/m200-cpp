@@ -4,7 +4,7 @@ The full TM200CE40T parity goal remains active. Work is pulled from this queue w
 
 | Priority | Task | Lane / owner | State | Next proof |
 |---|---|---|---|---|
-| P0 | Diagnose three-timer simulator crash in ProcessMbitsEdges | GUI operator + separate Wine runtime chat | Unresolved; original-watch A1 STOP-only startup trial active in the current editor session | Preserve exact S/A/B bytes; if A1 passes, stop and record not reproduced in this context |
+| P0 | Diagnose three-timer simulator crash in ProcessMbitsEdges | GUI operator + separate Wine runtime chat | Historical cause unresolved; original A1 startup remained Online/identical/STOP in two observations, official cleanup confirmed; B/A2 not started | Not reproduced in this editor session/interval; preserve exact bytes and investigate cold/lifecycle context separately |
 | P1 | Exercise TON/TP/TOF sequence, held/repeated buttons, STOP/RESET/permissive interactions | Official GUI operator | Completion, held/fresh START, TON abort and RESET passed; further cases queued | Observe TP abort/drain, permission loss and rejected busy edges with direct words |
 | P1 | Save/reopen I/O and complex projects; validate normal launcher persistence | Official GUI operator | Sequence save/readback/reopen passed; other projects and launcher restart queued | Preserve original bytes; compare editor-saved IL/configuration and reverse C++ |
 | P1 | Publish validated increments with English documentation | Main agent | 587-test Register graph foundation published; earlier full-pin Modbus checkpoint published | Validate actual new CLI products; Actions stays disabled |
@@ -47,5 +47,5 @@ See [official artifact evidence](docs/validation/OFFICIAL-EDITOR-RESULTS.json), 
 
 - Published: 587-test standalone Register graph foundation and earlier 568-test native full-pin Modbus checkpoint; earlier WRITE_READ_VAR and Register configuration foundation remain separately scoped; genuine timer/single-write products have separate official evidence.
 - GUI: bounded FIFO/LIFO cases completed; FIFO reset/store/retrieve collisions and held-edge cases observed, simulator stopped. LIFO repeats and self-status evaluation remain; simple native R/I/O graph capture is active. Generated FC5/6, WRITE_READ_VAR and all three full-pin Modbus products passed save/fresh-reopen No error; no communication transaction was executed.
-- Compiler: full-pin READ I/WRITE Q/WRITE_READ MW passed568 local tests and independent review; bare Execute/Abort import/export is in TDD after all three native bindings passed save/fresh-reopen. Genuine bare products and wider profiles remain.
+- Compiler: full-pin READ I/WRITE Q/WRITE_READ MW passed 568 local tests and independent review; bare Execute/Abort import/export is in TDD after all three native bindings passed save/fresh-reopen. Genuine bare products and wider profiles remain.
 - Library foundation: strict Register configuration and graph codecs passed the frozen 587-test suite; full Register compilation/execution stays unsupported until integrated and validated. Two native FIFO self-status trials are separately observed; broader state/control-flow/lifecycle gates remain.
