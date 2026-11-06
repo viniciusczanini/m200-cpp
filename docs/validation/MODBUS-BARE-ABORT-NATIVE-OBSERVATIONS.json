@@ -1,0 +1,1262 @@
+{
+  "date": "2026-11-06",
+  "scope": "Three controlled hand-built bare Execute/Abort native binding observations; official root-operated conversion/save/fresh reopen, not genuine compiler output or runtime/exchange validation.",
+  "status": "all_three_native_binding_stages_complete",
+  "cases": [
+    {
+      "case": "read",
+      "root_final_GUI_record": {
+        "saved_sha256": "222de155bd4061649a017859f8775322974c3e06b3a85204ff85ae015e35b3e4",
+        "saved_bytes": 88863,
+        "root_personally_viewed_NoError_clean_save": true,
+        "one_rung_six_IL": true,
+        "native_graph_entities": 3,
+        "fresh_reopen_pending": false,
+        "RUN_Execute_network": false,
+        "root_personally_viewed_reopen_Programming_NoError": true,
+        "other_project_before_reopen": "native_modbus_bare_abort_write_q",
+        "saved_sha256_after_reopen": "222de155bd4061649a017859f8775322974c3e06b3a85204ff85ae015e35b3e4"
+      },
+      "root_GUI_record_artifact": {
+        "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/observed/read/root-gui-observations.json",
+        "bytes": 517,
+        "sha256": "4c6c553a99c7970d4156af688b2e68d10483ded929ae205e6c808dbe1dc2d846"
+      },
+      "original_candidate": {
+        "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/native_modbus_bare_abort_read_i.smbp",
+        "bytes": 85558,
+        "sha256": "01e6994cb64d07ec10eb48ac807cf6554c6f521e8b85e38b61464d9d75685c48"
+      },
+      "exact_native_editor_saved": {
+        "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/observed/read/native_modbus_bare_abort_read_i_editor_saved.smbp",
+        "bytes": 88863,
+        "sha256": "222de155bd4061649a017859f8775322974c3e06b3a85204ff85ae015e35b3e4"
+      },
+      "counts": {
+        "rungs": 1,
+        "lexical_IL_lines": 6,
+        "native_graph_entities": 3
+      },
+      "bare_IL": [
+        "BLK %READ_VAR0",
+        "LD %M20",
+        "EXECUTE",
+        "LD %M21",
+        "ABORT",
+        "END_BLK"
+      ],
+      "typed_control_pins": {
+        "block": "%READ_VAR0",
+        "Execute": [
+          "LD",
+          "%M20"
+        ],
+        "Abort": [
+          "LD",
+          "%M21"
+        ]
+      },
+      "typed_configuration": {
+        "%READ_VAR0": {
+          "kind": "READ_VAR",
+          "link": "SL1",
+          "id": 1,
+          "timeout_100ms": 100,
+          "obj_type": 1,
+          "first_obj": 17,
+          "quantity": 17,
+          "index_data": 200,
+          "first_read_obj": 0,
+          "read_quantity": 1,
+          "index_data_in": 0
+        }
+      },
+      "native_graph_fields": [
+        {
+          "ElementType": "NormalContact",
+          "Descriptor": "%M20",
+          "Comment": "",
+          "Row": "0",
+          "Column": "0",
+          "ChosenConnection": "Left, Right"
+        },
+        {
+          "ElementType": "NormalContact",
+          "Descriptor": "%M21",
+          "Comment": "",
+          "Row": "1",
+          "Column": "0",
+          "ChosenConnection": "Left, Right"
+        },
+        {
+          "ElementType": "ReadVarBasic",
+          "Descriptor": "%READ_VAR0",
+          "Comment": "",
+          "Row": "0",
+          "Column": "1",
+          "ChosenConnection": "Left"
+        }
+      ],
+      "checks": {
+        "six_lexical_IL_lines_unchanged": true,
+        "actual_three_entity_native_graph_exact": true,
+        "typed_FB_configuration_equal": true,
+        "FB_dotnet_wrappers_equal": true,
+        "hardware_exact_typed_tree_equal": true,
+        "actual_Man21_SL1_master": true,
+        "all_allocation_nodes_equal": true,
+        "task_nodes_equal": true,
+        "rung_names_labels_human_comments_equal": true,
+        "program_symbol_trees_equal": true,
+        "watch_trees_equal": true,
+        "all_differences_classified": true,
+        "complete_XML_closes_after_reported_changes": true,
+        "source_and_saved_bytes_preserved": true
+      },
+      "real_difference_count": 9,
+      "real_differences_by_class": {
+        "saved_project_identity_metadata": 2,
+        "IL_formatting_only": 3,
+        "native_Ladder_selection": 1,
+        "native_generated_graph_entity": 3
+      },
+      "all_real_differences": [
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/FullName",
+          "before": "P:\\compiler-validation-2026-11-06\\modbus_full_pin_read.smbp",
+          "after": "P:\\compiler-validation-2026-11-06\\native-modbus-bare-abort-2026-11-06\\native_modbus_bare_abort_read_i.smbp",
+          "classification": "saved_project_identity_metadata"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/Name",
+          "before": "modbus_full_pin_read",
+          "after": "native_modbus_bare_abort_read_i",
+          "classification": "saved_project_identity_metadata"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[0]/InstructionLines/InstructionLineEntity[0]/InstructionLine",
+          "before": "BLK %READ_VAR0",
+          "after": "BLK   %READ_VAR0",
+          "classification": "IL_formatting_only"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[0]/InstructionLines/InstructionLineEntity[1]/InstructionLine",
+          "before": "LD %M20",
+          "after": "LD    %M20",
+          "classification": "IL_formatting_only"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[0]/InstructionLines/InstructionLineEntity[3]/InstructionLine",
+          "before": "LD %M21",
+          "after": "LD    %M21",
+          "classification": "IL_formatting_only"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[0]/IsLadderSelected",
+          "before": "false",
+          "after": "true",
+          "classification": "native_Ladder_selection"
+        },
+        {
+          "kind": "added_element",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[0]/LadderElements/LadderEntity[row=0,column=0,type=NormalContact]",
+          "before": null,
+          "after": {
+            "tag": "LadderEntity",
+            "attributes": {},
+            "text": "",
+            "tail": "",
+            "children": {
+              "ChosenConnection": {
+                "tag": "ChosenConnection",
+                "attributes": {},
+                "text": "Left, Right",
+                "tail": "",
+                "children": {}
+              },
+              "Column": {
+                "tag": "Column",
+                "attributes": {},
+                "text": "0",
+                "tail": "",
+                "children": {}
+              },
+              "Comment": {
+                "tag": "Comment",
+                "attributes": {},
+                "text": "",
+                "tail": "",
+                "children": {}
+              },
+              "Descriptor": {
+                "tag": "Descriptor",
+                "attributes": {},
+                "text": "%M20",
+                "tail": "",
+                "children": {}
+              },
+              "ElementType": {
+                "tag": "ElementType",
+                "attributes": {},
+                "text": "NormalContact",
+                "tail": "",
+                "children": {}
+              },
+              "Row": {
+                "tag": "Row",
+                "attributes": {},
+                "text": "0",
+                "tail": "",
+                "children": {}
+              }
+            }
+          },
+          "classification": "native_generated_graph_entity"
+        },
+        {
+          "kind": "added_element",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[0]/LadderElements/LadderEntity[row=0,column=1,type=ReadVarBasic]",
+          "before": null,
+          "after": {
+            "tag": "LadderEntity",
+            "attributes": {},
+            "text": "",
+            "tail": "",
+            "children": {
+              "ChosenConnection": {
+                "tag": "ChosenConnection",
+                "attributes": {},
+                "text": "Left",
+                "tail": "",
+                "children": {}
+              },
+              "Column": {
+                "tag": "Column",
+                "attributes": {},
+                "text": "1",
+                "tail": "",
+                "children": {}
+              },
+              "Comment": {
+                "tag": "Comment",
+                "attributes": {},
+                "text": "",
+                "tail": "",
+                "children": {}
+              },
+              "Descriptor": {
+                "tag": "Descriptor",
+                "attributes": {},
+                "text": "%READ_VAR0",
+                "tail": "",
+                "children": {}
+              },
+              "ElementType": {
+                "tag": "ElementType",
+                "attributes": {},
+                "text": "ReadVarBasic",
+                "tail": "",
+                "children": {}
+              },
+              "Row": {
+                "tag": "Row",
+                "attributes": {},
+                "text": "0",
+                "tail": "",
+                "children": {}
+              }
+            }
+          },
+          "classification": "native_generated_graph_entity"
+        },
+        {
+          "kind": "added_element",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[0]/LadderElements/LadderEntity[row=1,column=0,type=NormalContact]",
+          "before": null,
+          "after": {
+            "tag": "LadderEntity",
+            "attributes": {},
+            "text": "",
+            "tail": "",
+            "children": {
+              "ChosenConnection": {
+                "tag": "ChosenConnection",
+                "attributes": {},
+                "text": "Left, Right",
+                "tail": "",
+                "children": {}
+              },
+              "Column": {
+                "tag": "Column",
+                "attributes": {},
+                "text": "0",
+                "tail": "",
+                "children": {}
+              },
+              "Comment": {
+                "tag": "Comment",
+                "attributes": {},
+                "text": "",
+                "tail": "",
+                "children": {}
+              },
+              "Descriptor": {
+                "tag": "Descriptor",
+                "attributes": {},
+                "text": "%M21",
+                "tail": "",
+                "children": {}
+              },
+              "ElementType": {
+                "tag": "ElementType",
+                "attributes": {},
+                "text": "NormalContact",
+                "tail": "",
+                "children": {}
+              },
+              "Row": {
+                "tag": "Row",
+                "attributes": {},
+                "text": "1",
+                "tail": "",
+                "children": {}
+              }
+            }
+          },
+          "classification": "native_generated_graph_entity"
+        }
+      ],
+      "inherited_human_comment_unchanged": "GUI SERIALIZATION CANDIDATE; DO NOT RUN | UNPROVEN XML enum I; FC2",
+      "private_readback": {
+        "path": "output/reports/native-modbus-bare-abort-readback-2026-11-06/read-readback.json",
+        "bytes": 13414,
+        "sha256": "6c5b09cf5d1e7149f1088711f3cd8d2ab558c35d01dc597486aced8a05897ab3"
+      },
+      "product_probe_at_readback_source_pin": {
+        "accepted": false,
+        "error": "M200-E: mixed Ladder rows are outside the supported series subset",
+        "interpretation": "Observed native bare-ABORT graphics are still a product binding gap at this source pin; no gate changes made."
+      },
+      "readback_product_source_sha256": {
+        "m200/project.py": "92251c8012bd84373ba4afa64399bc2ff067ab8482a857e15abf013a2d9cf4d8",
+        "m200/communication_graph.py": "3589d930316fa8f916d2de2c5e9ceb8f2b4997ac463df7ec7ba97e403ce7cc2a",
+        "m200/communication.py": "105c1aef50e7ee00bc7c7142a5b6805d4ddf5f18fc04c5e60a52b78841a6b3b0",
+        "m200/communication_xml.py": "2762f0fd89552de18e21bb632e536eb4c1a9449702cdfb6444dfb58bb606aac2"
+      }
+    },
+    {
+      "case": "write",
+      "root_final_GUI_record": {
+        "saved_sha256": "1489ad6bdcdde1101708088d37ee2eacb326ee23a3c6ac8c0d91cbe25f51fb7d",
+        "saved_bytes": 88872,
+        "root_personally_viewed_NoError_clean_save": true,
+        "one_rung_six_IL": true,
+        "native_graph_entities": 3,
+        "fresh_reopen_pending": false,
+        "RUN_Execute_network": false,
+        "root_personally_viewed_reopen_Programming_NoError": true,
+        "other_project_before_reopen": "native_modbus_bare_abort_read_i_editor_saved",
+        "saved_sha256_after_reopen": "1489ad6bdcdde1101708088d37ee2eacb326ee23a3c6ac8c0d91cbe25f51fb7d"
+      },
+      "root_GUI_record_artifact": {
+        "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/observed/write/root-gui-observations.json",
+        "bytes": 529,
+        "sha256": "8fd238486ee11965777738279cc22ea00bee7dc749ae275446fadfb1e2abe147"
+      },
+      "original_candidate": {
+        "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/native_modbus_bare_abort_write_q.smbp",
+        "bytes": 85565,
+        "sha256": "afcf14277cedbca5a63a91c9d9a10f3ff91ddb9a5a513f1c4f858ba4c3ae3622"
+      },
+      "exact_native_editor_saved": {
+        "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/observed/write/native_modbus_bare_abort_write_q_editor_saved.smbp",
+        "bytes": 88872,
+        "sha256": "1489ad6bdcdde1101708088d37ee2eacb326ee23a3c6ac8c0d91cbe25f51fb7d"
+      },
+      "counts": {
+        "rungs": 1,
+        "lexical_IL_lines": 6,
+        "native_graph_entities": 3
+      },
+      "bare_IL": [
+        "BLK %WRITE_VAR0",
+        "LD %M22",
+        "EXECUTE",
+        "LD %M23",
+        "ABORT",
+        "END_BLK"
+      ],
+      "typed_control_pins": {
+        "block": "%WRITE_VAR0",
+        "Execute": [
+          "LD",
+          "%M22"
+        ],
+        "Abort": [
+          "LD",
+          "%M23"
+        ]
+      },
+      "typed_configuration": {
+        "%WRITE_VAR0": {
+          "kind": "WRITE_VAR",
+          "link": "SL1",
+          "id": 1,
+          "timeout_100ms": 100,
+          "obj_type": 2,
+          "first_obj": 73,
+          "quantity": 17,
+          "index_data": 240,
+          "first_read_obj": 0,
+          "read_quantity": 1,
+          "index_data_in": 0
+        }
+      },
+      "native_graph_fields": [
+        {
+          "ElementType": "NormalContact",
+          "Descriptor": "%M22",
+          "Comment": "",
+          "Row": "0",
+          "Column": "0",
+          "ChosenConnection": "Left, Right"
+        },
+        {
+          "ElementType": "NormalContact",
+          "Descriptor": "%M23",
+          "Comment": "",
+          "Row": "1",
+          "Column": "0",
+          "ChosenConnection": "Left, Right"
+        },
+        {
+          "ElementType": "WriteVarBasic",
+          "Descriptor": "%WRITE_VAR0",
+          "Comment": "",
+          "Row": "0",
+          "Column": "1",
+          "ChosenConnection": "Left"
+        }
+      ],
+      "checks": {
+        "six_lexical_IL_lines_unchanged": true,
+        "actual_three_entity_native_graph_exact": true,
+        "typed_FB_configuration_equal": true,
+        "FB_dotnet_wrappers_equal": true,
+        "hardware_exact_typed_tree_equal": true,
+        "actual_Man21_SL1_master": true,
+        "all_allocation_nodes_equal": true,
+        "task_nodes_equal": true,
+        "rung_names_labels_human_comments_equal": true,
+        "program_symbol_trees_equal": true,
+        "watch_trees_equal": true,
+        "all_differences_classified": true,
+        "complete_XML_closes_after_reported_changes": true,
+        "source_and_saved_bytes_preserved": true
+      },
+      "real_difference_count": 9,
+      "real_differences_by_class": {
+        "saved_project_identity_metadata": 2,
+        "IL_formatting_only": 3,
+        "native_Ladder_selection": 1,
+        "native_generated_graph_entity": 3
+      },
+      "all_real_differences": [
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/FullName",
+          "before": "P:\\compiler-validation-2026-11-06\\modbus_full_pin_write.smbp",
+          "after": "P:\\compiler-validation-2026-11-06\\native-modbus-bare-abort-2026-11-06\\native_modbus_bare_abort_write_q.smbp",
+          "classification": "saved_project_identity_metadata"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/Name",
+          "before": "modbus_full_pin_write",
+          "after": "native_modbus_bare_abort_write_q",
+          "classification": "saved_project_identity_metadata"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[0]/InstructionLines/InstructionLineEntity[0]/InstructionLine",
+          "before": "BLK %WRITE_VAR0",
+          "after": "BLK   %WRITE_VAR0",
+          "classification": "IL_formatting_only"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[0]/InstructionLines/InstructionLineEntity[1]/InstructionLine",
+          "before": "LD %M22",
+          "after": "LD    %M22",
+          "classification": "IL_formatting_only"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[0]/InstructionLines/InstructionLineEntity[3]/InstructionLine",
+          "before": "LD %M23",
+          "after": "LD    %M23",
+          "classification": "IL_formatting_only"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[0]/IsLadderSelected",
+          "before": "false",
+          "after": "true",
+          "classification": "native_Ladder_selection"
+        },
+        {
+          "kind": "added_element",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[0]/LadderElements/LadderEntity[row=0,column=0,type=NormalContact]",
+          "before": null,
+          "after": {
+            "tag": "LadderEntity",
+            "attributes": {},
+            "text": "",
+            "tail": "",
+            "children": {
+              "ChosenConnection": {
+                "tag": "ChosenConnection",
+                "attributes": {},
+                "text": "Left, Right",
+                "tail": "",
+                "children": {}
+              },
+              "Column": {
+                "tag": "Column",
+                "attributes": {},
+                "text": "0",
+                "tail": "",
+                "children": {}
+              },
+              "Comment": {
+                "tag": "Comment",
+                "attributes": {},
+                "text": "",
+                "tail": "",
+                "children": {}
+              },
+              "Descriptor": {
+                "tag": "Descriptor",
+                "attributes": {},
+                "text": "%M22",
+                "tail": "",
+                "children": {}
+              },
+              "ElementType": {
+                "tag": "ElementType",
+                "attributes": {},
+                "text": "NormalContact",
+                "tail": "",
+                "children": {}
+              },
+              "Row": {
+                "tag": "Row",
+                "attributes": {},
+                "text": "0",
+                "tail": "",
+                "children": {}
+              }
+            }
+          },
+          "classification": "native_generated_graph_entity"
+        },
+        {
+          "kind": "added_element",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[0]/LadderElements/LadderEntity[row=0,column=1,type=WriteVarBasic]",
+          "before": null,
+          "after": {
+            "tag": "LadderEntity",
+            "attributes": {},
+            "text": "",
+            "tail": "",
+            "children": {
+              "ChosenConnection": {
+                "tag": "ChosenConnection",
+                "attributes": {},
+                "text": "Left",
+                "tail": "",
+                "children": {}
+              },
+              "Column": {
+                "tag": "Column",
+                "attributes": {},
+                "text": "1",
+                "tail": "",
+                "children": {}
+              },
+              "Comment": {
+                "tag": "Comment",
+                "attributes": {},
+                "text": "",
+                "tail": "",
+                "children": {}
+              },
+              "Descriptor": {
+                "tag": "Descriptor",
+                "attributes": {},
+                "text": "%WRITE_VAR0",
+                "tail": "",
+                "children": {}
+              },
+              "ElementType": {
+                "tag": "ElementType",
+                "attributes": {},
+                "text": "WriteVarBasic",
+                "tail": "",
+                "children": {}
+              },
+              "Row": {
+                "tag": "Row",
+                "attributes": {},
+                "text": "0",
+                "tail": "",
+                "children": {}
+              }
+            }
+          },
+          "classification": "native_generated_graph_entity"
+        },
+        {
+          "kind": "added_element",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[0]/LadderElements/LadderEntity[row=1,column=0,type=NormalContact]",
+          "before": null,
+          "after": {
+            "tag": "LadderEntity",
+            "attributes": {},
+            "text": "",
+            "tail": "",
+            "children": {
+              "ChosenConnection": {
+                "tag": "ChosenConnection",
+                "attributes": {},
+                "text": "Left, Right",
+                "tail": "",
+                "children": {}
+              },
+              "Column": {
+                "tag": "Column",
+                "attributes": {},
+                "text": "0",
+                "tail": "",
+                "children": {}
+              },
+              "Comment": {
+                "tag": "Comment",
+                "attributes": {},
+                "text": "",
+                "tail": "",
+                "children": {}
+              },
+              "Descriptor": {
+                "tag": "Descriptor",
+                "attributes": {},
+                "text": "%M23",
+                "tail": "",
+                "children": {}
+              },
+              "ElementType": {
+                "tag": "ElementType",
+                "attributes": {},
+                "text": "NormalContact",
+                "tail": "",
+                "children": {}
+              },
+              "Row": {
+                "tag": "Row",
+                "attributes": {},
+                "text": "1",
+                "tail": "",
+                "children": {}
+              }
+            }
+          },
+          "classification": "native_generated_graph_entity"
+        }
+      ],
+      "inherited_human_comment_unchanged": "GUI SERIALIZATION CANDIDATE; DO NOT RUN | UNPROVEN XML enum Q; FC15",
+      "private_readback": {
+        "path": "output/reports/native-modbus-bare-abort-readback-2026-11-06/write-readback.json",
+        "bytes": 13436,
+        "sha256": "139624de7a417796f2b86dad769c8f86b5e66d84e28f7dac49567b5eb1c6dbd4"
+      },
+      "product_probe_at_readback_source_pin": {
+        "accepted": false,
+        "error": "M200-E: mixed Ladder rows are outside the supported series subset",
+        "interpretation": "Observed native bare-ABORT graphics are still a product binding gap at this source pin; no gate changes made."
+      },
+      "readback_product_source_sha256": {
+        "m200/project.py": "92251c8012bd84373ba4afa64399bc2ff067ab8482a857e15abf013a2d9cf4d8",
+        "m200/communication_graph.py": "3589d930316fa8f916d2de2c5e9ceb8f2b4997ac463df7ec7ba97e403ce7cc2a",
+        "m200/communication.py": "105c1aef50e7ee00bc7c7142a5b6805d4ddf5f18fc04c5e60a52b78841a6b3b0",
+        "m200/communication_xml.py": "2762f0fd89552de18e21bb632e536eb4c1a9449702cdfb6444dfb58bb606aac2"
+      }
+    },
+    {
+      "case": "write_read",
+      "root_final_GUI_record": {
+        "saved_sha256": "ce46d988bcdaf5e9f0add2d17daff51deb0074240a937ca5f85aeed933ea8890",
+        "saved_bytes": 90288,
+        "root_personally_viewed_NoError_clean_save": true,
+        "one_rung_six_IL": true,
+        "native_graph_entities": 3,
+        "fresh_reopen_pending": false,
+        "RUN_Execute_network": false,
+        "root_personally_viewed_reopen_Programming_NoError": true,
+        "other_project_before_reopen": "register_fifo_self_status_watch7_editor_saved",
+        "saved_sha256_after_reopen": "ce46d988bcdaf5e9f0add2d17daff51deb0074240a937ca5f85aeed933ea8890"
+      },
+      "root_GUI_record_artifact": {
+        "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/observed/write_read/root-gui-observations.json",
+        "bytes": 530,
+        "sha256": "5bde5ef5c77c0f5a0d38a5676bdfbc302e324a093b380b5bea8abc75c9000798"
+      },
+      "original_candidate": {
+        "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/native_modbus_bare_abort_write_read_mw.smbp",
+        "bytes": 86955,
+        "sha256": "4ab81865a88fdd2babef60eca48cc5f6f18cfe5dcb5e693bb968425d5fc5834a"
+      },
+      "exact_native_editor_saved": {
+        "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/observed/write_read/native_modbus_bare_abort_write_read_mw_editor_saved.smbp",
+        "bytes": 90288,
+        "sha256": "ce46d988bcdaf5e9f0add2d17daff51deb0074240a937ca5f85aeed933ea8890"
+      },
+      "counts": {
+        "rungs": 1,
+        "lexical_IL_lines": 6,
+        "native_graph_entities": 3
+      },
+      "bare_IL": [
+        "BLK %WRITE_READ_VAR0",
+        "LD %M24",
+        "EXECUTE",
+        "LD %M25",
+        "ABORT",
+        "END_BLK"
+      ],
+      "typed_control_pins": {
+        "block": "%WRITE_READ_VAR0",
+        "Execute": [
+          "LD",
+          "%M24"
+        ],
+        "Abort": [
+          "LD",
+          "%M25"
+        ]
+      },
+      "typed_configuration": {
+        "%WRITE_READ_VAR0": {
+          "kind": "WRITE_READ_VAR",
+          "link": "SL1",
+          "id": 1,
+          "timeout_100ms": 100,
+          "obj_type": 0,
+          "first_obj": 17,
+          "quantity": 2,
+          "index_data": 300,
+          "first_read_obj": 41,
+          "read_quantity": 3,
+          "index_data_in": 400
+        }
+      },
+      "native_graph_fields": [
+        {
+          "ElementType": "NormalContact",
+          "Descriptor": "%M24",
+          "Comment": "",
+          "Row": "0",
+          "Column": "0",
+          "ChosenConnection": "Left, Right"
+        },
+        {
+          "ElementType": "NormalContact",
+          "Descriptor": "%M25",
+          "Comment": "",
+          "Row": "1",
+          "Column": "0",
+          "ChosenConnection": "Left, Right"
+        },
+        {
+          "ElementType": "WriteReadVarBasic",
+          "Descriptor": "%WRITE_READ_VAR0",
+          "Comment": "",
+          "Row": "0",
+          "Column": "1",
+          "ChosenConnection": "Left"
+        }
+      ],
+      "checks": {
+        "six_lexical_IL_lines_unchanged": true,
+        "actual_three_entity_native_graph_exact": true,
+        "typed_FB_configuration_equal": true,
+        "FB_dotnet_wrappers_equal": true,
+        "hardware_exact_typed_tree_equal": true,
+        "actual_Man21_SL1_master": true,
+        "all_allocation_nodes_equal": true,
+        "task_nodes_equal": true,
+        "rung_names_labels_human_comments_equal": true,
+        "program_symbol_trees_equal": true,
+        "watch_trees_equal": true,
+        "all_differences_classified": true,
+        "complete_XML_closes_after_reported_changes": true,
+        "source_and_saved_bytes_preserved": true
+      },
+      "real_difference_count": 9,
+      "real_differences_by_class": {
+        "saved_project_identity_metadata": 2,
+        "IL_formatting_only": 3,
+        "native_Ladder_selection": 1,
+        "native_generated_graph_entity": 3
+      },
+      "all_real_differences": [
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/FullName",
+          "before": "P:\\compiler-validation-2026-11-06\\modbus_full_pin_write_read.smbp",
+          "after": "P:\\compiler-validation-2026-11-06\\native-modbus-bare-abort-2026-11-06\\native_modbus_bare_abort_write_read_mw.smbp",
+          "classification": "saved_project_identity_metadata"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/Name",
+          "before": "modbus_full_pin_write_read",
+          "after": "native_modbus_bare_abort_write_read_mw",
+          "classification": "saved_project_identity_metadata"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[0]/InstructionLines/InstructionLineEntity[0]/InstructionLine",
+          "before": "BLK %WRITE_READ_VAR0",
+          "after": "BLK   %WRITE_READ_VAR0",
+          "classification": "IL_formatting_only"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[0]/InstructionLines/InstructionLineEntity[1]/InstructionLine",
+          "before": "LD %M24",
+          "after": "LD    %M24",
+          "classification": "IL_formatting_only"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[0]/InstructionLines/InstructionLineEntity[3]/InstructionLine",
+          "before": "LD %M25",
+          "after": "LD    %M25",
+          "classification": "IL_formatting_only"
+        },
+        {
+          "kind": "text",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[0]/IsLadderSelected",
+          "before": "false",
+          "after": "true",
+          "classification": "native_Ladder_selection"
+        },
+        {
+          "kind": "added_element",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[0]/LadderElements/LadderEntity[row=0,column=0,type=NormalContact]",
+          "before": null,
+          "after": {
+            "tag": "LadderEntity",
+            "attributes": {},
+            "text": "",
+            "tail": "",
+            "children": {
+              "ChosenConnection": {
+                "tag": "ChosenConnection",
+                "attributes": {},
+                "text": "Left, Right",
+                "tail": "",
+                "children": {}
+              },
+              "Column": {
+                "tag": "Column",
+                "attributes": {},
+                "text": "0",
+                "tail": "",
+                "children": {}
+              },
+              "Comment": {
+                "tag": "Comment",
+                "attributes": {},
+                "text": "",
+                "tail": "",
+                "children": {}
+              },
+              "Descriptor": {
+                "tag": "Descriptor",
+                "attributes": {},
+                "text": "%M24",
+                "tail": "",
+                "children": {}
+              },
+              "ElementType": {
+                "tag": "ElementType",
+                "attributes": {},
+                "text": "NormalContact",
+                "tail": "",
+                "children": {}
+              },
+              "Row": {
+                "tag": "Row",
+                "attributes": {},
+                "text": "0",
+                "tail": "",
+                "children": {}
+              }
+            }
+          },
+          "classification": "native_generated_graph_entity"
+        },
+        {
+          "kind": "added_element",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[0]/LadderElements/LadderEntity[row=0,column=1,type=WriteReadVarBasic]",
+          "before": null,
+          "after": {
+            "tag": "LadderEntity",
+            "attributes": {},
+            "text": "",
+            "tail": "",
+            "children": {
+              "ChosenConnection": {
+                "tag": "ChosenConnection",
+                "attributes": {},
+                "text": "Left",
+                "tail": "",
+                "children": {}
+              },
+              "Column": {
+                "tag": "Column",
+                "attributes": {},
+                "text": "1",
+                "tail": "",
+                "children": {}
+              },
+              "Comment": {
+                "tag": "Comment",
+                "attributes": {},
+                "text": "",
+                "tail": "",
+                "children": {}
+              },
+              "Descriptor": {
+                "tag": "Descriptor",
+                "attributes": {},
+                "text": "%WRITE_READ_VAR0",
+                "tail": "",
+                "children": {}
+              },
+              "ElementType": {
+                "tag": "ElementType",
+                "attributes": {},
+                "text": "WriteReadVarBasic",
+                "tail": "",
+                "children": {}
+              },
+              "Row": {
+                "tag": "Row",
+                "attributes": {},
+                "text": "0",
+                "tail": "",
+                "children": {}
+              }
+            }
+          },
+          "classification": "native_generated_graph_entity"
+        },
+        {
+          "kind": "added_element",
+          "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits[SectionNumber=0]/Rungs/RungEntity[0]/LadderElements/LadderEntity[row=1,column=0,type=NormalContact]",
+          "before": null,
+          "after": {
+            "tag": "LadderEntity",
+            "attributes": {},
+            "text": "",
+            "tail": "",
+            "children": {
+              "ChosenConnection": {
+                "tag": "ChosenConnection",
+                "attributes": {},
+                "text": "Left, Right",
+                "tail": "",
+                "children": {}
+              },
+              "Column": {
+                "tag": "Column",
+                "attributes": {},
+                "text": "0",
+                "tail": "",
+                "children": {}
+              },
+              "Comment": {
+                "tag": "Comment",
+                "attributes": {},
+                "text": "",
+                "tail": "",
+                "children": {}
+              },
+              "Descriptor": {
+                "tag": "Descriptor",
+                "attributes": {},
+                "text": "%M25",
+                "tail": "",
+                "children": {}
+              },
+              "ElementType": {
+                "tag": "ElementType",
+                "attributes": {},
+                "text": "NormalContact",
+                "tail": "",
+                "children": {}
+              },
+              "Row": {
+                "tag": "Row",
+                "attributes": {},
+                "text": "1",
+                "tail": "",
+                "children": {}
+              }
+            }
+          },
+          "classification": "native_generated_graph_entity"
+        }
+      ],
+      "inherited_human_comment_unchanged": "GUI SERIALIZATION CANDIDATE; DO NOT RUN | UNPROVEN typed WRITE_READ_VAR; IL-only; official Ladder conversion required",
+      "private_readback": {
+        "path": "output/reports/native-modbus-bare-abort-readback-2026-11-06/write_read-readback.json",
+        "bytes": 13593,
+        "sha256": "e9f84b2a8b201a6d6e54fd6fdc58e9ce4f6a0790886df5a3a59e44cf3f296f62"
+      },
+      "product_probe_at_readback_source_pin": {
+        "accepted": false,
+        "error": "M200-E: mixed Ladder rows are outside the supported series subset",
+        "interpretation": "Observed native bare-ABORT graphics are still a product binding gap at this source pin; no gate changes made."
+      },
+      "readback_product_source_sha256": {
+        "m200/project.py": "92251c8012bd84373ba4afa64399bc2ff067ab8482a857e15abf013a2d9cf4d8",
+        "m200/communication_graph.py": "3589d930316fa8f916d2de2c5e9ceb8f2b4997ac463df7ec7ba97e403ce7cc2a",
+        "m200/communication.py": "105c1aef50e7ee00bc7c7142a5b6805d4ddf5f18fc04c5e60a52b78841a6b3b0",
+        "m200/communication_xml.py": "2762f0fd89552de18e21bb632e536eb4c1a9449702cdfb6444dfb58bb606aac2"
+      }
+    }
+  ],
+  "profile": {
+    "CPU": "TM200CE40T",
+    "actual_ManagementLevel": "FunctLevelMan21_0",
+    "human_level": "14.0",
+    "link": "SL1 master",
+    "observed_objects": {
+      "READ_VAR": "I / FC2",
+      "WRITE_VAR": "Q / FC15",
+      "WRITE_READ_VAR": "MW / FC23"
+    }
+  },
+  "native_graph_contract": {
+    "entity_count_per_project": 3,
+    "contacts": [
+      {
+        "role": "Execute",
+        "type": "NormalContact",
+        "row": 0,
+        "column": 0,
+        "connection": "Left, Right"
+      },
+      {
+        "role": "Abort",
+        "type": "NormalContact",
+        "row": 1,
+        "column": 0,
+        "connection": "Left, Right"
+      }
+    ],
+    "block": {
+      "row": 0,
+      "column": 1,
+      "connection": "Left",
+      "class": "Per-kind ReadVarBasic / WriteVarBasic / WriteReadVarBasic"
+    },
+    "connected_status_outputs": 0,
+    "OUT_BLK_added": false,
+    "source_six_line_IL_preserved": true,
+    "not_extrapolated_from_full_pin_27_entity_graph": true
+  },
+  "readback_summary": {
+    "each_project": [
+      1,
+      6,
+      3
+    ],
+    "meaning": "rungs,lexical IL lines,native graph entities",
+    "real_differences_each": {
+      "saved_project_identity_metadata": 2,
+      "IL_formatting_only": 3,
+      "native_Ladder_selection": 1,
+      "native_generated_graph_entity": 3
+    },
+    "real_differences_each_total": 9,
+    "hardware_all_allocations_tasks_and_FB_config_wrappers_equal": true,
+    "source_human_comments_symbols_and_watch_trees_equal": true,
+    "closed_complete_typed_tree_after_listed_changes": true
+  },
+  "source_package": {
+    "manifest": {
+      "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/MANIFEST.json",
+      "bytes": 12046,
+      "sha256": "15e16583ebd2c67684e6b62ae19ba1ec540f9cff43f740dec1b0d88339146986"
+    },
+    "guide": {
+      "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/GUIDE.md",
+      "bytes": 2818,
+      "sha256": "8d9bfa48fb291bd2669747aea3d53e5800cf3a8d97dfbc216a63ba53faa41a1a"
+    },
+    "checksums": {
+      "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/SHA256SUMS",
+      "bytes": 1822,
+      "sha256": "15d537d2766d5b8818557161dc141eece4b4fb2965a44193e07b7845907a08b8"
+    },
+    "all18_frozen_initial_files_unchanged": true,
+    "preparation_provenance": [
+      {
+        "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/provenance/read.json",
+        "bytes": 3180,
+        "sha256": "26cabca0f8d8b2ef794147643b650d8a0d97672561af46048ab02a56e6f43ecf"
+      },
+      {
+        "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/provenance/write.json",
+        "bytes": 3192,
+        "sha256": "200f63054862ac85feb11f0aad2b3a819aebba399ecb57d5a2307f58f4735caf"
+      },
+      {
+        "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/provenance/write_read.json",
+        "bytes": 3252,
+        "sha256": "a3c4b7aa024321cde4af15fcc649a0dab7dc8f23b9f5bd23e136f4301ce2e844"
+      }
+    ],
+    "historical_labels_preserved": "Inherited Generated C++/full_pin/UNPROVEN comments and preparation pending fields are preserved. They describe the parent/preparation, not product provenance or this later result."
+  },
+  "procedure": "Open the exact writable shared candidate offline; convert the owned rung with the official editor; inspect No error and parameters; Ctrl+S and wait for clean title; filesystem-clone actual saved bytes; open another project; freshly reopen exact saved clone in Programming and inspect No error. Not a Save As claim.",
+  "independent_review": {
+    "readback_reproducer": {
+      "path": "output/reports/native-modbus-bare-abort-readback-2026-11-06/readback.py",
+      "bytes": 11043,
+      "sha256": "d857d53c58eda8177da8635505f77b7069f4c4fc681a253fef5fa32c4f86777a"
+    },
+    "all_six_exact_save_reopen_PNGs_personally_viewed": true,
+    "UI_NoError_clean_titles_parameters_and_two_input_binding_match": true,
+    "all_candidate_saved_and_copy_hashes_verified": true,
+    "no_GUI_input_by_reviewer": true,
+    "scope": "Typed codecs and read-only XML comparison only. No current whole-project product admission inferred; product probes are historical to their pinned source copies and separate implementation work may follow."
+  },
+  "PNG_copies": [
+    {
+      "case": "read",
+      "stage": "save",
+      "source": {
+        "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/observed/read/save.png",
+        "bytes": 334126,
+        "sha256": "67c8a3d1dcfd48b1e11912221d2207caf4c9552d86970fe4b7e6b7bb46d7ea98"
+      },
+      "public_copy": {
+        "path": "docs/validation/editor-evidence/modbus-bare-abort/read-save.png",
+        "bytes": 334126,
+        "sha256": "67c8a3d1dcfd48b1e11912221d2207caf4c9552d86970fe4b7e6b7bb46d7ea98"
+      },
+      "byte_identical": true
+    },
+    {
+      "case": "read",
+      "stage": "reopen",
+      "source": {
+        "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/observed/read/reopen.png",
+        "bytes": 327364,
+        "sha256": "47c0fdf286fbfbb7d848d685ffa502763af74a479792c28359020586de181137"
+      },
+      "public_copy": {
+        "path": "docs/validation/editor-evidence/modbus-bare-abort/read-reopen.png",
+        "bytes": 327364,
+        "sha256": "47c0fdf286fbfbb7d848d685ffa502763af74a479792c28359020586de181137"
+      },
+      "byte_identical": true
+    },
+    {
+      "case": "write",
+      "stage": "save",
+      "source": {
+        "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/observed/write/save.png",
+        "bytes": 334770,
+        "sha256": "7462f73e97e9a7426e4c75d4ffe8c11508ea36fd0dd5fe05696e2e72defc94cd"
+      },
+      "public_copy": {
+        "path": "docs/validation/editor-evidence/modbus-bare-abort/write-save.png",
+        "bytes": 334770,
+        "sha256": "7462f73e97e9a7426e4c75d4ffe8c11508ea36fd0dd5fe05696e2e72defc94cd"
+      },
+      "byte_identical": true
+    },
+    {
+      "case": "write",
+      "stage": "reopen",
+      "source": {
+        "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/observed/write/reopen.png",
+        "bytes": 328252,
+        "sha256": "3d43e459b0906e3dd3afa1a40f6466118ce07d2c71d3a14c63d8d6326f65ebe3"
+      },
+      "public_copy": {
+        "path": "docs/validation/editor-evidence/modbus-bare-abort/write-reopen.png",
+        "bytes": 328252,
+        "sha256": "3d43e459b0906e3dd3afa1a40f6466118ce07d2c71d3a14c63d8d6326f65ebe3"
+      },
+      "byte_identical": true
+    },
+    {
+      "case": "write_read",
+      "stage": "save",
+      "source": {
+        "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/observed/write_read/save.png",
+        "bytes": 342893,
+        "sha256": "510716eb286f6b670a84d9c364b571ae3b4249c2a9e1ef29f833b32269fb588e"
+      },
+      "public_copy": {
+        "path": "docs/validation/editor-evidence/modbus-bare-abort/write_read-save.png",
+        "bytes": 342893,
+        "sha256": "510716eb286f6b670a84d9c364b571ae3b4249c2a9e1ef29f833b32269fb588e"
+      },
+      "byte_identical": true
+    },
+    {
+      "case": "write_read",
+      "stage": "reopen",
+      "source": {
+        "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/observed/write_read/reopen.png",
+        "bytes": 336507,
+        "sha256": "265d76a541a7b12e381b436617528598ddcae60425fd7536a274d4f684f4fc08"
+      },
+      "public_copy": {
+        "path": "docs/validation/editor-evidence/modbus-bare-abort/write_read-reopen.png",
+        "bytes": 336507,
+        "sha256": "265d76a541a7b12e381b436617528598ddcae60425fd7536a274d4f684f4fc08"
+      },
+      "byte_identical": true
+    }
+  ],
+  "counts": {
+    "native_projects": 3,
+    "save_reopen_capture_files": 6,
+    "unique_PNG_hashes": 6,
+    "PNG_bytes": 2003912,
+    "runtime_scans": null,
+    "new_unit_tests": null
+  },
+  "limits": [
+    "No RUN, Execute/Abort assertion, exchange, network client, simulator communication or physical PLC test occurred in this stage.",
+    "These hand-built diagnostics are not genuine current-CLI products.",
+    "Normal direct M predicates and this Man21/SL1/object context only; other predicates, profiles, dynamic fields, status/output forms and runtime cancellation are unproven.",
+    "Tool binding implementation/admission and its tests are a separate stage; no compiler or validation gate is changed by this report.",
+    "No full suite or new unit-test count is attributed to the GUI observations."
+  ]
+}
