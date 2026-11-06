@@ -1,0 +1,3712 @@
+{
+  "date": "2026-11-06",
+  "classification": "PASS exact genuine CLI product static open/save/fresh-reopen, bounded local readbacks and separately recorded WR STOP-only preparation",
+  "scope": "Three static GUI products and a separate exact-file WR STOP-only sampled preparation stage; no RUN or native communication execution",
+  "repository_head_at_report": "b61a6a4fd15e99a7c70c7af9a31cbd93dac703df",
+  "official_environment": {
+    "target": "TM200CE40T",
+    "editor": "EcoStruxure Machine Expert Basic1.4 build484 in existing Mac Wine lab",
+    "actual_level": "FunctLevelMan21_0/human14.0",
+    "actual_link": "SL1 master",
+    "operator": "root only",
+    "save_procedure": "Ctrl+S to writable disposable P: working copies; filesystem-clone saved bytes; another project opened before fresh saved-clone reopen; no Save As claim",
+    "untrusted_DLL_banner": "Visible unchanged in exact No error captures; no cause/resolution claim"
+  },
+  "static_root_aggregate": {
+    "path": "output/editor-validation/modbus-generated-bare-abort-2026-11-06/ROOT-STATIC-OBSERVATIONS.json",
+    "bytes": 5945,
+    "sha256": "0a3173830b3e7ceb6a58d578376fdf8f9c4303b971ef1cf051f1eeedd39cd1c9"
+  },
+  "static_journal": {
+    "record": {
+      "path": "output/editor-validation/modbus-generated-bare-abort-2026-11-06/static-actions.jsonl",
+      "bytes": 10389,
+      "sha256": "f0b70e28a7e951293065eb7cc617297b6752cd9eff5377776514824bd95c3aff"
+    },
+    "complete_full_argument_entries": 12,
+    "all_exit0": true
+  },
+  "all_six_static_captures_personally_viewed_by_root_and_reviewer": true,
+  "cases": [
+    {
+      "case": "read_no_status",
+      "official_static_stage": "PASS: actual CLI original opened No error, Ctrl+S, different project, fresh saved clone Programming No error",
+      "root_record": {
+        "source": {
+          "case": "read_no_status",
+          "original": {
+            "path": "output/diagnostics/modbus-generated-bare-abort-candidates-2026-11-06/released-run/read_no_status-build/program.smbp",
+            "bytes": 151097,
+            "sha256": "3481058f61b536d06a88b158e1b0cec45cf2f2750e7589c7dfb6b858b3f2bdc6"
+          },
+          "shared_path": "/Users/tommy/Offline/projects/shared-folder/plc/compiler-validation-2026-11-06/modbus_generated_bare_abort_read_no_status.smbp",
+          "shared_bytes": 151097,
+          "shared_sha256": "3481058f61b536d06a88b158e1b0cec45cf2f2750e7589c7dfb6b858b3f2bdc6",
+          "shape": {
+            "bundle": "output/diagnostics/modbus-generated-bare-abort-candidates-2026-11-06/released-run/read_no_status-build",
+            "canonical_rungs": 19,
+            "canonical_IL": 44,
+            "native_rungs": 19,
+            "native_IL": 44,
+            "bare_graph_entities": 3,
+            "hardware_equal": true,
+            "actual_level": "FunctLevelMan21_0",
+            "config": {
+              "kind": "READ_VAR",
+              "link": "SL1",
+              "id": 1,
+              "timeout_100ms": 100,
+              "obj_type": 1,
+              "first_obj": 17,
+              "quantity": 17,
+              "index_data": 200,
+              "first_read_obj": 0,
+              "read_quantity": 1,
+              "index_data_in": 0
+            }
+          }
+        },
+        "saved_bytes": 155988,
+        "saved_sha256": "5a5bc2034e39d1f7bdd9a8e97c9c18c78b0e5e9d30548b683c769932525ea640",
+        "all_rungs_communications_timers_equal": true,
+        "fresh_reopen_pending": false,
+        "fresh_reopen_Programming_No_error": true,
+        "root_personally_viewed": true,
+        "reopen_capture": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793974472064202000-2146.png",
+        "different_project_before_reopen": "modbus_generated_bare_abort_write_read_timer"
+      },
+      "readback": {
+        "case": "read_no_status",
+        "classification": "PASS complete static readback and existing literal local-model replays",
+        "original": {
+          "path": "output/diagnostics/modbus-generated-bare-abort-candidates-2026-11-06/released-run/read_no_status-build/program.smbp",
+          "bytes": 151097,
+          "sha256": "3481058f61b536d06a88b158e1b0cec45cf2f2750e7589c7dfb6b858b3f2bdc6"
+        },
+        "editor_saved": {
+          "path": "output/editor-validation/modbus-generated-bare-abort-2026-11-06/observed/read_no_status/modbus_bare_read_editor_saved.smbp",
+          "bytes": 155988,
+          "sha256": "5a5bc2034e39d1f7bdd9a8e97c9c18c78b0e5e9d30548b683c769932525ea640"
+        },
+        "complete_typed_XML_deltas": [
+          {
+            "path": "ProjectDescriptor/FullName",
+            "before": "program.smbp",
+            "after": "P:\\compiler-validation-2026-11-06\\modbus_generated_bare_abort_read_no_status.smbp"
+          },
+          {
+            "path": "ProjectDescriptor/Name",
+            "before": "m200-cpp EXPERIMENTAL",
+            "after": "modbus_generated_bare_abort_read_no_status"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/MemoryBitsMemoryAllocation/Allocation",
+            "before": [
+              "Allocation",
+              [],
+              "Automatic",
+              []
+            ],
+            "after": null
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[0]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M500_500"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[1]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M501_501"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[2]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M502_502"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[3]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M503_503"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[4]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_2_IMAGE_504"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[5]/LadderElements/LadderEntity[0]/Comment",
+            "before": "",
+            "after": "Indicates the first controller cycle in RUN mode"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[5]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "SB_FIRSTRUN"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[5]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M502_502"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[6]/LadderElements/LadderEntity[0]/Comment",
+            "before": "",
+            "after": "Indicates the first controller cycle in RUN mode"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[6]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "SB_FIRSTRUN"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[6]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M503_503"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[7]/LadderElements/LadderEntity[0]/Comment",
+            "before": "",
+            "after": "Indicates the first controller cycle in RUN mode"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[7]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "SB_FIRSTRUN"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[7]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_2_IMAGE_504"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[8]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M500_500"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[8]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M502_502"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[9]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M501_501"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[9]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M503_503"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[10]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M502_502"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[10]/LadderElements/LadderEntity[1]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M503_503"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[11]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M500_500"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[11]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M502_502"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[12]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M501_501"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[12]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M503_503"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[13]/LadderElements/LadderEntity[0]/ComparisonExpression",
+            "before": "%MW200=-32767",
+            "after": "%MW200 = -32767"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[13]/LadderElements/LadderEntity[9]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M500_500"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[14]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M500_500"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[14]/LadderElements/LadderEntity[1]/ComparisonExpression",
+            "before": "%MW201=1",
+            "after": "%MW201 = 1"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[14]/LadderElements/LadderEntity[9]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M501_501"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[15]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M500_500"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[15]/LadderElements/LadderEntity[1]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M501_501"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[15]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_2_IMAGE_504"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[16]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M502_502"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[17]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M503_503"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[18]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "OUTPUT_2_IMAGE_504"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/TimersMemoryAllocation/Allocation",
+            "before": [
+              "Allocation",
+              [],
+              "Automatic",
+              []
+            ],
+            "after": null
+          }
+        ],
+        "delta_categories": {
+          "root identity": 2,
+          "explicit Automatic allocation child omitted": 2,
+          "Ladder graph": 35
+        },
+        "hardware_configuration_task_watch_timer_equal": {
+          "HardwareConfiguration": true,
+          "ManagementLevel": true,
+          "SoftwareConfiguration/MastTask": true,
+          "SoftwareConfiguration/FastTask": true,
+          "SoftwareConfiguration/CpuBehavior": true,
+          "SoftwareConfiguration/WatchLists": true,
+          "SoftwareConfiguration/FunctionBlocks": true,
+          "SoftwareConfiguration/Timers": true
+        },
+        "allocation_nodes_equal": {
+          "ConstantWordsMemoryAllocation": true,
+          "RegistersMemoryAllocation": true,
+          "DrumsMemoryAllocation": true,
+          "SbrsMemoryAllocation": true,
+          "ScsMemoryAllocation": true,
+          "FcsMemoryAllocation": true,
+          "SchsMemoryAllocation": true,
+          "HscsMemoryAllocation": true,
+          "PtosMemoryAllocation": true,
+          "CountersMemoryAllocation": true,
+          "MemoryBitsMemoryAllocation": false,
+          "TimersMemoryAllocation": false,
+          "MemoryWordsMemoryAllocation": true
+        },
+        "allocation_child_omissions": [
+          "MemoryBitsMemoryAllocation",
+          "TimersMemoryAllocation"
+        ],
+        "rung_names_comments_labels_equal": {
+          "Name": true,
+          "MainComment": true,
+          "Label": true
+        },
+        "instruction_comments_and_lexical_IL_equal": true,
+        "actual_reader_rungs_configs_timers_counters_equal": true,
+        "original_and_saved_shape": {
+          "rungs": 19,
+          "IL": 44,
+          "native_graph_entities_before": [
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            3,
+            11,
+            11,
+            10,
+            10,
+            11,
+            11,
+            11,
+            11
+          ],
+          "native_graph_entities_after": [
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            3,
+            11,
+            11,
+            10,
+            10,
+            11,
+            11,
+            11,
+            11
+          ]
+        },
+        "communications": {
+          "%READ_VAR0": {
+            "kind": "READ_VAR",
+            "link": "SL1",
+            "id": 1,
+            "timeout_100ms": 100,
+            "obj_type": 1,
+            "first_obj": 17,
+            "quantity": 17,
+            "index_data": 200,
+            "first_read_obj": 0,
+            "read_quantity": 1,
+            "index_data_in": 0
+          }
+        },
+        "reverse_CPP": {
+          "source": {
+            "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/read_no_status/editor-saved-audit.cpp",
+            "bytes": 2002,
+            "sha256": "524e42dd32c9b6f7dba8c70da47640517ff24146928943dcaa10e37d31647df5"
+          },
+          "rebuilt_project": {
+            "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/read_no_status/rebuilt/program.smbp",
+            "bytes": 212026,
+            "sha256": "5b2f5d7247c9292403ad230d7d14ec367bf089c4bae68dcf5dd7d40348a24f4c"
+          },
+          "rungs": 36,
+          "IL": 80,
+          "configs_and_timers_retained": true
+        },
+        "replayed_existing_timeline_positions": 14,
+        "replay_paths": [
+          "editor_saved",
+          "audit_CPP_IR",
+          "audit_reimport"
+        ],
+        "native_absent_path": true,
+        "original_and_saved_inputs_unchanged": true,
+        "official_open_save_reopen": "Root evidence recorded separately; no acceptance inferred by this static/model check",
+        "runtime_limits": "Local callback and absent SDK/VM behavior only; no official compilation, RUN or exchange performed",
+        "graph_changed_fields": {
+          "Symbol": 30,
+          "Comment": 3,
+          "ComparisonExpression": 2
+        },
+        "graph_changes_are_annotations_or_lexical_whitespace": true,
+        "timer_default_child_omissions": [],
+        "timer_configuration_equal_after_exact_observed_default_omissions": true,
+        "model_symbols_equal": true,
+        "timers": {}
+      },
+      "saved_shared_clone": {
+        "path": "/Users/tommy/Offline/projects/shared-folder/plc/compiler-validation-2026-11-06/modbus_bare_read_editor_saved.smbp",
+        "bytes": 155988,
+        "sha256": "5a5bc2034e39d1f7bdd9a8e97c9c18c78b0e5e9d30548b683c769932525ea640"
+      },
+      "root_case_record": {
+        "path": "output/editor-validation/modbus-generated-bare-abort-2026-11-06/observed/read_no_status/save-record.json",
+        "bytes": 1694,
+        "sha256": "3386cd99a143bef5a963d9d1315aa65de3da8f0fcc9c658208ff0c82355c4bd4"
+      },
+      "public_source": {
+        "path": "examples/editor_validation/modbus_bare_abort_read.cpp",
+        "bytes": 341,
+        "sha256": "d05a99614f19c2383e09b91ddfa971880309b201d5a11907e166b8109801fab7"
+      },
+      "public_source_original_byte_exact": true,
+      "public_path_rebuild": {
+        "case": "read_no_status",
+        "frozen_original": "output/diagnostics/modbus-generated-bare-abort-candidates-2026-11-06/bare_abort_read_no_status.cpp",
+        "public_source": "examples/editor_validation/modbus_bare_abort_read.cpp",
+        "bytes": 341,
+        "sha256": "d05a99614f19c2383e09b91ddfa971880309b201d5a11907e166b8109801fab7",
+        "byte_exact": true,
+        "CLI_command": [
+          "/Users/tommy/Offline/projects/m200-cpp/m200c",
+          "compile",
+          "/Users/tommy/Offline/projects/m200-cpp/examples/editor_validation/modbus_bare_abort_read.cpp",
+          "--template",
+          "/Users/tommy/Offline/projects/m200-cpp/tests/fixtures/official_tm200ce40t_modbus_full_pin_read.smbp",
+          "-o",
+          "/Users/tommy/Offline/projects/m200-cpp/output/reports/modbus-bare-generated-editor-review-2026-11-06/public-examples/read_no_status"
+        ],
+        "compile_log": {
+          "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/public-read_no_status-compile.log",
+          "bytes": 6429,
+          "sha256": "0330edbdcb33900b833c6ceeeec4827bf00be60e173905689c6070d8bf5592bd"
+        },
+        "template": {
+          "path": "tests/fixtures/official_tm200ce40t_modbus_full_pin_read.smbp",
+          "bytes": 97080,
+          "sha256": "8154e130ce73b6a1b6e90f5876264437ec36778207fc38c3a3661152059f9e50"
+        },
+        "generated_project": {
+          "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/public-examples/read_no_status/program.smbp",
+          "bytes": 151073,
+          "sha256": "44f6c1d55b0c24f6cd9a05891f0c97643636d8baad48e31ca9dc2cb15f8039fa"
+        },
+        "canonical_IL_configuration_timers_counters_symbols_equal": true,
+        "editor_readback_canonical_equal": true,
+        "rungs": 19,
+        "IL": 44,
+        "changed_metadata_fields": [
+          "rung_origins",
+          "source"
+        ],
+        "source_origin_filename_changes": [
+          {
+            "rung": 8,
+            "before": {
+              "file": "bare_abort_read_no_status.cpp",
+              "line": 7,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_read.cpp",
+              "line": 7,
+              "column": 3
+            }
+          },
+          {
+            "rung": 9,
+            "before": {
+              "file": "bare_abort_read_no_status.cpp",
+              "line": 7,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_read.cpp",
+              "line": 7,
+              "column": 3
+            }
+          },
+          {
+            "rung": 10,
+            "before": {
+              "file": "bare_abort_read_no_status.cpp",
+              "line": 7,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_read.cpp",
+              "line": 7,
+              "column": 3
+            }
+          },
+          {
+            "rung": 11,
+            "before": {
+              "file": "bare_abort_read_no_status.cpp",
+              "line": 8,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_read.cpp",
+              "line": 8,
+              "column": 3
+            }
+          },
+          {
+            "rung": 12,
+            "before": {
+              "file": "bare_abort_read_no_status.cpp",
+              "line": 9,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_read.cpp",
+              "line": 9,
+              "column": 3
+            }
+          },
+          {
+            "rung": 13,
+            "before": {
+              "file": "bare_abort_read_no_status.cpp",
+              "line": 10,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_read.cpp",
+              "line": 10,
+              "column": 3
+            }
+          },
+          {
+            "rung": 14,
+            "before": {
+              "file": "bare_abort_read_no_status.cpp",
+              "line": 10,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_read.cpp",
+              "line": 10,
+              "column": 3
+            }
+          },
+          {
+            "rung": 15,
+            "before": {
+              "file": "bare_abort_read_no_status.cpp",
+              "line": 10,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_read.cpp",
+              "line": 10,
+              "column": 3
+            }
+          }
+        ],
+        "source_origin_line_column_generated_fields_retained": true,
+        "original_CPP_and_project_unchanged": true,
+        "official_editor_acceptance_of_public_path_rebuild": "Not claimed; actual editor-tested original projects are separately hashed"
+      },
+      "captures": [
+        {
+          "case": "read_no_status",
+          "stage": "official Ctrl+S save completed: Programming No error",
+          "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793973413439327000-2146.png",
+          "path": "docs/validation/editor-evidence/modbus-bare-generated/read-save.png",
+          "bytes": 384774,
+          "sha256": "443a2d22538531881606e75fa1740ef07105a82068b23cddb0d345098fe29c70",
+          "independently_visually_reviewed": true
+        },
+        {
+          "case": "read_no_status",
+          "stage": "fresh saved-clone Programming reopen No error after another project",
+          "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793974472064202000-2146.png",
+          "path": "docs/validation/editor-evidence/modbus-bare-generated/read-reopen.png",
+          "bytes": 383827,
+          "sha256": "083c62adcd8c58134b256a4ea9ed80d24c6f107830459038f111d762ec20c4ca",
+          "independently_visually_reviewed": true
+        }
+      ],
+      "compiler_product_XML_hand_edits": false
+    },
+    {
+      "case": "write_aliases",
+      "official_static_stage": "PASS: actual CLI original opened No error, Ctrl+S, different project, fresh saved clone Programming No error",
+      "root_record": {
+        "source": {
+          "case": "write_aliases",
+          "original": {
+            "path": "output/diagnostics/modbus-generated-bare-abort-candidates-2026-11-06/released-run/write_aliases-build/program.smbp",
+            "bytes": 192845,
+            "sha256": "225bc26220b731b1bcedbae6e2d4c5b81321873285346c881da78164a620ad55"
+          },
+          "shared_path": "/Users/tommy/Offline/projects/shared-folder/plc/compiler-validation-2026-11-06/modbus_generated_bare_abort_write_aliases.smbp",
+          "shared_bytes": 192845,
+          "shared_sha256": "225bc26220b731b1bcedbae6e2d4c5b81321873285346c881da78164a620ad55",
+          "shape": {
+            "bundle": "output/diagnostics/modbus-generated-bare-abort-candidates-2026-11-06/released-run/write_aliases-build",
+            "canonical_rungs": 31,
+            "canonical_IL": 66,
+            "native_rungs": 31,
+            "native_IL": 66,
+            "bare_graph_entities": 3,
+            "hardware_equal": true,
+            "actual_level": "FunctLevelMan21_0",
+            "config": {
+              "kind": "WRITE_VAR",
+              "link": "SL1",
+              "id": 1,
+              "timeout_100ms": 100,
+              "obj_type": 2,
+              "first_obj": 73,
+              "quantity": 17,
+              "index_data": 240,
+              "first_read_obj": 0,
+              "read_quantity": 1,
+              "index_data_in": 0
+            }
+          }
+        },
+        "saved_bytes": 199029,
+        "saved_sha256": "3d9c7d0f43197e550394ad5cd19295b3a5195ede368c597a51633aca98f51334",
+        "all_rungs_communications_timers_equal": true,
+        "fresh_reopen_pending": false,
+        "fresh_reopen_Programming_No_error": true,
+        "root_personally_viewed": true,
+        "reopen_capture": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793974884253465000-2146.png",
+        "different_project_before_reopen": "modbus_bare_read_editor_saved"
+      },
+      "readback": {
+        "case": "write_aliases",
+        "classification": "PASS complete static readback and existing literal local-model replays",
+        "original": {
+          "path": "output/diagnostics/modbus-generated-bare-abort-candidates-2026-11-06/released-run/write_aliases-build/program.smbp",
+          "bytes": 192845,
+          "sha256": "225bc26220b731b1bcedbae6e2d4c5b81321873285346c881da78164a620ad55"
+        },
+        "editor_saved": {
+          "path": "output/editor-validation/modbus-generated-bare-abort-2026-11-06/observed/write_aliases/modbus_bare_write_editor_saved.smbp",
+          "bytes": 199029,
+          "sha256": "3d9c7d0f43197e550394ad5cd19295b3a5195ede368c597a51633aca98f51334"
+        },
+        "complete_typed_XML_deltas": [
+          {
+            "path": "ProjectDescriptor/FullName",
+            "before": "program.smbp",
+            "after": "P:\\compiler-validation-2026-11-06\\modbus_generated_bare_abort_write_aliases.smbp"
+          },
+          {
+            "path": "ProjectDescriptor/Name",
+            "before": "m200-cpp EXPERIMENTAL",
+            "after": "modbus_generated_bare_abort_write_aliases"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/MemoryBitsMemoryAllocation/Allocation",
+            "before": [
+              "Allocation",
+              [],
+              "Automatic",
+              []
+            ],
+            "after": null
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[0]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M502_502"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[1]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M501_501"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[2]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "INPUT_2_SNAPSHOT_500"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[3]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M503_503"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[4]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_1_IMAGE_504"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[5]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_2_IMAGE_505"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[6]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_3_IMAGE_506"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[7]/LadderElements/LadderEntity[0]/Comment",
+            "before": "",
+            "after": "Indicates the first controller cycle in RUN mode"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[7]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "SB_FIRSTRUN"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[7]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M503_503"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[8]/LadderElements/LadderEntity[0]/Comment",
+            "before": "",
+            "after": "Indicates the first controller cycle in RUN mode"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[8]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "SB_FIRSTRUN"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[8]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_1_IMAGE_504"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[9]/LadderElements/LadderEntity[0]/Comment",
+            "before": "",
+            "after": "Indicates the first controller cycle in RUN mode"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[9]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "SB_FIRSTRUN"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[9]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_2_IMAGE_505"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[10]/LadderElements/LadderEntity[0]/Comment",
+            "before": "",
+            "after": "Indicates the first controller cycle in RUN mode"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[10]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "SB_FIRSTRUN"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[10]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_3_IMAGE_506"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[11]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "INPUT_2_SNAPSHOT_500"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[11]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M503_503"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[12]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M503_503"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[12]/LadderElements/LadderEntity[9]/OperationExpression",
+            "before": "%MW240:=2",
+            "after": "%MW240 := 2"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[13]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M503_503"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[13]/LadderElements/LadderEntity[9]/OperationExpression",
+            "before": "%MW241:=0",
+            "after": "%MW241 := 0"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[14]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M503_503"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[14]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M503_503"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[15]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M503_503"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[15]/LadderElements/LadderEntity[9]/OperationExpression",
+            "before": "%MW240:=-32767",
+            "after": "%MW240 := -32767"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[16]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M503_503"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[16]/LadderElements/LadderEntity[9]/OperationExpression",
+            "before": "%MW241:=1",
+            "after": "%MW241 := 1"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[17]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M502_502"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[17]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M502_502"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[18]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M501_501"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[18]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M501_501"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[19]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M502_502"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[19]/LadderElements/LadderEntity[1]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M501_501"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[23]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M503_503"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[24]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_1_IMAGE_504"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[25]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_2_IMAGE_505"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[26]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "INPUT_2_SNAPSHOT_500"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[26]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_3_IMAGE_506"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[27]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M503_503"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[28]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "OUTPUT_1_IMAGE_504"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[29]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "OUTPUT_2_IMAGE_505"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[30]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "OUTPUT_3_IMAGE_506"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/TimersMemoryAllocation/Allocation",
+            "before": [
+              "Allocation",
+              [],
+              "Automatic",
+              []
+            ],
+            "after": null
+          }
+        ],
+        "delta_categories": {
+          "root identity": 2,
+          "explicit Automatic allocation child omitted": 2,
+          "Ladder graph": 46
+        },
+        "hardware_configuration_task_watch_timer_equal": {
+          "HardwareConfiguration": true,
+          "ManagementLevel": true,
+          "SoftwareConfiguration/MastTask": true,
+          "SoftwareConfiguration/FastTask": true,
+          "SoftwareConfiguration/CpuBehavior": true,
+          "SoftwareConfiguration/WatchLists": true,
+          "SoftwareConfiguration/FunctionBlocks": true,
+          "SoftwareConfiguration/Timers": true
+        },
+        "allocation_nodes_equal": {
+          "ConstantWordsMemoryAllocation": true,
+          "RegistersMemoryAllocation": true,
+          "DrumsMemoryAllocation": true,
+          "SbrsMemoryAllocation": true,
+          "ScsMemoryAllocation": true,
+          "FcsMemoryAllocation": true,
+          "SchsMemoryAllocation": true,
+          "HscsMemoryAllocation": true,
+          "PtosMemoryAllocation": true,
+          "CountersMemoryAllocation": true,
+          "MemoryBitsMemoryAllocation": false,
+          "TimersMemoryAllocation": false,
+          "MemoryWordsMemoryAllocation": true
+        },
+        "allocation_child_omissions": [
+          "MemoryBitsMemoryAllocation",
+          "TimersMemoryAllocation"
+        ],
+        "rung_names_comments_labels_equal": {
+          "Name": true,
+          "MainComment": true,
+          "Label": true
+        },
+        "instruction_comments_and_lexical_IL_equal": true,
+        "actual_reader_rungs_configs_timers_counters_equal": true,
+        "original_and_saved_shape": {
+          "rungs": 31,
+          "IL": 66,
+          "native_graph_entities_before": [
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            10,
+            10,
+            11,
+            10,
+            10,
+            11,
+            11,
+            3,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11
+          ],
+          "native_graph_entities_after": [
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            10,
+            10,
+            11,
+            10,
+            10,
+            11,
+            11,
+            3,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11
+          ]
+        },
+        "communications": {
+          "%WRITE_VAR0": {
+            "kind": "WRITE_VAR",
+            "link": "SL1",
+            "id": 1,
+            "timeout_100ms": 100,
+            "obj_type": 2,
+            "first_obj": 73,
+            "quantity": 17,
+            "index_data": 240,
+            "first_read_obj": 0,
+            "read_quantity": 1,
+            "index_data_in": 0
+          }
+        },
+        "reverse_CPP": {
+          "source": {
+            "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/write_aliases/editor-saved-audit.cpp",
+            "bytes": 2926,
+            "sha256": "48edfdfeeaf636c19f25b5218690a342d09a7a86b6a0b41a3e0e2029b83234da"
+          },
+          "rebuilt_project": {
+            "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/write_aliases/rebuilt/program.smbp",
+            "bytes": 260542,
+            "sha256": "52545f1fbccde0fde533c50e18094743043b87fe2d065d2a478990fd764a2e26"
+          },
+          "rungs": 50,
+          "IL": 105,
+          "configs_and_timers_retained": true
+        },
+        "replayed_existing_timeline_positions": 14,
+        "replay_paths": [
+          "editor_saved",
+          "audit_CPP_IR",
+          "audit_reimport"
+        ],
+        "native_absent_path": true,
+        "original_and_saved_inputs_unchanged": true,
+        "official_open_save_reopen": "Root evidence recorded separately; no acceptance inferred by this static/model check",
+        "runtime_limits": "Local callback and absent SDK/VM behavior only; no official compilation, RUN or exchange performed",
+        "graph_changed_fields": {
+          "Symbol": 38,
+          "Comment": 4,
+          "OperationExpression": 4
+        },
+        "graph_changes_are_annotations_or_lexical_whitespace": true,
+        "timer_default_child_omissions": [],
+        "timer_configuration_equal_after_exact_observed_default_omissions": true,
+        "model_symbols_equal": true,
+        "timers": {}
+      },
+      "saved_shared_clone": {
+        "path": "/Users/tommy/Offline/projects/shared-folder/plc/compiler-validation-2026-11-06/modbus_bare_write_editor_saved.smbp",
+        "bytes": 199029,
+        "sha256": "3d9c7d0f43197e550394ad5cd19295b3a5195ede368c597a51633aca98f51334"
+      },
+      "root_case_record": {
+        "path": "output/editor-validation/modbus-generated-bare-abort-2026-11-06/observed/write_aliases/save-record.json",
+        "bytes": 1676,
+        "sha256": "7573df43258b22fefe402bbeca8b9b7ae36fa337b7366730bf40964784a74c17"
+      },
+      "public_source": {
+        "path": "examples/editor_validation/modbus_bare_abort_write_aliases.cpp",
+        "bytes": 673,
+        "sha256": "80638df09508bb2bbb87e9cb9d1abe36220c44ce26e0485b33d6771115edbbfe"
+      },
+      "public_source_original_byte_exact": true,
+      "public_path_rebuild": {
+        "case": "write_aliases",
+        "frozen_original": "output/diagnostics/modbus-generated-bare-abort-candidates-2026-11-06/bare_abort_write_aliases.cpp",
+        "public_source": "examples/editor_validation/modbus_bare_abort_write_aliases.cpp",
+        "bytes": 673,
+        "sha256": "80638df09508bb2bbb87e9cb9d1abe36220c44ce26e0485b33d6771115edbbfe",
+        "byte_exact": true,
+        "CLI_command": [
+          "/Users/tommy/Offline/projects/m200-cpp/m200c",
+          "compile",
+          "/Users/tommy/Offline/projects/m200-cpp/examples/editor_validation/modbus_bare_abort_write_aliases.cpp",
+          "--template",
+          "/Users/tommy/Offline/projects/m200-cpp/tests/fixtures/official_tm200ce40t_modbus_full_pin_write.smbp",
+          "-o",
+          "/Users/tommy/Offline/projects/m200-cpp/output/reports/modbus-bare-generated-editor-review-2026-11-06/public-examples/write_aliases"
+        ],
+        "compile_log": {
+          "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/public-write_aliases-compile.log",
+          "bytes": 7434,
+          "sha256": "2de37782c1e26fadf17f50879b7079d5968ed2dd5a1f4298a4dfd39533c3456a"
+        },
+        "template": {
+          "path": "tests/fixtures/official_tm200ce40t_modbus_full_pin_write.smbp",
+          "bytes": 97089,
+          "sha256": "ae6ffad294a36e79656f36845f2a0bebf19df6f3e60b8aa7b82597b867b79af3"
+        },
+        "generated_project": {
+          "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/public-examples/write_aliases/program.smbp",
+          "bytes": 192957,
+          "sha256": "c5bdf22ed25c2a5b8c599559d2450596ebb4c775f2bb378dc76e096c378e11c5"
+        },
+        "canonical_IL_configuration_timers_counters_symbols_equal": true,
+        "editor_readback_canonical_equal": true,
+        "rungs": 31,
+        "IL": 66,
+        "changed_metadata_fields": [
+          "rung_origins",
+          "source"
+        ],
+        "source_origin_filename_changes": [
+          {
+            "rung": 11,
+            "before": {
+              "file": "bare_abort_write_aliases.cpp",
+              "line": 7,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_aliases.cpp",
+              "line": 7,
+              "column": 3
+            }
+          },
+          {
+            "rung": 12,
+            "before": {
+              "file": "bare_abort_write_aliases.cpp",
+              "line": 8,
+              "column": 5
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_aliases.cpp",
+              "line": 8,
+              "column": 5
+            }
+          },
+          {
+            "rung": 13,
+            "before": {
+              "file": "bare_abort_write_aliases.cpp",
+              "line": 9,
+              "column": 5
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_aliases.cpp",
+              "line": 9,
+              "column": 5
+            }
+          },
+          {
+            "rung": 14,
+            "before": {
+              "file": "bare_abort_write_aliases.cpp",
+              "line": 7,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_aliases.cpp",
+              "line": 7,
+              "column": 3
+            }
+          },
+          {
+            "rung": 15,
+            "before": {
+              "file": "bare_abort_write_aliases.cpp",
+              "line": 11,
+              "column": 5
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_aliases.cpp",
+              "line": 11,
+              "column": 5
+            }
+          },
+          {
+            "rung": 16,
+            "before": {
+              "file": "bare_abort_write_aliases.cpp",
+              "line": 12,
+              "column": 5
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_aliases.cpp",
+              "line": 12,
+              "column": 5
+            }
+          },
+          {
+            "rung": 17,
+            "before": {
+              "file": "bare_abort_write_aliases.cpp",
+              "line": 14,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_aliases.cpp",
+              "line": 14,
+              "column": 3
+            }
+          },
+          {
+            "rung": 18,
+            "before": {
+              "file": "bare_abort_write_aliases.cpp",
+              "line": 14,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_aliases.cpp",
+              "line": 14,
+              "column": 3
+            }
+          },
+          {
+            "rung": 19,
+            "before": {
+              "file": "bare_abort_write_aliases.cpp",
+              "line": 14,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_aliases.cpp",
+              "line": 14,
+              "column": 3
+            }
+          },
+          {
+            "rung": 20,
+            "before": {
+              "file": "bare_abort_write_aliases.cpp",
+              "line": 16,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_aliases.cpp",
+              "line": 16,
+              "column": 3
+            }
+          },
+          {
+            "rung": 21,
+            "before": {
+              "file": "bare_abort_write_aliases.cpp",
+              "line": 17,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_aliases.cpp",
+              "line": 17,
+              "column": 3
+            }
+          },
+          {
+            "rung": 22,
+            "before": {
+              "file": "bare_abort_write_aliases.cpp",
+              "line": 18,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_aliases.cpp",
+              "line": 18,
+              "column": 3
+            }
+          },
+          {
+            "rung": 23,
+            "before": {
+              "file": "bare_abort_write_aliases.cpp",
+              "line": 19,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_aliases.cpp",
+              "line": 19,
+              "column": 3
+            }
+          },
+          {
+            "rung": 24,
+            "before": {
+              "file": "bare_abort_write_aliases.cpp",
+              "line": 20,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_aliases.cpp",
+              "line": 20,
+              "column": 3
+            }
+          },
+          {
+            "rung": 25,
+            "before": {
+              "file": "bare_abort_write_aliases.cpp",
+              "line": 21,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_aliases.cpp",
+              "line": 21,
+              "column": 3
+            }
+          },
+          {
+            "rung": 26,
+            "before": {
+              "file": "bare_abort_write_aliases.cpp",
+              "line": 22,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_aliases.cpp",
+              "line": 22,
+              "column": 3
+            }
+          }
+        ],
+        "source_origin_line_column_generated_fields_retained": true,
+        "original_CPP_and_project_unchanged": true,
+        "official_editor_acceptance_of_public_path_rebuild": "Not claimed; actual editor-tested original projects are separately hashed"
+      },
+      "captures": [
+        {
+          "case": "write_aliases",
+          "stage": "official Ctrl+S save completed: Programming No error",
+          "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793973701402576000-2146.png",
+          "path": "docs/validation/editor-evidence/modbus-bare-generated/write-save.png",
+          "bytes": 382483,
+          "sha256": "7b7c178153cf6645d02027a6afee60b7d3d647e7c4bbf71ef1238291099ce9a2",
+          "independently_visually_reviewed": true
+        },
+        {
+          "case": "write_aliases",
+          "stage": "fresh saved-clone Programming reopen No error after another project",
+          "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793974884253465000-2146.png",
+          "path": "docs/validation/editor-evidence/modbus-bare-generated/write-reopen.png",
+          "bytes": 381688,
+          "sha256": "0ca01a193d78107ce8029a4a0d0f5bd612f09689ca98ef6687fe1ea426729662",
+          "independently_visually_reviewed": true
+        }
+      ],
+      "compiler_product_XML_hand_edits": false
+    },
+    {
+      "case": "write_read_timer",
+      "official_static_stage": "PASS: actual CLI original opened No error, Ctrl+S, different project, fresh saved clone Programming No error",
+      "root_record": {
+        "source": {
+          "case": "write_read_timer",
+          "original": {
+            "path": "output/diagnostics/modbus-generated-bare-abort-candidates-2026-11-06/released-run/write_read_timer-build/program.smbp",
+            "bytes": 341577,
+            "sha256": "7eceb1dec3c44d8c0d150c4db4a91b58822746b920eefaa7da00df4b7b9c858e"
+          },
+          "shared_path": "/Users/tommy/Offline/projects/shared-folder/plc/compiler-validation-2026-11-06/modbus_generated_bare_abort_write_read_timer.smbp",
+          "shared_bytes": 341577,
+          "shared_sha256": "7eceb1dec3c44d8c0d150c4db4a91b58822746b920eefaa7da00df4b7b9c858e",
+          "shape": {
+            "bundle": "output/diagnostics/modbus-generated-bare-abort-candidates-2026-11-06/released-run/write_read_timer-build",
+            "canonical_rungs": 72,
+            "canonical_IL": 161,
+            "native_rungs": 72,
+            "native_IL": 161,
+            "bare_graph_entities": 3,
+            "hardware_equal": true,
+            "actual_level": "FunctLevelMan21_0",
+            "config": {
+              "kind": "WRITE_READ_VAR",
+              "link": "SL1",
+              "id": 1,
+              "timeout_100ms": 100,
+              "obj_type": 0,
+              "first_obj": 17,
+              "quantity": 2,
+              "index_data": 300,
+              "first_read_obj": 41,
+              "read_quantity": 3,
+              "index_data_in": 400
+            }
+          }
+        },
+        "saved_bytes": 353702,
+        "saved_sha256": "55ce5db272eda93b9e52ad8d43ac0b915f47d8f4d1cc604edd770e4ef3859b8b",
+        "all_rungs_communications_timers_equal": true,
+        "fresh_reopen_pending": false,
+        "fresh_reopen_Programming_No_error": true,
+        "root_personally_viewed": true,
+        "reopen_capture": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793975125542952000-2146.png",
+        "different_project_before_reopen": "modbus_bare_write_editor_saved"
+      },
+      "readback": {
+        "case": "write_read_timer",
+        "classification": "PASS complete static readback and existing literal local-model replays",
+        "original": {
+          "path": "output/diagnostics/modbus-generated-bare-abort-candidates-2026-11-06/released-run/write_read_timer-build/program.smbp",
+          "bytes": 341577,
+          "sha256": "7eceb1dec3c44d8c0d150c4db4a91b58822746b920eefaa7da00df4b7b9c858e"
+        },
+        "editor_saved": {
+          "path": "output/editor-validation/modbus-generated-bare-abort-2026-11-06/observed/write_read_timer/modbus_bare_write_read_editor_saved.smbp",
+          "bytes": 353702,
+          "sha256": "55ce5db272eda93b9e52ad8d43ac0b915f47d8f4d1cc604edd770e4ef3859b8b"
+        },
+        "complete_typed_XML_deltas": [
+          {
+            "path": "ProjectDescriptor/FullName",
+            "before": "program.smbp",
+            "after": "P:\\compiler-validation-2026-11-06\\modbus_generated_bare_abort_write_read_timer.smbp"
+          },
+          {
+            "path": "ProjectDescriptor/Name",
+            "before": "m200-cpp EXPERIMENTAL",
+            "after": "modbus_generated_bare_abort_write_read_timer"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/MemoryBitsMemoryAllocation/Allocation",
+            "before": [
+              "Allocation",
+              [],
+              "Automatic",
+              []
+            ],
+            "after": null
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[0]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M506_506"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[1]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M505_505"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[2]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "INPUT_2_SNAPSHOT_500"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[3]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "INPUT_3_SNAPSHOT_512"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[4]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "INPUT_4_SNAPSHOT_501"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[5]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "INPUT_5_SNAPSHOT_502"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[6]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M507_507"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[7]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_1_IMAGE_508"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[8]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_2_IMAGE_509"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[9]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_3_IMAGE_510"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[10]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_4_IMAGE_511"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[11]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_5_IMAGE_513"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[12]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_6_IMAGE_514"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[13]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_7_IMAGE_515"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[14]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_8_IMAGE_516"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[15]/LadderElements/LadderEntity[0]/Comment",
+            "before": "",
+            "after": "Indicates the first controller cycle in RUN mode"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[15]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "SB_FIRSTRUN"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[15]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M507_507"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[16]/LadderElements/LadderEntity[0]/Comment",
+            "before": "",
+            "after": "Indicates the first controller cycle in RUN mode"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[16]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "SB_FIRSTRUN"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[16]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_1_IMAGE_508"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[17]/LadderElements/LadderEntity[0]/Comment",
+            "before": "",
+            "after": "Indicates the first controller cycle in RUN mode"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[17]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "SB_FIRSTRUN"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[17]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_2_IMAGE_509"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[18]/LadderElements/LadderEntity[0]/Comment",
+            "before": "",
+            "after": "Indicates the first controller cycle in RUN mode"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[18]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "SB_FIRSTRUN"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[18]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_3_IMAGE_510"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[19]/LadderElements/LadderEntity[0]/Comment",
+            "before": "",
+            "after": "Indicates the first controller cycle in RUN mode"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[19]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "SB_FIRSTRUN"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[19]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_4_IMAGE_511"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[20]/LadderElements/LadderEntity[0]/Comment",
+            "before": "",
+            "after": "Indicates the first controller cycle in RUN mode"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[20]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "SB_FIRSTRUN"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[20]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_5_IMAGE_513"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[21]/LadderElements/LadderEntity[0]/Comment",
+            "before": "",
+            "after": "Indicates the first controller cycle in RUN mode"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[21]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "SB_FIRSTRUN"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[21]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_6_IMAGE_514"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[22]/LadderElements/LadderEntity[0]/Comment",
+            "before": "",
+            "after": "Indicates the first controller cycle in RUN mode"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[22]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "SB_FIRSTRUN"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[22]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_7_IMAGE_515"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[23]/LadderElements/LadderEntity[0]/Comment",
+            "before": "",
+            "after": "Indicates the first controller cycle in RUN mode"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[23]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "SB_FIRSTRUN"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[23]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_8_IMAGE_516"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[24]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "CONSTANT_FALSE_503"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[24]/LadderElements/LadderEntity[1]/Symbol",
+            "before": "",
+            "after": "CONSTANT_FALSE_503"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[24]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "CONSTANT_FALSE_503"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[25]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "CONSTANT_FALSE_503"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[25]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "CONSTANT_TRUE_504"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[26]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "INPUT_3_SNAPSHOT_512"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[26]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M507_507"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[27]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M507_507"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[27]/LadderElements/LadderEntity[9]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M507_507"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[28]/LadderElements/LadderEntity[0]/Comment",
+            "before": "",
+            "after": "Indicates the first controller cycle in RUN mode"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[28]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "SB_FIRSTRUN"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[28]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M507_507"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[29]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M507_507"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[29]/LadderElements/LadderEntity[9]/OperationExpression",
+            "before": "%MW399:=30583",
+            "after": "%MW399 := 30583"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[30]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M507_507"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[30]/LadderElements/LadderEntity[9]/OperationExpression",
+            "before": "%MW400:=9320",
+            "after": "%MW400 := 9320"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[31]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M507_507"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[31]/LadderElements/LadderEntity[9]/OperationExpression",
+            "before": "%MW401:=4951",
+            "after": "%MW401 := 4951"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[32]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M507_507"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[32]/LadderElements/LadderEntity[9]/OperationExpression",
+            "before": "%MW402:=13980",
+            "after": "%MW402 := 13980"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[33]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M507_507"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[33]/LadderElements/LadderEntity[9]/OperationExpression",
+            "before": "%MW403:=-30584",
+            "after": "%MW403 := -30584"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[34]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "INPUT_2_SNAPSHOT_500"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[34]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M507_507"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[35]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M507_507"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[35]/LadderElements/LadderEntity[9]/OperationExpression",
+            "before": "%MW300:=17185",
+            "after": "%MW300 := 17185"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[36]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M507_507"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[36]/LadderElements/LadderEntity[9]/OperationExpression",
+            "before": "%MW301:=4369",
+            "after": "%MW301 := 4369"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[37]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M507_507"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[37]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M507_507"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[38]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M507_507"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[38]/LadderElements/LadderEntity[9]/OperationExpression",
+            "before": "%MW300:=4660",
+            "after": "%MW300 := 4660"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[39]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M507_507"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[39]/LadderElements/LadderEntity[9]/OperationExpression",
+            "before": "%MW301:=-21555",
+            "after": "%MW301 := -21555"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[40]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M506_506"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[40]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M506_506"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[41]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M507_507"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[42]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M506_506"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[42]/LadderElements/LadderEntity[1]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M507_507"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[42]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M506_506"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[43]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M506_506"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[43]/LadderElements/LadderEntity[1]/Symbol",
+            "before": "",
+            "after": "INPUT_4_SNAPSHOT_501"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[43]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M506_506"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[44]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M505_505"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[44]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M505_505"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[45]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M505_505"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[45]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M507_507"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[46]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M505_505"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[46]/LadderElements/LadderEntity[1]/Symbol",
+            "before": "",
+            "after": "INPUT_5_SNAPSHOT_502"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[46]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M505_505"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[47]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M505_505"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[47]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M505_505"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[48]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M506_506"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[48]/LadderElements/LadderEntity[1]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M505_505"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[49]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M507_507"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[50]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_1_IMAGE_508"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[51]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_2_IMAGE_509"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[52]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_3_IMAGE_510"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[53]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_4_IMAGE_511"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[54]/LadderElements/LadderEntity[0]/ComparisonExpression",
+            "before": "%MW400=-32767",
+            "after": "%MW400 = -32767"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[54]/LadderElements/LadderEntity[9]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M505_505"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[55]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M505_505"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[55]/LadderElements/LadderEntity[1]/ComparisonExpression",
+            "before": "%MW401=-1",
+            "after": "%MW401 = -1"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[55]/LadderElements/LadderEntity[9]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M506_506"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[56]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M505_505"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[56]/LadderElements/LadderEntity[1]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M506_506"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[56]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M505_505"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[57]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M505_505"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[57]/LadderElements/LadderEntity[1]/ComparisonExpression",
+            "before": "%MW402=4660",
+            "after": "%MW402 = 4660"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[57]/LadderElements/LadderEntity[9]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M506_506"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[58]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M505_505"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[58]/LadderElements/LadderEntity[1]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M506_506"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[58]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_5_IMAGE_513"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[59]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "INPUT_4_SNAPSHOT_501"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[59]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_6_IMAGE_514"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[60]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "INPUT_5_SNAPSHOT_502"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[60]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_7_IMAGE_515"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[61]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "INPUT_2_SNAPSHOT_500"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[61]/LadderElements/LadderEntity[10]/Symbol",
+            "before": "",
+            "after": "OUTPUT_8_IMAGE_516"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[62]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "CONSTANT_TRUE_504"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[62]/LadderElements/LadderEntity[9]/OperationExpression",
+            "before": "%MW20:=%TM4.V",
+            "after": "%MW20 := %TM4.V"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[63]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "COMPILER_REUSED_M507_507"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[64]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "OUTPUT_1_IMAGE_508"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[65]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "OUTPUT_2_IMAGE_509"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[66]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "OUTPUT_3_IMAGE_510"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[67]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "OUTPUT_4_IMAGE_511"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[68]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "OUTPUT_5_IMAGE_513"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[69]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "OUTPUT_6_IMAGE_514"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[70]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "OUTPUT_7_IMAGE_515"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity[71]/LadderElements/LadderEntity[0]/Symbol",
+            "before": "",
+            "after": "OUTPUT_8_IMAGE_516"
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Timers/TimerTM/IsDynamicPreset",
+            "before": [
+              "IsDynamicPreset",
+              [],
+              "false",
+              []
+            ],
+            "after": null
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Timers/TimerTM/IsRetentive",
+            "before": [
+              "IsRetentive",
+              [],
+              "false",
+              []
+            ],
+            "after": null
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/Timers/TimerTM/Type",
+            "before": [
+              "Type",
+              [],
+              "TON",
+              []
+            ],
+            "after": null
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration/TimersMemoryAllocation/Allocation",
+            "before": [
+              "Allocation",
+              [],
+              "Automatic",
+              []
+            ],
+            "after": null
+          }
+        ],
+        "delta_categories": {
+          "root identity": 2,
+          "explicit Automatic allocation child omitted": 2,
+          "Ladder graph": 132,
+          "explicit timer default child omitted": 3
+        },
+        "graph_changed_fields": {
+          "Symbol": 109,
+          "Comment": 10,
+          "OperationExpression": 10,
+          "ComparisonExpression": 3
+        },
+        "graph_changes_are_annotations_or_lexical_whitespace": true,
+        "hardware_configuration_task_watch_timer_equal": {
+          "HardwareConfiguration": true,
+          "ManagementLevel": true,
+          "SoftwareConfiguration/MastTask": true,
+          "SoftwareConfiguration/FastTask": true,
+          "SoftwareConfiguration/CpuBehavior": true,
+          "SoftwareConfiguration/WatchLists": true,
+          "SoftwareConfiguration/FunctionBlocks": true,
+          "SoftwareConfiguration/Timers": false
+        },
+        "allocation_nodes_equal": {
+          "ConstantWordsMemoryAllocation": true,
+          "RegistersMemoryAllocation": true,
+          "DrumsMemoryAllocation": true,
+          "SbrsMemoryAllocation": true,
+          "ScsMemoryAllocation": true,
+          "FcsMemoryAllocation": true,
+          "SchsMemoryAllocation": true,
+          "HscsMemoryAllocation": true,
+          "PtosMemoryAllocation": true,
+          "CountersMemoryAllocation": true,
+          "MemoryBitsMemoryAllocation": false,
+          "TimersMemoryAllocation": false,
+          "MemoryWordsMemoryAllocation": true
+        },
+        "allocation_child_omissions": [
+          "MemoryBitsMemoryAllocation",
+          "TimersMemoryAllocation"
+        ],
+        "rung_names_comments_labels_equal": {
+          "Name": true,
+          "MainComment": true,
+          "Label": true
+        },
+        "instruction_comments_and_lexical_IL_equal": true,
+        "actual_reader_rungs_configs_timers_counters_equal": true,
+        "original_and_saved_shape": {
+          "rungs": 72,
+          "IL": 161,
+          "native_graph_entities_before": [
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            10,
+            11,
+            10,
+            10,
+            10,
+            10,
+            10,
+            11,
+            10,
+            10,
+            11,
+            10,
+            10,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            3,
+            11,
+            11,
+            11,
+            11,
+            11,
+            10,
+            10,
+            11,
+            10,
+            11,
+            11,
+            11,
+            11,
+            10,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11
+          ],
+          "native_graph_entities_after": [
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            10,
+            11,
+            10,
+            10,
+            10,
+            10,
+            10,
+            11,
+            10,
+            10,
+            11,
+            10,
+            10,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            3,
+            11,
+            11,
+            11,
+            11,
+            11,
+            10,
+            10,
+            11,
+            10,
+            11,
+            11,
+            11,
+            11,
+            10,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11,
+            11
+          ]
+        },
+        "communications": {
+          "%WRITE_READ_VAR0": {
+            "kind": "WRITE_READ_VAR",
+            "link": "SL1",
+            "id": 1,
+            "timeout_100ms": 100,
+            "obj_type": 0,
+            "first_obj": 17,
+            "quantity": 2,
+            "index_data": 300,
+            "first_read_obj": 41,
+            "read_quantity": 3,
+            "index_data_in": 400
+          }
+        },
+        "reverse_CPP": {
+          "source": {
+            "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/write_read_timer/editor-saved-audit.cpp",
+            "bytes": 7025,
+            "sha256": "d9af75e156876ed4e62f969a4498fe6ee07c253e8d4f9785be79558a92b3813a"
+          },
+          "rebuilt_project": {
+            "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/write_read_timer/rebuilt/program.smbp",
+            "bytes": 512086,
+            "sha256": "3eaa6d1e62daa6ff04d8223eb25f6b0d83be6c51f86b786fbeeb38c49f133b49"
+          },
+          "rungs": 120,
+          "IL": 260,
+          "configs_and_timers_retained": true
+        },
+        "replayed_existing_timeline_positions": 23,
+        "replay_paths": [
+          "editor_saved",
+          "audit_CPP_IR",
+          "audit_reimport"
+        ],
+        "native_absent_path": true,
+        "original_and_saved_inputs_unchanged": true,
+        "official_open_save_reopen": "Root evidence recorded separately; no acceptance inferred by this static/model check",
+        "runtime_limits": "Local callback and absent SDK/VM behavior only; no official compilation, RUN or exchange performed",
+        "timer_default_child_omissions": [
+          {
+            "Address": "%TM4",
+            "field": "Type",
+            "before": "TON",
+            "after": null
+          },
+          {
+            "Address": "%TM4",
+            "field": "IsRetentive",
+            "before": "false",
+            "after": null
+          },
+          {
+            "Address": "%TM4",
+            "field": "IsDynamicPreset",
+            "before": "false",
+            "after": null
+          }
+        ],
+        "timer_configuration_equal_after_exact_observed_default_omissions": true,
+        "model_symbols_equal": true,
+        "timers": {
+          "4": {
+            "kind": "TON",
+            "milliseconds": 20,
+            "base_ms": 10,
+            "retentive": false,
+            "dynamic_preset": false
+          }
+        }
+      },
+      "saved_shared_clone": {
+        "path": "/Users/tommy/Offline/projects/shared-folder/plc/compiler-validation-2026-11-06/modbus_bare_write_read_editor_saved.smbp",
+        "bytes": 353702,
+        "sha256": "55ce5db272eda93b9e52ad8d43ac0b915f47d8f4d1cc604edd770e4ef3859b8b"
+      },
+      "root_case_record": {
+        "path": "output/editor-validation/modbus-generated-bare-abort-2026-11-06/observed/write_read_timer/save-record.json",
+        "bytes": 1698,
+        "sha256": "8ac9ffbc178096d6e1a4927bb28f13bf81ba2976b0940b9e7cf8e51b192d20fd"
+      },
+      "public_source": {
+        "path": "examples/editor_validation/modbus_bare_abort_write_read_timer.cpp",
+        "bytes": 1181,
+        "sha256": "80f062d57870016836894096fe6af11a7ca5725b36d93fe3c325b48d98c9ab31"
+      },
+      "public_source_original_byte_exact": true,
+      "public_path_rebuild": {
+        "case": "write_read_timer",
+        "frozen_original": "output/diagnostics/modbus-generated-bare-abort-candidates-2026-11-06/bare_abort_write_read_timer.cpp",
+        "public_source": "examples/editor_validation/modbus_bare_abort_write_read_timer.cpp",
+        "bytes": 1181,
+        "sha256": "80f062d57870016836894096fe6af11a7ca5725b36d93fe3c325b48d98c9ab31",
+        "byte_exact": true,
+        "CLI_command": [
+          "/Users/tommy/Offline/projects/m200-cpp/m200c",
+          "compile",
+          "/Users/tommy/Offline/projects/m200-cpp/examples/editor_validation/modbus_bare_abort_write_read_timer.cpp",
+          "--template",
+          "/Users/tommy/Offline/projects/m200-cpp/tests/fixtures/official_tm200ce40t_modbus_full_pin_write_read.smbp",
+          "-o",
+          "/Users/tommy/Offline/projects/m200-cpp/output/reports/modbus-bare-generated-editor-review-2026-11-06/public-examples/write_read_timer"
+        ],
+        "compile_log": {
+          "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/public-write_read_timer-compile.log",
+          "bytes": 11752,
+          "sha256": "1d23cdf880b818fee2ccdbe13475daa8aa270b43d90792e71ff03c006557d953"
+        },
+        "template": {
+          "path": "tests/fixtures/official_tm200ce40t_modbus_full_pin_write_read.smbp",
+          "bytes": 98503,
+          "sha256": "9e7a3359a99c433bdebe7eaca21235960de806fdfb8151a678e39345e4b3588f"
+        },
+        "generated_project": {
+          "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/public-examples/write_read_timer/program.smbp",
+          "bytes": 341836,
+          "sha256": "bceb0da842951ab487b4f4763e2c680ae8732f5321aeae5e851169399beb3d8c"
+        },
+        "canonical_IL_configuration_timers_counters_symbols_equal": true,
+        "editor_readback_canonical_equal": true,
+        "rungs": 72,
+        "IL": 161,
+        "changed_metadata_fields": [
+          "rung_origins",
+          "source"
+        ],
+        "source_origin_filename_changes": [
+          {
+            "rung": 26,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 8,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 8,
+              "column": 3
+            }
+          },
+          {
+            "rung": 27,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 8,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 8,
+              "column": 3
+            }
+          },
+          {
+            "rung": 28,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 9,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 9,
+              "column": 3
+            }
+          },
+          {
+            "rung": 29,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 10,
+              "column": 5
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 10,
+              "column": 5
+            }
+          },
+          {
+            "rung": 30,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 11,
+              "column": 5
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 11,
+              "column": 5
+            }
+          },
+          {
+            "rung": 31,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 12,
+              "column": 5
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 12,
+              "column": 5
+            }
+          },
+          {
+            "rung": 32,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 13,
+              "column": 5
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 13,
+              "column": 5
+            }
+          },
+          {
+            "rung": 33,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 14,
+              "column": 5
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 14,
+              "column": 5
+            }
+          },
+          {
+            "rung": 34,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 16,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 16,
+              "column": 3
+            }
+          },
+          {
+            "rung": 35,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 17,
+              "column": 5
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 17,
+              "column": 5
+            }
+          },
+          {
+            "rung": 36,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 18,
+              "column": 5
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 18,
+              "column": 5
+            }
+          },
+          {
+            "rung": 37,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 16,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 16,
+              "column": 3
+            }
+          },
+          {
+            "rung": 38,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 20,
+              "column": 5
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 20,
+              "column": 5
+            }
+          },
+          {
+            "rung": 39,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 21,
+              "column": 5
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 21,
+              "column": 5
+            }
+          },
+          {
+            "rung": 40,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 23,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 23,
+              "column": 3
+            }
+          },
+          {
+            "rung": 41,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 23,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 23,
+              "column": 3
+            }
+          },
+          {
+            "rung": 42,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 23,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 23,
+              "column": 3
+            }
+          },
+          {
+            "rung": 43,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 23,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 23,
+              "column": 3
+            }
+          },
+          {
+            "rung": 44,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 23,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 23,
+              "column": 3
+            }
+          },
+          {
+            "rung": 45,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 23,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 23,
+              "column": 3
+            }
+          },
+          {
+            "rung": 46,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 23,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 23,
+              "column": 3
+            }
+          },
+          {
+            "rung": 47,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 23,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 23,
+              "column": 3
+            }
+          },
+          {
+            "rung": 48,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 23,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 23,
+              "column": 3
+            }
+          },
+          {
+            "rung": 49,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 26,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 26,
+              "column": 3
+            }
+          },
+          {
+            "rung": 50,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 27,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 27,
+              "column": 3
+            }
+          },
+          {
+            "rung": 51,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 28,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 28,
+              "column": 3
+            }
+          },
+          {
+            "rung": 52,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 29,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 29,
+              "column": 3
+            }
+          },
+          {
+            "rung": 53,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 30,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 30,
+              "column": 3
+            }
+          },
+          {
+            "rung": 54,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 31,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 31,
+              "column": 3
+            }
+          },
+          {
+            "rung": 55,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 31,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 31,
+              "column": 3
+            }
+          },
+          {
+            "rung": 56,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 31,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 31,
+              "column": 3
+            }
+          },
+          {
+            "rung": 57,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 31,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 31,
+              "column": 3
+            }
+          },
+          {
+            "rung": 58,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 31,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 31,
+              "column": 3
+            }
+          },
+          {
+            "rung": 59,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 33,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 33,
+              "column": 3
+            }
+          },
+          {
+            "rung": 60,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 34,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 34,
+              "column": 3
+            }
+          },
+          {
+            "rung": 61,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 35,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 35,
+              "column": 3
+            }
+          },
+          {
+            "rung": 62,
+            "before": {
+              "file": "bare_abort_write_read_timer.cpp",
+              "line": 36,
+              "column": 3
+            },
+            "after": {
+              "file": "modbus_bare_abort_write_read_timer.cpp",
+              "line": 36,
+              "column": 3
+            }
+          }
+        ],
+        "source_origin_line_column_generated_fields_retained": true,
+        "original_CPP_and_project_unchanged": true,
+        "official_editor_acceptance_of_public_path_rebuild": "Not claimed; actual editor-tested original projects are separately hashed"
+      },
+      "captures": [
+        {
+          "case": "write_read_timer",
+          "stage": "official Ctrl+S save completed: Programming No error",
+          "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793974124013734000-2146.png",
+          "path": "docs/validation/editor-evidence/modbus-bare-generated/write-read-save.png",
+          "bytes": 382572,
+          "sha256": "3b9a7a6bae1247ff6e84fa7894af3f2c2acefe507bc0ef5c9804e98802b85b30",
+          "independently_visually_reviewed": true
+        },
+        {
+          "case": "write_read_timer",
+          "stage": "fresh saved-clone Programming reopen No error after another project",
+          "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793975125542952000-2146.png",
+          "path": "docs/validation/editor-evidence/modbus-bare-generated/write-read-reopen.png",
+          "bytes": 382094,
+          "sha256": "acb16afe079bd12f32c9c2b38013e6553de76805c35d94f687a54adcea492ae7",
+          "independently_visually_reviewed": true
+        }
+      ],
+      "compiler_product_XML_hand_edits": false
+    }
+  ],
+  "public_PNGs": [
+    {
+      "case": "read_no_status",
+      "stage": "official Ctrl+S save completed: Programming No error",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793973413439327000-2146.png",
+      "path": "docs/validation/editor-evidence/modbus-bare-generated/read-save.png",
+      "bytes": 384774,
+      "sha256": "443a2d22538531881606e75fa1740ef07105a82068b23cddb0d345098fe29c70",
+      "independently_visually_reviewed": true
+    },
+    {
+      "case": "write_aliases",
+      "stage": "official Ctrl+S save completed: Programming No error",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793973701402576000-2146.png",
+      "path": "docs/validation/editor-evidence/modbus-bare-generated/write-save.png",
+      "bytes": 382483,
+      "sha256": "7b7c178153cf6645d02027a6afee60b7d3d647e7c4bbf71ef1238291099ce9a2",
+      "independently_visually_reviewed": true
+    },
+    {
+      "case": "write_read_timer",
+      "stage": "official Ctrl+S save completed: Programming No error",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793974124013734000-2146.png",
+      "path": "docs/validation/editor-evidence/modbus-bare-generated/write-read-save.png",
+      "bytes": 382572,
+      "sha256": "3b9a7a6bae1247ff6e84fa7894af3f2c2acefe507bc0ef5c9804e98802b85b30",
+      "independently_visually_reviewed": true
+    },
+    {
+      "case": "read_no_status",
+      "stage": "fresh saved-clone Programming reopen No error after another project",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793974472064202000-2146.png",
+      "path": "docs/validation/editor-evidence/modbus-bare-generated/read-reopen.png",
+      "bytes": 383827,
+      "sha256": "083c62adcd8c58134b256a4ea9ed80d24c6f107830459038f111d762ec20c4ca",
+      "independently_visually_reviewed": true
+    },
+    {
+      "case": "write_aliases",
+      "stage": "fresh saved-clone Programming reopen No error after another project",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793974884253465000-2146.png",
+      "path": "docs/validation/editor-evidence/modbus-bare-generated/write-reopen.png",
+      "bytes": 381688,
+      "sha256": "0ca01a193d78107ce8029a4a0d0f5bd612f09689ca98ef6687fe1ea426729662",
+      "independently_visually_reviewed": true
+    },
+    {
+      "case": "write_read_timer",
+      "stage": "fresh saved-clone Programming reopen No error after another project",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793975125542952000-2146.png",
+      "path": "docs/validation/editor-evidence/modbus-bare-generated/write-read-reopen.png",
+      "bytes": 382094,
+      "sha256": "acb16afe079bd12f32c9c2b38013e6553de76805c35d94f687a54adcea492ae7",
+      "independently_visually_reviewed": true
+    },
+    {
+      "case": "write_read_timer",
+      "stage": "separate WR STOP-only observation 1: No error / Online / Stop; identical applications",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793975543992757000-2146.png",
+      "path": "docs/validation/editor-evidence/modbus-bare-generated/write-read-stop-observation-1.png",
+      "bytes": 310674,
+      "sha256": "167c1f254ecfd31c79e9b7198d90f841346efa625591be0865ae23e0d94ab0be",
+      "independently_visually_reviewed": true
+    },
+    {
+      "case": "write_read_timer",
+      "stage": "separate WR STOP-only observation 2: No error / Online / Stop; identical applications",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793975680868317000-2146.png",
+      "path": "docs/validation/editor-evidence/modbus-bare-generated/write-read-stop-observation-2.png",
+      "bytes": 310674,
+      "sha256": "167c1f254ecfd31c79e9b7198d90f841346efa625591be0865ae23e0d94ab0be",
+      "independently_visually_reviewed": true
+    },
+    {
+      "case": "write_read_timer",
+      "stage": "separate WR STOP-only fresh cleanup: No error / Not Connected; simulator panel absent",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793975830477798000-2146.png",
+      "path": "docs/validation/editor-evidence/modbus-bare-generated/write-read-stop-cleanup.png",
+      "bytes": 287238,
+      "sha256": "cea7b22283288794a699a30a828077b270e677a5bce43a8f4cbbecdea11ec8b4",
+      "independently_visually_reviewed": true
+    }
+  ],
+  "public_PNG_count": 9,
+  "PNG_transformations": "None; exact filesystem byte copies",
+  "historical_original_local_validation": {
+    "ready_record": {
+      "path": "output/diagnostics/modbus-generated-bare-abort-candidates-2026-11-06/READY.json",
+      "bytes": 5039,
+      "sha256": "b129989502a0dbefb94c057f1c30d48ad998e53ee0fcb2f09b8ae0dc79341423"
+    },
+    "result": {
+      "path": "output/diagnostics/modbus-generated-bare-abort-candidates-2026-11-06/released-run/results.json",
+      "bytes": 267531,
+      "sha256": "5516b9392dbf4046561b23722d5c978bb8988235511ae2d969cdc31537fe9b29"
+    },
+    "terminal": {
+      "path": "output/diagnostics/modbus-generated-bare-abort-candidates-2026-11-06/released-terminal.log",
+      "bytes": 803,
+      "sha256": "5db87cdf0a494c95761f8c53bcd77641fe5996fabcc31f4228c988c7b47a4ad0"
+    },
+    "frozen_manifest": {
+      "path": "output/diagnostics/modbus-generated-bare-abort-candidates-2026-11-06/FINAL-MANIFEST.json",
+      "bytes": 60588,
+      "sha256": "d39fb08f3acd02389451300c88591616c628f9f9eda0f2a9ea5dc5acca6f592e"
+    },
+    "all238_original_bundle_records_currently_verified": true,
+    "positions": 51,
+    "starts": 10,
+    "completed": 7,
+    "cancelled": 3,
+    "seconds": 7.392,
+    "source_pin_count_at_that_historical_run": 170,
+    "then_final_stress_sha256": "3337af2420b1b259c30137b18dde64cd0d0dedcbb4e70703fa5faa54656db867",
+    "historical_source_and_snapshot_flags_not_relabelled_as_current": true
+  },
+  "saved_file_local_reverse_validation": {
+    "existing_positions_replayed": 51,
+    "per_case": {
+      "read_no_status": 14,
+      "write_aliases": 14,
+      "write_read_timer": 23
+    },
+    "paths": [
+      "saved IR callback and absent transport",
+      "audit C++ IR callback and absent transport",
+      "audit SMBP callback and absent transport",
+      "native audit SDK C++ absent transport"
+    ],
+    "no_new_distinct_frames_or_unit_methods": true,
+    "native_protocol_execution_claim": false,
+    "audit_cost_is_reported_per_case": true
+  },
+  "public_example_validation": {
+    "results": {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/PUBLIC-EXAMPLE-RESULTS.json",
+      "bytes": 26307,
+      "sha256": "65a294c63917617790eb4a01ae64f6bbbbbfc44a6bed460f0b458ec64d695b48"
+    },
+    "byte_identical_sources": true,
+    "canonical_IL_configurations_timers_counters_symbols_equal": true,
+    "source_origin_filename_changes": [
+      8,
+      16,
+      37
+    ],
+    "line_column_generated_origin_fields_unchanged": true,
+    "public_path_output_hashes_are_distinct_from_GUI_tested_originals": true,
+    "local_CLI_flag_help": {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/compile-help.log",
+      "bytes": 225,
+      "sha256": "556b3884b8e2220d05457666a4ad749a23b5d6d4d64cdb593139bd39e0ec9209"
+    },
+    "new_full628_run": false
+  },
+  "source_pins": {
+    "scope": "Existing172 immutable source/input files + three byte-exact public examples + CLI launcher",
+    "count": 176,
+    "sha256": {
+      ".gitattributes": "0a554fc9391f8d0f24fe8b3967061e0b87e341d98b5131aa0142fb6b7908d747",
+      "docs/capabilities/COUNTER-SOURCES.json": "2da70defcc1c7dedbea5dbf97e3d53df0e74a766cfde231852954af4419ddfbd",
+      "docs/capabilities/INDEXED-SOURCES.json": "8d9e40c40a2ea1df365bed39b50321aae2370aa3e48f10dab496d7d3c143ad1a",
+      "docs/validation/TIMER-MODE-STRESS-RESULTS.json": "2422e4df23cfe7c1d4c844b34e651490bb444c1862805f6c79b3ccd093b0d00d",
+      "docs/validation/TIMER-PROPERTY-STRESS-RESULTS.json": "190531e18e869974dbff6b2827041a290e2a2481fe915bd69eb0eb5ef984d526",
+      "m200/__init__.py": "77c5815a3596eebca3e939d1ad39abba46fa4edc4df148aaa7e47f13e5eda0ab",
+      "m200/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "m200/allocation.py": "f21e8753757ebf1c54874c18c3385a7d79ce52992514725920c29a1ca6281be9",
+      "m200/arithmetic.py": "bd0a83b4cc3257d2734a2ad1131137ce0608c2688a0565842b41759c336df75a",
+      "m200/arrays.py": "d4574f6e48ab98f70feb3f474f30bbf387117f5db3ddde395525a21a77da42ed",
+      "m200/bits.py": "d76ca8b8bb587a6811cfb3e157c00385ba0a836b8eb669afdda9af4e635b6a61",
+      "m200/boolean_bdd.py": "b3de9c79a5b14953256117afa22df8aaf2b37eb71689f224ca2d66e78a02882f",
+      "m200/capabilities.py": "e94e59743ee0eae98c476938f8eafe04966c0823b825b1d070980d15d41348a0",
+      "m200/cli.py": "22110f728cd456b9fae20a2ae1c2f9a03ba3fede808ee220318071c09a9d6a14",
+      "m200/communication.py": "105c1aef50e7ee00bc7c7142a5b6805d4ddf5f18fc04c5e60a52b78841a6b3b0",
+      "m200/communication_graph.py": "3b6e9a8ffc3c9ae1203106b37385141f8007719e55e010a29eec07732e3a3d61",
+      "m200/communication_xml.py": "2762f0fd89552de18e21bb632e536eb4c1a9449702cdfb6444dfb58bb606aac2",
+      "m200/config.py": "5411e6a28bd67da9a45c1660f1c62673443b249ac76948ede80b57c6e322f73e",
+      "m200/conversions.py": "0922116a83ef1bcacda5fb9a588f2bc10d522a7c1ca7f301148ea88e6e370250",
+      "m200/copy_fusion.py": "39c8f498518c46d35ad61ec2c53564a61748a4957eae25e8d241a3c7e4b98816",
+      "m200/counter_graph.py": "80abf1241ee5095a121c47e1a196de03f1e7ed37fe0c54626b2a3f3eba4a9e8c",
+      "m200/counter_xml.py": "a87177f18a698b1f442a7c16eb66748a6d2c06c9c966ac199c6275bb1e326554",
+      "m200/counters.py": "0e4ed9d8fe6f4356f3d6b6986558a0f9caa019daa3f741b12522d1fdd6f376ce",
+      "m200/edge_functions.py": "c58b059d15ee7387ed7e65f841ad549f3b30c3781a258c0a6340a96e9cd92a24",
+      "m200/edges.py": "e590a801d00b94d20a2dd1f428635aa299e3bd59bcbfe2442f5ffa4fd3d64713",
+      "m200/flow.py": "090035e4abc84354287c934898430c0da038a81a11452526e4d87a70def55607",
+      "m200/frontend.py": "2b56e3ca231ccb3cbb9a5371051928b360559400566c771a4cd678db07c0504a",
+      "m200/il.py": "f177243b0b658414b8e2f3da7eac7a7ed62b7996f5faa2154b96377f9538db83",
+      "m200/indexed.py": "0b8ca542e2be87392d8de2a75ef8ad0d48534b28d7f82d1e24fd1bf38fc8343b",
+      "m200/jsonio.py": "c4d8447354b4f48205a8d5bfc58e1a3919656ba2073ecc5982b2f8fd6253fd70",
+      "m200/ladder_lowering.py": "66bffd608bc2e554b61f56eacf608efe7749b89d19dc5c9d4fc13e004913fb52",
+      "m200/levels.py": "439eba12b9bf189795449983755b55d92f77261678a983c4ed9e94b5eb341149",
+      "m200/lower.py": "d9cc4e13b0e886a0c0d7bd85880d621d76f8c371943f4d4d1549f111ab1aa657",
+      "m200/modbus.py": "a391ce5ff71520cea4f6b74d9ae984ba6cb4d6fff36b9d44fe05396e68c2e32b",
+      "m200/model.py": "e786ea2d03ea7d9c98c641fe6ed84a00a2076f51a1974ce1209355ef4dad0e11",
+      "m200/native.py": "016a6af7d7f7b1de11dab9bee1477faa9f4d393f75bbf09e1b3bf5daa5e6ac4f",
+      "m200/native_logic.py": "6a5990a9b75186ca678172491605a8485747ec004c685a3c4d22b025be8a53de",
+      "m200/numeric.py": "b29de2050a070dcbf23ab4e942642f45ad22a580d70b078f5b74111dfde629c5",
+      "m200/project.py": "da62b18ea0e87f9b881e673af7a610aa6de57297b0ff182e3a0dbfaedca32708",
+      "m200/register_graph.py": "301cd66e5cc473ced8aa7be29fc0881484857a9072b8f490dac17e54496a459c",
+      "m200/register_xml.py": "8cccf50926e13978df2389afb48cf37409b451e8b4b80be86e1f3299dd292f71",
+      "m200/reverse.py": "a84be951d8f3e113fb74065c024198408efd584c3b16794a3f88e1f04507a0d1",
+      "m200/subroutine_graph.py": "39463c5145710c6395b809e55e9a8a910c7197710b4f6ffcdfa569f5db733667",
+      "m200/subroutine_xml.py": "0b52b1980132ce50c3a89a480125d45b568e1521c9d4c43f60d575762c972e4b",
+      "m200/timer_profile.py": "ca3f7855752418db88698ab0a6fff8ead02f67d8c63c767baeb7b0f985fd346e",
+      "m200/timers.py": "384e3c26facd76ed8da5449d001348fe1c1dd818a73532ab9c782e6a9b0fedf6",
+      "output/editor-validation/native-register-shared-request/editor-saved/register_fifo_editor_saved.smbp": "85219725709cbe90641e25bedddd6bfa4f13011a55e01be4ba087f8f42b09189",
+      "output/editor-validation/native-register-shared-request/editor-saved/register_lifo_editor_saved.smbp": "8d04a2bc22bc2466a928ea185d41641f53c5493e26a2a19d690ef8e55822c1ab",
+      "sdk/plc.hpp": "b1d6f04ab2ce88d4e37ac781a299f134c5882971f2d593ead502be3877e784b3",
+      "tests/editor_validation/run.py": "d204fa45b64dba7b33fb05c707c2f8f8362ec8f6714d19cc84ac5d4e475e55f6",
+      "tests/editor_validation/sequence_timers.py": "eb8700e346af43f3ae53ddf5034e4b7230502da8cc66e6991c7e1712670f8702",
+      "tests/fixtures/native_counter_branch_graphs.json": "fb77d8c8838c01d3b3404a47f11ff2c46d26f5057ece2e5b35f50b0e15975886",
+      "tests/fixtures/native_counter_graphs.json": "0830c6669cded99441496d3d496b8dbb67d133f7a8ace160daae40868d35029a",
+      "tests/fixtures/native_timer_graphs.json": "e8f82d22bca8b5c6a480598dfceb33bf2744feada776812b98261060132b518c",
+      "tests/fixtures/official_tm200ce40t_end.provenance.json": "e451a56395e51ad3af7f2aa35ce715c391c2b10e062ca1a31d98626702d61ada",
+      "tests/fixtures/official_tm200ce40t_end.smbp": "11b4772aab31b5759ebf5a0315125cd4f1f0005dd0bad943c64de9af9eb2ea31",
+      "tests/fixtures/official_tm200ce40t_endc.provenance.json": "e3d62c63824a4171f0b8654c8ebcdcc13631f4d5b754406f6d4d017c3363b87a",
+      "tests/fixtures/official_tm200ce40t_endc.smbp": "10d49746b54f4b8ef14dee3a51e8f08607aabebc5e142ade76f3643a1369451f",
+      "tests/fixtures/official_tm200ce40t_endcn.provenance.json": "da9e593ab5e5b8dc3acb3848044d767ddf4b42a5f12f09ee29cc79d9e1b8c66c",
+      "tests/fixtures/official_tm200ce40t_endcn.smbp": "5c76b1dabede9dc85c2c155f01c00d981262d804c150ccb7a7efbc07ba0496dc",
+      "tests/fixtures/official_tm200ce40t_memory.provenance.json": "b9826924298610100516b075c671362c87b85ff35e2489e0df661ea8cdd89730",
+      "tests/fixtures/official_tm200ce40t_memory.smbp": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf",
+      "tests/fixtures/official_tm200ce40t_memory_editor_saved.provenance.json": "7e5e29c8401bc9cdf9b4d340807b17b2a2af0d9a935f5a8fcc2d74d60fcda32a",
+      "tests/fixtures/official_tm200ce40t_memory_editor_saved.smbp": "4b6120f1151f840ae234e6f79135c51ec78e0fd3df21736c542894d52402a6bc",
+      "tests/fixtures/official_tm200ce40t_modbus_bare_abort_read.provenance.json": "2996f59a99bc0b3ada6e6ed5a0710385af585deeb255c687c9f0c38231d7fd42",
+      "tests/fixtures/official_tm200ce40t_modbus_bare_abort_read.smbp": "222de155bd4061649a017859f8775322974c3e06b3a85204ff85ae015e35b3e4",
+      "tests/fixtures/official_tm200ce40t_modbus_bare_abort_write.provenance.json": "af9f67dba2d31a96d37f278ff3af38f72bfe41a14dc5a577eecdd731c18ecf61",
+      "tests/fixtures/official_tm200ce40t_modbus_bare_abort_write.smbp": "1489ad6bdcdde1101708088d37ee2eacb326ee23a3c6ac8c0d91cbe25f51fb7d",
+      "tests/fixtures/official_tm200ce40t_modbus_bare_abort_write_read.provenance.json": "c4403129ec28518b3af4d7d18adf041db9eceea6dd6e29dd603f93d24d67f586",
+      "tests/fixtures/official_tm200ce40t_modbus_bare_abort_write_read.smbp": "ce46d988bcdaf5e9f0add2d17daff51deb0074240a937ca5f85aeed933ea8890",
+      "tests/fixtures/official_tm200ce40t_modbus_full_pin_read.provenance.json": "8d30908043d3bd1d4a66bd4bcb0f86c050ca6999451303c3f9c91f4db92d79fd",
+      "tests/fixtures/official_tm200ce40t_modbus_full_pin_read.smbp": "8154e130ce73b6a1b6e90f5876264437ec36778207fc38c3a3661152059f9e50",
+      "tests/fixtures/official_tm200ce40t_modbus_full_pin_write.provenance.json": "f5c556d3896a6e824509c25ca50b70e8c2dca2c71c5d4b80331fbaacbe2ef7dc",
+      "tests/fixtures/official_tm200ce40t_modbus_full_pin_write.smbp": "ae6ffad294a36e79656f36845f2a0bebf19df6f3e60b8aa7b82597b867b79af3",
+      "tests/fixtures/official_tm200ce40t_modbus_full_pin_write_read.provenance.json": "5c7d0e2ef28bc3bfd34fe2e8e858b3db939edf1e64f271fd33449e2ca01d97b8",
+      "tests/fixtures/official_tm200ce40t_modbus_full_pin_write_read.smbp": "9e7a3359a99c433bdebe7eaca21235960de806fdfb8151a678e39345e4b3588f",
+      "tests/fixtures/official_tm200ce40t_modbus_read_i.provenance.json": "95582f622e7ad61c46d9d902c6408245cc6e5e3db511770515a2bbc332a9d5a9",
+      "tests/fixtures/official_tm200ce40t_modbus_read_i.smbp": "1c857a39e418d602b30f132ebc311f60521eb70fdb44ddbe94fc39ff9430d214",
+      "tests/fixtures/official_tm200ce40t_modbus_read_q.provenance.json": "ab73aff0a34a9cdf8d6fa312535c8bd1e8de46f1bbd07c6f2813bc8a30e5a3c0",
+      "tests/fixtures/official_tm200ce40t_modbus_read_q.smbp": "4994ba0c7aee1ffc5127f15e673215dc9a5b9ef521877255e243b3cb3cef8d4f",
+      "tests/fixtures/official_tm200ce40t_modbus_single_coil.provenance.json": "082e0e4424bad622c62a77ea8ae9775029670c188890ee7179d5a68bd4b69180",
+      "tests/fixtures/official_tm200ce40t_modbus_single_coil.smbp": "4b72a0380555290934a4eea0492e3f9c0491b08f0741bd9f7ded49666845ef8f",
+      "tests/fixtures/official_tm200ce40t_modbus_single_reg.provenance.json": "9190f49a2bb35c59ebf47344388d4d02e9b8eede5b9f279dd2bfcbb0edbc8c22",
+      "tests/fixtures/official_tm200ce40t_modbus_single_reg.smbp": "d24a3b572bc565d9d1cb9d4111ffd231d28422384e7b08bd977c85198b995ed8",
+      "tests/fixtures/official_tm200ce40t_modbus_write_q.provenance.json": "e1a264b49644905d6ea7ac7752112eece4d8bfc62adec68f70ae3d3aeef0af52",
+      "tests/fixtures/official_tm200ce40t_modbus_write_q.smbp": "da5f8bb39369d888f86c09b136222756a42127410d0c867574c80dacb66c465e",
+      "tests/fixtures/official_tm200ce40t_modbus_write_read.provenance.json": "582257c462d3c509bd7c8a245070aedb1bf6809ea08d683e570cb4fc87806034",
+      "tests/fixtures/official_tm200ce40t_modbus_write_read.smbp": "6a7edd820fcaee97cc4c1c783005f0a88a0409c98934e7b6964fbce1004bb52e",
+      "tests/fixtures/official_tm200ce40t_register_fifo_three_ld.provenance.json": "44d133c0c01788d8f07d6a1c0f8a75dcb9710e19e43fc2b1477a9dbe6e3a376d",
+      "tests/fixtures/official_tm200ce40t_register_fifo_three_ld.smbp": "f6198b7054f1f1b6dbd016f6df756ef2ebd150a99d26bc59e86069944d000fa4",
+      "tests/fixtures/official_tm200ce40t_register_lifo_three_ld.provenance.json": "7f969a7de6b559b6c023c2ad854cf8267e81b64916d348b295b5764567d16e5f",
+      "tests/fixtures/official_tm200ce40t_register_lifo_three_ld.smbp": "a82e4dd97f37c469dae5d30f68b12cf3d11f55f0131f171d7e6b0a3b5c37cf0a",
+      "tests/fixtures/official_tm200ce40t_subroutine_sr0.provenance.json": "f22502f3be85dcf6ff8cf1c4fcee8c9dece406ef92ca99064b7dd6b0c2f6f42f",
+      "tests/fixtures/official_tm200ce40t_subroutine_sr0.smbp": "49438bcbed59cde889547869d8c033f377dfb7e60153136a57cb48e135b0e21a",
+      "tests/fixtures/official_tm200ce40t_subroutine_sr63.provenance.json": "300ddc9bc3a7b76b0e70cfe2cfe9a0017ae902dac0626e2531c44b5ec52c43b8",
+      "tests/fixtures/official_tm200ce40t_subroutine_sr63.smbp": "ff05369c686e8bc1887612afdbfcfd57d24e0e4e1e51d8d2b2b443824a2fa652",
+      "tests/fixtures/official_tm200ce40t_timer_10ms.provenance.json": "3b6c2e9f09e8da42c4e68e86fb03e417d11b33372d97fe069164121615bb2971",
+      "tests/fixtures/official_tm200ce40t_timer_10ms.smbp": "934affc43bd7e3d918b529b5cbfaee5aabd6bc062006edcd5c3cacf0d7f2bc45",
+      "tests/fixtures/official_tm200ce40t_timer_options_behavior.provenance.json": "106137384b9f4b7c38786e066e9158e1d53042e6d6260f953279d78c9bb23477",
+      "tests/fixtures/official_tm200ce40t_timer_options_behavior.smbp": "5358e5334696e1838e8b34b9efaa84fafb2a7bd97802d2d2ee32ae94a7f52214",
+      "tests/fixtures/official_tm200ce40t_timer_ret_ton_fl3_2.provenance.json": "deb0b3c186c0f36292e165d02ae869a44d2d391ca9c200dccccc1aecc936bff0",
+      "tests/fixtures/official_tm200ce40t_timer_ret_ton_fl3_2.smbp": "35a9d891711ff3eb74d745f30c14cbb3574b7cd61b0cec876320263e28a1fbd6",
+      "tests/fixtures/synthetic.smbp": "5c04625cb62d03bd8d2982430970bbb3fb81070205c302d4e39f5a5b78a7f515",
+      "tests/public/control-flow-manifest.json": "9c90f5da2e907305d50f8dbb6a5d64e77306a2b92b501d7f0a79e9380a2d07a9",
+      "tests/public/control_flow.py": "65f9d5f2aba359e6c316aa133c577496114e3981728cf5ce60ada5ecbad7ae72",
+      "tests/public/fetch.py": "196a8b6233a222fd1ebb86a89ced34dda368568bd0a82407cc792d45760af5ba",
+      "tests/public/manifest.json": "7c54959214e085d2852a6601a27a48cf212744cb26ce5aadac6ab8f4d6386324",
+      "tests/public/run.py": "c87893404e91a1b90e648303aafa647c7e9d9199c1e6b86e30ea1c0710b27fda",
+      "tests/stress/bit_objects.py": "a39468f5ae36159b378cda34f2bfbe81abdf42fa1cb1fbf5cca0e6325b9c0489",
+      "tests/stress/boolean_audit.py": "ecd800fad5e3eb05948eb833f77a6098fb0e44aaecf8c0a81b60f1c529de146a",
+      "tests/stress/control_flow.py": "ad7814da8c24d58557b9f749252f624e86d71dd28f1873f8b84dcbf5dece6586",
+      "tests/stress/conversions.py": "da56e75ab3d233470151c3efbd4a9c836e1dcfd3c5469945bdbebb0c61f073d0",
+      "tests/stress/counter_graphs.py": "455889489bfb813b1ecaa27efbd2cd40592373ec61ea7c2f82618eb3256b1285",
+      "tests/stress/counters.py": "477b0685314abb2bafa58f27989df132a9b374dac8a4dc4a882a87d5fcd9acd6",
+      "tests/stress/digital_io.py": "0bece2a8e6ec6eee1d07054522d6766a238caa9f7d911cbe3f09afddb4090506",
+      "tests/stress/dynamic_arrays.py": "df53722713450024bfce76434e1e548ceabccde25b7b5654417d8a2a889566ac",
+      "tests/stress/expression_edges.py": "d8dc293380b5aa3de06c3d764dab8324a974fd8d7f9d6962dbd776b9abc5d82a",
+      "tests/stress/il_properties.py": "f2269c4d4beb32ea1e9e014aea71b67f3a05839ec137d5f9be237fa833f25644",
+      "tests/stress/indexed.py": "d8937c58e751f515b6d65dcc4f3d1d1a2545d4dee9ed673f73e02fa4f77426a3",
+      "tests/stress/integer_flags.py": "1f26ac9b9adcb349c381ae03288ed6588c2fb6eda691003089e85072f9a2b689",
+      "tests/stress/modbus_full_pin.py": "98b443a7211d1269a637973f4438add6f0fc8522d1f18e2e0954cd044aabd409",
+      "tests/stress/native_edges.py": "29bb2bcff1568a0e6adfacd46840dbd20f6f159043df4da86b4a5765a1c986da",
+      "tests/stress/native_logic.py": "c70a0a69556ab796c18b53d0b2d5ce4b3f1dbd45df9093c8760fff17b6c9551b",
+      "tests/stress/run.py": "f8a317eea4fa0e016ce3c5dd9de2ee534ee333c659cf51396e27ce386d91b7d7",
+      "tests/stress/timer_modes.py": "e49f7526f0fec09d072721deeb33b4c0a5a098fc75151a7293644f24e4441baf",
+      "tests/stress/timer_properties.py": "8d1353d38757664145ea233273d629faa623b04e946e33598ca65b9590085f65",
+      "tests/test_adversarial.py": "70697b896097c6c84093595d03fa244498aa9e1dd92b767654bf9683c752a2c7",
+      "tests/test_allocation.py": "30841d4cbd34aa72a5423150773c1f9cb69ba81a8b550b2b82b8be735cce98ff",
+      "tests/test_arrays.py": "e41d1d729a04fa7cea78c6511eb1f5c77908a022f02475b9b3d056984049efcd",
+      "tests/test_bit_communication_xml.py": "f93c7ee89d31159f6b366ce0a0286bc3ff5ce34c62085b3b57afaf304f1cad9c",
+      "tests/test_bit_objects.py": "9fc13a3081ad8c13d0276364d0b6b62beed307a8e4af61752fcf98c7d0a5ce8f",
+      "tests/test_capabilities.py": "15d1fab381fb0aa052e4bd985cc077ebce402964071e1d66ca5d6b763b62716e",
+      "tests/test_communication_compiler.py": "07e10834d084472242e0043f60b3d8e687b628c2536ab89adb6b7c7c9607f209",
+      "tests/test_communication_project.py": "62c93e9bceffa04150a72c7527adb48e2c959799eb7218460dbbe6ac791785a6",
+      "tests/test_communication_xml.py": "836dfeb3312c14cf036bd75aeef9cd7acf344fcc01cbd49b7cb9f14f01622a19",
+      "tests/test_control_flow.py": "8c2ad3d223641ee562ad74236c9ec04429c5bb24a1755fcffdaa562a856509db",
+      "tests/test_conversions.py": "7db2481732b54abbd0a188b1ac0c04eb2b37948e88d9a1b3e6f6b71bb875ecc7",
+      "tests/test_copy_fusion.py": "bef86dfabf49e5a25aa2193eed4107346a74657dd4619a581770f3d181487740",
+      "tests/test_counter_graphs.py": "cbcae6b9e643342c6333433b011accc3e97f620d33621df029496d79b523e935",
+      "tests/test_counters.py": "ff93ed6f67bf6c86fe688efb636aafbce53025b9fd9eb6542f2fabdb895265ed",
+      "tests/test_dynamic_arrays.py": "6714bd13bd8b0b1bcb3443cfa713e3ddaa0045e5f4be3b9854f94c282d719cc2",
+      "tests/test_expression_edges.py": "2971d2147c3172619923a2bb587fff2b7f5ca7f6f10c7a6a84d157dd96a50526",
+      "tests/test_inactive_pulse_aliases.py": "8c89f7d08e8889b6bca59b0b0e818585465a0d8473269725e3273acc5d2446ce",
+      "tests/test_indexed.py": "e8e9d248f90c47197a982ca2410efcae37f070b1c11b41ce0d26145cc8e92589",
+      "tests/test_indexed_bits.py": "5e7c05ab57931ed15012a580adc3034a36ed6c78b3df0ddc59ad9b8a5aca6a6f",
+      "tests/test_integer_flags.py": "750f324db795037de77e71ca4bf10927973a28dab55c3fbb971ea547d98bc289",
+      "tests/test_mast_task_profile.py": "6bcbc398b4a2048c44a92433dc9d1f03755b5186814c0136fea4cdde04125d93",
+      "tests/test_modbus.py": "6a5d5b4e04363514b44b199793593e2d887a4d6dbbbd69937f34d91eb42b7546",
+      "tests/test_modbus_bare_abort_native_profile.py": "1e0f9bb9c219179e8196d0bf3d654c023f5a3b331ab8b6acd38c677e049e91da",
+      "tests/test_modbus_full_pin_native_profile.py": "99c30dad93f2424555fe541519155cbd32068196daa85b279463d0d943790baf",
+      "tests/test_modbus_single_native_profile.py": "7223bf9af49a238a2c2ea2b9f6b49b91ee978cc38837a92643955373458e194d",
+      "tests/test_modbus_transport_recovery.py": "564d4d062d98871885cd3a62d773bdf3617117e86ded0b551a0cd3bbdc6deb9a",
+      "tests/test_modbus_write_read_native_profile.py": "8d005fef26232e814b151a8b84af1d5ada3527df720eddd517a34ca4fb539223",
+      "tests/test_native_edges.py": "1671d2c49540d1dfc9b709e47fa6b0521505b73f92bad755a06f8f047b51f3eb",
+      "tests/test_native_end_graphs.py": "ff6f41418a2dff5579afd6dffceb95f6526ff5b7f1626a7b28c7d4394ef260cb",
+      "tests/test_native_logic.py": "aaa004e025625c9107441f17c5b7578fede443eb24d24e59985c2d22c035d7c7",
+      "tests/test_numeric.py": "6d072af3241154ab4823f9ff4ffc797ea830ba25bf0fcb5d28c69b7f7b247aef",
+      "tests/test_numeric_stress.py": "2453fe9b4352ec4a2e5dceea9c1462a8487f7283fe6904618df7d7101a61cca9",
+      "tests/test_official_profile.py": "a846191a137e8cf492fcfc92721fddf491a547cdbe9b6a6c33073fa667fd9543",
+      "tests/test_public_regressions.py": "2dbedd883358b74d7c082ae750a107e3a57a889758eec1b61501b810b3dca532",
+      "tests/test_register_graph.py": "fb64a51ea25a5c67f4e9d893c4bba00e7a8541b0ee1132316c5b30f8f3337da1",
+      "tests/test_register_xml.py": "07ebf1a24864e75551c561e6a5ce9ea049d2212568c19ef9d4a008952a577de3",
+      "tests/test_review_regressions.py": "458f5c6690fa7c9afc3035a27a9a40eb5167729d25e4faa53bd3c902dcffdd83",
+      "tests/test_scan_exit.py": "deac144a54f822fbd52a1205d90ccedccd0725874ff47fe6ffd83c385c1091e5",
+      "tests/test_subroutine_graph.py": "fd409e0eaca5641e5646a17e5e87e8140d7540aca432c685a2610ff18a0ea4ef",
+      "tests/test_subroutine_xml.py": "35a5ddf6295cfff8de764ff72bda2afc8850665c02d3271d5c184f216a153cbc",
+      "tests/test_timer_modes.py": "d85e8526a32b60859c507fefd596eaeb53c5580d397fc705167f51f159d69fb3",
+      "tests/test_timer_option_bindings.py": "e07b68561a990fa72af70557bad9ae5a60a2e88230bc9dae53a4f9c2e0e67e73",
+      "tests/test_timer_properties.py": "daf92505702d81502023602b3102c4cc34c84a621ba99a90ebb3662daf277012",
+      "tests/test_timer_property_stress.py": "33c85057f20ddd3d1d619a413db8ef2630feee3d584d2e60a9c583dd29c6eabd",
+      "tests/test_timer_xml_bindings.py": "9982273f54099987b6e06be84d02ec525ff9f7dc3876121a5f04c81f719b8095",
+      "tests/test_toolchain.py": "08f6edf37688853d09fc33627e88d2e0a7d358ec8173b4395c4def758d34f860",
+      "examples/editor_validation/modbus_bare_abort_read.cpp": "d05a99614f19c2383e09b91ddfa971880309b201d5a11907e166b8109801fab7",
+      "examples/editor_validation/modbus_bare_abort_write_aliases.cpp": "80638df09508bb2bbb87e9cb9d1abe36220c44ce26e0485b33d6771115edbbfe",
+      "examples/editor_validation/modbus_bare_abort_write_read_timer.cpp": "80f062d57870016836894096fe6af11a7ca5725b36d93fe3c325b48d98c9ab31",
+      "m200c": "dda4ffd05d83eb4e6656bead70f45d34fec369b9bfaa0b0e58b94489c6c215bd"
+    },
+    "before": {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/public-example-source-pin-before.json",
+      "bytes": 19876,
+      "sha256": "4581e09b05c6e7e73099db317b7668691910874caffb43f78062378861368d2f"
+    },
+    "after": {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/public-example-source-pin-after.json",
+      "bytes": 19955,
+      "sha256": "0d45a2bc4966c566f402940a3c081eb276a11c9619e9835e1142115b2682c0ab"
+    },
+    "all_unchanged": true
+  },
+  "normalization_policy": "Complete typed XML differences retained per case; only Name/FullName identities, graph Symbol/Comment fields, token-identical numeric-expression spacing, exact Automatic child omissions and the literal TM4 TON/false-option omissions are accepted. No unknown difference is generally dropped.",
+  "reviewer_helper_history": {
+    "raw_allocation_equality_assumption": "Failed on two explicit Automatic-to-empty-container omissions; initial log preserved",
+    "raw_active_timer_equality_assumption": "Failed on exact TON/false/false TM4 child omissions; initial log preserved",
+    "metadata_API_assumption": "Removed a nonexistent Program.name access; retained first successful READ public compilation without repeating it; initial helper log preserved",
+    "product_bug_demonstrated": false
+  },
+  "separate_WR_STOP_only_stage": {
+    "included_in_this_static_result": false,
+    "included_as_separate_bounded_stage_in_this_report": true,
+    "classification": "PASS two sampled No error / Online / Stop views with identical applications and official cleanup; no RUN/transaction claim",
+    "root_record": {
+      "path": "output/editor-validation/modbus-generated-bare-abort-2026-11-06/ROOT-WR-STOP-OBSERVATIONS.json",
+      "bytes": 3070,
+      "sha256": "acb7c8a090ea8d1212c80de2744cac1f95f9ff5e82d9a85499efbc64cd345bb8"
+    },
+    "exact_root_record": {
+      "scope": "Separate bounded local official-simulator preparation in STOP after static save/fresh-reopen success; not RUN or communication execution",
+      "source": {
+        "path": "output/editor-validation/modbus-generated-bare-abort-2026-11-06/observed/write_read_timer/modbus_bare_write_read_editor_saved.smbp",
+        "bytes": 353702,
+        "sha256": "55ce5db272eda93b9e52ad8d43ac0b915f47d8f4d1cc604edd770e4ef3859b8b"
+      },
+      "shared_after_cleanup": {
+        "path": "/Users/tommy/Offline/projects/shared-folder/plc/compiler-validation-2026-11-06/modbus_bare_write_read_editor_saved.smbp",
+        "bytes": 353702,
+        "sha256": "55ce5db272eda93b9e52ad8d43ac0b915f47d8f4d1cc604edd770e4ef3859b8b"
+      },
+      "simulator_host_pid": 34875,
+      "observations": [
+        {
+          "label": "WR-STOP-observation-1",
+          "capture": {
+            "path": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793975543992757000-2146.png",
+            "bytes": 310674,
+            "sha256": "167c1f254ecfd31c79e9b7198d90f841346efa625591be0865ae23e0d94ab0be"
+          },
+          "capture_epoch": "1793975543.992757",
+          "seconds_after_launch_request": "58.9009449",
+          "No_error": true,
+          "Online": true,
+          "STOP": true,
+          "applications_identical": true,
+          "root_personally_viewed": true
+        },
+        {
+          "label": "WR-STOP-observation-2",
+          "capture": {
+            "path": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793975680868317000-2146.png",
+            "bytes": 310674,
+            "sha256": "167c1f254ecfd31c79e9b7198d90f841346efa625591be0865ae23e0d94ab0be"
+          },
+          "capture_epoch": "1793975680.868317",
+          "seconds_after_launch_request": "195.7765049",
+          "No_error": true,
+          "Online": true,
+          "STOP": true,
+          "applications_identical": true,
+          "root_personally_viewed": true
+        }
+      ],
+      "seconds_between_captures": "136.875560",
+      "unique_observation_PNG_hashes": 1,
+      "commissioning_notices": "No protocol is enabled; application protection inactive; existing Untrusted DLL banner visible",
+      "cleanup": {
+        "official_stop": {
+          "path": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793975760962911000-2146.png",
+          "bytes": 287238,
+          "sha256": "cea7b22283288794a699a30a828077b270e677a5bce43a8f4cbbecdea11ec8b4"
+        },
+        "fresh_completed": {
+          "path": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793975830477798000-2146.png",
+          "bytes": 287238,
+          "sha256": "cea7b22283288794a699a30a828077b270e677a5bce43a8f4cbbecdea11ec8b4"
+        },
+        "status": "No error / Not Connected; simulator panel absent",
+        "exact_ps_pid34875_exit": 1,
+        "TCP502_lsof_exit": 1,
+        "root_personally_viewed": true
+      },
+      "journal": {
+        "path": "output/editor-validation/modbus-generated-bare-abort-2026-11-06/WR-STOP-actions.jsonl",
+        "bytes": 7714,
+        "sha256": "c60bdee79ef4a73b22814490e2e0ae7faa97b83fd15ca8fb6526c37e9cb11852"
+      },
+      "complete_argument_records": 6,
+      "no_RUN_input_or_communication_commands": true,
+      "no_external_clients_or_physical_PLC": true,
+      "not_scans_or_continuous_observation": true,
+      "does_not_resolve_historical_P0": true
+    },
+    "journal_complete_full_argument_entries": 6,
+    "all_journal_entries_exit0": true,
+    "observations_sample_count": 2,
+    "unique_observation_PNG_hash_count": 1,
+    "observation_PNGs_byte_identical": true,
+    "seconds_after_launch_request": [
+      "58.9009449",
+      "195.7765049"
+    ],
+    "seconds_between_samples": "136.875560",
+    "timing_basis": "Capture times minus launch-request time; not scans, readiness duration or continuous observation",
+    "all_three_promoted_captures_independently_visually_reviewed": true,
+    "cleanup_image_independently_confirms": "No error / Not Connected; simulator panel absent",
+    "process_and_TCP502_cleanup_basis": "Read-only review of root-recorded exact ps/lsof exit1 results; no independent process/network command by this lane",
+    "public_PNGs": [
+      {
+        "case": "write_read_timer",
+        "stage": "separate WR STOP-only observation 1: No error / Online / Stop; identical applications",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793975543992757000-2146.png",
+        "path": "docs/validation/editor-evidence/modbus-bare-generated/write-read-stop-observation-1.png",
+        "bytes": 310674,
+        "sha256": "167c1f254ecfd31c79e9b7198d90f841346efa625591be0865ae23e0d94ab0be",
+        "independently_visually_reviewed": true
+      },
+      {
+        "case": "write_read_timer",
+        "stage": "separate WR STOP-only observation 2: No error / Online / Stop; identical applications",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793975680868317000-2146.png",
+        "path": "docs/validation/editor-evidence/modbus-bare-generated/write-read-stop-observation-2.png",
+        "bytes": 310674,
+        "sha256": "167c1f254ecfd31c79e9b7198d90f841346efa625591be0865ae23e0d94ab0be",
+        "independently_visually_reviewed": true
+      },
+      {
+        "case": "write_read_timer",
+        "stage": "separate WR STOP-only fresh cleanup: No error / Not Connected; simulator panel absent",
+        "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793975830477798000-2146.png",
+        "path": "docs/validation/editor-evidence/modbus-bare-generated/write-read-stop-cleanup.png",
+        "bytes": 287238,
+        "sha256": "cea7b22283288794a699a30a828077b270e677a5bce43a8f4cbbecdea11ec8b4",
+        "independently_visually_reviewed": true
+      }
+    ],
+    "no_RUN_input_changes_or_communication_commands": true,
+    "no_external_clients_or_physical_PLC": true,
+    "native_protocol_execution_proven": false,
+    "historical_P0_resolved": false,
+    "no_cause_or_general_simulator_stability_inferred": true
+  },
+  "artifact_pins": [
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/read_no_status/READBACK.json",
+      "bytes": 47818,
+      "sha256": "481803c6d003ad3ed40e03fc7748f14a1d621683987c4cd6c436473039c7e6bf"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/read_no_status/decompile.log",
+      "bytes": 467,
+      "sha256": "ec5f3bb292f1800963fe8db164e0931bd4663c1aaeee2d00fb7411b9066e18ed"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/read_no_status/recompile.log",
+      "bytes": 8192,
+      "sha256": "b9c4195073f5134a8518e5d960fdf183f7434a4f1925fb26b9c7ead91304c245"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/read_no_status/editor-saved-audit.cpp",
+      "bytes": 2002,
+      "sha256": "524e42dd32c9b6f7dba8c70da47640517ff24146928943dcaa10e37d31647df5"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/read_no_status/editor-saved-audit.cpp.configuration.smbp",
+      "bytes": 155988,
+      "sha256": "5a5bc2034e39d1f7bdd9a8e97c9c18c78b0e5e9d30548b683c769932525ea640"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/read_no_status/rebuilt/report.json",
+      "bytes": 7668,
+      "sha256": "fb2ad919cf1dae473368f82b7a47823a64a8fbd249fa940b873b483f49ee0fb6"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/write_aliases/READBACK.json",
+      "bytes": 50701,
+      "sha256": "900bf962d150bc0e35e5d529a6a85ecb978000059ea776625626a0a747fb7758"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/write_aliases/decompile.log",
+      "bytes": 466,
+      "sha256": "ac87ec45b3eb959cd72eca53a7eae334b523188ed69ec9fb22ffc698e674e20d"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/write_aliases/recompile.log",
+      "bytes": 9491,
+      "sha256": "59ad6f807a2097ed0422263b7b17172775391eb9e72fb50782f017b60b6df33b"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/write_aliases/editor-saved-audit.cpp",
+      "bytes": 2926,
+      "sha256": "48edfdfeeaf636c19f25b5218690a342d09a7a86b6a0b41a3e0e2029b83234da"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/write_aliases/editor-saved-audit.cpp.configuration.smbp",
+      "bytes": 199029,
+      "sha256": "3d9c7d0f43197e550394ad5cd19295b3a5195ede368c597a51633aca98f51334"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/write_aliases/rebuilt/report.json",
+      "bytes": 8969,
+      "sha256": "0a18517ee56044eae00df6b827ed6cb4782d74bbe917db3c5a0b439741aeb2e2"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/write_read_timer/READBACK.json",
+      "bytes": 114397,
+      "sha256": "5b581379eda03c433008b9a521220f47c62ea9cdd03eaf6a1a3d81cc83ea4caa"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/write_read_timer/decompile.log",
+      "bytes": 477,
+      "sha256": "e802914b34aa9e486da3c2713c058bdfa8d47d3f54a5ed2f1674fb677adceeb6"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/write_read_timer/recompile.log",
+      "bytes": 16072,
+      "sha256": "5cda819e01873b5ebcca350d772e32fb48d40522de6729d2b4df67bca0cdb244"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/write_read_timer/editor-saved-audit.cpp",
+      "bytes": 7025,
+      "sha256": "d9af75e156876ed4e62f969a4498fe6ee07c253e8d4f9785be79558a92b3813a"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/write_read_timer/editor-saved-audit.cpp.configuration.smbp",
+      "bytes": 353702,
+      "sha256": "55ce5db272eda93b9e52ad8d43ac0b915f47d8f4d1cc604edd770e4ef3859b8b"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/write_read_timer/rebuilt/report.json",
+      "bytes": 15536,
+      "sha256": "7cea0bae5f5df5a5ca79f0eda0dbf2386b0a1fddd4be669f148e94872dac3859"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/analyze.py",
+      "bytes": 10267,
+      "sha256": "9367afe97aa59ee880e26f334ab88aa0772e0e2a7b802f8058ff6b2426d0a88b"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/compile_public_examples.py",
+      "bytes": 5094,
+      "sha256": "9894e39b2740581003b55d05d5049c89a663704d293f49cd7537875caed8b421"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/compile-help.log",
+      "bytes": 225,
+      "sha256": "556b3884b8e2220d05457666a4ad749a23b5d6d4d64cdb593139bd39e0ec9209"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/read-analysis.log",
+      "bytes": 3886,
+      "sha256": "e31c7c6d86cb61159fe00453ed01db2e477d32cb9066a53e5fca36ad22ee20ca"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/write-analysis.log",
+      "bytes": 4125,
+      "sha256": "36dae3766088d0cb0723962d6a5ace34675a4b5e71c4b8062c53c6221c3470ac"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/write-read-analysis.log",
+      "bytes": 5674,
+      "sha256": "1daae948651785fa3eba2aae9d5e7ec4dab0f9cf86cfc30535c4e319ad39a1e2"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/read-analysis-initial-allocation-assumption.log",
+      "bytes": 668,
+      "sha256": "70b46731c46523297741ae6189a8b3fc35f2276d78def81e6261bdbdf02abae3"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/write-read-analysis-initial-timer-default-assumption.log",
+      "bytes": 540,
+      "sha256": "2665b4a7afe08f4c443d56856e7527163e839ee8bd4ed3c260f9d394dfc00431"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/public-examples-initial-helper-API-assumption.log",
+      "bytes": 956,
+      "sha256": "8f3dd01500c27f53397d3f71ac55fef55c6cbfe083d2b5c24f258092f979d113"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/PUBLIC-EXAMPLE-RESULTS.json",
+      "bytes": 26307,
+      "sha256": "65a294c63917617790eb4a01ae64f6bbbbbfc44a6bed460f0b458ec64d695b48"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/public-examples.log",
+      "bytes": 411,
+      "sha256": "65057c66716a175675ea32e38d1bf403a42fdaa2d3bf04ce7a3724767e4aa9aa"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/public-example-source-pin-before.json",
+      "bytes": 19876,
+      "sha256": "4581e09b05c6e7e73099db317b7668691910874caffb43f78062378861368d2f"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/public-example-source-pin-after.json",
+      "bytes": 19955,
+      "sha256": "0d45a2bc4966c566f402940a3c081eb276a11c9619e9835e1142115b2682c0ab"
+    },
+    {
+      "path": "output/editor-validation/modbus-generated-bare-abort-2026-11-06/ROOT-WR-STOP-OBSERVATIONS.json",
+      "bytes": 3070,
+      "sha256": "acb7c8a090ea8d1212c80de2744cac1f95f9ff5e82d9a85499efbc64cd345bb8"
+    },
+    {
+      "path": "output/editor-validation/modbus-generated-bare-abort-2026-11-06/WR-STOP-actions.jsonl",
+      "bytes": 7714,
+      "sha256": "c60bdee79ef4a73b22814490e2e0ae7faa97b83fd15ca8fb6526c37e9cb11852"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/WR-STOP-REVIEW.json",
+      "bytes": 2734,
+      "sha256": "921f8812f805fa94fae7d0cdd40ae57dd58ae2c2016f43d2da7c299b281df579"
+    }
+  ],
+  "operations_by_this_lane": {
+    "product_code_or_tests_changed": false,
+    "existing172_inputs_changed": false,
+    "public_example_files_added": 3,
+    "public_report_and_PNGs_added": true,
+    "GUI_Wine_network_serial_process_port_firmware_physical_actions": false,
+    "stage_commit_push": false
+  },
+  "limits": [
+    "Static No error/save/reopen is not vendor runtime/protocol/physical proof",
+    "Local MemoryTransport callbacks share the reference model; native SDK checks use absent transport",
+    "Public path rebuilds change source-origin metadata and have separate, not GUI-tested hashes",
+    "Audit C++ lowering increases scratch/copy/rung cost; exact resource-count preservation is not claimed",
+    "No new full628 regression run or unit-test total is claimed",
+    "Other native contact/object/link/level/partial-graph profiles remain separate tool gaps; full parity remains the goal",
+    "Separate WR STOP preparation contains two sampled observations with one unique PNG hash, not scans or continuous observation",
+    "STOP-only acceptance proves no RUN or native communication transaction and does not resolve historical P0",
+    "Root alone operated GUI/simulator and checked process/listener cleanup; this lane reviewed frozen records/images only"
+  ],
+  "public_static_PNG_count": 6,
+  "public_STOP_stage_PNG_count": 3,
+  "unique_public_PNG_hash_count": 8,
+  "historical_static_only_report_snapshots": [
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/static-only-snapshot/MODBUS-BARE-ABORT-GENERATED-PROJECT-RESULTS.json",
+      "bytes": 152993,
+      "sha256": "bda2b96be06351ccd4f39fb55acd875094e5f95ac1ef3ee0902895ac5811b13d"
+    },
+    {
+      "path": "output/reports/modbus-bare-generated-editor-review-2026-11-06/static-only-snapshot/MODBUS-BARE-ABORT-GENERATED-PROJECT-RESULTS.md",
+      "bytes": 7587,
+      "sha256": "f10d56078cd940fbb97ad496c218dea3483acde6f26290ab1bb00526eac6a74d"
+    }
+  ]
+}
