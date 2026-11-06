@@ -27,7 +27,7 @@ The frontend does not translate source by text substitution. Unknown AST nodes a
 
 Supported source constructs include boolean variables, initialization, sequential assignment, `if/else`, `!`, `&&`, `||`, boolean XOR/equality, compatible typed numeric comparisons, fixed-capacity arrays, and same-scan control flow.
 
-A bare `return;` exits `scan()` through the output-commit epilogue, preserving earlier writes and retained outputs. It works inside supported loops and conditional/goto paths. Imported operand-free END/ENDC/ENDCN use their native accumulator condition and export through supported Jump graphics; native END graphical entities remain unverified. See [scan-exit semantics](capabilities/SCAN-EXIT.md).
+A bare `return;` exits `scan()` through the output-commit epilogue, preserving earlier writes and retained outputs. It works inside supported loops and conditional/goto paths. Imported operand-free END/ENDC/ENDCN use their native accumulator condition and export through supported Jump graphics; native END graphical import accepts the verified closed series forms. See [scan-exit semantics](capabilities/SCAN-EXIT.md).
 
 Boolean helper functions may have one return expression, with no recursion or explicit state writes. Numeric intrinsics inside an expanded expression retain their S17/S18 side effects. This is not support for arbitrary C++ functions or classes.
 

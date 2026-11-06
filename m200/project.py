@@ -14,7 +14,8 @@ from pathlib import Path
 from .il import validate
 from .config import configuration, unique_tree
 from .model import Program, Timer, address, fail
-from .flow import split_label
+from .timer_profile import BASES
+from .flow import ENDS, split_label
 from .indexed import has_indexed, direct_word_limit, has_indexed_bits
 from .bits import memory_bits_used
 from .edges import SERIES, contact_type
@@ -36,7 +37,6 @@ from .counter_xml import (
 )
 
 TARGET = "TM200CE40T"
-BASES = {1: "OneMilliSeconds", 100: "OneHundredMilliSeconds", 1000: "OneSecond"}
 LEFT_ONLY = {
     "Coil",
     "SetCoil",
@@ -45,6 +45,8 @@ LEFT_ONLY = {
     "ReadVarBasic",
     "WriteVarBasic",
     "Jump",
+    "End",
+    "EndCn",
 }
 
 
@@ -95,10 +97,26 @@ def graphics(rung, timer_column=3, communication_contact_column=0):
     # Deliberately only series contacts, one action, and one optional Timer.
     # Compound expressions are split into boolean gates by the lowerer.
     _, rung = split_label(rung)
-    if any(line.split(maxsplit=1)[0] in ("END", "ENDC", "ENDCN") for line in rung):
-        fail(
-            "native END-family Ladder XML binding is unverified; normalize to supported Jump graphics"
-        )
+    end_type = None
+    if any(line.split(maxsplit=1)[0] in ENDS for line in rung):
+        # Exact official saves distinguish power-rail END from conditional End:
+        # END alone has ten wire cells; ENDC/ENDCN have a preceding predicate.
+        if rung == ["END"]:
+            return [("Line", "", i) for i in range(10)] + [("End", "", 10)]
+        if len(rung) < 2 or rung[-1] not in ("ENDC", "ENDCN"):
+            fail("native END graph requires a standalone END or terminal ENDC/ENDCN")
+        for i, line in enumerate(rung[:-1]):
+            parts = line.split(maxsplit=1)
+            allowed = (
+                ("LD", "LDN", "LDR", "LDF")
+                if i == 0
+                else ("AND", "ANDN", "ANDR", "ANDF")
+            )
+            if len(parts) != 2 or parts[0] not in allowed or parts[1] in ("0", "1"):
+                fail(
+                    "unverified native END predicate graph; use supported series contacts"
+                )
+        end_type = "End" if rung[-1] == "ENDC" else "EndCn"
     if any(line.split(maxsplit=1)[0] in ("JMP", "JMPCN") for line in rung):
         fail("SMBP graphics for JMP/JMPCN are unverified; generate a contact and JMPC")
     if rung[0].startswith("BLK "):
@@ -216,6 +234,8 @@ def graphics(rung, timer_column=3, communication_contact_column=0):
                 else rung[-1]
             )
             items.append(("Operation", expression[1:-1].strip(), 9))
+        elif end_type is not None:
+            items.append((end_type, "", 10))
         else:
             op, arg = rung[-1].split()
             items.append(
@@ -247,15 +267,16 @@ def check_graph(rung_node, lines, program=None):
         if rung_node.findtext("IsLadderSelected", "false").lower() == "true":
             fail("selected Ladder rung has no graphics")
         return
-    if any(line.split(maxsplit=1)[0] in ("END", "ENDC", "ENDCN") for line in lines):
-        fail(
-            "native END-family Ladder XML binding is unverified; IL-only import remains available"
-        )
+    native_end = any(line.split(maxsplit=1)[0] in ENDS for line in lines)
+    if native_end and (rung_node.attrib or graph.attrib):
+        fail("unknown native END graph attributes")
     actual = []
     rows = set()
     for e in graph:
         if e.tag != "LadderEntity":
             fail("unknown graphical element container")
+        if native_end and (e.attrib or any(c.attrib for c in e)):
+            fail("unknown native END graph attributes")
         if any(
             c.tag
             not in (
@@ -282,6 +303,8 @@ def check_graph(rung_node, lines, program=None):
             fail("invalid Ladder coordinates")
         if row not in (0, 1):
             fail("parallel/multi-row Ladder is outside the supported import subset")
+        if native_end and row != 0:
+            fail("unverified native END graph row; observed bindings use row zero")
         rows.add(row)
         typ = e.findtext("ElementType", "")
         expr_field = {

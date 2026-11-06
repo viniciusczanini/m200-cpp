@@ -548,14 +548,16 @@ class ToolchainTests(unittest.TestCase):
         self.assertIn("M200-E", r.stderr)
         self.assertNotIn("Traceback", r.stderr)
 
-    def test_unverified_timer_base_serialization_is_refused(self):
+    def test_proven_10ms_base_serialization_after_six_1ms_timers(self):
         decl = "".join("plc::Ton t%d{20};" % i for i in range(7))
         calls = "".join("bool b%d=t%d.update(true);" % (i, i) for i in range(7))
         p = self.compile(decl + "void scan(){" + calls + "}")
-        with self.assertRaisesRegex(Exception, "M200-E"):
-            self.api("project").write_project(
-                p, ROOT / "tests/fixtures/synthetic.smbp", self.work / "out.smbp"
-            )
+        project = self.api("project")
+        destination = self.work / "out.smbp"
+        project.write_project(p, ROOT / "tests/fixtures/synthetic.smbp", destination)
+        loaded = project.load_project(destination)
+        self.assertEqual(loaded.timers, p.timers)
+        self.assertEqual([loaded.timers[i].base_ms for i in range(7)], [1] * 6 + [10])
 
     def test_section_order_is_validated_on_external_projects(self):
         import xml.etree.ElementTree as ET

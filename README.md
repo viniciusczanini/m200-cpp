@@ -83,7 +83,7 @@ These are **locally implemented subsets**, not declarations of complete official
 |---|---|---|
 | Boolean logic and I/O | State, sequential assignments, conditions, short-circuit logic, 24 embedded inputs and 16 outputs | Special I/O modes, immediate access, and physical behavior remain open |
 | Typed numbers | `i16`, `i32`, `f32`, 53 explicit numeric intrinsics, comparisons, shared MW/MD/MF memory | Ordinary C++ arithmetic and implicit promotions are restricted; numeric error recovery is incomplete |
-| Arrays and control flow | Fixed-capacity typed arrays, computed indices, `while`/`for`/`do`, `break`, `continue`, labels, `goto`, early `return;` and END-family IL | Returns commit prior output writes; native END graphical binding remains gated; allocation overhead still applies |
+| Arrays and control flow | Fixed-capacity typed arrays, computed indices, `while`/`for`/`do`, `break`, `continue`, labels, `goto`, early `return;` and END-family IL | Returns commit prior output writes; verified native series END graphs can be imported; Jump export and allocation overhead still apply |
 | Timers, edges, counters | TON/TOF/TP, clock and edge APIs, timer properties, native counters | Several modes have local models but blocked SMBP export; timing and lifecycle need external tests |
 | Modbus | READ/WRITE/WRITE_READ models; FC1/2/3/4/5/6/15/16/23; explicit local transports | SMBP export covers proved READ/WRITE word profiles only; physical serial/TCP runtime behavior is unvalidated |
 | Projects and reverse conversion | Conservative SMBP parsing, IL/Ladder consistency checks, source maps, C++ reconstruction | Arbitrary vendor projects are not supported; unknown active constructs fail explicitly |
@@ -117,7 +117,7 @@ The recorded **2026-11-06 validation rounds** contain:
 
 | Evidence | Recorded result |
 |---|---:|
-| Latest combined unit/regression suite | 441 passing tests |
+| Latest combined unit/regression suite | 462 passing tests |
 | Earlier baseline unit/regression suite | 417 passing tests |
 | Historical stress and public-program traces | 288,372 base scan frames |
 | Combined state/array, timer/counter and numeric candidates | 276 distinct candidate frames |
@@ -127,7 +127,7 @@ The recorded **2026-11-06 validation rounds** contain:
 
 The BCD vectors are **not scans** and are excluded from the scan total. Repeated runs and comparison stages are also excluded. The [local results](docs/validation/LOCAL-RESULTS.md) and [conversion result manifest](docs/validation/CONVERSION-LOCAL-RESULTS.json) record the exact scope, commands, and hashes. These are historical results tied to the recorded files, not an automatically refreshed build badge or proof of universal equivalence.
 
-The [latest integration record](docs/validation/SCAN-EXIT-INTEGRATION-RESULTS.md) records the combined changes and fresh checks. The [earlier regression manifest](docs/validation/OFFICIAL-EDITOR-LOCAL-RESULTS.json) records the authentic-profile and memory-only constant fixes. The [combined-program manifest](docs/validation/COMPLEX-LOCAL-RESULTS.json) includes independent expected values and six exact candidates; their official execution is tracked separately. Follow the [complex test walkthrough](examples/editor_validation/README.md) and [three-timer sequence](examples/editor_validation/SEQUENCE_TIMERS.md) to reproduce them locally; [the sequence manifest](docs/validation/SEQUENCE-TIMERS-LOCAL-RESULTS.json) records its separate timing and button traces.
+The [latest END/timer integration record](docs/validation/NATIVE-END-TIMER-10MS-RESULTS.md) records the 462-test integration and exact fixtures. The [earlier scan-exit/Modbus record](docs/validation/SCAN-EXIT-INTEGRATION-RESULTS.md) preserves the 441-test checkpoint. The [earlier regression manifest](docs/validation/OFFICIAL-EDITOR-LOCAL-RESULTS.json) records the authentic-profile and memory-only constant fixes. The [combined-program manifest](docs/validation/COMPLEX-LOCAL-RESULTS.json) includes independent expected values and six exact candidates; their official execution is tracked separately. Follow the [complex test walkthrough](examples/editor_validation/README.md) and [three-timer sequence](examples/editor_validation/SEQUENCE_TIMERS.md) to reproduce them locally; [the sequence manifest](docs/validation/SEQUENCE-TIMERS-LOCAL-RESULTS.json) records its separate timing and button traces.
 
 `check` compares the 16-output traces of native original C++, emitted IL, and reconstructed C++ for the supplied inputs and elapsed times. Deeper tests also inspect memory, flags, aliases, and independent oracles. The implementations share parts of the local model, so agreement does not replace official simulation or hardware measurements. `certify` deliberately refuses to claim certification.
 
@@ -153,7 +153,7 @@ Pinned public-project tests are separate: `make public-fetch` explicitly downloa
 | [Capability inventory](docs/capabilities/README.md) | Implemented coverage, missing families, source conflicts |
 | [SMBP format evidence](docs/FORMAT.md) | Observed serialization, provenance, and unsupported variants |
 | [Modbus](docs/MODBUS.md) | APIs, configuration, status/error semantics, protocol versus exporter coverage |
-| [Early return and END](docs/capabilities/SCAN-EXIT.md) | Scan-exit semantics, output commit and native graph gate |
+| [Early return and END](docs/capabilities/SCAN-EXIT.md) / [Native graph import](docs/capabilities/NATIVE-END-GRAPH-IMPORT.md) | Scan-exit semantics, output commit and verified graph boundaries |
 | [Timer audit](docs/capabilities/TIMER-PARITY-AUDIT.md) / [Modbus audit](docs/capabilities/MODBUS-PARITY-AUDIT.md) | Documented capabilities, implemented domains and precise remaining tests |
 | [Active task queue](TASK_QUEUE.md) | Work lanes, prerequisites and next evidence |
 | [Local validation record](docs/validation/LOCAL-RESULTS.md) | Dated test history and reproducible result manifests |

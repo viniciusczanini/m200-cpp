@@ -4,8 +4,7 @@ Audit date: 2026-11-06, compiler revision `95fefd8`. TON, TOF and TP, all five
 documented bases, retentive TON/TOF and dynamic presets remain part of the full
 [parity contract](../PARITY.md). The local implementation covers their principal
 state paths, but editor bindings, feature boundaries and lifecycle behavior are
-incomplete. **Keep the 10 ms and timer-option SMBP gates until the evidence below
-is closed.** No compiler, editor, simulator or controller was changed for this
+incomplete. **Keep the timer-option SMBP gates until their behavior evidence is closed.** The 10 ms binding was subsequently established by an exact editor-saved/reopened CE40T fixture. No compiler, editor, simulator or controller was changed for this
 audit. Only this document was written.
 
 ## Primary sources and identity
@@ -107,7 +106,7 @@ justify replacing `validate_timer_profile` with a level comparison today.
 | Non-retentive TON/TOF/TP | `TimerTM`, Type, Preset, Base and false option fields are emitted and locally reread | Frontend, IL/VM, SDK and reverse path | TON0/100 ms/preset 5 has the exact case below; operator also reports a completed 1 s-base three-timer sequence; no general matrix |
 | Bases 1 ms / 100 ms / 1 s | Current names `OneMilliSeconds`, `OneHundredMilliSeconds`, `OneSecond` | Import/export allowed, with 1 ms index restriction | 100 ms TON covered; 1 s sequence completion reported; 1 ms acceptance and other combinations remain separate |
 | 1 minute | Existing public M200 files omit Base and use the default | Import/export uses omitted Base | No exact CE40T timer acceptance case established here |
-| 10 ms | Installed `TimerTimeBaseEnum` has `TenMilliSeconds=1` | Local timer model supports 10 ms; SMBP import/export rejects it | Enum identity only; no verified editor-created/saved binding |
+| 10 ms | Exact CE40T editor save preserves `TenMilliSeconds` for TON/TOF/TP | Local model and SMBP import/export supported | Saved/reopened fixture SHA `934affc43bd7e3d918b529b5cbfaee5aabd6bc062006edcd5c3cacf0d7f2bc45`; runtime timing remains separate |
 | Retentive TON/TOF | `IsRetentive=true` exists in a pinned foreign M200 project | Local modes/JSON/reverse supported; SMBP true is refused | No CE40T option/boundary acceptance |
 | Dynamic preset | `IsDynamicPreset` is recognized; false is emitted | Local mode supported; SMBP true is refused | No editor-created true-mode CE40T fixture or runtime proof |
 
@@ -204,3 +203,5 @@ The stale timed-counter numbers exactly match current `compile_source` frontend
 IL. `normalize` expands it to 102/221, matching both the actual SMBP's
 `RungEntity`/`InstructionLine` counts and `load_project`. State arrays and numeric
 diagnostics have equal frontend/normalized counts. The GUI operator corrected the timed-counter metadata before publication; this audit itself did not edit the official evidence manifest.
+
+The subsequent [END/timer integration](../validation/NATIVE-END-TIMER-10MS-RESULTS.md) records the 10 ms fixture and 462-test checkpoint. [Timer level research](TIMER-LEVEL-BINDING-RESEARCH.md) distinguishes stored flags from UI availability and downstream execution.

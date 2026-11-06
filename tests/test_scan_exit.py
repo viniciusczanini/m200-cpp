@@ -258,7 +258,9 @@ plc::output(0,plc::read_word(20)==9 && !plc::read_m(20));}""",
         with self.assertRaisesRegex(CompileError, "bare return"):
             compile_source(source)
 
-    def test_native_end_graph_binding_stays_gated_but_il_only_import_is_valid(self):
+    def test_malformed_native_end_graph_stays_rejected_and_il_only_import_is_valid(
+        self,
+    ):
         for op, lines in (
             ("END", ["END"]),
             ("ENDC", ["LD %M0", "ENDC"]),
@@ -268,7 +270,7 @@ plc::output(0,plc::read_word(20)==9 && !plc::read_m(20));}""",
                 rung = ET.fromstring(
                     "<RungEntity><LadderElements><LadderEntity><ElementType>End</ElementType><Row>0</Row><Column>10</Column><ChosenConnection>Left</ChosenConnection></LadderEntity></LadderElements><IsLadderSelected>true</IsLadderSelected></RungEntity>"
                 )
-                with self.assertRaisesRegex(CompileError, "END.*unverified"):
+                with self.assertRaises(CompileError):
                     check_graph(rung, lines)
                 root = ET.parse(Path(__file__).parent / "fixtures/synthetic.smbp")
                 pou = ET.SubElement(root.find(".//Pous"), "ProgramOrganizationUnits")

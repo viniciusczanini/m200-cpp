@@ -1,0 +1,466 @@
+{
+  "format": "m200-native-end-timer-10ms-results-v1",
+  "date": "2026-11-06",
+  "target": "TM200CE40T",
+  "baseline_commit": "bc1d565ffce9f9e96512c4fc8dfe836544035caa",
+  "scope": "Native END-family closed graphical import and static non-retentive10ms timer XML binding. Bounded local regression and exact official-editor observations; no complete library or physical certification.",
+  "source_snapshot": {
+    "status": "109selectedsource/test/fixturefiles match the full-suite start pin at publication capture",
+    "pin": {
+      "path": "output/editor-validation/native-end/import-validation/source-pin.json",
+      "bytes": 10988,
+      "sha256": "658e9cbfef4a623e47bca2788b26f0b6ed2ebb02a7154f5f6374637ad9ae4799"
+    },
+    "files": 109,
+    "files_sha256": {
+      ".gitattributes": "8a5b61b2792ba318f8bd5bc9102f4771907d7f51e22b737c5ec03d6f8b76b00c",
+      "m200/__init__.py": "77c5815a3596eebca3e939d1ad39abba46fa4edc4df148aaa7e47f13e5eda0ab",
+      "m200/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "m200/allocation.py": "f21e8753757ebf1c54874c18c3385a7d79ce52992514725920c29a1ca6281be9",
+      "m200/arithmetic.py": "bd0a83b4cc3257d2734a2ad1131137ce0608c2688a0565842b41759c336df75a",
+      "m200/arrays.py": "d4574f6e48ab98f70feb3f474f30bbf387117f5db3ddde395525a21a77da42ed",
+      "m200/bits.py": "d76ca8b8bb587a6811cfb3e157c00385ba0a836b8eb669afdda9af4e635b6a61",
+      "m200/boolean_bdd.py": "b3de9c79a5b14953256117afa22df8aaf2b37eb71689f224ca2d66e78a02882f",
+      "m200/capabilities.py": "e94e59743ee0eae98c476938f8eafe04966c0823b825b1d070980d15d41348a0",
+      "m200/cli.py": "22110f728cd456b9fae20a2ae1c2f9a03ba3fede808ee220318071c09a9d6a14",
+      "m200/communication.py": "105c1aef50e7ee00bc7c7142a5b6805d4ddf5f18fc04c5e60a52b78841a6b3b0",
+      "m200/communication_xml.py": "99362c0f32e1b27dcfc8caa65c2f2e3091c21aa18f45dfae2705b9bc58b6946f",
+      "m200/config.py": "2b023105d5021d678d0b1f8a36f256da56d378f626dfba1c707c2743e994892b",
+      "m200/conversions.py": "0922116a83ef1bcacda5fb9a588f2bc10d522a7c1ca7f301148ea88e6e370250",
+      "m200/copy_fusion.py": "39c8f498518c46d35ad61ec2c53564a61748a4957eae25e8d241a3c7e4b98816",
+      "m200/counter_graph.py": "80abf1241ee5095a121c47e1a196de03f1e7ed37fe0c54626b2a3f3eba4a9e8c",
+      "m200/counter_xml.py": "a87177f18a698b1f442a7c16eb66748a6d2c06c9c966ac199c6275bb1e326554",
+      "m200/counters.py": "0e4ed9d8fe6f4356f3d6b6986558a0f9caa019daa3f741b12522d1fdd6f376ce",
+      "m200/edge_functions.py": "c58b059d15ee7387ed7e65f841ad549f3b30c3781a258c0a6340a96e9cd92a24",
+      "m200/edges.py": "e590a801d00b94d20a2dd1f428635aa299e3bd59bcbfe2442f5ffa4fd3d64713",
+      "m200/flow.py": "090035e4abc84354287c934898430c0da038a81a11452526e4d87a70def55607",
+      "m200/frontend.py": "2b56e3ca231ccb3cbb9a5371051928b360559400566c771a4cd678db07c0504a",
+      "m200/il.py": "f177243b0b658414b8e2f3da7eac7a7ed62b7996f5faa2154b96377f9538db83",
+      "m200/indexed.py": "0b8ca542e2be87392d8de2a75ef8ad0d48534b28d7f82d1e24fd1bf38fc8343b",
+      "m200/jsonio.py": "c4d8447354b4f48205a8d5bfc58e1a3919656ba2073ecc5982b2f8fd6253fd70",
+      "m200/ladder_lowering.py": "804361acf89064fca90722fd1459d2db968d9c3bc2235fa84478c487767a009b",
+      "m200/levels.py": "439eba12b9bf189795449983755b55d92f77261678a983c4ed9e94b5eb341149",
+      "m200/lower.py": "d9cc4e13b0e886a0c0d7bd85880d621d76f8c371943f4d4d1549f111ab1aa657",
+      "m200/modbus.py": "a391ce5ff71520cea4f6b74d9ae984ba6cb4d6fff36b9d44fe05396e68c2e32b",
+      "m200/model.py": "e786ea2d03ea7d9c98c641fe6ed84a00a2076f51a1974ce1209355ef4dad0e11",
+      "m200/native.py": "016a6af7d7f7b1de11dab9bee1477faa9f4d393f75bbf09e1b3bf5daa5e6ac4f",
+      "m200/native_logic.py": "6a5990a9b75186ca678172491605a8485747ec004c685a3c4d22b025be8a53de",
+      "m200/numeric.py": "b29de2050a070dcbf23ab4e942642f45ad22a580d70b078f5b74111dfde629c5",
+      "m200/project.py": "c72eda60704239f510f95de4df7fcd21ea0d493cd4ffba6472a1c5142374f461",
+      "m200/reverse.py": "a84be951d8f3e113fb74065c024198408efd584c3b16794a3f88e1f04507a0d1",
+      "m200/timer_profile.py": "1338b8dda86c775be488b3ddc097eee170049e97168f82ac1aa9c25cf4ea6034",
+      "m200/timers.py": "384e3c26facd76ed8da5449d001348fe1c1dd818a73532ab9c782e6a9b0fedf6",
+      "sdk/plc.hpp": "b1d6f04ab2ce88d4e37ac781a299f134c5882971f2d593ead502be3877e784b3",
+      "tests/editor_validation/run.py": "d204fa45b64dba7b33fb05c707c2f8f8362ec8f6714d19cc84ac5d4e475e55f6",
+      "tests/editor_validation/sequence_timers.py": "eb8700e346af43f3ae53ddf5034e4b7230502da8cc66e6991c7e1712670f8702",
+      "tests/fixtures/native_counter_branch_graphs.json": "fb77d8c8838c01d3b3404a47f11ff2c46d26f5057ece2e5b35f50b0e15975886",
+      "tests/fixtures/native_counter_graphs.json": "0830c6669cded99441496d3d496b8dbb67d133f7a8ace160daae40868d35029a",
+      "tests/fixtures/native_timer_graphs.json": "e8f82d22bca8b5c6a480598dfceb33bf2744feada776812b98261060132b518c",
+      "tests/fixtures/official_tm200ce40t_end.provenance.json": "e451a56395e51ad3af7f2aa35ce715c391c2b10e062ca1a31d98626702d61ada",
+      "tests/fixtures/official_tm200ce40t_end.smbp": "11b4772aab31b5759ebf5a0315125cd4f1f0005dd0bad943c64de9af9eb2ea31",
+      "tests/fixtures/official_tm200ce40t_endc.provenance.json": "e3d62c63824a4171f0b8654c8ebcdcc13631f4d5b754406f6d4d017c3363b87a",
+      "tests/fixtures/official_tm200ce40t_endc.smbp": "10d49746b54f4b8ef14dee3a51e8f08607aabebc5e142ade76f3643a1369451f",
+      "tests/fixtures/official_tm200ce40t_endcn.provenance.json": "da9e593ab5e5b8dc3acb3848044d767ddf4b42a5f12f09ee29cc79d9e1b8c66c",
+      "tests/fixtures/official_tm200ce40t_endcn.smbp": "5c76b1dabede9dc85c2c155f01c00d981262d804c150ccb7a7efbc07ba0496dc",
+      "tests/fixtures/official_tm200ce40t_memory.provenance.json": "b9826924298610100516b075c671362c87b85ff35e2489e0df661ea8cdd89730",
+      "tests/fixtures/official_tm200ce40t_memory.smbp": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf",
+      "tests/fixtures/official_tm200ce40t_memory_editor_saved.provenance.json": "7e5e29c8401bc9cdf9b4d340807b17b2a2af0d9a935f5a8fcc2d74d60fcda32a",
+      "tests/fixtures/official_tm200ce40t_memory_editor_saved.smbp": "4b6120f1151f840ae234e6f79135c51ec78e0fd3df21736c542894d52402a6bc",
+      "tests/fixtures/official_tm200ce40t_timer_10ms.provenance.json": "3b6c2e9f09e8da42c4e68e86fb03e417d11b33372d97fe069164121615bb2971",
+      "tests/fixtures/official_tm200ce40t_timer_10ms.smbp": "934affc43bd7e3d918b529b5cbfaee5aabd6bc062006edcd5c3cacf0d7f2bc45",
+      "tests/fixtures/synthetic.smbp": "5c04625cb62d03bd8d2982430970bbb3fb81070205c302d4e39f5a5b78a7f515",
+      "tests/public/control_flow.py": "65f9d5f2aba359e6c316aa133c577496114e3981728cf5ce60ada5ecbad7ae72",
+      "tests/public/fetch.py": "196a8b6233a222fd1ebb86a89ced34dda368568bd0a82407cc792d45760af5ba",
+      "tests/public/run.py": "c87893404e91a1b90e648303aafa647c7e9d9199c1e6b86e30ea1c0710b27fda",
+      "tests/stress/bit_objects.py": "a39468f5ae36159b378cda34f2bfbe81abdf42fa1cb1fbf5cca0e6325b9c0489",
+      "tests/stress/boolean_audit.py": "ecd800fad5e3eb05948eb833f77a6098fb0e44aaecf8c0a81b60f1c529de146a",
+      "tests/stress/control_flow.py": "ad7814da8c24d58557b9f749252f624e86d71dd28f1873f8b84dcbf5dece6586",
+      "tests/stress/conversions.py": "da56e75ab3d233470151c3efbd4a9c836e1dcfd3c5469945bdbebb0c61f073d0",
+      "tests/stress/counter_graphs.py": "455889489bfb813b1ecaa27efbd2cd40592373ec61ea7c2f82618eb3256b1285",
+      "tests/stress/counters.py": "477b0685314abb2bafa58f27989df132a9b374dac8a4dc4a882a87d5fcd9acd6",
+      "tests/stress/digital_io.py": "0bece2a8e6ec6eee1d07054522d6766a238caa9f7d911cbe3f09afddb4090506",
+      "tests/stress/dynamic_arrays.py": "df53722713450024bfce76434e1e548ceabccde25b7b5654417d8a2a889566ac",
+      "tests/stress/expression_edges.py": "d8dc293380b5aa3de06c3d764dab8324a974fd8d7f9d6962dbd776b9abc5d82a",
+      "tests/stress/il_properties.py": "f2269c4d4beb32ea1e9e014aea71b67f3a05839ec137d5f9be237fa833f25644",
+      "tests/stress/indexed.py": "d8937c58e751f515b6d65dcc4f3d1d1a2545d4dee9ed673f73e02fa4f77426a3",
+      "tests/stress/integer_flags.py": "1f26ac9b9adcb349c381ae03288ed6588c2fb6eda691003089e85072f9a2b689",
+      "tests/stress/native_edges.py": "29bb2bcff1568a0e6adfacd46840dbd20f6f159043df4da86b4a5765a1c986da",
+      "tests/stress/native_logic.py": "c70a0a69556ab796c18b53d0b2d5ce4b3f1dbd45df9093c8760fff17b6c9551b",
+      "tests/stress/run.py": "f8a317eea4fa0e016ce3c5dd9de2ee534ee333c659cf51396e27ce386d91b7d7",
+      "tests/stress/timer_modes.py": "e49f7526f0fec09d072721deeb33b4c0a5a098fc75151a7293644f24e4441baf",
+      "tests/stress/timer_properties.py": "de3006b72b4d589785cfb7c6a34aac23a47792f2dc44c6e6a7b2e1a03125304d",
+      "tests/test_adversarial.py": "70697b896097c6c84093595d03fa244498aa9e1dd92b767654bf9683c752a2c7",
+      "tests/test_allocation.py": "30841d4cbd34aa72a5423150773c1f9cb69ba81a8b550b2b82b8be735cce98ff",
+      "tests/test_arrays.py": "e41d1d729a04fa7cea78c6511eb1f5c77908a022f02475b9b3d056984049efcd",
+      "tests/test_bit_objects.py": "9fc13a3081ad8c13d0276364d0b6b62beed307a8e4af61752fcf98c7d0a5ce8f",
+      "tests/test_capabilities.py": "15d1fab381fb0aa052e4bd985cc077ebce402964071e1d66ca5d6b763b62716e",
+      "tests/test_communication_compiler.py": "07e10834d084472242e0043f60b3d8e687b628c2536ab89adb6b7c7c9607f209",
+      "tests/test_communication_project.py": "62c93e9bceffa04150a72c7527adb48e2c959799eb7218460dbbe6ac791785a6",
+      "tests/test_communication_xml.py": "71cd33f04058cc8f2014bb40181f7087c758c7ac5106bddf470c5ddaebe7b05b",
+      "tests/test_control_flow.py": "8c2ad3d223641ee562ad74236c9ec04429c5bb24a1755fcffdaa562a856509db",
+      "tests/test_conversions.py": "7db2481732b54abbd0a188b1ac0c04eb2b37948e88d9a1b3e6f6b71bb875ecc7",
+      "tests/test_copy_fusion.py": "bef86dfabf49e5a25aa2193eed4107346a74657dd4619a581770f3d181487740",
+      "tests/test_counter_graphs.py": "cbcae6b9e643342c6333433b011accc3e97f620d33621df029496d79b523e935",
+      "tests/test_counters.py": "ff93ed6f67bf6c86fe688efb636aafbce53025b9fd9eb6542f2fabdb895265ed",
+      "tests/test_dynamic_arrays.py": "6714bd13bd8b0b1bcb3443cfa713e3ddaa0045e5f4be3b9854f94c282d719cc2",
+      "tests/test_expression_edges.py": "2971d2147c3172619923a2bb587fff2b7f5ca7f6f10c7a6a84d157dd96a50526",
+      "tests/test_indexed.py": "e8e9d248f90c47197a982ca2410efcae37f070b1c11b41ce0d26145cc8e92589",
+      "tests/test_indexed_bits.py": "5e7c05ab57931ed15012a580adc3034a36ed6c78b3df0ddc59ad9b8a5aca6a6f",
+      "tests/test_integer_flags.py": "750f324db795037de77e71ca4bf10927973a28dab55c3fbb971ea547d98bc289",
+      "tests/test_modbus.py": "6a5d5b4e04363514b44b199793593e2d887a4d6dbbbd69937f34d91eb42b7546",
+      "tests/test_modbus_transport_recovery.py": "564d4d062d98871885cd3a62d773bdf3617117e86ded0b551a0cd3bbdc6deb9a",
+      "tests/test_native_edges.py": "1671d2c49540d1dfc9b709e47fa6b0521505b73f92bad755a06f8f047b51f3eb",
+      "tests/test_native_end_graphs.py": "ff6f41418a2dff5579afd6dffceb95f6526ff5b7f1626a7b28c7d4394ef260cb",
+      "tests/test_native_logic.py": "aaa004e025625c9107441f17c5b7578fede443eb24d24e59985c2d22c035d7c7",
+      "tests/test_numeric.py": "6d072af3241154ab4823f9ff4ffc797ea830ba25bf0fcb5d28c69b7f7b247aef",
+      "tests/test_numeric_stress.py": "2453fe9b4352ec4a2e5dceea9c1462a8487f7283fe6904618df7d7101a61cca9",
+      "tests/test_official_profile.py": "a846191a137e8cf492fcfc92721fddf491a547cdbe9b6a6c33073fa667fd9543",
+      "tests/test_public_regressions.py": "2dbedd883358b74d7c082ae750a107e3a57a889758eec1b61501b810b3dca532",
+      "tests/test_review_regressions.py": "458f5c6690fa7c9afc3035a27a9a40eb5167729d25e4faa53bd3c902dcffdd83",
+      "tests/test_scan_exit.py": "deac144a54f822fbd52a1205d90ccedccd0725874ff47fe6ffd83c385c1091e5",
+      "tests/test_timer_modes.py": "d85e8526a32b60859c507fefd596eaeb53c5580d397fc705167f51f159d69fb3",
+      "tests/test_timer_properties.py": "daf92505702d81502023602b3102c4cc34c84a621ba99a90ebb3662daf277012",
+      "tests/test_timer_xml_bindings.py": "9982273f54099987b6e06be84d02ec525ff9f7dc3876121a5f04c81f719b8095",
+      "tests/test_toolchain.py": "08f6edf37688853d09fc33627e88d2e0a7d358ec8173b4395c4def758d34f860"
+    },
+    "included": "m200/*.py, sdk/plc.hpp, tests/**/*.py, tests/fixtures/* and .gitattributes",
+    "excluded": "Documentation, generated output, external research corpus and unsettled lab experiments are not part of this source pin."
+  },
+  "full_regression": {
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "status": "passed",
+    "tests": 462,
+    "seconds": 154.393,
+    "log": {
+      "path": "output/editor-validation/native-end/import-validation/full-regression.log",
+      "bytes": 47452,
+      "sha256": "b7a2f159616b285c12aefe2f77f7a68588166a94855396edfe725a9bd881d143"
+    },
+    "new_tests": {
+      "native_end_graphs": 17,
+      "timer_xml_bindings": 4
+    },
+    "baseline_tests": 441
+  },
+  "focused_runs": {
+    "native_end": {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "tests.test_native_end_graphs",
+        "tests.test_scan_exit",
+        "-v"
+      ],
+      "status": "passed",
+      "tests": 35,
+      "seconds": 8.58,
+      "modules": {
+        "test_native_end_graphs": 17,
+        "test_scan_exit": 18
+      },
+      "log": {
+        "path": "output/editor-validation/native-end/import-validation/focused-regression.log",
+        "bytes": 4058,
+        "sha256": "37a822a986b69f1c3cfeb357ea4357ef32bb486369408fd711cb8b9aa17fa577"
+      }
+    },
+    "timer": {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "tests.test_timer_xml_bindings",
+        "tests.test_timer_modes",
+        "tests.test_timer_properties",
+        "tests.test_toolchain",
+        "-v"
+      ],
+      "status": "passed",
+      "tests": 73,
+      "seconds": 25.619,
+      "modules": {
+        "test_timer_xml_bindings": 4,
+        "test_timer_modes": 12,
+        "test_timer_properties": 10,
+        "test_toolchain": 47
+      },
+      "evidence_basis": "Scoped timer agent reported this focused pass in tool-session output. No standalone focused log was persisted. The complete462-test log independently contains all73of these cases passing.",
+      "standalone_log": null
+    },
+    "counting": "35and73are focused selections/repetitions within the462-test combined suite; do not add them to462. Test subcases, conversion stages and repetitions are not additional distinct frames."
+  },
+  "independent_review": {
+    "status": "no actionable defects reported",
+    "evidence_basis": "Root-coordinated independent reviewer result supplied for publication; not a new test run by evidence assembly.",
+    "focused_tests_repeated": 35,
+    "additional_malformed_probes": 21,
+    "counting": "Review repetitions/probes are reported separately, not added to the combined unit-test total."
+  },
+  "lint": {
+    "version": "ruff0.17.3",
+    "check": {
+      "command": [
+        "ruff",
+        "check",
+        "m200",
+        "tests"
+      ],
+      "status": "passed",
+      "log": {
+        "path": "output/editor-validation/native-end/import-validation/ruff-check.log",
+        "bytes": 19,
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      }
+    },
+    "format": {
+      "command": [
+        "ruff",
+        "format",
+        "--check",
+        "m200",
+        "tests"
+      ],
+      "status": "passed",
+      "files": 91,
+      "log": {
+        "path": "output/editor-validation/native-end/import-validation/ruff-format-check.log",
+        "bytes": 27,
+        "sha256": "00a7f07f2dd4a1459bd76952c6f781e7b70e6fa643c75909fde50a665b52b5f6"
+      }
+    },
+    "diff_check": "passed"
+  },
+  "official_editor_environment": {
+    "editor": "EcoStruxure Machine Expert Basic1.4build484",
+    "lab": "Authorized local Wine/.NET4.8 lab",
+    "connection_state": "Not Connected in the recorded captures",
+    "advisory": "The existing Untrusted DLL detected lab banner is visible; this is not clean-Windows or hardware certification."
+  },
+  "native_end_bindings": [
+    {
+      "opcode": "ENDC",
+      "fixture": {
+        "path": "tests/fixtures/official_tm200ce40t_endc.smbp",
+        "bytes": 86629,
+        "sha256": "10d49746b54f4b8ef14dee3a51e8f08607aabebc5e142ade76f3643a1369451f"
+      },
+      "provenance": {
+        "path": "tests/fixtures/official_tm200ce40t_endc.provenance.json",
+        "bytes": 1139,
+        "sha256": "e3d62c63824a4171f0b8654c8ebcdcc13631f4d5b754406f6d4d017c3363b87a"
+      },
+      "actual_il": [
+        "LD %M0",
+        "ENDC"
+      ],
+      "project_version": "3.0.0.0",
+      "management_level": "FunctLevelMan21_0",
+      "observed_graph": {
+        "terminal": "End",
+        "row": 0,
+        "column": 10,
+        "descriptor": "",
+        "connection": "Left",
+        "prefix": "NormalContact%M0 at0/0; Line cells1..9"
+      },
+      "official_editor": {
+        "status": "No error during IL-to-Ladder conversion, followed by official save",
+        "capture": {
+          "path": "docs/validation/editor-evidence/native-end-binding-endc.png",
+          "bytes": 304948,
+          "sha256": "bf0fda88cbff74498227a37e5732fd5011b4aea08bce2301f917e30a0d5cf9f3"
+        },
+        "original_lab_capture": "logs/skill-1793945650832883000-2146.png",
+        "visual_review": "No error, Not Connected, Ladder shown; existing lab Untrusted DLL detected banner visible. Captures precede final save, whose exact bytes are pinned separately."
+      },
+      "import_status": "supported within the recorded closed profile",
+      "native_runtime": "not tested",
+      "physical_plc": "pending"
+    },
+    {
+      "opcode": "ENDCN",
+      "fixture": {
+        "path": "tests/fixtures/official_tm200ce40t_endcn.smbp",
+        "bytes": 86644,
+        "sha256": "5c76b1dabede9dc85c2c155f01c00d981262d804c150ccb7a7efbc07ba0496dc"
+      },
+      "provenance": {
+        "path": "tests/fixtures/official_tm200ce40t_endcn.provenance.json",
+        "bytes": 1147,
+        "sha256": "da9e593ab5e5b8dc3acb3848044d767ddf4b42a5f12f09ee29cc79d9e1b8c66c"
+      },
+      "actual_il": [
+        "LD %M0",
+        "ENDCN"
+      ],
+      "project_version": "3.0.0.0",
+      "management_level": "FunctLevelMan21_0",
+      "observed_graph": {
+        "terminal": "EndCn",
+        "row": 0,
+        "column": 10,
+        "descriptor": "",
+        "connection": "Left",
+        "prefix": "NormalContact%M0 at0/0; Line cells1..9"
+      },
+      "official_editor": {
+        "status": "No error during IL-to-Ladder conversion, followed by official save",
+        "capture": {
+          "path": "docs/validation/editor-evidence/native-end-binding-endcn.png",
+          "bytes": 305485,
+          "sha256": "6a9c29a26ad7b4561af420574a8974ca8bc9f1932254626a50063ce0e47e072c"
+        },
+        "original_lab_capture": "logs/skill-1793946077565309000-2146.png",
+        "visual_review": "No error, Not Connected, Ladder shown; existing lab Untrusted DLL detected banner visible. Captures precede final save, whose exact bytes are pinned separately."
+      },
+      "import_status": "supported within the recorded closed profile",
+      "native_runtime": "not tested",
+      "physical_plc": "pending"
+    },
+    {
+      "opcode": "END",
+      "fixture": {
+        "path": "tests/fixtures/official_tm200ce40t_end.smbp",
+        "bytes": 86370,
+        "sha256": "11b4772aab31b5759ebf5a0315125cd4f1f0005dd0bad943c64de9af9eb2ea31"
+      },
+      "provenance": {
+        "path": "tests/fixtures/official_tm200ce40t_end.provenance.json",
+        "bytes": 1090,
+        "sha256": "e451a56395e51ad3af7f2aa35ce715c391c2b10e062ca1a31d98626702d61ada"
+      },
+      "actual_il": [
+        "END"
+      ],
+      "project_version": "3.0.0.0",
+      "management_level": "FunctLevelMan21_0",
+      "observed_graph": {
+        "terminal": "End",
+        "row": 0,
+        "column": 10,
+        "descriptor": "",
+        "connection": "Left",
+        "prefix": "Line cells0..9"
+      },
+      "official_editor": {
+        "status": "No error during IL-to-Ladder conversion, followed by official save",
+        "capture": {
+          "path": "docs/validation/editor-evidence/native-end-binding-end.png",
+          "bytes": 301673,
+          "sha256": "7b85dd581648b96dce3641629e84d09f20846a88b1667de67008e23423638c81"
+        },
+        "original_lab_capture": "logs/skill-1793946158518487000-2146.png",
+        "visual_review": "No error, Not Connected, Ladder shown; existing lab Untrusted DLL detected banner visible. Captures precede final save, whose exact bytes are pinned separately."
+      },
+      "import_status": "supported within the recorded closed profile",
+      "native_runtime": "not tested",
+      "physical_plc": "pending"
+    }
+  ],
+  "timer_10ms_binding": {
+    "fixture": {
+      "path": "tests/fixtures/official_tm200ce40t_timer_10ms.smbp",
+      "bytes": 96342,
+      "sha256": "934affc43bd7e3d918b529b5cbfaee5aabd6bc062006edcd5c3cacf0d7f2bc45"
+    },
+    "provenance": {
+      "path": "tests/fixtures/official_tm200ce40t_timer_10ms.provenance.json",
+      "bytes": 2809,
+      "sha256": "3b6c2e9f09e8da42c4e68e86fb03e417d11b33372d97fe069164121615bb2971"
+    },
+    "management_level": "FunctLevelMan21_0",
+    "base_enum": "TenMilliSeconds",
+    "timers": [
+      {
+        "address": "%TM0",
+        "index": 0,
+        "type": "TON",
+        "preset": 5,
+        "base": "TenMilliSeconds",
+        "retentive": false,
+        "dynamic_preset": false,
+        "omitted_default_fields": [
+          "Type",
+          "IsRetentive",
+          "IsDynamicPreset"
+        ]
+      },
+      {
+        "address": "%TM1",
+        "index": 1,
+        "type": "TOF",
+        "preset": 5,
+        "base": "TenMilliSeconds",
+        "retentive": false,
+        "dynamic_preset": false,
+        "omitted_default_fields": [
+          "IsRetentive",
+          "IsDynamicPreset"
+        ]
+      },
+      {
+        "address": "%TM2",
+        "index": 2,
+        "type": "TP",
+        "preset": 5,
+        "base": "TenMilliSeconds",
+        "retentive": false,
+        "dynamic_preset": false,
+        "omitted_default_fields": [
+          "IsRetentive",
+          "IsDynamicPreset"
+        ]
+      }
+    ],
+    "rungs": 3,
+    "instructions": 21,
+    "options": {
+      "retentive": false,
+      "dynamic_preset": false
+    },
+    "official_editor": {
+      "status": "Original diagnostic opened No error, officially saved, then exact saved bytes freshly reopened No error after loading a different project.",
+      "fresh_reopen_capture": {
+        "path": "docs/validation/editor-evidence/timer-10ms-fresh-reopen.png",
+        "bytes": 498401,
+        "sha256": "5df9ff6fd16f2876ff58ec99081f4011725f2b0bb931712a50f1e3e7f23f30fe"
+      },
+      "original_lab_capture": "logs/skill-1793946847459406000-2146.png",
+      "visual_review": "No error and Not Connected visible; fixture hash unchanged. Root supplies the load/save/different-project/reopen procedure."
+    },
+    "local_import_export": "passed with the exact Base enum and false options",
+    "native_runtime": "not established by this observation",
+    "tick_accuracy": "not measured",
+    "physical_plc": "pending"
+  },
+  "product_boundaries": {
+    "native_end_import": "Three recorded bindings supported; predicate/terminal polarity, descriptor, geometry, wires and connections are checked against actual IL. Unsupported graph forms fail explicitly.",
+    "native_end_export": "Existing semantic Jump normalization retained; no switch to generated nativeEnd/EndCn export.",
+    "retentive_dynamic_gates": "Unchanged; this publication enables only the false-option10ms XML binding.",
+    "validate_timer_profile_ast_equal_to_baseline": true,
+    "write_project_ast_equal_to_baseline": true,
+    "not_claimed": [
+      "Native END runtime execution from these three diagnostic fixtures",
+      "Native timer runtime/tick accuracy or physical timing",
+      "Other functional-level or firmware option combinations",
+      "Unsettled retentive/dynamic/new-profile GUI experiments",
+      "Arbitrary native END graph layouts or complete library parity"
+    ]
+  },
+  "preservation": {
+    "native_fixtures": "Exact native CRLF bytes preserved, with -text whitespace=cr-at-eol Git attributes.",
+    "historical_manifests": "Previously published historical integration manifests were not modified.",
+    "scope_of_this_task": "Evidence documents and byte-exact screenshot copies only; no core edits, staging, commit or CI."
+  },
+  "physical_plc": "pending",
+  "complete_library": false
+}

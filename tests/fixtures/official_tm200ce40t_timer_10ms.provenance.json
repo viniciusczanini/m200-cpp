@@ -1,0 +1,74 @@
+{
+  "source": "User's local Schneider Basic Wine lab; official-editor save and fresh reopen of a hand-built diagnostic timer candidate",
+  "editor": "EcoStruxure Machine Expert Basic 1.4 build484",
+  "target": "TM200CE40T",
+  "copied_utc": "2026-11-06",
+  "file": "official_tm200ce40t_timer_10ms.smbp",
+  "sha256": "934affc43bd7e3d918b529b5cbfaee5aabd6bc062006edcd5c3cacf0d7f2bc45",
+  "bytes": 96342,
+  "original_modified": false,
+  "parent_candidate": {
+    "file": "timer_profile_02_10ms_all.smbp",
+    "sha256": "d934dddf7cc49e094fc33105c9dbd22e1c3a786f6e21d267b2a766598118d05f",
+    "operation": "Disposable ET diagnostic assembled from established timer rung shapes, opened No error, saved by the official editor, then reopened after a different project"
+  },
+  "hardware_template_sha256": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf",
+  "hardware_leaf_differences_from_template": [],
+  "observed_normalization": {
+    "management_level": "FunctLevelMan21_0",
+    "first_pou_section_number": "0",
+    "timers": [
+      {
+        "address": "%TM0",
+        "index": 0,
+        "type": "TON",
+        "preset": 5,
+        "base": "TenMilliSeconds",
+        "retentive": false,
+        "dynamic_preset": false,
+        "omitted_default_fields": [
+          "Type",
+          "IsRetentive",
+          "IsDynamicPreset"
+        ]
+      },
+      {
+        "address": "%TM1",
+        "index": 1,
+        "type": "TOF",
+        "preset": 5,
+        "base": "TenMilliSeconds",
+        "retentive": false,
+        "dynamic_preset": false,
+        "omitted_default_fields": [
+          "IsRetentive",
+          "IsDynamicPreset"
+        ]
+      },
+      {
+        "address": "%TM2",
+        "index": 2,
+        "type": "TP",
+        "preset": 5,
+        "base": "TenMilliSeconds",
+        "retentive": false,
+        "dynamic_preset": false,
+        "omitted_default_fields": [
+          "IsRetentive",
+          "IsDynamicPreset"
+        ]
+      }
+    ],
+    "rung_count": 3,
+    "instruction_count": 21
+  },
+  "editor_reopen": {
+    "status": "No error",
+    "observed_by": "root local desktop GUI operator",
+    "procedure": "A different retentive candidate was loaded before freshly reopening this exact saved project; artifact hash remained unchanged",
+    "capture": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793946847459406000-2146.png",
+    "capture_sha256": "5df9ff6fd16f2876ff58ec99081f4011725f2b0bb931712a50f1e3e7f23f30fe",
+    "scope": "Exact TON/TOF/TP 10ms Base TenMilliSeconds binding with preset 5, false option defaults, functional token FunctLevelMan21_0"
+  },
+  "scope": "Establishes this exact saved/reopened 10ms binding. Retentive/dynamic XML gates remain unchanged. No claim about other functional levels, tick accuracy, simulator runtime or physical PLC timing."
+}

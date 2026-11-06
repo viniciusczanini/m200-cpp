@@ -1,0 +1,28 @@
+{
+  "source": "Official Schneider Basic GUI IL-to-Ladder conversion and save in the local authorized Wine lab",
+  "source_artifact": "output/editor-validation/native-end/unconditional-editor-saved.smbp",
+  "editor": "EcoStruxure Machine Expert Basic 1.4 build 484",
+  "target": "TM200CE40T",
+  "date": "2026-11-06",
+  "file": "official_tm200ce40t_end.smbp",
+  "bytes": 86370,
+  "sha256": "11b4772aab31b5759ebf5a0315125cd4f1f0005dd0bad943c64de9af9eb2ea31",
+  "original_modified": false,
+  "newline": "CRLF, byte-exact native save",
+  "project_version": "3.0.0.0",
+  "management_level": "FunctLevelMan21_0",
+  "program": [
+    "END"
+  ],
+  "observed_binding": {
+    "element_type": "End",
+    "row": 0,
+    "column": 10,
+    "descriptor": "",
+    "connection": "Left",
+    "prefix": "Line cells0..9"
+  },
+  "official_observation": "No error with validation enabled after IL-to-Ladder conversion and save",
+  "runtime_validation": "not performed for these native-END diagnostic fixtures",
+  "scope": "Exact observed import binding; no general graph, simulator or physical PLC certification"
+}

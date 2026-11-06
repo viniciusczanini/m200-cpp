@@ -40,22 +40,16 @@ invented update by the exit implementation.
 
 ## Ladder export and remaining evidence gates
 
-The native graphical END/EndCn XML binding is **unverified**. An enum name does
-not establish instruction binding, descriptors or a complete saved graph.
-The importer continues to reject graphical END-family rungs explicitly, while
-accepting supported IL-only rungs with Ladder unselected.
-
-An initial ENDC diagnostic has now opened with No error, been converted to
-Ladder and saved by the official editor. It uses an `End` action after its
-contact. This single observed fixture is recorded in the
-[official evidence](../validation/OFFICIAL-EDITOR-RESULTS.json); implementing
-and validating every END-family binding remains the next task. The gate is
-still active.
+The importer accepts the closed native graphical forms established by three
+exact editor-saved fixtures: standalone END with a power-rail wire, and terminal
+ENDC/ENDCN following supported series predicates. It checks the instruction,
+polarity, descriptor, geometry, connections and complete wire chain. Other
+forms remain explicit gaps; see [native graph import](NATIVE-END-GRAPH-IMPORT.md).
+Supported IL-only rungs with Ladder unselected remain accepted.
 
 Export instead lowers native END-family instructions to the existing supported
 conditional Jump graph and one shared final scan-exit anchor. This is a derived
-control-flow translation. It is not evidence that the native End graph is
-accepted by the official editor. C++ returns similarly use a shared jump to
+control-flow translation. The separate native import fixtures establish their own exact editor acceptance; this derived export has a different graph. C++ returns similarly use a shared jump to
 the output-commit epilogue. Each path may need a spare label and private anchor
 storage; exhausting those resources is reported as compiler overhead, not as
 proof that the PLC cannot express the algorithm.
