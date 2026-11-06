@@ -217,11 +217,12 @@ void scan(){plc::write_word(0,10);plc::write_word(1,0);plc::output(1,false);plc:
             called = Machine(program)
             expected = [False] * 16
             expected[14 if index == 0 else 0] = True
-            expected_words = [2, 22, 22] if index == 0 else [2, 0, 0]
+            expected_words = [2, 22, 22] if index == 0 else [2]
+            observed_words = len(expected_words)
             self.assertEqual(inline.step({}, 10), expected)
-            self.assertEqual(inline.words[:3], expected_words)
+            self.assertEqual(inline.words[:observed_words], expected_words)
             self.assertEqual(called.step({}, 10), expected)
-            self.assertEqual(called.words[:3], inline.words[:3])
+            self.assertEqual(called.words[:observed_words], expected_words)
             self.assertEqual(called.index_error, inline.index_error)
             self.assertFalse(called.index_error)
             with tempfile.TemporaryDirectory() as folder:
@@ -229,7 +230,7 @@ void scan(){plc::write_word(0,10);plc::write_word(1,0);plc::output(1,false);plc:
                 source.write_text(to_cpp(program))
                 rebuilt = Machine(compile_source(source))
                 self.assertEqual(rebuilt.step({}, 10), expected)
-                self.assertEqual(rebuilt.words[:3], inline.words[:3])
+                self.assertEqual(rebuilt.words[:observed_words], expected_words)
                 self.assertEqual(run_native(source, [{"dt_ms": 10}]), [expected])
 
     def test_indexed_leaf_refused_until_internal_guard_transfers_are_supported(self):

@@ -112,13 +112,15 @@ The [architecture and semantics guide](docs/ARCHITECTURE.md) explains memory ali
 ./m200c capabilities --all    # Full source-backed catalogue
 ```
 
+Generic [compiler optimization](docs/OPTIMIZATION.md) now uses native process images, dead private-store elimination and low-address allocation. The unchanged clock example compiles to 55 rungs/126 instructions, down from 122/261; seven used words require extent 181 instead of 4006. Source algorithms and loops are preserved.
+
 ## Validation
 
 The recorded **2026-11-06 validation rounds** contain:
 
 | Evidence | Recorded result |
 |---|---:|
-| Latest combined unit/regression suite | 684 passing tests / 224.974 s / zero skips |
+| Latest combined unit/regression suite | 703 passing tests / 222.366 s / zero skips |
 | Earlier baseline unit/regression suite | 417 passing tests |
 | Historical stress and public-program traces | 288,372 base scan frames |
 | Combined state/array, timer/counter and numeric candidates | 276 distinct candidate frames |
@@ -130,7 +132,7 @@ The BCD vectors are **not scans** and are excluded from the scan total. Repeated
 
 Exact [generated single-write products](docs/validation/MODBUS-SINGLE-GENERATED-PROJECT-RESULTS.md), [generated WRITE_READ_VAR product](docs/validation/MODBUS-WRITE-READ-GENERATED-PROJECT-RESULTS.md) and [generated timer products](docs/validation/TIMER-GENERATED-PROJECT-RESULTS.md) have separate official-editor evidence; only the saved timer/watch artifact has the runtime observations recorded there. [Native FIFO/LIFO diagnostics](docs/validation/REGISTER-NATIVE-OBSERVATIONS.md) also have bounded simulator evidence; they are hand-built research inputs, and Register compilation remains unfinished. Separate [FIFO reset and held-request observations](docs/validation/REGISTER-COLLISION-OBSERVATIONS.md) preserve first-call latches and the limits of the recorded evidence. Two [FIFO self-status trials](docs/validation/REGISTER-SELF-STATUS-OBSERVATIONS.md) separately record the first-call sample, later held state and refresh limits.
 
-The [subroutine compiler checkpoint](docs/validation/SUBROUTINE-COMPILER-RESULTS.md) records the current 684-test result and a genuine [C++→SMBP example](examples/editor_validation/cpp_subroutine_implicit.cpp) accepted, saved and freshly reopened as Ladder with No error, then run through input 0→1→0 with Q0010→1110→0010 in the official local simulator. C++, SDK, VM, reverse conversion and the one-leaf native export profile are implemented; broader layouts remain compiler work. The [earlier standalone foundation](docs/validation/SUBROUTINE-FOUNDATION-RESULTS.md) remains a historical 628-test checkpoint.
+The [subroutine compiler checkpoint](docs/validation/SUBROUTINE-COMPILER-RESULTS.md) records the preceding 684-test result and a genuine [C++→SMBP example](examples/editor_validation/cpp_subroutine_implicit.cpp) accepted, saved and freshly reopened as Ladder with No error, then run through input 0→1→0 with Q0010→1110→0010 in the official local simulator. C++, SDK, VM, reverse conversion and the one-leaf native export profile are implemented; broader layouts remain compiler work. The [earlier standalone foundation](docs/validation/SUBROUTINE-FOUNDATION-RESULTS.md) remains a historical 628-test checkpoint.
 
 The [native M-contact observations](docs/validation/NATIVE-M-CONTACT-BINDING-OBSERVATIONS.md) qualify actual editor conversion/save/reopen for an M20-controlled SR0 call and an M20/M21/M22-controlled FIFO block. These hand-built diagnostics supply binding evidence for the current subroutine exporter and future Register integration; their results remain separate from generated-program acceptance.
 
@@ -165,8 +167,10 @@ Pinned public-project tests are separate: `make public-fetch` explicitly downloa
 | Guide | Contents |
 |---|---|
 | [Getting started](docs/GETTING_STARTED.md) | Setup, CLI commands, traces, artifacts, reverse conversion, editor handoff |
+| [Compiler optimization](docs/OPTIMIZATION.md) | Same-source size comparison, I/O semantics, allocation and validation |
 | [Architecture and semantics](docs/ARCHITECTURE.md) | Compiler stages, supported language, resource allocation, execution rules, current gates |
 | [Functional parity contract](docs/PARITY.md) | Final target and acceptance criteria |
+| [Completion plan](docs/superpowers/plans/2026-11-06-compiler-finish.md) | Optimization-first execution order, finite release gates and physical acceptance |
 | [Capability inventory](docs/capabilities/README.md) | Implemented coverage, missing families, source conflicts |
 | [SMBP format evidence](docs/FORMAT.md) | Observed serialization, provenance, and unsupported variants |
 | [Subroutine SDK](docs/SUBROUTINES.md) | Descriptor API, shared scan semantics, native export profile and remaining gates |

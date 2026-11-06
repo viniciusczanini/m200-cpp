@@ -8,6 +8,7 @@ from m200.il import Machine, validate
 from m200.model import CompileError, Program
 from m200.native import run_native
 from m200.reverse import to_cpp
+from m200.numeric import memory_words_used
 
 
 class NumericTests(unittest.TestCase):
@@ -224,7 +225,9 @@ plc::output(0,n>2);if(n>=5){n=0;}
         self.assertTrue(comparisons)
         allocation = root.find("SoftwareConfiguration/MemoryWordsMemoryAllocation")
         self.assertEqual(allocation.findtext("Allocation"), "Manual")
-        self.assertGreaterEqual(int(allocation.findtext("ForcedCount")), 4001)
+        required = max(memory_words_used(program), default=-1) + 1
+        self.assertGreaterEqual(int(allocation.findtext("ForcedCount")), required)
+        self.assertGreaterEqual(int(allocation.findtext("ForcedCount")), 32)
         self.assertTrue(
             all(
                 e.findtext("Column") == "9"

@@ -442,12 +442,12 @@ class Frontend:
 
     def input(self, index):
         if index not in self.inputs:
-            self.inputs[index] = self.lower.bit("input_%d_snapshot" % index)
+            self.inputs[index] = f"%I0.{index}"
         return self.inputs[index]
 
     def output(self, index):
         if index not in self.outputs:
-            self.outputs[index] = self.lower.bit("output_%d_image" % index)
+            self.outputs[index] = f"%Q0.{index}"
         return self.outputs[index]
 
     def array_constant(self, node):
@@ -636,14 +636,9 @@ class Frontend:
                 bank, typ = PACK_READS[key]
                 text, start, count = self.packed_reference(bank, args, node, typ)
                 if bank == "output":
-                    result = self.lower.word(typ, "output_bits_snapshot")
-                    self.lower.numeric_assign(result, literal(0, typ))
                     for i in range(count):
-                        self.lower.rung(
-                            "LD " + self.output(start + i),
-                            "ST " + self.lower.storage.word_bit(result, i),
-                        )
-                    return result
+                        self.output(start + i)
+                    return self.lower.copy(Number(typ, text), "output_bits_snapshot")
                 return self.lower.copy(Number(typ, text), "packed_bits_read")
             if key in INDEXED_READS:
                 return self.indexed_reference(args, INDEXED_READS[key], node)
@@ -1209,13 +1204,8 @@ class Frontend:
                 )
                 if bank == "output":
                     for i in range(count):
-                        self.lower.assign(
-                            self.output(start + i),
-                            self.lower.storage.word_bit(value, i),
-                            guard,
-                        )
-                else:
-                    self.lower.assign(Number(typ, text), value, guard)
+                        self.output(start + i)
+                self.lower.assign(Number(typ, text), value, guard)
                 return
             if key == "copy_m_bits":
                 text, _, count = self.packed_reference(
@@ -1420,7 +1410,7 @@ class Frontend:
                 boolean(self.expr(helper_body["inner"][0]["inner"][0], params))
             finally:
                 self.lower, self.inputs, self.outputs, self.active = saved
-        # All bodies share one allocator and one master scan input/output image.
+        # All bodies share one allocator and the MAST task's native I/Q images.
         # No leaf prefix/tail/finalize may create a second controller scan.
         for number, name, section, function in self.subroutine_specs.values():
             leaf_body = next(
@@ -1464,21 +1454,28 @@ class Frontend:
         }
         self.statement(body)
         if self.scan_exit is not None:
-            # C++ output writes target an image. Every exit must commit it before
-            # the next scan, including writes preceding a conditional return.
+            # Keep the shared return destination. Native Q writes already update
+            # the process image; the PLC transfers it physically at scan end.
             self.lower.label(self.scan_exit)
         if self.comm_observed - self.calls:
             fail("communication status read without an unconditional update per scan")
-        tail = [
-            ["LD " + image, f"ST %Q0.{n}"] for n, image in sorted(self.outputs.items())
-        ]
-        prefix = [
-            ["LD %I0." + str(n), "ST " + v] for n, v in sorted(self.inputs.items())
-        ]
-        prefix += [
-            ["LD %Q0." + str(n), "ST " + v] for n, v in sorted(self.outputs.items())
-        ]
-        prefix += [["LD %S13", "R " + v] for _, v in sorted(self.outputs.items())]
+        from .io_lowering import initialization, reset_rungs
+
+        required = (
+            set(self.outputs)
+            if self.subroutine_specs
+            else initialization(
+                self.lower.program.rungs,
+                self.outputs,
+                {v: k == "1" for k, v in self.lower.constants.items()},
+            )
+        )
+        prefix = reset_rungs(required)
+        tail = []
+        self.lower.program.metadata["io_lowering"] = {
+            "mode": "native I/Q process images; isolated MAST",
+            "run_initialization_outputs": sorted(required),
+        }
         prefix += self.lower.constant_rungs
         if self.word_count is not None:
             anchor = self.lower.bit("explicit_word_image_extent")

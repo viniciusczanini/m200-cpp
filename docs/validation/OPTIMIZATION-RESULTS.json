@@ -1,0 +1,108 @@
+{
+  "format": "m200-compiler-optimization-results-v1",
+  "date": "2026-11-06",
+  "baseline_commit": "1bfd233f73cbd55cbde0277ef09ad096bbe17a14",
+  "same_cpp": {
+    "path": "examples/christmas/revoada20_clock_10.cpp",
+    "sha256": "37e2386fe336e4ef411ad3eb7ee468c4800083708049b5d22c6b93bf1b17cb7d",
+    "algorithm_unchanged": true,
+    "loops_preserved": true
+  },
+  "before": {
+    "rungs": 122,
+    "IL": 261,
+    "M_used": 22,
+    "MW_used": 7,
+    "required_MW_extent": 4006
+  },
+  "after": {
+    "rungs": 55,
+    "IL": 126,
+    "M_used": 7,
+    "MW_used": 7,
+    "required_MW_extent": 181
+  },
+  "validation": {
+    "tests": 703,
+    "seconds": 222.366,
+    "skips": 0,
+    "pinned_inputs": 746,
+    "inputs_stable": true,
+    "log_sha256": "1cdd68e81477ab2f4a6b56f48346497e194d82d1955ac74c8f0784adc3df0546",
+    "source_pin_sha256": "860b8d30bb3216fc3f94d651a794f4cb0b3c077a39b19521828b31fff8c747c4",
+    "runtime_test_pin_sha256": "a77422e1d4efb91a1af16a8464b2a585a3cd918a1b79607cdfcb20eb8e04f2aa",
+    "integrated_files_compared": 220,
+    "integration_differences": 0,
+    "make_examples_seconds": 13.165
+  },
+  "initial_run": {
+    "passed": 700,
+    "failed": 3,
+    "cause": "Tests assumed preferred4000 placement or zero values in unreferenced private scratch words. Three reviewed assertions were corrected; all runtime source bytes stayed identical.",
+    "focused_corrected_methods": 3,
+    "focused_seconds": 1.369
+  },
+  "independent_reviews": {
+    "DSE_lowfit": "ab114dd672f39b7170d5aa49b229ed3ae30d4b934e227e88010ba70450387c18",
+    "direct_IO": "a22cff297518d4768a8d0c763031fe38e2d5dc66974a3704fc7618f009165573"
+  },
+  "candidate": {
+    "bytes": 273585,
+    "sha256": "3017e9ec2e9e073e30d5e7cc4006896e99e3c33f63b5d0e78082dd5e5c77a471"
+  },
+  "official_observation": {
+    "Programming_No_error": true,
+    "saved_sha256": "6f34b6b37c2b190e39ccb39e72c331f2e2fd0a9205610e23670995faf8d60141",
+    "saved_rungs": 55,
+    "saved_IL": 126,
+    "simulator_Online_Run": true,
+    "START_panel_Q0_on": true,
+    "user_confirmed_motion": true,
+    "optimized_candidate_fresh_reopen": false,
+    "complete_cycle_quantitative_observation": false,
+    "physical_PLC": false
+  },
+  "official_saved_reverse_local_check": {
+    "status": "PASS",
+    "official_saved_sha256": "6f34b6b37c2b190e39ccb39e72c331f2e2fd0a9205610e23670995faf8d60141",
+    "saved_rungs": 55,
+    "saved_IL": 126,
+    "recovered_cpp_sha256": "4125c406c2319eccf8d0c4102671b333dddfcc0dfb9f1540e30055dbfabe40be",
+    "rebuilt_rungs": 72,
+    "rebuilt_IL": 165,
+    "sequence_positions": 2461,
+    "control_positions": 14,
+    "routes": [
+      "official save IL VM",
+      "recovered C++ recompiled IL VM",
+      "reexported/reimported SMBP VM",
+      "recovered C++ native SDK"
+    ],
+    "native_editor_reopen_of_rebuilt": false,
+    "physical_plc": false
+  },
+  "captures": [
+    {
+      "path": "docs/validation/editor-evidence/compiler-optimization/ladder-no-error.png",
+      "bytes": 416939,
+      "sha256": "20706e74e09b03d978d0a46545013446c5a66f6a4810cd076dcaa42150db0303"
+    },
+    {
+      "path": "docs/validation/editor-evidence/compiler-optimization/online-run.png",
+      "bytes": 301767,
+      "sha256": "c4e6d81248ab86397061d87df430fe8cee10fb6e0fc0fc652160ccda00b0de32"
+    },
+    {
+      "path": "docs/validation/editor-evidence/compiler-optimization/start-panel-q0.png",
+      "bytes": 18106,
+      "sha256": "c8b95d0ae6bcefa8fd3e621eeb9a6c6e9feefcb06fb3976997c2684adb9359fd"
+    }
+  ],
+  "limits": [
+    "Admitted isolated Master process-image profile",
+    "Physical timing and broader task/immediate-I/O semantics need separate evidence",
+    "SampledS5 clock contract remains unchanged; no missed-edge inference",
+    "DSE skips subroutine programs; directI/O supports admitted contexts",
+    "Compiler-private physical addresses are not an ABI"
+  ]
+}

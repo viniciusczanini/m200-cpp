@@ -8,7 +8,6 @@ Conditional writes do not kill the previous value in the liveness equations.
 import re
 from collections import deque
 from dataclasses import dataclass
-from itertools import chain
 
 from .flow import JUMPS, destinations, split_label
 from .model import fail
@@ -16,6 +15,7 @@ from .numeric import Number, TYPES
 from .edges import OPS as EDGE_OPS
 from .edge_functions import parse as expression_edge
 from .copy_fusion import fuse as fuse_copies
+from .dead_stores import eliminate as eliminate_dead_stores
 
 REFERENCE = re.compile(r"%M(?:W|D|F)?[0-9]+")
 ASSIGNMENT = re.compile(
@@ -283,6 +283,19 @@ class Storage:
                 {v: k == "1" for k, v in constants.items()},
                 self.members,
             )
+            removed = eliminate_dead_stores(
+                program, self.registers, self.members, self.groups, REFERENCE, out
+            )
+            if removed:
+                fusible = {
+                    ref: reg for ref, reg in fusible.items() if ref in self.registers
+                }
+                _, out = live_ranges(
+                    program,
+                    fusible,
+                    {v: k == "1" for k, v in constants.items()},
+                    self.members,
+                )
             fuse_copies(
                 program, self.registers, self.members, self.groups, REFERENCE, out
             )
@@ -291,11 +304,8 @@ class Storage:
 
         def choose(ref, forbidden):
             reg = self.registers[ref]
-            preferred, capacity = (500, 1024) if reg.bank == "bit" else (4000, 8000)
-            for base in chain(
-                range(preferred, capacity - reg.width + 1),
-                range(max(0, min(preferred, capacity - reg.width + 1))),
-            ):
+            capacity = 1024 if reg.bank == "bit" else 8000
+            for base in range(capacity - reg.width + 1):
                 if all(i not in forbidden for i in range(base, base + reg.width)):
                     return base
             fail(

@@ -77,13 +77,18 @@ class ReviewRegressions(unittest.TestCase):
         import xml.etree.ElementTree as ET
         from m200.project import write_project, load_project
 
-        p = self.code("void scan(){plc::i16 x=1;plc::output(0,x==1);}")
+        p = self.code(
+            "void scan(){plc::write_word(4000,1);plc::output(0,plc::read_word(4000)==1);}"
+        )
         path = self.source.with_suffix(".smbp")
         fixture = Path(__file__).parent / "fixtures/synthetic.smbp"
         write_project(p, fixture, path)
         root = ET.parse(path).getroot()
         expr = root.find(".//OperationExpression")
+        self.assertIn("%MW4000", expr.text)
+        before = expr.text
         expr.text = expr.text.replace("%MW4000", "%MW40 00")
+        self.assertNotEqual(expr.text, before)
         ET.ElementTree(root).write(path)
         with self.assertRaisesRegex(CompileError, "numeric|operation|mixed"):
             load_project(path)
