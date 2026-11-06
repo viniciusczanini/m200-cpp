@@ -1,0 +1,519 @@
+{
+  "date": "2026-11-06",
+  "scope": "Standalone plain-LD Register graph codec foundation with portable exact FIFO/LIFO fixtures; no whole-project or runtime admission",
+  "base_checkpoint": {
+    "tests": 568,
+    "published_commit": "15791b7",
+    "repository_head_at_run": "d3fb2660ce791ea94ffe785db6c7990bd4e20f6e",
+    "historical_results_edited": false
+  },
+  "changed_source_sha256": {
+    ".gitattributes": "827d619bb21db55def1ab74b2963d4b470aacf3bcda302422a23332d3db3cade",
+    "m200/register_graph.py": "301cd66e5cc473ced8aa7be29fc0881484857a9072b8f490dac17e54496a459c",
+    "tests/test_register_graph.py": "fb64a51ea25a5c67f4e9d893c4bba00e7a8541b0ee1132316c5b30f8f3337da1"
+  },
+  "product_admission": {
+    "whole_Register_project": "still refused",
+    "config_project_Program_frontend_reverse_SDK_VM_integration": false,
+    "new_CPP_Register_API": false,
+    "new_Register_runtime_or_FIFO_LIFO_semantics": false,
+    "hardware_allocation_level_validation": "not supplied by this component"
+  },
+  "component_contract": {
+    "RegisterInputs": "Frozen validated data: index, reset, store, retrieve pin addresses; no execution state",
+    "parse_block": "Closed eight-line BLK %R0..3; plain LD reset/R, LD store/I, LD retrieve/O; END_BLK. Native formatting whitespace is normalized without changing caller input.",
+    "graphics": "Returns exact four-entity geometry from validated parameters",
+    "read_graph": "Checks original owned RungEntity/InstructionLines/LadderElements, then returns pin addresses without mutation",
+    "write_graph": "Only fills missing/empty LadderElements after validating provided and stored bodies agree; complete valid existing graph and UI annotations remain unchanged. Never rewrites IL or other rung fields. Malformed/partial/mismatched owned data is refused before mutation.",
+    "native_index": [
+      0,
+      3
+    ],
+    "contact_family": "canonical direct %I0.0..%I0.23, plain LD only",
+    "mode": "Graph is identical for the two captured modes; mode is read separately through the existing register_xml foundation",
+    "geometry": [
+      [
+        "NormalContact",
+        "reset",
+        0,
+        0,
+        "Left, Right"
+      ],
+      [
+        "NormalContact",
+        "store",
+        1,
+        0,
+        "Left, Right"
+      ],
+      [
+        "NormalContact",
+        "retrieve",
+        2,
+        0,
+        "Left, Right"
+      ],
+      [
+        "Register",
+        "%R<index>",
+        0,
+        1,
+        "Left"
+      ]
+    ],
+    "XML_closure": "Unknown/duplicate/namespaced fields, attributes, nested scalars, significant container text/tails, missing data, forged geometry/connections/identities and unsupported IL forms fail explicitly",
+    "metadata": "Known scalar comments/symbols are preserved; no field provides executable or mode authority",
+    "not_a_whole_XML_project_validator": true
+  },
+  "fixture_byte_preservation": {
+    "rule": "tests/fixtures/official_tm200ce40t_register_*.smbp -text whitespace=cr-at-eol",
+    "existing_attributes_hooks_untouched": true,
+    "public_fixture_tests_require_no_ignored_lab_files": true
+  },
+  "fixtures": [
+    {
+      "file": "tests/fixtures/official_tm200ce40t_register_fifo_three_ld.smbp",
+      "bytes": 105416,
+      "sha256": "f6198b7054f1f1b6dbd016f6df756ef2ebd150a99d26bc59e86069944d000fa4",
+      "provenance": {
+        "file": "tests/fixtures/official_tm200ce40t_register_fifo_three_ld.provenance.json",
+        "bytes": 2999,
+        "sha256": "44d133c0c01788d8f07d6a1c0f8a75dcb9710e19e43fc2b1477a9dbe6e3a376d"
+      },
+      "mode": "Fifo(default omitted)",
+      "management_level": "FunctLevelMan21_0",
+      "root_GUI_observation_snapshot": {
+        "kind": "fifo",
+        "saved_sha256": "f6198b7054f1f1b6dbd016f6df756ef2ebd150a99d26bc59e86069944d000fa4",
+        "saved_bytes": 105416,
+        "root_personally_viewed_save_no_error_clean_title": true,
+        "native_IL_lexemes_equal": true,
+        "fresh_reopen_pending": false,
+        "runtime_pending": true,
+        "fresh_reopen_no_error": true,
+        "root_personally_viewed_reopen_png": true,
+        "other_project_before_reopen": "register_lifo_canonical_three_ld",
+        "reopen_stage": "Programming",
+        "saved_sha256_after_reopen": "f6198b7054f1f1b6dbd016f6df756ef2ebd150a99d26bc59e86069944d000fa4"
+      },
+      "captures": [
+        {
+          "file": "output/editor-validation/native-register-evaluation-2026-11-06/observed/fifo/reopen.png",
+          "sha256": "8f2c150da22da38243dddf81a41a0f95ba94632dc99bf60bad16403c46a9b181",
+          "bytes": 384586
+        },
+        {
+          "file": "output/editor-validation/native-register-evaluation-2026-11-06/observed/fifo/save.png",
+          "sha256": "16f405554f9baf6f98337150e524b26337d9b1e4e3742ee1bf1a89637ea05d22",
+          "bytes": 391231
+        }
+      ],
+      "raw_rungs": 6,
+      "normalized_instruction_lines": 18,
+      "graph_entity_counts": [
+        10,
+        10,
+        10,
+        4,
+        11,
+        11
+      ],
+      "native_CRLF_preserved": true,
+      "runtime_proof_from_this_fixture": "not claimed"
+    },
+    {
+      "file": "tests/fixtures/official_tm200ce40t_register_lifo_three_ld.smbp",
+      "bytes": 105554,
+      "sha256": "a82e4dd97f37c469dae5d30f68b12cf3d11f55f0131f171d7e6b0a3b5c37cf0a",
+      "provenance": {
+        "file": "tests/fixtures/official_tm200ce40t_register_lifo_three_ld.provenance.json",
+        "bytes": 3019,
+        "sha256": "7f969a7de6b559b6c023c2ad854cf8267e81b64916d348b295b5764567d16e5f"
+      },
+      "mode": "Lifo(explicit configuration)",
+      "management_level": "FunctLevelMan21_0",
+      "root_GUI_observation_snapshot": {
+        "kind": "lifo",
+        "saved_sha256": "a82e4dd97f37c469dae5d30f68b12cf3d11f55f0131f171d7e6b0a3b5c37cf0a",
+        "saved_bytes": 105554,
+        "root_personally_viewed_save_no_error_clean_title": true,
+        "native_IL_lexemes_equal": true,
+        "fresh_reopen_pending": false,
+        "runtime_pending": true,
+        "fresh_reopen_no_error": true,
+        "root_personally_viewed_reopen_png": true,
+        "other_project_before_reopen": "register_fifo_canonical_three_ld_editor_saved",
+        "reopen_stage": "Programming",
+        "saved_sha256_after_reopen": "a82e4dd97f37c469dae5d30f68b12cf3d11f55f0131f171d7e6b0a3b5c37cf0a"
+      },
+      "captures": [
+        {
+          "file": "output/editor-validation/native-register-evaluation-2026-11-06/observed/lifo/reopen.png",
+          "sha256": "d2e6c1a4d62bac26bc418000a6d133928ecbcbb65381fa712f1491a818d494bf",
+          "bytes": 384581
+        },
+        {
+          "file": "output/editor-validation/native-register-evaluation-2026-11-06/observed/lifo/save.png",
+          "sha256": "0a94ac6c264e4f382efc2c6ecba5a7739e146fb6841acaa212104d54d3123dae",
+          "bytes": 391141
+        }
+      ],
+      "raw_rungs": 6,
+      "normalized_instruction_lines": 18,
+      "graph_entity_counts": [
+        10,
+        10,
+        10,
+        4,
+        11,
+        11
+      ],
+      "native_CRLF_preserved": true,
+      "runtime_proof_from_this_fixture": "not claimed"
+    }
+  ],
+  "TDD": {
+    "initial_RED": {
+      "methods": 1,
+      "failures": 1,
+      "reason": "standalone register_graph module absent"
+    },
+    "complete_new_file_RED": {
+      "methods": 19,
+      "failures": 19,
+      "errors": 0,
+      "reason": "same missing component"
+    },
+    "initial_GREEN": {
+      "methods": 19,
+      "seconds": 0.193,
+      "result": "OK"
+    },
+    "final_focused": {
+      "methods": 37,
+      "new_graph_methods": 19,
+      "existing_config_methods": 18,
+      "seconds": 0.221,
+      "result": "OK",
+      "skips": 0
+    }
+  },
+  "full_regression": {
+    "command": "python3 -m unittest discover -s tests -v",
+    "tests": 587,
+    "seconds": 234.067,
+    "result": "OK",
+    "skips": 0,
+    "source_input_pins": 156,
+    "post_run_pin_mismatches": 0,
+    "full_log_sha256": "ff21bdd7c399ed02175de85176a5f69f6be930ec9bedc99bcdfc7d1ba596c794",
+    "source_pin_sha256": "0bdbc598b5fcebc97f0b2df7e51660b7684a9400dadef67ffea853666fd5d67b",
+    "log": {
+      "file": "output/diagnostics/register-graph-foundation-2026-11-06/full-regression.log",
+      "bytes": 63343,
+      "sha256": "ff21bdd7c399ed02175de85176a5f69f6be930ec9bedc99bcdfc7d1ba596c794"
+    },
+    "root_terminal_log_read": true,
+    "independent_terminal_log_and156hashes_verified_readonly": true,
+    "optional_old_Register_config_lab_method": "Executed here; its pre-existing public-checkout skip remains separate. All nineteen new graph methods use portable public fixtures."
+  },
+  "verification_scope": {
+    "frozen_unit_snapshot": {
+      "pins": 156,
+      "Python_files": 104,
+      "all_before_after_pins_unchanged": true,
+      "all_current_tree_claim": false
+    },
+    "separate_concurrent_artifact": {
+      "path": "tests/stress/modbus_full_pin.py",
+      "sha256_at_observation": "97261660f9a79a2009a12eb027ff4791af9f79d54e6b365b619bb02b448f642b",
+      "included_in_unit_source_pin": false,
+      "discovered_unittest_file": false,
+      "authority": "Separate root-owned Modbus stress lane; no inferred validation from the Register unit run"
+    },
+    "reason": "The root-owned Modbus stress script appeared after Register freeze. It is not a discovered unittest file and was not included retroactively in this unit source pin. Its separate stress evidence must be assessed independently.",
+    "extra_full_suite_repeated": false
+  },
+  "ruff": {
+    "version": "0.17.3",
+    "exact_frozen_104_Python_paths": {
+      "check": "pass",
+      "format_check": "pass"
+    },
+    "postrun_current_105_Python_paths": {
+      "check": "pass",
+      "format_check": "pass"
+    },
+    "diff_check": "pass"
+  },
+  "independent_review": {
+    "classification": "PASS: no actionable defect found; isolated graph foundation only",
+    "outstanding_findings": [],
+    "local_parameter_combinations": 55296,
+    "XML_writes": 96,
+    "graph_permutations": 24,
+    "malformed_owned_XML_cases_with_read_write_atomicity": 374,
+    "IL_negatives": 190,
+    "typed_negatives": 7,
+    "annotation_positives": 5,
+    "focused_methods": 19,
+    "focused_seconds": 0.185,
+    "focused_run_evidence": "Tool-session observation; no persisted focused stdout log claimed",
+    "exact_fixture_lab_provenance_CRLF_and_capture_pins": "verified",
+    "whole_project_refusal_and_existing_destination_preservation": "verified",
+    "review_pins": 156,
+    "review_before_after_stable": true,
+    "terminal_evidence": "Reviewer separately confirmed the 587/234.067s/0skips log, result hash and all156 current pins read-only; no all-current-tree or extra-suite claim",
+    "parameter_scope": "Local codec combinations are not additional official/native project acceptance cases"
+  },
+  "remaining_tool_gaps": [
+    "Whole Register project configuration/IR/frontend/reverse/SDK/VM integration",
+    "Register numeric/status properties, capacity, FIFO/LIFO storage and lifecycle semantics",
+    "Reset/store/retrieve edges, collision priority, self-status/compound evaluation timing and error/failure behavior",
+    "Other bit domains, negated/edge/compound/status contact shapes, labels and wired-output or wider/branched native forms",
+    "Actual hardware/functional-level/allocation qualification and physical PLC/runtime proof"
+  ],
+  "evidence_limits": "Official save/fresh-reopen establishes these exact authored bindings. The standalone codec adds no execution model, new program admission or full-parity claim.",
+  "source_pin": {
+    "file": "output/diagnostics/register-graph-foundation-2026-11-06/source-pin.json",
+    "bytes": 17531,
+    "sha256": "0bdbc598b5fcebc97f0b2df7e51660b7684a9400dadef67ffea853666fd5d67b",
+    "sha256_by_file": {
+      ".gitattributes": "827d619bb21db55def1ab74b2963d4b470aacf3bcda302422a23332d3db3cade",
+      "docs/capabilities/COUNTER-SOURCES.json": "2da70defcc1c7dedbea5dbf97e3d53df0e74a766cfde231852954af4419ddfbd",
+      "docs/capabilities/INDEXED-SOURCES.json": "8d9e40c40a2ea1df365bed39b50321aae2370aa3e48f10dab496d7d3c143ad1a",
+      "docs/validation/TIMER-MODE-STRESS-RESULTS.json": "2422e4df23cfe7c1d4c844b34e651490bb444c1862805f6c79b3ccd093b0d00d",
+      "docs/validation/TIMER-PROPERTY-STRESS-RESULTS.json": "190531e18e869974dbff6b2827041a290e2a2481fe915bd69eb0eb5ef984d526",
+      "m200/__init__.py": "77c5815a3596eebca3e939d1ad39abba46fa4edc4df148aaa7e47f13e5eda0ab",
+      "m200/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "m200/allocation.py": "f21e8753757ebf1c54874c18c3385a7d79ce52992514725920c29a1ca6281be9",
+      "m200/arithmetic.py": "bd0a83b4cc3257d2734a2ad1131137ce0608c2688a0565842b41759c336df75a",
+      "m200/arrays.py": "d4574f6e48ab98f70feb3f474f30bbf387117f5db3ddde395525a21a77da42ed",
+      "m200/bits.py": "d76ca8b8bb587a6811cfb3e157c00385ba0a836b8eb669afdda9af4e635b6a61",
+      "m200/boolean_bdd.py": "b3de9c79a5b14953256117afa22df8aaf2b37eb71689f224ca2d66e78a02882f",
+      "m200/capabilities.py": "e94e59743ee0eae98c476938f8eafe04966c0823b825b1d070980d15d41348a0",
+      "m200/cli.py": "22110f728cd456b9fae20a2ae1c2f9a03ba3fede808ee220318071c09a9d6a14",
+      "m200/communication.py": "105c1aef50e7ee00bc7c7142a5b6805d4ddf5f18fc04c5e60a52b78841a6b3b0",
+      "m200/communication_graph.py": "3589d930316fa8f916d2de2c5e9ceb8f2b4997ac463df7ec7ba97e403ce7cc2a",
+      "m200/communication_xml.py": "2762f0fd89552de18e21bb632e536eb4c1a9449702cdfb6444dfb58bb606aac2",
+      "m200/config.py": "5411e6a28bd67da9a45c1660f1c62673443b249ac76948ede80b57c6e322f73e",
+      "m200/conversions.py": "0922116a83ef1bcacda5fb9a588f2bc10d522a7c1ca7f301148ea88e6e370250",
+      "m200/copy_fusion.py": "39c8f498518c46d35ad61ec2c53564a61748a4957eae25e8d241a3c7e4b98816",
+      "m200/counter_graph.py": "80abf1241ee5095a121c47e1a196de03f1e7ed37fe0c54626b2a3f3eba4a9e8c",
+      "m200/counter_xml.py": "a87177f18a698b1f442a7c16eb66748a6d2c06c9c966ac199c6275bb1e326554",
+      "m200/counters.py": "0e4ed9d8fe6f4356f3d6b6986558a0f9caa019daa3f741b12522d1fdd6f376ce",
+      "m200/edge_functions.py": "c58b059d15ee7387ed7e65f841ad549f3b30c3781a258c0a6340a96e9cd92a24",
+      "m200/edges.py": "e590a801d00b94d20a2dd1f428635aa299e3bd59bcbfe2442f5ffa4fd3d64713",
+      "m200/flow.py": "090035e4abc84354287c934898430c0da038a81a11452526e4d87a70def55607",
+      "m200/frontend.py": "2b56e3ca231ccb3cbb9a5371051928b360559400566c771a4cd678db07c0504a",
+      "m200/il.py": "f177243b0b658414b8e2f3da7eac7a7ed62b7996f5faa2154b96377f9538db83",
+      "m200/indexed.py": "0b8ca542e2be87392d8de2a75ef8ad0d48534b28d7f82d1e24fd1bf38fc8343b",
+      "m200/jsonio.py": "c4d8447354b4f48205a8d5bfc58e1a3919656ba2073ecc5982b2f8fd6253fd70",
+      "m200/ladder_lowering.py": "66bffd608bc2e554b61f56eacf608efe7749b89d19dc5c9d4fc13e004913fb52",
+      "m200/levels.py": "439eba12b9bf189795449983755b55d92f77261678a983c4ed9e94b5eb341149",
+      "m200/lower.py": "d9cc4e13b0e886a0c0d7bd85880d621d76f8c371943f4d4d1549f111ab1aa657",
+      "m200/modbus.py": "a391ce5ff71520cea4f6b74d9ae984ba6cb4d6fff36b9d44fe05396e68c2e32b",
+      "m200/model.py": "e786ea2d03ea7d9c98c641fe6ed84a00a2076f51a1974ce1209355ef4dad0e11",
+      "m200/native.py": "016a6af7d7f7b1de11dab9bee1477faa9f4d393f75bbf09e1b3bf5daa5e6ac4f",
+      "m200/native_logic.py": "6a5990a9b75186ca678172491605a8485747ec004c685a3c4d22b025be8a53de",
+      "m200/numeric.py": "b29de2050a070dcbf23ab4e942642f45ad22a580d70b078f5b74111dfde629c5",
+      "m200/project.py": "92251c8012bd84373ba4afa64399bc2ff067ab8482a857e15abf013a2d9cf4d8",
+      "m200/register_graph.py": "301cd66e5cc473ced8aa7be29fc0881484857a9072b8f490dac17e54496a459c",
+      "m200/register_xml.py": "8cccf50926e13978df2389afb48cf37409b451e8b4b80be86e1f3299dd292f71",
+      "m200/reverse.py": "a84be951d8f3e113fb74065c024198408efd584c3b16794a3f88e1f04507a0d1",
+      "m200/timer_profile.py": "ca3f7855752418db88698ab0a6fff8ead02f67d8c63c767baeb7b0f985fd346e",
+      "m200/timers.py": "384e3c26facd76ed8da5449d001348fe1c1dd818a73532ab9c782e6a9b0fedf6",
+      "output/editor-validation/native-register-shared-request/editor-saved/register_fifo_editor_saved.smbp": "85219725709cbe90641e25bedddd6bfa4f13011a55e01be4ba087f8f42b09189",
+      "output/editor-validation/native-register-shared-request/editor-saved/register_lifo_editor_saved.smbp": "8d04a2bc22bc2466a928ea185d41641f53c5493e26a2a19d690ef8e55822c1ab",
+      "sdk/plc.hpp": "b1d6f04ab2ce88d4e37ac781a299f134c5882971f2d593ead502be3877e784b3",
+      "tests/editor_validation/run.py": "d204fa45b64dba7b33fb05c707c2f8f8362ec8f6714d19cc84ac5d4e475e55f6",
+      "tests/editor_validation/sequence_timers.py": "eb8700e346af43f3ae53ddf5034e4b7230502da8cc66e6991c7e1712670f8702",
+      "tests/fixtures/native_counter_branch_graphs.json": "fb77d8c8838c01d3b3404a47f11ff2c46d26f5057ece2e5b35f50b0e15975886",
+      "tests/fixtures/native_counter_graphs.json": "0830c6669cded99441496d3d496b8dbb67d133f7a8ace160daae40868d35029a",
+      "tests/fixtures/native_timer_graphs.json": "e8f82d22bca8b5c6a480598dfceb33bf2744feada776812b98261060132b518c",
+      "tests/fixtures/official_tm200ce40t_end.provenance.json": "e451a56395e51ad3af7f2aa35ce715c391c2b10e062ca1a31d98626702d61ada",
+      "tests/fixtures/official_tm200ce40t_end.smbp": "11b4772aab31b5759ebf5a0315125cd4f1f0005dd0bad943c64de9af9eb2ea31",
+      "tests/fixtures/official_tm200ce40t_endc.provenance.json": "e3d62c63824a4171f0b8654c8ebcdcc13631f4d5b754406f6d4d017c3363b87a",
+      "tests/fixtures/official_tm200ce40t_endc.smbp": "10d49746b54f4b8ef14dee3a51e8f08607aabebc5e142ade76f3643a1369451f",
+      "tests/fixtures/official_tm200ce40t_endcn.provenance.json": "da9e593ab5e5b8dc3acb3848044d767ddf4b42a5f12f09ee29cc79d9e1b8c66c",
+      "tests/fixtures/official_tm200ce40t_endcn.smbp": "5c76b1dabede9dc85c2c155f01c00d981262d804c150ccb7a7efbc07ba0496dc",
+      "tests/fixtures/official_tm200ce40t_memory.provenance.json": "b9826924298610100516b075c671362c87b85ff35e2489e0df661ea8cdd89730",
+      "tests/fixtures/official_tm200ce40t_memory.smbp": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf",
+      "tests/fixtures/official_tm200ce40t_memory_editor_saved.provenance.json": "7e5e29c8401bc9cdf9b4d340807b17b2a2af0d9a935f5a8fcc2d74d60fcda32a",
+      "tests/fixtures/official_tm200ce40t_memory_editor_saved.smbp": "4b6120f1151f840ae234e6f79135c51ec78e0fd3df21736c542894d52402a6bc",
+      "tests/fixtures/official_tm200ce40t_modbus_full_pin_read.provenance.json": "8d30908043d3bd1d4a66bd4bcb0f86c050ca6999451303c3f9c91f4db92d79fd",
+      "tests/fixtures/official_tm200ce40t_modbus_full_pin_read.smbp": "8154e130ce73b6a1b6e90f5876264437ec36778207fc38c3a3661152059f9e50",
+      "tests/fixtures/official_tm200ce40t_modbus_full_pin_write.provenance.json": "f5c556d3896a6e824509c25ca50b70e8c2dca2c71c5d4b80331fbaacbe2ef7dc",
+      "tests/fixtures/official_tm200ce40t_modbus_full_pin_write.smbp": "ae6ffad294a36e79656f36845f2a0bebf19df6f3e60b8aa7b82597b867b79af3",
+      "tests/fixtures/official_tm200ce40t_modbus_full_pin_write_read.provenance.json": "5c7d0e2ef28bc3bfd34fe2e8e858b3db939edf1e64f271fd33449e2ca01d97b8",
+      "tests/fixtures/official_tm200ce40t_modbus_full_pin_write_read.smbp": "9e7a3359a99c433bdebe7eaca21235960de806fdfb8151a678e39345e4b3588f",
+      "tests/fixtures/official_tm200ce40t_modbus_read_i.provenance.json": "95582f622e7ad61c46d9d902c6408245cc6e5e3db511770515a2bbc332a9d5a9",
+      "tests/fixtures/official_tm200ce40t_modbus_read_i.smbp": "1c857a39e418d602b30f132ebc311f60521eb70fdb44ddbe94fc39ff9430d214",
+      "tests/fixtures/official_tm200ce40t_modbus_read_q.provenance.json": "ab73aff0a34a9cdf8d6fa312535c8bd1e8de46f1bbd07c6f2813bc8a30e5a3c0",
+      "tests/fixtures/official_tm200ce40t_modbus_read_q.smbp": "4994ba0c7aee1ffc5127f15e673215dc9a5b9ef521877255e243b3cb3cef8d4f",
+      "tests/fixtures/official_tm200ce40t_modbus_single_coil.provenance.json": "082e0e4424bad622c62a77ea8ae9775029670c188890ee7179d5a68bd4b69180",
+      "tests/fixtures/official_tm200ce40t_modbus_single_coil.smbp": "4b72a0380555290934a4eea0492e3f9c0491b08f0741bd9f7ded49666845ef8f",
+      "tests/fixtures/official_tm200ce40t_modbus_single_reg.provenance.json": "9190f49a2bb35c59ebf47344388d4d02e9b8eede5b9f279dd2bfcbb0edbc8c22",
+      "tests/fixtures/official_tm200ce40t_modbus_single_reg.smbp": "d24a3b572bc565d9d1cb9d4111ffd231d28422384e7b08bd977c85198b995ed8",
+      "tests/fixtures/official_tm200ce40t_modbus_write_q.provenance.json": "e1a264b49644905d6ea7ac7752112eece4d8bfc62adec68f70ae3d3aeef0af52",
+      "tests/fixtures/official_tm200ce40t_modbus_write_q.smbp": "da5f8bb39369d888f86c09b136222756a42127410d0c867574c80dacb66c465e",
+      "tests/fixtures/official_tm200ce40t_modbus_write_read.provenance.json": "582257c462d3c509bd7c8a245070aedb1bf6809ea08d683e570cb4fc87806034",
+      "tests/fixtures/official_tm200ce40t_modbus_write_read.smbp": "6a7edd820fcaee97cc4c1c783005f0a88a0409c98934e7b6964fbce1004bb52e",
+      "tests/fixtures/official_tm200ce40t_register_fifo_three_ld.provenance.json": "44d133c0c01788d8f07d6a1c0f8a75dcb9710e19e43fc2b1477a9dbe6e3a376d",
+      "tests/fixtures/official_tm200ce40t_register_fifo_three_ld.smbp": "f6198b7054f1f1b6dbd016f6df756ef2ebd150a99d26bc59e86069944d000fa4",
+      "tests/fixtures/official_tm200ce40t_register_lifo_three_ld.provenance.json": "7f969a7de6b559b6c023c2ad854cf8267e81b64916d348b295b5764567d16e5f",
+      "tests/fixtures/official_tm200ce40t_register_lifo_three_ld.smbp": "a82e4dd97f37c469dae5d30f68b12cf3d11f55f0131f171d7e6b0a3b5c37cf0a",
+      "tests/fixtures/official_tm200ce40t_timer_10ms.provenance.json": "3b6c2e9f09e8da42c4e68e86fb03e417d11b33372d97fe069164121615bb2971",
+      "tests/fixtures/official_tm200ce40t_timer_10ms.smbp": "934affc43bd7e3d918b529b5cbfaee5aabd6bc062006edcd5c3cacf0d7f2bc45",
+      "tests/fixtures/official_tm200ce40t_timer_options_behavior.provenance.json": "106137384b9f4b7c38786e066e9158e1d53042e6d6260f953279d78c9bb23477",
+      "tests/fixtures/official_tm200ce40t_timer_options_behavior.smbp": "5358e5334696e1838e8b34b9efaa84fafb2a7bd97802d2d2ee32ae94a7f52214",
+      "tests/fixtures/official_tm200ce40t_timer_ret_ton_fl3_2.provenance.json": "deb0b3c186c0f36292e165d02ae869a44d2d391ca9c200dccccc1aecc936bff0",
+      "tests/fixtures/official_tm200ce40t_timer_ret_ton_fl3_2.smbp": "35a9d891711ff3eb74d745f30c14cbb3574b7cd61b0cec876320263e28a1fbd6",
+      "tests/fixtures/synthetic.smbp": "5c04625cb62d03bd8d2982430970bbb3fb81070205c302d4e39f5a5b78a7f515",
+      "tests/public/control-flow-manifest.json": "9c90f5da2e907305d50f8dbb6a5d64e77306a2b92b501d7f0a79e9380a2d07a9",
+      "tests/public/control_flow.py": "65f9d5f2aba359e6c316aa133c577496114e3981728cf5ce60ada5ecbad7ae72",
+      "tests/public/fetch.py": "196a8b6233a222fd1ebb86a89ced34dda368568bd0a82407cc792d45760af5ba",
+      "tests/public/manifest.json": "7c54959214e085d2852a6601a27a48cf212744cb26ce5aadac6ab8f4d6386324",
+      "tests/public/run.py": "c87893404e91a1b90e648303aafa647c7e9d9199c1e6b86e30ea1c0710b27fda",
+      "tests/stress/bit_objects.py": "a39468f5ae36159b378cda34f2bfbe81abdf42fa1cb1fbf5cca0e6325b9c0489",
+      "tests/stress/boolean_audit.py": "ecd800fad5e3eb05948eb833f77a6098fb0e44aaecf8c0a81b60f1c529de146a",
+      "tests/stress/control_flow.py": "ad7814da8c24d58557b9f749252f624e86d71dd28f1873f8b84dcbf5dece6586",
+      "tests/stress/conversions.py": "da56e75ab3d233470151c3efbd4a9c836e1dcfd3c5469945bdbebb0c61f073d0",
+      "tests/stress/counter_graphs.py": "455889489bfb813b1ecaa27efbd2cd40592373ec61ea7c2f82618eb3256b1285",
+      "tests/stress/counters.py": "477b0685314abb2bafa58f27989df132a9b374dac8a4dc4a882a87d5fcd9acd6",
+      "tests/stress/digital_io.py": "0bece2a8e6ec6eee1d07054522d6766a238caa9f7d911cbe3f09afddb4090506",
+      "tests/stress/dynamic_arrays.py": "df53722713450024bfce76434e1e548ceabccde25b7b5654417d8a2a889566ac",
+      "tests/stress/expression_edges.py": "d8dc293380b5aa3de06c3d764dab8324a974fd8d7f9d6962dbd776b9abc5d82a",
+      "tests/stress/il_properties.py": "f2269c4d4beb32ea1e9e014aea71b67f3a05839ec137d5f9be237fa833f25644",
+      "tests/stress/indexed.py": "d8937c58e751f515b6d65dcc4f3d1d1a2545d4dee9ed673f73e02fa4f77426a3",
+      "tests/stress/integer_flags.py": "1f26ac9b9adcb349c381ae03288ed6588c2fb6eda691003089e85072f9a2b689",
+      "tests/stress/native_edges.py": "29bb2bcff1568a0e6adfacd46840dbd20f6f159043df4da86b4a5765a1c986da",
+      "tests/stress/native_logic.py": "c70a0a69556ab796c18b53d0b2d5ce4b3f1dbd45df9093c8760fff17b6c9551b",
+      "tests/stress/run.py": "f8a317eea4fa0e016ce3c5dd9de2ee534ee333c659cf51396e27ce386d91b7d7",
+      "tests/stress/timer_modes.py": "e49f7526f0fec09d072721deeb33b4c0a5a098fc75151a7293644f24e4441baf",
+      "tests/stress/timer_properties.py": "8d1353d38757664145ea233273d629faa623b04e946e33598ca65b9590085f65",
+      "tests/test_adversarial.py": "70697b896097c6c84093595d03fa244498aa9e1dd92b767654bf9683c752a2c7",
+      "tests/test_allocation.py": "30841d4cbd34aa72a5423150773c1f9cb69ba81a8b550b2b82b8be735cce98ff",
+      "tests/test_arrays.py": "e41d1d729a04fa7cea78c6511eb1f5c77908a022f02475b9b3d056984049efcd",
+      "tests/test_bit_communication_xml.py": "13714b9c8622bdf589ea592fc44a7212fded8c94a9cd6bc3fe9eb5a836cc93b3",
+      "tests/test_bit_objects.py": "9fc13a3081ad8c13d0276364d0b6b62beed307a8e4af61752fcf98c7d0a5ce8f",
+      "tests/test_capabilities.py": "15d1fab381fb0aa052e4bd985cc077ebce402964071e1d66ca5d6b763b62716e",
+      "tests/test_communication_compiler.py": "07e10834d084472242e0043f60b3d8e687b628c2536ab89adb6b7c7c9607f209",
+      "tests/test_communication_project.py": "62c93e9bceffa04150a72c7527adb48e2c959799eb7218460dbbe6ac791785a6",
+      "tests/test_communication_xml.py": "836dfeb3312c14cf036bd75aeef9cd7acf344fcc01cbd49b7cb9f14f01622a19",
+      "tests/test_control_flow.py": "8c2ad3d223641ee562ad74236c9ec04429c5bb24a1755fcffdaa562a856509db",
+      "tests/test_conversions.py": "7db2481732b54abbd0a188b1ac0c04eb2b37948e88d9a1b3e6f6b71bb875ecc7",
+      "tests/test_copy_fusion.py": "bef86dfabf49e5a25aa2193eed4107346a74657dd4619a581770f3d181487740",
+      "tests/test_counter_graphs.py": "cbcae6b9e643342c6333433b011accc3e97f620d33621df029496d79b523e935",
+      "tests/test_counters.py": "ff93ed6f67bf6c86fe688efb636aafbce53025b9fd9eb6542f2fabdb895265ed",
+      "tests/test_dynamic_arrays.py": "6714bd13bd8b0b1bcb3443cfa713e3ddaa0045e5f4be3b9854f94c282d719cc2",
+      "tests/test_expression_edges.py": "2971d2147c3172619923a2bb587fff2b7f5ca7f6f10c7a6a84d157dd96a50526",
+      "tests/test_inactive_pulse_aliases.py": "8c89f7d08e8889b6bca59b0b0e818585465a0d8473269725e3273acc5d2446ce",
+      "tests/test_indexed.py": "e8e9d248f90c47197a982ca2410efcae37f070b1c11b41ce0d26145cc8e92589",
+      "tests/test_indexed_bits.py": "5e7c05ab57931ed15012a580adc3034a36ed6c78b3df0ddc59ad9b8a5aca6a6f",
+      "tests/test_integer_flags.py": "750f324db795037de77e71ca4bf10927973a28dab55c3fbb971ea547d98bc289",
+      "tests/test_mast_task_profile.py": "6bcbc398b4a2048c44a92433dc9d1f03755b5186814c0136fea4cdde04125d93",
+      "tests/test_modbus.py": "6a5d5b4e04363514b44b199793593e2d887a4d6dbbbd69937f34d91eb42b7546",
+      "tests/test_modbus_full_pin_native_profile.py": "43775a02848f190392a326a4deccf471344bbf10ea5df8bbb16232e4cfd46c64",
+      "tests/test_modbus_single_native_profile.py": "7223bf9af49a238a2c2ea2b9f6b49b91ee978cc38837a92643955373458e194d",
+      "tests/test_modbus_transport_recovery.py": "564d4d062d98871885cd3a62d773bdf3617117e86ded0b551a0cd3bbdc6deb9a",
+      "tests/test_modbus_write_read_native_profile.py": "7d14c46d1406d613d020953d8d4aeae4cf9737f645e9b1852f7b9440b13696d7",
+      "tests/test_native_edges.py": "1671d2c49540d1dfc9b709e47fa6b0521505b73f92bad755a06f8f047b51f3eb",
+      "tests/test_native_end_graphs.py": "ff6f41418a2dff5579afd6dffceb95f6526ff5b7f1626a7b28c7d4394ef260cb",
+      "tests/test_native_logic.py": "aaa004e025625c9107441f17c5b7578fede443eb24d24e59985c2d22c035d7c7",
+      "tests/test_numeric.py": "6d072af3241154ab4823f9ff4ffc797ea830ba25bf0fcb5d28c69b7f7b247aef",
+      "tests/test_numeric_stress.py": "2453fe9b4352ec4a2e5dceea9c1462a8487f7283fe6904618df7d7101a61cca9",
+      "tests/test_official_profile.py": "a846191a137e8cf492fcfc92721fddf491a547cdbe9b6a6c33073fa667fd9543",
+      "tests/test_public_regressions.py": "2dbedd883358b74d7c082ae750a107e3a57a889758eec1b61501b810b3dca532",
+      "tests/test_register_graph.py": "fb64a51ea25a5c67f4e9d893c4bba00e7a8541b0ee1132316c5b30f8f3337da1",
+      "tests/test_register_xml.py": "07ebf1a24864e75551c561e6a5ce9ea049d2212568c19ef9d4a008952a577de3",
+      "tests/test_review_regressions.py": "458f5c6690fa7c9afc3035a27a9a40eb5167729d25e4faa53bd3c902dcffdd83",
+      "tests/test_scan_exit.py": "deac144a54f822fbd52a1205d90ccedccd0725874ff47fe6ffd83c385c1091e5",
+      "tests/test_timer_modes.py": "d85e8526a32b60859c507fefd596eaeb53c5580d397fc705167f51f159d69fb3",
+      "tests/test_timer_option_bindings.py": "e07b68561a990fa72af70557bad9ae5a60a2e88230bc9dae53a4f9c2e0e67e73",
+      "tests/test_timer_properties.py": "daf92505702d81502023602b3102c4cc34c84a621ba99a90ebb3662daf277012",
+      "tests/test_timer_property_stress.py": "33c85057f20ddd3d1d619a413db8ef2630feee3d584d2e60a9c583dd29c6eabd",
+      "tests/test_timer_xml_bindings.py": "9982273f54099987b6e06be84d02ec525ff9f7dc3876121a5f04c81f719b8095",
+      "tests/test_toolchain.py": "08f6edf37688853d09fc33627e88d2e0a7d358ec8173b4395c4def758d34f860"
+    }
+  },
+  "local_evidence": {
+    "initial-red.log": {
+      "file": "output/diagnostics/register-graph-foundation-2026-11-06/initial-red.log",
+      "bytes": 1054,
+      "sha256": "9fb0d4eb301a94f467ed81cb264b1b909d2b30d14e59e0066deb7c976c90bb94"
+    },
+    "focused-red.log": {
+      "file": "output/diagnostics/register-graph-foundation-2026-11-06/focused-red.log",
+      "bytes": 18659,
+      "sha256": "4e158df5409b25cbc81646508983c53aa474a9bc3290686706b99b66c1e5ff1b"
+    },
+    "first-green.log": {
+      "file": "output/diagnostics/register-graph-foundation-2026-11-06/first-green.log",
+      "bytes": 2378,
+      "sha256": "ddd27d43a30ea3a07a60657d85e20e89e25250fe9d9d2e275fdb63b06668bbf2"
+    },
+    "focused-green.log": {
+      "file": "output/diagnostics/register-graph-foundation-2026-11-06/focused-green.log",
+      "bytes": 4188,
+      "sha256": "dd8edfd3fc21cf42ec5221c4abf09d135bb153d9608ee2d327392377b851f0b1"
+    },
+    "full-result.json": {
+      "file": "output/diagnostics/register-graph-foundation-2026-11-06/full-result.json",
+      "bytes": 371,
+      "sha256": "a7c50741d2e389912c95d68db7b0c07fa15889224ecc8c9ba87286882ee6a943"
+    },
+    "verification-scope.json": {
+      "file": "output/diagnostics/register-graph-foundation-2026-11-06/verification-scope.json",
+      "bytes": 697,
+      "sha256": "42280b2ff2cd2a902fde3553019c3e39e0e0644d99da88915c9200e4e084a580"
+    },
+    "ruff-frozen-check.log": {
+      "file": "output/diagnostics/register-graph-foundation-2026-11-06/ruff-frozen-check.log",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "ruff-frozen-format.log": {
+      "file": "output/diagnostics/register-graph-foundation-2026-11-06/ruff-frozen-format.log",
+      "bytes": 28,
+      "sha256": "54073445325370522f5e8514f811bc815389f5402f1e4358dc9ec12dc81a0a61"
+    },
+    "ruff-check.log": {
+      "file": "output/diagnostics/register-graph-foundation-2026-11-06/ruff-check.log",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "ruff-format.log": {
+      "file": "output/diagnostics/register-graph-foundation-2026-11-06/ruff-format.log",
+      "bytes": 28,
+      "sha256": "1b2a949c4425b6097242b1e28a12a597d352c04edc11185a9a3012a5f542e9d6"
+    }
+  },
+  "independent_evidence": {
+    "REVIEW.md": {
+      "file": "output/reports/register-graph-independent-review-2026-11-06/REVIEW.md",
+      "bytes": 3933,
+      "sha256": "d46d1f5a6d5dc08b77aecc51993bc2cccae2f0afcc69a898fbbe1e1b3226f8c7"
+    },
+    "verification.json": {
+      "file": "output/reports/register-graph-independent-review-2026-11-06/verification.json",
+      "bytes": 1277,
+      "sha256": "34192208b3e78e0d940df0d1e57a285429c2ec76b781814d9042482377aade45"
+    },
+    "probe.py": {
+      "file": "output/reports/register-graph-independent-review-2026-11-06/probe.py",
+      "bytes": 12159,
+      "sha256": "9842daefafa620266477232d59b19a39d64df0258b6187c78c693e1fed4c2785"
+    },
+    "probe-results.json": {
+      "file": "output/reports/register-graph-independent-review-2026-11-06/probe-results.json",
+      "bytes": 1565,
+      "sha256": "75975675fd5c9156fe8ae4fd52b1b3e60da998822e7e15d7eca8abc9e1c16447"
+    },
+    "probe.log": {
+      "file": "output/reports/register-graph-independent-review-2026-11-06/probe.log",
+      "bytes": 1565,
+      "sha256": "75975675fd5c9156fe8ae4fd52b1b3e60da998822e7e15d7eca8abc9e1c16447"
+    }
+  }
+}

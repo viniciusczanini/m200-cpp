@@ -1,0 +1,93 @@
+{
+  "source": "User-authored local CE40T lab project; exact actual official save and fresh-reopened saved-byte clone",
+  "editor": "EcoStruxure Machine Expert Basic1.4build484",
+  "target": "TM200CE40T",
+  "file": "official_tm200ce40t_register_lifo_three_ld.smbp",
+  "sha256": "a82e4dd97f37c469dae5d30f68b12cf3d11f55f0131f171d7e6b0a3b5c37cf0a",
+  "bytes": 105554,
+  "copied_date": "2026-11-06",
+  "original_modified": false,
+  "source_saved_file": "output/editor-validation/native-register-evaluation-2026-11-06/observed/lifo/register_lifo_canonical_three_ld_editor_saved.smbp",
+  "mode": "Lifo(explicit configuration)",
+  "management_level": "FunctLevelMan21_0",
+  "raw_rungs": 6,
+  "normalized_instruction_lines": 18,
+  "graph_entity_counts": [
+    10,
+    10,
+    10,
+    4,
+    11,
+    11
+  ],
+  "bare_Register_IL": [
+    "BLK %R0",
+    "LD %I0.0",
+    "R",
+    "LD %I0.1",
+    "I",
+    "LD %I0.2",
+    "O",
+    "END_BLK"
+  ],
+  "bare_graph": [
+    [
+      "NormalContact",
+      "%I0.0",
+      0,
+      0,
+      "Left, Right"
+    ],
+    [
+      "NormalContact",
+      "%I0.1",
+      1,
+      0,
+      "Left, Right"
+    ],
+    [
+      "NormalContact",
+      "%I0.2",
+      2,
+      0,
+      "Left, Right"
+    ],
+    [
+      "Register",
+      "%R0",
+      0,
+      1,
+      "Left"
+    ]
+  ],
+  "root_GUI_observation": {
+    "kind": "lifo",
+    "saved_sha256": "a82e4dd97f37c469dae5d30f68b12cf3d11f55f0131f171d7e6b0a3b5c37cf0a",
+    "saved_bytes": 105554,
+    "root_personally_viewed_save_no_error_clean_title": true,
+    "native_IL_lexemes_equal": true,
+    "fresh_reopen_pending": false,
+    "runtime_pending": true,
+    "fresh_reopen_no_error": true,
+    "root_personally_viewed_reopen_png": true,
+    "other_project_before_reopen": "register_fifo_canonical_three_ld_editor_saved",
+    "reopen_stage": "Programming",
+    "saved_sha256_after_reopen": "a82e4dd97f37c469dae5d30f68b12cf3d11f55f0131f171d7e6b0a3b5c37cf0a"
+  },
+  "source_observation_file": "output/editor-validation/native-register-evaluation-2026-11-06/observed/lifo/root-gui-observations.json",
+  "source_observation_sha256": "9a5ce560f1afaa70f10c40300197404755c806a0c2f510a786e40584910e90a1",
+  "captures": [
+    {
+      "file": "output/editor-validation/native-register-evaluation-2026-11-06/observed/lifo/reopen.png",
+      "sha256": "d2e6c1a4d62bac26bc418000a6d133928ecbcbb65381fa712f1491a818d494bf",
+      "bytes": 384581
+    },
+    {
+      "file": "output/editor-validation/native-register-evaluation-2026-11-06/observed/lifo/save.png",
+      "sha256": "0a94ac6c264e4f382efc2c6ecba5a7739e146fb6841acaa212104d54d3123dae",
+      "bytes": 391141
+    }
+  ],
+  "comments": "Original diagnostic names and pending-proof comments remain byte-exact; later root-operated save/fresh-reopen evidence above establishes the observed binding. Comments are not validation authority.",
+  "scope": "Standalone plain-LD Register graph/config evidence only; no whole-project compiler admission or Register execution/FIFO/LIFO/collision timing proof is inferred."
+}
