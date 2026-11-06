@@ -1,7 +1,8 @@
 """Closed SMBP communication serialization observed in authored public projects.
 
-READ_VAR supports MW/I/IW/Q; WRITE_VAR supports MW/Q. Bit enum strings are
-backed by exact TM200CE40T official-editor saved/reopened fixtures.
+READ_VAR supports MW/I/IW/Q; WRITE_VAR supports MW/Q and the two single-write
+enums. Single-write project profiles remain closed to observed Man21/SL1.
+Enum strings are backed by exact TM200CE40T saved/reopened fixtures.
 See docs/capabilities/MODBUS-FORMAT-RESEARCH.md for pinned sources and gaps.
 This module never creates port settings or substitutes a controller profile.
 """
@@ -30,7 +31,14 @@ _BLOCK_TYPES = {
     for k, v in [("READ_VAR", "ReadVarBasic"), ("WRITE_VAR", "WriteVarBasic")]
 }
 _LINKS = {"SerialLine1": "SL1", "EthernetLink": "ETH1"}
-_OBJECTS = {"MW": 0, "I": 1, "Q": 2, "IW": 3}
+_OBJECTS = {
+    "MW": 0,
+    "I": 1,
+    "Q": 2,
+    "IW": 3,
+    "SINGLE_COIL": 4,
+    "SINGLE_REG": 5,
+}
 _PARAMETERS = {
     "Link": "link",
     "RemoteDeviceId": "id",
@@ -348,12 +356,20 @@ def check_template_channels(root, configs):
     if not configs:
         return
     level = _scalar(_find(root, "ManagementLevel"))
-    budget = 32 if functional_level(level) >= (10, 1) else 16
+    actual_level = functional_level(level)
+    budget = 32 if actual_level >= (10, 1) else 16
     links = set()
     for address, config in configs.items():
         _, index = _checked_config(address, config)
         if index >= budget:
             fail("communication instance requires functional level >= 10.1")
+        if config.kind == "WRITE_VAR" and config.obj_type in (4, 5):
+            if actual_level < (5, 0):
+                fail("single-write Modbus functions require functional level >= 5.0")
+            if level != "FunctLevelMan21_0":
+                fail("unverified single-write functional-level profile")
+            if config.link != "SL1":
+                fail("unverified single-write link profile; observed SL1 only")
         links.add(config.link)
     if "SL1" in links:
         node = _find(root, "HardwareConfiguration/Plc/SerialLineConfiguration")

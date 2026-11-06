@@ -1,0 +1,59 @@
+{
+  "source": "User local Schneider Basic lab; official Ctrl+S save of a writable disposable P: candidate copy, followed by fresh reopen of an exact saved-byte clone",
+  "editor": "EcoStruxure Machine Expert Basic 1.4 build 484",
+  "target": "TM200CE40T",
+  "copied_utc": "2026-11-06",
+  "file": "official_tm200ce40t_modbus_single_reg.smbp",
+  "sha256": "d24a3b572bc565d9d1cb9d4111ffd231d28422384e7b08bd977c85198b995ed8",
+  "bytes": 88736,
+  "original_modified": false,
+  "parent_candidate": {
+    "file": "06_write_single_reg_fc6.smbp",
+    "sha256": "d4f464dd518bb3af4908c670911c6a708fb450e6206ac07db3c0d477900a4d25",
+    "operation": "Frozen candidate copied byte-for-byte to a writable disposable P: working file; Ctrl+S saved that working file. Actual saved bytes copied unchanged to a separate editor_saved artifact; another project opened before this exact saved-byte clone was freshly reopened."
+  },
+  "hardware_template_sha256": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf",
+  "hardware_change_from_authentic_template": [
+    {
+      "path": "HardwareConfiguration/Plc/SerialLineConfiguration/Addressing",
+      "from": "SlaveAddressing",
+      "to": "MasterAddressing"
+    }
+  ],
+  "configuration": {
+    "kind": "WRITE_VAR",
+    "link_xml": "SerialLine1",
+    "management_level": "FunctLevelMan21_0",
+    "human_level": "14.0",
+    "remote_device_id": 1,
+    "timeout_100ms": 100,
+    "object_xml": "SINGLE_REG",
+    "object_numeric": 5,
+    "function_code": 6,
+    "first_obj": 131,
+    "quantity": 1,
+    "index_data": 280,
+    "buffer_words": 1
+  },
+  "editor_save": {
+    "status": "No error",
+    "observed_by": "root local desktop GUI operator",
+    "capture_file": "docs/validation/editor-evidence/modbus-bindings/06_write_single_reg_fc6_save.png",
+    "capture_sha256": "2d4f39a00817b99343bde6fcd8d6a721df8b099cd1fc10503079fa10236bfe58"
+  },
+  "editor_fresh_reopen": {
+    "status": "No error",
+    "observed_by": "root local desktop GUI operator",
+    "capture_file": "docs/validation/editor-evidence/modbus-bindings/06_reopen.png",
+    "capture_sha256": "1e54f0e7ecd1f7a7369b8828bc41f4b897312658fdba7061ad6f010a63c7672e",
+    "scope": "Exact saved-byte clone only"
+  },
+  "local_readback": {
+    "file": "/Users/tommy/Offline/plc-mac-lab/diagnostics/modbus-next-bindings-20261106/editor-saved/06_write_single_reg_fc6_readback.json",
+    "sha256": "4c5142afbc19c5ee0f5cf3d04de6a9ec1255a8357ee14a22a6d51f141619321d",
+    "raw_il_equal": true,
+    "hardware_semantics_equal": true,
+    "function_block_semantics_equal": true
+  },
+  "scope": "Exact single-write typed XML binding and Execute-only WriteVarBasic graph at literal FunctLevelMan21_0/SL1. Documented minimum human 5.0 is distinct from this exact observed profile. No native compile, Modbus exchange, firmware or physical PLC proof; connected Abort/status graphs and WRITE_READ_VAR remain separate."
+}

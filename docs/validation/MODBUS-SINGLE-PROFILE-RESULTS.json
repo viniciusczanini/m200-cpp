@@ -1,0 +1,231 @@
+{
+  "date": "2026-11-06",
+  "scope": "WRITE_VAR SINGLE_COIL/SINGLE_REG typed XML admission using existing Execute-only graph forms",
+  "base_checkpoint": {
+    "commit": "d9c5a55b35ff479bd3a364d0f03afb7f286c1f3d",
+    "tests": 506,
+    "historical_results_edited": false
+  },
+  "changed_source_sha256": {
+    "m200/communication_xml.py": "27a2527e5be5243c670cfd137884d90ef4099003a9d93aacb6556de7b7c579ed",
+    "tests/test_modbus_single_native_profile.py": "223c10e46a6f0f61bf85551f16673a6304aecb8f2bfff46dcc31c1a0c8c1bb0b",
+    "tests/test_communication_xml.py": "4976f77713e2e319a29bd735cd63025e5a14db1986bb684418a63fb4744248cb",
+    "tests/test_bit_communication_xml.py": "78cb166c3d7d56c411567617d378092a3758375540e470e7d73f03ca82c1f146"
+  },
+  "admission_contract": {
+    "target": "TM200CE40T",
+    "kind": "WRITE_VAR",
+    "objects": {
+      "SINGLE_COIL": {
+        "value": 4,
+        "function": 5
+      },
+      "SINGLE_REG": {
+        "value": 5,
+        "function": 6
+      }
+    },
+    "actual_XML_ManagementLevel": "FunctLevelMan21_0",
+    "human_level": "14.0",
+    "actual_link": "SL1",
+    "documented_minimum_human_level": "5.0",
+    "below_minimum": "rejected with the documented minimum",
+    "other_known_levels_or_links": "explicit unverified tool profile, not a PLC impossibility",
+    "authority": "actual XML/template level, configured link and serial-master fields; Program metadata cannot override them",
+    "codec_context": "read_blocks/write_blocks remain typed codecs; load_project/write_project/check_template_channels enforce the complete profile",
+    "buffer_words": 1,
+    "quantity": "Existing bounded ModbusConfig Quantity is preserved but ignored for extent/PDU; the actual editor captures have Quantity1"
+  },
+  "remaining_gates": [
+    "WRITE_READ_VAR typed XML",
+    "connected Abort/full-status graph forms",
+    "single writes at other functional levels or links"
+  ],
+  "unchanged_components": [
+    "m200/project.py",
+    "SDK",
+    "Modbus protocol/runtime",
+    "VM"
+  ],
+  "fixture_byte_preservation": "Exact official saved-byte clones copied unchanged; existing modbus*.smbp -text rule preserves native CRLF",
+  "fixtures": [
+    {
+      "file": "tests/fixtures/official_tm200ce40t_modbus_single_coil.smbp",
+      "sha256": "4b72a0380555290934a4eea0492e3f9c0491b08f0741bd9f7ded49666845ef8f",
+      "bytes": 88741,
+      "provenance": "tests/fixtures/official_tm200ce40t_modbus_single_coil.provenance.json",
+      "provenance_sha256": "082e0e4424bad622c62a77ea8ae9775029670c188890ee7179d5a68bd4b69180",
+      "profile": {
+        "kind": "WRITE_VAR",
+        "link_xml": "SerialLine1",
+        "management_level": "FunctLevelMan21_0",
+        "human_level": "14.0",
+        "remote_device_id": 1,
+        "timeout_100ms": 100,
+        "object_xml": "SINGLE_COIL",
+        "object_numeric": 4,
+        "function_code": 5,
+        "first_obj": 107,
+        "quantity": 1,
+        "index_data": 260,
+        "buffer_words": 1
+      },
+      "editor_fresh_reopen": {
+        "status": "No error",
+        "observed_by": "root local desktop GUI operator",
+        "capture_file": "docs/validation/editor-evidence/modbus-bindings/05_reopen.png",
+        "capture_sha256": "3919496c45a37db055699366702a794396cb0042620a80329b9684d3e0260ed4",
+        "scope": "Exact saved-byte clone only"
+      }
+    },
+    {
+      "file": "tests/fixtures/official_tm200ce40t_modbus_single_reg.smbp",
+      "sha256": "d24a3b572bc565d9d1cb9d4111ffd231d28422384e7b08bd977c85198b995ed8",
+      "bytes": 88736,
+      "provenance": "tests/fixtures/official_tm200ce40t_modbus_single_reg.provenance.json",
+      "provenance_sha256": "9190f49a2bb35c59ebf47344388d4d02e9b8eede5b9f279dd2bfcbb0edbc8c22",
+      "profile": {
+        "kind": "WRITE_VAR",
+        "link_xml": "SerialLine1",
+        "management_level": "FunctLevelMan21_0",
+        "human_level": "14.0",
+        "remote_device_id": 1,
+        "timeout_100ms": 100,
+        "object_xml": "SINGLE_REG",
+        "object_numeric": 5,
+        "function_code": 6,
+        "first_obj": 131,
+        "quantity": 1,
+        "index_data": 280,
+        "buffer_words": 1
+      },
+      "editor_fresh_reopen": {
+        "status": "No error",
+        "observed_by": "root local desktop GUI operator",
+        "capture_file": "docs/validation/editor-evidence/modbus-bindings/06_reopen.png",
+        "capture_sha256": "1e54f0e7ecd1f7a7369b8828bc41f4b897312658fdba7061ad6f010a63c7672e",
+        "scope": "Exact saved-byte clone only"
+      }
+    }
+  ],
+  "TDD": {
+    "initial_RED": {
+      "tests": 1,
+      "failed_subcases": 2,
+      "seconds": 0.015,
+      "reason": "SINGLE_COIL/SINGLE_REG XML enum spellings unproven before this increment"
+    },
+    "full_new_test_RED": {
+      "tests": 10,
+      "failures": 14,
+      "errors": 10,
+      "feature_missing_reasons": [
+        "unproven SINGLE_COIL XML enum",
+        "unproven SINGLE_REG XML enum"
+      ]
+    },
+    "GREEN": {
+      "tests": 10,
+      "seconds": 1.072,
+      "result": "OK"
+    }
+  },
+  "focused_regression": {
+    "tests": 51,
+    "seconds": 3.554,
+    "result": "OK",
+    "scope": "existing communication XML/project/compiler/bit tests plus the new single-profile file"
+  },
+  "full_regression": {
+    "command": "make check",
+    "expanded_command": "python3 -m unittest discover -s tests -v",
+    "tests": 516,
+    "seconds": 200.776,
+    "result": "OK",
+    "pinned_source_input_files": 134,
+    "post_run_pin_mismatches": 0
+  },
+  "ruff": {
+    "version": "0.17.3",
+    "check": "pass",
+    "format_check": "pass",
+    "python_files": 97
+  },
+  "independent_review": {
+    "result": "pass",
+    "outstanding_findings": [],
+    "actual_level_link_cases": 100,
+    "ignored_quantity_endpoints": 8,
+    "malformed_bounds_direction_cases": 24,
+    "metadata_atomic_export_cases": 16,
+    "literal_PDU_checks": 4,
+    "MemoryTransport_cases": 2,
+    "native_VM_reverse_no_transport_cases": 2,
+    "late_unsupported_WR_collection_atomicity": "pass",
+    "focused_tests": 10,
+    "focused_seconds": 1.066,
+    "full_log_and_all134pins_verified": true,
+    "extra_full_suite_by_reviewer": false
+  },
+  "prepared_CLI_products": {
+    "scope": "Preparation snapshot only; official GUI product acceptance recorded separately when observed",
+    "bundle": "output/diagnostics/modbus-generated-single-candidates-2026-11-06",
+    "frozen_shared_bundle": "P:\\compiler-validation-2026-11-06\\modbus-generated-single-candidates-2026-11-06",
+    "no_hand_edited_XML": true,
+    "cases": [
+      {
+        "name": "modbus_generated_single_coil",
+        "source": "sources/modbus_generated_single_coil.cpp",
+        "source_sha256": "27326b2522caa78e70174622f58bf6dfc20fa24b33130401cbc6c290eea7983a",
+        "reverse_sha256": "ef39f3281f0a4ac8f55c2d0ebcd24c54c5dbbf193f7a94856922fa83e3551b33",
+        "program_sha256": "6d9e10277a9b8311afd6ac61d7e309eba1ba35d1b535c53c75aa9434645002b6",
+        "raw_rungs": 2,
+        "raw_instruction_lines": 6,
+        "execute_memory_bit": 11,
+        "official_GUI_status_at_preparation": "pending",
+        "runtime_exchange": "not performed"
+      },
+      {
+        "name": "modbus_generated_single_reg",
+        "source": "sources/modbus_generated_single_reg.cpp",
+        "source_sha256": "3fd57c56925dce0439d552cccaf0eb604b45ec08e4e0f3ef6e31a916ae1bd4e3",
+        "reverse_sha256": "e94ee73caf1561c2d97df683eb3b3fd601b42df6fb5b9a2184b945d39f9f72fa",
+        "program_sha256": "4cb9b48c207d2ceef3d5b1d295cbfcbc9b3e9355c2926523e1a2ad7da638d9c5",
+        "raw_rungs": 2,
+        "raw_instruction_lines": 6,
+        "execute_memory_bit": 12,
+        "official_GUI_status_at_preparation": "pending",
+        "runtime_exchange": "not performed"
+      }
+    ]
+  },
+  "evidence_sha256": {
+    "output/diagnostics/modbus-single-profile-2026-11-06/initial-red.log": "8b0abd574c1a8b7ede9dac87ff3709a11e08176dd9de9f9616a60b4e2039734d",
+    "output/diagnostics/modbus-single-profile-2026-11-06/focused-red.log": "49c5276dd5bf7ca122c2209cc1411cce64914dcab1235947ac33956f02caf6c0",
+    "output/diagnostics/modbus-single-profile-2026-11-06/focused-green.log": "f823590b4ce9cb7debf794f3e0b45da56f5e3a765d3e856c2a68dc883aca5803",
+    "output/diagnostics/modbus-single-profile-2026-11-06/communication-regression.log": "07750fb994caeae15be5a29d596e0916f282d098d7867c7104b03e70274fe1a2",
+    "output/diagnostics/modbus-single-profile-2026-11-06/full-regression.log": "d4b4bec66b93e144e531cf76a29b5dde0a050807190f3e8666ab89e218f70620",
+    "output/diagnostics/modbus-single-profile-2026-11-06/source-pin.json": "bc3af58ac9733eb484fbcaa0d7e3c7b8ec08c9ba29c2dd68cb7ae801b3b38655",
+    "output/reports/modbus-single-independent-review-2026-11-06/review.json": "3709da2192471950aa6760d5d7ea2fe05879a2b8d543f8d8b210d8b6514bfde8",
+    "output/reports/modbus-single-independent-review-2026-11-06/REVIEW.md": "95e1f7d643d014b79d54b93b11d8e375866a00d4e082e440ce3882f56c35b6c8",
+    "output/reports/modbus-single-independent-review-2026-11-06/probe-results.json": "573848a0311af75812cca772520e904855b773c96bfe78bf3aa8dc57bb3960a1",
+    "output/diagnostics/modbus-generated-single-candidates-2026-11-06/MANIFEST.json": "ae5a4554fa30c78915185a041cd6c5e5545c2d88536177bddfb09e27801c09bc",
+    "output/diagnostics/modbus-generated-single-candidates-2026-11-06/SHA256SUMS": "0519f2553bb096fa87f6fae140cbab917217504f92beb3070eed03c517cfb76a"
+  },
+  "primary_source": {
+    "document": "Generic Functions Library EIO0000003289.04",
+    "page": 180,
+    "url": "https://www.se.com/ww/en/download/document/EIO0000003289/",
+    "sha256": "d2c8af0598276e7a0bb4f30770e4529282962bc6ee3944dee0645cb9a3186595",
+    "facts": [
+      "FC5/FC6 minimum human level5.0",
+      "Quantity ignored for single coil/register",
+      "IndexData is a local MW source"
+    ]
+  },
+  "limits": [
+    "Basic exact saved/reopened XML bindings, not native compilation or actual Modbus execution proof",
+    "Local PDU/peer/native-model checks do not establish serial delivery, firmware or physical controller behavior",
+    "Other profiles and full communication parity remain active tool work"
+  ]
+}

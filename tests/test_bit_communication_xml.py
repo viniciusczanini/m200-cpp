@@ -310,8 +310,6 @@ class BitCommunicationXMLTests(unittest.TestCase):
     def test_unproven_kinds_and_abort_fail_without_replacing_existing_output(self):
         valid = ModbusConfig(obj_type=1, first_obj=17, quantity=17, index_data=200)
         for cfg in (
-            ModbusConfig(kind="WRITE_VAR", obj_type=4, index_data=300),
-            ModbusConfig(kind="WRITE_VAR", obj_type=5, index_data=300),
             ModbusConfig(kind="WRITE_READ_VAR", index_data=300, index_data_in=400),
         ):
             key = "%" + cfg.kind + "0"
