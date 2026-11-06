@@ -1,6 +1,8 @@
 import copy
+import json
 import unittest
 import xml.etree.ElementTree as ET
+from pathlib import Path
 
 from m200.model import CompileError, Program
 from m200.modbus import ModbusConfig
@@ -129,7 +131,7 @@ def remotes(index=0):
 
 def root():
     node = ET.Element("ProjectDescriptor")
-    ET.SubElement(node, "ManagementLevel").text = "FunctLevelMan10_1"
+    ET.SubElement(node, "ManagementLevel").text = "FunctLevelMan15_0"
     plc = ET.SubElement(ET.SubElement(node, "HardwareConfiguration"), "Plc")
     plc.append(serial())
     tcp = ET.SubElement(
@@ -390,15 +392,56 @@ class CommunicationXMLTests(unittest.TestCase):
     def test_instance_budget_is_gated_at_functional_level_10_1(self):
         n = root()
         cfg = {"%READ_VAR16": ModbusConfig()}
-        n.find("ManagementLevel").text = "FunctLevelMan10_0"
+        n.find("ManagementLevel").text = "FunctLevelMan14_0"
         with self.assertRaises(CompileError):
             comm.check_template_channels(n, cfg)
-        n.find("ManagementLevel").text = "FunctLevelMan10_1"
+        n.find("ManagementLevel").text = "FunctLevelMan15_0"
         comm.check_template_channels(n, cfg)
         n.find("ManagementLevel").text = "FunctLevelMan9_0"
         comm.check_template_channels(n, {"%READ_VAR15": ModbusConfig()})
         with self.assertRaises(CompileError):
             comm.check_template_channels(root(), {"%READ_VAR32": ModbusConfig()})
+
+    def test_real_management_level_tokens_are_mapped_before_instance_gate(self):
+        for token in ("FunctLevelMan11_0", "FunctLevelMan13_0", "FunctLevelMan14_0"):
+            n = root()
+            n.find("ManagementLevel").text = token
+            with self.subTest(token=token), self.assertRaises(CompileError):
+                comm.check_template_channels(n, {"%READ_VAR16": ModbusConfig()})
+            comm.check_template_channels(n, {"%READ_VAR15": ModbusConfig()})
+        for token in ("FunctLevelMan15_0", "FunctLevelMan18_0", "FunctLevelMan21_0"):
+            n = root()
+            n.find("ManagementLevel").text = token
+            comm.check_template_channels(n, {"%READ_VAR31": ModbusConfig()})
+        for token in (
+            "FunctLevelMan10_1",
+            "FunctLevelMan22_0",
+            "FunctLevelMan014_0",
+            "FunctLevelMan14_1",
+        ):
+            n = root()
+            n.find("ManagementLevel").text = token
+            with self.subTest(unknown=token), self.assertRaises(CompileError):
+                comm.check_template_channels(n, {"%READ_VAR0": ModbusConfig()})
+
+    def test_all_observed_level_tokens_match_independent_editor_resources(self):
+        from m200.levels import FUNCTIONAL_LEVELS
+
+        path = Path(__file__).parents[1] / "docs/capabilities/EDITOR-INTEROP-FACTS.json"
+        rows = json.loads(path.read_text())["management_levels"]["rows"]
+        self.assertEqual(len(rows), 21)
+        self.assertEqual(
+            FUNCTIONAL_LEVELS, {row["token"]: tuple(row["human_level"]) for row in rows}
+        )
+        for row in rows:
+            n = root()
+            n.find("ManagementLevel").text = row["token"]
+            comm.check_template_channels(n, {"%READ_VAR15": ModbusConfig()})
+            if tuple(row["human_level"]) >= (10, 1):
+                comm.check_template_channels(n, {"%READ_VAR31": ModbusConfig()})
+            else:
+                with self.subTest(token=row["token"]), self.assertRaises(CompileError):
+                    comm.check_template_channels(n, {"%READ_VAR16": ModbusConfig()})
 
     def test_container_text_is_not_an_empty_configuration(self):
         for node, call in [

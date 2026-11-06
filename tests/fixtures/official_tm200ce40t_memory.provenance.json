@@ -1,0 +1,21 @@
+{
+  "source": "User's local Schneider Basic Wine lab",
+  "editor": "EcoStruxure Machine Expert Basic 1.4 build 484",
+  "target": "TM200CE40T",
+  "copied_utc": "2026-11-06",
+  "file": "official_tm200ce40t_memory.smbp",
+  "sha256": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf",
+  "bytes": 83391,
+  "program": [
+    "LD %M0",
+    "ST %M1"
+  ],
+  "original_modified": false,
+  "scope": "Authentic editor-created inactive hardware/default profile and simple memory rung; no physical compatibility proof.",
+  "editor_open": {
+    "status": "No error",
+    "evidence": "skill-1793938955148514000-1689.png",
+    "observed_by": "parent agent operating GUI",
+    "scope": "exact original baseline only; not a generated-project acceptance claim"
+  }
+}

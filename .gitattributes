@@ -1,0 +1,2 @@
+# Keep authentic editor fixtures byte-exact, including their native CRLF lines.
+tests/fixtures/official_tm200ce40t_memory*.smbp -text whitespace=cr-at-eol

@@ -1,0 +1,292 @@
+{
+  "date": "2026-11-06",
+  "scope": "Exact artifact observations only; full parity and physical validation remain incomplete",
+  "environment": {
+    "editor": "EcoStruxure Machine Expert Basic 1.4 build 484",
+    "wine": "Wine 9 SikarugirCX24.0.7",
+    "dotnet": "native .NET 4.8",
+    "target": "TM200CE40T",
+    "simulator_firmware_display": "1.14.1.0",
+    "functional_level_token": "FunctLevelMan21_0",
+    "known_font_helper_advisory": "PLCLabFontCompat.dll; continued in authorized lab with Remember choice unchecked",
+    "culture": "en-GB process/current/new thread defaults via reviewed own helper; language correction only, separate from Netmanage/socket work"
+  },
+  "candidates": [
+    {
+      "name": "compiler-memory",
+      "original": {
+        "path": "output/editor-memory/program.smbp",
+        "bytes": 84039,
+        "sha256": "7128749796a0ca788898ed077f82ff4e8275a413ec2116fd0fb9f761c3653116"
+      },
+      "il": [
+        "LD %M0",
+        "ST %M1"
+      ],
+      "source": "#include <plc.hpp>\nvoid scan(){plc::write_m(1,plc::read_m(0));}\n",
+      "editor_open": "No error; Ladder visible",
+      "simulator": "Online, PC/controller applications identical; RUN confirmed",
+      "simulator_value_truth_table": "not forced in official simulator",
+      "editor_saved": {
+        "path": "output/editor-memory/editor-saved.smbp",
+        "bytes": 86197,
+        "sha256": "4b6120f1151f840ae234e6f79135c51ec78e0fd3df21736c542894d52402a6bc"
+      },
+      "save_change": "Rung comment only; editor normalized serialization",
+      "reopen": "No error; exact TM200CE40T target",
+      "semantic_readback": "IL and hardware retained; see OFFICIAL-EDITOR-REVIEW.md",
+      "physical_plc": "pending"
+    },
+    {
+      "name": "compiler-io",
+      "original": {
+        "path": "output/editor-io/program.smbp",
+        "bytes": 94914,
+        "sha256": "1bd2d9e1ff439d458d3e50813e278cdaf70bcdc2d3aad0cf21bd0f9001b7bc8e"
+      },
+      "source": "#include <plc.hpp>\nvoid scan() { plc::output(0, plc::input(0)); }\n",
+      "simulator": "Online/identical/RUN; I0.0 False/True/False produced Q0.0 False/True/False in Ladder and simulator panel",
+      "cause": "Confirmed UI/validation resource-string mismatch from en-US versus en-GB thread cultures; own helper now sets consistent en-GB defaults. No I/O configuration or official validation rule changed.",
+      "physical_plc": "pending",
+      "initial_editor_open": "Program errors detected",
+      "initial_errors": [
+        "I/O %I0.0 already used by Filtering",
+        "I/O %Q0.0 already used by User logic (two rungs)"
+      ],
+      "editor_open": "No error after culture-only runtime correction; exact project bytes unchanged",
+      "culture_helper_sha256": "085dd408aa25b928edab8482928288bb05b54880520bceb16bccda9ed8d42d33",
+      "save_reopen": "pending"
+    },
+    {
+      "name": "compiler-memory-with-animation-table",
+      "artifact": {
+        "path": "output/editor-memory/with-animation-table.smbp",
+        "bytes": 86820,
+        "sha256": "6af5bd3ade58add7b2f794dc08dae7cf36a7cc144c6d5be378cf3ea251af24c5"
+      },
+      "derivation": "Official editor added animation table for M0/M1 to the previously saved memory program; executable IL unchanged",
+      "editor": "No error; local simulator Online/RUN",
+      "observations": [
+        {
+          "written_M0": 0,
+          "observed_M1": 0
+        },
+        {
+          "written_M0": 1,
+          "observed_M1": 1
+        },
+        {
+          "written_M0": 0,
+          "observed_M1": 0
+        }
+      ],
+      "method": "Changed M0 Value cell in the official animation table; read both cells and Ladder state. No Force operation and no external TCP client.",
+      "physical_plc": "pending"
+    },
+    {
+      "name": "state_arrays",
+      "artifact": {
+        "path": "output/editor-validation/complex/state_arrays/program.smbp",
+        "bytes": 572344,
+        "sha256": "d3644371358ffd1385f352e4ce553ea644ce592408bc9bbf200e8e42e8debc1c"
+      },
+      "rungs": 141,
+      "instructions": 298,
+      "editor": "No error on open; Ladder rendered. Simulator compiler reports0errors/2advisories.",
+      "advisories": [
+        "Backward jump %L0 may cause infinite loop/trigger watchdog (rung78)",
+        "Backward jump %L5 may cause infinite loop/trigger watchdog (rung101)"
+      ],
+      "simulator": "Online/identical/RUN, stable after repeated real-time scans",
+      "observed_outputs": [
+        {
+          "phase": "initial",
+          "outputs_on": [
+            0,
+            4,
+            11,
+            12,
+            14
+          ]
+        },
+        {
+          "phase": "pulse1",
+          "outputs_on": [
+            1,
+            5,
+            9,
+            10,
+            12,
+            13,
+            14
+          ]
+        },
+        {
+          "phase": "pulse2",
+          "outputs_on": [
+            2,
+            6,
+            10,
+            12,
+            15
+          ]
+        },
+        {
+          "phase": "pulse3",
+          "outputs_on": [
+            3,
+            7,
+            9,
+            12,
+            13,
+            15
+          ]
+        },
+        {
+          "phase": "pulse4-ignored",
+          "outputs_on": [
+            3,
+            7,
+            9,
+            12,
+            13,
+            15
+          ]
+        },
+        {
+          "phase": "reset-priority",
+          "outputs_on": [
+            0,
+            4,
+            11,
+            12,
+            14
+          ]
+        },
+        {
+          "phase": "held-after-reset",
+          "outputs_on": [
+            0,
+            4,
+            11,
+            12,
+            14
+          ]
+        }
+      ],
+      "checks": "Initial/checksum states1/2/3, repeated held input, fourth pulse ignored, reset priority and held-after-reset observed through16simulator output indicators; matches independent expected phases",
+      "direct_numeric_watch": "not performed; equality and checksum-bit indicators observed",
+      "save_reopen": "pending",
+      "physical_plc": "pending"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "docs/validation/editor-evidence/memory-ladder.png",
+      "sha256": "71e54e8c158a7788117ccc3bb55711b8a60a0c558dbb89064ee784d1151a4f75",
+      "original_capture": "skill-1793939780794461000-1874.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/memory-simulator-run.png",
+      "sha256": "7d5d1c2f763e29339dbcf9c86b19746ec7747d4f2401d3f29708103b7bd393aa",
+      "original_capture": "skill-1793940408082830000-1874.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/memory-editor-saved-reopen.png",
+      "sha256": "723813e16fbcb679d75ab37e5b4f5f81dbeadbb497c6ea15946e915c2d3fff24",
+      "original_capture": "skill-1793940561288103000-1874.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/io-resource-errors.png",
+      "sha256": "88850ee8af3530ffb0ccab932c46cd2bd38b61b4ac9adfc5ddda1b23d1c5ffb1",
+      "original_capture": "skill-1793940659677670000-1874.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/memory-table-zero.png",
+      "sha256": "367ce14b187adefbfd2fc40b1a63c0bba1b1d75475a0ac29061d3d023385d252",
+      "original_capture": "skill-1793941183138380000-1874.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/memory-table-one.png",
+      "sha256": "401ba9494e422e7f9d9c0a1ab0bd48bf3ba5874d0a29c0de08703716672b2829",
+      "original_capture": "skill-1793941209734966000-1874.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/memory-table-return-zero.png",
+      "sha256": "19799bfd89e77c3cd49f8155622aefa94ec932f6d6ec81b85b62b044a7cad712",
+      "original_capture": "skill-1793941238670607000-1874.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/io-culture-fixed.png",
+      "sha256": "a34c9b20559f75c659309164f15278e129f64b7bb4f994f3057185fd7980eeb8",
+      "original_capture": "skill-1793941653243077000-2146.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/io-simulator-on.png",
+      "sha256": "8b2c17b3b9e474e9d01beebb56dc58a87420f7a9ac24e5b3341f7694670ec18b",
+      "original_capture": "skill-1793941762513159000-2146.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/io-simulator-off.png",
+      "sha256": "0ef8998812a71b0af2e99c97aa79b807b718299aaceb460db702e04c2a854a23",
+      "original_capture": "skill-1793941782929983000-2146.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/io-invalid-q16.png",
+      "sha256": "679fdead815558a9d7d5128202ead5a49deaea4301a90acae52374751d02b8f5",
+      "original_capture": "skill-1793941872993025000-2146.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/state-arrays-initial.png",
+      "sha256": "26999fe9834cf9ecd6ac0105aa92d3b8756c7a12cf42460710b46ba93e78ad3d",
+      "original_capture": "skill-1793941999611196000-2225.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/state-arrays-pulse1.png",
+      "sha256": "234d25760eecadaab5e31c0495a32bd47d3f25cb819feb28ae8639e010256ae8",
+      "original_capture": "skill-1793942024171176000-2225.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/state-arrays-pulse2.png",
+      "sha256": "f53bf687f02570389f8a48e7abe973779d7ac3dec241f9bc93d014faa14c2b2c",
+      "original_capture": "skill-1793942052180465000-2225.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/state-arrays-pulse3.png",
+      "sha256": "022de4e3cf323490f0a557ba618e70da6f151d02c496081d554d9edfb3b8a2dc",
+      "original_capture": "skill-1793942077262817000-2225.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/state-arrays-pulse4-ignored.png",
+      "sha256": "022de4e3cf323490f0a557ba618e70da6f151d02c496081d554d9edfb3b8a2dc",
+      "original_capture": "skill-1793942098560927000-2225.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/state-arrays-reset-priority.png",
+      "sha256": "53a9d5e71ade5bbc088dc0e8bc55f04019e866e89e2e41e90d60db7dff0691c5",
+      "original_capture": "skill-1793942108056200000-2225.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/state-arrays-held-after-reset.png",
+      "sha256": "d16e955d8bc5e3915a9fbd2563fe27f35571548c9716b8106cc247d673db6e3b",
+      "original_capture": "skill-1793942117892708000-2225.png"
+    },
+    {
+      "path": "docs/validation/editor-evidence/state-arrays-advisories.png",
+      "sha256": "ea5a5036b0db7ab44fdbb29c8090424b0f5c9ba6785b3aa068129f5095dea209",
+      "original_capture": "skill-1793942147397111000-2146.png"
+    }
+  ],
+  "validation_policy": "Automatic editor validation stayed enabled. No physical PLC transfer, firmware update or load actuation. Simulator stopped through Commissioning; TCP 502 listener absent afterward.",
+  "limitations": [
+    "Memory-copy acceptance is not general exporter acceptance.",
+    "Complex combinations, timer timing and communications remain separate official-simulator tests.",
+    "Source output paths are ignored local artifacts; hashes identify the observed bytes."
+  ],
+  "negative_control": {
+    "sha256": "e183e5c1d99d190ea16bf03ebf29185904d8bd3e4f2842dbf5bc0f7dadd6590a",
+    "change": "Only program Q0.0 operands/graphics replaced by Q0.16; hardware target unchanged",
+    "result": "Official editor detects two errors: %Q0.16 does not exist",
+    "simulator": "not started"
+  }
+}

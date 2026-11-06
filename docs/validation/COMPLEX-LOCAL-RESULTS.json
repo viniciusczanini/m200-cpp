@@ -1,0 +1,3079 @@
+{
+  "format": "m200-complex-local-validation-v1",
+  "date": "2026-11-06",
+  "target": "TM200CE40T",
+  "status": "local_checks_passed",
+  "runner": "tests/editor_validation/run.py",
+  "readme": "examples/editor_validation/README.md",
+  "recorded_command": [
+    "python3",
+    "tests/editor_validation/run.py"
+  ],
+  "reproduce_command": [
+    "python3",
+    "tests/editor_validation/run.py",
+    "--output",
+    "output/editor-validation/complex-fresh"
+  ],
+  "output_directory_policy": "Use an absent output directory; the runner preserves existing artifacts by refusing a nonempty/existing target.",
+  "template": {
+    "path": "tests/fixtures/official_tm200ce40t_memory.smbp",
+    "sha256": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf",
+    "provenance": "tests/fixtures/official_tm200ce40t_memory.provenance.json",
+    "scope": "Authentic editor-created baseline; baseline No error does not establish acceptance of any complex candidate."
+  },
+  "cases": [
+    {
+      "case": "state_arrays",
+      "status": "local_checks_passed",
+      "source": "examples/editor_validation/state_arrays.cpp",
+      "source_sha256": "bd16b63996a4e9b94039a7bf053214efcb09b971b40da965c89c6173d160b579",
+      "scans": 37,
+      "rungs": 141,
+      "instructions": 298,
+      "project": "output/editor-validation/complex/state_arrays/program.smbp",
+      "project_sha256": "d3644371358ffd1385f352e4ce553ea644ce592408bc9bbf200e8e42e8debc1c",
+      "repeated_project_sha256": "2f904a5b14a7da4af4b0c978f95ecd9b999a3ee529ed38717a2b23546cc3d67d",
+      "template_sha256": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf",
+      "controls": [
+        "I0.0",
+        "I0.1",
+        "I0.2"
+      ],
+      "phases": [
+        {
+          "phase": "initial",
+          "last_frame": 3,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.4",
+            "Q0.11",
+            "Q0.12",
+            "Q0.14"
+          ],
+          "word_values": {
+            "MD100": 22000,
+            "MW102": 0,
+            "MD104": 1000,
+            "MD106": 4000
+          }
+        },
+        {
+          "phase": "pulse_1",
+          "last_frame": 6,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.1",
+            "Q0.5",
+            "Q0.9",
+            "Q0.10",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14"
+          ],
+          "word_values": {
+            "MD100": 29500,
+            "MW102": 1,
+            "MD104": 1250,
+            "MD106": 5000
+          }
+        },
+        {
+          "phase": "release_1",
+          "last_frame": 8,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.1",
+            "Q0.5",
+            "Q0.9",
+            "Q0.10",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14"
+          ],
+          "word_values": {
+            "MD100": 29500,
+            "MW102": 1,
+            "MD104": 1250,
+            "MD106": 5000
+          }
+        },
+        {
+          "phase": "pulse_2",
+          "last_frame": 11,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.2",
+            "Q0.6",
+            "Q0.10",
+            "Q0.12",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MD100": 37000,
+            "MW102": 2,
+            "MD104": 1500,
+            "MD106": 6000
+          }
+        },
+        {
+          "phase": "release_2",
+          "last_frame": 13,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.2",
+            "Q0.6",
+            "Q0.10",
+            "Q0.12",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MD100": 37000,
+            "MW102": 2,
+            "MD104": 1500,
+            "MD106": 6000
+          }
+        },
+        {
+          "phase": "pulse_3",
+          "last_frame": 16,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.3",
+            "Q0.7",
+            "Q0.9",
+            "Q0.12",
+            "Q0.13",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MD100": 44500,
+            "MW102": 3,
+            "MD104": 1750,
+            "MD106": 7000
+          }
+        },
+        {
+          "phase": "release_3",
+          "last_frame": 18,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.3",
+            "Q0.7",
+            "Q0.9",
+            "Q0.12",
+            "Q0.13",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MD100": 44500,
+            "MW102": 3,
+            "MD104": 1750,
+            "MD106": 7000
+          }
+        },
+        {
+          "phase": "pulse_4",
+          "last_frame": 21,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.3",
+            "Q0.7",
+            "Q0.9",
+            "Q0.12",
+            "Q0.13",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MD100": 44500,
+            "MW102": 3,
+            "MD104": 1750,
+            "MD106": 7000
+          }
+        },
+        {
+          "phase": "release_4",
+          "last_frame": 23,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.3",
+            "Q0.7",
+            "Q0.9",
+            "Q0.12",
+            "Q0.13",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MD100": 44500,
+            "MW102": 3,
+            "MD104": 1750,
+            "MD106": 7000
+          }
+        },
+        {
+          "phase": "reset_while_held",
+          "last_frame": 26,
+          "controls": [
+            true,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.4",
+            "Q0.11",
+            "Q0.12",
+            "Q0.14"
+          ],
+          "word_values": {
+            "MD100": 22000,
+            "MW102": 0,
+            "MD104": 1000,
+            "MD106": 4000
+          }
+        },
+        {
+          "phase": "held_after_reset_no_new_edge",
+          "last_frame": 29,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.4",
+            "Q0.11",
+            "Q0.12",
+            "Q0.14"
+          ],
+          "word_values": {
+            "MD100": 22000,
+            "MW102": 0,
+            "MD104": 1000,
+            "MD106": 4000
+          }
+        },
+        {
+          "phase": "release_after_reset",
+          "last_frame": 31,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.4",
+            "Q0.11",
+            "Q0.12",
+            "Q0.14"
+          ],
+          "word_values": {
+            "MD100": 22000,
+            "MW102": 0,
+            "MD104": 1000,
+            "MD106": 4000
+          }
+        },
+        {
+          "phase": "fresh_pulse_after_reset",
+          "last_frame": 34,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.1",
+            "Q0.5",
+            "Q0.9",
+            "Q0.10",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14"
+          ],
+          "word_values": {
+            "MD100": 29500,
+            "MW102": 1,
+            "MD104": 1250,
+            "MD106": 5000
+          }
+        },
+        {
+          "phase": "final",
+          "last_frame": 36,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.1",
+            "Q0.5",
+            "Q0.9",
+            "Q0.10",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14"
+          ],
+          "word_values": {
+            "MD100": 29500,
+            "MW102": 1,
+            "MD104": 1250,
+            "MD106": 5000
+          }
+        }
+      ],
+      "official_editor": "pending",
+      "official_simulator": "pending",
+      "physical_plc": "pending",
+      "timing_scope": "local oracle at100ms frames; manual timer test should wait at least2s for settled states; no physical timing proof",
+      "recompiled_project": "output/editor-validation/complex/state_arrays/recompiled.smbp",
+      "artifact_sha256": {
+        "output/editor-validation/complex/state_arrays/program.smbp": "d3644371358ffd1385f352e4ce553ea644ce592408bc9bbf200e8e42e8debc1c",
+        "output/editor-validation/complex/state_arrays/program.audit.cpp": "89c740135e05bd647113aceb8564480cf37a3c090a6e3d0136852d922e963888",
+        "output/editor-validation/complex/state_arrays/recompiled.smbp": "2f904a5b14a7da4af4b0c978f95ecd9b999a3ee529ed38717a2b23546cc3d67d",
+        "output/editor-validation/complex/state_arrays/trace.json": "f35fd1d46857ae948dadb69b5df1ffbac1acb9e91d9eab3faef4ccd1f6967234",
+        "output/editor-validation/complex/state_arrays/expected.json": "33bf13283704fdcafa53d9f5df97951d99746a9369ce05d17cf59223ab7df1f7"
+      }
+    },
+    {
+      "case": "state_arrays_memory",
+      "status": "local_checks_passed",
+      "source": "examples/editor_validation/state_arrays_memory.cpp",
+      "source_sha256": "ef725f3eee84b1864e1c9432b4eaef63951c179fd6c5f0a8ce1027763d7ff07e",
+      "scans": 37,
+      "rungs": 85,
+      "instructions": 186,
+      "project": "output/editor-validation/complex/state_arrays_memory/program.smbp",
+      "project_sha256": "c5640f5056f38ac5ed788635ecddd88c1bada5d788b31c94fc0dd4f1dfbe292d",
+      "repeated_project_sha256": "3b7e58501527e9731873c0cb78952e61f178acf715882e31bd53320cc6915b38",
+      "template_sha256": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf",
+      "controls": [
+        "M800",
+        "M801",
+        "M802"
+      ],
+      "phases": [
+        {
+          "phase": "initial",
+          "last_frame": 3,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M708",
+            "M715",
+            "M716",
+            "M718"
+          ],
+          "word_values": {
+            "MD100": 22000,
+            "MW102": 0,
+            "MD104": 1000,
+            "MD106": 4000
+          }
+        },
+        {
+          "phase": "pulse_1",
+          "last_frame": 6,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M705",
+            "M709",
+            "M713",
+            "M714",
+            "M716",
+            "M717",
+            "M718"
+          ],
+          "word_values": {
+            "MD100": 29500,
+            "MW102": 1,
+            "MD104": 1250,
+            "MD106": 5000
+          }
+        },
+        {
+          "phase": "release_1",
+          "last_frame": 8,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M705",
+            "M709",
+            "M713",
+            "M714",
+            "M716",
+            "M717",
+            "M718"
+          ],
+          "word_values": {
+            "MD100": 29500,
+            "MW102": 1,
+            "MD104": 1250,
+            "MD106": 5000
+          }
+        },
+        {
+          "phase": "pulse_2",
+          "last_frame": 11,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M706",
+            "M710",
+            "M714",
+            "M716",
+            "M719"
+          ],
+          "word_values": {
+            "MD100": 37000,
+            "MW102": 2,
+            "MD104": 1500,
+            "MD106": 6000
+          }
+        },
+        {
+          "phase": "release_2",
+          "last_frame": 13,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M706",
+            "M710",
+            "M714",
+            "M716",
+            "M719"
+          ],
+          "word_values": {
+            "MD100": 37000,
+            "MW102": 2,
+            "MD104": 1500,
+            "MD106": 6000
+          }
+        },
+        {
+          "phase": "pulse_3",
+          "last_frame": 16,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M707",
+            "M711",
+            "M713",
+            "M716",
+            "M717",
+            "M719"
+          ],
+          "word_values": {
+            "MD100": 44500,
+            "MW102": 3,
+            "MD104": 1750,
+            "MD106": 7000
+          }
+        },
+        {
+          "phase": "release_3",
+          "last_frame": 18,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M707",
+            "M711",
+            "M713",
+            "M716",
+            "M717",
+            "M719"
+          ],
+          "word_values": {
+            "MD100": 44500,
+            "MW102": 3,
+            "MD104": 1750,
+            "MD106": 7000
+          }
+        },
+        {
+          "phase": "pulse_4",
+          "last_frame": 21,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M707",
+            "M711",
+            "M713",
+            "M716",
+            "M717",
+            "M719"
+          ],
+          "word_values": {
+            "MD100": 44500,
+            "MW102": 3,
+            "MD104": 1750,
+            "MD106": 7000
+          }
+        },
+        {
+          "phase": "release_4",
+          "last_frame": 23,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M707",
+            "M711",
+            "M713",
+            "M716",
+            "M717",
+            "M719"
+          ],
+          "word_values": {
+            "MD100": 44500,
+            "MW102": 3,
+            "MD104": 1750,
+            "MD106": 7000
+          }
+        },
+        {
+          "phase": "reset_while_held",
+          "last_frame": 26,
+          "controls": [
+            true,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M708",
+            "M715",
+            "M716",
+            "M718"
+          ],
+          "word_values": {
+            "MD100": 22000,
+            "MW102": 0,
+            "MD104": 1000,
+            "MD106": 4000
+          }
+        },
+        {
+          "phase": "held_after_reset_no_new_edge",
+          "last_frame": 29,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M708",
+            "M715",
+            "M716",
+            "M718"
+          ],
+          "word_values": {
+            "MD100": 22000,
+            "MW102": 0,
+            "MD104": 1000,
+            "MD106": 4000
+          }
+        },
+        {
+          "phase": "release_after_reset",
+          "last_frame": 31,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M708",
+            "M715",
+            "M716",
+            "M718"
+          ],
+          "word_values": {
+            "MD100": 22000,
+            "MW102": 0,
+            "MD104": 1000,
+            "MD106": 4000
+          }
+        },
+        {
+          "phase": "fresh_pulse_after_reset",
+          "last_frame": 34,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M705",
+            "M709",
+            "M713",
+            "M714",
+            "M716",
+            "M717",
+            "M718"
+          ],
+          "word_values": {
+            "MD100": 29500,
+            "MW102": 1,
+            "MD104": 1250,
+            "MD106": 5000
+          }
+        },
+        {
+          "phase": "final",
+          "last_frame": 36,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M705",
+            "M709",
+            "M713",
+            "M714",
+            "M716",
+            "M717",
+            "M718"
+          ],
+          "word_values": {
+            "MD100": 29500,
+            "MW102": 1,
+            "MD104": 1250,
+            "MD106": 5000
+          }
+        }
+      ],
+      "official_editor": "pending",
+      "official_simulator": "pending",
+      "physical_plc": "pending",
+      "timing_scope": "local oracle at100ms frames; manual timer test should wait at least2s for settled states; no physical timing proof",
+      "recompiled_project": "output/editor-validation/complex/state_arrays_memory/recompiled.smbp",
+      "artifact_sha256": {
+        "output/editor-validation/complex/state_arrays_memory/program.smbp": "c5640f5056f38ac5ed788635ecddd88c1bada5d788b31c94fc0dd4f1dfbe292d",
+        "output/editor-validation/complex/state_arrays_memory/program.audit.cpp": "bcc367ab3ad1613f000b8c2fb6c30311f162083b10e7fddc61eb5d716c90aaac",
+        "output/editor-validation/complex/state_arrays_memory/recompiled.smbp": "3b7e58501527e9731873c0cb78952e61f178acf715882e31bd53320cc6915b38",
+        "output/editor-validation/complex/state_arrays_memory/trace.json": "f35fd1d46857ae948dadb69b5df1ffbac1acb9e91d9eab3faef4ccd1f6967234",
+        "output/editor-validation/complex/state_arrays_memory/expected.json": "33bf13283704fdcafa53d9f5df97951d99746a9369ce05d17cf59223ab7df1f7"
+      }
+    },
+    {
+      "case": "timed_counter",
+      "status": "local_checks_passed",
+      "source": "examples/editor_validation/timed_counter.cpp",
+      "source_sha256": "2a3968b0f6b17f6bbf5775e3f5d1ada5c1ed4b1130a29438fcdfb8c74d9d8a2b",
+      "scans": 73,
+      "rungs": 102,
+      "instructions": 221,
+      "project": "output/editor-validation/complex/timed_counter/program.smbp",
+      "project_sha256": "abf6cb87d043840b5fa4065b4ad69144a6454b34573404edcb02d594d9345581",
+      "repeated_project_sha256": "ed0822acae6036b6ce91177c431672b031846324bc979572d17b76a58351ba29",
+      "template_sha256": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf",
+      "controls": [
+        "I0.0",
+        "I0.1",
+        "I0.2"
+      ],
+      "phases": [
+        {
+          "phase": "initial",
+          "last_frame": 3,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.5",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW120": 0,
+            "MW121": 0,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "premature_pulse_ignored",
+          "last_frame": 5,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.5",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW120": 0,
+            "MW121": 0,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "held_while_timer_becomes_ready_no_new_edge",
+          "last_frame": 17,
+          "controls": [
+            true,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.5",
+            "Q0.6",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW120": 0,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "release_enabled",
+          "last_frame": 19,
+          "controls": [
+            false,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.5",
+            "Q0.6",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW120": 0,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "qualified_pulse_1",
+          "last_frame": 22,
+          "controls": [
+            true,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.1",
+            "Q0.6",
+            "Q0.8",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW120": 1,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "qualified_release_1",
+          "last_frame": 24,
+          "controls": [
+            false,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.1",
+            "Q0.6",
+            "Q0.8",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW120": 1,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "qualified_pulse_2",
+          "last_frame": 27,
+          "controls": [
+            true,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.2",
+            "Q0.6",
+            "Q0.9",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW120": 2,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "qualified_release_2",
+          "last_frame": 29,
+          "controls": [
+            false,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.2",
+            "Q0.6",
+            "Q0.9",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW120": 2,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "qualified_pulse_3",
+          "last_frame": 32,
+          "controls": [
+            true,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.3",
+            "Q0.4",
+            "Q0.6",
+            "Q0.8",
+            "Q0.9",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW120": 3,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 1
+          }
+        },
+        {
+          "phase": "qualified_release_3",
+          "last_frame": 34,
+          "controls": [
+            false,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.3",
+            "Q0.4",
+            "Q0.6",
+            "Q0.8",
+            "Q0.9",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW120": 3,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 1
+          }
+        },
+        {
+          "phase": "qualified_pulse_4",
+          "last_frame": 37,
+          "controls": [
+            true,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.4",
+            "Q0.6",
+            "Q0.10",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW120": 4,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 1
+          }
+        },
+        {
+          "phase": "qualified_release_4",
+          "last_frame": 39,
+          "controls": [
+            false,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.4",
+            "Q0.6",
+            "Q0.10",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW120": 4,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 1
+          }
+        },
+        {
+          "phase": "reset_dominates",
+          "last_frame": 42,
+          "controls": [
+            true,
+            true,
+            true
+          ],
+          "indicators_on": [
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW120": 0,
+            "MW121": 0,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "held_after_reset_no_new_edge",
+          "last_frame": 54,
+          "controls": [
+            true,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.5",
+            "Q0.6",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW120": 0,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "release_after_reset",
+          "last_frame": 56,
+          "controls": [
+            false,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.5",
+            "Q0.6",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW120": 0,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "fresh_qualified_pulse",
+          "last_frame": 59,
+          "controls": [
+            true,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.1",
+            "Q0.6",
+            "Q0.8",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW120": 1,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "disable_timer_while_input_held",
+          "last_frame": 63,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.1",
+            "Q0.8",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW120": 1,
+            "MW121": 0,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "release_disabled",
+          "last_frame": 66,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.1",
+            "Q0.8",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW120": 1,
+            "MW121": 0,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "final_reset",
+          "last_frame": 69,
+          "controls": [
+            false,
+            false,
+            true
+          ],
+          "indicators_on": [
+            "Q0.5",
+            "Q0.7",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW120": 0,
+            "MW121": 0,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "final",
+          "last_frame": 72,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.5",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW120": 0,
+            "MW121": 0,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        }
+      ],
+      "official_editor": "pending",
+      "official_simulator": "pending",
+      "physical_plc": "pending",
+      "timing_scope": "local oracle at100ms frames; manual timer test should wait at least2s for settled states; no physical timing proof",
+      "recompiled_project": "output/editor-validation/complex/timed_counter/recompiled.smbp",
+      "artifact_sha256": {
+        "output/editor-validation/complex/timed_counter/program.smbp": "abf6cb87d043840b5fa4065b4ad69144a6454b34573404edcb02d594d9345581",
+        "output/editor-validation/complex/timed_counter/program.audit.cpp": "b6b80e44d129ae130be78347409eda921052d939e5b20baded5f489fdb755791",
+        "output/editor-validation/complex/timed_counter/recompiled.smbp": "ed0822acae6036b6ce91177c431672b031846324bc979572d17b76a58351ba29",
+        "output/editor-validation/complex/timed_counter/trace.json": "4305758fb99a1c61b901efa5c5823156544d3e6e7f8b4fe1ce6c7a327d23747c",
+        "output/editor-validation/complex/timed_counter/expected.json": "e4ef6cd9bae24a544a444ee2ea28c6d33e31aac29b0f1d4f7fff0f700ab03125"
+      }
+    },
+    {
+      "case": "timed_counter_memory",
+      "status": "local_checks_passed",
+      "source": "examples/editor_validation/timed_counter_memory.cpp",
+      "source_sha256": "07fe983a09d39621b4cd26474223c3d2f21959eba49a14f678f6bb41ec8ecae7",
+      "scans": 73,
+      "rungs": 49,
+      "instructions": 115,
+      "project": "output/editor-validation/complex/timed_counter_memory/program.smbp",
+      "project_sha256": "edce3a016c95d726d79b3df5c5ba7ea456a6411161e67c83c88c6be93e18d27f",
+      "repeated_project_sha256": "97edc017a57588ff07f471f6eef15f9b62602b64abad119560c6d0cbc1d5decf",
+      "template_sha256": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf",
+      "controls": [
+        "M800",
+        "M801",
+        "M802"
+      ],
+      "phases": [
+        {
+          "phase": "initial",
+          "last_frame": 3,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M709",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW120": 0,
+            "MW121": 0,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "premature_pulse_ignored",
+          "last_frame": 5,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M709",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW120": 0,
+            "MW121": 0,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "held_while_timer_becomes_ready_no_new_edge",
+          "last_frame": 17,
+          "controls": [
+            true,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M709",
+            "M710",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW120": 0,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "release_enabled",
+          "last_frame": 19,
+          "controls": [
+            false,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M709",
+            "M710",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW120": 0,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "qualified_pulse_1",
+          "last_frame": 22,
+          "controls": [
+            true,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M705",
+            "M710",
+            "M712",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW120": 1,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "qualified_release_1",
+          "last_frame": 24,
+          "controls": [
+            false,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M705",
+            "M710",
+            "M712",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW120": 1,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "qualified_pulse_2",
+          "last_frame": 27,
+          "controls": [
+            true,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M706",
+            "M710",
+            "M713",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW120": 2,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "qualified_release_2",
+          "last_frame": 29,
+          "controls": [
+            false,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M706",
+            "M710",
+            "M713",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW120": 2,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "qualified_pulse_3",
+          "last_frame": 32,
+          "controls": [
+            true,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M707",
+            "M708",
+            "M710",
+            "M712",
+            "M713",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW120": 3,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 1
+          }
+        },
+        {
+          "phase": "qualified_release_3",
+          "last_frame": 34,
+          "controls": [
+            false,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M707",
+            "M708",
+            "M710",
+            "M712",
+            "M713",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW120": 3,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 1
+          }
+        },
+        {
+          "phase": "qualified_pulse_4",
+          "last_frame": 37,
+          "controls": [
+            true,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M708",
+            "M710",
+            "M714",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW120": 4,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 1
+          }
+        },
+        {
+          "phase": "qualified_release_4",
+          "last_frame": 39,
+          "controls": [
+            false,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M708",
+            "M710",
+            "M714",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW120": 4,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 1
+          }
+        },
+        {
+          "phase": "reset_dominates",
+          "last_frame": 42,
+          "controls": [
+            true,
+            true,
+            true
+          ],
+          "indicators_on": [
+            "M709",
+            "M710",
+            "M711",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW120": 0,
+            "MW121": 0,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "held_after_reset_no_new_edge",
+          "last_frame": 54,
+          "controls": [
+            true,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M709",
+            "M710",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW120": 0,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "release_after_reset",
+          "last_frame": 56,
+          "controls": [
+            false,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M709",
+            "M710",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW120": 0,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "fresh_qualified_pulse",
+          "last_frame": 59,
+          "controls": [
+            true,
+            true,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M705",
+            "M710",
+            "M712",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW120": 1,
+            "MW121": 5,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "disable_timer_while_input_held",
+          "last_frame": 63,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M705",
+            "M712",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW120": 1,
+            "MW121": 0,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "release_disabled",
+          "last_frame": 66,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M705",
+            "M712",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW120": 1,
+            "MW121": 0,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "final_reset",
+          "last_frame": 69,
+          "controls": [
+            false,
+            false,
+            true
+          ],
+          "indicators_on": [
+            "M709",
+            "M711",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW120": 0,
+            "MW121": 0,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        },
+        {
+          "phase": "final",
+          "last_frame": 72,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M709",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW120": 0,
+            "MW121": 0,
+            "MW122": 5,
+            "MW123": 3,
+            "MW124": 0
+          }
+        }
+      ],
+      "official_editor": "pending",
+      "official_simulator": "pending",
+      "physical_plc": "pending",
+      "timing_scope": "local oracle at100ms frames; manual timer test should wait at least2s for settled states; no physical timing proof",
+      "recompiled_project": "output/editor-validation/complex/timed_counter_memory/recompiled.smbp",
+      "artifact_sha256": {
+        "output/editor-validation/complex/timed_counter_memory/program.smbp": "edce3a016c95d726d79b3df5c5ba7ea456a6411161e67c83c88c6be93e18d27f",
+        "output/editor-validation/complex/timed_counter_memory/program.audit.cpp": "f7023da94caca235b3011079f81dfde1f2fb379f9ce2da4e9f3197999a8bb17a",
+        "output/editor-validation/complex/timed_counter_memory/recompiled.smbp": "97edc017a57588ff07f471f6eef15f9b62602b64abad119560c6d0cbc1d5decf",
+        "output/editor-validation/complex/timed_counter_memory/trace.json": "4305758fb99a1c61b901efa5c5823156544d3e6e7f8b4fe1ce6c7a327d23747c",
+        "output/editor-validation/complex/timed_counter_memory/expected.json": "e4ef6cd9bae24a544a444ee2ea28c6d33e31aac29b0f1d4f7fff0f700ab03125"
+      }
+    },
+    {
+      "case": "numeric_diagnostics",
+      "status": "local_checks_passed",
+      "source": "examples/editor_validation/numeric_diagnostics.cpp",
+      "source_sha256": "a3c21aad99d69cd28dce3dd87dc2ee3acb1b761145f6c9ed9e850a4098a6eeaa",
+      "scans": 28,
+      "rungs": 113,
+      "instructions": 231,
+      "project": "output/editor-validation/complex/numeric_diagnostics/program.smbp",
+      "project_sha256": "af42029357b2780b9209103f49f119ff18600e5cb1b6ad456e3df0d4ef8f6ff1",
+      "repeated_project_sha256": "914f0f2c86af8e1549911f47145eba6438ac6ea26a90c11977be9e402b335681",
+      "template_sha256": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf",
+      "controls": [
+        "I0.0",
+        "I0.1",
+        "I0.2"
+      ],
+      "phases": [
+        {
+          "phase": "initial",
+          "last_frame": 3,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.1",
+            "Q0.2",
+            "Q0.3",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.11",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": 9296,
+            "MW143": 2450,
+            "MD146": -2128394905,
+            "MD148": 81234567,
+            "MD150": 305407056,
+            "MD160": 305407056
+          }
+        },
+        {
+          "phase": "high_bcd_carriers",
+          "last_frame": 7,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.1",
+            "Q0.2",
+            "Q0.3",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.11",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": -26215,
+            "MW143": 9999,
+            "MD146": -1717986919,
+            "MD148": 99999999,
+            "MD150": 305437081,
+            "MD160": 305437081
+          }
+        },
+        {
+          "phase": "lower_bcd_carriers",
+          "last_frame": 11,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.1",
+            "Q0.2",
+            "Q0.3",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.11",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": 9296,
+            "MW143": 2450,
+            "MD146": -2128394905,
+            "MD148": 81234567,
+            "MD150": 305407056,
+            "MD160": 305407056
+          }
+        },
+        {
+          "phase": "alternate_0",
+          "last_frame": 12,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.1",
+            "Q0.2",
+            "Q0.3",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.11",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": 9296,
+            "MW143": 2450,
+            "MD146": -2128394905,
+            "MD148": 81234567,
+            "MD150": 305407056,
+            "MD160": 305407056
+          }
+        },
+        {
+          "phase": "alternate_1",
+          "last_frame": 13,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.1",
+            "Q0.2",
+            "Q0.3",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.11",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": -26215,
+            "MW143": 9999,
+            "MD146": -1717986919,
+            "MD148": 99999999,
+            "MD150": 305437081,
+            "MD160": 305437081
+          }
+        },
+        {
+          "phase": "alternate_2",
+          "last_frame": 14,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.1",
+            "Q0.2",
+            "Q0.3",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.11",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": 9296,
+            "MW143": 2450,
+            "MD146": -2128394905,
+            "MD148": 81234567,
+            "MD150": 305407056,
+            "MD160": 305407056
+          }
+        },
+        {
+          "phase": "alternate_3",
+          "last_frame": 15,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.1",
+            "Q0.2",
+            "Q0.3",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.11",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": -26215,
+            "MW143": 9999,
+            "MD146": -1717986919,
+            "MD148": 99999999,
+            "MD150": 305437081,
+            "MD160": 305437081
+          }
+        },
+        {
+          "phase": "alternate_4",
+          "last_frame": 16,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.1",
+            "Q0.2",
+            "Q0.3",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.11",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": 9296,
+            "MW143": 2450,
+            "MD146": -2128394905,
+            "MD148": 81234567,
+            "MD150": 305407056,
+            "MD160": 305407056
+          }
+        },
+        {
+          "phase": "alternate_5",
+          "last_frame": 17,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.1",
+            "Q0.2",
+            "Q0.3",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.11",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": -26215,
+            "MW143": 9999,
+            "MD146": -1717986919,
+            "MD148": 99999999,
+            "MD150": 305437081,
+            "MD160": 305437081
+          }
+        },
+        {
+          "phase": "alternate_6",
+          "last_frame": 18,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.1",
+            "Q0.2",
+            "Q0.3",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.11",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": 9296,
+            "MW143": 2450,
+            "MD146": -2128394905,
+            "MD148": 81234567,
+            "MD150": 305407056,
+            "MD160": 305407056
+          }
+        },
+        {
+          "phase": "alternate_7",
+          "last_frame": 19,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.1",
+            "Q0.2",
+            "Q0.3",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.11",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": -26215,
+            "MW143": 9999,
+            "MD146": -1717986919,
+            "MD148": 99999999,
+            "MD150": 305437081,
+            "MD160": 305437081
+          }
+        },
+        {
+          "phase": "alternate_8",
+          "last_frame": 20,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.1",
+            "Q0.2",
+            "Q0.3",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.11",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": 9296,
+            "MW143": 2450,
+            "MD146": -2128394905,
+            "MD148": 81234567,
+            "MD150": 305407056,
+            "MD160": 305407056
+          }
+        },
+        {
+          "phase": "alternate_9",
+          "last_frame": 21,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.1",
+            "Q0.2",
+            "Q0.3",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.11",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": -26215,
+            "MW143": 9999,
+            "MD146": -1717986919,
+            "MD148": 99999999,
+            "MD150": 305437081,
+            "MD160": 305437081
+          }
+        },
+        {
+          "phase": "alternate_10",
+          "last_frame": 22,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.1",
+            "Q0.2",
+            "Q0.3",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.11",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": 9296,
+            "MW143": 2450,
+            "MD146": -2128394905,
+            "MD148": 81234567,
+            "MD150": 305407056,
+            "MD160": 305407056
+          }
+        },
+        {
+          "phase": "alternate_11",
+          "last_frame": 23,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.1",
+            "Q0.2",
+            "Q0.3",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.11",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": -26215,
+            "MW143": 9999,
+            "MD146": -1717986919,
+            "MD148": 99999999,
+            "MD150": 305437081,
+            "MD160": 305437081
+          }
+        },
+        {
+          "phase": "final_high",
+          "last_frame": 27,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "Q0.0",
+            "Q0.1",
+            "Q0.2",
+            "Q0.3",
+            "Q0.4",
+            "Q0.5",
+            "Q0.6",
+            "Q0.7",
+            "Q0.8",
+            "Q0.9",
+            "Q0.10",
+            "Q0.11",
+            "Q0.12",
+            "Q0.13",
+            "Q0.14",
+            "Q0.15"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": -26215,
+            "MW143": 9999,
+            "MD146": -1717986919,
+            "MD148": 99999999,
+            "MD150": 305437081,
+            "MD160": 305437081
+          }
+        }
+      ],
+      "official_editor": "pending",
+      "official_simulator": "pending",
+      "physical_plc": "pending",
+      "timing_scope": "local oracle at100ms frames; manual timer test should wait at least2s for settled states; no physical timing proof",
+      "recompiled_project": "output/editor-validation/complex/numeric_diagnostics/recompiled.smbp",
+      "artifact_sha256": {
+        "output/editor-validation/complex/numeric_diagnostics/program.smbp": "af42029357b2780b9209103f49f119ff18600e5cb1b6ad456e3df0d4ef8f6ff1",
+        "output/editor-validation/complex/numeric_diagnostics/program.audit.cpp": "2ab25e9dbb4aa62063cb1dc7cb70ea65da5cf10b1de612ab170029aa22add471",
+        "output/editor-validation/complex/numeric_diagnostics/recompiled.smbp": "914f0f2c86af8e1549911f47145eba6438ac6ea26a90c11977be9e402b335681",
+        "output/editor-validation/complex/numeric_diagnostics/trace.json": "10743335f44637f6fad770dbc76bbf43361885d6bc74b559ad661d8cb5c00ccf",
+        "output/editor-validation/complex/numeric_diagnostics/expected.json": "e2836386c427a4b39e7c5f029d86be5935b86037117436412a27b642171b79dd"
+      }
+    },
+    {
+      "case": "numeric_diagnostics_memory",
+      "status": "local_checks_passed",
+      "source": "examples/editor_validation/numeric_diagnostics_memory.cpp",
+      "source_sha256": "267c7d783a49ff883f0a6b029517eaa44639078edfd1866e94b83def10df4975",
+      "scans": 28,
+      "rungs": 64,
+      "instructions": 133,
+      "project": "output/editor-validation/complex/numeric_diagnostics_memory/program.smbp",
+      "project_sha256": "ab333aa3467beb484689d7c1ba3d2ff6bf73f4c467187d05c9826f8cbdb81cc6",
+      "repeated_project_sha256": "0653770562fa72e50ad35913d7bc924fe67aa9f2d841321f3f3d788f1f92a8b6",
+      "template_sha256": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf",
+      "controls": [
+        "M800",
+        "M801",
+        "M802"
+      ],
+      "phases": [
+        {
+          "phase": "initial",
+          "last_frame": 3,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M705",
+            "M706",
+            "M707",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M715",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": 9296,
+            "MW143": 2450,
+            "MD146": -2128394905,
+            "MD148": 81234567,
+            "MD150": 305407056,
+            "MD160": 305407056
+          }
+        },
+        {
+          "phase": "high_bcd_carriers",
+          "last_frame": 7,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M705",
+            "M706",
+            "M707",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M715",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": -26215,
+            "MW143": 9999,
+            "MD146": -1717986919,
+            "MD148": 99999999,
+            "MD150": 305437081,
+            "MD160": 305437081
+          }
+        },
+        {
+          "phase": "lower_bcd_carriers",
+          "last_frame": 11,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M705",
+            "M706",
+            "M707",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M715",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": 9296,
+            "MW143": 2450,
+            "MD146": -2128394905,
+            "MD148": 81234567,
+            "MD150": 305407056,
+            "MD160": 305407056
+          }
+        },
+        {
+          "phase": "alternate_0",
+          "last_frame": 12,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M705",
+            "M706",
+            "M707",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M715",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": 9296,
+            "MW143": 2450,
+            "MD146": -2128394905,
+            "MD148": 81234567,
+            "MD150": 305407056,
+            "MD160": 305407056
+          }
+        },
+        {
+          "phase": "alternate_1",
+          "last_frame": 13,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M705",
+            "M706",
+            "M707",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M715",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": -26215,
+            "MW143": 9999,
+            "MD146": -1717986919,
+            "MD148": 99999999,
+            "MD150": 305437081,
+            "MD160": 305437081
+          }
+        },
+        {
+          "phase": "alternate_2",
+          "last_frame": 14,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M705",
+            "M706",
+            "M707",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M715",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": 9296,
+            "MW143": 2450,
+            "MD146": -2128394905,
+            "MD148": 81234567,
+            "MD150": 305407056,
+            "MD160": 305407056
+          }
+        },
+        {
+          "phase": "alternate_3",
+          "last_frame": 15,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M705",
+            "M706",
+            "M707",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M715",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": -26215,
+            "MW143": 9999,
+            "MD146": -1717986919,
+            "MD148": 99999999,
+            "MD150": 305437081,
+            "MD160": 305437081
+          }
+        },
+        {
+          "phase": "alternate_4",
+          "last_frame": 16,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M705",
+            "M706",
+            "M707",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M715",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": 9296,
+            "MW143": 2450,
+            "MD146": -2128394905,
+            "MD148": 81234567,
+            "MD150": 305407056,
+            "MD160": 305407056
+          }
+        },
+        {
+          "phase": "alternate_5",
+          "last_frame": 17,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M705",
+            "M706",
+            "M707",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M715",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": -26215,
+            "MW143": 9999,
+            "MD146": -1717986919,
+            "MD148": 99999999,
+            "MD150": 305437081,
+            "MD160": 305437081
+          }
+        },
+        {
+          "phase": "alternate_6",
+          "last_frame": 18,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M705",
+            "M706",
+            "M707",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M715",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": 9296,
+            "MW143": 2450,
+            "MD146": -2128394905,
+            "MD148": 81234567,
+            "MD150": 305407056,
+            "MD160": 305407056
+          }
+        },
+        {
+          "phase": "alternate_7",
+          "last_frame": 19,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M705",
+            "M706",
+            "M707",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M715",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": -26215,
+            "MW143": 9999,
+            "MD146": -1717986919,
+            "MD148": 99999999,
+            "MD150": 305437081,
+            "MD160": 305437081
+          }
+        },
+        {
+          "phase": "alternate_8",
+          "last_frame": 20,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M705",
+            "M706",
+            "M707",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M715",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": 9296,
+            "MW143": 2450,
+            "MD146": -2128394905,
+            "MD148": 81234567,
+            "MD150": 305407056,
+            "MD160": 305407056
+          }
+        },
+        {
+          "phase": "alternate_9",
+          "last_frame": 21,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M705",
+            "M706",
+            "M707",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M715",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": -26215,
+            "MW143": 9999,
+            "MD146": -1717986919,
+            "MD148": 99999999,
+            "MD150": 305437081,
+            "MD160": 305437081
+          }
+        },
+        {
+          "phase": "alternate_10",
+          "last_frame": 22,
+          "controls": [
+            false,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M705",
+            "M706",
+            "M707",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M715",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": 9296,
+            "MW143": 2450,
+            "MD146": -2128394905,
+            "MD148": 81234567,
+            "MD150": 305407056,
+            "MD160": 305407056
+          }
+        },
+        {
+          "phase": "alternate_11",
+          "last_frame": 23,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M705",
+            "M706",
+            "M707",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M715",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": -26215,
+            "MW143": 9999,
+            "MD146": -1717986919,
+            "MD148": 99999999,
+            "MD150": 305437081,
+            "MD160": 305437081
+          }
+        },
+        {
+          "phase": "final_high",
+          "last_frame": 27,
+          "controls": [
+            true,
+            false,
+            false
+          ],
+          "indicators_on": [
+            "M704",
+            "M705",
+            "M706",
+            "M707",
+            "M708",
+            "M709",
+            "M710",
+            "M711",
+            "M712",
+            "M713",
+            "M714",
+            "M715",
+            "M716",
+            "M717",
+            "M718",
+            "M719"
+          ],
+          "word_values": {
+            "MW140": -20442,
+            "MW141": 32767,
+            "MW142": -26215,
+            "MW143": 9999,
+            "MD146": -1717986919,
+            "MD148": 99999999,
+            "MD150": 305437081,
+            "MD160": 305437081
+          }
+        }
+      ],
+      "official_editor": "pending",
+      "official_simulator": "pending",
+      "physical_plc": "pending",
+      "timing_scope": "local oracle at100ms frames; manual timer test should wait at least2s for settled states; no physical timing proof",
+      "recompiled_project": "output/editor-validation/complex/numeric_diagnostics_memory/recompiled.smbp",
+      "artifact_sha256": {
+        "output/editor-validation/complex/numeric_diagnostics_memory/program.smbp": "ab333aa3467beb484689d7c1ba3d2ff6bf73f4c467187d05c9826f8cbdb81cc6",
+        "output/editor-validation/complex/numeric_diagnostics_memory/program.audit.cpp": "b29614a0cc8baa46ac95a9ebe4900f4e1aebc5eeaac2e016dd26dff7b43ae972",
+        "output/editor-validation/complex/numeric_diagnostics_memory/recompiled.smbp": "0653770562fa72e50ad35913d7bc924fe67aa9f2d841321f3f3d788f1f92a8b6",
+        "output/editor-validation/complex/numeric_diagnostics_memory/trace.json": "10743335f44637f6fad770dbc76bbf43361885d6bc74b559ad661d8cb5c00ccf",
+        "output/editor-validation/complex/numeric_diagnostics_memory/expected.json": "e2836386c427a4b39e7c5f029d86be5935b86037117436412a27b642171b79dd"
+      }
+    }
+  ],
+  "distinct_candidate_frames": 276,
+  "counting": "276 distinct (candidate, trace-position) frames:37 state +73 timed +28 numeric, each in I/O and memory-only variants. Equal/stability frames remain distinct temporal positions. SDK/VM/JSON/normalization/XML/C++ comparison stages and repetitions are not additional frames. This manifest does not add these frames to historical stress/public totals.",
+  "comparison_stages": [
+    "original IL VM",
+    "JSON-restored VM",
+    "normalized VM",
+    "original C++ SDK with raw observed-word snapshots",
+    "actual exported XML VM",
+    "C++ reconstructed from that XML SDK with raw observed-word snapshots",
+    "recompiled C++ VM",
+    "second exported XML VM"
+  ],
+  "oracle_review": {
+    "state_arrays": "Independent Python list updates and weighted integer sum; expected checksums22000/29500/37000/44500, capped at3 accepted rising edges; reset priority and held inputs covered.",
+    "timed_counter": "Independent elapsed-time arithmetic at100ms trace steps, discrete rising-edge detection, integer event count and latch. Initial state,500ms threshold and edge phase are declared local-contract assumptions, not measurements of the official simulator or PLC.",
+    "numeric_diagnostics": "Independent declared manual saturation result, hexadecimal decimal-digit packing, byte/word composition and explicit raw-word observations; does not call compiler numeric evaluation for expected answers.",
+    "shared_components": "SDK and VM are separate implementations of the same intended contract. Normalization, XML parsing/emission and reverse compilation share compiler modules. Their agreement is not independent proof of Schneider interpretation or physical behavior.",
+    "memory_controls": "Memory-only harness injects M800..802 before begin_scan, modeling external memory writes between scans; official animation-table scheduling/force behavior remains unverified.",
+    "scope": "Three combined algorithms with bounded traces; no claim of complete instruction coverage, all possible inputs, native lifecycle equivalence or hardware timing."
+  },
+  "validation_package_sha256": "3f9ccce7cc1e81049327af1e190c0502010e23b4d27f047e7ba9b1b350493f17",
+  "validation_package_digest_definition": "SHA256 of canonical compact sorted-key JSON of validation_package_files_sha256; covers six source programs, runner, README and authentic template/provenance, not an atomic compiler-source snapshot.",
+  "validation_package_files_sha256": {
+    "examples/editor_validation/README.md": "b4605d225ef07be84f9bc363f30df89e99873395d69a7c8be992e5812a34eaea",
+    "examples/editor_validation/numeric_diagnostics.cpp": "a3c21aad99d69cd28dce3dd87dc2ee3acb1b761145f6c9ed9e850a4098a6eeaa",
+    "examples/editor_validation/numeric_diagnostics_memory.cpp": "267c7d783a49ff883f0a6b029517eaa44639078edfd1866e94b83def10df4975",
+    "examples/editor_validation/state_arrays.cpp": "bd16b63996a4e9b94039a7bf053214efcb09b971b40da965c89c6173d160b579",
+    "examples/editor_validation/state_arrays_memory.cpp": "ef725f3eee84b1864e1c9432b4eaef63951c179fd6c5f0a8ce1027763d7ff07e",
+    "examples/editor_validation/timed_counter.cpp": "2a3968b0f6b17f6bbf5775e3f5d1ada5c1ed4b1130a29438fcdfb8c74d9d8a2b",
+    "examples/editor_validation/timed_counter_memory.cpp": "07fe983a09d39621b4cd26474223c3d2f21959eba49a14f678f6bb41ec8ecae7",
+    "tests/editor_validation/run.py": "d204fa45b64dba7b33fb05c707c2f8f8362ec8f6714d19cc84ac5d4e475e55f6",
+    "tests/fixtures/official_tm200ce40t_memory.provenance.json": "b9826924298610100516b075c671362c87b85ff35e2489e0df661ea8cdd89730",
+    "tests/fixtures/official_tm200ce40t_memory.smbp": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf"
+  },
+  "local_log": {
+    "path": ".superpowers/sdd/2026-11-06-official-profile/complex.log",
+    "sha256": "75230f70558f5bf4451cef2d0009b3127560bf81e26aefc07723b287c6813d2f"
+  },
+  "official_editor": "pending",
+  "official_simulator": "pending",
+  "physical_plc": "pending",
+  "complete_library": false
+}

@@ -1,0 +1,34 @@
+{
+  "source": "User's local Schneider Basic Wine lab; official-editor save of the compiler-generated memory candidate",
+  "editor": "EcoStruxure Machine Expert Basic 1.4 build 484",
+  "target": "TM200CE40T",
+  "copied_utc": "2026-11-06",
+  "file": "official_tm200ce40t_memory_editor_saved.smbp",
+  "sha256": "4b6120f1151f840ae234e6f79135c51ec78e0fd3df21736c542894d52402a6bc",
+  "bytes": 86197,
+  "program": [
+    "LD %M0",
+    "ST %M1"
+  ],
+  "original_modified": false,
+  "parent_candidate": {
+    "sha256": "7128749796a0ca788898ed077f82ff4e8275a413ec2116fd0fb9f761c3653116",
+    "bytes": 84039,
+    "operation": "Rung comment changed in the official GUI, then saved to a separate file; candidate bytes preserved"
+  },
+  "hardware_template_sha256": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf",
+  "observed_normalization": {
+    "first_pou_section_number": 1,
+    "memory_bits_allocation": "empty element",
+    "memory_words_allocation": "empty element",
+    "timers_allocation": "empty element",
+    "management_level": "FunctLevelMan21_0"
+  },
+  "editor_open": {
+    "status": "No error",
+    "observed_by": "local desktop GUI operator",
+    "scope": "Exact saved memory candidate reopened; no general editor or physical PLC compatibility claim"
+  },
+  "readback_review": "docs/validation/OFFICIAL-EDITOR-REVIEW.md",
+  "scope": "Exact official-editor saved fixture; normalized IL and hardware retention checked locally against the authentic baseline. Physical PLC validation remains pending."
+}

@@ -50,7 +50,7 @@ class Lowerer:
                         zero = self.bit("constant_false")
                         self.constants["0"] = zero
                         self.constant_rungs.append(
-                            ["LD %I0.0", "ANDN %I0.0", "ST " + zero]
+                            ["LD " + zero, "ANDN " + zero, "ST " + zero]
                         )
                     if key == "1":
                         one = self.bit("constant_true")

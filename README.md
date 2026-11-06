@@ -1,268 +1,157 @@
-# m200-cpp — protótipo local
+# m200-cpp
 
-A meta final é **equivalência funcional com a programação oficial do
-TM200CE40T**: todo algoritmo aceito nesse perfil deve ter uma forma suportada
-de expressão em C++ e gerar um projeto equivalente. As restrições atuais do
-protótipo são trabalho pendente, não o escopo final da biblioteca. O contrato
-completo está em [docs/PARITY.md](docs/PARITY.md).
+**Write PLC logic in C++. Inspect the generated instructions. Recover C++ from the real program.**
 
-Ferramenta experimental para escrever lógica do **Schneider TM200CE40T** em C++ restrito, gerar IL e um projeto `.smbp` a partir de um template, e reconstruir C++ a partir das instruções reais do arquivo.
+An experimental C++ → IL → Ladder/SMBP toolchain for the **Schneider Electric TM200CE40T**. It combines a restricted C++ language, a small PLC SDK, automatic resource allocation, a local instruction executor, and a reverse compiler.
 
-**Ainda não validado no EcoStruxure Machine Expert Basic nem no CLP.** Os testes locais não comprovam que o editor abre o arquivo, nem o comportamento elétrico ou temporal no equipamento. O usuário disponibilizará Windows/software/CLP no futuro via SSH. Nenhuma instalação de Windows ou comunicação com o CLP é necessária para usar o protótipo local.
+The intended result is a project opened, checked, and transferred by **EcoStruxure Machine Expert Basic**. The reverse path reads the project's actual instructions and configuration; it does not recover a saved copy of the original source.
 
-## Começar
+> **Experimental · partial coverage.** Exact generated memory-copy and digital I/O projects have opened as Ladder and run in the official local simulator under Wine. Memory save/reopen and both logic states were checked. A Wine thread-language mismatch causing false I/O reservation errors was isolated and corrected; broader editor and physical TM200CE40T behavior remain unvalidated. This is an independent project, without Schneider Electric certification or endorsement.
 
-Requisitos: Python 3.9+ e `clang++` com C++17. No Mac testado: Apple Clang 21. O projeto usa apenas a biblioteca padrão do Python. Pode definir `M200_CLANG` para selecionar outro executável.
+[Quick start](#quick-start) · [Workflow](#workflow) · [Current coverage](#current-coverage) · [Validation](#validation) · [Documentation](#documentation)
+
+## Why this project exists
+
+PLC programs should be expressible as readable source code while remaining inspectable in the manufacturer's tools. m200-cpp explores that workflow with explicit scan semantics, typed operations, visible resource costs, and reversible native instructions.
+
+The final goal is **functional equivalence with the identified official TM200CE40T profile**: every algorithm accepted for that profile should have a supported C++ expression and produce an equivalent project. Today's subset is a development milestone. Missing instructions, tasks, peripherals, or exporter features remain toolchain work; they do not establish a limitation of the PLC. See the [full parity contract](docs/PARITY.md).
+
+## Quick start
+
+Requirements: **Python 3.9+**, **Clang with C++17 support**, and `make` for the validation targets. The Python implementation uses only the standard library. The recorded development environment uses macOS and Apple Clang 21; other environments need their own validation.
 
 ```sh
-cd /Users/tommy/Offline/projects/m200-cpp
-make check
+git clone https://github.com/viniciusczanini/m200-cpp.git
+cd m200-cpp
+
 ./m200c compile examples/blink.cpp -o output/blink
 ./m200c check examples/blink.cpp --trace examples/trace.json
-```
-
-Um clock local fica assim:
-
-```cpp
-#include <plc.hpp>
-
-plc::Clock pisca{500};  // meio período mínimo: 500 ms
-
-void scan() {
-    bool ligado = pisca.update(true);
-    plc::output(0, ligado);
-}
-```
-
-`scan()` executa uma vez por ciclo. `Clock` aloca dois timers e seu estado; não bloqueia a tarefa. Começa desligado; `update(false)` zera os timers e a fase. Cada meio período inclui a resolução do timer e a latência do scan — não é uma promessa de 500 ms exatos. O modelo local começa no instante zero; essa precisão ainda precisa ser confrontada com o simulador oficial e com o CLP.
-
-Também há `plc::clock_ms(10|100|1000|60000)`, que lê as bases globais `%S4..%S7`. Elas têm fase global no controlador, não fase reiniciável por instância; o modelo local assume fase zero apenas para reprodução dos testes.
-
-## O que já funciona localmente
-
-- Variáveis `bool`, inicialização, atribuição sequencial, `if/else`, `!`, `&&`, `||`, XOR booleano, `==` e `!=`.
-- Funções auxiliares booleanas com um único `return`, sem recursão ou escrita explícita de estado. Intrínsecos numéricos na expressão preservam seus efeitos em S17/S18 ao serem expandidos.
-- Estado global entre scans e captura das entradas usadas. Saídas têm imagem lógica e escrita consolidada no final do ciclo. No primeiro scan de RUN, saídas e globais comuns usadas pelo programa são reinicializadas conforme o contrato.
-- `plc::input(0..23)`, `plc::output(0..15, bool)` e `plc::output_state(0..15)`, com índices literais.
-- `plc::Ton`, `plc::Tof`, `plc::Pulse`, `plc::Clock`, `plc::RisingEdge` e `plc::FallingEdge`. As instâncias são globais. Por enquanto há uma ocorrência estática de `update` por instância no código; habilitação é parâmetro explícito. Laços e saltos podem visitar essa ocorrência zero ou várias vezes no mesmo scan; o estado atualiza em cada visita. Chamadas em ramos que o frontend ainda traduz por predicação são recusadas. Uma instância inteiramente não utilizada é permitida, embora sua declaração possa reservar recursos.
-- Alocação automática de bits e timers; os temporários também entram no orçamento. O alocador pode usar os 1.024 bits M e reutiliza células privadas quando a análise do fluxo comprova que os valores não coexistem. Globais e estado de instâncias mantêm células únicas; endereços explícitos ficam reservados. As posições a partir de 500 são preferência, sem limitar o banco à metade superior. Retenção e transições físicas continuam dependendo do perfil e da validação externa.
-- Tipos `plc::i16`, `plc::i32` e `plc::f32`, 53 operações numéricas explícitas, comparações e leitura/escrita de words/dwords/REAL. `%MW`, `%MD` e `%MF` compartilham os mesmos 8.000 words, agora todos disponíveis ao alocador, descontados endereços explícitos e buffers inteiros de comunicação. MD/MF ocupam duas células; reuso leva em conta a sobreposição física entre tipos. As posições a partir de 4.000 são preferência, não reserva exclusiva.
-- Executor IL com validação estrita, conversor IL/SMBP → C++ e comparação com a execução C++ nativa.
-- Projeto XML baseado em template, rungs Ladder de contatos em série, bobinas, timers e blocos numéricos Operation/Comparison, verificação local de coerência IL/gráfico e arquivo de vínculo fonte/rung.
-
-O protótipo **recusa** aritmética C++ com promoções implícitas (use as operações explícitas `plc::*`), unsigned, arrays multidimensionais, ponteiros, referências arbitrárias, classes da aplicação, exceções, threads, funções externas, headers com declarações fora do SDK e nós AST desconhecidos. Retenção configurável de memória entre reinícios, expansões, tarefas de evento, acesso imediato e PTO/PWM ainda não estão implementados. Modbus tem agora um subconjunto descrito abaixo; não representa a cobertura completa de comunicação do PLC. Não existe tentativa de compilar C++ geral e ignorar as partes difíceis.
-
-Arrays de capacidade fixa de `bool`, `plc::i16`, `plc::i32` e `plc::f32` aceitam leitura/escrita com índice literal ou calculado em execução (`bool`, `i16` ou `i32`). Arrays com índice calculado usam grupos contíguos; os elementos de32bits têm stride2 words. Arrays globais persistem entre scans e recebem inicialização no primeiro RUN; locais são inicializados quando a declaração executa, inclusive dentro de um laço. Inicializadores parciais e `{}` zeram os elementos restantes. Arrays locais sem inicialização são recusados. O caminho reverso recupera os operandos/endereço reais, sem precisar preservar a sintaxe original de array. `examples/dynamic_arrays.cpp` percorre arrays numéricos com `for`.
-
-Literais fora da faixa falham na compilação. Para índice calculado fora da faixa, o modelo experimental usa `%S20` e o primeiro elemento como fallback, após validar o índice sem overflow. Isso é uma política da ferramenta: `[]` fora da faixa tem comportamento indefinido no C++ desktop. Os testes não executam o C++ original nesse domínio. A ordem RHS antes do lvalue e o curto-circuito são preservados por snapshots e desvios reais.
-
-Arrays booleanos dinâmicos e a API raw `read_m_indexed`/`write_m_indexed` estão implementados em C++/IL/VM/reversão. A API raw declara imagens globais `plc::BitMemory bits{count}` e `plc::WordMemory words{count}`, usando o conteúdo do MW como offset em bits. **A exportação/importação SMBP com bits indexados permanece bloqueada:** o manual exige nível funcional10.0, mas ainda não há mapeamento comprovado desse nível para o token de projeto nem validação do perfil CE40T. `examples/dynamic_bits.cpp` serve para testes locais, sem alegar projeto oficial aceito.
-
-A API nativa indexada de words já aceita índices calculados em execução:
-
-```cpp
-plc::WordMemory image{64}; // reserva MW0..63 como imagem explícita da aplicação
-// Dentro de scan():
-plc::write_word(0, 3);
-plc::write_word_indexed(16, 0, 42); // endereço 16 + conteúdo de MW0 = MW19
-plc::i16 value = plc::read_word_indexed(16, 0);
-```
-
-O segundo argumento é o **endereço literal do MW de índice**, não o offset em si. Existem variantes `read/write_dword_indexed` e `read/write_real_indexed`; o offset é medido em words, inclusive para objetos de32bits, que ocupam duas células. O índice original não é alterado por erro. `%S20`, lido por `plc::system(20)`, persiste até `plc::clear_index_error()`; S/ST nesse bit são recusados. Em erro, a API usa o endereço base. Guardas preservam o limite lógico de `WordMemory` mesmo que os temporários ocupem endereços mais altos. A imagem inteira fica reservada, além de buffers de comunicação. `examples/indexed_words.cpp` percorre uma tabela com `for`.
-
-O modelo local usa maior referência direta para a indexação nativa e verifica ambas as células de MD/MF. Relação com sobrealocação Manual, default XML e símbolos isolados permanece sem prova externa: esses perfis são recusados na importação indexada. A emissão Operation/Comparison é experimental, baseada na sintaxe documentada; não foi encontrado original gráfico indexado nesta pesquisa. Perfil/word-offset32/fronteiras/flags precisam do editor e PLC. Grupos contíguos preservam os elementos vivos durante escritas parciais e não invadem imagens explícitas/buffers; a alocação conservadora e o overhead ainda podem recusar um programa que caiba numa implementação nativa menor. Esta etapa não conclui a cobertura integral.
-
-AND/OR nativo com comparação indexada também é recusado enquanto a ordem de resolução/erro do contato não estiver comprovada. O C++ com `&&/||` continua suportado: o compilador captura o lado esquerdo e emite snapshot/desvio antes de acessar o endereço, preservando o curto-circuito definido pela linguagem.
-
-`while`, `for`, `do/while`, `break`, `continue`, labels e `goto` usam saltos nativos e executam no mesmo scan. Em `for`, use tipos `plc::*` e incremento explícito, por exemplo `i=plc::add_i16(i,1)`; operadores C++ de incremento/promoção ainda não foram ampliados. O caminho inverso reconstrói labels e `goto` a partir da IL real. São contabilizados os 64 labels nativos, incluindo os gerados pelo compilador. A VM tem limite local de execução, configurável por `Machine(..., instruction_limit=...)`: excedê-lo gera erro, sem encerrar o laço com sucesso nem simular o watchdog físico. O XML emitido usa a forma `Jump/JMPC` observada em original; gráficos diretos de `JMP/JMPCN` permanecem sem comprovação. O exemplo `examples/loops.cpp` exercita essa linguagem.
-
-`read_m`, `write_m` e `system` são primitivas de auditoria usadas no C++ reconstruído. `system` aceita somente as quatro bases de clock e o primeiro scan `%S13`. O significado da região retida e de estados iniciais de projetos externos precisa ser confrontado com sua configuração; não há simulação de falta de energia/retomada física.
-
-`Ton`, `Tof` e `Pulse` também expõem `preset()` (%TM.P), `value()` (%TM.V),
-`done()` (%TM.Q) e `set_preset(i16)`. O construtor explícito
-`plc::Ton t{42,100,3}` fixa TM42, base100ms e preset3ticks; a reversão conserva
-esses três parâmetros. A escrita P usa o objeto nativo, sem variável sombra.
-V/Q são somente leitura. Com `IsDynamicPreset=false`, o novo P só afeta a
-próxima ativação, mesmo sendo lido imediatamente. Saltar o bloco deixa seu
-estado interno progredir, mas não reescreve a saída ligada ao bloco. A fase
-real dos ticks e o ciclo de vida precisam de validação externa. A base10ms continua
-bloqueada no XML por falta de serialização comprovada. Exemplo:
-`examples/timer_properties.cpp`; contratos: `docs/capabilities/TIMER-PROPERTIES.md`.
-
-O construtor de 5 argumentos `Ton/Tof/Pulse{index,base,preset,retentive,dynamic_preset}`
-aceita flags bool literais. TON/TOF retentivos pausam e retomam V antes da
-conclusão; TP retentivo é recusado. Dynamic Preset permite alterar P enquanto
-roda, considerando-o na próxima atualização da base. Reduzir P abaixo de V
-conclui mantendo V. Com as duas opções, P menor que V enquanto pausado zera V.
-São modos implementados em C++/IL/configuração/VM/SDK/reversão, com os flags
-preservados no JSON. **SMBP com qualquer opção true continua bloqueado** até
-comprovar o mapeamento de nível funcional 3.3/12.0. Fase/fração dos ticks e
-fronteiras após conclusão permanecem políticas locais pendentes de ensaio.
-Exemplo `examples/timer_modes.cpp`; contrato `docs/capabilities/TIMER-MODES.md`.
-
-Bits individuais de MW são acessados com `read_word_bit(word,bit)` e
-`write_word_bit(word,bit,bool)`, preservando os outros bits e os aliases MD/MF.
-As APIs `read_m/input/output_bits_i16/i32` e `write_m/output_bits_i16/i32`
-transferem grupos contíguos com início múltiplo de8, comprimento1–32 limitado
-ao portador/banco e bit inicial no LSB. Leituras preenchem os bits altos com
-zero; escritas preservam vizinhos. `copy_m_bits(dest,source,count)` captura
-o grupo antes de escrever e admite sobreposição. Leituras de Q enxergam as
-escritas anteriores do mesmo scan. Exemplo `examples/bit_objects.cpp`;
-escopo e restrições: `docs/capabilities/BIT-OBJECTS.md`.
-
-Os contatos nativos LDR/LDF, ANDR/ANDF, ORR/ORF e XORR/XORF estão disponíveis
-na IL e reversão. Em C++, `input_rising/falling(index)` e `m_rising/falling(index)`
-retornam a borda amostrada no começo do ciclo. Leituras repetidas não consomem
-o evento e saltos não acumulam bordas antigas. Uma escrita em M no programa
-aparece na detecção do próximo ciclo; um pulso que sobe e desce dentro do ciclo
-não aparece. As classes RisingEdge/FallingEdge continuam detectores no ponto
-da chamada. Fase das entradas, partida/retomada e aceitação oficial aguardam
-validação externa. Exemplo `examples/native_edges.cpp`; contrato
-`docs/capabilities/NATIVE-EDGE-CONTACTS.md`.
-
-Para bordas de uma expressão no ponto da execução, use `plc::rising(id,bool)`
-ou `plc::falling(id,bool)`. Cada tipo tem IDs estáticos distintos0..254;
-saltos preservam o histórico e laços executam novamente o mesmo ponto.
-Chamadas condicionais e &&/|| respeitam a avaliação de C++. O exportador
-expande os blocos em M/gates de Ladder básico; o relatório registra os recursos
-do projeto efetivamente gerado. O modelo de histórico/partida ainda aguarda
-comprovação externa. Exemplo `examples/expression_edges.cpp`; contrato
-`docs/capabilities/EXPRESSION-EDGES.md` e custos em `docs/capabilities/COPY-FUSION.md`.
-
-Contadores comuns usam `plc::Counter{id,preset}`, com R/S/CU/CD por
-`reset/set/count_up/count_down(bool)` e getters `preset/value/done/empty/full`.
-`update(r,s,cu,cd)` executa as quatro ações nessa ordem e retorna D;
-`set_preset(i16)` escreve P. Instâncias podem aparecer em vários pontos e laços.
-O projeto usa Counter nativo, com configuração e identidade preservadas, sem
-simular o contador com M/MW. Flags, interação entre entradas e histórico são
-um modelo local provisório, incluindo um conflito no manual sobre E.
-Gráficos puros do Counter com branches/saídas são importados mediante prova
-booleana de conectividade e ordem, incluindo prefixos e bobinas compartilhados;
-comparações/efeitos numéricos dentro desse gráfico raw ainda requerem trabalho.
-O exportador normaliza a lógica em rungs separados e informa a extensão de
-alocação. Ver `docs/capabilities/COUNTER-GRAPHS.md`.
-Contrato `docs/capabilities/COUNTERS.md`; exemplo `examples/counter.cpp`.
-
-## Números e inventário completo de pesquisa
-
-```cpp
-#include <plc.hpp>
-plc::i16 count = 0;
-void scan() {
-    count = plc::add_i16(count, 1);
-    if (count >= 50) { count = 0; }
-    plc::f32 fraction = plc::div_f32(plc::int_to_real(count), 50.0f);
-    plc::write_word(0, count);
-    plc::write_real(2, fraction);
-    plc::output(0, fraction >= 0.5f);
-}
-```
-
-Use `plc::add_i16(a,b)`, `add_i32` ou `add_f32` para escolher a operação e sua largura. Os operadores C++ `+ - * /` para valores de aplicação são recusados. As operações aceitas incluem aritmética, REM, lógica word, shifts/rotações, raiz, funções REAL e conversões explícitas. A lista consultável está em `./m200c capabilities`; há um exemplo em `examples/numeric_control.cpp`. As comparações `== != < <= > >=` exigem tipos compatíveis. Literais REAL usam o sufixo `f`; inicializadores numéricos usam `plc::i16/i32/f32`.
-
-O compilador recusa literais fora da faixa, endereços impossíveis e shifts inválidos. O modelo inteiro permite consultar `plc::system(17/18)` e limpar os flags com `clear_shift_carry()`/`clear_arithmetic_error()`. S17 recebe o último bit ejetado em cada shift/rotação; S18 guarda overflow até reset explícito. ADD/SUB/MUL/ABS e DIV/REM mínimo/-1 usam bits modulares com S18. O guia mostra o caso ADD word23241+21853=-20442; os demais resultados exatos de overflow são uma política local ainda sem confirmação física. Operações literais continuam emitidas para preservar os flags, assim como snapshots, guardas e laços. Veja `examples/integer_flags.cpp` e [o contrato](docs/capabilities/INTEGER-FLAGS.md).
-
-DIV inteiro por zero/SQRT negativo marcam S18 e interrompem o modelo local, pois seus bits de resultado não estão definidos nas fontes consultadas. Recuperação desses valores indeterminados, float `%SW17` e demais erros aritméticos ainda faltam. Nenhum desses ensaios garante scan/watchdog ou comportamento físico das saídas. EXPT e conversões DEG/RAD continuam recusados até resolver a semântica/evidência necessária.
-
-As conversões `bcd_to_int`/`bcd_to_dint` (BTI), `int_to_bcd`/`dint_to_bcd` (ITB), `concat_words` (CONCATW) e `int_to_dint` (DWORD) também são emitidas como instruções nativas. BCD usa quatro/oito dígitos, inclusive quando o portador assinado é negativo; o bit alto não representa sinal decimal. CONCATW recebe a palavra baixa primeiro e a alta depois, com ordem corroborada oficialmente. DWORD usa extensão de sinal no modelo local, ainda sem prova física para negativos. BCD inválido marca S18 e interrompe o modelo; recuperação de resultado indeterminado continua pendente. Ver [contrato e fontes](docs/capabilities/CONVERSIONS.md) e `examples/conversions.cpp`.
-
-As expressões respeitam `if/else` e curto-circuito `&&/||`. O caminho inverso preserva endereços e operações. O C++ de auditoria pode compilar nativamente mesmo quando sua **recompilação para PLC** excede o orçamento de instruções ou a memória. A segunda tradução ainda pode introduzir overhead; a análise conservadora de vida e a coloração não provam que inexiste uma implementação nativa menor. Essa otimização continua no objetivo. Células reutilizadas têm símbolos `compiler_reused_*`; eles não representam várias variáveis persistentes independentes. O relatório registra contagens virtuais/físicas e reservas em `metadata.allocation`.
-
-O inventário reúne **250 registros documentais** (161 de linguagem/blocos e 89 de hardware/configuração), incluindo 13 conflitos entre fontes, com páginas, limites e hashes dos documentos. Ele inclui recursos nativos, opcionais, ausentes e com suporte ainda desconhecido: não significa 250 recursos implementados. Os estados de pesquisa começam em `missing/pending` até receber evidência específica de implementação por fase; a seção `library` da CLI lista o subconjunto local atual. A biblioteca **ainda não está completa**. O trabalho restante está registrado em [docs/capabilities/README.md](docs/capabilities/README.md).
-
-```sh
-./m200c capabilities
-./m200c capabilities HW.HSC
-./m200c capabilities --all
-make stress
-make public-fetch   # download explícito dos originais fixados
-make public-check   # teste local dos originais, sem download implícito
-```
-
-`make stress` cria relatórios e fontes de reprodução em um diretório temporário novo fora do repositório. Executa apenas testes locais e falha diante de divergências inesperadas. `make check` inclui a matriz de 53 intrínsecos numéricos e suas referências independentes.
-
-## Modbus no TM200CE40T
-
-```cpp
-#include <plc.hpp>
-plc::ReadVar remote{plc::Link::Ethernet, 1, 100,
-                    plc::Object::HoldingWords, 0, 2, 100};
-void scan() {
-    bool done = remote.update(plc::input(0), false);
-    plc::output(0, done);
-    plc::output(1, remote.busy());
-    plc::output(2, remote.error());
-    if (done) { plc::output(3, plc::read_word(100) > 0); }
-}
-```
-
-O exemplo lê dois registradores remotos desde o endereço zero para `%MW100..101`. O índice Ethernet `1` deve estar configurado no template do **TM200CE40T**. Os construtores `ReadVar`, `WriteVar` e `WriteReadVar` produzem blocos nativos de comunicação; getters expõem Done/Busy/Aborted/Error e os códigos de erro. O buffer inteiro é validado e reservado antes de alocar temporários. Índices explícitos preservam a identidade dos blocos na conversão de volta.
-
-A implementação local inclui os function codes 1/2/3/4/5/6/15/16/23, packing de bits, MBAP, erros, timeout, aborto e exclusão por porta. A simulação usa somente um transporte fornecido explicitamente. Sem transporte, uma tentativa retorna erro de canal não configurado; não existe sucesso simulado automático.
-
-A exportação `.smbp` cobre os perfis de READ_VAR/WRITE_VAR com enums e configuração comprovados em arquivos originais. Exige SL1 RS485/RTU/master explícita ou remoto Ethernet existente. Variantes de XML ainda desconhecidas — incluindo WRITE_READ_VAR, bits/single-coil, certos parâmetros de porta e a ligação gráfica ABORT — são recusadas na exportação. O suporte de protocolo/IL dessas operações não equivale a suporte de XML completo. Editor oficial, porta serial física e PLC continuam pendentes.
-
-Detalhes e limites: [docs/MODBUS.md](docs/MODBUS.md). Ensaios públicos: [docs/validation/PUBLIC-PROJECTS.md](docs/validation/PUBLIC-PROJECTS.md).
-
-## Gerar o projeto que será testado no editor
-
-O caminho inverso também entende STN/N, MPS/MRD/MPP, grupos AND(/OR( com `)`,
-timers com entrada composta e saídas ST/STN/S/R, e `IN %TMn` terminal ou antes
-de outra carga. Valores salvos são snapshots, preservando a ordem das escritas.
-Na exportação, a lógica complexa é traduzida para rungs simples usando os
-elementos Ladder já conhecidos; o programa de entrada permanece intacto.
-Comparações em curto-circuito usam saltos para evitar leituras indevidas.
-O conflito documental de profundidade MPS 11/32, efeitos de IN observados por
-ações posteriores e demais modificadores ainda têm lacunas explícitas.
-Detalhes e ensaios: `docs/capabilities/NATIVE-LOGIC.md`. Isso amplia a cobertura
-local; a aceitação dos arquivos pelo editor oficial continua pendente.
-
-No Machine Expert Basic, criar e salvar um projeto **TM200CE40T** e trazer o arquivo para o Mac. Não basta trocar a referência de um projeto M221 ou de outro M200.
-
-```sh
-./m200c compile examples/blink.cpp \
-  --template /caminho/template-real-tm200ce40t.smbp \
-  -o output/blink-para-windows
-```
-
-O compilador mantém a configuração de hardware do template e substitui o programa e suas alocações. Templates com objetos/tarefas ativos desconhecidos são recusados. O arquivo original não é alterado. A saída contém:
-
-- `program.smbp`, quando um template foi fornecido;
-- `program.il` e `program.m200.json`, com as instruções reais;
-- `program.audit.cpp`, reconstruído da IL, sem recuperar uma cópia do fonte original;
-- `source-map.json`, com nomes de memória e a relação entre origem C++ e rungs;
-- `report.json`, com recursos, hashes, versões e validações ainda pendentes.
-
-`tests/fixtures/synthetic.smbp` é exclusivamente uma fixture de parser. Ela permite exercitar a serialização aqui, mas **não é um perfil oficial nem um projeto pronto para carregar no CLP**. Não há um template autêntico do TM200CE40T incluído.
-
-O perfil de leitura é conservador: até um template real vazio pode exigir ajuste de defaults quando tivermos o editor. Configurações desconhecidas, XML ambíguo com campos duplicados e atributos de execução não reconhecidos são recusados.
-
-Uma restrição adicional do backend atual: a enumeração XML da base de timer de **10 ms** ainda não foi estabelecida por um exemplo inspecionado. A IL/modelo local pode usar essa base, mas a exportação `.smbp` a recusa. As outras bases também continuam sem validação no editor. Timers de 1 ms só podem ocupar `%TM0..%TM5`; um `Clock` consome dois timers. Configurações não representáveis ou recursos esgotados geram erro.
-
-## Converter de volta e conferir
-
-```sh
-./m200c decompile output/blink-para-windows/program.smbp -o output/conferir.cpp
-./m200c inspect output/blink-para-windows/program.smbp
 ./m200c simulate output/blink/program.m200.json --trace examples/trace.json
 ```
 
-O conversor lê a IL e os timers efetivamente presentes no arquivo. O resultado é C++ válido para auditoria, com endereços explícitos e ordem de execução preservada. Nomes e estrutura exatos do C++ original não são recuperáveis em geral. Uma cópia do projeto acompanha a saída com o sufixo `.configuration.smbp`, preservando as informações que não pertencem ao código.
+No package installation, Windows installation, or PLC connection is needed for these local commands. Set `M200_CLANG` to select a different Clang executable. `python3 -m m200` is equivalent to `./m200c` when run from the repository root.
 
-Arquivos externos só são aceitos dentro do subconjunto reconhecido: instruções booleanas, operações/comparações numéricas reconhecidas, blocos de timer específicos, seções em ordem e gráficos simples coerentes. Paralelos, grafcet, saltos, tarefas adicionais, bases/modos desconhecidos e divergências entre IL e gráfico geram erro. Um arquivo arbitrário do editor pode ser recusado; ainda não há descompilador geral de SMBP.
+A minimal nonblocking clock:
 
-A descompilação recusa caminhos existentes ou que coincidam com o projeto de entrada, inclusive aliases por symlink e o caminho da cópia de configuração. Escolha um nome novo para cada conferência.
+```cpp
+#include <plc.hpp>
 
-`check` compara a execução nativa do C++ original, a IL e o C++ reconstruído para a mesma sequência de entradas/tempo. Isso ajuda a detectar erros de ordem e conversão. A conferência de volta e o executor próprio compartilham partes do modelo e não substituem o simulador oficial. O comando `certify` sempre recusa declarar compatibilidade enquanto a validação oficial estiver pendente.
+plc::Clock blink{500};
 
-As saídas são preparadas antes de substituir artefatos de uma compilação anterior. Arquivos gerados que tenham sido editados, ou arquivos desconhecidos no diretório, impedem a sobrescrita. Escolha outro diretório para preservar uma edição manual.
+void scan() {
+    bool on = blink.update(true);
+    plc::output(0, on);
+}
+```
 
-## Próximo passo com Windows
+`scan()` runs once per PLC cycle. This clock starts off and uses two native timers plus state. Its nominal 500 ms half-period is subject to timer resolution and scan latency; local simulation does not establish physical timing.
 
-O roteiro está em [docs/validation/WINDOWS.md](docs/validation/WINDOWS.md). SSH permitirá transferir arquivos, consultar versões e colher evidências; a abertura, compilação e inspeção do editor poderão exigir sessão gráfica interativa. Isso ainda precisa ser confirmado na máquina que será disponibilizada.
+**Without `--template`, compilation produces local IL, JSON, audit C++, and reports—not an SMBP project.** To exercise the project exporter, supply an authentic project created for the exact TM200CE40T target:
 
-A ferramenta nova da Apple pesquisada foi **Container machines**, um ambiente Linux persistente. Ela pode ajudar em testes Linux, mas não fornece o Windows do editor Schneider. O compilador já executa nativamente no Mac; nenhuma VM é dependência deste protótipo.
+```sh
+./m200c compile examples/blink.cpp \
+  --template tests/fixtures/official_tm200ce40t_memory.smbp \
+  -o output/blink-project
+```
 
-Fontes técnicas e limites da pesquisa: [docs/FORMAT.md](docs/FORMAT.md). Todos os testes são locais; não há CI ou publicação remota configurada.
+The included [authentic baseline](tests/fixtures/official_tm200ce40t_memory.provenance.json) was created and reopened in Machine Expert Basic 1.4 build 484 in a Wine-hosted lab. The [exact candidate evidence](docs/validation/OFFICIAL-EDITOR-RESULTS.json) records memory and I/O observations, the environment correction, and a rejected invalid-address control. For your application, use a project with the correct hardware, firmware profile, functional level, and communication settings. `tests/fixtures/synthetic.smbp` is only a parser fixture; another CPU's project cannot become a valid template by changing its model name.
 
-Resultados, revisão e decisões: [docs/validation/LOCAL-RESULTS.md](docs/validation/LOCAL-RESULTS.md).
+Follow the [getting started guide](docs/GETTING_STARTED.md) for artifacts, traces, reverse conversion, and the official-editor workflow.
+
+## Workflow
+
+```mermaid
+flowchart LR
+    CPP[Restricted C++ + plc.hpp] --> COMP[Clang AST + lowering]
+    COMP --> IL[Validated IL + allocation]
+    IL --> LOCAL[Local execution + differential checks]
+    IL --> EXPORT[Template-based Ladder / SMBP]
+    TEMPLATE[Authentic target project] --> EXPORT
+    EXPORT --> EDITOR[Official editor validation]
+    EDITOR --> PLC[Transfer through official software]
+    SMBP[Supported SMBP / program JSON] --> REVERSE[Read actual IL + configuration]
+    REVERSE --> AUDIT[Equivalent audit C++]
+```
+
+The editor and PLC steps are validation gates. The CLI does not download programs, update firmware, or operate physical outputs automatically.
+
+## Current coverage
+
+These are **locally implemented subsets**, not declarations of complete official support.
+
+| Area | Available locally | Important boundary |
+|---|---|---|
+| Boolean logic and I/O | State, sequential assignments, conditions, short-circuit logic, 24 embedded inputs and 16 outputs | Special I/O modes, immediate access, and physical behavior remain open |
+| Typed numbers | `i16`, `i32`, `f32`, 53 explicit numeric intrinsics, comparisons, shared MW/MD/MF memory | Ordinary C++ arithmetic and implicit promotions are restricted; numeric error recovery is incomplete |
+| Arrays and control flow | Fixed-capacity typed arrays, computed indices, `while`/`for`/`do`, `break`, `continue`, labels and `goto` | Loops execute within one scan; allocation overhead and export gates still apply |
+| Timers, edges, counters | TON/TOF/TP, clock and edge APIs, timer properties, native counters | Several modes have local models but blocked SMBP export; timing and lifecycle need external tests |
+| Modbus | READ/WRITE/WRITE_READ models; FC1/2/3/4/5/6/15/16/23; explicit local transports | SMBP export covers proved READ/WRITE word profiles only; physical serial/TCP runtime behavior is unvalidated |
+| Projects and reverse conversion | Conservative SMBP parsing, IL/Ladder consistency checks, source maps, C++ reconstruction | Arbitrary vendor projects are not supported; unknown active constructs fail explicitly |
+
+The source language intentionally uses explicit PLC operations:
+
+```cpp
+#include <plc.hpp>
+
+plc::i16 count = 0;
+
+void scan() {
+    count = plc::add_i16(count, 1);
+    if (count >= 50) { count = 0; }
+    plc::write_word(0, count);
+    plc::output(0, count >= 25);
+}
+```
+
+The [architecture and semantics guide](docs/ARCHITECTURE.md) explains memory aliases, scan order, flags, block behavior, and exporter gates. The [capability inventory](docs/capabilities/README.md) tracks the larger target: **250 documentary records are not 250 implemented features**.
+
+```sh
+./m200c capabilities          # Inventory summary + implemented library subset
+./m200c capabilities HW.HSC   # One documented capability
+./m200c capabilities --all    # Full source-backed catalogue
+```
+
+## Validation
+
+The recorded **2026-11-06 local baseline** contains:
+
+| Evidence | Recorded result |
+|---|---:|
+| Unit/regression suite | 417 passing tests |
+| Stress and public-program traces | 288,372 base scan frames |
+| Combined state/array, timer/counter and numeric candidates | 276 distinct candidate frames |
+| Separate exhaustive BCD32 SDK oracle | 100,000,000 valid vectors |
+
+The BCD vectors are **not scans** and are excluded from the scan total. Repeated runs and comparison stages are also excluded. The [local results](docs/validation/LOCAL-RESULTS.md) and [conversion result manifest](docs/validation/CONVERSION-LOCAL-RESULTS.json) record the exact scope, commands, and hashes. These are historical results tied to the recorded files, not an automatically refreshed build badge or proof of universal equivalence.
+
+The [current regression manifest](docs/validation/OFFICIAL-EDITOR-LOCAL-RESULTS.json) records the authentic-profile and memory-only constant fixes. The [combined-program manifest](docs/validation/COMPLEX-LOCAL-RESULTS.json) includes independent expected values and six exact candidates; their official execution is tracked separately. Follow the [complex test walkthrough](examples/editor_validation/README.md) to reproduce them locally.
+
+`check` compares the 16-output traces of native original C++, emitted IL, and reconstructed C++ for the supplied inputs and elapsed times. Deeper tests also inspect memory, flags, aliases, and independent oracles. The implementations share parts of the local model, so agreement does not replace official simulation or hardware measurements. `certify` deliberately refuses to claim certification.
+
+Run validation **locally**:
+
+```sh
+make check           # Unit and regression tests
+make examples        # Compile and check the bundled examples
+make stress          # Local deterministic stress suites
+```
+
+Pinned public-project tests are separate: `make public-fetch` explicitly downloads their source fixtures, then `make public-check` runs locally. `make public-flow-fetch` / `make public-flow-check` cover the additional control-flow corpus. Downloads are not implicit in those check targets.
+
+**No remote CI is used. GitHub Actions must remain disabled for this repository.** GitHub stores the versioned source; validation runs on the developer's machine.
+
+## Documentation
+
+| Guide | Contents |
+|---|---|
+| [Getting started](docs/GETTING_STARTED.md) | Setup, CLI commands, traces, artifacts, reverse conversion, editor handoff |
+| [Architecture and semantics](docs/ARCHITECTURE.md) | Compiler stages, supported language, resource allocation, execution rules, current gates |
+| [Functional parity contract](docs/PARITY.md) | Final target and acceptance criteria |
+| [Capability inventory](docs/capabilities/README.md) | Implemented coverage, missing families, source conflicts |
+| [SMBP format evidence](docs/FORMAT.md) | Observed serialization, provenance, and unsupported variants |
+| [Modbus](docs/MODBUS.md) | APIs, configuration, status/error semantics, protocol versus exporter coverage |
+| [Local validation record](docs/validation/LOCAL-RESULTS.md) | Dated test history and reproducible result manifests |
+| [Official editor evidence](docs/validation/OFFICIAL-EDITOR-RESULTS.json) | Exact candidates, observed results, screenshots, and unresolved failures |
+| [Windows / official validation plan](docs/validation/WINDOWS.md) | Editor, simulator, and physical-controller acceptance steps |
+
+The entry guides are in English. Much of the detailed research and historical validation record is currently in Portuguese.

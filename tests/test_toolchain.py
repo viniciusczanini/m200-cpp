@@ -67,6 +67,69 @@ class ToolchainTests(unittest.TestCase):
         )
         self.assertEqual([x[0] for x in got], [True, False, False])
 
+    def test_memory_only_constants_do_not_require_physical_io(self):
+        p = self.compile(
+            "void scan(){bool cleared=false;plc::write_m(1,cleared);"
+            "plc::write_m(2,true);plc::write_m(3,plc::read_m(0));}"
+        )
+        self.assertNotRegex(
+            "\n".join(line for rung in p.rungs for line in rung), r"%[IQ]0\.\d+"
+        )
+        for initial in (False, True):
+            machine = self.api("il").Machine(p)
+            for value in (False, True, True, False):
+                # Include dirty private scratch without changing the explicit input M0.
+                machine.memory[:] = [initial] * len(machine.memory)
+                machine.memory[0] = value
+                machine.step()
+                self.assertEqual(machine.memory[1:4], [False, True, value])
+
+    def test_numeric_loop_without_io_initializes_dirty_private_bits(self):
+        p = self.compile(
+            "plc::i16 held=0;void scan(){plc::i16 n=0;plc::i16 sum=0;"
+            "while(n<4){sum=plc::add_i16(sum,n);n=plc::add_i16(n,1);}"
+            "held=plc::add_i16(held,sum);plc::write_word(0,held);"
+            "plc::write_m(0,sum==6);}"
+        )
+        self.assertNotRegex(
+            "\n".join(line for rung in p.rungs for line in rung), r"%[IQ]0\.\d+"
+        )
+        vm_traces = []
+        for initial in (False, True):
+            machine = self.api("il").Machine(p)
+            trace = []
+            for expected in (6, 12, 18):
+                machine.memory[:] = [initial] * len(machine.memory)
+                machine.step()
+                self.assertEqual(machine.words[0], expected)
+                self.assertTrue(machine.memory[0])
+                trace.append(
+                    [machine.words[0] == value for value in (6, 12, 18)]
+                    + [machine.memory[0]]
+                )
+            vm_traces.append(trace)
+        # Observe the exact memory-only source through a separate native harness.
+        probe = self.work / "observe.cpp"
+        probe.write_text(
+            '#define scan memory_scan\n#include "program.cpp"\n#undef scan\n'
+            "void scan(){memory_scan();plc::output(0,plc::read_word(0)==6);"
+            "plc::output(1,plc::read_word(0)==12);"
+            "plc::output(2,plc::read_word(0)==18);"
+            "plc::output(3,plc::read_m(0));}\n"
+        )
+        native = self.api("native").run_native(probe, [{}] * 3)
+        observed = [frame[:4] for frame in native]
+        self.assertEqual(
+            observed,
+            [
+                [True, False, False, True],
+                [False, True, False, True],
+                [False, False, True, True],
+            ],
+        )
+        for trace in vm_traces:
+            self.assertEqual(observed, trace)
+
     def test_assignment_order_toggle_and_branch_condition_snapshot(self):
         p = self.compile(
             "bool state=false; void scan(){if(!state){state=!state;plc::output(1,state);}else{state=false;plc::output(1,state);}plc::output(0,state);}"

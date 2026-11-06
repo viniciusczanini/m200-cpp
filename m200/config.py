@@ -57,6 +57,7 @@ REPEATED = {
     "DigitalInputs": {"DiscretInput"},
     "DigitalOutputs": {"DiscretOutput"},
     "HighSpeedCounters": {"HighSpeedCounter"},
+    "PulseTrainOutputs": {"PulseTrainOutput"},
     "DedicatedInputs": {"DedicatedInput"},
     "ReflexOutputs": {"ReflexOutput"},
     "Thresholds": {"Threshold"},
@@ -70,6 +71,7 @@ CPU_ARRAYS = set(
 TECHNICAL = set(
     "PtoConfiguration ComConfiguration Compatibility FastCounterMax FourInputsEventTask GrafcetBitsMax InternalRamStart LabelsMax LfRegistersMax MemoryConstantWordsMax MemoryWordsMax NumRelays NumRelaysMax NumTransistors NumTransistorsMax PidAmountMax PlcNumberSysBits PlcNumberSysWords PlcStartAddrSysBits PlcType TimersMax AnalogInputPrecision AnalogOutputPrecision StepCountersMax CountersMax DrumsMax ExternalRamSize ExternalRamSizeWithDisplay ExternalRamStart InternalRamAppStart InternalRamSize InternalBitsMax InternalEepromSize ScheduleBlocksMax ShiftBitRegistersMax SubroutinesMax SupportDoubleWord SupportEvents SupportFloatingPoint NumberOf1MsTimerBase".split()
 )
+TECHNICAL |= {"MetadataAreaSize", "UdfbInstanceMax", "UdfMax", "UdfObjectsMax"}
 
 
 def fields(node, allowed):
@@ -152,9 +154,16 @@ def check_io(node, entry, prefix, capacity):
     fields(node, {entry})
     seen = set()
     for io in node:
-        fields(io, {"Address", "Index", "Symbol", "Comment"})
+        defaults = (
+            {"DIFiltering": "DIFilterings4ms", "DILatch": "DILatchNo"}
+            if entry == "DiscretInput"
+            else {}
+        )
+        fields(io, {"Address", "Index", "Symbol", "Comment"} | defaults.keys())
         for c in io:
             scalar(c)
+            if c.tag in defaults and c.text != defaults[c.tag]:
+                fail("non-default input filtering/latch is not implemented: " + c.tag)
         try:
             index = int(io.findtext("Index", "-1"))
         except ValueError:
@@ -166,6 +175,39 @@ def check_io(node, entry, prefix, capacity):
         ):
             fail("invalid or duplicate I/O descriptor")
         seen.add(index)
+
+
+def inactive_pulse_outputs(node):
+    """Preserve only the disabled axis defaults observed in native M200 files."""
+    fields(node, {"PulseTrainOutput"})
+    seen = set()
+    for output in node:
+        fields(output, {"Address", "Index", "PtoObject", "GlobalIndex", "Preset"})
+        index = output.findtext("Index", "")
+        if (
+            index not in ("0", "1")
+            or index in seen
+            or output.findtext("GlobalIndex") != index
+            or output.findtext("Address")
+            != f"%PLS{index}/%PWM{index}/%PTO{index}/%FREQGEN{index}"
+            or output.findtext("Preset") != "1"
+        ):
+            fail("unsupported pulse output defaults")
+        seen.add(index)
+        for child in output:
+            if child.tag == "PtoObject":
+                fields(child, {"RefInput", "ZPhaseInput", "ProbeInput"})
+                if any(
+                    child.findtext(field) != "NotUsed"
+                    for field in ("RefInput", "ZPhaseInput", "ProbeInput")
+                ):
+                    fail("active pulse axis configuration is unsupported")
+                for value in child:
+                    scalar(value)
+            else:
+                scalar(child)
+        if output.find("PtoObject") is None:
+            fail("pulse output requires the observed inactive PtoObject defaults")
 
 
 def check_numbers(node):
@@ -301,12 +343,12 @@ def ethernet(node):
             for c in part:
                 if c.tag in ("RemoteServers", "Devices"):
                     validate_remotes(c)
-                elif c.tag.endswith("IoScanner") or c.tag == "Drives":
-                    empty(c)
                 elif c.tag == "IsIoScanner":
                     scalar(c)
                     if (c.text or "false").lower() != "false":
                         fail("active IOScanner configuration is not implemented")
+                elif c.tag.endswith("IoScanner") or c.tag == "Drives":
+                    empty(c)
                 else:
                     scalar(c)
             if (
@@ -396,6 +438,8 @@ def configuration(root):
             check_io(part, "DiscretOutput", "%Q0.", 16)
         elif part.tag == "HighSpeedCounters":
             inactive_hsc(part)
+        elif part.tag == "PulseTrainOutputs":
+            inactive_pulse_outputs(part)
         elif part.tag == "EthernetConfiguration":
             ethernet(part)
         elif part.tag == "TechnicalConfiguration":

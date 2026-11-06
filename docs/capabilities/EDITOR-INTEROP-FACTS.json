@@ -1,0 +1,281 @@
+{
+  "format": "m200-editor-interop-facts-v1",
+  "observed_utc": "2026-11-06",
+  "editor": "EcoStruxure Machine Expert Basic 1.4 build484",
+  "environment": "existing Wine9/.NET4.8 lab; metadata-only inspection, binaries unchanged",
+  "extraction": "Existing binary-refinery dnhdr/dnrc/dnmr; no new package install; no executable, assembly, source method body or complete resource dump published",
+  "assemblies": [
+    {
+      "file": "SchneiderElectric.SoMachineBasic.Entities.dll",
+      "bytes": 1104024,
+      "sha256": "bf7b33a79356dbfd9839891b00e61695b5af3b5ee7ce121def37e3e973a9455e"
+    },
+    {
+      "file": "SchneiderElectric.SoMachineBasic.CommonCore.dll",
+      "bytes": 92824,
+      "sha256": "9434b681932df39a57f9ee14d39e09b12bd5eb42c62d8aa814ef217821d0181a"
+    },
+    {
+      "file": "SchneiderElectric.SoMachineBasic.Common.CommonResources.dll",
+      "bytes": 389784,
+      "sha256": "a7b34ccd1ddb91ae1b9d3b80a6585df5f70448c73957ac509d81e82e885eb155"
+    }
+  ],
+  "management_levels": {
+    "enum_type": "SchneiderElectric.Automation.SoMachineBasic.Common.CommonCore.ManagementLevel.ManagementLevel",
+    "type_def_index": 61,
+    "resource_name": "SchneiderElectric.Automation.SoMachineBasic.Common.CommonResources.LocalizationResources.resources",
+    "rows": [
+      {
+        "token": "FunctLevelMan1_0",
+        "enum_value": 10,
+        "resource_key": "enumFunctLevelMan1_0",
+        "resource_text": "t-Level 1.0",
+        "human_level": [
+          1,
+          0
+        ]
+      },
+      {
+        "token": "FunctLevelMan2_0",
+        "enum_value": 11,
+        "resource_key": "enumFunctLevelMan2_0",
+        "resource_text": "t-Level 2.0",
+        "human_level": [
+          2,
+          0
+        ]
+      },
+      {
+        "token": "FunctLevelMan3_0",
+        "enum_value": 12,
+        "resource_key": "enumFunctLevelMan3_0",
+        "resource_text": "t-Level 3.0",
+        "human_level": [
+          3,
+          0
+        ]
+      },
+      {
+        "token": "FunctLevelMan4_0",
+        "enum_value": 13,
+        "resource_key": "enumFunctLevelMan4_0",
+        "resource_text": "t-Level 3.1",
+        "human_level": [
+          3,
+          1
+        ]
+      },
+      {
+        "token": "FunctLevelMan5_0",
+        "enum_value": 14,
+        "resource_key": "enumFunctLevelMan5_0",
+        "resource_text": "t-Level 3.2",
+        "human_level": [
+          3,
+          2
+        ]
+      },
+      {
+        "token": "FunctLevelMan6_0",
+        "enum_value": 15,
+        "resource_key": "enumFunctLevelMan6_0",
+        "resource_text": "t-Level 3.3",
+        "human_level": [
+          3,
+          3
+        ]
+      },
+      {
+        "token": "FunctLevelMan7_0",
+        "enum_value": 16,
+        "resource_key": "enumFunctLevelMan7_0",
+        "resource_text": "t-Level 4.0",
+        "human_level": [
+          4,
+          0
+        ]
+      },
+      {
+        "token": "FunctLevelMan8_0",
+        "enum_value": 17,
+        "resource_key": "enumFunctLevelMan8_0",
+        "resource_text": "t-Level 4.1",
+        "human_level": [
+          4,
+          1
+        ]
+      },
+      {
+        "token": "FunctLevelMan9_0",
+        "enum_value": 18,
+        "resource_key": "enumFunctLevelMan9_0",
+        "resource_text": "t-Level 5.0",
+        "human_level": [
+          5,
+          0
+        ]
+      },
+      {
+        "token": "FunctLevelMan10_0",
+        "enum_value": 19,
+        "resource_key": "enumFunctLevelMan10_0",
+        "resource_text": "t-Level 5.1",
+        "human_level": [
+          5,
+          1
+        ]
+      },
+      {
+        "token": "FunctLevelMan11_0",
+        "enum_value": 20,
+        "resource_key": "enumFunctLevelMan11_0",
+        "resource_text": "t-Level 6.0",
+        "human_level": [
+          6,
+          0
+        ]
+      },
+      {
+        "token": "FunctLevelMan12_0",
+        "enum_value": 21,
+        "resource_key": "enumFunctLevelMan12_0",
+        "resource_text": "t-Level 6.1",
+        "human_level": [
+          6,
+          1
+        ]
+      },
+      {
+        "token": "FunctLevelMan13_0",
+        "enum_value": 22,
+        "resource_key": "enumFunctLevelMan13_0",
+        "resource_text": "t-Level 6.2",
+        "human_level": [
+          6,
+          2
+        ]
+      },
+      {
+        "token": "FunctLevelMan14_0",
+        "enum_value": 23,
+        "resource_key": "enumFunctLevelMan14_0",
+        "resource_text": "t-Level 10.0",
+        "human_level": [
+          10,
+          0
+        ]
+      },
+      {
+        "token": "FunctLevelMan15_0",
+        "enum_value": 24,
+        "resource_key": "enumFunctLevelMan15_0",
+        "resource_text": "t-Level 10.1",
+        "human_level": [
+          10,
+          1
+        ]
+      },
+      {
+        "token": "FunctLevelMan16_0",
+        "enum_value": 25,
+        "resource_key": "enumFunctLevelMan16_0",
+        "resource_text": "t-Level 10.2",
+        "human_level": [
+          10,
+          2
+        ]
+      },
+      {
+        "token": "FunctLevelMan17_0",
+        "enum_value": 26,
+        "resource_key": "enumFunctLevelMan17_0",
+        "resource_text": "t-Level 11.0",
+        "human_level": [
+          11,
+          0
+        ]
+      },
+      {
+        "token": "FunctLevelMan18_0",
+        "enum_value": 27,
+        "resource_key": "enumFunctLevelMan18_0",
+        "resource_text": "t-Level 12.0",
+        "human_level": [
+          12,
+          0
+        ]
+      },
+      {
+        "token": "FunctLevelMan19_0",
+        "enum_value": 28,
+        "resource_key": "enumFunctLevelMan19_0",
+        "resource_text": "t-Level 12.1",
+        "human_level": [
+          12,
+          1
+        ]
+      },
+      {
+        "token": "FunctLevelMan20_0",
+        "enum_value": 29,
+        "resource_key": "enumFunctLevelMan20_0",
+        "resource_text": "t-Level 13.0",
+        "human_level": [
+          13,
+          0
+        ]
+      },
+      {
+        "token": "FunctLevelMan21_0",
+        "enum_value": 30,
+        "resource_key": "enumFunctLevelMan21_0",
+        "resource_text": "t-Level 14.0",
+        "human_level": [
+          14,
+          0
+        ]
+      }
+    ],
+    "scope": "Internal token ordinals mapped to human feature labels; does not establish M200 firmware support for each level"
+  },
+  "timer_time_bases": {
+    "type": "SchneiderElectric.Automation.SoMachineBasic.Entities.PLCObjects.FunctionBlocks.Enums.TimerTimeBaseEnum",
+    "type_def_index": 551,
+    "values": {
+      "OneMilliSeconds": 0,
+      "TenMilliSeconds": 1,
+      "OneHundredMilliSeconds": 2,
+      "OneSecond": 3,
+      "OneMinute": 4
+    },
+    "candidate_xml_name_for_10ms": "TenMilliSeconds",
+    "xml_binding": "candidate enum identifier, requires editor-created Timer XML and acceptance test",
+    "hardware_timing": "pending"
+  },
+  "ladder_element_types": {
+    "type": "SchneiderElectric.Automation.SoMachineBasic.Entities.Program.ProgramElementTypes",
+    "type_def_index": 244,
+    "values": {
+      "NormalContact": 1,
+      "Coil": 5,
+      "Jump": 10,
+      "JumpCn": 11,
+      "Return": 12,
+      "Stop": 13,
+      "Line": 17,
+      "Timer": 23,
+      "End": 37,
+      "EndCn": 38
+    },
+    "scope": "Enum identifier/value only; END/ENDC/ENDCN layout, instruction binding and editor-saved XML remain unverified"
+  },
+  "pou_section_number": {
+    "original_template_first_section": 0,
+    "original_template_sha256": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf",
+    "other_observed_variant_first_section": 1,
+    "writer_policy": "preserve observed template base, contiguous section numbering",
+    "editor_baseline": "Root independently reopened exact original with No error; screenshot skill-1793938955148514000-1689.png"
+  },
+  "physical_plc": "pending"
+}

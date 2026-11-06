@@ -11,6 +11,7 @@ import xml.etree.ElementTree as ET
 
 from .communication import block_address
 from .model import fail
+from .levels import functional_level
 from .modbus import ModbusConfig, validate_config
 
 
@@ -346,10 +347,7 @@ def check_template_channels(root, configs):
     if not configs:
         return
     level = _scalar(_find(root, "ManagementLevel"))
-    match = re.fullmatch(r"FunctLevelMan(\d+)_(\d+)", level)
-    if not match or len(match.group(1)) > 3 or len(match.group(2)) > 3:
-        fail("invalid communication functional level")
-    budget = 32 if tuple(map(int, match.groups())) >= (10, 1) else 16
+    budget = 32 if functional_level(level) >= (10, 1) else 16
     links = set()
     for address, config in configs.items():
         _, index = _checked_config(address, config)

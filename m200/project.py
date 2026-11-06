@@ -333,6 +333,16 @@ def numeric_graph(typ, expression):
     return tuple(freeze(v) for v in parsed)
 
 
+def section_base(pous):
+    """Native editor uses zero; earlier observed files use one-based sections."""
+    if pous is None or not len(pous):
+        return 1
+    value = pous[0].findtext("SectionNumber")
+    if value not in ("0", "1"):
+        fail("POU section order is unsupported or inconsistent")
+    return int(value)
+
+
 def load_project(path):
     root = parse(path)
     sw = configuration(root)
@@ -385,7 +395,7 @@ def load_project(path):
             )
     pous = sw.find("Pous")
     if pous is not None:
-        for section, pou in enumerate(pous, 1):
+        for section, pou in enumerate(pous, section_base(pous)):
             if pou.findtext("SectionNumber") != str(section):
                 fail("POU section order is unsupported or inconsistent")
             if any(c.tag not in ("Name", "SectionNumber", "Rungs") for c in pou):
@@ -520,6 +530,7 @@ def write_project(program, template, destination):
     program = normalize(program)
     root = parse(template)
     sw = configuration(root)
+    first_section = section_base(sw.find("Pous"))
     check_template_channels(root, program.communications)
     write_blocks(program, sw)
     write_counters(program, sw)
@@ -540,7 +551,7 @@ def write_project(program, template, destination):
     pous = element(sw, "Pous")
     pou = element(pous, "ProgramOrganizationUnits")
     element(pou, "Name", "Generated C++ - EXPERIMENTAL")
-    element(pou, "SectionNumber", 1)
+    element(pou, "SectionNumber", first_section)
     rungs = element(pou, "Rungs")
     for i, lines in enumerate(program.rungs):
         r = element(rungs, "RungEntity")
