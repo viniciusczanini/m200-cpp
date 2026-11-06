@@ -2,6 +2,10 @@
 
 Status: **2026-11-06 — working experimental toolchain; full parity unfinished.**
 
+**Current delivery goal:** [Natal da Liberdade release](GOAL.md). The user moved
+whole-controller parity to a future version; it is not the exit criterion for
+this priority release. The full inventory below remains preserved as future work.
+
 The goal remains unchanged: every algorithm and resource accepted for the
 identified Schneider TM200CE40T profile must have a supported restricted-C++
 expression, coherent native Ladder/SMBP output and equivalent reverse C++.

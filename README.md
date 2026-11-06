@@ -10,6 +10,9 @@ The intended result is a project opened, checked, and transferred by **EcoStruxu
 
 [Quick start](#quick-start) · [Workflow](#workflow) · [Current coverage](#current-coverage) · [Validation](#validation) · [Documentation](#documentation)
 
+The current delivery targets the [Natal da Liberdade release](docs/GOAL.md),
+including RTC/scheduling. Whole-controller parity remains a future-version goal.
+
 ## Why this project exists
 
 PLC programs should be expressible as readable source code while remaining inspectable in the manufacturer's tools. m200-cpp explores that workflow with explicit scan semantics, typed operations, visible resource costs, and reversible native instructions.

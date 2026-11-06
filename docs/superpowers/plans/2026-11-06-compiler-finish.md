@@ -1,5 +1,9 @@
 # Compiler Completion Implementation Plan
 
+> **Release-goal override, 2026-11-06:** the user moved full parity to a future
+> version. [GOAL.md](../../GOAL.md) defines the Natal delivery and its exit
+> criteria. Deferred work in this full completion plan does not block that release.
+
 > **User execution override, 2026-11-06:** use the
 > [parallel delivery policy](../../PARALLEL-DELIVERY.md): twenty isolated
 > implementation lanes, three dedicated test agents, and a final batched

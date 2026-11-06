@@ -1,5 +1,10 @@
 # Functional parity with the Schneider TM200CE40T profile
 
+> **Current release scope, revised by the user on 2026-11-06:** the
+> [Natal da Liberdade goal](GOAL.md) defines this delivery. This full parity
+> contract remains the future-version objective; its deferred families do not
+> block the Natal release and are not claimed complete by that release.
+
 The user reinforced this requirement on 2026-11-05: every algorithm that can be
 programmed and accepted by the official software for their TM200CE40T must be
 expressible in C++ with this project's library, producing an equivalent project.
