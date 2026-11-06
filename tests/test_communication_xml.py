@@ -258,7 +258,7 @@ class CommunicationXMLTests(unittest.TestCase):
 
     def test_unproven_enum_or_block_export_fails_without_mutation(self):
         for cfg in [
-            ModbusConfig(obj_type=1),
+            ModbusConfig(kind="WRITE_VAR", obj_type=5),
             ModbusConfig(kind="WRITE_VAR", obj_type=4),
             ModbusConfig(kind="WRITE_READ_VAR"),
         ]:

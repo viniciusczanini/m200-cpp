@@ -1,0 +1,58 @@
+{
+  "source": "User local Schneider Basic lab; official-editor Ctrl+S save of a writable disposable candidate copy, followed by fresh reopen of an exact saved-byte clone",
+  "editor": "EcoStruxure Machine Expert Basic 1.4 build 484",
+  "target": "TM200CE40T",
+  "copied_utc": "2026-11-06",
+  "file": "official_tm200ce40t_modbus_read_i.smbp",
+  "sha256": "1c857a39e418d602b30f132ebc311f60521eb70fdb44ddbe94fc39ff9430d214",
+  "bytes": 88441,
+  "original_modified": false,
+  "parent_candidate": {
+    "file": "02_read_i_fc2.smbp",
+    "sha256": "112f98745711d0d97c4a5f42553a73c4d228161badbce7463b6ea4536aab5f72",
+    "operation": "Frozen candidate copied byte-for-byte to a writable disposable P: working file; official Ctrl+S saved that working file; actual saved bytes copied unchanged to the separate editor_saved artifact. A different project was opened before freshly reopening this exact saved-byte clone."
+  },
+  "hardware_template_sha256": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf",
+  "hardware_change_from_authentic_template": [
+    {
+      "path": "HardwareConfiguration/Plc/SerialLineConfiguration/Addressing",
+      "from": "SlaveAddressing",
+      "to": "MasterAddressing"
+    }
+  ],
+  "configuration": {
+    "kind": "READ_VAR",
+    "link_xml": "SerialLine1",
+    "remote_device_id": 1,
+    "timeout_100ms": 100,
+    "object_xml": "I",
+    "object_numeric": 1,
+    "function_code": 2,
+    "first_obj": 17,
+    "quantity_bits": 17,
+    "index_data": 200,
+    "buffer_words": 2
+  },
+  "editor_save": {
+    "status": "No error",
+    "observed_by": "root local desktop GUI operator",
+    "capture_file": "02_read_i_fc2_save.png",
+    "capture_sha256": "46982368c7c2a8e5b18d5b963da53b524f35bc8aca0712d84cc60dda46481914"
+  },
+  "editor_fresh_reopen": {
+    "status": "No error",
+    "observed_by": "root local desktop GUI operator",
+    "capture_file": "02_reopen.png",
+    "capture_sha256": "2cc576533ffa96c97ac5af22e75a4761781348a877e78786fc0d0dd2cde9847b",
+    "scope": "Exact saved candidate only"
+  },
+  "local_readback": {
+    "file": "/Users/tommy/Offline/plc-mac-lab/diagnostics/modbus-next-bindings-20261106/editor-saved/02_read_i_fc2_readback.json",
+    "sha256": "f0f9dc4d8ea8c2a7567f9aa930ad9d5d9d0ef377800ce9add4126dec2d4155de",
+    "raw_il_equal": true,
+    "hardware_semantics_equal": true,
+    "function_block_semantics_equal": true
+  },
+  "evidence_directory": "/Users/tommy/Offline/plc-mac-lab/diagnostics/modbus-next-bindings-20261106/editor-saved",
+  "scope": "Exact READ I/Q or WRITE Q typed XML binding and Execute-only graph saved/reopened at FunctLevelMan21_0. No compile, official simulator communication, serial transaction or physical PLC proof; other block kinds and graph forms remain gated."
+}

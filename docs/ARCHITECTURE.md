@@ -136,7 +136,7 @@ Global `Ton`, `Tof`, `Pulse`, `Clock`, `RisingEdge`, and `FallingEdge` instances
 
 TON/TOF/TP expose `preset()` (%TM.P), `value()` (%TM.V), `done()` (%TM.Q), and `set_preset(i16)`. `Ton{42, 100, 3}` fixes native TM42, a 100 ms base, and a three-tick preset; the reverse path preserves these parameters. Writes to P use the native object, not a shadow MW. V and Q are read-only. With Dynamic Preset false, a new P is visible immediately but affects the next activation. Skipping the block lets its internal state progress without rewriting its linked output.
 
-The five-argument constructor `{index, base, preset, retentive, dynamic_preset}` accepts literal flags. Locally, retentive TON/TOF pause/resume before completion; retentive TP is refused. Dynamic preset is modeled for TON/TOF/TP and applies on the next base update. Reducing P below V completes while retaining V; with both options, reducing P below V while paused resets V. These boundaries, native tick phase, fractional timing, RUN/STOP, and restart behavior remain provisional.
+The five-argument constructor `{index, base, preset, retentive, dynamic_preset}` accepts literal flags. The exporter/importer admit three separate one-second Man21 contexts from the actual template/input XML token, independently of Program metadata. See [official paired controls](validation/TIMER-OPTIONS-OFFICIAL-OBSERVATIONS.md) and [profile-policy results](validation/TIMER-OPTION-POLICY-RESULTS.md). Locally, retentive TON/TOF pause/resume before completion; retentive TP is refused. Dynamic preset is modeled for TON/TOF/TP and applies on the next base update. Reducing P below V completes while retaining V; with both options, reducing P below V while paused resets V. These boundaries, native tick phase, fractional timing, RUN/STOP, and restart behavior remain provisional.
 
 **SMBP with either timer option true remains blocked**, pending functional-level 3.3/12.0 mapping. The 10 ms timer base is also blocked because its XML enum has not been established from a verified original. Other emitted bases still require official acceptance.
 
@@ -172,7 +172,7 @@ No transport is selected automatically. `Machine(..., communication_transport=..
 
 The local engine bounds queues/receive data and rejects mismatched responses. Arbitration, simultaneous Abort/Execute, and code-clearing details remain conservative local policies where physical behavior lacks evidence. Physical serial RTU/ASCII/CRC is not implemented by the host model; in an exported project it belongs to the official PLC runtime.
 
-SMBP export covers proved READ_VAR/WRITE_VAR word profiles and known port enums only. WRITE_READ_VAR XML, bit/single-object enums, certain port parameters, dynamic communication properties, and graphical ABORT remain gaps. Local protocol support does not establish project-format support, serial electrical behavior, or physical Ethernet compatibility.
+SMBP export covers READ_VAR holding/input words and discrete-input/coil bits, plus WRITE_VAR holding words and coil bits, with the established port profiles. The bit bindings use exact official-editor saved/reopened CE40T fixtures. WRITE_READ_VAR XML, single-object enums, certain port parameters, dynamic communication properties, and graphical ABORT remain gaps. Local protocol support does not establish project-format support, serial electrical behavior, or physical Ethernet compatibility.
 
 See [Modbus API and limits](MODBUS.md), [serialization research](capabilities/MODBUS-FORMAT-RESEARCH.md), and the [read example](../examples/modbus_read.cpp).
 
@@ -188,10 +188,9 @@ Important current export gates include:
 
 | Feature available locally | Why project support remains gated |
 |---|---|
-| 10 ms timer base | Unproved XML enumeration |
-| Retentive / dynamic-preset timer modes | Functional-level serialization and profile mapping unresolved |
+| Other retentive / dynamic-preset timer contexts | Three separate contexts are admitted: retentive TON/TOF or dynamic TON, base 1 s, actual `FunctLevelMan21_0` only; other bases, levels, kinds and combined flags remain gated |
 | Indexed bits | FL10.0 mapping and CE40T profile evidence unresolved |
-| Several Modbus variants | Unproved object/port enums or graphical ABORT / WRITE_READ form |
+| Several Modbus variants | Single writes, other port forms and graphical ABORT / WRITE_READ forms await closed bindings |
 | Arbitrary native project graphs | Importer only handles explicitly reconciled subsets |
 
 `write_project` rereads the generated candidate and validates it locally before replacing the destination. Source maps and hashes make outputs inspectable. They do not prove the editor will open, compile, or retain the same program.

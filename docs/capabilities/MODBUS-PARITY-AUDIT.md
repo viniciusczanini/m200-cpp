@@ -109,3 +109,8 @@ Local source: `/Users/tommy/Offline/plc-mac-lab/STATUS.md`, particularly the ext
 | 3 | Optional ports, multiple remotes and remote ports other than 502 are unproved in the exporter. | Preserve official model/cartridge/level and configuration; separate remote index, Unit ID and port. An enum name does not authorize inventing hardware trees or a port field. |
 
 These are future tasks, not actions performed or authorized by this document. Official validation and integrity checks remain necessary. This inventory provides no reason to remove gates or declare complete Modbus parity.
+
+
+## Subsequent scoped implementation
+
+A later closed binding increment adds READ_VAR I/Q and WRITE_VAR Q from exact CE40T official saves and fresh reopens. Packed MW buffer and direction checks remain enforced. Single writes, WRITE_READ_VAR and connected Abort/output graph forms remain gated in the product. The original audit table describes its earlier checkpoint; editor binding evidence still does not establish an actual exchange.

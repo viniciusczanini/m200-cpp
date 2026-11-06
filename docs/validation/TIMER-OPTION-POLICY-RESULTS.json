@@ -1,0 +1,290 @@
+{
+  "format": "m200-timer-option-policy-results-v1",
+  "date": "2026-11-06",
+  "target": "TM200CE40T",
+  "baseline_commit": "30d2df43912b4f77adc0a2cb10020f59bb109fbd",
+  "scope": "Admit three observed separate timer-option contexts at actual FunctLevelMan21_0 and base1000ms, without changing timer runtime/SDK behavior or inferring minimum levels.",
+  "context_keys": {
+    "fields": [
+      "kind",
+      "retentive",
+      "dynamic_preset",
+      "base_ms",
+      "actual_management_token"
+    ],
+    "allowed": [
+      [
+        "TON",
+        true,
+        false,
+        1000,
+        "FunctLevelMan21_0"
+      ],
+      [
+        "TOF",
+        true,
+        false,
+        1000,
+        "FunctLevelMan21_0"
+      ],
+      [
+        "TON",
+        false,
+        true,
+        1000,
+        "FunctLevelMan21_0"
+      ]
+    ]
+  },
+  "policy": {
+    "actual_xml_token_only": true,
+    "program_metadata_is_authority": false,
+    "false_false_behavior": "unchanged",
+    "full_model_validation_before_policy": true,
+    "existing_template_overwrite_refusal": "preserved",
+    "destination_replacement": "only after staged reimport/configuration agreement",
+    "broader_options": "explicitly unverified; rejected"
+  },
+  "source_pin": {
+    "scope": "Patch inputs and unchanged runtime/SDK only; combined full-suite source pin is recorded separately when available. Mutable root documentation excluded.",
+    "patch_inputs": [
+      {
+        "path": "m200/project.py",
+        "bytes": 28518,
+        "sha256": "3299d4cbecb3acaffbb6c222c1a178861b99c044a650af37648bba02306258e5"
+      },
+      {
+        "path": "m200/timer_profile.py",
+        "bytes": 2047,
+        "sha256": "ca3f7855752418db88698ab0a6fff8ead02f67d8c63c767baeb7b0f985fd346e"
+      },
+      {
+        "path": "tests/test_timer_option_bindings.py",
+        "bytes": 19033,
+        "sha256": "e07b68561a990fa72af70557bad9ae5a60a2e88230bc9dae53a4f9c2e0e67e73"
+      },
+      {
+        "path": "tests/fixtures/official_tm200ce40t_timer_options_behavior.smbp",
+        "bytes": 471237,
+        "sha256": "5358e5334696e1838e8b34b9efaa84fafb2a7bd97802d2d2ee32ae94a7f52214"
+      },
+      {
+        "path": "tests/fixtures/official_tm200ce40t_timer_options_behavior.provenance.json",
+        "bytes": 1701,
+        "sha256": "106137384b9f4b7c38786e066e9158e1d53042e6d6260f953279d78c9bb23477"
+      }
+    ],
+    "unchanged_behavior_files": {
+      "m200/timers.py": {
+        "sha256": "384e3c26facd76ed8da5449d001348fe1c1dd818a73532ab9c782e6a9b0fedf6",
+        "equal_to_baseline": true
+      },
+      "sdk/plc.hpp": {
+        "sha256": "b1d6f04ab2ce88d4e37ac781a299f134c5882971f2d593ead502be3877e784b3",
+        "equal_to_baseline": true
+      },
+      "m200/il.py": {
+        "sha256": "f177243b0b658414b8e2f3da7eac7a7ed62b7996f5faa2154b96377f9538db83",
+        "equal_to_baseline": true
+      },
+      "m200/frontend.py": {
+        "sha256": "2b56e3ca231ccb3cbb9a5371051928b360559400566c771a4cd678db07c0504a",
+        "equal_to_baseline": true
+      },
+      "m200/reverse.py": {
+        "sha256": "a84be951d8f3e113fb74065c024198408efd584c3b16794a3f88e1f04507a0d1",
+        "equal_to_baseline": true
+      }
+    }
+  },
+  "focused": {
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "tests.test_timer_option_bindings",
+      "tests.test_timer_xml_bindings",
+      "tests.test_timer_modes",
+      "tests.test_timer_properties",
+      "tests.test_inactive_pulse_aliases",
+      "-v"
+    ],
+    "status": "passed",
+    "tests": 48,
+    "seconds": 20.11,
+    "modules": {
+      "tests.test_timer_option_bindings": 15,
+      "tests.test_timer_xml_bindings": 4,
+      "tests.test_timer_modes": 12,
+      "tests.test_timer_properties": 10,
+      "tests.test_inactive_pulse_aliases": 7
+    },
+    "log": {
+      "path": "output/diagnostics/timer-option-policy-2026-11-06/green-focused.log",
+      "bytes": 5856,
+      "sha256": "28ee0d2efcb2557dd5046f16e64e1ce2ffe11f66f84fecc9f6dcb0ef48314641"
+    },
+    "red": {
+      "status": "observed expected blanket-gate rejection",
+      "tests": 13,
+      "errors": 0,
+      "log": {
+        "path": "output/diagnostics/timer-option-policy-2026-11-06/red.log",
+        "bytes": 9207,
+        "sha256": "1779d513b870cd3895045c39c2e5112207804ef0286af37d77db3063a404861d"
+      },
+      "test_evolution": "The final15-test file adds policy/sparse boundaries. One initial success expectation for same-path output was corrected to preserve the existing refusal contract; it was not a requested new feature. No product behavior was expanded for that expectation.",
+      "blanket_gate_failures": 7,
+      "valid_new_feature_failures": 6
+    }
+  },
+  "literal_oracle": {
+    "distinct_frames": 26,
+    "source": "tests/test_timer_option_bindings.py::TRACE",
+    "checked_outputs": "Q0..15 at all26positions",
+    "checked_vm_words": "MW200..205 at all26positions",
+    "paths": [
+      "authentic5358saved XML import",
+      "independently written C++ source compiled to IL VM",
+      "C++ native SDK",
+      "supported XML export and reimport",
+      "XML to C++ and recompilation to IL VM",
+      "reversed native C++",
+      "reexported reversed XML"
+    ],
+    "counting": "These are26distinct local trace positions, repeated across comparison stages; repetitions are not additional frames. This is a local model oracle, not new official timing evidence."
+  },
+  "negative_scope": [
+    "Other modes/bases/combined trueflags",
+    "Low/unknown/missing/noncanonical actual management tokens",
+    "Forged Program metadata cannot authorize template context",
+    "Malformed/nested/duplicate fields and timers",
+    "Readonly V/Q, invalid preset, nonbool model flags, retentive TP",
+    "Active PTO reference in otherwise verified option template",
+    "Source/template/destination byte preservation on rejection",
+    "Existing source==destination output refusal"
+  ],
+  "boundary_scope": "Sparse TM254 and preset0/9999 binding checks use existing model limits. They do not claim official execution at those boundary values.",
+  "official_evidence": {
+    "observations": "docs/validation/TIMER-OPTIONS-OFFICIAL-OBSERVATIONS.json",
+    "summary": "docs/validation/TIMER-OPTIONS-OFFICIAL-OBSERVATIONS.md",
+    "artifact_sha256": "5358e5334696e1838e8b34b9efaa84fafb2a7bd97802d2d2ee32ae94a7f52214",
+    "distinct_claims": "Handbuilt candidate runtime/control observations and exact saved-file clean reopen support these selected contexts. This increment adds product generation locally; no newly generated artifact has received official GUI/runtime or physical acceptance in this report."
+  },
+  "full_regression": {
+    "status": "passed",
+    "command": [
+      "make",
+      "check"
+    ],
+    "underlying_command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "tests": 496,
+    "suite_seconds": 202.294,
+    "runner_seconds": 202.423,
+    "exit_code": 0,
+    "previous_checkpoint_tests": 471,
+    "new_timer_policy_tests": 15,
+    "new_modbus_bit_binding_tests": 10,
+    "combined_scope": "This one frozen run covers the narrow timer policy and the separate Modbus I/Q XML-binding increment. No native graph gate or timer/protocol runtime implementation is expanded.",
+    "source_inputs": 124,
+    "source_stable_start_to_end": true,
+    "source_still_matches_at_report": true,
+    "source_pin": {
+      "path": "output/editor-validation/timer-bit-integration/source-pin.json",
+      "bytes": 12864,
+      "sha256": "80ed48494fdc30bfb61e366cd79ea739fdee2a856116e5646ac07344728afedf"
+    },
+    "result": {
+      "path": "output/editor-validation/timer-bit-integration/result.json",
+      "bytes": 191,
+      "sha256": "91c856e71121e0472ff83b3d6970e07071d54f2b49e1f1cbc45c9bb69a31e4b7"
+    },
+    "log": {
+      "path": "output/editor-validation/timer-bit-integration/full-regression.log",
+      "bytes": 51725,
+      "sha256": "c08664896d1597ea2c6d64cb071c761b9e1855a0168819d78788e32e61e40752"
+    },
+    "counting": "496=471+15timer+10Modbus. Focused runs/reviewer repetitions/probes are included validation activity, not additional unit tests or frames."
+  },
+  "independent_review": {
+    "status": "no outstanding findings",
+    "scope": "Read-only exact-context/template-authority/atomicity review; no GUI, runtime or full-suite repetition.",
+    "context_combinations": 600,
+    "actual_template_forged_metadata_exports": 12,
+    "sparse_TM254_P0_P9999_cases": 6,
+    "malformed_token_and_same_path_controls": "passed",
+    "focused_tests": 26,
+    "focused_seconds": 5.572,
+    "review": {
+      "path": "output/reports/timer-modbus-independent-review-2026-11-06/REVIEW.md",
+      "bytes": 5512,
+      "sha256": "cef41d72dac2363e8e4fc2070456f3d5a2bd8c97d0b734549f8c33498d73141a"
+    },
+    "summary": {
+      "path": "output/reports/timer-modbus-independent-review-2026-11-06/review-summary.json",
+      "bytes": 2589,
+      "sha256": "f8a7f72684f6f6b647d4eedee3509d5300b116831b6e70e859c48d7bdc3c09d0"
+    },
+    "probes": {
+      "path": "output/reports/timer-modbus-independent-review-2026-11-06/timer-independent-probes.json",
+      "bytes": 93574,
+      "sha256": "59284d7fe6e1c7ba6d799397453441f5b27bf927a5645dc97759aba0b8118c43"
+    },
+    "focused_log": {
+      "path": "output/reports/timer-modbus-independent-review-2026-11-06/timer-focused.log",
+      "bytes": 3280,
+      "sha256": "c2711917f5db18d2678d2423448f28ddbf4d49a5c18f6686bee73b80d7a43ed1"
+    },
+    "source_pin": {
+      "path": "output/reports/timer-modbus-independent-review-2026-11-06/timer-reviewed-pin.json",
+      "bytes": 821,
+      "sha256": "d94cfa07a1bb5784c4c9a800f9ad9420a81467c8a60c807ec2ad13176783d706"
+    },
+    "early_test_corrections": "Preserved the existing same-path refusal; corrected the inactive-PTO setup path before final review. Neither correction expanded product behavior."
+  },
+  "historical_evidence": "Older observation/integration manifests remain byte-exact historical checkpoints. Prior stress totals are not rerun or added to this result.",
+  "local_only": true,
+  "ci_or_remote_runners": false,
+  "generated_cli_candidate": {
+    "status": "supported CLI generation and local oracle passed; official acceptance pending at this report checkpoint",
+    "manifest": {
+      "path": "output/editor-validation/timer-options-generated/manifest.json",
+      "bytes": 6556,
+      "sha256": "3d629c6f3044805542da30964c3fdc08f7911031e8d0c5d85cb7101f2a9704f5"
+    },
+    "source": {
+      "path": "output/editor-validation/timer-options-generated/timer_options_behavior.cpp",
+      "bytes": 1764,
+      "sha256": "7a6819152ed649e9413807c382d4b6e1d8c5f11256111a5add579540c73d39c0"
+    },
+    "template": {
+      "path": "tests/fixtures/official_tm200ce40t_memory.smbp",
+      "bytes": 83391,
+      "sha256": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf"
+    },
+    "project": {
+      "path": "output/editor-validation/timer-options-generated/timer_options_generated.smbp",
+      "bytes": 452279,
+      "sha256": "5f8594912d882a3f8631988d6b6653b567c6314f8ed353cab37ee0284c6fc312"
+    },
+    "procedure": "Normal compile CLI with no XML edits; actual emitted XML decompiled and recompiled with the normal CLI. Source, IL, JSON, audit/reverse C++ and recompiled artifacts are pinned in the candidate manifest.",
+    "counting": "Uses the same26literal local positions; no new distinct-frame total is added.",
+    "source_comment_note": "The byte-exact lab C++ retains a historical gated diagnostic comment. Current admission is determined by the product policy, not that comment."
+  },
+  "checks": {
+    "owned_python_ruff_check": "passed",
+    "owned_python_ruff_format_check": "passed",
+    "git_diff_check": "passed",
+    "fixture_crlf_count": 11612,
+    "fixture_git_attributes": "-text whitespace=cr-at-eol",
+    "fixture_nonempty_password_fields": 0
+  }
+}

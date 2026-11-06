@@ -1,0 +1,44 @@
+{
+  "file": "official_tm200ce40t_timer_options_behavior.smbp",
+  "sha256": "5358e5334696e1838e8b34b9efaa84fafb2a7bd97802d2d2ee32ae94a7f52214",
+  "bytes": 471237,
+  "original_modified": false,
+  "source": "Exact save by the official editor after adding MW200..205 animation rows to the diagnostic candidate; copied byte-for-byte from the local lab.",
+  "editor": "EcoStruxure Machine Expert Basic 1.4 build484",
+  "target": "TM200CE40T",
+  "management_level": "FunctLevelMan21_0",
+  "parent_candidate_sha256": "72590cd249739a1bdc4f7387f8508f918d0a7c6b85ad0e15240fdcb9bb5b23ec",
+  "timers": [
+    {
+      "index": 0,
+      "kind": "TON",
+      "base_ms": 1000,
+      "preset": 20,
+      "retentive": true,
+      "dynamic_preset": false
+    },
+    {
+      "index": 1,
+      "kind": "TOF",
+      "base_ms": 1000,
+      "preset": 20,
+      "retentive": true,
+      "dynamic_preset": false
+    },
+    {
+      "index": 2,
+      "kind": "TON",
+      "base_ms": 1000,
+      "preset": 20,
+      "retentive": false,
+      "dynamic_preset": true
+    }
+  ],
+  "evidence": "docs/validation/TIMER-OPTIONS-OFFICIAL-OBSERVATIONS.json",
+  "fresh_reopen": {
+    "status": "No error",
+    "capture": "docs/validation/editor-evidence/timer-options/fresh-reopen.png",
+    "sha256": "274c72703980bad3577123cb2e28711729dacae39807c931fbd68b7c7c0b0368"
+  },
+  "scope": "The parent candidate had settled local official simulator observations paired with flags-off controls. This saved derivative has matching typed IL/timer/graph/hardware semantics and a fresh clean reopen. Three separate modes at base1000 and Man21 only; no native timing, other levels/bases/kinds, combined flags, lifecycle or physical PLC certification."
+}

@@ -14,7 +14,7 @@ from pathlib import Path
 from .il import validate
 from .config import configuration, unique_tree
 from .model import Program, Timer, address, fail
-from .timer_profile import BASES
+from .timer_profile import BASES, validate_options
 from .flow import ENDS, split_label
 from .indexed import has_indexed, direct_word_limit, has_indexed_bits
 from .bits import memory_bits_used
@@ -489,7 +489,7 @@ def load_project(path):
     validate(p)
     # Validate the complete IL before examining its graphics. A status may be
     # read before its configured FB is called later in the same scan.
-    validate_allocations(sw, p)
+    validate_allocations(sw, p, root.findtext("ManagementLevel"))
     for node, lines in graph_nodes:
         check_graph(node, lines, p)
     p.metadata = {
@@ -505,13 +505,12 @@ def load_project(path):
     return p
 
 
-def validate_timer_profile(program):
-    if any(t.retentive or t.dynamic_preset for t in program.timers.values()):
-        fail("timer-mode functional-level mapping is unverified for SMBP")
+def validate_timer_profile(program, level_token=None):
+    validate_options(program, level_token)
 
 
-def validate_allocations(sw, program):
-    validate_timer_profile(program)
+def validate_allocations(sw, program, level_token=None):
+    validate_timer_profile(program, level_token)
     if has_indexed_bits(program):
         fail("indexed-bit functional-level mapping is unverified for SMBP")
     bits = memory_bits_used(program)
@@ -553,14 +552,14 @@ def validate_allocations(sw, program):
 
 def write_project(program, template, destination):
     validate(program)
-    validate_timer_profile(program)
     if has_indexed_bits(program):
         fail("indexed-bit functional-level mapping is unverified for SMBP")
     from .ladder_lowering import normalize
 
-    program = normalize(program)
     root = parse(template)
     sw = configuration(root)
+    validate_timer_profile(program, root.findtext("ManagementLevel"))
+    program = normalize(program)
     first_section = section_base(sw.find("Pous"))
     check_template_channels(root, program.communications)
     write_blocks(program, sw)

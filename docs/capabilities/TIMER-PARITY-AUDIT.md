@@ -205,3 +205,8 @@ IL. `normalize` expands it to 102/221, matching both the actual SMBP's
 diagnostics have equal frontend/normalized counts. The GUI operator corrected the timed-counter metadata before publication; this audit itself did not edit the official evidence manifest.
 
 The subsequent [END/timer integration](../validation/NATIVE-END-TIMER-10MS-RESULTS.md) records the 10 ms fixture and 462-test checkpoint. [Timer level research](TIMER-LEVEL-BINDING-RESEARCH.md) distinguishes stored flags from UI availability and downstream execution.
+
+
+## Subsequent scoped implementation
+
+A later increment admits only separate retentive TON/TOF and dynamic TON at base1000ms and actual `FunctLevelMan21_0`, following [paired official controls](../validation/TIMER-OPTIONS-OFFICIAL-OBSERVATIONS.md). [Profile-policy results](../validation/TIMER-OPTION-POLICY-RESULTS.md) distinguish this narrow admission from the remaining mode/base/level/lifecycle gaps. Earlier audit statements about a blanket option gate describe the state when this audit was written.

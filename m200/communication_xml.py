@@ -1,6 +1,7 @@
 """Closed SMBP communication serialization observed in authored public projects.
 
-Only READ_VAR / WRITE_VAR and proven MW / IW enum strings are emitted.
+READ_VAR supports MW/I/IW/Q; WRITE_VAR supports MW/Q. Bit enum strings are
+backed by exact TM200CE40T official-editor saved/reopened fixtures.
 See docs/capabilities/MODBUS-FORMAT-RESEARCH.md for pinned sources and gaps.
 This module never creates port settings or substitutes a controller profile.
 """
@@ -29,7 +30,7 @@ _BLOCK_TYPES = {
     for k, v in [("READ_VAR", "ReadVarBasic"), ("WRITE_VAR", "WriteVarBasic")]
 }
 _LINKS = {"SerialLine1": "SL1", "EthernetLink": "ETH1"}
-_OBJECTS = {"MW": 0, "IW": 3}
+_OBJECTS = {"MW": 0, "I": 1, "Q": 2, "IW": 3}
 _PARAMETERS = {
     "Link": "link",
     "RemoteDeviceId": "id",

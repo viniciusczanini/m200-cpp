@@ -2,3 +2,4 @@
 tests/fixtures/official_tm200ce40t_memory*.smbp -text whitespace=cr-at-eol
 tests/fixtures/official_tm200ce40t_end*.smbp -text whitespace=cr-at-eol
 tests/fixtures/official_tm200ce40t_timer*.smbp -text whitespace=cr-at-eol
+tests/fixtures/official_tm200ce40t_modbus*.smbp -text whitespace=cr-at-eol

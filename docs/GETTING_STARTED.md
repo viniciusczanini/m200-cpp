@@ -110,7 +110,7 @@ For your own configuration, substitute `--template path/to/your-tm200ce40t.smbp`
 
 The parser is conservative: even an authentic blank template may contain defaults the tool does not yet recognize. Unknown active objects, tasks, execution attributes, ambiguous duplicate fields, and unsupported format variants are refused rather than silently discarded. Such a refusal may be an importer gap, not an invalid official project.
 
-Some locally implemented operations intentionally cannot be exported yet. Examples include the unproved 10 ms timer enum, indexed-bit functional-level mapping, timer options requiring unresolved functional levels, and several Modbus graphical variants. See the [export gates](ARCHITECTURE.md#project-format-and-export-gates).
+Some locally implemented operations intentionally cannot be exported yet. Examples include indexed-bit functional-level mapping, timer-option contexts beyond separate retentive TON/TOF or dynamic TON at a one-second base and actual Man21 profile, and several Modbus graphical variants. Ordinary 10 ms timer serialization is supported. See the [export gates](ARCHITECTURE.md#project-format-and-export-gates).
 
 ## 6. Reverse the actual program
 

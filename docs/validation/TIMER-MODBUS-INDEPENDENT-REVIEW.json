@@ -1,0 +1,795 @@
+{
+  "format": "m200-timer-modbus-independent-review-v1",
+  "date": "2026-11-06",
+  "target": "TM200CE40T",
+  "base_commit": "30d2df43912b4f77adc0a2cb10020f59bb109fbd",
+  "result": "pass",
+  "outstanding_findings": [],
+  "scope": "Independent read-only review of timer profile authorization and Modbus I/Q XML bindings; public evidence added only after review",
+  "corrected_before_freeze": [
+    "Preserved source==destination refusal instead of adding in-place export support",
+    "Hardware negative targets the actual PtoObject/RefInput node"
+  ],
+  "new_regressions_reviewed": {
+    "tests/test_timer_option_bindings.py": 15,
+    "tests/test_bit_communication_xml.py": 10
+  },
+  "timer_admission": {
+    "key_fields": [
+      "kind",
+      "retentive",
+      "dynamic_preset",
+      "base_ms",
+      "actual_management_token"
+    ],
+    "keys": [
+      [
+        "TON",
+        true,
+        false,
+        1000,
+        "FunctLevelMan21_0"
+      ],
+      [
+        "TOF",
+        true,
+        false,
+        1000,
+        "FunctLevelMan21_0"
+      ],
+      [
+        "TON",
+        false,
+        true,
+        1000,
+        "FunctLevelMan21_0"
+      ]
+    ],
+    "ordinary_false_false_behavior": "unchanged",
+    "program_metadata_is_authority": false
+  },
+  "modbus_XML_admission": [
+    {
+      "block": "READ_VAR",
+      "XML": "I",
+      "numeric": 1,
+      "function_code": 2
+    },
+    {
+      "block": "READ_VAR",
+      "XML": "Q",
+      "numeric": 2,
+      "function_code": 1
+    },
+    {
+      "block": "WRITE_VAR",
+      "XML": "Q",
+      "numeric": 2,
+      "function_code": 15
+    }
+  ],
+  "focused_runs": {
+    "timer_options_XML_alias": {
+      "tests": 26,
+      "seconds": 5.572,
+      "status": "OK",
+      "log": "output/reports/timer-modbus-independent-review-2026-11-06/timer-focused.log",
+      "log_sha256": "c2711917f5db18d2678d2423448f28ddbf4d49a5c18f6686bee73b80d7a43ed1"
+    },
+    "communication": {
+      "tests": 41,
+      "seconds": 2.467,
+      "status": "OK",
+      "log": "output/reports/timer-modbus-independent-review-2026-11-06/communication-focused.log",
+      "log_sha256": "596b8ae0dd1d4ad1d39302b76f4daf66609ab0e1dc4beca7c22a45507a448c9b"
+    },
+    "counts_overlap_new_regressions": true
+  },
+  "timer_independent_probes": {
+    "context_cases": 600,
+    "context_allowed": 153,
+    "dimensions": {
+      "kind": [
+        "TON",
+        "TOF",
+        "TP"
+      ],
+      "flags": [
+        [
+          false,
+          false
+        ],
+        [
+          true,
+          false
+        ],
+        [
+          false,
+          true
+        ],
+        [
+          true,
+          true
+        ]
+      ],
+      "base_ms": [
+        1,
+        10,
+        100,
+        1000,
+        60000
+      ],
+      "level_token": [
+        null,
+        "FunctLevelMan5_0",
+        "FunctLevelMan6_0",
+        "FunctLevelMan7_0",
+        "FunctLevelMan17_0",
+        "FunctLevelMan18_0",
+        "FunctLevelMan20_0",
+        "FunctLevelMan21_0",
+        "FunctLevelMan22_0",
+        "FunctLevelMan21_0 "
+      ]
+    },
+    "expected_rule": "Strict IL validation first; ordinary false/false allowed, true options require one exact admitted key",
+    "full_export_cases": [
+      {
+        "case": "valid_actual_forged_low_metadata",
+        "allowed": true,
+        "error": null,
+        "source_unchanged": true
+      },
+      {
+        "case": "valid_tof_actual_forged_low_metadata",
+        "allowed": true,
+        "error": null,
+        "source_unchanged": true
+      },
+      {
+        "case": "valid_dynamic_actual_forged_low_metadata",
+        "allowed": true,
+        "error": null,
+        "source_unchanged": true
+      },
+      {
+        "case": "low_actual_forged_high_metadata",
+        "allowed": false,
+        "error": "M200-E: timer-mode functional-level mapping is unverified for SMBP",
+        "source_unchanged": true
+      },
+      {
+        "case": "documented_boundary_unverified",
+        "allowed": false,
+        "error": "M200-E: timer-mode functional-level mapping is unverified for SMBP",
+        "source_unchanged": true
+      },
+      {
+        "case": "dynamic_boundary_unverified",
+        "allowed": false,
+        "error": "M200-E: timer-mode functional-level mapping is unverified for SMBP",
+        "source_unchanged": true
+      },
+      {
+        "case": "unknown_actual_forged_high_metadata",
+        "allowed": false,
+        "error": "M200-E: unverified or invalid management-level token: FunctLevelMan999_0",
+        "source_unchanged": true
+      },
+      {
+        "case": "missing_actual_forged_high_metadata",
+        "allowed": false,
+        "error": "M200-E: timer-mode functional-level mapping is unverified for SMBP: actual management-level token is required",
+        "source_unchanged": true
+      },
+      {
+        "case": "other_base_forged_verified_metadata",
+        "allowed": false,
+        "error": "M200-E: timer-mode functional-level mapping is unverified for SMBP",
+        "source_unchanged": true
+      },
+      {
+        "case": "combined_forged_verified_metadata",
+        "allowed": false,
+        "error": "M200-E: timer-mode functional-level mapping is unverified for SMBP",
+        "source_unchanged": true
+      },
+      {
+        "case": "dynamic_tof_unverified",
+        "allowed": false,
+        "error": "M200-E: timer-mode functional-level mapping is unverified for SMBP",
+        "source_unchanged": true
+      },
+      {
+        "case": "dynamic_tp_unverified",
+        "allowed": false,
+        "error": "M200-E: timer-mode functional-level mapping is unverified for SMBP",
+        "source_unchanged": true
+      }
+    ],
+    "valid_sparse_endpoints": [
+      {
+        "kind": "TON",
+        "ret": true,
+        "dyn": false,
+        "preset": 0,
+        "index": 254
+      },
+      {
+        "kind": "TON",
+        "ret": true,
+        "dyn": false,
+        "preset": 9999,
+        "index": 254
+      },
+      {
+        "kind": "TOF",
+        "ret": true,
+        "dyn": false,
+        "preset": 0,
+        "index": 254
+      },
+      {
+        "kind": "TOF",
+        "ret": true,
+        "dyn": false,
+        "preset": 9999,
+        "index": 254
+      },
+      {
+        "kind": "TON",
+        "ret": false,
+        "dyn": true,
+        "preset": 0,
+        "index": 254
+      },
+      {
+        "kind": "TON",
+        "ret": false,
+        "dyn": true,
+        "preset": 9999,
+        "index": 254
+      }
+    ],
+    "nonstring_token_rejections": [
+      "M200-E: timer-mode functional-level mapping is unverified for SMBP: actual management-level token is required",
+      "M200-E: timer-mode functional-level mapping is unverified for SMBP: actual management-level token is required",
+      "M200-E: timer-mode functional-level mapping is unverified for SMBP: actual management-level token is required",
+      "M200-E: timer-mode functional-level mapping is unverified for SMBP: actual management-level token is required",
+      "M200-E: timer-mode functional-level mapping is unverified for SMBP: actual management-level token is required"
+    ],
+    "same_path_rejected_without_mutation": true,
+    "probe_sha256": "e8726ff12dafbeecf5b9860086a30f881e5b4f8fcf3df4a05dbae2c92e8d0877",
+    "results_sha256": "59284d7fe6e1c7ba6d799397453441f5b27bf927a5645dc97759aba0b8118c43"
+  },
+  "modbus_independent_probes": {
+    "XML_export_cases": [
+      {
+        "fixture": "read_i",
+        "case": "last_single_bit",
+        "allowed": true,
+        "error": null,
+        "source_unchanged": true
+      },
+      {
+        "fixture": "read_i",
+        "case": "last_full_word",
+        "allowed": true,
+        "error": null,
+        "source_unchanged": true
+      },
+      {
+        "fixture": "read_i",
+        "case": "last_two_words",
+        "allowed": true,
+        "error": null,
+        "source_unchanged": true
+      },
+      {
+        "fixture": "read_i",
+        "case": "remote_one_bit_over",
+        "allowed": false,
+        "error": "M200-E: Modbus remote object range exceeds address space",
+        "source_unchanged": true
+      },
+      {
+        "fixture": "read_i",
+        "case": "local_one_word_over",
+        "allowed": false,
+        "error": "M200-E: Modbus local data buffer exceeds address space",
+        "source_unchanged": true
+      },
+      {
+        "fixture": "read_i",
+        "case": "zero_quantity",
+        "allowed": false,
+        "error": "M200-E: invalid Modbus Quantity",
+        "source_unchanged": true
+      },
+      {
+        "fixture": "read_i",
+        "case": "maximum_quantity",
+        "allowed": true,
+        "error": null,
+        "source_unchanged": true
+      },
+      {
+        "fixture": "read_i",
+        "case": "excess_quantity",
+        "allowed": false,
+        "error": "M200-E: invalid Modbus Quantity",
+        "source_unchanged": true
+      },
+      {
+        "fixture": "read_i",
+        "case": "unknown_field",
+        "allowed": false,
+        "error": "M200-E: unsupported communication XML field: IFunctionBlock/BitOffset",
+        "source_unchanged": true,
+        "destination_preserved": true
+      },
+      {
+        "fixture": "read_i",
+        "case": "duplicate_object",
+        "allowed": false,
+        "error": "M200-E: duplicate XML singleton: IFunctionBlock/ObjType",
+        "source_unchanged": true,
+        "destination_preserved": true
+      },
+      {
+        "fixture": "read_i",
+        "case": "wrong_index",
+        "allowed": false,
+        "error": "M200-E: mismatched or duplicate communication block index",
+        "source_unchanged": true,
+        "destination_preserved": true
+      },
+      {
+        "fixture": "read_i",
+        "case": "wrong_wrapper",
+        "allowed": false,
+        "error": "M200-E: unsupported XML attribute: IndexData/Type",
+        "source_unchanged": true,
+        "destination_preserved": true
+      },
+      {
+        "fixture": "read_i",
+        "case": "unknown_enum",
+        "allowed": false,
+        "error": "M200-E: unproven communication XML enum: SINGLE_REG",
+        "source_unchanged": true,
+        "destination_preserved": true
+      },
+      {
+        "fixture": "read_i",
+        "case": "noncanonical_integer",
+        "allowed": false,
+        "error": "M200-E: invalid communication integer: FirstObj",
+        "source_unchanged": true,
+        "destination_preserved": true
+      },
+      {
+        "fixture": "read_q",
+        "case": "last_single_bit",
+        "allowed": true,
+        "error": null,
+        "source_unchanged": true
+      },
+      {
+        "fixture": "read_q",
+        "case": "last_full_word",
+        "allowed": true,
+        "error": null,
+        "source_unchanged": true
+      },
+      {
+        "fixture": "read_q",
+        "case": "last_two_words",
+        "allowed": true,
+        "error": null,
+        "source_unchanged": true
+      },
+      {
+        "fixture": "read_q",
+        "case": "remote_one_bit_over",
+        "allowed": false,
+        "error": "M200-E: Modbus remote object range exceeds address space",
+        "source_unchanged": true
+      },
+      {
+        "fixture": "read_q",
+        "case": "local_one_word_over",
+        "allowed": false,
+        "error": "M200-E: Modbus local data buffer exceeds address space",
+        "source_unchanged": true
+      },
+      {
+        "fixture": "read_q",
+        "case": "zero_quantity",
+        "allowed": false,
+        "error": "M200-E: invalid Modbus Quantity",
+        "source_unchanged": true
+      },
+      {
+        "fixture": "read_q",
+        "case": "maximum_quantity",
+        "allowed": true,
+        "error": null,
+        "source_unchanged": true
+      },
+      {
+        "fixture": "read_q",
+        "case": "excess_quantity",
+        "allowed": false,
+        "error": "M200-E: invalid Modbus Quantity",
+        "source_unchanged": true
+      },
+      {
+        "fixture": "read_q",
+        "case": "unknown_field",
+        "allowed": false,
+        "error": "M200-E: unsupported communication XML field: IFunctionBlock/BitOffset",
+        "source_unchanged": true,
+        "destination_preserved": true
+      },
+      {
+        "fixture": "read_q",
+        "case": "duplicate_object",
+        "allowed": false,
+        "error": "M200-E: duplicate XML singleton: IFunctionBlock/ObjType",
+        "source_unchanged": true,
+        "destination_preserved": true
+      },
+      {
+        "fixture": "read_q",
+        "case": "wrong_index",
+        "allowed": false,
+        "error": "M200-E: mismatched or duplicate communication block index",
+        "source_unchanged": true,
+        "destination_preserved": true
+      },
+      {
+        "fixture": "read_q",
+        "case": "wrong_wrapper",
+        "allowed": false,
+        "error": "M200-E: unsupported XML attribute: IndexData/Type",
+        "source_unchanged": true,
+        "destination_preserved": true
+      },
+      {
+        "fixture": "read_q",
+        "case": "unknown_enum",
+        "allowed": false,
+        "error": "M200-E: unproven communication XML enum: SINGLE_REG",
+        "source_unchanged": true,
+        "destination_preserved": true
+      },
+      {
+        "fixture": "read_q",
+        "case": "noncanonical_integer",
+        "allowed": false,
+        "error": "M200-E: invalid communication integer: FirstObj",
+        "source_unchanged": true,
+        "destination_preserved": true
+      },
+      {
+        "fixture": "write_q",
+        "case": "last_single_bit",
+        "allowed": true,
+        "error": null,
+        "source_unchanged": true
+      },
+      {
+        "fixture": "write_q",
+        "case": "last_full_word",
+        "allowed": true,
+        "error": null,
+        "source_unchanged": true
+      },
+      {
+        "fixture": "write_q",
+        "case": "last_two_words",
+        "allowed": true,
+        "error": null,
+        "source_unchanged": true
+      },
+      {
+        "fixture": "write_q",
+        "case": "remote_one_bit_over",
+        "allowed": false,
+        "error": "M200-E: Modbus remote object range exceeds address space",
+        "source_unchanged": true
+      },
+      {
+        "fixture": "write_q",
+        "case": "local_one_word_over",
+        "allowed": false,
+        "error": "M200-E: Modbus local data buffer exceeds address space",
+        "source_unchanged": true
+      },
+      {
+        "fixture": "write_q",
+        "case": "zero_quantity",
+        "allowed": false,
+        "error": "M200-E: invalid Modbus Quantity",
+        "source_unchanged": true
+      },
+      {
+        "fixture": "write_q",
+        "case": "maximum_quantity",
+        "allowed": true,
+        "error": null,
+        "source_unchanged": true
+      },
+      {
+        "fixture": "write_q",
+        "case": "excess_quantity",
+        "allowed": false,
+        "error": "M200-E: invalid Modbus Quantity",
+        "source_unchanged": true
+      },
+      {
+        "fixture": "write_q",
+        "case": "unknown_field",
+        "allowed": false,
+        "error": "M200-E: unsupported communication XML field: IFunctionBlock/BitOffset",
+        "source_unchanged": true,
+        "destination_preserved": true
+      },
+      {
+        "fixture": "write_q",
+        "case": "duplicate_object",
+        "allowed": false,
+        "error": "M200-E: duplicate XML singleton: IFunctionBlock/ObjType",
+        "source_unchanged": true,
+        "destination_preserved": true
+      },
+      {
+        "fixture": "write_q",
+        "case": "wrong_index",
+        "allowed": false,
+        "error": "M200-E: mismatched or duplicate communication block index",
+        "source_unchanged": true,
+        "destination_preserved": true
+      },
+      {
+        "fixture": "write_q",
+        "case": "wrong_wrapper",
+        "allowed": false,
+        "error": "M200-E: unsupported XML attribute: IndexData/Type",
+        "source_unchanged": true,
+        "destination_preserved": true
+      },
+      {
+        "fixture": "write_q",
+        "case": "unknown_enum",
+        "allowed": false,
+        "error": "M200-E: unproven communication XML enum: SINGLE_REG",
+        "source_unchanged": true,
+        "destination_preserved": true
+      },
+      {
+        "fixture": "write_q",
+        "case": "wrong_direction",
+        "allowed": false,
+        "error": "M200-E: unsupported Modbus ObjType for WRITE_VAR",
+        "source_unchanged": true,
+        "destination_preserved": true
+      },
+      {
+        "fixture": "write_q",
+        "case": "noncanonical_integer",
+        "allowed": false,
+        "error": "M200-E: invalid communication integer: FirstObj",
+        "source_unchanged": true,
+        "destination_preserved": true
+      }
+    ],
+    "literal_wire_cases": [
+      {
+        "read": "I",
+        "request_hex": "0200110011",
+        "response_hex": "0203818001",
+        "words": [
+          32897,
+          1
+        ]
+      },
+      {
+        "read": "Q",
+        "request_hex": "0100290011",
+        "response_hex": "0103818001",
+        "words": [
+          32897,
+          1
+        ]
+      },
+      {
+        "write": "Q",
+        "request_hex": "0f0049001103818001",
+        "response_hex": "0f00490011",
+        "source_words": [
+          32897,
+          65025
+        ]
+      }
+    ],
+    "response_nonzero_padding": "rejected",
+    "unused_write_source_bits": "masked without source mutation",
+    "probe_sha256": "b3dd50a13adb8835c9ffe32378ae5425c046e0008dbfdcd0dd33ad73e04afd1f",
+    "results_sha256": "24692ebe6b12e95b6f2d2253430ec912a4e3f7cd0de4c492df64349fdd8dcbfe"
+  },
+  "actual_template_authority_probes": [
+    {
+      "case": "low_level_forged_high_metadata",
+      "actual_token": "FunctLevelMan11_0",
+      "actual_role": "MasterAddressing",
+      "native_index": 16,
+      "forged_metadata": {
+        "management_level": "FunctLevelMan21_0",
+        "functional_level": [
+          14,
+          0
+        ]
+      },
+      "expected_allowed": false,
+      "error": "M200-E: communication instance requires functional level >= 10.1",
+      "source_unchanged": true,
+      "destination_preserved_on_rejection": true
+    },
+    {
+      "case": "high_level_forged_low_metadata",
+      "actual_token": "FunctLevelMan21_0",
+      "actual_role": "MasterAddressing",
+      "native_index": 16,
+      "forged_metadata": {
+        "management_level": "FunctLevelMan1_0",
+        "functional_level": [
+          1,
+          0
+        ]
+      },
+      "expected_allowed": true,
+      "error": null,
+      "source_unchanged": true,
+      "destination_preserved_on_rejection": false
+    },
+    {
+      "case": "slave_role_forged_master_metadata",
+      "actual_token": "FunctLevelMan21_0",
+      "actual_role": "SlaveAddressing",
+      "native_index": 0,
+      "forged_metadata": {
+        "serial_role": "MasterAddressing",
+        "ports": {
+          "SL1": "Master"
+        }
+      },
+      "expected_allowed": false,
+      "error": "M200-E: SL1 requires explicit RS485 Modbus RTU master configuration",
+      "source_unchanged": true,
+      "destination_preserved_on_rejection": true
+    },
+    {
+      "case": "master_role_forged_slave_metadata",
+      "actual_token": "FunctLevelMan21_0",
+      "actual_role": "MasterAddressing",
+      "native_index": 0,
+      "forged_metadata": {
+        "serial_role": "SlaveAddressing",
+        "ports": {
+          "SL1": "Slave"
+        }
+      },
+      "expected_allowed": true,
+      "error": null,
+      "source_unchanged": true,
+      "destination_preserved_on_rejection": false
+    },
+    {
+      "case": "unknown_level_forged_known_metadata",
+      "actual_token": "FunctLevelMan999_0",
+      "actual_role": "MasterAddressing",
+      "native_index": 0,
+      "forged_metadata": {
+        "management_level": "FunctLevelMan21_0",
+        "functional_level": [
+          14,
+          0
+        ]
+      },
+      "expected_allowed": false,
+      "error": "M200-E: unverified or invalid management-level token: FunctLevelMan999_0",
+      "source_unchanged": true,
+      "destination_preserved_on_rejection": true
+    }
+  ],
+  "fixture_identity": {
+    "timer_fixture_matches_root_saved_original": true,
+    "modbus": [
+      {
+        "fixture": "tests/fixtures/official_tm200ce40t_modbus_read_i.smbp",
+        "sha256": "1c857a39e418d602b30f132ebc311f60521eb70fdb44ddbe94fc39ff9430d214",
+        "exact_original_matches": [
+          "/Users/tommy/Offline/plc-mac-lab/diagnostics/modbus-next-bindings-20261106/editor-saved/02_read_i_fc2_editor_saved.smbp"
+        ]
+      },
+      {
+        "fixture": "tests/fixtures/official_tm200ce40t_modbus_read_q.smbp",
+        "sha256": "4994ba0c7aee1ffc5127f15e673215dc9a5b9ef521877255e243b3cb3cef8d4f",
+        "exact_original_matches": [
+          "/Users/tommy/Offline/plc-mac-lab/diagnostics/modbus-next-bindings-20261106/editor-saved/03_read_q_fc1_editor_saved.smbp"
+        ]
+      },
+      {
+        "fixture": "tests/fixtures/official_tm200ce40t_modbus_write_q.smbp",
+        "sha256": "da5f8bb39369d888f86c09b136222756a42127410d0c867574c80dacb66c465e",
+        "exact_original_matches": [
+          "/Users/tommy/Offline/plc-mac-lab/diagnostics/modbus-next-bindings-20261106/editor-saved/04_write_q_fc15_editor_saved.smbp"
+        ]
+      }
+    ]
+  },
+  "combined_local_suite": {
+    "initiated_by": "root",
+    "reviewer_did_not_repeat": true,
+    "tests": 496,
+    "test_runner_seconds": 202.294,
+    "wrapper_wall_seconds": 202.423,
+    "exit_code": 0,
+    "inputs": 124,
+    "source_stable": true,
+    "changed": [],
+    "full_log": "output/editor-validation/timer-bit-integration/full-regression.log",
+    "full_log_sha256": "c08664896d1597ea2c6d64cb071c761b9e1855a0168819d78788e32e61e40752",
+    "result_sha256": "91c856e71121e0472ff83b3d6970e07071d54f2b49e1f1cbc45c9bb69a31e4b7",
+    "source_pin_sha256": "80ed48494fdc30bfb61e366cd79ea739fdee2a856116e5646ac07344728afedf",
+    "source_after_sha256": "80ed48494fdc30bfb61e366cd79ea739fdee2a856116e5646ac07344728afedf"
+  },
+  "network_scope": {
+    "new_independent_probes_opened_sockets": false,
+    "existing_focused_test": "test_compiled_ethernet_read_uses_actual_loopback_tcp_and_generated_project",
+    "existing_test_host": "127.0.0.1",
+    "existing_test_port": "OS-assigned ephemeral; listener bind port0",
+    "external_or_PLC_network": false,
+    "port502": false,
+    "serial_device": false,
+    "reviewer_GUI_or_Wine": false
+  },
+  "unchanged_runtime_implementations": [
+    "m200/timers.py",
+    "sdk/plc.hpp",
+    "m200/modbus.py"
+  ],
+  "remaining_limits": [
+    "No fine timer timing or physical controller certification",
+    "No new functional-level minimum claim; other levels and bases remain gated for true options",
+    "Combined options and dynamic TOF/TP remain gated",
+    "STOP/RUN restart and power-loss semantics remain separate",
+    "No official Modbus transaction, serial delivery or physical PLC communication proof",
+    "Existing single-write, WRITE_READ_VAR and unsupported graph gates remain"
+  ],
+  "reviewed_files_sha256": {
+    ".gitattributes": "0fea1f94dacb1334746e03b2cdefc3ee8723b1d44a49df04ceb567b8642064e7",
+    "m200/project.py": "3299d4cbecb3acaffbb6c222c1a178861b99c044a650af37648bba02306258e5",
+    "m200/timer_profile.py": "ca3f7855752418db88698ab0a6fff8ead02f67d8c63c767baeb7b0f985fd346e",
+    "m200/communication_xml.py": "189df08b26745b0cf16a51016381f98b872f99da6afb6c849797487db9fe26ea",
+    "m200/modbus.py": "a391ce5ff71520cea4f6b74d9ae984ba6cb4d6fff36b9d44fe05396e68c2e32b",
+    "m200/numeric.py": "b29de2050a070dcbf23ab4e942642f45ad22a580d70b078f5b74111dfde629c5",
+    "m200/timers.py": "384e3c26facd76ed8da5449d001348fe1c1dd818a73532ab9c782e6a9b0fedf6",
+    "sdk/plc.hpp": "b1d6f04ab2ce88d4e37ac781a299f134c5882971f2d593ead502be3877e784b3",
+    "tests/test_timer_option_bindings.py": "e07b68561a990fa72af70557bad9ae5a60a2e88230bc9dae53a4f9c2e0e67e73",
+    "tests/test_bit_communication_xml.py": "f825290d3ce29400d3fa1ce2f6ad06e52d5cc4d3a591edf2be28623e24899061",
+    "tests/test_communication_xml.py": "9a139ff9e038f825701672ac866c9a5bd445cc3caca06c7e444b5cf90f5aaaae",
+    "tests/test_timer_xml_bindings.py": "9982273f54099987b6e06be84d02ec525ff9f7dc3876121a5f04c81f719b8095",
+    "tests/test_inactive_pulse_aliases.py": "8c89f7d08e8889b6bca59b0b0e818585465a0d8473269725e3273acc5d2446ce",
+    "tests/fixtures/official_tm200ce40t_timer_options_behavior.provenance.json": "106137384b9f4b7c38786e066e9158e1d53042e6d6260f953279d78c9bb23477",
+    "tests/fixtures/official_tm200ce40t_timer_options_behavior.smbp": "5358e5334696e1838e8b34b9efaa84fafb2a7bd97802d2d2ee32ae94a7f52214",
+    "tests/fixtures/official_tm200ce40t_modbus_read_i.provenance.json": "95582f622e7ad61c46d9d902c6408245cc6e5e3db511770515a2bbc332a9d5a9",
+    "tests/fixtures/official_tm200ce40t_modbus_read_i.smbp": "1c857a39e418d602b30f132ebc311f60521eb70fdb44ddbe94fc39ff9430d214",
+    "tests/fixtures/official_tm200ce40t_modbus_read_q.provenance.json": "ab73aff0a34a9cdf8d6fa312535c8bd1e8de46f1bbd07c6f2813bc8a30e5a3c0",
+    "tests/fixtures/official_tm200ce40t_modbus_read_q.smbp": "4994ba0c7aee1ffc5127f15e673215dc9a5b9ef521877255e243b3cb3cef8d4f",
+    "tests/fixtures/official_tm200ce40t_modbus_write_q.provenance.json": "e1a264b49644905d6ea7ac7752112eece4d8bfc62adec68f70ae3d3aeef0af52",
+    "tests/fixtures/official_tm200ce40t_modbus_write_q.smbp": "da5f8bb39369d888f86c09b136222756a42127410d0c867574c80dacb66c465e"
+  }
+}
