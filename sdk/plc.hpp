@@ -13,6 +13,7 @@ inline bool memory[1024] = {};
 inline unsigned long long now_ms = 0;
 inline bool first_scan = true;
 inline bool index_error = false;
+inline bool shift_carry=false, arithmetic_error=false;
 inline int word_memory_limit = 0;
 inline int bit_memory_limit = 0;
 inline int timer_next_index = 0;
@@ -41,10 +42,14 @@ struct BitMemory { explicit BitMemory(int count){if(count<1||count>1024)__builti
 inline bool system(int n) {
     if(n==13) return detail::first_scan;
     if(n==20) return detail::index_error;
+    if(n==17) return detail::shift_carry;
+    if(n==18) return detail::arithmetic_error;
     unsigned period = n==4?10:n==5?100:n==6?1000:60000;
     return ((detail::now_ms / (period/2)) & 1) != 0;
 }
 inline void clear_index_error(){detail::index_error=false;}
+inline void clear_shift_carry(){detail::shift_carry=false;}
+inline void clear_arithmetic_error(){detail::arithmetic_error=false;}
 inline bool clock_ms(unsigned period) {
     return ((detail::now_ms / (period/2)) & 1) != 0;
 }
@@ -175,6 +180,8 @@ bool read_m_indexed(int,int);
 void write_m_indexed(int,int,bool);
 bool system(int);
 void clear_index_error();
+void clear_shift_carry();
+void clear_arithmetic_error();
 bool clock_ms(unsigned);
 struct Ton { explicit Ton(unsigned); Ton(int,int,int); Ton(int,int,int,bool,bool); bool update(bool); i16 preset()const; i16 value(); bool done(); void set_preset(i16); };
 struct Counter { Counter(int,int); i16 preset()const; i16 value()const; bool empty()const; bool done()const; bool full()const; void set_preset(i16); void reset(bool); void set(bool); void count_up(bool); void count_down(bool); bool update(bool,bool,bool,bool); };
@@ -189,11 +196,12 @@ struct FallingEdge { FallingEdge(); bool update(bool); };
 static_assert(sizeof(i16)==2 && sizeof(i32)==4 && sizeof(f32)==4,"PLC numeric width mismatch");
 namespace detail {
 inline unsigned short words[8000] = {};
-inline i16 check_i16(long long v){if(v < -32768LL || v > 32767LL)__builtin_trap();return (i16)v;}
-inline i32 check_i32(long long v){if(v < -2147483648LL || v > 2147483647LL)__builtin_trap();return (i32)v;}
-inline f32 check_f32(f32 v){if(!__builtin_isfinite(v))__builtin_trap();return v;}
 inline i16 bits_i16(unsigned v){unsigned short raw=(unsigned short)v;i16 out;__builtin_memcpy(&out,&raw,2);return out;}
 inline i32 bits_i32(unsigned v){i32 out;__builtin_memcpy(&out,&v,4);return out;}
+inline i16 check_i16(long long v){if(v < -32768LL || v > 32767LL)arithmetic_error=true;return bits_i16((unsigned)v);}
+inline i32 check_i32(long long v){if(v < -2147483648LL || v > 2147483647LL)arithmetic_error=true;return bits_i32((unsigned)v);}
+inline f32 check_f32(f32 v){if(!__builtin_isfinite(v))__builtin_trap();return v;}
+inline void record_shift(unsigned long long value,int width,int distance,bool left){shift_carry=((value>>(left?width-distance:distance-1))&1U)!=0;}
 }
 inline i16 read_word(int n){return detail::bits_i16(detail::words[n]);}
 inline void write_word(int n,i16 v){detail::words[n]=(unsigned short)v;}
@@ -272,28 +280,28 @@ inline void write_m_indexed(int base,int index_word,bool value){write_m(detail::
 inline i16 add_i16(i16 a, i16 b){return detail::check_i16((long long)a+(long long)b);}
 inline i16 sub_i16(i16 a, i16 b){return detail::check_i16((long long)a-(long long)b);}
 inline i16 mul_i16(i16 a, i16 b){return detail::check_i16((long long)a*(long long)b);}
-inline i16 div_i16(i16 a, i16 b){if(b==0)__builtin_trap();return detail::check_i16((long long)a/(long long)b);}
-inline i16 sqrt_i16(i16 a){if(a<0)__builtin_trap();return detail::check_i16((long long)__builtin_sqrt((double)a));}
+inline i16 div_i16(i16 a, i16 b){if(b==0){detail::arithmetic_error=true;__builtin_trap();}return detail::check_i16((long long)a/(long long)b);}
+inline i16 sqrt_i16(i16 a){if(a<0){detail::arithmetic_error=true;__builtin_trap();}return detail::check_i16((long long)__builtin_sqrt((double)a));}
 inline i32 add_i32(i32 a, i32 b){return detail::check_i32((long long)a+(long long)b);}
 inline i32 sub_i32(i32 a, i32 b){return detail::check_i32((long long)a-(long long)b);}
 inline i32 mul_i32(i32 a, i32 b){return detail::check_i32((long long)a*(long long)b);}
-inline i32 div_i32(i32 a, i32 b){if(b==0)__builtin_trap();return detail::check_i32((long long)a/(long long)b);}
-inline i32 sqrt_i32(i32 a){if(a<0)__builtin_trap();return detail::check_i32((long long)__builtin_sqrt((double)a));}
+inline i32 div_i32(i32 a, i32 b){if(b==0){detail::arithmetic_error=true;__builtin_trap();}return detail::check_i32((long long)a/(long long)b);}
+inline i32 sqrt_i32(i32 a){if(a<0){detail::arithmetic_error=true;__builtin_trap();}return detail::check_i32((long long)__builtin_sqrt((double)a));}
 inline f32 add_f32(f32 a, f32 b){return detail::check_f32(a+b);}
 inline f32 sub_f32(f32 a, f32 b){return detail::check_f32(a-b);}
 inline f32 mul_f32(f32 a, f32 b){return detail::check_f32(a*b);}
 inline f32 div_f32(f32 a, f32 b){if(b==0)__builtin_trap();return detail::check_f32(a/b);}
 inline f32 sqrt_f32(f32 a){if(a<0)__builtin_trap();return detail::check_f32(__builtin_sqrtf(a));}
-inline i16 rem_i16(i16 a, i16 b){if(b==0)__builtin_trap();detail::check_i16((long long)a/(long long)b);return detail::check_i16((long long)a%(long long)b);}
-inline i16 shl_i16(i16 a, int b){if(b<1||b>16)__builtin_trap();unsigned long long u=(unsigned)a&65535U;return detail::bits_i16((unsigned)(u<<b));}
-inline i16 shr_i16(i16 a, int b){if(b<1||b>16)__builtin_trap();unsigned long long u=(unsigned)a&65535U;return detail::bits_i16((unsigned)(u>>b));}
-inline i16 rol_i16(i16 a, int b){if(b<1||b>16)__builtin_trap();unsigned long long u=(unsigned)a&65535U;return detail::bits_i16((unsigned)((u<<b)|(u>>(16-b))));}
-inline i16 ror_i16(i16 a, int b){if(b<1||b>16)__builtin_trap();unsigned long long u=(unsigned)a&65535U;return detail::bits_i16((unsigned)((u>>b)|(u<<(16-b))));}
-inline i32 rem_i32(i32 a, i32 b){if(b==0)__builtin_trap();detail::check_i32((long long)a/(long long)b);return detail::check_i32((long long)a%(long long)b);}
-inline i32 shl_i32(i32 a, int b){if(b<1||b>32)__builtin_trap();unsigned long long u=(unsigned)a&0xffffffffU;return detail::bits_i32((unsigned)(u<<b));}
-inline i32 shr_i32(i32 a, int b){if(b<1||b>32)__builtin_trap();unsigned long long u=(unsigned)a&0xffffffffU;return detail::bits_i32((unsigned)(u>>b));}
-inline i32 rol_i32(i32 a, int b){if(b<1||b>32)__builtin_trap();unsigned long long u=(unsigned)a&0xffffffffU;return detail::bits_i32((unsigned)((u<<b)|(u>>(32-b))));}
-inline i32 ror_i32(i32 a, int b){if(b<1||b>32)__builtin_trap();unsigned long long u=(unsigned)a&0xffffffffU;return detail::bits_i32((unsigned)((u>>b)|(u<<(32-b))));}
+inline i16 rem_i16(i16 a, i16 b){if(b==0){detail::arithmetic_error=true;__builtin_trap();}detail::check_i16((long long)a/(long long)b);return detail::check_i16((long long)a%(long long)b);}
+inline i16 shl_i16(i16 a, int b){if(b<1||b>16)__builtin_trap();unsigned long long u=(unsigned)a&65535U;detail::record_shift(u,16,b,true);return detail::bits_i16((unsigned)(u<<b));}
+inline i16 shr_i16(i16 a, int b){if(b<1||b>16)__builtin_trap();unsigned long long u=(unsigned)a&65535U;detail::record_shift(u,16,b,false);return detail::bits_i16((unsigned)(u>>b));}
+inline i16 rol_i16(i16 a, int b){if(b<1||b>16)__builtin_trap();unsigned long long u=(unsigned)a&65535U;detail::record_shift(u,16,b,true);return detail::bits_i16((unsigned)((u<<b)|(u>>(16-b))));}
+inline i16 ror_i16(i16 a, int b){if(b<1||b>16)__builtin_trap();unsigned long long u=(unsigned)a&65535U;detail::record_shift(u,16,b,false);return detail::bits_i16((unsigned)((u>>b)|(u<<(16-b))));}
+inline i32 rem_i32(i32 a, i32 b){if(b==0){detail::arithmetic_error=true;__builtin_trap();}detail::check_i32((long long)a/(long long)b);return detail::check_i32((long long)a%(long long)b);}
+inline i32 shl_i32(i32 a, int b){if(b<1||b>32)__builtin_trap();unsigned long long u=(unsigned)a&0xffffffffU;detail::record_shift(u,32,b,true);return detail::bits_i32((unsigned)(u<<b));}
+inline i32 shr_i32(i32 a, int b){if(b<1||b>32)__builtin_trap();unsigned long long u=(unsigned)a&0xffffffffU;detail::record_shift(u,32,b,false);return detail::bits_i32((unsigned)(u>>b));}
+inline i32 rol_i32(i32 a, int b){if(b<1||b>32)__builtin_trap();unsigned long long u=(unsigned)a&0xffffffffU;detail::record_shift(u,32,b,true);return detail::bits_i32((unsigned)((u<<b)|(u>>(32-b))));}
+inline i32 ror_i32(i32 a, int b){if(b<1||b>32)__builtin_trap();unsigned long long u=(unsigned)a&0xffffffffU;detail::record_shift(u,32,b,false);return detail::bits_i32((unsigned)((u>>b)|(u<<(32-b))));}
 inline i16 and_i16(i16 a, i16 b){return detail::bits_i16(a&b);}
 inline i16 or_i16(i16 a, i16 b){return detail::bits_i16(a|b);}
 inline i16 xor_i16(i16 a, i16 b){return detail::bits_i16(a^b);}

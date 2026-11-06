@@ -2,6 +2,7 @@ from .model import Program, fail
 from .allocation import Storage
 from .indexed import is_indexed, is_bit_indexed
 from .numeric import Number, TYPES, boolean, expect, OPS, evaluate, read as read_number
+from .arithmetic import ArithmeticState
 
 
 class Lowerer:
@@ -225,6 +226,7 @@ class Lowerer:
                 name,
                 [v if isinstance(v, int) else read_number([], v) for v in values],
                 kind,
+                flags=ArithmeticState(),
             )
         prepared = []
         for value, argkind in zip(values, args):

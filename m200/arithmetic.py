@@ -1,0 +1,55 @@
+"""Explicit local integer ALU flags; unknown result domains remain errors."""
+
+from .model import fail
+
+INTEGER_STEMS = frozenset(
+    (
+        "copy",
+        "add",
+        "sub",
+        "mul",
+        "div",
+        "rem",
+        "sqrt",
+        "abs",
+        "and",
+        "or",
+        "xor",
+        "not",
+        "shl",
+        "shr",
+        "rol",
+        "ror",
+        "low_word",
+        "high_word",
+    )
+)
+
+
+class ArithmeticState:
+    def __init__(self):
+        self.carry = False
+        self.overflow = False
+
+    def clear(self, index):
+        if index == 17:
+            self.carry = False
+        elif index == 18:
+            self.overflow = False
+        else:
+            fail("unsupported arithmetic flag reset")
+
+    def integer_result(self, value, kind):
+        if type(value) is not int or kind not in ("i16", "i32"):
+            fail("invalid local integer ALU result")
+        width = 16 if kind == "i16" else 32
+        bound = 1 << (width - 1)
+        if not -bound <= value < bound:
+            self.overflow = True
+        raw = value % (1 << width)
+        return raw - (1 << width) if raw >= bound else raw
+
+    def shifted(self, value, width, distance, left):
+        self.carry = bool(
+            (value % (1 << width)) & (1 << (width - distance if left else distance - 1))
+        )

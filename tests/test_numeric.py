@@ -129,9 +129,8 @@ plc::output(0,n<0);plc::output(1,plc::read_dword(10)==n);
             with self.subTest(operation=operation), self.assertRaises(CompileError):
                 validate(Program([["LD 1", operation]]))
 
-    def test_local_simulation_refuses_undefined_arithmetic_results(self):
+    def test_local_simulation_refuses_unmodeled_arithmetic_results(self):
         for initial, expression in [
-            ("32767", "plc::add_i16(a,1)"),
             ("0", "plc::div_i16(2,a)"),
             ("-1", "plc::sqrt_i16(a)"),
         ]:
@@ -148,11 +147,9 @@ plc::output(0,n<0);plc::output(1,plc::read_dword(10)==n);
             ):
                 Machine(program).step()
 
-    def test_known_impossible_numeric_literals_fail_during_compile(self):
+    def test_unmodeled_arithmetic_literals_fail_explicitly(self):
         for expression in [
-            "plc::add_i16(32767,1)",
-            "plc::div_i32(-2147483648,-1)",
-            "plc::rem_i16(-32768,-1)",
+            "plc::div_i16(1,0)",
             "plc::sqrt_f32(-1.0f)",
             "plc::real_to_int(32768.0f)",
         ]:

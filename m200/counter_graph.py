@@ -2,7 +2,7 @@
 
 from collections import defaultdict, deque
 from .boolean_bdd import BDD
-from .model import address, fail
+from .model import address, fail, SYSTEM_RESETS
 from .counters import reference as counter_reference, index as counter_index
 from .timers import reference as timer_reference
 from .native_logic import decode, OPEN, STORES
@@ -54,7 +54,7 @@ class State:
             if timer[1] != "Q" or writable:
                 fail("unsupported Counter graph timer property/action")
             return ("TM", *timer)
-        return address(arg, writable and not (op == "R" and arg == "%S20"))
+        return address(arg, writable and not (op == "R" and arg in SYSTEM_RESETS))
 
     def read(self, arg):
         key = self.key(arg)

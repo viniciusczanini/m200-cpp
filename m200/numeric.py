@@ -1,7 +1,9 @@
 """Typed numeric IL subset, independently evaluated with explicit error domains.
 
-Sources: EIO0000003289.04 pp49-59,67-72. Undefined arithmetic results
-stop local simulation; they are never fabricated as physical PLC behavior.
+Sources: EIO0000003289.04 pp49-59,67-72; EIO0000002019.06 pp322-323.
+Integer context models sticky S18 and S17/last-bit with signed modular results.
+Exact overflow bits beyond the G55 ADDword example remain a local policy.
+Unmodeled arithmetic domains stop simulation rather than inventing a result.
 """
 
 import math
@@ -10,6 +12,7 @@ import struct
 from dataclasses import dataclass
 
 from .model import fail, CompileError
+from .arithmetic import INTEGER_STEMS
 from .communication import status_reference, NUM_FIELDS, NUM_REFERENCE, cpp_name
 from .indexed import WORD_PATTERN, is_indexed, parse as parse_indexed
 from .bits import STRING_PATTERN, is_string, bit_string
@@ -318,7 +321,11 @@ def comparison(text):
     return operand(first, kind), op, operand(second.strip(), kind)
 
 
-def evaluate(name, values, kind):
+def evaluate(name, values, kind, flags=None):
+    stem = name.rsplit("_", 1)[0] if name.rsplit("_", 1)[-1] in TYPES else name
+    integer_flags = (
+        flags is not None and kind in ("i16", "i32") and stem in INTEGER_STEMS
+    )
     try:
         if name == "copy":
             result = values[0]
@@ -341,7 +348,10 @@ def evaluate(name, values, kind):
                     result = a / b
                 else:
                     q = abs(a) // abs(b) * (-1 if (a < 0) != (b < 0) else 1)
-                    checked(q, kind)
+                    if not integer_flags:
+                        checked(q, kind)
+                    elif stem == "rem":
+                        flags.integer_result(q, kind)
                     result = q if stem == "div" else a - q * b
             elif stem in (
                 "and",
@@ -356,6 +366,8 @@ def evaluate(name, values, kind):
                 "high_word",
             ):
                 unsigned = a & mask
+                if integer_flags and stem in ("shl", "shr", "rol", "ror"):
+                    flags.shifted(a, width, b, stem in ("shl", "rol"))
                 if stem == "and":
                     result = a & b
                 elif stem == "or":
@@ -403,10 +415,18 @@ def evaluate(name, values, kind):
                 result = round(a)
             else:
                 fail("unmodeled numeric operation: " + name)
-        return checked(result, kind)
+        return (
+            flags.integer_result(result, kind)
+            if integer_flags
+            else checked(result, kind)
+        )
     except CompileError:
+        if integer_flags:
+            flags.overflow = True
         raise
     except (ValueError, OverflowError, ZeroDivisionError) as exc:
+        if integer_flags:
+            flags.overflow = True
         fail("numeric arithmetic error: " + str(exc))
 
 

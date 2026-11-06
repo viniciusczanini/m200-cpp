@@ -1,0 +1,1560 @@
+{
+  "seed": 20020261119,
+  "local_workers": 4,
+  "target": "TM200CE40T",
+  "cases": [
+    {
+      "case": "shl_i16_1",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 1,
+      "operand_width": 16
+    },
+    {
+      "case": "shl_i16_2",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 2,
+      "operand_width": 16
+    },
+    {
+      "case": "shl_i16_3",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 3,
+      "operand_width": 16
+    },
+    {
+      "case": "shl_i16_4",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 4,
+      "operand_width": 16
+    },
+    {
+      "case": "shl_i16_5",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 5,
+      "operand_width": 16
+    },
+    {
+      "case": "shl_i16_6",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 6,
+      "operand_width": 16
+    },
+    {
+      "case": "shl_i16_7",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 7,
+      "operand_width": 16
+    },
+    {
+      "case": "shl_i16_8",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 8,
+      "operand_width": 16
+    },
+    {
+      "case": "shl_i16_9",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 9,
+      "operand_width": 16
+    },
+    {
+      "case": "shl_i16_10",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 10,
+      "operand_width": 16
+    },
+    {
+      "case": "shl_i16_11",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 11,
+      "operand_width": 16
+    },
+    {
+      "case": "shl_i16_12",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 12,
+      "operand_width": 16
+    },
+    {
+      "case": "shl_i16_13",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 13,
+      "operand_width": 16
+    },
+    {
+      "case": "shl_i16_14",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 14,
+      "operand_width": 16
+    },
+    {
+      "case": "shl_i16_15",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 15,
+      "operand_width": 16
+    },
+    {
+      "case": "shl_i16_16",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 16,
+      "operand_width": 16
+    },
+    {
+      "case": "shr_i16_1",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 1,
+      "operand_width": 16
+    },
+    {
+      "case": "shr_i16_2",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 2,
+      "operand_width": 16
+    },
+    {
+      "case": "shr_i16_3",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 3,
+      "operand_width": 16
+    },
+    {
+      "case": "shr_i16_4",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 4,
+      "operand_width": 16
+    },
+    {
+      "case": "shr_i16_5",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 5,
+      "operand_width": 16
+    },
+    {
+      "case": "shr_i16_6",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 6,
+      "operand_width": 16
+    },
+    {
+      "case": "shr_i16_7",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 7,
+      "operand_width": 16
+    },
+    {
+      "case": "shr_i16_8",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 8,
+      "operand_width": 16
+    },
+    {
+      "case": "shr_i16_9",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 9,
+      "operand_width": 16
+    },
+    {
+      "case": "shr_i16_10",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 10,
+      "operand_width": 16
+    },
+    {
+      "case": "shr_i16_11",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 11,
+      "operand_width": 16
+    },
+    {
+      "case": "shr_i16_12",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 12,
+      "operand_width": 16
+    },
+    {
+      "case": "shr_i16_13",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 13,
+      "operand_width": 16
+    },
+    {
+      "case": "shr_i16_14",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 14,
+      "operand_width": 16
+    },
+    {
+      "case": "shr_i16_15",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 15,
+      "operand_width": 16
+    },
+    {
+      "case": "shr_i16_16",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 16,
+      "operand_width": 16
+    },
+    {
+      "case": "rol_i16_1",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 1,
+      "operand_width": 16
+    },
+    {
+      "case": "rol_i16_2",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 2,
+      "operand_width": 16
+    },
+    {
+      "case": "rol_i16_3",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 3,
+      "operand_width": 16
+    },
+    {
+      "case": "rol_i16_4",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 4,
+      "operand_width": 16
+    },
+    {
+      "case": "rol_i16_5",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 5,
+      "operand_width": 16
+    },
+    {
+      "case": "rol_i16_6",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 6,
+      "operand_width": 16
+    },
+    {
+      "case": "rol_i16_7",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 7,
+      "operand_width": 16
+    },
+    {
+      "case": "rol_i16_8",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 8,
+      "operand_width": 16
+    },
+    {
+      "case": "rol_i16_9",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 9,
+      "operand_width": 16
+    },
+    {
+      "case": "rol_i16_10",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 10,
+      "operand_width": 16
+    },
+    {
+      "case": "rol_i16_11",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 11,
+      "operand_width": 16
+    },
+    {
+      "case": "rol_i16_12",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 12,
+      "operand_width": 16
+    },
+    {
+      "case": "rol_i16_13",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 13,
+      "operand_width": 16
+    },
+    {
+      "case": "rol_i16_14",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 14,
+      "operand_width": 16
+    },
+    {
+      "case": "rol_i16_15",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 15,
+      "operand_width": 16
+    },
+    {
+      "case": "rol_i16_16",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 16,
+      "operand_width": 16
+    },
+    {
+      "case": "ror_i16_1",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 1,
+      "operand_width": 16
+    },
+    {
+      "case": "ror_i16_2",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 2,
+      "operand_width": 16
+    },
+    {
+      "case": "ror_i16_3",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 3,
+      "operand_width": 16
+    },
+    {
+      "case": "ror_i16_4",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 4,
+      "operand_width": 16
+    },
+    {
+      "case": "ror_i16_5",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 5,
+      "operand_width": 16
+    },
+    {
+      "case": "ror_i16_6",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 6,
+      "operand_width": 16
+    },
+    {
+      "case": "ror_i16_7",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 7,
+      "operand_width": 16
+    },
+    {
+      "case": "ror_i16_8",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 8,
+      "operand_width": 16
+    },
+    {
+      "case": "ror_i16_9",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 9,
+      "operand_width": 16
+    },
+    {
+      "case": "ror_i16_10",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 10,
+      "operand_width": 16
+    },
+    {
+      "case": "ror_i16_11",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 11,
+      "operand_width": 16
+    },
+    {
+      "case": "ror_i16_12",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 12,
+      "operand_width": 16
+    },
+    {
+      "case": "ror_i16_13",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 13,
+      "operand_width": 16
+    },
+    {
+      "case": "ror_i16_14",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 14,
+      "operand_width": 16
+    },
+    {
+      "case": "ror_i16_15",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 15,
+      "operand_width": 16
+    },
+    {
+      "case": "ror_i16_16",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 16,
+      "operand_width": 16
+    },
+    {
+      "case": "add_i16",
+      "scans": 512,
+      "status": "pass",
+      "operand_width": 16
+    },
+    {
+      "case": "sub_i16",
+      "scans": 512,
+      "status": "pass",
+      "operand_width": 16
+    },
+    {
+      "case": "mul_i16",
+      "scans": 512,
+      "status": "pass",
+      "operand_width": 16
+    },
+    {
+      "case": "div_i16",
+      "scans": 512,
+      "status": "pass",
+      "operand_width": 16
+    },
+    {
+      "case": "rem_i16",
+      "scans": 512,
+      "status": "pass",
+      "operand_width": 16
+    },
+    {
+      "case": "sqrt_i16",
+      "scans": 512,
+      "status": "pass",
+      "operand_width": 16
+    },
+    {
+      "case": "shl_i32_1",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 1,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_2",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 2,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_3",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 3,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_4",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 4,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_5",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 5,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_6",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 6,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_7",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 7,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_8",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 8,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_9",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 9,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_10",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 10,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_11",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 11,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_12",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 12,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_13",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 13,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_14",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 14,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_15",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 15,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_16",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 16,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_17",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 17,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_18",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 18,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_19",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 19,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_20",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 20,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_21",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 21,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_22",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 22,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_23",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 23,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_24",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 24,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_25",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 25,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_26",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 26,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_27",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 27,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_28",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 28,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_29",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 29,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_30",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 30,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_31",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 31,
+      "operand_width": 32
+    },
+    {
+      "case": "shl_i32_32",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 32,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_1",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 1,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_2",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 2,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_3",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 3,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_4",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 4,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_5",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 5,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_6",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 6,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_7",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 7,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_8",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 8,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_9",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 9,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_10",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 10,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_11",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 11,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_12",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 12,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_13",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 13,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_14",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 14,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_15",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 15,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_16",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 16,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_17",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 17,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_18",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 18,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_19",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 19,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_20",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 20,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_21",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 21,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_22",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 22,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_23",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 23,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_24",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 24,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_25",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 25,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_26",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 26,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_27",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 27,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_28",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 28,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_29",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 29,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_30",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 30,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_31",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 31,
+      "operand_width": 32
+    },
+    {
+      "case": "shr_i32_32",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 32,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_1",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 1,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_2",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 2,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_3",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 3,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_4",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 4,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_5",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 5,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_6",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 6,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_7",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 7,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_8",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 8,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_9",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 9,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_10",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 10,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_11",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 11,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_12",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 12,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_13",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 13,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_14",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 14,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_15",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 15,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_16",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 16,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_17",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 17,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_18",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 18,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_19",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 19,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_20",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 20,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_21",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 21,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_22",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 22,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_23",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 23,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_24",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 24,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_25",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 25,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_26",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 26,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_27",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 27,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_28",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 28,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_29",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 29,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_30",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 30,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_31",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 31,
+      "operand_width": 32
+    },
+    {
+      "case": "rol_i32_32",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 32,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_1",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 1,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_2",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 2,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_3",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 3,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_4",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 4,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_5",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 5,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_6",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 6,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_7",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 7,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_8",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 8,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_9",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 9,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_10",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 10,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_11",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 11,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_12",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 12,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_13",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 13,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_14",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 14,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_15",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 15,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_16",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 16,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_17",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 17,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_18",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 18,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_19",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 19,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_20",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 20,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_21",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 21,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_22",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 22,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_23",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 23,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_24",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 24,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_25",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 25,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_26",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 26,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_27",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 27,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_28",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 28,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_29",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 29,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_30",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 30,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_31",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 31,
+      "operand_width": 32
+    },
+    {
+      "case": "ror_i32_32",
+      "scans": 256,
+      "status": "pass",
+      "shift_distance": 32,
+      "operand_width": 32
+    },
+    {
+      "case": "add_i32",
+      "scans": 512,
+      "status": "pass",
+      "operand_width": 32
+    },
+    {
+      "case": "sub_i32",
+      "scans": 512,
+      "status": "pass",
+      "operand_width": 32
+    },
+    {
+      "case": "mul_i32",
+      "scans": 512,
+      "status": "pass",
+      "operand_width": 32
+    },
+    {
+      "case": "div_i32",
+      "scans": 512,
+      "status": "pass",
+      "operand_width": 32
+    },
+    {
+      "case": "rem_i32",
+      "scans": 512,
+      "status": "pass",
+      "operand_width": 32
+    },
+    {
+      "case": "sqrt_i32",
+      "scans": 512,
+      "status": "pass",
+      "operand_width": 32
+    },
+    {
+      "case": "abs_i32",
+      "scans": 512,
+      "status": "pass",
+      "operand_width": 32
+    },
+    {
+      "case": "mixed_0",
+      "scans": 512,
+      "status": "pass"
+    },
+    {
+      "case": "mixed_1",
+      "scans": 512,
+      "status": "pass"
+    },
+    {
+      "case": "mixed_2",
+      "scans": 512,
+      "status": "pass"
+    },
+    {
+      "case": "mixed_3",
+      "scans": 512,
+      "status": "pass"
+    },
+    {
+      "case": "mixed_4",
+      "scans": 512,
+      "status": "pass"
+    },
+    {
+      "case": "mixed_5",
+      "scans": 512,
+      "status": "pass"
+    },
+    {
+      "case": "mixed_6",
+      "scans": 512,
+      "status": "pass"
+    },
+    {
+      "case": "mixed_7",
+      "scans": 512,
+      "status": "pass"
+    },
+    {
+      "case": "manual_G55",
+      "scans": 512,
+      "status": "pass",
+      "source": "EIO0000003289.04 p55",
+      "scope": "published three rungs plus explicit input/init/readback harness"
+    },
+    {
+      "case": "public_T_10",
+      "scans": 512,
+      "status": "pass",
+      "original_sha256": "3f30b1cabd03220c518afa4c0f5b800ca29f1d905e126ad421bffc8a2d5be3d7",
+      "rung": 10,
+      "scope": "complete isolated original IL, explicit cold-init/Q/flag/readback harness; source raw graph not emitted"
+    },
+    {
+      "case": "public_T_15",
+      "scans": 512,
+      "status": "pass",
+      "original_sha256": "3f30b1cabd03220c518afa4c0f5b800ca29f1d905e126ad421bffc8a2d5be3d7",
+      "rung": 15,
+      "scope": "complete isolated original IL, explicit cold-init/Q/flag/readback harness; source raw graph not emitted"
+    },
+    {
+      "case": "public_T_20",
+      "scans": 512,
+      "status": "pass",
+      "original_sha256": "3f30b1cabd03220c518afa4c0f5b800ca29f1d905e126ad421bffc8a2d5be3d7",
+      "rung": 20,
+      "scope": "complete isolated original IL, explicit cold-init/Q/flag/readback harness; source raw graph not emitted"
+    },
+    {
+      "case": "public_flow_loop",
+      "scans": 512,
+      "status": "pass",
+      "original_sha256": "4ea44184fd796888498b39561f60ff8ae4c4458447b9328896376431c1afe110",
+      "rung": 3,
+      "scope": "whole original shift/INC/JMPC rung with explicit input/seed/flag/readback harness; raw graph not emitted"
+    }
+  ],
+  "scans": 62464,
+  "source_sha256": {
+    "m200/__init__.py": "77c5815a3596eebca3e939d1ad39abba46fa4edc4df148aaa7e47f13e5eda0ab",
+    "m200/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "m200/allocation.py": "f21e8753757ebf1c54874c18c3385a7d79ce52992514725920c29a1ca6281be9",
+    "m200/arithmetic.py": "e3dd9776c484e55842c5c95dd30409dd3dbc3029e87addd6ff01a1b9cc69592d",
+    "m200/arrays.py": "d4574f6e48ab98f70feb3f474f30bbf387117f5db3ddde395525a21a77da42ed",
+    "m200/bits.py": "d76ca8b8bb587a6811cfb3e157c00385ba0a836b8eb669afdda9af4e635b6a61",
+    "m200/boolean_bdd.py": "b3de9c79a5b14953256117afa22df8aaf2b37eb71689f224ca2d66e78a02882f",
+    "m200/capabilities.py": "e94e59743ee0eae98c476938f8eafe04966c0823b825b1d070980d15d41348a0",
+    "m200/cli.py": "11eb2b920389131fab2422aae9f377274c93ecd9ca2b6b15901ee97df8d8c3d2",
+    "m200/communication.py": "105c1aef50e7ee00bc7c7142a5b6805d4ddf5f18fc04c5e60a52b78841a6b3b0",
+    "m200/communication_xml.py": "954e0fb861fef56381b204936c47f2f760dbcb3840dd018bb1d2a1b13bfc319f",
+    "m200/config.py": "536cde246108b3357f094757efc2c4e1e6290f667baa86c355d92305e25014b8",
+    "m200/copy_fusion.py": "39c8f498518c46d35ad61ec2c53564a61748a4957eae25e8d241a3c7e4b98816",
+    "m200/counter_graph.py": "80abf1241ee5095a121c47e1a196de03f1e7ed37fe0c54626b2a3f3eba4a9e8c",
+    "m200/counter_xml.py": "a87177f18a698b1f442a7c16eb66748a6d2c06c9c966ac199c6275bb1e326554",
+    "m200/counters.py": "0e4ed9d8fe6f4356f3d6b6986558a0f9caa019daa3f741b12522d1fdd6f376ce",
+    "m200/edge_functions.py": "c58b059d15ee7387ed7e65f841ad549f3b30c3781a258c0a6340a96e9cd92a24",
+    "m200/edges.py": "e590a801d00b94d20a2dd1f428635aa299e3bd59bcbfe2442f5ffa4fd3d64713",
+    "m200/flow.py": "a61ed946937daa4e54002dc29664c0ef6c02617eb1abb8faa0d0169e06244dc6",
+    "m200/frontend.py": "b1fbda932896610d2c93b39e0ec4976b069e1e4fabc3735304018bb382c08608",
+    "m200/il.py": "461668d0e23dd7a449efc963db8ad0a886d97eb9036a935225dbbb7b31244cd0",
+    "m200/indexed.py": "0b8ca542e2be87392d8de2a75ef8ad0d48534b28d7f82d1e24fd1bf38fc8343b",
+    "m200/jsonio.py": "c4d8447354b4f48205a8d5bfc58e1a3919656ba2073ecc5982b2f8fd6253fd70",
+    "m200/ladder_lowering.py": "6ded10d59e90334b2a128123a1a354fefb72d188a09196aa71f8878c3b78a822",
+    "m200/lower.py": "a272888c806158ea5403e8783e3a071ff135b7d9893957ef96defb872677b86c",
+    "m200/modbus.py": "62e98577eba6e2de938bc2292dd6cb16f22f64e1101fabdf5ea0f33fd009e92c",
+    "m200/model.py": "e786ea2d03ea7d9c98c641fe6ed84a00a2076f51a1974ce1209355ef4dad0e11",
+    "m200/native.py": "016a6af7d7f7b1de11dab9bee1477faa9f4d393f75bbf09e1b3bf5daa5e6ac4f",
+    "m200/native_logic.py": "10d4b0d4ce3aa98e5c5f35b2f83f9c6aa4d92f3bb7cbc05887a895a1b60dbe3f",
+    "m200/numeric.py": "e4888ac61fc735f0ef329f673a5a2af725e923eea7d1e832f5df9d201daf9002",
+    "m200/project.py": "83c5e0405b2a7d10f2b53d33a4df3cc08fac1286430849e8a571fe8eda205d39",
+    "m200/reverse.py": "bb0923cc94eced0856a222de2e8f44997b1641788afaa3e3f06034b9253870d8",
+    "m200/timers.py": "384e3c26facd76ed8da5449d001348fe1c1dd818a73532ab9c782e6a9b0fedf6",
+    "sdk/plc.hpp": "6b152f45f2b804bd99ec70b6696ce904d0720334a946155aa09d34576ea185d9",
+    "tests/stress/integer_flags.py": "59b4be614226355a9520ab8a8c8c4a18c6153f6d11c04cb8d2ada8b32b72845e",
+    "tests/stress/expression_edges.py": "d8dc293380b5aa3de06c3d764dab8324a974fd8d7f9d6962dbd776b9abc5d82a",
+    "tests/stress/bit_objects.py": "a39468f5ae36159b378cda34f2bfbe81abdf42fa1cb1fbf5cca0e6325b9c0489",
+    "tests/fixtures/synthetic.smbp": "5c04625cb62d03bd8d2982430970bbb3fb81070205c302d4e39f5a5b78a7f515",
+    "docs/capabilities/INDEXED-SOURCES.json": "8d9e40c40a2ea1df365bed39b50321aae2370aa3e48f10dab496d7d3c143ad1a",
+    "tests/public/control-flow-manifest.json": "9c90f5da2e907305d50f8dbb6a5d64e77306a2b92b501d7f0a79e9380a2d07a9"
+  },
+  "manuals_sha256": {
+    "EIO0000003289.pdf": "d2c8af0598276e7a0bb4f30770e4529282962bc6ee3944dee0645cb9a3186595",
+    "EIO0000002019.pdf": "fb4f684e7efbb46e3e38e61ed532d99bf623bedffe447b5c379dd3dd6c4434df"
+  },
+  "result_policy": "signed modular local policy; G55 proves ADDword example, other nonsignificant overflow bits unverified on physical PLC",
+  "unknown_domain": "integer DIV0/SQRTnegative still stop local model after S18; no fabricated result; float/SW17 not covered",
+  "whole_projects_imported": 0,
+  "official_editor": "pending",
+  "physical_plc": "pending"
+}

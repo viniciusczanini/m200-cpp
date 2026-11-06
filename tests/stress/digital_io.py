@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-from bit_objects import verify
+from expression_edges import verify
 from m200.frontend import compile_source
 
 SEED = 20020261115
@@ -99,6 +99,8 @@ if(plc::input(20)){plc::write_output_bits_i16(8,8,plc::read_output_bits_i16(0,8)
         ROOT / "sdk/plc.hpp",
         Path(__file__),
         ROOT / "tests/stress/bit_objects.py",
+        ROOT / "tests/stress/expression_edges.py",
+        ROOT / "tests/fixtures/synthetic.smbp",
     ]
     report = dict(
         seed=SEED,
@@ -115,12 +117,13 @@ if(plc::input(20)){plc::write_output_bits_i16(8,8,plc::read_output_bits_i16(0,8)
         official_editor="pending",
         physical_plc="pending",
         electrical_io="not-tested-locally",
+        exported_roundtrip="actual exported IL -> C++ -> compile -> new XML -> load and execute",
     )
     (ROOT / "docs/validation/DIGITAL-IO-STRESS-RESULTS.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n"
     )
     print(
-        f"PASS: {len(results)} cases / {report['scans']} scans / {len(bindings)} I/O/polarity bindings; C++, IL, reverse, JSON, normalization and XML"
+        f"PASS: {len(results)} cases / {report['scans']} scans / {len(bindings)} I/O/polarity bindings; C++, IL, reverse, JSON, normalization, XML and actual exported C++ recompilation"
     )
 
 

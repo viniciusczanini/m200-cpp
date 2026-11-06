@@ -344,22 +344,47 @@ void scan(){
         reverse.write_text(to_cpp(machine.program))
         self.assertEqual(run_native(reverse, frames), expected)
 
-    def test_undefined_numeric_domains_raise_without_fabricated_values(self):
+    def test_integer_overflow_writes_modular_result_and_sets_flag(self):
         cases = [
-            ("MW", (32767, 1), "%MW0+%MW2"),
-            ("MW", (-32768, 1), "%MW0-%MW2"),
-            ("MW", (32767, 2), "%MW0*%MW2"),
-            ("MW", (-32768, -1), "%MW0/%MW2"),
+            ("MW", (32767, 1), "%MW0+%MW2", -32768),
+            ("MW", (-32768, 1), "%MW0-%MW2", 32767),
+            ("MW", (32767, 2), "%MW0*%MW2", -2),
+            ("MW", (-32768, -1), "%MW0/%MW2", -32768),
+            ("MD", (2147483647, 1), "%MD0+%MD2", -2147483648),
+            ("MD", (-2147483648, 1), "%MD0-%MD2", 2147483647),
+            ("MD", (2147483647, 2), "%MD0*%MD2", -2),
+            ("MD", (-2147483648, -1), "%MD0/%MD2", -2147483648),
+            ("MD", (-2147483648,), "ABS(%MD0)", -2147483648),
+        ]
+        for prefix, values, expression, expected in cases:
+            with self.subTest(prefix=prefix, expression=expression):
+                rungs = [
+                    ["LD 1", "[%%%s%d:=%s]" % (prefix, index * 2, value)]
+                    for index, value in enumerate(values)
+                ]
+                rungs += [
+                    ["LD 1", "[%%%s100:=%s]" % (prefix, expression)],
+                    ["LD 1", "[%MW200:=0]"],
+                    ["LD %S18", "ST %Q0.0"],
+                ]
+                machine = Machine(Program(rungs))
+                self.assertTrue(machine.step()[0])
+                actual = (
+                    machine.words[100]
+                    if prefix == "MW"
+                    else machine.words[100] | (machine.words[101] << 16)
+                )
+                self.assertEqual(
+                    actual, raw_bits(expected, "i16" if prefix == "MW" else "i32")
+                )
+
+    def test_unmodeled_numeric_domains_raise_without_fabricated_values(self):
+        cases = [
             ("MW", (1, 0), "%MW0/%MW2"),
             ("MW", (1, 0), "%MW0 REM %MW2"),
             ("MW", (-1,), "SQRT(%MW0)"),
-            ("MD", (2147483647, 1), "%MD0+%MD2"),
-            ("MD", (-2147483648, 1), "%MD0-%MD2"),
-            ("MD", (2147483647, 2), "%MD0*%MD2"),
-            ("MD", (-2147483648, -1), "%MD0/%MD2"),
             ("MD", (1, 0), "%MD0 REM %MD2"),
             ("MD", (-1,), "SQRT(%MD0)"),
-            ("MD", (-2147483648,), "ABS(%MD0)"),
             ("MF", (3.4028234663852886e38, 2.0), "%MF0*%MF2"),
             ("MF", (1.0, 0.0), "%MF0/%MF2"),
             ("MF", (-1.0,), "SQRT(%MF0)"),

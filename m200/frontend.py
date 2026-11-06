@@ -1069,8 +1069,19 @@ class Frontend:
                 value = self.lower.copy(Number(typ, source), "bit_copy_snapshot")
                 self.lower.assign(Number(typ, text), value, guard)
                 return
-            if name == "plc::clear_index_error":
-                self.lower.rung("LD " + (guard if guard is not None else "1"), "R %S20")
+            if name in (
+                "plc::clear_index_error",
+                "plc::clear_arithmetic_error",
+                "plc::clear_shift_carry",
+            ):
+                target = {
+                    "plc::clear_index_error": 20,
+                    "plc::clear_arithmetic_error": 18,
+                    "plc::clear_shift_carry": 17,
+                }[name]
+                self.lower.rung(
+                    "LD " + (guard if guard is not None else "1"), "R %S" + str(target)
+                )
                 return
             if name == "plc::write_m_indexed":
                 value = boolean(self.expr(args[2]))

@@ -2,7 +2,8 @@
 
 import re
 
-from .model import address, fail, timer_config
+from .model import address, fail, timer_config, SYSTEM_RESETS
+from .arithmetic import ArithmeticState
 from .timers import (
     TimerState,
     REFERENCE as TIMER_REFERENCE,
@@ -213,9 +214,9 @@ def validate(program):
                     fail(
                         "indexed contact short-circuit/error effects are unverified; use an explicit load and CFG"
                     )
-                if arg == "%S20" and op in ("S", "ST", "STN"):
-                    fail("system index-error bit is writable only by R")
-                bit_operand(arg, op in STORES and arg != "%S20")
+                if arg in SYSTEM_RESETS and op in ("S", "ST", "STN"):
+                    fail("system flag is writable only by R")
+                bit_operand(arg, op in STORES and arg not in SYSTEM_RESETS)
     if set(jumps) - labels.keys():
         fail("jump references an undefined label")
     counter_uses = {
@@ -308,6 +309,7 @@ class Machine:
         }
         self.timers = {i: TimerState(t) for i, t in program.timers.items()}
         self.counters = {i: CounterState(c) for i, c in program.counters.items()}
+        self.arithmetic = ArithmeticState()
 
     def read(self, operand, inputs):
         counter = counter_reference(operand)
@@ -340,10 +342,19 @@ class Machine:
             return self.first
         if index == 20:
             return self.index_error
+        if index == 17:
+            return self.arithmetic.carry
+        if index == 18:
+            return self.arithmetic.overflow
         period = {4: 10, 5: 100, 6: 1000, 7: 60000}[index]
         return bool((self.now // (period // 2)) % 2)
 
     def write(self, operand, value):
+        if operand in ("%S17", "%S18"):
+            if value:
+                fail("system arithmetic flags can only be cleared")
+            self.arithmetic.clear(int(operand[2:]))
+            return
         if operand == "%S20":
             if value:
                 fail("system index-error bit can only be cleared")
@@ -482,7 +493,9 @@ class Machine:
                             self.read_number(v) if not isinstance(v, int) else v
                             for v in values
                         ]
-                        self.write_number(target, evaluate(name, args, kind))
+                        self.write_number(
+                            target, evaluate(name, args, kind, flags=self.arithmetic)
+                        )
                     continue
                 if op == "IN":
                     self.timer(timer_index(arg), acc)

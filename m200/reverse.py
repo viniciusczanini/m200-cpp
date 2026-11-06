@@ -81,10 +81,18 @@ def write_cpp(arg, value):
     if is_bit_indexed(arg):
         base, index = parse_bit(arg)
         return "plc::write_m_indexed(%d,%d,%s);" % (base, index, value)
-    if arg == "%S20":
+    if arg in ("%S17", "%S18", "%S20"):
         if value != "false":
-            fail("system index-error bit is writable only by reset")
-        return "plc::clear_index_error();"
+            fail("system flag is writable only by reset")
+        return (
+            "plc::"
+            + {
+                "%S17": "clear_shift_carry",
+                "%S18": "clear_arithmetic_error",
+                "%S20": "clear_index_error",
+            }[arg]
+            + "();"
+        )
     kind, n = address(arg, True)
     return ("plc::write_m" if kind == "M" else "plc::output") + "(%d, %s);" % (n, value)
 

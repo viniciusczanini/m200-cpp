@@ -607,3 +607,62 @@ ordenado declarado; não resolve os flags físicos de %C nem seu conflito sobre 
 Comparações/indexação/efeitos numéricos raw, outras estruturas, perfil exato,
 schema/editor e hardware permanecem pendentes. Biblioteca incompleta e objetivo
 integral ativo. Tudo local, sem CI, publicação ou atuação em PLC.
+
+
+## Flags inteiros e matriz digital ampliada — 2026-11-06
+
+Etapa após 86af2a3. Contrato em `../capabilities/INTEGER-FLAGS.md`; revisão
+independente em `INTEGER-FLAG-REVIEW.md`. Implementados S17/último bit ejetado
+em SHL/SHR/ROL/ROR e S18/overflow inteiro sticky, com leitura/reset explícito,
+snapshots e ordem preservados em C++, IL, SDK, JSON, normalização, reversão e
+XML. Operações literais com overflow são emitidas para produzir seus flags.
+SDK calcula em largura maior e copia bits, sem overflow assinado de C++.
+
+O exemplo oficial G55 soma 23241+21853, guarda -20442 e usa S18 para selecionar
+32767. Os demais resultados modulares de overflow são política local pendente
+de prova física. S17 recebe0/1 conforme o bit ejetado; sucesso/cópia/comparação
+não limpam S18. R é a única escrita admitida para esses flags. DIV0 e SQRT
+inteiro negativo marcam S18 e interrompem o modelo, mantendo explícita a lacuna
+de recuperação de resultados indeterminados. Float/SW17 ainda não implementado.
+
+A revisão não encontrou achados acionáveis. Seus192 frames, 17.952 operações
+UBSan e 24.576 vetores de oracle de shifts são evidência extra e ficam fora dos
+totais de stress. Os negativos antigos de overflow-abort foram substituídos por
+positivos de resultado/flag; DIV0/SQRT negativo, floats inválidos e conversões
+fora da faixa conservaram os testes de recusa/erro.
+
+Rodada final: **386 testes em 129,014 s**, exemplos, públicos, fetch/verificação
+dos originais, lint, formatação, capabilities e diff passaram. Os 14 scripts da
+receita stress foram executados como comandos locais independentes, com quatro
+workers externos; o novo stress usou quatro processos de casos (pico de sete
+workers de stress). `make stress` não foi invocado como comando único.
+
+Novo stress: **218 casos/62.464 scans**. São 192 combinações de família/largura/
+distância de shift, 13 famílias ALU, oito composições com laços/curto-circuito e
+cinco exemplos/trechos nativos. Valores MIN/MAX, walking bits e amostras seeded
+observam toda a largura por tabelas independentes, além de carry/erro antes e
+depois de clears. Percorre C++ original/IL/JSON/normalização/SDK/reversão e C++
+gerado do XML efetivamente exportado, recompilação e nova exportação.
+
+Os trechos originais T10/T15/T20 e flow-loop 3 permanecem inteiros, com harness
+explícito para inicialização, entradas, leitura de flags e resultados; hashes
+são conferidos. G55 é exemplo publicado do manual, não um SMBP baixado. Nenhum
+projeto estrangeiro completo foi declarado compatível ou teve CPU reescrita.
+
+A matriz digital passou: **24 entradas ×16 saídas ×2 polaridades =768 bindings**,
+49 casos / 12.800 scans, com imagem Q, escritas condicionais sucessivas, retenção
+entre scans, inversão, reset e cópias agrupadas. Foi ampliada para executar
+também C++ do XML efetivamente emitido e outro XML recompilado. Não é ensaio
+elétrico nem cobertura dos modos especiais PWM/PTO/HSC/acesso imediato.
+
+Total: **246.100 scans de stress +18.176 públicos =264.276**, cada frame-base
+contado uma vez. Exclui reruns, frames unitários, etapas comparadas, provas BDD,
+mutações e probes de revisão. Os demais ensaios de Modbus, temporizadores,
+contadores, memória, bordas e controle de fluxo passaram novamente.
+
+Resultados/hashes atuais: `INTEGER-FLAG-LOCAL-RESULTS.json`,
+`INTEGER-FLAG-STRESS-RESULTS.json` e os 14 relatórios de stress/públicos
+referenciados. Relatórios locais anteriores são históricos. Biblioteca completa
+continua false; meta integral ativa. Perfil/firmware/schema, editor Schneider,
+PLC e comportamento elétrico/temporal permanecem pendentes. Tudo local, sem CI,
+push, transmissão ao PLC ou acionamento de cargas.

@@ -222,6 +222,7 @@ def report(program):
             "Conservative allocation and compiler overhead can still reject a program that has a smaller native implementation.",
             "No vendor schema/editor validation has been run.",
             "Native timers require official simulation/hardware timing checks.",
+            "Integer S17/S18 and modular overflow are modeled locally; unspecified arithmetic results and float SW17 recovery remain gaps, with physical semantics unverified.",
             "Communication endpoints must be configured explicitly; successful local Modbus exchanges do not establish physical PLC compatibility.",
         ],
     }
@@ -333,7 +334,14 @@ def main(argv=None):
                     "system",
                     "clock_ms",
                     "clear_index_error",
+                    "clear_shift_carry",
+                    "clear_arithmetic_error",
                 ],
+                "integer_flags": {
+                    "read": "system(17/18)",
+                    "reset": ["clear_shift_carry", "clear_arithmetic_error"],
+                    "scope": "S17 assigned the last ejected bit on shifts/rotates; S18 sticky signed integer overflow with explicit reset, snapshots and guarded execution. Modular overflow bits beyond G55 ADDword are a local policy. DIV0/SQRTnegative stop local model after S18; float SW17 and unknown-result recovery remain gaps. Official editor/PLC pending.",
+                },
                 "stateful_types": [
                     "Ton",
                     "Tof",
