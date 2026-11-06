@@ -7,7 +7,8 @@ from pathlib import Path
 
 from m200.model import Program, CompileError
 from m200.il import Machine, validate
-from m200.numeric import evaluate
+from m200.numeric import Number, compare, comparison, evaluate
+from m200.scalar_numeric import Indeterminate
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -170,17 +171,41 @@ class IntegerFlagTests(unittest.TestCase):
             self.assertTrue(state.carry and state.overflow)
 
     def test_indeterminate_integer_fault_sets_error_but_does_not_fabricate_result(self):
-        for setup, operation in [
-            (["[%MW0:=7]", "[%MW1:=0]"], "[%MW10:=%MW0/%MW1]"),
-            (["[%MW0:=-1]"], "[%MW10:=SQRT(%MW0)]"),
+        for kind, prefix, setup, operation in [
+            ("i16", "MW", ["[%MW0:=7]", "[%MW1:=0]"], "[%MW10:=%MW0/%MW1]"),
+            ("i16", "MW", ["[%MW0:=-1]"], "[%MW10:=SQRT(%MW0)]"),
+            ("i16", "MW", ["[%MW0:=7]", "[%MW1:=0]"], "[%MW10:=%MW0 REM %MW1]"),
+            ("i32", "MD", ["[%MD0:=7]", "[%MD2:=0]"], "[%MD10:=%MD0/%MD2]"),
+            ("i32", "MD", ["[%MD0:=7]", "[%MD2:=0]"], "[%MD10:=%MD0 REM %MD2]"),
+            ("i32", "MD", ["[%MD0:=-1]"], "[%MD10:=SQRT(%MD0)]"),
         ]:
-            vm = Machine(
-                Program([["LD 1"] + setup + ["[%MW10:=123]"], ["LD 1", operation]])
-            )
-            with self.assertRaisesRegex(CompileError, "arithmetic"):
-                vm.step()
-            self.assertTrue(vm.arithmetic.overflow)
-            self.assertEqual(vm.words[10], 123)
+            with self.subTest(operation=operation):
+                target = "%" + prefix + "10"
+                vm = Machine(Program([
+                    ["LD 1"] + setup + ["[" + target + ":=123]"],
+                    ["LD 1", operation],
+                    ["LD %S18", "ST %Q0.0"],
+                ]))
+                vm.arithmetic.carry = True
+                self.assertTrue(vm.step()[0])
+                self.assertTrue(vm.arithmetic.overflow and vm.arithmetic.carry)
+                self.assertIsInstance(vm.read_number(Number(kind, target)), Indeterminate)
+                with self.assertRaisesRegex(CompileError, "indeterminate.*before recovery"):
+                    compare(vm.words, comparison("[" + target + "=0]"), vm.read_number)
+                # Clearing the error flag alone cannot validate unknown data.
+                vm.write("%S18", False)
+                self.assertIsInstance(vm.read_number(Number(kind, target)), Indeterminate)
+                if kind == "i32":
+                    vm.write_number("%MW10", 23)
+                    self.assertEqual(vm.read_number(Number("i16", "%MW10")), 23)
+                    self.assertIsInstance(vm.read_number(Number(kind, target)), Indeterminate)
+                    vm.write_number("%MW11", 0)
+                else:
+                    vm.write_number(target, 23)
+                self.assertEqual(vm.read_number(Number(kind, target)), 23)
+                self.assertIsNone(vm.indeterminate.read(10, 1 if kind == "i16" else 2))
+                self.assertTrue(vm.arithmetic.carry)
+                self.assertFalse(vm.arithmetic.overflow)
 
     def test_only_reset_writes_arithmetic_flags(self):
         for flag in [17, 18]:

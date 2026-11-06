@@ -18,7 +18,8 @@ from m200.frontend import compile_source
 from m200.il import Machine
 from m200.model import CompileError, Program
 from m200.native import run_native
-from m200.numeric import OPS
+from m200.numeric import OPS, Number, compare, comparison
+from m200.scalar_numeric import Indeterminate
 from m200.reverse import to_cpp
 
 
@@ -28,6 +29,7 @@ class Vector:
     kind: str
     arguments: tuple
     expected: object
+    expected_overflow: object = None
 
 
 def real32(value):
@@ -87,11 +89,21 @@ def fixed_vectors():
         Vector("mul_i16", "i16", (-181, 181), -32761),
         Vector("div_i16", "i16", (-32768, 3), -10922),
         Vector("sqrt_i16", "i16", (32767,), 181),
+        # Literal arithmetic oracles, independent of OPS/evaluate. Interior and
+        # wrap endpoints are retained for each new INC/DEC width.
+        Vector("inc_i16", "i16", (32766,), 32767, False),
+        Vector("inc_i16", "i16", (32767,), -32768, True),
+        Vector("dec_i16", "i16", (-32767,), -32768, False),
+        Vector("dec_i16", "i16", (-32768,), 32767, True),
         Vector("add_i32", "i32", (2147483640, 7), 2147483647),
         Vector("sub_i32", "i32", (-2147483640, 8), -2147483648),
         Vector("mul_i32", "i32", (46340, 46340), 2147395600),
         Vector("div_i32", "i32", (-2147483648, 3), -715827882),
         Vector("sqrt_i32", "i32", (2147483647,), 46340),
+        Vector("inc_i32", "i32", (2147483646,), 2147483647, False),
+        Vector("inc_i32", "i32", (2147483647,), -2147483648, True),
+        Vector("dec_i32", "i32", (-2147483647,), -2147483648, False),
+        Vector("dec_i32", "i32", (-2147483648,), 2147483647, True),
         Vector("add_f32", "f32", (16777216.0, 1.0), 16777216.0),
         Vector("sub_f32", "f32", (1.0000001192092896, 1.0), 0.00000011920928955078125),
         Vector("mul_f32", "f32", (3.0, 0.125), 0.375),
@@ -189,6 +201,8 @@ class NumericStressTests(unittest.TestCase):
                 )
                 address = slot * 2
                 writer = {"i16": "word", "i32": "dword", "f32": "real"}[vector.kind]
+                if vector.expected_overflow is not None:
+                    statements.append("plc::clear_arithmetic_error();")
                 statements.append(
                     "plc::write_%s(%d,plc::%s(%s));"
                     % (writer, address, vector.operation, arguments)
@@ -199,9 +213,12 @@ class NumericStressTests(unittest.TestCase):
                 else:
                     reader = writer
                     expected = vector.expected
+                overflow_check = ""
+                if vector.expected_overflow is not None:
+                    overflow_check = " && " + ("" if vector.expected_overflow else "!") + "plc::system(18)"
                 statements.append(
-                    "plc::output(%d,plc::read_%s(%d)==%s);"
-                    % (slot, reader, address, expected)
+                    "plc::output(%d,plc::read_%s(%d)==%s%s);"
+                    % (slot, reader, address, expected, overflow_check)
                 )
             source = self.source(
                 "vectors_%03d" % first, "void scan(){\n" + "\n".join(statements) + "\n}"
@@ -396,51 +413,101 @@ void scan(){
                     actual, raw_bits(expected, "i16" if prefix == "MW" else "i32")
                 )
 
-    def test_unmodeled_numeric_domains_raise_without_fabricated_values(self):
+    def test_numeric_faults_expose_flags_unknown_values_and_ieee_results(self):
+        # Expected status/result classes come from G02's error contract and the
+        # IEEE representation, not from the operation table or VM evaluator.
+        # SW17: 1=invalid/NaN, 4=division by zero, 8=overflow/infinity.
         cases = [
-            ("MW", (1, 0), "%MW0/%MW2"),
-            ("MW", (1, 0), "%MW0 REM %MW2"),
-            ("MW", (-1,), "SQRT(%MW0)"),
-            ("MD", (1, 0), "%MD0 REM %MD2"),
-            ("MD", (-1,), "SQRT(%MD0)"),
-            ("MF", (3.4028234663852886e38, 2.0), "%MF0*%MF2"),
-            ("MF", (1.0, 0.0), "%MF0/%MF2"),
-            ("MF", (-1.0,), "SQRT(%MF0)"),
-            ("MF", (0.0,), "LOG(%MF0)"),
-            ("MF", (-1.0,), "LN(%MF0)"),
-            ("MF", (1000.0,), "EXP(%MF0)"),
-            ("MF", (13000.0,), "SIN(%MF0)"),
-            ("MF", (-13000.0,), "COS(%MF0)"),
-            ("MF", (13000.0,), "TAN(%MF0)"),
-            ("MF", (2.0,), "ASIN(%MF0)"),
-            ("MF", (-2.0,), "ACOS(%MF0)"),
+            ("MW", (1, 0), "%MW0/%MW2", 0, "unknown"),
+            ("MW", (1, 0), "%MW0 REM %MW2", 0, "unknown"),
+            ("MW", (-1,), "SQRT(%MW0)", 0, "unknown"),
+            ("MD", (1, 0), "%MD0 REM %MD2", 0, "unknown"),
+            ("MD", (-1,), "SQRT(%MD0)", 0, "unknown"),
+            ("MF", (3.4028234663852886e38, 2.0), "%MF0*%MF2", 8, "positive_inf"),
+            ("MF", (1.0, 0.0), "%MF0/%MF2", 4, "positive_inf"),
+            ("MF", (-1.0,), "SQRT(%MF0)", 1, "nan"),
+            ("MF", (0.0,), "LOG(%MF0)", 4, "negative_inf"),
+            ("MF", (-1.0,), "LN(%MF0)", 1, "nan"),
+            ("MF", (1000.0,), "EXP(%MF0)", 8, "positive_inf"),
+            ("MF", (13000.0,), "SIN(%MF0)", 1, "nan"),
+            ("MF", (-13000.0,), "COS(%MF0)", 1, "nan"),
+            ("MF", (13000.0,), "TAN(%MF0)", 1, "nan"),
+            ("MF", (2.0,), "ASIN(%MF0)", 1, "nan"),
+            ("MF", (-2.0,), "ACOS(%MF0)", 1, "nan"),
         ]
-        for prefix, values, expression in cases:
+        for prefix, values, expression, status, result_class in cases:
             with self.subTest(prefix=prefix, expression=expression, values=values):
                 rungs = [
                     ["LD 1", "[%%%s%d:=%s]" % (prefix, index * 2, value)]
                     for index, value in enumerate(values)
                 ]
-                rungs.append(["LD 1", "[%%%s100:=%s]" % (prefix, expression)])
+                rungs += [
+                    ["LD 1", "[%MW100:=123]", "[%MW101:=456]"],
+                    ["LD 1", "[%%%s100:=%s]" % (prefix, expression)],
+                    ["LD %S18", "ST %Q0.0"],
+                    ["LD %S17", "ST %Q0.1"],
+                ]
                 machine = Machine(Program(rungs))
-                with self.assertRaisesRegex(CompileError, "arithmetic"):
-                    machine.step()
-                self.assertEqual(machine.words[100:102], [0, 0])
+                machine.arithmetic.carry = True
+                self.assertEqual(machine.step()[:2], [True, True])
+                self.assertTrue(machine.arithmetic.overflow)
+                self.assertEqual(machine.arithmetic.float_status, status)
+                kind = {"MW": "i16", "MD": "i32", "MF": "f32"}[prefix]
+                target = "%" + prefix + "100"
+                result = machine.read_number(Number(kind, target))
+                if result_class == "unknown":
+                    self.assertIsInstance(result, Indeterminate)
+                    with self.assertRaisesRegex(CompileError, "indeterminate.*before recovery"):
+                        compare(machine.words, comparison("[" + target + "=0]"), machine.read_number)
+                    machine.write("%S18", False)
+                    self.assertIsInstance(machine.read_number(Number(kind, target)), Indeterminate)
+                    machine.write_number(target, 23)
+                    self.assertEqual(machine.read_number(Number(kind, target)), 23)
+                    self.assertIsNone(machine.indeterminate.read(100, 1 if kind == "i16" else 2))
+                else:
+                    self.assertIsNone(machine.indeterminate.read(100, 2))
+                    bits = machine.words[100] | machine.words[101] << 16
+                    if result_class == "nan":
+                        self.assertTrue(math.isnan(result))
+                        self.assertEqual(bits & 0x7F800000, 0x7F800000)
+                        self.assertNotEqual(bits & 0x007FFFFF, 0)
+                        # IEEE NaN has no fixed payload/sign requirement here.
+                        self.assertFalse(compare(machine.words, comparison("[%MF100=%MF100]"), machine.read_number))
+                    else:
+                        self.assertTrue(math.isinf(result))
+                        self.assertEqual(bits, 0x7F800000 if result_class == "positive_inf" else 0xFF800000)
+                    machine.write("%S18", False)
+                    self.assertEqual(machine.arithmetic.float_status, status)
+                    machine.write_number("%SW17", 0)
+                    self.assertFalse(machine.arithmetic.overflow)
+                    self.assertEqual(machine.arithmetic.float_status, 0)
+                    machine.write_number(target, 2.5)
+                    self.assertEqual(machine.read_number(Number(kind, target)), 2.5)
+                self.assertFalse(machine.arithmetic.overflow)
+                self.assertTrue(machine.arithmetic.carry)
+        # These conversion domains still refuse execution; G03 recovery is
+        # deferred. Retain the negative and verify that no destination is written.
         for target, value, intrinsic in [
             ("MW", 32767.5, "REAL_TO_INT"),
             ("MD", 2147483648.0, "REAL_TO_DINT"),
         ]:
             with self.subTest(intrinsic=intrinsic):
-                machine = Machine(
-                    Program(
-                        [
-                            ["LD 1", "[%%MF0:=%s]" % value],
-                            ["LD 1", "[%%%s100:=%s(%%MF0)]" % (target, intrinsic)],
-                        ]
-                    )
-                )
+                machine = Machine(Program([
+                    ["LD 1", "[%%MF0:=%s]" % value],
+                    ["LD 1", "[%MW100:=123]", "[%MW101:=456]"],
+                    ["LD 1", "[%%%s100:=%s(%%MF0)]" % (target, intrinsic)],
+                    ["LD 1", "ST %Q0.0"],
+                ]))
+                machine.arithmetic.carry = True
                 with self.assertRaisesRegex(CompileError, "arithmetic"):
                     machine.step()
+                self.assertEqual(machine.words[100:102], [123, 456])
+                self.assertIsNone(machine.indeterminate.read(100, 2))
+                self.assertTrue(machine.arithmetic.carry)
+                self.assertFalse(machine.outputs[0])
+                # G3289 p72: range failure must set S18. Static review finds
+                # real_to_int/real_to_dint missing from the flag-setting path.
+                self.assertTrue(machine.arithmetic.overflow)
 
     def test_inactive_nested_branches_and_short_circuit_skip_faults(self):
         expressions = [
@@ -484,7 +551,13 @@ plc::f32 zero_real=0.0f,negative_real=-1.0f,too_large=32767.5f,angle=13000.0f;
             reverse = self.work / ("gating%d.audit.cpp" % first)
             reverse.write_text(to_cpp(program))
             self.assertEqual(run_native(reverse, frames), expected)
-            with self.assertRaisesRegex(CompileError, "arithmetic"):
+            self.assertFalse(machine.arithmetic.overflow)
+            self.assertEqual(machine.arithmetic.float_status, 0)
+            self.assertEqual(machine.indeterminate.words, {})
+            # Batch0 actually compares an unknown integer. Batch4 reaches the
+            # still-unmodeled REAL_TO_INT domain after its IEEE float effects.
+            diagnostic = "indeterminate.*before recovery" if first == 0 else "arithmetic"
+            with self.assertRaisesRegex(CompileError, diagnostic):
                 Machine(program).step({0: True})
 
     def test_nontrivial_real_math_agrees_with_independent_tolerances(self):

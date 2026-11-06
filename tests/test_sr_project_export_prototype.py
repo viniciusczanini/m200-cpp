@@ -1,4 +1,4 @@
-"""Genuine copied-pipeline SR export; no real product/editor claim."""
+"""Native SR export contracts; G06 extensions do not establish editor acceptance."""
 
 import copy
 import hashlib
@@ -154,7 +154,8 @@ class SubroutineProjectExport(unittest.TestCase):
                 (s.number, s.name, s.section_number, s.rungs),
                 (63, "distinct native name 🚦", 2, [["LD %I0.1", "ST %M21"]]),
             )
-            self.assertNotEqual(s.origins, p.subroutines[63].origins)
+            # SR comments preserve provenance; actual IL/graphs remain authoritative.
+            self.assertEqual(s.origins, p.subroutines[63].origins)
             machine = Machine(loaded)
             for inputs, expected in [
                 ({0: False, 1: True}, False),
@@ -237,19 +238,76 @@ void scan(){plc::write_word(5,7);plc::output(1,false);sr.call(plc::input(0)&&!pl
                 ),
             )
 
-    def test_section_multi_leaf_and_nonserializable_body_refuse_atomically(self):
-        for section in (0, 1, 42):
+    def test_independent_sections_multiple_leaves_and_normalizable_logic_roundtrip(self):
+        for section in (1, 42, 2147483647):
+            p = simple()
+            p.subroutines[63].section_number = section
+            with self.subTest(section=section), tempfile.TemporaryDirectory() as d:
+                dest = Path(d) / "section.smbp"
+                write_project(p, MEMORY, dest)
+                loaded = load_project(dest)
+                self.assertEqual(loaded.subroutines[63].section_number, section)
+                self.assertTrue(Machine(loaded).step({0: True, 1: True}, 10)[0])
+
+        p = simple()
+        p.subroutines[0] = SubroutineDefinition(0, "second", 3, [["LD %M20", "ST %M22"]])
+        p.rungs.insert(2, ["LD %M20", "SR0"])
+        p.rungs.append(["LD %M22", "ST %Q0.1"])
+        with tempfile.TemporaryDirectory() as d:
+            dest = Path(d) / "multiple.smbp"
+            write_project(p, MEMORY, dest)
+            loaded = load_project(dest)
+            self.assertEqual(set(loaded.subroutines), {0, 63})
+            self.assertEqual((loaded.subroutines[0].section_number, loaded.subroutines[63].section_number), (3, 2))
+            reverse = Path(d) / "reverse.cpp"
+            reverse.write_text(to_cpp(loaded))
+            rebuilt = compile_source(reverse)
+            self.assertEqual(set(rebuilt.subroutines), {0, 63})
+            for program in (p, loaded, rebuilt):
+                self.assertEqual(Machine(program).step({0: True, 1: True}, 10)[:2], [True, True])
+                self.assertEqual(Machine(program).step({0: False, 1: True}, 10)[:2], [False, False])
+
+        # Constant contacts, OR and STN are supported via actual normalization;
+        # check the truth tables instead of demanding byte-identical IL.
+        cases = [
+            ([["LD 1", "ST %M2"]], (True, True, True, True)),
+            ([["LD %M0", "OR %M1", "ST %M2"]], (False, True, True, True)),
+            ([["LD %M0", "STN %M2"]], (True, True, False, False)),
+        ]
+        controls = ((False, False), (False, True), (True, False), (True, True))
+        for index, (body, expected) in enumerate(cases):
+            p = simple()
+            p.subroutines[63].rungs = body
+            p.subroutines[63].origins = []
+            p.rungs = [["LD %I0.1", "ST %M0"], ["LD %I0.2", "ST %M1"],
+                       ["LD %I0.0", "SR63"], ["LD %M2", "ST %Q0.0"],
+                       ["LD 1", "ST %Q0.1"]]
+            with self.subTest(body=index), tempfile.TemporaryDirectory() as d:
+                dest = Path(d) / "logic.smbp"
+                write_project(p, MEMORY, dest)
+                loaded = load_project(dest)
+                for program in (p, loaded):
+                    for (a, b), value in zip(controls, expected):
+                        self.assertEqual(Machine(program).step({0: True, 1: a, 2: b}, 10)[:2], [value, True])
+                    self.assertEqual(Machine(program).step({0: False, 1: True, 2: True}, 10)[:2], [False, True])
+
+    def test_invalid_identity_section_and_body_refuse_atomically(self):
+        missing = simple()
+        missing.rungs[1][-1] = "SR0"
+        self.refuse(missing)
+        for section in (0, -1, 2147483648):
             p = simple()
             p.subroutines[63].section_number = section
             self.refuse(p)
-        p = simple()
-        p.subroutines[0] = SubroutineDefinition(0, "second", 3, [["END"]])
-        self.refuse(p)
+        for name, section, number in (("second", 2, 0), ("distinct native name 🚦", 3, 0), ("second", 3, 64)):
+            p = simple()
+            p.subroutines[number] = SubroutineDefinition(number, name, section, [["END"]])
+            self.refuse(p)
         for body in (
-            [["LD 1", "ST %M1"]],
-            [["LD %M0", "OR %M1", "ST %M2"]],
-            [["LD %M0", "STN %M2"]],
-            [["LD %M0", "END"]],
+            [["LD %M0", "END 0"]],
+            [["LD %M0", "END", "ST %M2"]],
+            [["LD 0", "SR63"]],
+            [["LD 1", "[%MW8000:=1]"]],
         ):
             p = simple()
             p.subroutines[63].rungs = body
@@ -257,23 +315,28 @@ void scan(){plc::write_word(5,7);plc::output(1,false);sr.call(plc::input(0)&&!pl
             self.refuse(p)
 
     def test_sole_and_conditional_END_in_leaf_stay_current_context(self):
-        for terminal, second in ((["END"], True), (["LD %I0.1", "ENDC"], True)):
+        cases = ((["END"], (True, True)),
+                 (["LD %I0.1", "ENDC"], (False, True)),
+                 (["LD %I0.1", "ENDCN"], (True, False)),
+                 (["LD %I0.1", "END"], (True, True)))
+        for terminal, returns in cases:
             p = simple()
             p.subroutines[63].rungs = [terminal, ["LD %I0.0", "ST %M21"]]
             p.subroutines[63].origins = []
-            with tempfile.TemporaryDirectory() as d:
+            p.rungs.append(["LD 1", "ST %Q0.1"])
+            with self.subTest(terminal=terminal), tempfile.TemporaryDirectory() as d:
                 dest = Path(d) / "end.smbp"
                 write_project(p, MEMORY, dest)
                 loaded = load_project(dest)
-                m = Machine(loaded)
-                m.step({0: True, 1: second}, 10)
-                self.assertFalse(m.memory[21])
-                self.assertFalse(m.outputs[0])
-                self.assertEqual(loaded.subroutines[63].rungs, p.subroutines[63].rungs)
-        p = simple()
-        p.subroutines[63].rungs = [["LD %I0.1", "ENDCN"]]
-        p.subroutines[63].origins = []
-        self.refuse(p)
+                for second, returned in zip((False, True), returns):
+                    machine = Machine(loaded)
+                    self.assertEqual(machine.step({0: True, 1: second}, 10)[:2], [not returned, True])
+                    self.assertEqual(machine.memory[21], not returned)
+                    self.assertEqual(machine.now, 10)
+                # Normalization may split a redundant load from an unconditional
+                # END, but the native terminal remains a local END/EndCn.
+                terminals = [line for rung in loaded.subroutines[63].rungs for line in rung if line in ("END", "ENDC", "ENDCN")]
+                self.assertEqual(terminals, [terminal[-1]])
 
     def test_all_context_allocation_covers_high_callee_only_words(self):
         p = simple()
@@ -297,7 +360,7 @@ void scan(){plc::write_word(5,7);plc::output(1,false);sr.call(plc::input(0)&&!pl
             self.assertEqual(m.words[7999], 42)
             self.assertTrue(m.memory[1023])
 
-    def test_active_template_refusal_preserves_absent_and_existing_output(self):
+    def test_active_template_replaces_executable_contexts_without_mutating_inputs(self):
         for p in (simple(), Program(rungs=[["LD %M0", "ST %M1"]])):
             original = copy.deepcopy(p.as_dict())
             raw = M20.read_bytes()
@@ -307,13 +370,22 @@ void scan(){plc::write_word(5,7);plc::output(1,false);sr.call(plc::input(0)&&!pl
                     if existing:
                         dest.parent.mkdir()
                         dest.write_bytes(b"sentinel")
-                    with self.assertRaises(CompileError):
-                        write_project(p, M20, dest)
-                    self.assertEqual(
-                        dest.read_bytes() if dest.exists() else None,
-                        b"sentinel" if existing else None,
-                    )
-                    self.assertEqual(dest.parent.exists(), existing)
+                    write_project(p, M20, dest)
+                    loaded = load_project(dest)
+                    self.assertEqual(set(loaded.subroutines), set(p.subroutines))
+                    self.assertNotIn(0, loaded.subroutines)  # inherited SR0 was replaced
+                    self.assertEqual(dest.parent.exists(), True)
+                    self.assertNotEqual(dest.read_bytes(), b"sentinel")
+                    machine = Machine(loaded)
+                    if p.subroutines:
+                        self.assertTrue(machine.step({0: True, 1: True}, 10)[0])
+                        self.assertEqual(loaded.subroutines[63].rungs, p.subroutines[63].rungs)
+                    else:
+                        self.assertEqual(loaded.rungs, p.rungs)
+                        machine.memory[0] = True
+                        machine.step({}, 10)
+                        self.assertTrue(machine.memory[1])
+                    self.assertEqual(machine.words[:3], [0, 0, 0])
             self.assertEqual(p.as_dict(), original)
             self.assertEqual(M20.read_bytes(), raw)
 

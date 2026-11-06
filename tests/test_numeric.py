@@ -1,3 +1,4 @@
+import math
 import random
 import tempfile
 import unittest
@@ -8,7 +9,8 @@ from m200.il import Machine, validate
 from m200.model import CompileError, Program
 from m200.native import run_native
 from m200.reverse import to_cpp
-from m200.numeric import memory_words_used
+from m200.numeric import Number, compare, comparison, memory_words_used
+from m200.scalar_numeric import Indeterminate
 
 
 class NumericTests(unittest.TestCase):
@@ -130,39 +132,72 @@ plc::output(0,n<0);plc::output(1,plc::read_dword(10)==n);
             with self.subTest(operation=operation), self.assertRaises(CompileError):
                 validate(Program([["LD 1", operation]]))
 
-    def test_local_simulation_refuses_unmodeled_arithmetic_results(self):
+    def test_integer_fault_values_remain_unknown_until_repaired(self):
         for initial, expression in [
             ("0", "plc::div_i16(2,a)"),
             ("-1", "plc::sqrt_i16(a)"),
         ]:
-            program = self.compile(
-                "void scan(){plc::i16 a="
-                + initial
-                + ";plc::i16 n="
-                + expression
-                + ";plc::write_word(0,n);}"
-            )
-            with (
-                self.subTest(expression=expression),
-                self.assertRaisesRegex(CompileError, "arithmetic"),
-            ):
-                Machine(program).step()
-
-    def test_unmodeled_arithmetic_literals_fail_explicitly(self):
-        for expression in [
-            "plc::div_i16(1,0)",
-            "plc::sqrt_f32(-1.0f)",
-            "plc::real_to_int(32768.0f)",
-        ]:
-            with (
-                self.subTest(expression=expression),
-                self.assertRaisesRegex(CompileError, "arithmetic"),
-            ):
-                self.compile(
-                    "void scan(){plc::write_word(0,plc::real_to_int(plc::int_to_real(1)));plc::output(0,"
-                    + expression
-                    + "==0);}"
+            with self.subTest(expression=expression):
+                program = self.compile(
+                    "void scan(){plc::i16 a=" + initial
+                    + ";plc::i16 n=" + expression
+                    + ";plc::write_word(0,n);plc::output(0,plc::system(18));}"
                 )
+                machine = Machine(program)
+                self.assertTrue(machine.step()[0])
+                self.assertTrue(machine.arithmetic.overflow)
+                self.assertIsInstance(
+                    machine.read_number(Number("i16", "%MW0")), Indeterminate
+                )
+                # Copy/storage may carry the unknown value. Observation is the
+                # failure point; the destination must never become a valid zero.
+                with self.assertRaisesRegex(CompileError, "indeterminate.*before recovery"):
+                    compare(machine.words, comparison("[%MW0=0]"), machine.read_number)
+                machine.write_number("%MW0", 23)
+                machine.write("%S18", False)
+                self.assertEqual(machine.read_number(Number("i16", "%MW0")), 23)
+                self.assertIsNone(machine.indeterminate.read(0, 1))
+                self.assertFalse(machine.arithmetic.overflow)
+
+    def test_literal_faults_are_runtime_effects_with_distinct_result_contracts(self):
+        for kind, expression in [
+            ("i16", "plc::div_i16(1,0)"),
+            ("f32", "plc::sqrt_f32(-1.0f)"),
+            ("i16", "plc::real_to_int(32768.0f)"),
+        ]:
+            with self.subTest(expression=expression):
+                writer = "real" if kind == "f32" else "word"
+                # Admission is no longer an arithmetic evaluation. An invalid
+                # typed literal itself (e.g. i16=32768) is still rejected above.
+                program = self.compile(
+                    "void scan(){plc::write_word(10,123);"
+                    "plc::write_word(11,456);plc::write_" + writer
+                    + "(10," + expression + ");plc::output(0,true);}"
+                )
+                machine = Machine(program)
+                if expression.startswith("plc::real_to_int"):
+                    # G03 is deferred: keep this real-to-integer domain refusal
+                    # and its before-write atomicity, merely at runtime now.
+                    with self.assertRaisesRegex(CompileError, "arithmetic"):
+                        machine.step()
+                    self.assertEqual(machine.words[10:12], [123, 456])
+                    self.assertFalse(machine.outputs[0])
+                    # G3289 p72 requires S18 even when this local conversion
+                    # path still refuses execution. Keep the real source gap
+                    # visible; do not turn the missing flag into a new oracle.
+                    self.assertTrue(machine.arithmetic.overflow)
+                else:
+                    self.assertTrue(machine.step()[0])
+                    self.assertTrue(machine.arithmetic.overflow)
+                    result = machine.read_number(Number(kind, "%M" + ("F" if kind == "f32" else "W") + "10"))
+                    if kind == "i16":
+                        self.assertIsInstance(result, Indeterminate)
+                        with self.assertRaisesRegex(CompileError, "indeterminate"):
+                            compare(machine.words, comparison("[%MW10=0]"), machine.read_number)
+                        self.assertEqual(machine.arithmetic.float_status, 0)
+                    else:
+                        self.assertTrue(math.isnan(result))
+                        self.assertEqual(machine.arithmetic.float_status, 1)
 
     def test_inactive_branches_and_short_circuit_do_not_evaluate_arithmetic(self):
         self.equivalent(

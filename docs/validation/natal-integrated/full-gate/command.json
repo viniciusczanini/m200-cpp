@@ -1,0 +1,21 @@
+{
+  "all_inputs": 968,
+  "command": [
+    "make",
+    "check"
+  ],
+  "compiler_sdk_pins": 72,
+  "cwd": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/combined-7/source",
+  "elapsed_seconds": 300.12,
+  "environment": {
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "exit": 2,
+  "finished_utc": "2026-11-06T22:34:53.758284+00:00",
+  "freeze_id": "natal-combined-7",
+  "input_bytes": 114559477,
+  "log_sha256": "29a3dcdedd04fe979e7f959aeac9258fa34640db038b29a15ae0a10ab0645764",
+  "sole_full_run": true,
+  "started_utc": "2026-11-06T22:29:53.636498+00:00",
+  "state": "complete"
+}

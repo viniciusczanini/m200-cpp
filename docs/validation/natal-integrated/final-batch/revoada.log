@@ -1,0 +1,43 @@
+{
+  "status": "PASS sampled-clock contract",
+  "source": "examples/christmas/revoada20_clock_10.cpp",
+  "source_sha256": "37e2386fe336e4ef411ad3eb7ee468c4800083708049b5d22c6b93bf1b17cb7d",
+  "SMBP": "output/final-batch-revoada/program.smbp",
+  "SMBP_sha256": "e0395eb9553d509b2e41c6bcc976f85193971b1ace111d0170057103c69050fc",
+  "start_phase_cases": [
+    {
+      "START_ms": 0,
+      "first_quantum_ms": 550,
+      "later_quantum_ms": 600,
+      "positions": 2459
+    },
+    {
+      "START_ms": 49,
+      "first_quantum_ms": 501,
+      "later_quantum_ms": 600,
+      "positions": 2458
+    },
+    {
+      "START_ms": 50,
+      "first_quantum_ms": 500,
+      "later_quantum_ms": 600,
+      "positions": 2459
+    },
+    {
+      "START_ms": 75,
+      "first_quantum_ms": 575,
+      "later_quantum_ms": 600,
+      "positions": 2469
+    }
+  ],
+  "control_positions": 14,
+  "onehot_order_double_endpoints_and_two_loops": true,
+  "timers": 0,
+  "rungs": 46,
+  "IL": 103,
+  "M_unique": 5,
+  "M_span": 5,
+  "MW_unique": 7,
+  "MW_span": 181,
+  "tradeoff": "First quantum500..600ms depends on START/clock phase; later600ms only when all rising/falling levels sampled. No missed-edge/saturation/monotonic-time guarantee or absolute START-phase parity."
+}

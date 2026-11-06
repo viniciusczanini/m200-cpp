@@ -293,14 +293,80 @@ class ToolchainTests(unittest.TestCase):
             "bool f(bool a){return f(a);}void scan(){plc::output(0,f(true));}", "M200-E"
         )
 
-    def test_rejects_conditional_or_duplicate_timer_update(self):
-        for body in [
+    def test_timer_updates_accept_guarded_and_repeated_sites_but_reject_nested_calls(self):
+        # Preserve the exact formerly rejected triggers as admission positives.
+        for body in (
             "plc::Ton t{20};void scan(){if(plc::input(0)){bool q=t.update(true);}}",
             "plc::Ton t{20};void scan(){bool a=t.update(true);bool b=t.update(false);}",
+        ):
+            with self.subTest(admitted_body=body):
+                self.assertEqual(set(self.compile(body).timers), {0})
+
+        def equivalent(body, frames, expected_pairs, expected_values):
+            program = self.compile(body)
+            self.assertEqual(set(program.timers), {0})
+            expected = [list(pair) + [False] * 14 for pair in expected_pairs]
+
+            def check(candidate):
+                machine = self.api("il").Machine(candidate)
+                for i, frame in enumerate(frames):
+                    with self.subTest(frame=i):
+                        self.assertEqual(machine.step(frame.get("inputs", {}), frame["dt_ms"]), expected[i])
+                        self.assertEqual(machine.words[0], expected_values[i])
+
+            check(program)
+            self.assertEqual(self.api("native").run_native(self.work / "program.cpp", frames), expected)
+            destination = self.work / "timer_sites.smbp"
+            self.api("project").write_project(program, ROOT / "tests/fixtures/synthetic.smbp", destination)
+            actual = self.api("project").load_project(destination)
+            self.assertEqual(actual.timers, program.timers)
+            self.assertEqual(actual.metadata["official_editor"], "pending")
+            check(actual)
+            reverse = self.work / "timer_sites_reverse.cpp"
+            reverse.write_text(self.api("reverse").to_cpp(actual))
+            rebuilt = self.api("frontend").compile_source(reverse)
+            self.assertEqual(rebuilt.timers, program.timers)
+            check(rebuilt)
+            self.assertEqual(self.api("native").run_native(reverse, frames), expected)
+
+        # A false guard skips IN entirely. At t20 the timer has completed even
+        # though its previously wired output remains false until another call.
+        equivalent(
+            "plc::Ton t{0,10,2};bool wired=false;void scan(){"
+            "if(plc::input(0)){wired=t.update(plc::input(1));}"
+            "plc::output(0,wired);plc::output(1,t.done());plc::write_word(0,t.value());}",
+            [
+                {"dt_ms": 10, "inputs": {0: True, 1: True}},
+                {"dt_ms": 10}, {"dt_ms": 0},
+                {"dt_ms": 0, "inputs": {0: True}},
+                {"dt_ms": 20, "inputs": {0: True, 1: True}},
+                {"dt_ms": 0, "inputs": {0: True, 1: True}},
+                {"dt_ms": 0}, {"dt_ms": 0, "inputs": {0: True}},
+            ],
+            [(False, False), (False, False), (False, True), (False, False),
+             (False, False), (True, True), (True, True), (False, False)],
+            [0, 1, 2, 0, 0, 2, 2, 0],
+        )
+        # Both static sites update the SAME identity in order, at one timestamp.
+        # At t20 first call returns true, then the second resets V/Q to zero.
+        equivalent(
+            "plc::Ton t{0,10,2};void scan(){bool a=t.update(true);"
+            "bool b=t.update(plc::input(0));plc::output(0,a);plc::output(1,b);"
+            "plc::write_word(0,t.value());}",
+            [
+                {"dt_ms": 20, "inputs": {0: True}}, {"dt_ms": 0},
+                {"dt_ms": 20, "inputs": {0: True}},
+                {"dt_ms": 0, "inputs": {0: True}}, {"dt_ms": 0},
+            ],
+            [(False, False), (True, False), (False, False), (True, True), (True, False)],
+            [0, 0, 0, 2, 0],
+        )
+        # This original negative remains: admitting separate timer call sites
+        # does not authorize eager evaluation of C++ short-circuit expressions.
+        self.rejects(
             "plc::Ton t{20};void scan(){plc::output(0,plc::input(0)&&t.update(true));}",
-        ]:
-            with self.subTest(body=body):
-                self.rejects(body, "M200-E")
+            "M200-E",
+        )
 
     def test_rejects_unrepresentable_clock_and_timer_duration(self):
         self.rejects("void scan(){plc::output(0,plc::clock_ms(123));}", "M200-E")

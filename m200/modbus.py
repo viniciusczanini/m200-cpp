@@ -15,7 +15,8 @@ import socket
 import struct
 from dataclasses import asdict, dataclass, fields
 
-from .model import fail
+from .model import fail, CompileError
+from .communication_properties import initial_properties, effective_config, signed_word, DOMAINS
 
 
 READ_FUNCTIONS = {0: 3, 1: 2, 2: 1, 3: 4}
@@ -302,6 +303,57 @@ class CommunicationEngine:
         self._states = {}
         self._active_links = {}
         self._now_ms = 0
+        self._properties = {}
+        self._definitions = {}
+        self._property_writes = {}
+
+    def define(self, key, config):
+        validate_config(config)
+        previous = self._definitions.get(key)
+        self._definitions[key] = config
+        if key not in self._properties:
+            self._properties[key] = initial_properties(config)
+        values = self._properties[key]
+        if previous is not None and previous != config:
+            # Keep the historical direct-engine API: supplying a new immutable
+            # config updates defaults, while explicit native-property stores win.
+            for field, value in initial_properties(config).items():
+                if field not in self._property_writes.get(key, ()):
+                    values[field] = value
+
+    def read_property(self, key, field):
+        if key not in self._definitions or field not in DOMAINS[self._definitions[key].kind]:
+            fail("undefined communication property")
+        if key not in self._properties:
+            self._properties[key] = initial_properties(self._definitions[key])
+        return signed_word(self._properties[key][field])
+
+    def write_property(self, key, field, value):
+        self.read_property(key, field)
+        _integer(value, "property word pattern", -32768, 65535)
+        self._properties[key][field] = value & 65535
+        self._property_writes.setdefault(key, set()).add(field)
+
+    def lifecycle(self, event):
+        """Explicit local lifecycle, separate from the VM's scan scheduler.
+
+        Cold restores configured properties; warm preserves them. STOP cancels
+        active tokens. Edge history is re-armed so first TRUE after RUN does not
+        silently become an Execute rising edge. Exact controller resumption is
+        still an official runtime acceptance case.
+        """
+        if event not in ("cold", "warm", "stop"):
+            fail("unknown communication lifecycle event")
+        if event == "warm":
+            return
+        for key, state in self._states.items():
+            if state.status.busy:
+                self._release(key, state, cancel=True)
+            state.status = CommunicationStatus()
+            state.last_execute = state.last_abort = None
+        if event == "cold":
+            self._properties = {key: initial_properties(cfg) for key, cfg in self._definitions.items()}
+            self._property_writes.clear()
 
     def status(self, key):
         state = self._states.get(key)
@@ -319,6 +371,31 @@ class CommunicationEngine:
         state.destination = None
 
     def update(self, key, config, execute, abort, now_ms, words):
+        self.define(key, config)
+        if type(execute) is not bool or type(abort) is not bool:
+            fail("Modbus Execute and Abort inputs must be BOOL")
+        _integer(now_ms, "monotonic clock (milliseconds)", self._now_ms)
+        self._now_ms = now_ms
+        if not isinstance(words, list):
+            fail("Modbus requires the mutable shared MW word table")
+        state = self._states.get(key)
+        if state is not None and state.status.busy:
+            current = state.config
+        elif (state is not None and state.last_execute is False and execute
+              and not (state.last_abort is False and abort)):
+            try:
+                current = effective_config(config, self._properties[key])
+            except CompileError:
+                # Individual stores may temporarily form an invalid parameter
+                # set. Only an actual Execute snapshots/validates that set.
+                state.last_execute, state.last_abort = execute, abort
+                state.status = CommunicationStatus(error=True, comm_error=6)
+                return state.status
+        else:
+            current = config
+        return self._update(key, current, execute, abort, now_ms, words)
+
+    def _update(self, key, config, execute, abort, now_ms, words):
         validate_config(config)
         if type(execute) is not bool or type(abort) is not bool:
             fail("Modbus Execute and Abort inputs must be BOOL")

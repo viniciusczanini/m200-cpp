@@ -11,9 +11,7 @@ import xml.etree.ElementTree as ET
 from m200.model import CompileError
 
 ROOT = Path(__file__).resolve().parents[1]
-LAB_SAVES = (
-    ROOT / "output/editor-validation/native-register-shared-request/editor-saved"
-)
+LAB_SAVES = ROOT / "tests/fixtures/register_config_only"
 
 
 def software(entries=""):
@@ -103,10 +101,10 @@ class RegisterXmlTests(unittest.TestCase):
             LAB_SAVES / ("register_" + mode + "_editor_saved.smbp")
             for mode in ("fifo", "lifo")
         ]
-        if not all(path.is_file() for path in paths):
-            self.skipTest(
-                "Optional pinned local editor saves are not present; no fixture was promoted"
-            )
+        self.assertTrue(
+            all(path.is_file() for path in paths),
+            "Pinned configuration-only editor fixtures are required",
+        )
         from m200.project import load_project
 
         for path, sha, mode, entries in (

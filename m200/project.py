@@ -14,19 +14,27 @@ from pathlib import Path
 
 from .il import validate
 from .config import configuration, unique_tree
-from .model import Program, Timer, SubroutineDefinition, address, fail
+from .model import Program, SubroutineDefinition, address, fail
 from .subroutine_xml import read_subroutines, write_subroutines, Subroutine
-from .subroutine_contexts import call_target
+from .subroutine_contexts import call_target, context_view, context_views, static_operand_view
+from .subroutine_native import origin_comment as sr_origin_comment, import_origins as sr_import_origins
 from .subroutine_graph import (
     read_graph as check_subroutine_call_graph,
     graphics as subroutine_call_graphics,
     _rung_surface,
 )
 from .timer_profile import BASES, validate_options
+from .timer_xml import (
+    read_configs as read_timers, write_configs as write_timers,
+    series as timer_graphics, check_graph as check_timer_graph,
+)
 from .flow import ENDS, split_label
 from .indexed import has_indexed, direct_word_limit, has_indexed_bits
 from .bits import memory_bits_used
 from .edges import SERIES, contact_type
+from .boolean_graph import graphics as expression_graphics, validate_profile as validate_boolean_profile
+from .boolean_banks import BooleanConfig, config as boolean_config
+from .edge_functions import parse as expression_edge
 from .numeric import (
     word_address,
     comparison,
@@ -36,7 +44,7 @@ from .numeric import (
     memory_words_used,
 )
 from .communication import parse_block
-from .communication_xml import read_blocks, write_blocks, check_template_channels
+from .communication_xml import read_blocks, write_blocks, check_template_channels, check_dynamic_channels
 from .communication_graph import (
     import_rung as import_full_communication,
     import_origins as import_full_communication_origins,
@@ -53,6 +61,9 @@ from .counter_xml import (
     check_graph as check_counter_graph,
 )
 from .registers import RegisterConfig
+from .sequence_xml import read_sequences, write_sequences
+from .sequence_graph import is_block as sequence_block, graphics as sequence_graphics, check_graph as check_sequence_graph
+from .sequences import FAMILIES as SEQUENCE_FAMILIES
 from .register_xml import read_registers, write_registers, RegisterMode
 from .register_graph import (
     graphics as register_graphics,
@@ -122,6 +133,9 @@ def graphics(rung, timer_column=3, communication_contact_column=0):
     # Deliberately only series contacts, one action, and one optional Timer.
     # Compound expressions are split into boolean gates by the lowerer.
     _, rung = split_label(rung)
+    expression = expression_graphics(rung)
+    if expression is not None:
+        return expression
     end_type = None
     if any(line.split(maxsplit=1)[0] in ENDS for line in rung):
         # Exact official saves distinguish power-rail END from conditional End:
@@ -181,47 +195,7 @@ def graphics(rung, timer_column=3, communication_contact_column=0):
                 ]
                 + [(typ, key, column)]
             )
-        from .native_logic import timer_body, STORES
-
-        body = timer_body(rung)
-        if body is None:
-            fail("unsupported function block graphics")
-        at = next(i for i, line in enumerate(body) if line.startswith("IN "))
-        inputs = body[:at]
-        outputs = body[at + 2 :]
-        if len(outputs) != 1 or outputs[0].split(maxsplit=1)[0] not in STORES:
-            fail("Timer graphics require one supported output action")
-        terminal, target = outputs[0].split(maxsplit=1)
-        if terminal == "STN":
-            fail("STN Timer graphics require native logic normalization")
-        items = []
-        width = 0
-        for i, line in enumerate(inputs):
-            parts = line.split(maxsplit=1)
-            if len(parts) != 2 or parts[0] not in (
-                ("LD", "LDN") if i == 0 else ("AND", "ANDN")
-            ):
-                fail("Timer input graphics require series contacts or normalization")
-            op, arg = parts
-            if arg.startswith("["):
-                if op not in ("LD", "AND"):
-                    fail("negated timer comparison graphics are unsupported")
-                typ, arg, span = "Comparison", arg[1:-1].strip(), 2
-            else:
-                typ, span = (
-                    ("NegatedContact" if op in ("LDN", "ANDN") else "NormalContact"),
-                    1,
-                )
-            items.append((typ, arg, width))
-            width += span
-        if timer_column not in (1, 2, 3) or width > timer_column:
-            fail("unverified Timer graphical position")
-        items += [("Line", "", i) for i in range(width, timer_column)]
-        items += [("Timer", descriptor, timer_column)]
-        items += [("Line", "", i) for i in range(timer_column + 2, 10)]
-        items.append(
-            ({"ST": "Coil", "S": "SetCoil", "R": "ResetCoil"}[terminal], target, 10)
-        )
+        return [(typ, arg, col) for typ, arg, _, col, _ in timer_graphics(rung, timer_column)]
     else:
         items = []
         column = 0
@@ -286,9 +260,19 @@ def graphics(rung, timer_column=3, communication_contact_column=0):
     return items
 
 
-def check_graph(rung_node, lines, program=None):
-    _, lines = split_label(lines)
+def check_graph(rung_node, lines, program=None, level_token=None):
+    label, lines = split_label(lines)
+    if sequence_block(lines):
+        check_sequence_graph(rung_node, lines)
+        return
     if re.fullmatch(r"BLK %R[0-9]+", lines[0]):
+        if label is not None:
+            # The wrapper owns label validation. Register geometry is the
+            # unchanged block graph, independent of the enclosing POU label.
+            rung_node = copy.deepcopy(rung_node)
+            rung_node.find("Label").text = ""
+            instructions = rung_node.find("InstructionLines")
+            instructions.remove(instructions[0])
         check_register_graph(rung_node, lines)
         return
     if program is not None and program.subroutines:
@@ -298,6 +282,17 @@ def check_graph(rung_node, lines, program=None):
             return
         if _check_observed_subroutine_tautology(rung_node, lines):
             return
+    native_timer_graph = any(
+        e.findtext("ElementType") == "Timer" for e in rung_node.findall("LadderElements/LadderEntity")
+    )
+    if lines[0].startswith("BLK %TM") or native_timer_graph:
+        resources = (
+            None if program is None else {("C", i) for i in program.counters}
+            | {("TM", i) for i in program.timers}
+            | {("COMM", key) for key in program.communications}
+        )
+        check_timer_graph(rung_node, lines, resources, level_token)
+        return
     if lines[0].startswith("BLK %C"):
         resources = (
             None
@@ -449,16 +444,7 @@ def _check_observed_subroutine_tautology(node, lines):
 
 def _resource_context_views(program):
     """Nonexecuting operand/allocation views; never flatten execution contexts."""
-    yield program
-    for definition in program.subroutines.values():
-        view = copy.copy(program)
-        view.rungs = definition.rungs
-        view.subroutines = {}
-        view.metadata = dict(program.metadata)
-        if definition.origins:
-            view.metadata["rung_origins"] = definition.origins
-        else:
-            view.metadata.pop("rung_origins", None)
+    for _, view in context_views(program):
         yield view
 
 
@@ -494,10 +480,24 @@ def load_project(path):
     root = parse(path)
     sw = configuration(root)
     p = Program()
+    from .scalar_constants import read_configs as read_constants
+    p.constants, constant_symbols = read_constants(root.find("SoftwareConfiguration"))
+    p.symbols.update(constant_symbols)
+    constant_allocation = sw.find("ConstantWordsMemoryAllocation")
+    if constant_allocation is not None and constant_allocation.findtext("Allocation") == "Manual":
+        count = constant_allocation.findtext("ForcedCount", "")
+        if re.fullmatch(r"[1-9][0-9]{0,2}", count) is None:
+            fail("invalid constant memory allocation")
+        p.metadata["constant_words"] = int(count)
     p.counters = read_counters(sw)
+    from .rtc_xml import read_rtcs, read_schedules
+    p.rtcs = read_rtcs(sw)
+    p.schedules = read_schedules(sw)
     graph_nodes = []
     origins = []
     full_groups = []
+    p.communications = read_blocks(sw)
+    check_template_channels(root, p.communications)
     native_subroutines = read_subroutines(sw)
     if native_subroutines:
         pous = sw.find("Pous")
@@ -513,31 +513,49 @@ def load_project(path):
             pous is None
             or len(pous) != 1
             or pous[0].findtext("SectionNumber") != "0"
-            or len(native_subroutines) != 1
         ):
             fail(
-                "prototype native SR import supports one master and one independent leaf"
+                "native SR import requires one Master section 0"
             )
         for number, definition in native_subroutines.items():
             if definition.section_number == 0:
                 fail("native SR section identity collides with its master")
-            context_lines, context_origins = [], []
+            context_lines, context_origins, context_groups = [], [], []
             for native_index, node in enumerate(definition.rungs):
                 _, lines = _rung_surface(node)
-                context_lines.append(lines)
-                context_origins.append(
-                    {
-                        "file": Path(path).name,
-                        "generated": "native SR%s section %s rung %s | %s"
-                        % (
-                            number,
-                            definition.section_number,
-                            native_index,
-                            node.findtext("Name", ""),
-                        ),
-                    }
-                )
-                graph_nodes.append((node, lines))
+                origin = {
+                    "file": Path(path).name,
+                    "generated": "native SR%s section %s rung %s | %s"
+                    % (
+                        number,
+                        definition.section_number,
+                        native_index,
+                        node.findtext("Name", ""),
+                    ),
+                }
+                canonical = import_full_communication(node, lines, root, p.communications)
+                if canonical is None:
+                    context_lines.append(lines)
+                    context_origins.extend(sr_import_origins(node, origin))
+                    graph_nodes.append((node, lines))
+                elif len(canonical) == 1:
+                    context_lines.extend(canonical)
+                    context_origins.extend(sr_import_origins(node, origin))
+                else:
+                    group_origins = import_full_communication_origins(node, origin)
+                    context_groups.append({
+                        "key": split_label(lines)[1][0].split(maxsplit=1)[1],
+                        "canonical_start": len(context_lines),
+                        "canonical_rungs": 5,
+                        "source_instruction_lines": len(lines),
+                        "origin": {"section": definition.section_number,
+                            "native_rung": native_index,
+                            "name": node.findtext("Name", ""),
+                            "main_comment": full_communication_human_comment(node)},
+                        "source_origins": group_origins,
+                    })
+                    context_lines.extend(canonical)
+                    context_origins.extend(group_origins)
             p.subroutines[number] = SubroutineDefinition(
                 number,
                 definition.name,
@@ -545,50 +563,9 @@ def load_project(path):
                 context_lines,
                 context_origins,
             )
-    p.communications = read_blocks(sw)
-    check_template_channels(root, p.communications)
-    timer_nodes = sw.find("Timers")
-    if timer_nodes is not None:
-        for t in timer_nodes:
-            if t.tag != "TimerTM" or any(
-                x.tag
-                not in (
-                    "Address",
-                    "Index",
-                    "Type",
-                    "Preset",
-                    "Base",
-                    "Comment",
-                    "Symbol",
-                    "IsRetentive",
-                    "IsDynamicPreset",
-                )
-                for x in t
-            ):
-                fail("unsupported timer configuration")
-            for child in t:
-                if len(child):
-                    fail("timer value must be scalar: " + child.tag)
-            flags = []
-            for tag in ("IsRetentive", "IsDynamicPreset"):
-                value = t.findtext(tag, "false")
-                if value not in ("true", "false"):
-                    fail("unsupported timer boolean: " + tag)
-                flags.append(value == "true")
-            try:
-                index = int(t.findtext("Index", "-1"))
-                preset = int(t.findtext("Preset", "9999"))
-            except ValueError:
-                fail("invalid timer index/preset")
-            if index in p.timers or t.findtext("Address") != "%TM" + str(index):
-                fail("invalid or duplicate timer")
-            base = t.findtext("Base", "")
-            if base and base not in BASES.values():
-                fail("unsupported timer time base: " + base)
-            base_ms = {v: k for k, v in BASES.items()}.get(base, 60000)
-            p.timers[index] = Timer(
-                t.findtext("Type", "TON"), preset * base_ms, base_ms, *flags
-            )
+            if context_groups:
+                p.metadata.setdefault("subroutine_full_pin_groups", {})[str(number)] = context_groups
+    p.timers = read_timers(sw)
     pous = sw.find("Pous")
     if pous is not None:
         for section, pou in enumerate(pous, section_base(pous)):
@@ -690,15 +667,24 @@ def load_project(path):
         p.metadata["native_full_pin_groups"] = full_groups
     p.registers = {
         i: RegisterConfig(mode.value)
-        for i, mode in read_registers(sw, register_ids(p.rungs)).items()
+        for i, mode in read_registers(sw, register_ids(static_operand_view(p).rungs)).items()
     }
+    if any(expression_edge(line.split(maxsplit=1)[0]) is not None for rung in static_operand_view(p).rungs for line in rung if line.strip()):
+        p.boolean = BooleanConfig(native_expression_edges=True)
+    validate_boolean_profile(p, root.findtext("ManagementLevel"))
+    for name, configs in read_sequences(sw).items():
+        setattr(p, name, configs)
+    _sequence_profile(p, root)
     _register_profile(p, root)
+    from .rtc_xml import profile as rtc_profile
+    rtc_profile(p, root)
     validate(p)
+    check_dynamic_channels(root, p)
     # Validate the complete IL before examining its graphics. A status may be
     # read before its configured FB is called later in the same scan.
     validate_allocations(sw, p, root.findtext("ManagementLevel"))
     for node, lines in graph_nodes:
-        check_graph(node, lines, p)
+        check_graph(node, lines, p, root.findtext("ManagementLevel"))
     p.metadata.update(
         {
             "official_editor": "pending",
@@ -712,6 +698,13 @@ def load_project(path):
         }
     )
     return p
+
+
+def _sequence_profile(program, root):
+    maxima = {"SBR": "ShiftBitRegistersMax", "SC": "StepCountersMax", "DR": "DrumsMax"}
+    for family, name in SEQUENCE_FAMILIES.items():
+        if getattr(program, name) and (root.findtext("ManagementLevel") != "FunctLevelMan21_0" or root.findtext("HardwareConfiguration/Plc/Cpu/TechnicalConfiguration/" + maxima[family]) != "8"):
+            fail("native sequence export requires identified CE40T/Man21 capacity8; active acceptance pending")
 
 
 def _register_profile(program, root):
@@ -736,11 +729,11 @@ def validate_allocations(sw, program, level_token=None):
     views = list(_resource_context_views(program))
     if any(has_indexed_bits(view) for view in views):
         fail("indexed-bit functional-level mapping is unverified for SMBP")
-    if program.subroutines and any(has_indexed(view) for view in views):
-        fail("prototype native SR indexed-context allocation is unverified")
     bits = set().union(*(memory_bits_used(view) for view in views))
     words_used = set().union(*(memory_words_used(view) for view in views))
+    from .scalar_constants import extent as constant_extent
     requirements = {
+        "ConstantWordsMemoryAllocation": (512, constant_extent(program)),
         "MemoryWordsMemoryAllocation": (
             8000,
             max(words_used, default=-1) + 1,
@@ -748,6 +741,10 @@ def validate_allocations(sw, program, level_token=None):
         "MemoryBitsMemoryAllocation": (1024, max(bits, default=-1) + 1),
         "TimersMemoryAllocation": (255, max(program.timers, default=-1) + 1),
         "RegistersMemoryAllocation": (4, max(program.registers, default=-1) + 1),
+        "SchsMemoryAllocation": (16, max(program.schedules, default=-1) + 1),
+        "DrumsMemoryAllocation": (8, max(program.drums, default=-1) + 1),
+        "SbrsMemoryAllocation": (8, max(program.shift_bit_registers, default=-1) + 1),
+        "ScsMemoryAllocation": (8, max(program.step_counters, default=-1) + 1),
     }
     for tag, (capacity, required) in requirements.items():
         node = sw.find(tag)
@@ -762,14 +759,15 @@ def validate_allocations(sw, program, level_token=None):
             count is None or int(count) < required
         ):
             fail(tag + " allocation does not cover all referenced memory/buffers")
-    if has_indexed(program):
-        bound = direct_word_limit(program)
+    resources = static_operand_view(program)
+    if has_indexed(resources):
+        bound = direct_word_limit(resources)
         words = sw.find("MemoryWordsMemoryAllocation")
         forced = words.findtext("ForcedCount") if words is not None else None
         mode = words.findtext("Allocation") if words is not None else None
         if mode not in ("Automatic", "Manual"):
             fail("indexed bound with an omitted/default allocation mode is unverified")
-        if max(memory_words_used(program), default=-1) + 1 > bound or (
+        if max(memory_words_used(resources), default=-1) + 1 > bound or (
             mode == "Manual" and forced is not None and int(forced) != bound
         ):
             fail(
@@ -787,19 +785,17 @@ def _subroutine_semantics(program):
 
 
 def _leaf_graphics(lines):
-    if lines != ["END"]:
-        if lines[-1] == "ENDCN":
-            fail("prototype native SR ENDCN leaf graph binding is unverified")
-        if not (
-            lines[-1] == "ENDC"
-            or is_operation(lines[-1])
-            or lines[-1].split(maxsplit=1)[0] in ("ST", "S", "R")
-        ):
-            fail("prototype leaf action cannot be serialized without normalization")
-        for line in lines[:-1]:
-            parts = line.split(maxsplit=1)
-            if len(parts) != 2 or parts[1] in ("0", "1"):
-                fail("prototype leaf constants require a materialized shared M contact")
+    _, body = split_label(lines)
+    if sequence_block(body):
+        return sequence_graphics(body)
+    if body and body[0].startswith("BLK %TM"):
+        return timer_graphics(body)
+    if body and body[0].startswith("BLK %C"):
+        return counter_graphics(body)
+    if body and re.fullmatch(r"BLK %R[0-9]+", body[0]):
+        return register_graphics(body)
+    # END variants remain native returns in this context. Other logic has been
+    # normalized with the same supported serializers as Master, without inlining.
     return [
         (t, a, 0, c, "Left" if t in LEFT_ONLY else "Left, Right")
         for t, a, c in graphics(lines)
@@ -819,18 +815,12 @@ def _sr_export_profile(program, root, sw):
         or pous is None
         or len(pous) != 1
         or pous[0].findtext("SectionNumber") != "0"
-        or len(program.subroutines) != 1
-        or next(iter(program.subroutines.values())).section_number != 2
     ):
         fail(
-            "unverified native SR export profile; require Man21, Master0 and one independent leaf section2"
+            "unverified native SR export profile; require Man21, Master0 and 64-SR capacity"
         )
-    for definition in program.subroutines.values():
-        for lines in definition.rungs:
-            label, body = split_label(lines)
-            if label is not None:
-                fail("native leaf labels are not bound")
-            _leaf_graphics(body)  # Never apply Master END/control lowering to a leaf.
+    if any(value.section_number == 0 for value in program.subroutines.values()):
+        fail("native SR section identity collides with Master section 0")
 
 
 def _write_rung_body(rung, lines, items, explicit_descriptors=False):
@@ -859,6 +849,9 @@ def _write_rung_body(rung, lines, items, explicit_descriptors=False):
 
 def write_project(program, template, destination):
     validate(program)
+    cfg = boolean_config(program)
+    if cfg.word_objects:
+        fail("Boolean IO word image SMBP binding belongs to active module configuration; no synthetic hardware is emitted")
     if has_indexed_bits(program):
         fail("indexed-bit functional-level mapping is unverified for SMBP")
     from .ladder_lowering import normalize
@@ -866,15 +859,24 @@ def write_project(program, template, destination):
     root = parse(template)
     sw = configuration(root)
     _register_profile(program, root)
-    if read_subroutines(sw):
-        fail("prototype SR SMBP export is gated for active template Subroutines")
+    from .rtc_xml import profile as rtc_profile
+    rtc_profile(program, root)
+    _sequence_profile(program, root)
     _sr_export_profile(program, root, sw)
     validate_timer_profile(program, root.findtext("ManagementLevel"))
+    validate_boolean_profile(program, root.findtext("ManagementLevel"))
     program = normalize(program)
     first_section = section_base(sw.find("Pous"))
     check_template_channels(root, program.communications)
+    from .scalar_constants import write_configs as write_constants
+    write_constants(program, sw)
+    check_dynamic_channels(root, program)
     write_blocks(program, sw)
+    from .rtc_xml import write_rtcs, write_schedules
+    write_rtcs(program, sw)
+    write_schedules(program, sw)
     write_counters(program, sw)
+    write_sequences(program, sw)
     write_registers(
         {i: RegisterMode(cfg.mode) for i, cfg in program.registers.items()}, sw
     )
@@ -885,6 +887,9 @@ def write_project(program, template, destination):
         "MemoryBitsMemoryAllocation",
         "TimersMemoryAllocation",
         "RegistersMemoryAllocation",
+        "DrumsMemoryAllocation",
+        "SbrsMemoryAllocation",
+        "ScsMemoryAllocation",
         "MemoryWords",
         "MemoryDoubleWords",
         "MemoryFloats",
@@ -908,6 +913,10 @@ def write_project(program, template, destination):
             if full_communication is not None
             else subroutine_call_graphics(body)
             if program.subroutines and call_target(body) is not None
+            else timer_graphics(body)
+            if body[0].startswith("BLK %TM")
+            else sequence_graphics(body)
+            if sequence_block(body)
             else counter_graphics(body)
             if body[0].startswith("BLK %C")
             else register_graphics(body)
@@ -953,42 +962,57 @@ def write_project(program, template, destination):
         wrappers = {}
         for number, definition in program.subroutines.items():
             nodes = []
-            for i, lines in enumerate(definition.rungs):
+            view = context_view(program, definition)
+            for i, lines, full_communication, consumed in communication_serialized_rungs(view, root):
                 node = ET.Element("RungEntity")
-                _write_rung_body(node, lines, _leaf_graphics(lines))
+                label, body = split_label(lines)
+                items = (
+                    full_communication_graphics(full_communication)
+                    if full_communication is not None
+                    else timer_graphics(body)
+                    if body[0].startswith("BLK %TM")
+                    else counter_graphics(body)
+                    if body[0].startswith("BLK %C")
+                    else register_graphics(body)
+                    if re.fullmatch(r"BLK %R[0-9]+", body[0])
+                    else _leaf_graphics(lines)
+                )
+                _write_rung_body(node, lines, items, full_communication is not None)
                 element(node, "Name", "cpp_sr%s_%04d" % (number, i))
+                origins = [
+                    definition.origins[j] if j < len(definition.origins)
+                    else {"generated": "SR%s source rung %s" % (number, j)}
+                    for j in range(i, i + consumed)
+                ]
                 element(
                     node,
                     "MainComment",
-                    "Experimental generated leaf; official validation pending",
+                    (
+                        full_communication_source_human_comment(view, full_communication)
+                        + full_communication_origin_comment(origins)
+                        if full_communication is not None and consumed == 5
+                        else "Experimental generated SR; official validation pending"
+                        + sr_origin_comment(origins)
+                    ),
                 )
-                element(node, "Label", "")
+                element(node, "Label", label or "")
                 element(node, "IsLadderSelected", "true")
                 nodes.append(node)
             wrappers[number] = Subroutine(
                 number, definition.name, definition.section_number, tuple(nodes)
             )
         write_subroutines(wrappers, sw)
-    timers = element(sw, "Timers")
-    for i, t in sorted(program.timers.items()):
-        if t.base_ms not in (*BASES, 60000):
-            fail(
-                "SMBP serialization of the 10 ms timer base is not verified; use IL output until a vendor sample is available"
-            )
-        e = element(timers, "TimerTM")
-        element(e, "Address", "%TM" + str(i))
-        element(e, "Index", i)
-        element(e, "Type", t.kind)
-        element(e, "Preset", t.preset)
-        if t.base_ms != 60000:
-            element(e, "Base", BASES[t.base_ms])
-        element(e, "IsRetentive", str(t.retentive).lower())
-        element(e, "IsDynamicPreset", str(t.dynamic_preset).lower())
+    else:
+        # Replace supported template SRs; do not retain hidden executable POUs.
+        write_subroutines({}, sw)
+    write_timers(program, sw)
     bits = element(sw, "MemoryBits")
     numeric = {
         k: element(sw, k) for k in ("MemoryWords", "MemoryDoubleWords", "MemoryFloats")
     }
     for addr, symbol in sorted(program.symbols.items()):
+        if addr.startswith("%K"):
+            continue  # Family serializer owns constant metadata.
         if addr.startswith(("%MW", "%MD", "%MF")):
             kind, index = word_address(addr)
             collection, entry = {
@@ -1011,6 +1035,9 @@ def write_project(program, template, destination):
     element(allocation, "Allocation", "Automatic")
     allocation = element(sw, "RegistersMemoryAllocation")
     element(allocation, "Allocation", "Automatic")
+    for family, tag in (("SBR", "SbrsMemoryAllocation"), ("SC", "ScsMemoryAllocation"), ("DR", "DrumsMemoryAllocation")):
+        allocation = element(sw, tag)
+        element(allocation, "Allocation", "Automatic")
     required = (
         max(
             set().union(
@@ -1050,6 +1077,12 @@ def write_project(program, template, destination):
             or loaded.timers != program.timers
             or loaded.counters != program.counters
             or loaded.registers != program.registers
+            or any(loaded.constants.get(i, 0) != program.constants.get(i, 0) for i in range(512))
+            or loaded.rtcs != program.rtcs
+            or loaded.schedules != program.schedules
+            or loaded.shift_bit_registers != program.shift_bit_registers
+            or loaded.step_counters != program.step_counters
+            or loaded.drums != program.drums
             or _subroutine_semantics(loaded) != _subroutine_semantics(program)
         ):
             fail("internal XML round trip changed program/configuration")

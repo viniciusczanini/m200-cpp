@@ -1,0 +1,178 @@
+{
+  "schema": "m200.batch-acceptance.profiles.v1",
+  "preparation_status": "not_run",
+  "version_scope": {
+    "active_work_packages": [
+      "G01",
+      "G02",
+      "G06",
+      "G07",
+      "G08",
+      "G09",
+      "G11"
+    ],
+    "deferred_state": "DEFERRED_VERSION",
+    "deferred_id_prefixes": [
+      "float."
+    ],
+    "rule": "RTC/calendar remains active. Other packages and new float-family acceptance are deferred for this Natal version; existing real regressions remain. Algorithm loops do not promote exact native control opcodes. Full parity remains incomplete."
+  },
+  "variants": [
+    {
+      "id": "supervisor",
+      "source": "examples/batch_acceptance/supervisor.cpp",
+      "template": "tests/fixtures/official_tm200ce40t_memory.smbp",
+      "purpose": "Coexistence of ordinary MAST I/O, three timers, a light Clock, one Counter, FIFO/LIFO and integer shared words.",
+      "exclusive_ownership": [
+        "ordinary_process_image",
+        "TM0..4",
+        "C0",
+        "R0..1",
+        "MW0..22"
+      ],
+      "physical_execution": "pending; ordinary outputs only, no load authorization",
+      "local_transport": "none",
+      "scenarios": [
+        "io-ports",
+        "boolean-edges",
+        "three-timers",
+        "light-clock",
+        "fifo-lifo",
+        "sequence-counter-loop",
+        "numeric-words",
+        "resource-composition"
+      ]
+    },
+    {
+      "id": "subroutine",
+      "source": "examples/batch_acceptance/subroutine.cpp",
+      "template": "tests/fixtures/official_tm200ce40t_memory.smbp",
+      "purpose": "Current stateless leaf SR profile, separated from function-block composition.",
+      "exclusive_ownership": [
+        "ordinary_process_image",
+        "SR0-section2",
+        "MW10..12"
+      ],
+      "physical_execution": "pending",
+      "local_transport": "none",
+      "scenarios": [
+        "subroutine-order"
+      ]
+    },
+    {
+      "id": "modbus-no-transport",
+      "source": "examples/batch_acceptance/modbus.cpp",
+      "template": "tests/fixtures/official_tm200ce40t_modbus_full_pin_read.smbp",
+      "purpose": "Three configured SL1 communication kinds, selected one at a time; explicit default no-transport error control.",
+      "exclusive_ownership": [
+        "ordinary_process_image",
+        "SL1-master",
+        "READ_VAR0",
+        "WRITE_VAR0",
+        "WRITE_READ_VAR0",
+        "MW10..33",
+        "MW100..121"
+      ],
+      "physical_execution": "forbidden by this batch; no physical serial transport or endpoint is authorized",
+      "local_transport": "none; expected error255/15 is not a successful transaction",
+      "scenarios": [
+        "modbus-default-error"
+      ]
+    },
+    {
+      "id": "subroutine-stateful",
+      "source": "examples/batch_acceptance/subroutine_stateful.cpp",
+      "template": "tests/fixtures/official_tm200ce40t_memory.smbp",
+      "purpose": "G06 SR0/SR63 composition: repeated stateful calls, loop continue, early local returns, shared timer and caller values live across a mutating callee.",
+      "exclusive_ownership": [
+        "ordinary_process_image",
+        "SR0-section2",
+        "SR63-section42",
+        "TM4",
+        "M200",
+        "MW1",
+        "MW7..16",
+        "MW20"
+      ],
+      "physical_execution": "pending; local acceptance only",
+      "local_transport": "none",
+      "scenarios": [
+        "subroutine-stateful-liveness"
+      ],
+      "expected_resources": {
+        "timer_ids": [
+          4
+        ],
+        "subroutine_sections": {
+          "0": 2,
+          "63": 42
+        }
+      }
+    }
+  ],
+  "pending_profiles": [
+    {
+      "work_package": "G06",
+      "profile": "broader-useful-subroutines",
+      "requires": [
+        "integrated API notice",
+        "named supported native layouts",
+        "independent caller/leaf order vectors"
+      ]
+    },
+    {
+      "work_package": "G07",
+      "profile": "timer-options",
+      "requires": [
+        "integrated API notice",
+        "retention/dynamic timeline vectors",
+        "bounded authentic profile"
+      ]
+    },
+    {
+      "work_package": "G08",
+      "profile": "drum-step-shift",
+      "requires": [
+        "delivered API",
+        "native resource configuration",
+        "held/reset edge vectors"
+      ]
+    },
+    {
+      "work_package": "G09",
+      "profile": "rtc-calendar",
+      "requires": [
+        "delivered API",
+        "explicit virtual calendar inputs",
+        "rollover oracle"
+      ]
+    },
+    {
+      "work_package": "G11",
+      "profile": "messages-exchange",
+      "requires": [
+        "delivered API",
+        "bounded local transport contract",
+        "wire-level oracle"
+      ]
+    },
+    {
+      "work_package": "G01",
+      "profile": "remaining-boolean-memory-banks",
+      "requires": [
+        "integrated API notice",
+        "named input/memory bank contracts",
+        "literal bit/word alias vectors"
+      ]
+    },
+    {
+      "work_package": "G02",
+      "profile": "remaining-integer-flags",
+      "requires": [
+        "integrated API notice",
+        "named arithmetic/carry/recovery domains",
+        "literal numerical boundaries"
+      ]
+    }
+  ]
+}

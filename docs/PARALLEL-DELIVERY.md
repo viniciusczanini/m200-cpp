@@ -2,7 +2,8 @@
 
 Execution policy changed by the user on 2026-11-06. This policy supersedes
 per-family serial execution and simulator gates in the earlier execution plan.
-The functional parity contract and evidence requirements are unchanged.
+The evidence requirements remain in force. The later Natal scope revision below
+sets the current release boundary.
 
 ## Natal da Liberdade priority release
 
@@ -24,10 +25,8 @@ not restarted automatically, and partial source is not merged as validated work.
 
 ## Work allocation
 
-- One isolated implementation lane for each of the twenty work packages G01–G20
-  in the capability matrix. Each lane implements its remaining supported scope,
-  including the C++/SDK, typed model, native configuration/graphics and reverse
-  paths. Existing working features remain intact.
+- The initial dispatch created twenty isolated implementation lanes. Only the
+  seven Natal packages remain eligible for this release; thirteen are stopped.
 - Implementation lanes do not run tests, builds, Wine or the official editor.
   They return actual source changes, an API contract, sources and explicit gaps.
 - Three dedicated test agents prepare independent cases in parallel: composed
@@ -35,6 +34,36 @@ not restarted automatically, and partial source is not merged as validated work.
   communication interoperability.
 - The coordinator integrates the isolated changes and resolves shared-file
   conflicts. Source changes do not become validated because they were merged.
+
+### Parallel correction round
+
+| Owner | Bounded deliverable | Handoff |
+|---|---|---|
+| G01 chat | BooleanStack branch balance, explicit master-cycle first-scan lifetime, canonical string addresses | Six-file combined G01/G06 correction frozen for focused validation |
+| G06 chat | Preserve canonical SR returns and avoid unnecessary leaf normalization | Same frozen correction; no changed regression expectations |
+| G02 chat | Review numeric legacy assertions, flags/indeterminate results and INC/DEC stress vectors | Isolated test proposal; coordinator reviews before test execution |
+| G07 chat | Review timer option/level assertions and genuine invalid/atomicity controls | Isolated test proposal; no observed profile promoted to editor acceptance |
+| G11 chat | Review obsolete single/stateless-SR restrictions while retaining native nesting and malformed-graph checks | Isolated SR test proposal; no Modbus scope expansion |
+| G09 chat | Bind prepared calendar tests to the implemented RTC host API | Isolated adapter proposal; unresolved native answers remain pending |
+| G08 chat | Prepare finite sequence probes and ordered observations for the final native batch | Text artifacts only; no early simulator execution |
+| Test agent 1 | SR normalization and composed-program regression | Local focused execution |
+| Test agent 2 | Boolean/scan SDK-versus-VM semantics and negative controls | Local focused execution |
+| Test agent 3 | Native graph, configuration and reverse interoperability | Local focused execution; sole final regression runner |
+| Coordinator | Review proposals, merge disjoint changes, close test inputs and prepare the final simulator batch | One integrated release candidate |
+
+Implementation and test authors edit separate private candidates. Test agents
+execute frozen source copies. The final regression starts only after its test
+inputs are closed; focused reruns are limited to defects or changed contracts.
+The current combined implementation has not passed its full regression gate:
+the first combined run exposed real defects and assertions requiring contract
+review. Historical failures remain recorded until independently resolved.
+
+The correction deliveries and final local runs are now recorded in
+[integration evidence](validation/NATAL-INTEGRATION-PROGRESS.md): 1,009 tests
+passed, eight explicit pending cases remain raw failures, and the final
+24-case/seven-route composition and ten budgets passed. Two agents preserve
+portable regressions for the fixed bugs; a separate Wine chat handles editor
+visibility before the coordinator resumes the finite native batch.
 
 ## Gates
 

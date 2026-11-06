@@ -1,0 +1,74 @@
+[
+  {
+    "actual_sha256": "d2c8af0598276e7a0bb4f30770e4529282962bc6ee3944dee0645cb9a3186595",
+    "bytes": 2674700,
+    "expected_sha256": "d2c8af0598276e7a0bb4f30770e4529282962bc6ee3944dee0645cb9a3186595",
+    "id": "generic_functions",
+    "matches_authored_manifest": true,
+    "path": "/Users/tommy/Offline/projects/m200-cpp/research/downloads/manuals/EIO0000003289.pdf"
+  },
+  {
+    "actual_sha256": "fb4f684e7efbb46e3e38e61ed532d99bf623bedffe447b5c379dd3dd6c4434df",
+    "bytes": 24872820,
+    "expected_sha256": "fb4f684e7efbb46e3e38e61ed532d99bf623bedffe447b5c379dd3dd6c4434df",
+    "id": "m200_programming",
+    "matches_authored_manifest": true,
+    "path": "/Users/tommy/Offline/projects/m200-cpp/research/downloads/manuals/EIO0000002019.pdf"
+  },
+  {
+    "actual_sha256": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf",
+    "bytes": 83391,
+    "expected_sha256": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf",
+    "id": "authentic_template",
+    "matches_authored_manifest": true,
+    "path": "/Users/tommy/Offline/projects/m200-cpp/tests/fixtures/official_tm200ce40t_memory.smbp"
+  },
+  {
+    "actual_sha256": "5445cbb4d99f9c12e586aae64a0cb5583d5af6e404dcc028e1800072bffb2da2",
+    "bytes": 7490,
+    "expected_sha256": "5445cbb4d99f9c12e586aae64a0cb5583d5af6e404dcc028e1800072bffb2da2",
+    "id": "api_and_gaps",
+    "matches_authored_manifest": true,
+    "path": "/Users/tommy/Offline/projects/m200-cpp/docs/NATIVE-SEQUENCES.md"
+  },
+  {
+    "actual_sha256": "2e11702dcfc0bf6554194b711d244849fd928c0641ddd7ad598a0d472ef03703",
+    "bytes": 9393,
+    "expected_sha256": "2e11702dcfc0bf6554194b711d244849fd928c0641ddd7ad598a0d472ef03703",
+    "id": "original_delivery",
+    "matches_authored_manifest": true,
+    "path": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/lanes/G08/DELIVERY.md"
+  },
+  {
+    "actual_sha256": "b4ae12c9a629818690e21e9187630c5e0c5bde6eee8a766c61593449a3a6a70c",
+    "bytes": 24283,
+    "expected_sha256": "b4ae12c9a629818690e21e9187630c5e0c5bde6eee8a766c61593449a3a6a70c",
+    "id": "independent_case_and_pending_catalogue",
+    "matches_authored_manifest": true,
+    "path": "/Users/tommy/Offline/projects/m200-cpp/tests/parallel_semantics/g0108_cases.py"
+  },
+  {
+    "actual_sha256": "90029612742fcdbce37dd9cb1ff1572bdd6571af4f3edf4dbd35bd69bcc6f27b",
+    "bytes": 7953,
+    "expected_sha256": "90029612742fcdbce37dd9cb1ff1572bdd6571af4f3edf4dbd35bd69bcc6f27b",
+    "id": "combined3_local",
+    "matches_authored_manifest": true,
+    "path": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/combined-3/test-batch/summary.json"
+  },
+  {
+    "actual_sha256": "7f7b77b75a29b1dc02b31fe91c3ff5c249bc6a41209a9302e9da3fa9788611a0",
+    "bytes": 1346,
+    "expected_sha256": "7f7b77b75a29b1dc02b31fe91c3ff5c249bc6a41209a9302e9da3fa9788611a0",
+    "id": "combined3b_local",
+    "matches_authored_manifest": true,
+    "path": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/combined-3b/test-batch/summary.json"
+  },
+  {
+    "actual_sha256": "6d02b1ca0f4307a29330d2806b7252a9c9a1a84cc53605f575e9c0860edbb095",
+    "bytes": 3014,
+    "expected_sha256": "6d02b1ca0f4307a29330d2806b7252a9c9a1a84cc53605f575e9c0860edbb095",
+    "id": "combined3c_focused_local",
+    "matches_authored_manifest": true,
+    "path": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/combined-3c/test-interop/summary.json"
+  }
+]

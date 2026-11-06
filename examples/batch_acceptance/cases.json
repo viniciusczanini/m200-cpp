@@ -1,0 +1,1606 @@
+{
+  "schema": "m200.batch-acceptance.cases.v1",
+  "status": "prepared_not_executed",
+  "oracle_rule": "Expected values below are literal, hand-derived observations. Never replace them with compiler, VM, SDK or reverse output.",
+  "cases": [
+    {
+      "id": "io-ports",
+      "variant": "supervisor",
+      "selector": 0,
+      "oracle": "Q0..15 mirror the raw low sixteen input bits. MW10 is raw I16..23; I19 is the manual-selector bit and remains observable.",
+      "scope": "Ordinary MAST process images; this does not exercise immediate physical I/O, filters or fallback modes.",
+      "coverage_ids": [
+        "bool.ld",
+        "bool.st",
+        "assign.bitstring"
+      ],
+      "frames": [
+        {
+          "label": "zero",
+          "inputs": {
+            "19": true
+          },
+          "words": {
+            "0": 0
+          },
+          "expect": {
+            "output_mask": 0,
+            "words": {
+              "0": 0,
+              "1": 0,
+              "10": 8
+            }
+          }
+        },
+        {
+          "label": "first-and-last-low-port",
+          "inputs": {
+            "0": true,
+            "15": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 32769,
+            "words": {
+              "1": -32767,
+              "10": 8
+            }
+          }
+        },
+        {
+          "label": "interior-port-release",
+          "inputs": {
+            "1": true,
+            "14": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 16386,
+            "words": {
+              "1": 16386,
+              "10": 8
+            }
+          }
+        },
+        {
+          "label": "all-sixteen-output-image-bits",
+          "inputs": {
+            "0": true,
+            "1": true,
+            "2": true,
+            "3": true,
+            "4": true,
+            "5": true,
+            "6": true,
+            "7": true,
+            "8": true,
+            "9": true,
+            "10": true,
+            "11": true,
+            "12": true,
+            "13": true,
+            "14": true,
+            "15": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 65535,
+            "words": {
+              "1": -1
+            }
+          }
+        },
+        {
+          "label": "upper-eight-input-ports",
+          "inputs": {
+            "16": true,
+            "17": true,
+            "18": true,
+            "19": true,
+            "20": true,
+            "21": true,
+            "22": true,
+            "23": true
+          },
+          "expect": {
+            "output_mask": 0,
+            "words": {
+              "0": 0,
+              "10": 255
+            }
+          }
+        },
+        {
+          "label": "release",
+          "inputs": {
+            "19": true
+          },
+          "expect": {
+            "output_mask": 0,
+            "words": {
+              "10": 8
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "boolean-edges",
+      "variant": "supervisor",
+      "selector": 1,
+      "oracle": "Bits0..7 are I1, !I2, AND, OR, XOR, rising-I1, falling-I1 and a toggle latch. Reset clears only the latch.",
+      "scope": "C++ Boolean/edge/latch expressions; exact unmentioned native contact-bank or stack opcodes remain separate work.",
+      "coverage_ids": [
+        "bool.ldn",
+        "bool.and",
+        "bool.or",
+        "bool.xor",
+        "bool.s",
+        "bool.r",
+        "bool.not_accumulator",
+        "bool.expression_rising",
+        "bool.expression_falling"
+      ],
+      "frames": [
+        {
+          "label": "reset",
+          "inputs": {
+            "0": true,
+            "19": true
+          },
+          "words": {
+            "0": 1
+          },
+          "expect": {
+            "output_mask": 2
+          }
+        },
+        {
+          "label": "released",
+          "inputs": {
+            "19": true
+          },
+          "expect": {
+            "output_mask": 2
+          }
+        },
+        {
+          "label": "first-rise",
+          "inputs": {
+            "1": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 187
+          }
+        },
+        {
+          "label": "held-rise-with-second-button",
+          "inputs": {
+            "1": true,
+            "2": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 141
+          }
+        },
+        {
+          "label": "fall-with-second-held",
+          "inputs": {
+            "2": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 216
+          }
+        },
+        {
+          "label": "latch-retained",
+          "inputs": {
+            "19": true
+          },
+          "expect": {
+            "output_mask": 130
+          }
+        },
+        {
+          "label": "second-rise-unlatches",
+          "inputs": {
+            "1": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 59
+          }
+        },
+        {
+          "label": "second-fall",
+          "inputs": {
+            "19": true
+          },
+          "expect": {
+            "output_mask": 66
+          }
+        },
+        {
+          "label": "reset-again",
+          "inputs": {
+            "0": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "three-timers",
+      "variant": "supervisor",
+      "selector": 2,
+      "oracle": "At 10ms scan start intervals, TON30ms completes on the fourth enabled call; TP20ms ends on the third; TOF20ms lasts two scan-start intervals after its falling input. Bits0/1/2 are TON/TOF/TP.",
+      "scope": "Three ordinary timers on a shared virtual clock, base10ms, no retention/dynamic preset or physical timing qualification.",
+      "coverage_ids": [
+        "fb.tm"
+      ],
+      "frames": [
+        {
+          "label": "reset",
+          "dt_ms": 10,
+          "inputs": {
+            "0": true,
+            "19": true
+          },
+          "words": {
+            "0": 2
+          },
+          "expect": {
+            "output_mask": 0,
+            "words": {
+              "10": 0,
+              "11": 0,
+              "12": 0
+            }
+          }
+        },
+        {
+          "label": "enable-t0",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 6,
+            "words": {
+              "10": 0
+            }
+          }
+        },
+        {
+          "label": "enable-t10",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 6,
+            "words": {
+              "10": 1
+            }
+          }
+        },
+        {
+          "label": "enable-t20",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 2,
+            "words": {
+              "10": 2
+            }
+          }
+        },
+        {
+          "label": "enable-t30",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 3,
+            "words": {
+              "10": 3
+            }
+          }
+        },
+        {
+          "label": "fall-t0",
+          "dt_ms": 10,
+          "inputs": {
+            "19": true
+          },
+          "expect": {
+            "output_mask": 2,
+            "words": {
+              "10": 0
+            }
+          }
+        },
+        {
+          "label": "fall-t10",
+          "dt_ms": 10,
+          "inputs": {
+            "19": true
+          },
+          "expect": {
+            "output_mask": 2
+          }
+        },
+        {
+          "label": "fall-t20",
+          "dt_ms": 10,
+          "inputs": {
+            "19": true
+          },
+          "expect": {
+            "output_mask": 0
+          }
+        },
+        {
+          "label": "idle",
+          "dt_ms": 10,
+          "inputs": {
+            "19": true
+          },
+          "expect": {
+            "output_mask": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "fifo-lifo",
+      "variant": "supervisor",
+      "selector": 3,
+      "oracle": "Two stored values 11/22 drain as FIFO11/22 and LIFO22/11. Held Store and fresh simultaneous requests add no item. Bits match the standalone dual Register example.",
+      "scope": "R0FIFO/R1LIFO with explicit reset; initial RUN, cold/warm/STOP, full capacity and physical behavior are not inferred from this twenty-frame trace.",
+      "coverage_ids": [
+        "fb.r",
+        "block.blk",
+        "block.end_blk",
+        "compare.eq"
+      ],
+      "frames": [
+        {
+          "label": "reset",
+          "inputs": {
+            "0": true,
+            "19": true
+          },
+          "words": {
+            "0": 3
+          },
+          "expect": {
+            "output_mask": 5,
+            "words": {
+              "10": 0,
+              "11": 0
+            }
+          }
+        },
+        {
+          "label": "sentinel",
+          "inputs": {
+            "4": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 773,
+            "words": {
+              "10": 42,
+              "11": 42
+            }
+          }
+        },
+        {
+          "label": "store11",
+          "inputs": {
+            "1": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 768
+          }
+        },
+        {
+          "label": "held-store-input22",
+          "inputs": {
+            "1": true,
+            "3": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 768
+          }
+        },
+        {
+          "label": "store-release",
+          "inputs": {
+            "3": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 768
+          }
+        },
+        {
+          "label": "store22",
+          "inputs": {
+            "1": true,
+            "3": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 768
+          }
+        },
+        {
+          "label": "release-before-both",
+          "inputs": {
+            "19": true
+          },
+          "expect": {
+            "output_mask": 768
+          }
+        },
+        {
+          "label": "fresh-both-noop",
+          "inputs": {
+            "1": true,
+            "2": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 768
+          }
+        },
+        {
+          "label": "release-before-pop",
+          "inputs": {
+            "19": true
+          },
+          "expect": {
+            "output_mask": 768
+          }
+        },
+        {
+          "label": "first-pop",
+          "inputs": {
+            "2": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 144,
+            "words": {
+              "10": 11,
+              "11": 22
+            }
+          }
+        },
+        {
+          "label": "held-pop",
+          "inputs": {
+            "2": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 144
+          }
+        },
+        {
+          "label": "pop-release",
+          "inputs": {
+            "19": true
+          },
+          "expect": {
+            "output_mask": 144
+          }
+        },
+        {
+          "label": "second-pop",
+          "inputs": {
+            "2": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 101,
+            "words": {
+              "10": 22,
+              "11": 11
+            }
+          }
+        },
+        {
+          "label": "second-release",
+          "inputs": {
+            "19": true
+          },
+          "expect": {
+            "output_mask": 101
+          }
+        },
+        {
+          "label": "empty-pop",
+          "inputs": {
+            "2": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 101
+          }
+        },
+        {
+          "label": "empty-release",
+          "inputs": {
+            "19": true
+          },
+          "expect": {
+            "output_mask": 101
+          }
+        },
+        {
+          "label": "rewrite-output-sentinel",
+          "inputs": {
+            "4": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 773
+          }
+        },
+        {
+          "label": "sentinel-release",
+          "inputs": {
+            "19": true
+          },
+          "expect": {
+            "output_mask": 773
+          }
+        },
+        {
+          "label": "empty-pop-retains-sentinel",
+          "inputs": {
+            "2": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 773
+          }
+        },
+        {
+          "label": "final-release",
+          "inputs": {
+            "19": true
+          },
+          "expect": {
+            "output_mask": 773
+          }
+        }
+      ]
+    },
+    {
+      "id": "sequence-counter-loop",
+      "variant": "supervisor",
+      "selector": 4,
+      "oracle": "Sequence step advances once per rising I1 modulo3. Counter P2 follows fresh CU/CD. A for-loop sums1..3=6 or1..5=15. Output low bits encode step, then D/value and sum predicates.",
+      "scope": "Source control structures and bounded loop lowering, not a claim of exact native IF/FOR textual opcode admission.",
+      "coverage_ids": [
+        "fb.c",
+        "compare.le",
+        "integer.inc"
+      ],
+      "frames": [
+        {
+          "label": "reset",
+          "inputs": {
+            "0": true,
+            "19": true
+          },
+          "words": {
+            "0": 4
+          },
+          "expect": {
+            "output_mask": 288,
+            "words": {
+              "10": 0,
+              "11": 0,
+              "12": 6
+            }
+          }
+        },
+        {
+          "label": "advance-one",
+          "inputs": {
+            "1": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 321,
+            "words": {
+              "10": 1,
+              "11": 1,
+              "12": 6
+            }
+          }
+        },
+        {
+          "label": "held-does-not-advance",
+          "inputs": {
+            "1": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 321
+          }
+        },
+        {
+          "label": "release-and-long-loop",
+          "inputs": {
+            "3": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 577,
+            "words": {
+              "12": 15
+            }
+          }
+        },
+        {
+          "label": "advance-two-done",
+          "inputs": {
+            "1": true,
+            "3": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 658,
+            "words": {
+              "10": 2,
+              "11": 2,
+              "12": 15
+            }
+          }
+        },
+        {
+          "label": "short-loop-after-release",
+          "inputs": {
+            "19": true
+          },
+          "expect": {
+            "output_mask": 402,
+            "words": {
+              "12": 6
+            }
+          }
+        },
+        {
+          "label": "sequence-wrap-counter-three",
+          "inputs": {
+            "1": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 256,
+            "words": {
+              "10": 0,
+              "11": 3
+            }
+          }
+        },
+        {
+          "label": "down-to-done",
+          "inputs": {
+            "2": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 400,
+            "words": {
+              "11": 2
+            }
+          }
+        },
+        {
+          "label": "held-down",
+          "inputs": {
+            "2": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 400
+          }
+        },
+        {
+          "label": "down-release",
+          "inputs": {
+            "19": true
+          },
+          "expect": {
+            "output_mask": 400
+          }
+        },
+        {
+          "label": "reset-again",
+          "inputs": {
+            "0": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 288
+          }
+        }
+      ]
+    },
+    {
+      "id": "numeric-words",
+      "variant": "supervisor",
+      "selector": 5,
+      "oracle": "Raw signed arithmetic literals:7+5=12; -7+3=-4, truncating division-2 and remainder-1;32767+1 wraps to-32768 and sets S18; explicit reset clears S18.",
+      "scope": "i16 operations with dynamic public MW inputs; invalid-domain and broader scalar/float operations remain assigned to separate vectors.",
+      "coverage_ids": [
+        "assign.scalar",
+        "integer.add",
+        "integer.subtract",
+        "integer.multiply",
+        "integer.divide",
+        "integer.rem",
+        "integer.sqrt",
+        "compare.ne"
+      ],
+      "frames": [
+        {
+          "label": "positive",
+          "inputs": {
+            "0": true,
+            "19": true
+          },
+          "words": {
+            "0": 5,
+            "20": 7,
+            "21": 5,
+            "22": 81
+          },
+          "expect": {
+            "output_mask": 12,
+            "words": {
+              "1": 12,
+              "10": 2,
+              "11": 35,
+              "12": 1,
+              "13": 2,
+              "14": 9,
+              "15": 0
+            }
+          }
+        },
+        {
+          "label": "negative",
+          "inputs": {
+            "19": true
+          },
+          "words": {
+            "20": -7,
+            "21": 3,
+            "22": 16
+          },
+          "expect": {
+            "output_mask": 65532,
+            "words": {
+              "1": -4,
+              "10": -10,
+              "11": -21,
+              "12": -2,
+              "13": -1,
+              "14": 4,
+              "15": 0
+            }
+          }
+        },
+        {
+          "label": "signed-overflow",
+          "inputs": {
+            "19": true
+          },
+          "words": {
+            "20": 32767,
+            "21": 1,
+            "22": 1
+          },
+          "expect": {
+            "output_mask": 32768,
+            "words": {
+              "1": -32768,
+              "10": 32766,
+              "11": 32767,
+              "12": 32767,
+              "13": 0,
+              "14": 1,
+              "15": 1
+            }
+          }
+        },
+        {
+          "label": "error-recovery",
+          "inputs": {
+            "0": true,
+            "19": true
+          },
+          "words": {
+            "20": 0,
+            "21": 1,
+            "22": 0
+          },
+          "expect": {
+            "output_mask": 1,
+            "words": {
+              "1": 1,
+              "10": -1,
+              "11": 0,
+              "12": 0,
+              "13": 0,
+              "14": 0,
+              "15": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "light-clock",
+      "variant": "supervisor",
+      "selector": 7,
+      "oracle": "A20ms Clock alternates two lamp commands. On10ms scan-start intervals its first enabled output is false,false,true,true,true,false. STOP lowers enable and restarts the next activation. Bits0/1 are phaseA/B, bit2 enabled, bit3 STOP.",
+      "scope": "Virtual-clock light sequence using the current Clock helper; this is not RTC/calendar or physical timing evidence.",
+      "coverage_ids": [
+        "fb.tm"
+      ],
+      "frames": [
+        {
+          "label": "reset",
+          "dt_ms": 10,
+          "inputs": {
+            "0": true,
+            "19": true
+          },
+          "words": {
+            "0": 7
+          },
+          "expect": {
+            "output_mask": 0
+          }
+        },
+        {
+          "label": "phaseB-t0",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 6
+          }
+        },
+        {
+          "label": "phaseB-t10",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 6
+          }
+        },
+        {
+          "label": "phaseA-t20",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 5
+          }
+        },
+        {
+          "label": "phaseA-t30",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 5
+          }
+        },
+        {
+          "label": "phaseA-t40",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 5
+          }
+        },
+        {
+          "label": "phaseB-t50",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 6
+          }
+        },
+        {
+          "label": "stop",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true,
+            "2": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 8
+          }
+        },
+        {
+          "label": "held-stop",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true,
+            "2": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 8
+          }
+        },
+        {
+          "label": "restart-phaseB",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 6
+          }
+        },
+        {
+          "label": "restart-held",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 6
+          }
+        },
+        {
+          "label": "restart-phaseA",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 5
+          }
+        },
+        {
+          "label": "release-enable",
+          "dt_ms": 10,
+          "inputs": {
+            "19": true
+          },
+          "expect": {
+            "output_mask": 0
+          }
+        },
+        {
+          "label": "final-reset",
+          "dt_ms": 10,
+          "inputs": {
+            "0": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "resource-composition",
+      "variant": "supervisor",
+      "oracle": "Switching scenarios resets inactive stateful resources, preserves selector/public words, and keeps independent Counter/Register output images. Input-bit selection is exercised before word selection.",
+      "scope": "Composition regression, not extra feature-row completion.",
+      "coverage_ids": [],
+      "frames": [
+        {
+          "label": "input-select-fifo-reset",
+          "inputs": {
+            "0": true,
+            "20": true,
+            "21": true
+          },
+          "expect": {
+            "output_mask": 5,
+            "words": {
+              "0": 3
+            }
+          }
+        },
+        {
+          "label": "manual-sentinel",
+          "inputs": {
+            "4": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 773
+          }
+        },
+        {
+          "label": "store-before-switch",
+          "inputs": {
+            "1": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 768
+          }
+        },
+        {
+          "label": "switch-counter",
+          "inputs": {
+            "19": true
+          },
+          "words": {
+            "0": 4
+          },
+          "expect": {
+            "output_mask": 288
+          }
+        },
+        {
+          "label": "counter-one",
+          "inputs": {
+            "1": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 321
+          }
+        },
+        {
+          "label": "return-to-empty-registers",
+          "inputs": {
+            "19": true
+          },
+          "words": {
+            "0": 3
+          },
+          "expect": {
+            "output_mask": 5
+          }
+        },
+        {
+          "label": "fresh-store-after-switch",
+          "inputs": {
+            "1": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 0
+          }
+        },
+        {
+          "label": "retrieve-both11",
+          "inputs": {
+            "2": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 85,
+            "words": {
+              "10": 11,
+              "11": 11
+            }
+          }
+        },
+        {
+          "label": "switch-released-boolean",
+          "inputs": {
+            "19": true
+          },
+          "words": {
+            "0": 1
+          },
+          "expect": {
+            "output_mask": 2
+          }
+        },
+        {
+          "label": "fresh-edge-after-switch",
+          "inputs": {
+            "1": true,
+            "19": true
+          },
+          "expect": {
+            "output_mask": 187
+          }
+        },
+        {
+          "label": "switch-to-last-io-port",
+          "inputs": {
+            "15": true,
+            "19": true
+          },
+          "words": {
+            "0": 0
+          },
+          "expect": {
+            "output_mask": 32768,
+            "words": {
+              "1": -32768
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "subroutine-order",
+      "variant": "subroutine",
+      "oracle": "Disabled leaf leaves MW12=10/output4; enabled leaf writes MW12=20/output7. Caller then writes MW10=30 in both cases.",
+      "scope": "One stateless SR0 leaf/section2, separately admitted profile.",
+      "coverage_ids": [
+        "control.subroutine"
+      ],
+      "frames": [
+        {
+          "label": "disabled",
+          "inputs": {},
+          "expect": {
+            "output_mask": 4,
+            "words": {
+              "10": 30,
+              "11": 0,
+              "12": 10
+            }
+          }
+        },
+        {
+          "label": "enabled",
+          "inputs": {
+            "1": true
+          },
+          "expect": {
+            "output_mask": 7,
+            "words": {
+              "10": 30,
+              "11": 1,
+              "12": 20
+            }
+          }
+        },
+        {
+          "label": "held-enabled",
+          "inputs": {
+            "1": true
+          },
+          "expect": {
+            "output_mask": 7,
+            "words": {
+              "10": 30,
+              "11": 1,
+              "12": 20
+            }
+          }
+        },
+        {
+          "label": "released",
+          "inputs": {},
+          "expect": {
+            "output_mask": 4,
+            "words": {
+              "10": 30,
+              "11": 0,
+              "12": 10
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "modbus-default-error",
+      "variant": "modbus-no-transport",
+      "oracle": "Without an injected transport, a fresh Execute after initialization yields explicit CommError255/OperError15. Initial heldTRUE is not an edge, release clears status, no success or transaction is fabricated.",
+      "scope": "Negative no-endpoint control only. Not a successful native Modbus transaction, transport timeout test or physical serial validation.",
+      "coverage_ids": [
+        "comm.read_var",
+        "comm.write_var",
+        "comm.write_read_var",
+        "HW.COMM_READ_VAR",
+        "HW.COMM_WRITE_VAR",
+        "HW.COMM_WRITE_READ_VAR"
+      ],
+      "frames": [
+        {
+          "label": "initial-true-no-edge",
+          "inputs": {
+            "1": true
+          },
+          "expect": {
+            "output_mask": 0,
+            "words": {
+              "10": 0,
+              "12": 0
+            }
+          }
+        },
+        {
+          "label": "initial-held",
+          "inputs": {
+            "1": true
+          },
+          "expect": {
+            "output_mask": 0
+          }
+        },
+        {
+          "label": "release",
+          "inputs": {},
+          "expect": {
+            "output_mask": 0
+          }
+        },
+        {
+          "label": "read-fresh-no-transport",
+          "inputs": {
+            "1": true
+          },
+          "expect": {
+            "output_mask": 4,
+            "words": {
+              "10": 255,
+              "12": 15,
+              "13": 0
+            }
+          }
+        },
+        {
+          "label": "read-held",
+          "inputs": {
+            "1": true
+          },
+          "expect": {
+            "output_mask": 4
+          }
+        },
+        {
+          "label": "clear-read",
+          "inputs": {},
+          "expect": {
+            "output_mask": 0,
+            "words": {
+              "10": 0,
+              "12": 0
+            }
+          }
+        },
+        {
+          "label": "write-fresh-no-transport",
+          "inputs": {
+            "1": true,
+            "3": true
+          },
+          "expect": {
+            "output_mask": 64,
+            "words": {
+              "20": 255,
+              "22": 15,
+              "23": 0
+            }
+          }
+        },
+        {
+          "label": "clear-write",
+          "inputs": {},
+          "expect": {
+            "output_mask": 0,
+            "words": {
+              "20": 0,
+              "22": 0
+            }
+          }
+        },
+        {
+          "label": "exchange-fresh-no-transport",
+          "inputs": {
+            "1": true,
+            "4": true
+          },
+          "expect": {
+            "output_mask": 1024,
+            "words": {
+              "30": 255,
+              "32": 15,
+              "33": 0
+            }
+          }
+        },
+        {
+          "label": "clear-exchange",
+          "inputs": {},
+          "expect": {
+            "output_mask": 0,
+            "words": {
+              "30": 0,
+              "32": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "subroutine-stateful-liveness",
+      "variant": "subroutine-stateful",
+      "oracle": "Each SR0 loop sums1+3=4, so two calls add8. Normal tails add10 each; early returns add1 each. SR63 snapshots shared words/timer. Caller snapshots MW20 before the callee overwrites it with99. One shared TON20ms advances by elapsed time, not number of calls; a skipped wired M200 keeps its last assigned value.",
+      "scope": "Integrated G06/G07 local composition, two non-nested SRs with separate section IDs, one TM4, public memory observations and literal8-frame timeline; no native editor or physical evidence.",
+      "coverage_ids": [
+        "control.subroutine",
+        "fb.tm"
+      ],
+      "frames": [
+        {
+          "label": "initialize-disabled-timer-two-normal-calls",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true,
+            "5": true
+          },
+          "words": {
+            "20": 5
+          },
+          "expect": {
+            "output_mask": 20,
+            "words": {
+              "1": 20,
+              "7": 8,
+              "8": 20,
+              "9": 8,
+              "10": 20,
+              "11": 0,
+              "12": 12,
+              "13": 5,
+              "14": 20,
+              "15": 77,
+              "16": 0,
+              "20": 99
+            }
+          }
+        },
+        {
+          "label": "shared-timer-first-enable",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true,
+            "2": true,
+            "5": true
+          },
+          "words": {
+            "20": 9
+          },
+          "expect": {
+            "output_mask": 24,
+            "words": {
+              "1": 24,
+              "7": 8,
+              "8": 20,
+              "9": 8,
+              "10": 20,
+              "11": 0,
+              "12": 16,
+              "13": 9,
+              "14": 24,
+              "15": 77,
+              "16": 0,
+              "20": 99
+            }
+          }
+        },
+        {
+          "label": "two-early-returns-and-observer-return",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true,
+            "2": true,
+            "3": true,
+            "4": true,
+            "5": true
+          },
+          "words": {
+            "20": -3
+          },
+          "expect": {
+            "output_mask": 12,
+            "words": {
+              "1": 12,
+              "7": 8,
+              "8": 2,
+              "9": 8,
+              "10": 2,
+              "11": 1,
+              "12": 4,
+              "13": -3,
+              "14": 12,
+              "15": -1,
+              "16": 0,
+              "20": 99
+            }
+          }
+        },
+        {
+          "label": "both-srs-skipped-timer-property-done-wired-q-retained",
+          "dt_ms": 10,
+          "inputs": {
+            "2": true
+          },
+          "words": {
+            "20": 7
+          },
+          "expect": {
+            "output_mask": 270,
+            "words": {
+              "1": 270,
+              "7": 0,
+              "8": 0,
+              "9": -1,
+              "10": -1,
+              "11": -1,
+              "12": 14,
+              "13": 7,
+              "14": 14,
+              "15": -1,
+              "16": 0,
+              "20": 7
+            }
+          }
+        },
+        {
+          "label": "resume-same-timer-and-normal-caller-continuation",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true,
+            "2": true,
+            "5": true
+          },
+          "words": {
+            "20": 11
+          },
+          "expect": {
+            "output_mask": 282,
+            "words": {
+              "1": 282,
+              "7": 8,
+              "8": 20,
+              "9": 8,
+              "10": 20,
+              "11": 2,
+              "12": 18,
+              "13": 11,
+              "14": 26,
+              "15": 77,
+              "16": 1,
+              "20": 99
+            }
+          }
+        },
+        {
+          "label": "falling-enable-resets-shared-timer",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true,
+            "5": true
+          },
+          "words": {
+            "20": 1
+          },
+          "expect": {
+            "output_mask": 16,
+            "words": {
+              "1": 16,
+              "7": 8,
+              "8": 20,
+              "9": 8,
+              "10": 20,
+              "11": 0,
+              "12": 8,
+              "13": 1,
+              "14": 16,
+              "15": 77,
+              "16": 0,
+              "20": 99
+            }
+          }
+        },
+        {
+          "label": "observer-without-mutating-sr",
+          "dt_ms": 10,
+          "inputs": {
+            "5": true
+          },
+          "words": {
+            "20": 20
+          },
+          "expect": {
+            "output_mask": 27,
+            "words": {
+              "1": 27,
+              "7": 0,
+              "8": 0,
+              "9": 0,
+              "10": 0,
+              "11": 0,
+              "12": 27,
+              "13": 20,
+              "14": 27,
+              "15": 77,
+              "16": 0,
+              "20": 20
+            }
+          }
+        },
+        {
+          "label": "all-skipped-caller-zero-live-result",
+          "dt_ms": 10,
+          "inputs": {},
+          "words": {
+            "20": -7
+          },
+          "expect": {
+            "output_mask": 0,
+            "words": {
+              "1": 0,
+              "7": 0,
+              "8": 0,
+              "9": -1,
+              "10": -1,
+              "11": -1,
+              "12": 0,
+              "13": -7,
+              "14": 0,
+              "15": -1,
+              "16": 0,
+              "20": -7
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

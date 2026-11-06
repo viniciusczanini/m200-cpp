@@ -260,12 +260,31 @@ plc::output(0,!skipped&&!ok);plc::output(1,plc::system(18));plc::output(2,n==3);
             body,
         )
 
+    def test_literal_bcd_faults_remain_runtime_refusals_before_destination_write(self):
+        # Removing compile-time arithmetic evaluation does not complete the
+        # deferred G03 recovery domain. Preserve the genuine runtime negative.
+        for writer, expression in [
+            ("word", "plc::bcd_to_int(10)"),
+            ("word", "plc::int_to_bcd(-1)"),
+            ("dword", "plc::dint_to_bcd(100000000)"),
+            ("dword", "plc::bcd_to_dint(10)"),
+        ]:
+            with self.subTest(expression=expression):
+                vm = Machine(self.compile(
+                    "void scan(){plc::write_word(100,123);"
+                    "plc::write_word(101,456);plc::write_" + writer
+                    + "(100," + expression + ");plc::output(0,true);}"
+                ))
+                vm.arithmetic.carry = True
+                with self.assertRaisesRegex(CompileError, "BCD"):
+                    vm.step()
+                self.assertTrue(vm.arithmetic.overflow and vm.arithmetic.carry)
+                self.assertEqual(vm.words[100:102], [123, 456])
+                self.assertIsNone(vm.indeterminate.read(100, 2))
+                self.assertFalse(vm.outputs[0])
+
     def test_invalid_types_arity_literals_and_unknown_operators_fail(self):
         for expression in [
-            "plc::bcd_to_int(10)",
-            "plc::int_to_bcd(-1)",
-            "plc::dint_to_bcd(100000000)",
-            "plc::bcd_to_dint(10)",
             "plc::int_to_dint(plc::read_dword(0))",
             "plc::concat_words(plc::read_dword(0),1)",
             "plc::concat_words(1)",

@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+    "-B",
+    "tests/test_natal_boolean.py",
+    "-v"
+  ],
+  "cwd": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/permanent-boolean-regressions/source",
+  "only_module": "tests/test_natal_boolean.py",
+  "execution_count": 1
+}

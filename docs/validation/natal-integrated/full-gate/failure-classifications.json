@@ -1,0 +1,198 @@
+[
+  {
+    "block_index": 0,
+    "case": "parallel_semantics.G08_sc_middle_steps_and_exclusive_reset.vm",
+    "classification": "NATIVE_ORACLE_PENDING",
+    "detail": "Native SC reset/request-history interaction remains unresolved; original request/oracle retained for audit, not executed as success.",
+    "diagnostic": "parallel_semantics.contracts.PendingOracleError: G08_sc_middle_steps_and_exclusive_reset: pending_native_reset_history; PENDING native reset/history qualification; original preliminary oracle retained: Generic pp155-158; middle transitions only, no guessed endpoint or ambiguous one-hot write.",
+    "evidence": [
+      {
+        "fact": "Unprepared oracle_status or missing expected raises PendingOracleError before adapter invocation.",
+        "file": "tests/parallel_semantics/test_semantics.py",
+        "line": 26,
+        "sha256": "f4584d9fee55183984e2baece5fb0517e54014834d7e76978f74b8291ae32ec3"
+      },
+      {
+        "fact": "Original8frame trace retained; pending_native_reset_history prevents claiming a literal result for immediate CD\u2192exclusive reset.",
+        "file": "tests/parallel_semantics/source_cases.py",
+        "line": 12,
+        "sha256": "97bdc9df091a443644279de95eb4eb53f158cd550564c055c7f10d9e41a94d33"
+      },
+      {
+        "fact": "Separate known neutral/full-pin-before-reset control remains discoverable and passed in vm and sdk.",
+        "file": "tests/parallel_semantics/source_cases.py",
+        "line": 173,
+        "sha256": "97bdc9df091a443644279de95eb4eb53f158cd550564c055c7f10d9e41a94d33"
+      }
+    ],
+    "full_gate_disposition": "INCOMPLETE; raw FAIL remains, no source/expectation changes or retries",
+    "raw_kind": "FAIL"
+  },
+  {
+    "block_index": 1,
+    "case": "parallel_semantics.G08_sc_middle_steps_and_exclusive_reset.sdk",
+    "classification": "NATIVE_ORACLE_PENDING",
+    "detail": "Native SC reset/request-history interaction remains unresolved; original request/oracle retained for audit, not executed as success.",
+    "diagnostic": "parallel_semantics.contracts.PendingOracleError: G08_sc_middle_steps_and_exclusive_reset: pending_native_reset_history; PENDING native reset/history qualification; original preliminary oracle retained: Generic pp155-158; middle transitions only, no guessed endpoint or ambiguous one-hot write.",
+    "evidence": [
+      {
+        "fact": "Unprepared oracle_status or missing expected raises PendingOracleError before adapter invocation.",
+        "file": "tests/parallel_semantics/test_semantics.py",
+        "line": 26,
+        "sha256": "f4584d9fee55183984e2baece5fb0517e54014834d7e76978f74b8291ae32ec3"
+      },
+      {
+        "fact": "Original8frame trace retained; pending_native_reset_history prevents claiming a literal result for immediate CD\u2192exclusive reset.",
+        "file": "tests/parallel_semantics/source_cases.py",
+        "line": 12,
+        "sha256": "97bdc9df091a443644279de95eb4eb53f158cd550564c055c7f10d9e41a94d33"
+      },
+      {
+        "fact": "Separate known neutral/full-pin-before-reset control remains discoverable and passed in vm and sdk.",
+        "file": "tests/parallel_semantics/source_cases.py",
+        "line": 173,
+        "sha256": "97bdc9df091a443644279de95eb4eb53f158cd550564c055c7f10d9e41a94d33"
+      }
+    ],
+    "full_gate_disposition": "INCOMPLETE; raw FAIL remains, no source/expectation changes or retries",
+    "raw_kind": "FAIL"
+  },
+  {
+    "block_index": 2,
+    "case": "parallel_semantics.G01_edge_cold_warm_stop_RUN_history_is_not_guessed.vm",
+    "classification": "NATIVE_ORACLE_PENDING",
+    "detail": "Native Boolean lifecycle oracle not supplied; no lifecycle equivalence inferred.",
+    "diagnostic": "parallel_semantics.contracts.PendingOracleError: G01_edge_cold_warm_stop_RUN_history_is_not_guessed: pending_contract_or_native_oracle; Native lifecycle equivalence remains pending. CONTRACT/DELIVERY must state the exact local event policy before an oracle is admitted.",
+    "evidence": [
+      {
+        "fact": "Unprepared oracle_status or missing expected raises PendingOracleError before adapter invocation.",
+        "file": "tests/parallel_semantics/test_semantics.py",
+        "line": 26,
+        "sha256": "f4584d9fee55183984e2baece5fb0517e54014834d7e76978f74b8291ae32ec3"
+      },
+      {
+        "fact": "Expected=None; oracle_status pending_contract_or_native_oracle for cold/warm/STOP/RUN expression-edge history.",
+        "file": "tests/parallel_semantics/priority_cases.py",
+        "line": 71,
+        "sha256": "c547572ef9dc3d0bd0ac60f63611d3c61dd8a7648c746610b850fd1904f6344f"
+      }
+    ],
+    "full_gate_disposition": "INCOMPLETE; raw FAIL remains, no source/expectation changes or retries",
+    "raw_kind": "FAIL"
+  },
+  {
+    "block_index": 3,
+    "case": "parallel_semantics.G01_edge_cold_warm_stop_RUN_history_is_not_guessed.sdk",
+    "classification": "NATIVE_ORACLE_PENDING",
+    "detail": "Native Boolean lifecycle oracle not supplied; no lifecycle equivalence inferred.",
+    "diagnostic": "parallel_semantics.contracts.PendingOracleError: G01_edge_cold_warm_stop_RUN_history_is_not_guessed: pending_contract_or_native_oracle; Native lifecycle equivalence remains pending. CONTRACT/DELIVERY must state the exact local event policy before an oracle is admitted.",
+    "evidence": [
+      {
+        "fact": "Unprepared oracle_status or missing expected raises PendingOracleError before adapter invocation.",
+        "file": "tests/parallel_semantics/test_semantics.py",
+        "line": 26,
+        "sha256": "f4584d9fee55183984e2baece5fb0517e54014834d7e76978f74b8291ae32ec3"
+      },
+      {
+        "fact": "Expected=None; oracle_status pending_contract_or_native_oracle for cold/warm/STOP/RUN expression-edge history.",
+        "file": "tests/parallel_semantics/priority_cases.py",
+        "line": 71,
+        "sha256": "c547572ef9dc3d0bd0ac60f63611d3c61dd8a7648c746610b850fd1904f6344f"
+      }
+    ],
+    "full_gate_disposition": "INCOMPLETE; raw FAIL remains, no source/expectation changes or retries",
+    "raw_kind": "FAIL"
+  },
+  {
+    "block_index": 4,
+    "case": "parallel_semantics.G08_unresolved_native_domains_remain_visible_gaps.vm",
+    "classification": "NATIVE_ORACLE_PENDING",
+    "detail": "Unknown native endpoint/collision domains deliberately stay pending; local refusal is not native semantic proof.",
+    "diagnostic": "parallel_semantics.contracts.PendingOracleError: G08_unresolved_native_domains_remain_visible_gaps: pending_native_oracle; G08 explicitly retains unmodeled collision/endpoint domains; a refusal is not completed semantic coverage.",
+    "evidence": [
+      {
+        "fact": "Unprepared oracle_status or missing expected raises PendingOracleError before adapter invocation.",
+        "file": "tests/parallel_semantics/test_semantics.py",
+        "line": 26,
+        "sha256": "f4584d9fee55183984e2baece5fb0517e54014834d7e76978f74b8291ae32ec3"
+      },
+      {
+        "fact": "Expected=None and pending_native_oracle for SBR fill/edge collisions, SC endpoints/multiple writes and DR pending-step+advance.",
+        "file": "tests/parallel_semantics/priority_cases.py",
+        "line": 91,
+        "sha256": "c547572ef9dc3d0bd0ac60f63611d3c61dd8a7648c746610b850fd1904f6344f"
+      }
+    ],
+    "full_gate_disposition": "INCOMPLETE; raw FAIL remains, no source/expectation changes or retries",
+    "raw_kind": "FAIL"
+  },
+  {
+    "block_index": 5,
+    "case": "parallel_semantics.G08_unresolved_native_domains_remain_visible_gaps.sdk",
+    "classification": "NATIVE_ORACLE_PENDING",
+    "detail": "Unknown native endpoint/collision domains deliberately stay pending; local refusal is not native semantic proof.",
+    "diagnostic": "parallel_semantics.contracts.PendingOracleError: G08_unresolved_native_domains_remain_visible_gaps: pending_native_oracle; G08 explicitly retains unmodeled collision/endpoint domains; a refusal is not completed semantic coverage.",
+    "evidence": [
+      {
+        "fact": "Unprepared oracle_status or missing expected raises PendingOracleError before adapter invocation.",
+        "file": "tests/parallel_semantics/test_semantics.py",
+        "line": 26,
+        "sha256": "f4584d9fee55183984e2baece5fb0517e54014834d7e76978f74b8291ae32ec3"
+      },
+      {
+        "fact": "Expected=None and pending_native_oracle for SBR fill/edge collisions, SC endpoints/multiple writes and DR pending-step+advance.",
+        "file": "tests/parallel_semantics/priority_cases.py",
+        "line": 91,
+        "sha256": "c547572ef9dc3d0bd0ac60f63611d3c61dd8a7648c746610b850fd1904f6344f"
+      }
+    ],
+    "full_gate_disposition": "INCOMPLETE; raw FAIL remains, no source/expectation changes or retries",
+    "raw_kind": "FAIL"
+  },
+  {
+    "block_index": 6,
+    "case": "parallel_semantics.G11_busy_dynamic_buffer_change_does_not_redirect_active_read.sdk",
+    "classification": "UNBOUND_ADAPTER",
+    "detail": "G11 raw-byte asynchronous VM peer is bound, but no independent SDK host transport binding is registered. Missing SDK execution is not a protocol/runtime PASS.",
+    "diagnostic": "parallel_semantics.contracts.PendingAdapterError: G11_async has no independent sdk host binding yet",
+    "evidence": [
+      {
+        "fact": "G11_async engines list contains vm only; delivery explicitly leaves SDK transport integration pending.",
+        "file": "tests/parallel_semantics/adapters.json",
+        "line": 68,
+        "sha256": "35d09d840caa75822933d254a27234e46d9a04e60abfdea5b5bb44173e9fb351"
+      },
+      {
+        "fact": "Unsupported engine raises PendingAdapterError instead of skip or mock success.",
+        "file": "tests/parallel_semantics/adapters.py",
+        "line": 25,
+        "sha256": "f286f57008acf7b5b1d2de00c669aa3f8c9aa16f06760f9f598473f6e0f54794"
+      }
+    ],
+    "full_gate_disposition": "INCOMPLETE; raw FAIL remains, no source/expectation changes or retries",
+    "raw_kind": "FAIL"
+  },
+  {
+    "block_index": 7,
+    "case": "parallel_semantics.G11_abort_prevents_late_response_buffer_mutation.sdk",
+    "classification": "UNBOUND_ADAPTER",
+    "detail": "G11 raw-byte asynchronous VM peer is bound, but no independent SDK host transport binding is registered. Missing SDK execution is not a protocol/runtime PASS.",
+    "diagnostic": "parallel_semantics.contracts.PendingAdapterError: G11_async has no independent sdk host binding yet",
+    "evidence": [
+      {
+        "fact": "G11_async engines list contains vm only; delivery explicitly leaves SDK transport integration pending.",
+        "file": "tests/parallel_semantics/adapters.json",
+        "line": 68,
+        "sha256": "35d09d840caa75822933d254a27234e46d9a04e60abfdea5b5bb44173e9fb351"
+      },
+      {
+        "fact": "Unsupported engine raises PendingAdapterError instead of skip or mock success.",
+        "file": "tests/parallel_semantics/adapters.py",
+        "line": 25,
+        "sha256": "f286f57008acf7b5b1d2de00c669aa3f8c9aa16f06760f9f598473f6e0f54794"
+      }
+    ],
+    "full_gate_disposition": "INCOMPLETE; raw FAIL remains, no source/expectation changes or retries",
+    "raw_kind": "FAIL"
+  }
+]

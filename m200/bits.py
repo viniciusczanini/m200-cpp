@@ -43,10 +43,12 @@ def memory_bits_used(program):
         " ".join(" ".join(r) for r in program.rungs) + " " + " ".join(program.symbols)
     )
     used = {int(n) for n in re.findall(r"%M([0-9]+)", text)}
+    used.update(int(c.output[2:]) for c in program.schedules.values() if re.fullmatch(r"%M[0-9]+", c.output))
     for m in STRING.finditer(text):
         bank, start, count = bit_string(m[0])
         if bank == "M":
             used.update(range(start, start + count))
+    used.update(int(cam.output[2:]) for cfg in program.drums.values() for cam in cfg.cams if cam.output.startswith("%M"))
     return used
 
 

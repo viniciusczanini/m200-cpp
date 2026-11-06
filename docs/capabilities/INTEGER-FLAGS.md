@@ -1,4 +1,12 @@
-# Flags inteiros S17/S18 e recuperação de overflow
+# Integer flags: original implementation notes
+
+This historical note predates the integrated G02 destination/constant/status
+implementation. Its open-work section describes that earlier checkpoint.
+The current English [numeric guide](../NUMERIC.md) and
+[integration evidence](../validation/NATAL-INTEGRATION-PROGRESS.md) supersede
+those older abort/recovery statements. In particular, destination DIV/REM/SQRT
+and explicit copies now retain unknown masks; primitive SDK value propagation
+and native lifecycle qualification remain pending.
 
 Etapa após 86af2a3; meta integral em `../PARITY.md` permanece. Fontes:
 [G EIO0000003289.04](https://www.se.com/us/en/download/document/EIO0000003289/),

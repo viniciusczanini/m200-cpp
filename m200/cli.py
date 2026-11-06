@@ -32,13 +32,15 @@ ARTIFACTS = {
 
 
 def render_il(program):
+    internal_rtc = any(line.startswith("RTC_EXEC ") for rung in program.rungs for line in rung)
+    warning = "; INTERNAL IR: RTC_EXEC is not vendor IL; native RTC block binding pending.\n" if internal_rtc else ""
     def rungs_text(rungs):
         return "\n\n".join(
             "; Rung %d\n%s" % (n, "\n".join(r)) for n, r in enumerate(rungs)
         )
 
     if not program.subroutines:
-        return rungs_text(program.rungs) + "\n"
+        return warning + rungs_text(program.rungs) + "\n"
     parts = ["; MASTER\n" + rungs_text(program.rungs)]
     for number, definition in sorted(program.subroutines.items()):
         parts.append(
@@ -243,6 +245,8 @@ def report(program):
             "required_word_allocation": max(words, default=-1) + 1,
             "timers": len(program.timers),
             "timer_capacity": 255,
+            "required_timer_allocation": max(program.timers, default=-1) + 1,
+            "timer_native_validation": "expanded mode/base/graph/lifecycle combinations unverified",
             "counters": len(program.counters),
             "required_counter_allocation": max(program.counters, default=-1) + 1,
             "counter_capacity_model": 255,
@@ -252,6 +256,12 @@ def report(program):
             "required_register_allocation": max(program.registers, default=-1) + 1,
             "register_queue_words": 16 * len(program.registers),
             "register_semantics": "native FIFO/LIFO storage separate from MW; per-call local policy; broader native lifecycle/repeated-call equivalence pending",
+            "rtcs": len(program.rtcs),
+            "rtc_capacity": 2,
+            "schedules": len(program.schedules),
+            "schedule_capacity": 16,
+            "rtc_native_update_binding": "pending; RTC_EXEC is internal IR only",
+            "rtc_calendar_semantics": "unvalidated local policy; native snapshot/set uses documented S/SW objects",
             "communication_blocks": len(program.communications),
             "communication_capacity_per_kind": 32,
             "rising_functions": sum(kind == "RISING" for kind, _ in functions),
@@ -298,7 +308,7 @@ def report(program):
             },
         }
         result["limitations"].append(
-            "Prototype direct leaf SR contexts only; native M-contact/section profiles and SMBP export remain gated; code-size totals are not scan cost or watchdog proof."
+            "Independent native SR contexts share resource state and images; nested SR calls are prohibited. Wider/stateful/control-flow layouts await the batch editor/simulator gate; code-size totals are not scan cost or watchdog proof."
         )
     return result
 
@@ -439,10 +449,12 @@ def main(argv=None):
                 ],
                 "timer_properties": {
                     "types": ["Ton", "Tof", "Pulse"],
-                    "methods": ["preset", "value", "done", "set_preset"],
+                    "methods": ["update", "execute", "preset", "value", "done", "set_preset"],
                     "explicit_constructor": "native_index, base_ms, preset_ticks",
                     "mode_constructor": "native_index, base_ms, preset_ticks, retentive, dynamic_preset (literal bool flags)",
-                    "scope": "Retentive TON/TOF and dynamic preset TON/TOF/TP in local C++/IL/configuration/VM/reverse. TP retention rejected. True-mode SMBP functional-level mapping, native tick phase and lifecycle validation pending.",
+                    "scope": "TON/TOF/TP, all five bases, P/V/Q, conditional/repeated update and input-only execute. Retentive TON/TOF plus dynamic TON/TOF/TP serialize by actual project level (retention conservatively >=4.0; dynamic >=12.0). TP retention rejected. Expanded combinations/native graphs/lifecycle are implemented but unvalidated; historical observations remain scoped.",
+                    "host_lifecycle": ["stop", "run", "power_off", "warm_restart", "cold_restart"],
+                    "lifecycle_scope": "Timer-only trace events before a frame scan; other CPU resources, startup bits and physical fallback are outside these hooks.",
                 },
                 "native_counters": {
                     "type": "Counter(native_index,preset)",
@@ -493,7 +505,7 @@ def main(argv=None):
             print(
                 json.dumps(
                     [
-                        machine.step(f.get("inputs", {}), f.get("dt_ms", 10))
+                        machine.step(f.get("inputs", {}), f.get("dt_ms", 10), f.get("timer_event"))
                         for f in frames
                     ]
                 )
@@ -502,7 +514,7 @@ def main(argv=None):
         p = compile_source(args.source)
         machine = Machine(p)
         emitted = [
-            machine.step(f.get("inputs", {}), f.get("dt_ms", 10)) for f in frames
+            machine.step(f.get("inputs", {}), f.get("dt_ms", 10), f.get("timer_event")) for f in frames
         ]
         original = run_native(args.source, frames)
         with tempfile.TemporaryDirectory(prefix="m200-audit-") as d:

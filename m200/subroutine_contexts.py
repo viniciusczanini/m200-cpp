@@ -1,12 +1,54 @@
-"""Ignored prototype leaf contexts. No native graph/SMBP/frontend admission."""
+"""Independent native SR contexts, sharing one controller resource image.
+
+SR0..63 are Free POUs, not inline source functions. Native nested calls are
+forbidden (EIO0000003289.04 pp65–66); labels and END remain local to a POU.
+"""
 
 import copy
 import re
 from .model import SubroutineDefinition, fail
-from .flow import split_label, ENDS
+from .flow import split_label, destinations
 from .native_logic import decode, LOGIC
 from .subroutine_graph import _xml_text
-from .indexed import ANY_INDEXED
+
+
+def context_view(program, definition=None, *, resources=False):
+    """A single executable context; optionally select its referenced FB configs.
+
+    The resource-filtered form is for the existing flat validator/reverse emitter
+    only. Runtime and project allocation always use the original shared maps.
+    """
+    view = copy.copy(program)
+    view.rungs = program.rungs if definition is None else definition.rungs
+    view.subroutines = {}
+    view.metadata = dict(program.metadata)
+    if definition is not None:
+        view.metadata.pop("rung_origins", None)
+        if definition.origins:
+            view.metadata["rung_origins"] = definition.origins
+        view.metadata.pop("native_full_pin_groups", None)
+        groups = program.metadata.get("subroutine_full_pin_groups", {})
+        if isinstance(groups, dict) and str(definition.number) in groups:
+            view.metadata["native_full_pin_groups"] = groups[str(definition.number)]
+    if resources:
+        timer_ids = set()
+        communication_ids = set()
+        for rung in view.rungs:
+            for line in rung:
+                timer_ids.update(int(i) for i in re.findall(r"%TM([0-9]+)(?:\b|\.)", line))
+                communication_ids.update(re.findall(r"%(?:READ_VAR|WRITE_VAR|WRITE_READ_VAR)[0-9]+", line))
+        view.timers = {i: cfg for i, cfg in program.timers.items() if i in timer_ids}
+        view.communications = {
+            key: cfg for key, cfg in program.communications.items()
+            if key in communication_ids
+        }
+    return view
+
+
+def context_views(program, *, resources=False):
+    yield None, context_view(program, resources=resources)
+    for number, definition in program.subroutines.items():
+        yield number, context_view(program, definition, resources=resources)
 
 
 def static_operand_view(program):
@@ -32,15 +74,15 @@ def call_target(raw):
         or not raw
         or any(not isinstance(line, str) or not line.strip() for line in raw)
     ):
-        fail("prototype rungs must be nonempty instruction-string lists")
+        fail("SR contexts require nonempty instruction-string lists")
     _, body = split_label(raw)
     if not body:
-        fail("prototype rung has no body")
+        fail("SR context rung has no body")
     if not any(line.split(maxsplit=1)[0].startswith("SR") for line in body):
         return None
     match = re.fullmatch(r"SR(0|[1-9][0-9]*)", body[-1])
     if match is None or len(match[1]) > 2 or int(match[1]) >= 64 or len(body) < 2:
-        fail("prototype supports only canonical terminal conditional SR0..SR63")
+        fail("SR calls require canonical terminal conditional SR0..SR63")
     for op, _ in decode(body[:-1] + ["ENDC"]):
         if op not in (*LOGIC, "N", "ENDC"):
             fail("SR call predicate must have balanced plain boolean operations")
@@ -63,18 +105,18 @@ def validate_contexts(program, validate_flat):
     if not program.subroutines:
         validate_flat(program)
         return
+    if any(not isinstance(value, dict) for value in (
+        program.timers, program.counters, program.registers,
+        program.communications, program.metadata,
+        program.shift_bit_registers, program.step_counters, program.drums,
+        program.constants, program.rtcs, program.schedules,
+    )):
+        fail("invalid shared SR resource or metadata mapping")
     if len(program.subroutines) > 64:
-        fail("at most64native subroutine identities")
-    if (
-        program.timers
-        or program.counters
-        or program.communications
-        or program.registers
-    ):
-        fail("prototype SR stateful-resource closures are not implemented")
+        fail("at most 64 native subroutine identities")
     names, sections = set(), set()
     if not isinstance(program.rungs, list):
-        fail("prototype master rungs must be a list")
+        fail("master rungs must be a list")
     count = sum(len(raw) if isinstance(raw, list) else 10001 for raw in program.rungs)
     for number, definition in program.subroutines.items():
         if (
@@ -99,61 +141,63 @@ def validate_contexts(program, validate_flat):
         if not isinstance(definition.rungs, list) or not definition.rungs:
             fail("subroutine requires a nonempty rung sequence")
         if not isinstance(definition.origins, list):
-            fail("prototype callee origins must be a list")
+            fail("callee origins must be a list")
         for raw in definition.rungs:
-            if isinstance(raw, list) and any(
-                isinstance(line, str) and ANY_INDEXED.search(line) for line in raw
-            ):
-                fail("prototype indexed leaf guard transfers are not implemented")
             target = call_target(raw)
-            label, body = split_label(raw)
-            if label is not None or target is not None:
-                fail("native nested SR/label transfers are outside prototype scope")
-            instructions = decode(body)
-            if len(instructions) != 1 and any(op == "END" for op, _ in instructions):
-                fail(
-                    "native unconditional END must be the sole instruction in its rung"
-                )
-            for op, _ in instructions:
-                if op not in (
-                    "LD",
-                    "LDN",
-                    "AND",
-                    "ANDN",
-                    "OR",
-                    "ORN",
-                    "XOR",
-                    "XORN",
-                    "N",
-                    "ST",
-                    "STN",
-                    "S",
-                    "R",
-                    "NUM",
-                    *ENDS,
-                ):
-                    fail(
-                        "prototype supports direct stateless leaf memory/output operations only"
-                    )
-        flat = copy.copy(program)
-        flat.subroutines = {}
-        flat.rungs = definition.rungs
-        flat.metadata = {
-            k: v for k, v in program.metadata.items() if k != "rung_origins"
-        }
-        if definition.origins:
-            flat.metadata["rung_origins"] = definition.origins
-        validate_flat(flat)
+            if target is not None:
+                fail("native SR nesting is prohibited by the controller profile")
         count += sum(map(len, definition.rungs))
     if count > 10000:
-        fail("combined prototype context instruction budget exceeded")
+        fail("combined SR context instruction budget exceeded (tool limit 10000)")
     projected = []
     for raw in program.rungs:
         target = call_target(raw)
         if target is not None and target not in program.subroutines:
             fail("undefined SR target")
         projected.append(raw if target is None else raw[:-1] + ["ENDC"])
-    flat = copy.copy(program)
-    flat.subroutines = {}
-    flat.rungs = projected
-    validate_flat(flat)
+    # Per-context label resolution must precede any union used for accounting.
+    # The flat validator normally requires every FB config to be used. Check
+    # those uses across the complete shared application instead of each body.
+    used_timers, used_communications, expression_ids = set(), set(), set()
+    for number, flat in context_views(program):
+        if number is None:
+            flat.rungs = projected
+        validate_flat(flat, require_resource_use=False)
+        references = context_view(program, None if number is None else program.subroutines[number], resources=True)
+        used_timers.update(references.timers)
+        used_communications.update(references.communications)
+        from .edge_functions import parse as expression_edge
+        for raw in flat.rungs:
+            _, body = split_label(raw)
+            # Communication blocks have their own closed decoder.
+            if body[0].startswith("BLK ") and body[0].split(maxsplit=1)[1] in flat.communications:
+                continue
+            for op, _ in decode(body):
+                if expression_edge(op) is not None:
+                    if op in expression_ids:
+                        fail("duplicate expression edge instruction identity across SR contexts: " + op)
+                    expression_ids.add(op)
+    if used_timers != program.timers.keys():
+        fail("unused timer configuration is unsupported across SR contexts")
+    if used_communications != program.communications.keys():
+        fail("unused communication configuration is unsupported across SR contexts")
+    # Communication admission still requires unique update locations. Timer
+    # visits follow the G07 shared-identity policy across all contexts/sites.
+    communication_updates = set()
+    for _, flat in context_views(program):
+        for raw in flat.rungs:
+            _, body = split_label(raw)
+            key = body[0].split(maxsplit=1)[1] if body[0].startswith("BLK ") else None
+            if key in program.communications:
+                if key in communication_updates:
+                    fail("multiply updated communication block across SR contexts")
+                communication_updates.add(key)
+                continue
+    if communication_updates != program.communications.keys():
+        fail("unused communication configuration is unsupported across SR contexts")
+    declared_labels = set()
+    for _, view in context_views(program):
+        labels = set(destinations(view))
+        if labels & declared_labels:
+            fail("native label identities must be unique across the application")
+        declared_labels.update(labels)

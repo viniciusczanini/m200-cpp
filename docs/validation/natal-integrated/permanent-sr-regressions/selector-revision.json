@@ -1,0 +1,7 @@
+{
+  "cause": "Initial selector searched all SR rungs and matched an auxiliary NormalContact at row0, before the BLK %SC0 rung.",
+  "correction": "Select the rung whose actual IL contains BLK %SC0, then its NormalContact. Literal expected row1, source repro and frame/oracle values unchanged.",
+  "initial_module_sha256": "bf4fc64a94ce1cb417621fc0576ba811f6ace896960d020115bf0109d020714a",
+  "final_module_sha256": "82521a18c4c8fcd6534ef87fb3c5b4bb71608503de50dbaa1fdc39cadb5440dc",
+  "rerun_scope": "Only test_minimal_step_counter_SR_keeps_partial_CU_row_and_history; five passing methods not repeated."
+}

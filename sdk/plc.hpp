@@ -6,7 +6,9 @@ using i16 = short;
 using i32 = int;
 using f32 = float;
 #ifdef PLC_NATIVE
+class TimerState;
 namespace detail {
+inline bool boolean_system_external(int);
 inline bool inputs[24] = {};
 inline bool outputs[16] = {};
 inline bool memory[1024] = {};
@@ -14,14 +16,32 @@ inline unsigned long long now_ms = 0;
 inline bool first_scan = true;
 inline bool index_error = false;
 inline bool shift_carry=false, arithmetic_error=false;
+inline unsigned short float_status=0;
 inline int word_memory_limit = 0;
 inline int bit_memory_limit = 0;
 inline int timer_next_index = 0;
 inline bool previous_inputs[24]={}, previous_memory[1024]={};
 inline bool input_rise[24]={}, input_fall[24]={}, memory_rise[1024]={}, memory_fall[1024]={};
+inline void rtc_begin_scan();
+inline bool rtc_system(int);
 inline void begin_scan(){
+    rtc_begin_scan();
     for(int i=0;i<24;++i){input_rise[i]=inputs[i]&&!previous_inputs[i];input_fall[i]=previous_inputs[i]&&!inputs[i];previous_inputs[i]=inputs[i];}
     for(int i=0;i<1024;++i){memory_rise[i]=memory[i]&&!previous_memory[i];memory_fall[i]=previous_memory[i]&&!memory[i];previous_memory[i]=memory[i];}
+}
+// Host reference hooks only; no private PLC memory is allocated for this bank.
+enum class TimerEvent { stop, run, power_off, warm_restart, cold_restart };
+inline TimerState* timer_states[255] = {};
+inline bool timer_running=true, timer_powered=true;
+inline void timer_event(TimerEvent);
+inline void timer_advance_time(unsigned long long);
+inline bool master_cycle_started=false;
+inline void begin_master_cycle(){
+    // Explicit boundaries close the prior MAST interval. begin_scan and the
+    // standard harness retain their existing first_scan lifecycle contract.
+    if(master_cycle_started)first_scan=false;
+    master_cycle_started=true;
+    begin_scan();
 }
 inline bool timer_used[255] = {};
 inline int claim_timer(int index){if(index<0||index>=255||timer_used[index])__builtin_trap();timer_used[index]=true;if(timer_next_index<=index)timer_next_index=index+1;return index;}
@@ -40,10 +60,12 @@ inline bool falling(int n,bool value){if(n<0||n>=255)__builtin_trap();bool resul
 inline void write_m(int n,bool v) { detail::memory[n] = v; }
 struct BitMemory { explicit BitMemory(int count){if(count<1||count>1024)__builtin_trap();detail::bit_memory_limit=count;} };
 inline bool system(int n) {
+    if(n==50||n==51||n==52||n==59)return detail::rtc_system(n);
     if(n==13) return detail::first_scan;
     if(n==20) return detail::index_error;
     if(n==17) return detail::shift_carry;
     if(n==18) return detail::arithmetic_error;
+    if(n!=4&&n!=5&&n!=6&&n!=7)return detail::boolean_system_external(n);
     unsigned period = n==4?10:n==5?100:n==6?1000:60000;
     return ((detail::now_ms / (period/2)) & 1) != 0;
 }
@@ -55,6 +77,9 @@ inline bool clock_ms(unsigned period) {
 }
 namespace detail { inline int sr_depth=0; inline bool sr_used[64]={}; }
 class Subroutine {
+    // One native Free POU identity. Repeated calls execute this same body and
+    // its shared global FB instances, memory, images and clock synchronously.
+    // The controller forbids SR-to-SR nesting; do not inline or clone its state.
     int index; void (*body)(); const char* metadata_name=nullptr; int metadata_section=-1;
 public:
     Subroutine(int n,void (*f)()):index(n),body(f){if(n<0||n>=64||!f||detail::sr_used[n])__builtin_trap();detail::sr_used[n]=true;}
@@ -64,9 +89,9 @@ public:
     void call(bool enable){if(!enable)return;if(detail::sr_depth)__builtin_trap();++detail::sr_depth;body();--detail::sr_depth;}
 };
 class TimerState {
-    int kind, base=1, configured=0, active=0, current=0;
+    int kind, base=1, configured=0, initial=0, active=0, current=0;
     bool previous=false, result=false, retain=false, dynamic=false, completed=false;
-    long long started=-1;
+    long long started=-1, offline_since=-1;
     unsigned long long counted=0;
     void finish(){completed=true;result=kind==0;if(kind!=0)started=-1;}
     void begin(){
@@ -75,6 +100,8 @@ class TimerState {
         if(current>=active)finish();
     }
     void refresh(){
+        if(offline_since>=0)return;
+        if(started>=0&&detail::now_ms<(unsigned long long)started)__builtin_trap();
         if(started>=0&&!completed){
             unsigned long long ticks=(detail::now_ms-(unsigned long long)started)/(unsigned)base;
             if(ticks>counted){
@@ -94,21 +121,40 @@ public:
         bool found=false;
         for(int candidate:bases){if(candidate==1&&index>=6)continue;
             if(ms<=(unsigned)candidate*9999U&&ms%(unsigned)candidate==0){base=candidate;configured=(int)(ms/(unsigned)base);found=true;break;}}
-        if(!found)__builtin_trap();active=configured;
+        if(!found)__builtin_trap();initial=active=configured;
+        detail::timer_states[index]=this;
     }
     TimerState(int index,int tb,int ticks,int k,bool ret=false,bool dyn=false):kind(k),base(tb),configured(ticks),active(ticks),retain(ret),dynamic(dyn){
         detail::claim_timer(index);
         if((tb!=1&&tb!=10&&tb!=100&&tb!=1000&&tb!=60000)||(tb==1&&index>=6)||ticks<0||ticks>9999||(k==2&&ret))__builtin_trap();
+        initial=configured;detail::timer_states[index]=this;
+    }
+    TimerState(const TimerState&)=delete;
+    TimerState& operator=(const TimerState&)=delete;
+    void cold_restart(){
+        configured=active=initial;current=0;previous=result=completed=false;
+        started=offline_since=-1;counted=0;
+    }
+    void power_off(){if(offline_since<0){refresh();offline_since=(long long)detail::now_ms;}}
+    void warm_restart(){
+        if(offline_since>=0){
+            if(detail::now_ms<(unsigned long long)offline_since)__builtin_trap();
+            if(started>=0)started+=(long long)(detail::now_ms-(unsigned long long)offline_since);
+            offline_since=-1;
+        }
+        refresh();
     }
     i16 preset()const{return (i16)configured;}
     i16 value(){refresh();return (i16)current;}
     bool done(){refresh();return result;}
     void set_preset(i16 ticks){
-        if(ticks<0||ticks>9999)__builtin_trap();refresh();configured=ticks;
+        if(offline_since>=0||ticks<0||ticks>9999)__builtin_trap();refresh();configured=ticks;
         bool paused=kind==0?!previous:previous;
         if(retain&&dynamic&&started<0&&paused&&ticks<current)current=0;
     }
+    void execute(bool enabled){(void)update(enabled);}
     bool update(bool enabled){
+        if(offline_since>=0)__builtin_trap();
         refresh();
         if(kind==0){
             if(!enabled){if(!retain||completed)current=0;started=-1;result=false;completed=false;}
@@ -123,6 +169,26 @@ public:
 struct Ton:TimerState{explicit Ton(unsigned ms):TimerState(ms,0){} Ton(int i,int b,int p):TimerState(i,b,p,0){} Ton(int i,int b,int p,bool r,bool d):TimerState(i,b,p,0,r,d){}};
 struct Tof:TimerState{explicit Tof(unsigned ms):TimerState(ms,1){} Tof(int i,int b,int p):TimerState(i,b,p,1){} Tof(int i,int b,int p,bool r,bool d):TimerState(i,b,p,1,r,d){}};
 struct Pulse:TimerState{explicit Pulse(unsigned ms):TimerState(ms,2){} Pulse(int i,int b,int p):TimerState(i,b,p,2){} Pulse(int i,int b,int p,bool r,bool d):TimerState(i,b,p,2,r,d){}};
+namespace detail {
+inline void timer_advance_time(unsigned long long dt){
+    if(now_ms+dt<now_ms||now_ms+dt>0x7fffffffffffffffULL)__builtin_trap();
+    now_ms+=dt;
+    for(auto timer:timer_states)if(timer)(void)timer->value();
+}
+inline void timer_event(TimerEvent event){
+    if(event==TimerEvent::run&&!timer_powered)__builtin_trap();
+    for(auto timer:timer_states)if(timer){
+        (void)timer->value();
+        if(event==TimerEvent::power_off)timer->power_off();
+        else if(event==TimerEvent::warm_restart)timer->warm_restart();
+        else if(event==TimerEvent::cold_restart)timer->cold_restart();
+    }
+    if(event==TimerEvent::stop)timer_running=false;
+    else if(event==TimerEvent::run)timer_running=true;
+    else if(event==TimerEvent::power_off)timer_running=timer_powered=false;
+    else timer_running=timer_powered=true;
+}
+}
 class Clock {
     Ton turn_on, turn_off;
     bool value=false;
@@ -232,7 +298,7 @@ void clear_index_error();
 void clear_shift_carry();
 void clear_arithmetic_error();
 bool clock_ms(unsigned);
-struct Ton { explicit Ton(unsigned); Ton(int,int,int); Ton(int,int,int,bool,bool); bool update(bool); i16 preset()const; i16 value(); bool done(); void set_preset(i16); };
+struct Ton { explicit Ton(unsigned); Ton(int,int,int); Ton(int,int,int,bool,bool); bool update(bool); void execute(bool); i16 preset()const; i16 value(); bool done(); void set_preset(i16); };
 struct Counter { Counter(int,int); i16 preset()const; i16 value()const; bool empty()const; bool done()const; bool full()const; void set_preset(i16); void reset(bool); void set(bool); void count_up(bool); void count_down(bool); bool update(bool,bool,bool,bool); };
 class RegisterState {
 protected:
@@ -247,33 +313,39 @@ public:
 };
 struct Fifo:RegisterState{explicit Fifo(int);};
 struct Lifo:RegisterState{explicit Lifo(int);};
-struct Tof { explicit Tof(unsigned); Tof(int,int,int); Tof(int,int,int,bool,bool); bool update(bool); i16 preset()const; i16 value(); bool done(); void set_preset(i16); };
-struct Pulse { explicit Pulse(unsigned); Pulse(int,int,int); Pulse(int,int,int,bool,bool); bool update(bool); i16 preset()const; i16 value(); bool done(); void set_preset(i16); };
+struct Tof { explicit Tof(unsigned); Tof(int,int,int); Tof(int,int,int,bool,bool); bool update(bool); void execute(bool); i16 preset()const; i16 value(); bool done(); void set_preset(i16); };
+struct Pulse { explicit Pulse(unsigned); Pulse(int,int,int); Pulse(int,int,int,bool,bool); bool update(bool); void execute(bool); i16 preset()const; i16 value(); bool done(); void set_preset(i16); };
 struct Clock { explicit Clock(unsigned); bool update(bool); };
 struct RisingEdge { RisingEdge(); bool update(bool); };
 struct FallingEdge { FallingEdge(); bool update(bool); };
 #endif
+#include "plc_sequences.hpp"
 // Fixed-width numeric API. Explicit operations avoid C++ integer promotions.
 #ifdef PLC_NATIVE
 static_assert(sizeof(i16)==2 && sizeof(i32)==4 && sizeof(f32)==4,"PLC numeric width mismatch");
 namespace detail {
 inline unsigned short words[8000] = {};
+// Host oracle shadow only; consumes no controller memory.
+inline unsigned short indeterminate_words[8000] = {};
 inline i16 bits_i16(unsigned v){unsigned short raw=(unsigned short)v;i16 out;__builtin_memcpy(&out,&raw,2);return out;}
 inline i32 bits_i32(unsigned v){i32 out;__builtin_memcpy(&out,&v,4);return out;}
 inline i16 check_i16(long long v){if(v < -32768LL || v > 32767LL)arithmetic_error=true;return bits_i16((unsigned)v);}
 inline i32 check_i32(long long v){if(v < -2147483648LL || v > 2147483647LL)arithmetic_error=true;return bits_i32((unsigned)v);}
-inline f32 check_f32(f32 v){if(!__builtin_isfinite(v))__builtin_trap();return v;}
+inline void float_error(unsigned mask){arithmetic_error=true;float_status|=(unsigned short)mask;}
+inline f32 check_f32(f32 v){if(__builtin_isnan(v))float_error(1);else if(__builtin_isinf(v))float_error(8);return v;}
 inline void record_shift(unsigned long long value,int width,int distance,bool left){shift_carry=((value>>(left?width-distance:distance-1))&1U)!=0;}
 }
-inline i16 read_word(int n){return detail::bits_i16(detail::words[n]);}
-inline void write_word(int n,i16 v){detail::words[n]=(unsigned short)v;}
+inline i16 read_word(int n){if(detail::indeterminate_words[n])__builtin_trap();return detail::bits_i16(detail::words[n]);}
+inline void write_word(int n,i16 v){detail::indeterminate_words[n]=0;detail::words[n]=(unsigned short)v;}
 inline bool read_word_bit(int n,int bit){
     if(n<0||n>=(detail::word_memory_limit?detail::word_memory_limit:8000)||bit<0||bit>=16)__builtin_trap();
+    if(detail::indeterminate_words[n]&(1U<<bit))__builtin_trap();
     return (detail::words[n]&(1U<<bit))!=0;
 }
 inline void write_word_bit(int n,int bit,bool value){
     if(n<0||n>=(detail::word_memory_limit?detail::word_memory_limit:8000)||bit<0||bit>=16)__builtin_trap();
     unsigned mask=1U<<bit;
+    detail::indeterminate_words[n]&=(unsigned short)~mask;
     detail::words[n]=(unsigned short)((detail::words[n]&~mask)|(value?mask:0U));
 }
 namespace detail {
@@ -307,9 +379,9 @@ inline void copy_m_bits(int dest,int source,int count){
     unsigned snapshot=detail::read_bits(0,source,count,32);
     detail::write_bits(0,dest,count,32,snapshot);
 }
-inline i32 read_dword(int n){return detail::bits_i32((unsigned)detail::words[n]|((unsigned)detail::words[n+1]<<16));}
-inline void write_dword(int n,i32 v){unsigned raw;__builtin_memcpy(&raw,&v,4);detail::words[n]=(unsigned short)raw;detail::words[n+1]=(unsigned short)(raw>>16);}
-inline f32 read_real(int n){i32 raw=read_dword(n);f32 out;__builtin_memcpy(&out,&raw,4);return detail::check_f32(out);}
+inline i32 read_dword(int n){if(detail::indeterminate_words[n]||detail::indeterminate_words[n+1])__builtin_trap();return detail::bits_i32((unsigned)detail::words[n]|((unsigned)detail::words[n+1]<<16));}
+inline void write_dword(int n,i32 v){detail::indeterminate_words[n]=detail::indeterminate_words[n+1]=0;unsigned raw;__builtin_memcpy(&raw,&v,4);detail::words[n]=(unsigned short)raw;detail::words[n+1]=(unsigned short)(raw>>16);}
+inline f32 read_real(int n){i32 raw=read_dword(n);f32 out;__builtin_memcpy(&out,&raw,4);return out;}
 inline void write_real(int n,f32 v){i32 raw;__builtin_memcpy(&raw,&v,4);write_dword(n,raw);}
 struct WordMemory {
     explicit WordMemory(int count){if(count<1||count>8000)__builtin_trap();detail::word_memory_limit=count;}
@@ -352,8 +424,8 @@ inline i32 sqrt_i32(i32 a){if(a<0){detail::arithmetic_error=true;__builtin_trap(
 inline f32 add_f32(f32 a, f32 b){return detail::check_f32(a+b);}
 inline f32 sub_f32(f32 a, f32 b){return detail::check_f32(a-b);}
 inline f32 mul_f32(f32 a, f32 b){return detail::check_f32(a*b);}
-inline f32 div_f32(f32 a, f32 b){if(b==0)__builtin_trap();return detail::check_f32(a/b);}
-inline f32 sqrt_f32(f32 a){if(a<0)__builtin_trap();return detail::check_f32(__builtin_sqrtf(a));}
+inline f32 div_f32(f32 a, f32 b){if(b==0){f32 v=a/b;detail::float_error(__builtin_isnan(v)?1:4);return v;}return detail::check_f32(a/b);}
+inline f32 sqrt_f32(f32 a){return detail::check_f32(__builtin_sqrtf(a));}
 inline i16 rem_i16(i16 a, i16 b){if(b==0){detail::arithmetic_error=true;__builtin_trap();}detail::check_i16((long long)a/(long long)b);return detail::check_i16((long long)a%(long long)b);}
 inline i16 shl_i16(i16 a, int b){if(b<1||b>16)__builtin_trap();unsigned long long u=(unsigned)a&65535U;detail::record_shift(u,16,b,true);return detail::bits_i16((unsigned)(u<<b));}
 inline i16 shr_i16(i16 a, int b){if(b<1||b>16)__builtin_trap();unsigned long long u=(unsigned)a&65535U;detail::record_shift(u,16,b,false);return detail::bits_i16((unsigned)(u>>b));}
@@ -371,19 +443,19 @@ inline i16 not_i16(i16 a){return detail::bits_i16(~a);}
 inline i32 abs_i32(i32 a){return detail::check_i32(a<0?-(long long)a:(long long)a);}
 inline f32 abs_f32(f32 a){return detail::check_f32(__builtin_fabsf(a));}
 inline f32 trunc_f32(f32 a){return detail::check_f32(__builtin_truncf(a));}
-inline f32 log_f32(f32 a){return detail::check_f32(__builtin_log10f(a));}
-inline f32 ln_f32(f32 a){return detail::check_f32(__builtin_logf(a));}
+inline f32 log_f32(f32 a){if(a==0){detail::float_error(4);return -__builtin_inff();}return detail::check_f32(__builtin_log10f(a));}
+inline f32 ln_f32(f32 a){if(a==0){detail::float_error(4);return -__builtin_inff();}return detail::check_f32(__builtin_logf(a));}
 inline f32 exp_f32(f32 a){return detail::check_f32(__builtin_expf(a));}
-inline f32 sin_f32(f32 a){if(a < -12867.963509103793 || a > 12867.963509103793)__builtin_trap();return detail::check_f32(__builtin_sinf(a));}
-inline f32 cos_f32(f32 a){if(a < -12867.963509103793 || a > 12867.963509103793)__builtin_trap();return detail::check_f32(__builtin_cosf(a));}
-inline f32 tan_f32(f32 a){if(a < -12867.963509103793 || a > 12867.963509103793)__builtin_trap();return detail::check_f32(__builtin_tanf(a));}
+inline f32 sin_f32(f32 a){if(a < -12867.963509103793 || a > 12867.963509103793){detail::float_error(1);return __builtin_nanf("");}return detail::check_f32(__builtin_sinf(a));}
+inline f32 cos_f32(f32 a){if(a < -12867.963509103793 || a > 12867.963509103793){detail::float_error(1);return __builtin_nanf("");}return detail::check_f32(__builtin_cosf(a));}
+inline f32 tan_f32(f32 a){if(a < -12867.963509103793 || a > 12867.963509103793){detail::float_error(1);return __builtin_nanf("");}return detail::check_f32(__builtin_tanf(a));}
 inline f32 asin_f32(f32 a){return detail::check_f32(__builtin_asinf(a));}
 inline f32 acos_f32(f32 a){return detail::check_f32(__builtin_acosf(a));}
 inline f32 atan_f32(f32 a){return detail::check_f32(__builtin_atanf(a));}
 inline f32 int_to_real(i16 a){return (f32)a;}
 inline f32 dint_to_real(i32 a){return (f32)a;}
-inline i16 real_to_int(f32 a){double v=__builtin_rint((double)a);if(!__builtin_isfinite(v)||v<-32768.0||v>32767.0)__builtin_trap();return (i16)v;}
-inline i32 real_to_dint(f32 a){double v=__builtin_rint((double)a);if(!__builtin_isfinite(v)||v<-2147483648.0||v>2147483647.0)__builtin_trap();return (i32)v;}
+inline i16 real_to_int(f32 a){double v=__builtin_rint((double)a);if(!__builtin_isfinite(v)||v<-32768.0||v>32767.0){detail::arithmetic_error=true;__builtin_trap();}return (i16)v;}
+inline i32 real_to_dint(f32 a){double v=__builtin_rint((double)a);if(!__builtin_isfinite(v)||v<-2147483648.0||v>2147483647.0){detail::arithmetic_error=true;__builtin_trap();}return (i32)v;}
 inline i16 low_word(i32 a){return detail::bits_i16((unsigned)a);}
 inline i16 high_word(i32 a){return detail::bits_i16((unsigned)a>>16);}
 namespace detail {
@@ -478,8 +550,14 @@ i32 dint_to_bcd(i32);
 i32 concat_words(i16,i16);
 i32 int_to_dint(i16);
 #endif
+#ifdef PLC_NATIVE
+namespace detail { inline i16 rtc_read_word(int); inline void rtc_write_word(int,i16); }
+#endif
+#include "scalar_numeric.hpp"
 // Native Modbus function blocks. Ports/endpoints are configured in the template.
 enum class Link : int { Serial1=1, Ethernet=2 };
+// These property values are native WORDs; LINK uses 1=SL1,3=Ethernet.
+enum class CommProperty : int { Link=0, Id=1, Timeout=2, ObjType=3, FirstObj=4, Quantity=5, IndexData=6, FirstWriteObj=7, WriteQuantity=8, IndexDataOut=9, FirstReadObj=10, ReadQuantity=11, IndexDataIn=12 };
 enum class Object : int { HoldingWords=0, DiscreteInputs=1, Coils=2, InputWords=3, SingleCoil=4, SingleRegister=5 };
 #ifdef PLC_NATIVE
 namespace detail {
@@ -492,21 +570,92 @@ inline CommunicationResult (*communication_hook)(const CommunicationConfig&,int,
 class Communication {
     detail::CommunicationConfig config;
     int index;
+    int native_link;
+    detail::CommunicationConfig active_config{};
     detail::CommunicationResult state;
     bool initialized=false,old_execute=false,old_abort=false;
+    bool property_allowed(CommProperty field) const {
+        int f=(int)field;
+        if(f<0||f>12)return false;
+        if(f<=3)return true;
+        return config.kind==2?f>=7:f<=6;
+    }
+    bool parameters_valid() const {
+        if((config.link!=1&&config.link!=2)||config.timeout<0)return false;
+        int minimum=config.kind==1&&config.link==1?0:1;
+        if(config.id<minimum||config.id>(config.link==1?247:16))return false;
+        if(config.first<0||config.first>65535||config.index<0||config.index>7999)return false;
+        int count=config.quantity,words=count;
+        if(config.kind==0) {
+            if(config.obj<0||config.obj>3)return false;
+            int maximum=(config.obj==1||config.obj==2)?2000:125;
+            if(count<1||count>maximum)return false;
+            if(config.obj==1||config.obj==2)words=(count+15)/16;
+        } else if(config.kind==1) {
+            if(config.obj==4||config.obj==5){count=1;words=1;}
+            else {
+                if(config.obj!=0&&config.obj!=2)return false;
+                if(count<1||count>(config.obj==2?1968:123))return false;
+                if(config.obj==2)words=(count+15)/16;
+            }
+        } else {
+            if(config.obj!=0||count<1||count>121)return false;
+            if(config.first_read<0||config.first_read>65535||config.read_quantity<1||config.read_quantity>125||config.first_read+config.read_quantity>65536)return false;
+            if(config.index_in<0||config.index_in+config.read_quantity>8000)return false;
+        }
+        return config.first+count<=65536&&config.index+words<=8000;
+    }
 public:
     Communication(int kind,Link link,int id,int timeout,Object obj,int first,int qty,int data,int read_first=0,int read_qty=1,int in_data=0,int native_index=-1)
-      :config{kind,(int)link,id,timeout,(int)obj,first,qty,data,read_first,read_qty,in_data},index(native_index<0?detail::communication_counts[kind]++:native_index){if(index<0||index>=32)__builtin_trap();}
+      :config{kind,(int)link,id,timeout,(int)obj,first,qty,data,read_first,read_qty,in_data},index(native_index<0?detail::communication_counts[kind]++:native_index),native_link(link==Link::Serial1?1:3){if(index<0||index>=32)__builtin_trap();}
     bool update(bool execute,bool abort) {
-        if(detail::communication_hook) {
-            state=detail::communication_hook(config,index,execute,abort,detail::now_ms,detail::words);
+        bool edge=initialized && execute && !old_execute;
+        bool cancel=initialized && abort && !old_abort;
+        if(!state.busy&&edge&&!cancel&&!parameters_valid()) {
+            state={};state.error=true;state.comm_error=6;
+        } else if(detail::communication_hook) {
+            // The adapter sees the captured configuration while Busy, even if
+            // the program writes properties before the next invocation.
+            if(!state.busy) active_config=config;
+            state=detail::communication_hook(active_config,index,execute,abort,detail::now_ms,detail::words);
         } else {
-            bool edge=initialized && execute && !old_execute;
-            bool cancel=initialized && abort && !old_abort;
             if(!execute) state={};
             if(edge&&!cancel){state={};state.error=true;state.comm_error=255;state.oper_error=15;}
         }
         initialized=true;old_execute=execute;old_abort=abort;return state.done;
+    }
+    i16 property(CommProperty field) const {
+        if(!property_allowed(field))__builtin_trap();
+        int value=0;
+        switch(field) {
+        case CommProperty::Link:value=native_link;break;
+        case CommProperty::Id:value=config.id;break;
+        case CommProperty::Timeout:value=config.timeout;break;
+        case CommProperty::ObjType:value=config.obj;break;
+        case CommProperty::FirstObj:case CommProperty::FirstWriteObj:value=config.first;break;
+        case CommProperty::Quantity:case CommProperty::WriteQuantity:value=config.quantity;break;
+        case CommProperty::IndexData:case CommProperty::IndexDataOut:value=config.index;break;
+        case CommProperty::FirstReadObj:value=config.first_read;break;
+        case CommProperty::ReadQuantity:value=config.read_quantity;break;
+        case CommProperty::IndexDataIn:value=config.index_in;break;
+        }
+        return (i16)(unsigned short)value;
+    }
+    void set_property(CommProperty field,i16 pattern) {
+        if(!property_allowed(field))__builtin_trap();
+        int value=(unsigned short)pattern;
+        switch(field) {
+        case CommProperty::Link:native_link=value;config.link=value==1?1:value==3?2:-1;break;
+        case CommProperty::Id:config.id=value;break;
+        case CommProperty::Timeout:config.timeout=value;break;
+        case CommProperty::ObjType:config.obj=value;break;
+        case CommProperty::FirstObj:case CommProperty::FirstWriteObj:config.first=value;break;
+        case CommProperty::Quantity:case CommProperty::WriteQuantity:config.quantity=value;break;
+        case CommProperty::IndexData:case CommProperty::IndexDataOut:config.index=value;break;
+        case CommProperty::FirstReadObj:config.first_read=value;break;
+        case CommProperty::ReadQuantity:config.read_quantity=value;break;
+        case CommProperty::IndexDataIn:config.index_in=value;break;
+        }
     }
     bool done() const{return state.done;}
     bool busy() const{return state.busy;}
@@ -520,9 +669,200 @@ struct WriteVar:Communication { WriteVar(Link l,int id,int t,Object o,int f,int 
 struct WriteReadVar:Communication { WriteReadVar(Link l,int id,int t,int f,int q,int d,int rf,int rq,int rd):Communication(2,l,id,t,Object::HoldingWords,f,q,d,rf,rq,rd){} WriteReadVar(int n,Link l,int id,int t,int f,int q,int d,int rf,int rq,int rd):Communication(2,l,id,t,Object::HoldingWords,f,q,d,rf,rq,rd,n){} };
 #else
 struct Subroutine { Subroutine(int,void(*)()); Subroutine(int,void(*)(),const char*,int); void call(bool); };
-struct ReadVar { ReadVar(Link,int,int,Object,int,int,int); ReadVar(int,Link,int,int,Object,int,int,int); bool update(bool,bool); bool done()const; bool busy()const; bool aborted()const; bool error()const; i16 comm_error()const; i32 oper_error()const; };
-struct WriteVar { WriteVar(Link,int,int,Object,int,int,int); WriteVar(int,Link,int,int,Object,int,int,int); bool update(bool,bool); bool done()const; bool busy()const; bool aborted()const; bool error()const; i16 comm_error()const; i32 oper_error()const; };
-struct WriteReadVar { WriteReadVar(Link,int,int,int,int,int,int,int,int); WriteReadVar(int,Link,int,int,int,int,int,int,int,int); bool update(bool,bool); bool done()const; bool busy()const; bool aborted()const; bool error()const; i16 comm_error()const; i32 oper_error()const; };
+struct ReadVar { ReadVar(Link,int,int,Object,int,int,int); ReadVar(int,Link,int,int,Object,int,int,int); bool update(bool,bool); bool done()const; bool busy()const; bool aborted()const; bool error()const; i16 property(CommProperty)const; void set_property(CommProperty,i16); i16 comm_error()const; i32 oper_error()const; };
+struct WriteVar { WriteVar(Link,int,int,Object,int,int,int); WriteVar(int,Link,int,int,Object,int,int,int); bool update(bool,bool); bool done()const; bool busy()const; bool aborted()const; bool error()const; i16 property(CommProperty)const; void set_property(CommProperty,i16); i16 comm_error()const; i32 oper_error()const; };
+struct WriteReadVar { WriteReadVar(Link,int,int,int,int,int,int,int,int); WriteReadVar(int,Link,int,int,int,int,int,int,int,int); bool update(bool,bool); bool done()const; bool busy()const; bool aborted()const; bool error()const; i16 property(CommProperty)const; void set_property(CommProperty,i16); i16 comm_error()const; i32 oper_error()const; };
+#endif
+
+// G09 RTC/calendar API. Host clock defaults invalid and never consults wall time.
+// RTC_EXEC is internal IR only; native RTC block/graph binding is still gated.
+#ifdef PLC_NATIVE
+class Rtc;
+namespace detail {
+inline Rtc* rtc_instances[2]={};
+struct Calendar { int day=1,month=1,year=2000,hours=0,minutes=0,seconds=0; };
+inline Calendar rtc_calendar;
+inline bool rtc_valid=false,rtc_available=true,rtc_gate=false,rtc_write_error=false,rtc_adjust_enabled=false;
+inline unsigned short rtc_image[5]={},rtc_adjust_mask=0,rtc_correction=0,rtc_enable_mask=65535,rtc_last_stop[4]={},rtc_stop_cause=0;
+inline unsigned long long rtc_last_ms=0,rtc_sub_ms=0,rtc_absolute_origin=0;
+inline long long rtc_absolute_offset=0;
+inline unsigned long long rtc_ticks(){return(((now_ms-rtc_absolute_origin)/100)+rtc_absolute_offset)&2147483647ULL;}
+inline int rtc_last_correction_day=-1;
+inline bool rtc_used[2]={};
+struct ScheduleData { bool used=false;int bank=0,output=0;int values[9]={};int configured[9]={}; };
+inline ScheduleData schedules[16];
+inline bool calendar_leap(int y){return y%4==0&&(y%100!=0||y%400==0);}
+inline int calendar_month_days(int y,int m){const int lengths[]={31,28,31,30,31,30,31,31,30,31,30,31};return lengths[m-1]+(m==2&&calendar_leap(y));}
+inline int calendar_ordinal(const Calendar& c){int y=c.year-1;int days=365*y+y/4-y/100+y/400;for(int m=1;m<c.month;++m)days+=calendar_month_days(c.year,m);return days+c.day-1;}
+inline int calendar_weekday(const Calendar& c){return calendar_ordinal(c)%7+1;}
+inline int calendar_error(const Calendar& c){
+    if(c.year<2000)return 1;if(c.month<1||c.month>12)return 2;if(c.day<1||c.day>31)return 3;
+    if(c.hours<0||c.hours>23)return 5;if(c.minutes<0||c.minutes>59)return 6;if(c.seconds<0||c.seconds>59)return 7;
+    if(c.year>9999)__builtin_trap(); // explicit host representation gap, not vendor year rejection.
+    if(c.day>calendar_month_days(c.year,c.month))return 8;return 0;
+}
+inline Calendar calendar_from_ordinal(int day){
+    if(day<0||day>3652058)__builtin_trap();
+    int lo=1,hi=10000;
+    while(lo+1<hi){int mid=lo+(hi-lo)/2;Calendar c;c.year=mid;if(calendar_ordinal(c)<=day)lo=mid;else hi=mid;}
+    Calendar c;c.year=lo;int left=day-calendar_ordinal(c);c.month=1;
+    while(left>=calendar_month_days(c.year,c.month)){left-=calendar_month_days(c.year,c.month);++c.month;}
+    c.day=left+1;return c;
+}
+inline void calendar_add_seconds(Calendar& c,long long seconds){
+    long long time=(long long)c.hours*3600+c.minutes*60+c.seconds+seconds;
+    long long days=time/86400;long long rem=time%86400;if(rem<0){rem+=86400;--days;}
+    long long ordinal=(long long)calendar_ordinal(c)+days;
+    if(ordinal<0||ordinal>3652058)__builtin_trap();
+    Calendar result=calendar_from_ordinal((int)ordinal);result.hours=(int)(rem/3600);result.minutes=(int)(rem/60%60);result.seconds=(int)(rem%60);c=result;
+}
+inline unsigned short rtc_bcd(int value){return (unsigned short)((value/1000%10<<12)|(value/100%10<<8)|(value/10%10<<4)|(value%10));}
+inline int rtc_unbcd(unsigned short value){int out=0,mul=1;for(int n=0;n<4;++n){int d=value&15;if(d>9)return -1;out+=d*mul;mul*=10;value>>=4;}return out;}
+inline void rtc_refresh(){
+    if(rtc_gate)return;const Calendar& c=rtc_calendar;
+    rtc_image[0]=rtc_bcd(calendar_weekday(c));rtc_image[1]=rtc_bcd(c.seconds);
+    rtc_image[2]=rtc_bcd(c.hours*100+c.minutes);rtc_image[3]=rtc_bcd(c.month*100+c.day);rtc_image[4]=rtc_bcd(c.year);
+}
+inline int rtc_commit(Calendar c){int error=calendar_error(c);if(error)return error;if(!rtc_available)return 9;rtc_calendar=c;rtc_valid=true;rtc_sub_ms=0;rtc_refresh();return 0;}
+inline void rtc_apply_adjust(){
+    if(rtc_gate||!rtc_valid||!rtc_available)return;
+    unsigned mask=rtc_adjust_mask;Calendar c=rtc_calendar;const int units[]={1,60,3600,86400};long long delta=0;
+    for(int i=1;i<=4;++i)delta+=((int)((mask>>i)&1)-(int)((mask>>(i+8))&1))*units[i-1];
+    calendar_add_seconds(c,delta);
+    int months=(int)((mask>>5)&1)-(int)((mask>>13)&1),years=(int)((mask>>6)&1)-(int)((mask>>14)&1);
+    int month=c.year*12+c.month-1+months+12*years;
+    c.year=month/12;c.month=month%12+1;if(c.year<2000)return;if(c.year>9999)__builtin_trap();
+    int last=calendar_month_days(c.year,c.month);if(c.day>last)c.day=last;rtc_calendar=c;rtc_refresh();
+}
+inline bool rtc_system(int n){if(n==50)return rtc_gate;if(n==51)return !rtc_valid||!rtc_available;if(n==52)return rtc_write_error;if(n==59)return rtc_adjust_enabled;__builtin_trap();}
+inline void rtc_set_system(int n,bool value){
+    if(n==50){
+        if(rtc_gate&&!value){int s=rtc_unbcd(rtc_image[1]),hm=rtc_unbcd(rtc_image[2]),md=rtc_unbcd(rtc_image[3]),y=rtc_unbcd(rtc_image[4]);
+            Calendar c;c.seconds=s;c.hours=hm/100;c.minutes=hm%100;c.month=md/100;c.day=md%100;c.year=y;
+            rtc_write_error=s<0||hm<0||md<0||y<0||rtc_commit(c)!=0;}
+        rtc_gate=value;rtc_refresh();return;
+    }
+    if(n==51){rtc_valid=!value;return;}
+    if(n==59){if(value&&!rtc_adjust_enabled)rtc_apply_adjust();rtc_adjust_enabled=value;return;}
+    __builtin_trap();
+}
+inline i16 rtc_read_word(int n){
+    unsigned long long ticks=rtc_ticks();
+    if(n==18)return(i16)(ticks%32768);if(n==19)return(i16)(ticks/32768);
+    if(n>=49&&n<=53)return(i16)rtc_image[n-49];if(n>=54&&n<=57)return(i16)rtc_last_stop[n-54];
+    if(n==58)return(i16)rtc_stop_cause;if(n==59)return(i16)rtc_adjust_mask;if(n==60)return(i16)rtc_correction;
+    if(n==114)return(i16)rtc_enable_mask;if(n==118)return(i16)65535;__builtin_trap();
+}
+inline void rtc_write_word(int n,i16 value){unsigned short raw=(unsigned short)value;
+    if(n==18||n==19){unsigned long long ticks=rtc_ticks(),lo=ticks%32768,hi=ticks/32768;if(n==18){if(raw>32767)__builtin_trap();lo=raw;}else hi=raw;rtc_absolute_offset=(long long)(hi*32768+lo)-(long long)((now_ms-rtc_absolute_origin)/100);return;}
+    if(n>=50&&n<=53){if(!rtc_gate)__builtin_trap();rtc_image[n-49]=raw;return;}
+    if(n==59){rtc_adjust_mask=raw;return;}if(n==60){if((raw&~255)||(raw&127)>30)__builtin_trap();rtc_correction=raw;return;}
+    if(n==114){rtc_enable_mask=raw;return;}__builtin_trap();
+}
+inline bool schedule_active(const ScheduleData& s){
+    const int* v=s.values;
+    for(int i=0;i<2;++i){int k=i*4;if(v[k]<1||v[k]>31||v[k+1]<1||v[k+1]>12||v[k+2]<0||v[k+2]>23||v[k+3]<0||v[k+3]>59)return false;if(v[k]>calendar_month_days(2012,v[k+1]))return false;}
+    if(v[8]<0||v[8]>127)return false;
+    int date=rtc_calendar.month*32+rtc_calendar.day,start=v[1]*32+v[0],end=v[5]*32+v[4];
+    int minute=rtc_calendar.hours*60+rtc_calendar.minutes,sh=v[2]*60+v[3],eh=v[6]*60+v[7];
+    bool date_ok=start<=end?(start<=date&&date<=end):(date>=start||date<=end);
+    bool time_ok=sh<=eh?(sh<=minute&&minute<=eh):(minute>=sh||minute<=eh);
+    return date_ok&&time_ok&&(v[8]&(1<<(calendar_weekday(rtc_calendar)-1)));
+}
+inline void rtc_begin_scan(){
+    unsigned long long delta=now_ms-rtc_last_ms;rtc_last_ms=now_ms;
+    if(rtc_available){
+        Calendar old=rtc_calendar;rtc_sub_ms+=delta;calendar_add_seconds(rtc_calendar,(long long)(rtc_sub_ms/1000));rtc_sub_ms%=1000;
+        int old_day=calendar_ordinal(old),new_day=calendar_ordinal(rtc_calendar);
+        int second=rtc_calendar.hours*3600+rtc_calendar.minutes*60+rtc_calendar.seconds;
+        int sunday=new_day-(calendar_weekday(rtc_calendar)%7);
+        long long old_time=(long long)old_day*86400+old.hours*3600+old.minutes*60+old.seconds;
+        long long new_time=(long long)new_day*86400+second,point=(long long)sunday*86400+30;
+        if(rtc_valid&&old_time<point&&point<=new_time&&rtc_last_correction_day!=sunday){rtc_last_correction_day=sunday;int amount=rtc_correction&127;calendar_add_seconds(rtc_calendar,(rtc_correction&128)?-amount:amount);}
+    }
+    rtc_refresh();
+    // Fixed16 native blocks; clear each assigned output then OR all contributors.
+    for(int i=0;i<16;++i)if(schedules[i].used){auto& s=schedules[i];(s.bank==0?memory[s.output]:outputs[s.output])=false;}
+    if(rtc_valid&&rtc_available)for(int i=0;i<16;++i)if(schedules[i].used&&(rtc_enable_mask&(1<<i))&&schedule_active(schedules[i])){auto& s=schedules[i];(s.bank==0?memory[s.output]:outputs[s.output])=true;}
+}
+// Explicit host harness hooks. Frontend does not admit these as PLC source APIs.
+inline void rtc_seed(Calendar value,bool valid=true,bool available=true){if(calendar_error(value))__builtin_trap();rtc_calendar=value;rtc_valid=valid;rtc_available=available;rtc_sub_ms=0;rtc_last_ms=now_ms;rtc_refresh();}
+inline void rtc_stop(unsigned short cause=1){rtc_refresh();for(int i=0;i<4;++i)rtc_last_stop[i]=rtc_image[i+1];rtc_stop_cause=cause;}
+}
+inline i16 read_system_word(int);
+inline void write_system_word(int,i16);
+inline void write_system(int n,bool value){detail::rtc_set_system(n,value);}
+inline void rtc_snapshot(int first_word){if(first_word<0||first_word+5>(detail::word_memory_limit?detail::word_memory_limit:8000))__builtin_trap();for(int i=0;i<5;++i)write_word(first_word+i,read_system_word(49+i));}
+inline i32 absolute_counter_100ms(){return(i32)detail::rtc_ticks();}
+class Rtc {
+    detail::Calendar value,configured;bool q=false,err=false,previous_write=false;int weekday=0,error_code=0;
+public:
+    Rtc(int n,int day,int month,int year,int hours,int minutes,int seconds):value{day,month,year,hours,minutes,seconds},configured(value){
+        if(n<0||n>=2||detail::rtc_used[n]||day<1||day>31||month<1||month>12||year<2000||year>32767||hours<0||hours>23||minutes<0||minutes>59||seconds<0||seconds>59)__builtin_trap();detail::rtc_used[n]=true;detail::rtc_instances[n]=this;
+    }
+    void reset(bool cold){if(cold)value=configured;q=err=false;weekday=error_code=0;previous_write=false;}
+    void update(bool enable,bool read,bool write){
+        bool edge=write&&!previous_write;previous_write=enable?write:false;
+        if(!enable){q=err=false;weekday=error_code=0;return;}if(!read&&!write){q=err=false;return;}
+        int e=read&&write?256:detail::rtc_gate?257:!detail::rtc_available?9:0;
+        if(!e&&read){if(!detail::rtc_valid)e=9;else value=detail::rtc_calendar;}
+        else if(!e&&write){if(!edge)return;e=detail::rtc_commit(value);}
+        q=e==0;err=e!=0;error_code=e;if(!e)weekday=detail::calendar_weekday(detail::rtc_calendar);
+    }
+    bool done()const{return q;}bool error()const{return err;}i16 day_of_week()const{return(i16)weekday;}i16 error_id()const{return(i16)error_code;}
+    i16 day()const{return(i16)value.day;}void set_day(i16 v){value.day=v;}
+    i16 month()const{return(i16)value.month;}void set_month(i16 v){value.month=v;}
+    i16 year()const{return(i16)value.year;}void set_year(i16 v){value.year=v;}
+    i16 hours()const{return(i16)value.hours;}void set_hours(i16 v){value.hours=v;}
+    i16 minutes()const{return(i16)value.minutes;}void set_minutes(i16 v){value.minutes=v;}
+    i16 seconds()const{return(i16)value.seconds;}void set_seconds(i16 v){value.seconds=v;}
+};
+namespace detail {
+inline void rtc_reset(bool cold){
+    if(cold){rtc_enable_mask=65535;rtc_absolute_origin=now_ms;rtc_absolute_offset=0;for(int i=0;i<16;++i)if(schedules[i].used)for(int j=0;j<9;++j)schedules[i].values[j]=schedules[i].configured[j];for(int i=0;i<2;++i)if(rtc_instances[i])rtc_instances[i]->reset(true);}
+    rtc_gate=false;rtc_adjust_enabled=false;rtc_adjust_mask=0;rtc_write_error=false;rtc_refresh();
+}
+}
+class Schedule {
+    int index;
+public:
+    Schedule(int n,int bank,int output,int sd,int sm,int sh,int sn,int ed,int em,int eh,int en,int dow):index(n){
+        if(n<0||n>=16||detail::schedules[n].used||bank<0||bank>1||output<0||output>=(bank==0?1024:16))__builtin_trap();
+        auto& s=detail::schedules[n];s.used=true;s.bank=bank;s.output=output;const int values[]={sd,sm,sh,sn,ed,em,eh,en,dow};
+        for(int i=0;i<9;++i)s.values[i]=s.configured[i]=values[i];
+        for(int k=0;k<8;k+=4){if(values[k+1]<1||values[k+1]>12||values[k]<1||values[k]>detail::calendar_month_days(2012,values[k+1])||values[k+2]<0||values[k+2]>23||values[k+3]<0||values[k+3]>59)__builtin_trap();}if(dow<0||dow>127)__builtin_trap();
+    }
+    i16 start_day()const{return(i16)detail::schedules[index].values[0];}void set_start_day(i16 v){detail::schedules[index].values[0]=v;}
+    i16 start_month()const{return(i16)detail::schedules[index].values[1];}void set_start_month(i16 v){detail::schedules[index].values[1]=v;}
+    i16 start_hour()const{return(i16)detail::schedules[index].values[2];}void set_start_hour(i16 v){detail::schedules[index].values[2]=v;}
+    i16 start_min()const{return(i16)detail::schedules[index].values[3];}void set_start_min(i16 v){detail::schedules[index].values[3]=v;}
+    i16 end_day()const{return(i16)detail::schedules[index].values[4];}void set_end_day(i16 v){detail::schedules[index].values[4]=v;}
+    i16 end_month()const{return(i16)detail::schedules[index].values[5];}void set_end_month(i16 v){detail::schedules[index].values[5]=v;}
+    i16 end_hour()const{return(i16)detail::schedules[index].values[6];}void set_end_hour(i16 v){detail::schedules[index].values[6]=v;}
+    i16 end_min()const{return(i16)detail::schedules[index].values[7];}void set_end_min(i16 v){detail::schedules[index].values[7]=v;}
+    i16 dow()const{return(i16)detail::schedules[index].values[8];}void set_dow(i16 v){detail::schedules[index].values[8]=v;}
+};
+#else
+i16 read_system_word(int);
+void rtc_snapshot(int);
+i32 absolute_counter_100ms();
+void write_system_word(int,i16);
+void write_system(int,bool);
+struct Rtc {
+    Rtc(int,int,int,int,int,int,int);void update(bool,bool,bool);
+    bool done()const;bool error()const;i16 day_of_week()const;i16 error_id()const;
+    i16 day()const;void set_day(i16);i16 month()const;void set_month(i16);i16 year()const;void set_year(i16);
+    i16 hours()const;void set_hours(i16);i16 minutes()const;void set_minutes(i16);i16 seconds()const;void set_seconds(i16);
+};
+struct Schedule {
+    Schedule(int,int,int,int,int,int,int,int,int,int,int,int);
+    i16 start_day()const;void set_start_day(i16);i16 start_month()const;void set_start_month(i16);
+    i16 start_hour()const;void set_start_hour(i16);i16 start_min()const;void set_start_min(i16);
+    i16 end_day()const;void set_end_day(i16);i16 end_month()const;void set_end_month(i16);
+    i16 end_hour()const;void set_end_hour(i16);i16 end_min()const;void set_end_min(i16);i16 dow()const;void set_dow(i16);
+};
 #endif
 
 }
+
+#include "plc_boolean.hpp"

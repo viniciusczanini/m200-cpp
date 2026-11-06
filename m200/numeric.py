@@ -3,7 +3,7 @@
 Sources: EIO0000003289.04 pp49-60,67-72; EIO0000002019.06 pp322-323.
 Integer context models sticky S18 and S17/last-bit with signed modular results.
 Exact overflow bits beyond the G55 ADDword example remain a local policy.
-Unmodeled arithmetic domains stop simulation rather than inventing a result.
+Unspecified integer results propagate until overwritten; observing one is an error.
 """
 
 import math
@@ -13,8 +13,12 @@ from dataclasses import dataclass
 
 from .model import fail, CompileError
 from .arithmetic import INTEGER_STEMS
+from .scalar_constants import PATTERN as CONSTANT_PATTERN, parse as constant_reference
+from .scalar_numeric import (OPS as SCALAR_OPS, SYSTEM_WORD_PATTERN, system_word,
+    Indeterminate, known, real32, Real32, evaluate_float)
 from .conversions import NUMERIC_CONVERSIONS, evaluate_conversion, needs_word_snapshot
 from .communication import status_reference, NUM_FIELDS, NUM_REFERENCE, cpp_name
+from .communication_properties import property_reference, ENUMS, has_buffer_writes
 from .indexed import WORD_PATTERN, is_indexed, parse as parse_indexed
 from .bits import STRING_PATTERN, is_string, bit_string
 from .timers import (
@@ -35,15 +39,26 @@ from .registers import (
     GETTERS as REGISTER_GETTERS,
 )
 
+from .rtc import NUMERIC_PATTERN as RTC_PATTERN, numeric_reference as rtc_reference, cpp_read as rtc_cpp
+
+from .sequences import NUMERIC_PATTERN as DRUM_PATTERN, reference as sequence_reference
+
 VALUE_PATTERN = (
     "(?:"
     + WORD_PATTERN
+    + "|" + SYSTEM_WORD_PATTERN
+    + "|" + CONSTANT_PATTERN
     + "|"
     + TIMER_PATTERN
     + "|"
     + COUNTER_PATTERN
     + "|"
     + REGISTER_PATTERN
+    + "|" + NUM_REFERENCE
+    + "|"
+    + RTC_PATTERN
+    + "|"
+    + DRUM_PATTERN
     + ")"
 )
 
@@ -88,6 +103,7 @@ for name, dest, src, token in [
 ]:
     OPS[name] = (dest, (src,), token, "function")
 OPS.update(NUMERIC_CONVERSIONS)
+OPS.update(SCALAR_OPS)
 
 
 @dataclass(frozen=True)
@@ -167,6 +183,24 @@ def word_address(text):
 
 
 def reference_address(text, writable=False):
+    constant = constant_reference(text, writable)
+    if constant:
+        return constant[:2]
+    if system_word(text, writable):
+        return "i16", 17
+    status = status_reference(text)
+    if status:
+        if status[1] not in NUM_FIELDS or (writable and not property_reference(text, True)):
+            fail("communication output is read-only or nonnumeric: " + text)
+        return NUM_FIELDS[status[1]][0], 0
+    rtc = rtc_reference(text, writable)
+    if rtc:
+        return "i16", rtc[1]
+    sequence = sequence_reference(text, writable)
+    if sequence:
+        if sequence[0] != "DR" or sequence[2] != "S":
+            fail("native sequence property is not numeric: " + text)
+        return "i16", sequence[1]
     register = register_reference(text, writable)
     if register:
         if register[1] not in ("I", "O"):
@@ -199,6 +233,17 @@ def operand(text, kind):
         if actual != kind:
             fail("mixed numeric IL types")
         return Number(kind, text)
+    based = re.fullmatch(r"(2|8|16)#([0-9A-Fa-f]+)", text)
+    if based and kind != "f32":
+        base, digits = int(based[1]), based[2]
+        try:
+            raw = int(digits, base)
+        except ValueError:
+            fail("invalid based numeric literal: " + text)
+        width = 16 if kind == "i16" else 32
+        if raw >= 1 << width:
+            fail("based numeric literal exceeds operand width")
+        return literal(raw - (1 << width) if raw >= 1 << (width - 1) else raw, kind)
     pattern = (
         r"-?(?:0|[1-9][0-9]*)"
         if kind != "f32"
@@ -218,8 +263,8 @@ def operation(line):
         typ, _ = word_address(target)
         return (
             target,
-            ("add_" if token == "INC" else "sub_") + typ,
-            [Number(typ, target), literal(1, typ)],
+            token.lower() + "_" + typ,
+            [Number(typ, target)],
         )
     m = re.fullmatch(
         r"\[\s*(" + VALUE_PATTERN + "|" + STRING_PATTERN + r")\s*:=\s*(.*?)\s*\]", line
@@ -227,6 +272,11 @@ def operation(line):
     if not m:
         fail("unsupported numeric operation: " + line)
     target, expression = m.groups()
+    sequence = sequence_reference(target, True)
+    if sequence:
+        if sequence[0] != "DR" or sequence[2] != "S" or re.fullmatch(r"[0-7]", expression.strip()) is None:
+            fail("Drum .S write requires decimal immediate 0..7")
+        return target, "copy", [Number("i16", expression.strip())]
     expression = expression.strip()
     if is_string(target) or is_string(expression):
         source_string = is_string(expression)
@@ -262,7 +312,7 @@ def operation(line):
     typ, _ = reference_address(target, True)
     # Match longer names via exact token, not prefix. Arithmetic is one operator.
     for name, (out, args, token, shape) in OPS.items():
-        if out != typ:
+        if out != typ or shape == "inplace":
             continue
         if shape == "binary":
             atom = (
@@ -270,7 +320,7 @@ def operation(line):
                 + NUM_REFERENCE
                 + r"|"
                 + VALUE_PATTERN
-                + r"|-?[0-9]+(?:\.[0-9]*)?(?:[eE][+-]?[0-9]+)?)"
+                + r"|(?:2|8|16)#[0-9A-Fa-f]+|-?[0-9]+(?:\.[0-9]*)?(?:[eE][+-]?[0-9]+)?)"
             )
             pat = atom + r"\s*" + re.escape(token) + r"\s*" + atom
         else:
@@ -310,7 +360,7 @@ def operation(line):
             fail("numeric function requires an object operand")
         if (
             is_indexed(target)
-            or any(isinstance(v, Number) and is_indexed(v.code) for v in parsed)
+            or any(isinstance(v, Number) and (is_indexed(v.code) or (v.code.startswith("%K") and "[" in v.code)) for v in parsed)
         ) and (typ != "i16" or shape != "binary"):
             fail(
                 "indexed operands in this numeric instruction require a direct snapshot"
@@ -344,7 +394,7 @@ def comparison(text):
     if not m:
         fail("unsupported numeric comparison: " + text)
     first, op, second = m.groups()
-    if is_indexed(first):
+    if is_indexed(first) or (first.startswith("%K") and "[" in first):
         fail("indexed comparison first operand requires a direct snapshot")
     status = status_reference(first)
     kind = (
@@ -357,9 +407,16 @@ def comparison(text):
 
 def evaluate(name, values, kind, flags=None):
     stem = name.rsplit("_", 1)[0] if name.rsplit("_", 1)[-1] in TYPES else name
+    if any(isinstance(v, Indeterminate) for v in values):
+        return next(v for v in values if isinstance(v, Indeterminate))
+    if kind == "f32" and name not in NUMERIC_CONVERSIONS:
+        return evaluate_float(stem, values, flags)
     integer_flags = (
         flags is not None and kind in ("i16", "i32") and stem in INTEGER_STEMS
     )
+    # REAL_TO_* errors set S18 (G3289 p72), but their invalid results must
+    # remain refusals: including them in integer_flags would modular-wrap them.
+    conversion_flags = flags is not None and name in ("real_to_int", "real_to_dint")
     try:
         if name == "copy":
             result = values[0]
@@ -371,7 +428,9 @@ def evaluate(name, values, kind, flags=None):
             b = values[1] if len(values) > 1 else None
             width = 16 if kind == "i16" else 32
             mask = (1 << width) - 1
-            if stem == "add":
+            if stem in ("inc", "dec"):
+                result = a + (1 if stem == "inc" else -1)
+            elif stem == "add":
                 result = a + b
             elif stem == "sub":
                 result = a - b
@@ -379,6 +438,9 @@ def evaluate(name, values, kind, flags=None):
                 result = a * b
             elif stem in ("div", "rem"):
                 if b == 0:
+                    if integer_flags:
+                        flags.overflow = True
+                        return Indeterminate("integer division by zero")
                     fail("numeric arithmetic error: division by zero")
                 if kind == "f32":
                     result = a / b
@@ -428,6 +490,9 @@ def evaluate(name, values, kind, flags=None):
                 if result >= 1 << (width - 1):
                     result -= 1 << width
             elif stem == "sqrt":
+                if a < 0 and integer_flags:
+                    flags.overflow = True
+                    return Indeterminate("negative integer square root")
                 result = math.sqrt(a) if kind == "f32" else math.isqrt(a)
             elif stem == "abs":
                 result = abs(a)
@@ -457,11 +522,11 @@ def evaluate(name, values, kind, flags=None):
             else checked(result, kind)
         )
     except CompileError:
-        if integer_flags:
+        if integer_flags or conversion_flags:
             flags.overflow = True
         raise
     except (ValueError, OverflowError, ZeroDivisionError) as exc:
-        if integer_flags:
+        if integer_flags or conversion_flags:
             flags.overflow = True
         fail("numeric arithmetic error: " + str(exc))
 
@@ -476,14 +541,14 @@ def read(words, value):
     raw |= words[index + 1] << 16
     if kind == "i32":
         return raw - 4294967296 if raw >= 2147483648 else raw
-    return f32(struct.unpack("<f", struct.pack("<I", raw))[0])
+    return Real32(raw)
 
 
 def write(words, target, value):
     kind, index = word_address(target)
-    value = checked(value, kind)
+    value = real32(value) if kind == "f32" else checked(value, kind)
     raw = (
-        struct.unpack("<I", struct.pack("<f", value))[0]
+        value.raw
         if kind == "f32"
         else int(value) & 0xFFFFFFFF
     )
@@ -495,7 +560,7 @@ def write(words, target, value):
 def compare(words, parsed, reader=None):
     a, op, b = parsed
     reader = reader or (lambda v: read(words, v))
-    left, right = reader(a), reader(b)
+    left, right = known(reader(a)), known(reader(b))
     if op == "=":
         return left == right
     if op == "<>":
@@ -510,6 +575,21 @@ def compare(words, parsed, reader=None):
 
 
 def cpp(value):
+    constant = constant_reference(value.code)
+    if constant:
+        kind, index, indexed = constant
+        fn = {"i16": "word", "i32": "dword", "f32": "real"}[kind]
+        return "plc::read_constant_" + fn + ("_indexed(%d,%d)" % (index, indexed) if indexed is not None else "(%d)" % index)
+    if system_word(value.code):
+        return "plc::read_system_word(17)"
+    rtc = rtc_cpp(value.code)
+    if rtc is not None:
+        return rtc
+    sequence = sequence_reference(value.code)
+    if sequence:
+        if sequence[0] != "DR" or sequence[2] != "S":
+            fail("numeric Drum step required")
+        return "drum_%d.step()" % sequence[1]
     register = register_reference(value.code)
     if register:
         return "register_%d.%s()" % (register[0], REGISTER_GETTERS[register[1]])
@@ -523,6 +603,9 @@ def cpp(value):
     timer = timer_reference(value.code)
     if timer:
         return "timer_%d.%s()" % (timer[0], GETTERS[timer[1]])
+    prop = property_reference(value.code)
+    if prop:
+        return cpp_name(prop[0]) + ".property(plc::CommProperty::" + ENUMS[prop[1]] + ")"
     status = status_reference(value.code)
     if status:
         return cpp_name(status[0]) + "." + NUM_FIELDS[status[1]][1] + "()"
@@ -552,4 +635,8 @@ def memory_words_used(program):
             words.update(
                 range(cfg.index_data_in, cfg.index_data_in + cfg.read_quantity)
             )
+    if has_buffer_writes(program):
+        # Dynamic native buffer addresses/counts can reach the full real bank.
+        # Frontend requires explicit ownership so private scratch cannot alias.
+        words.update(range(8000))
     return words

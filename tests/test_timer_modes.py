@@ -1,7 +1,9 @@
 """Retentive/dynamic modes: explicit hand timelines and preserved config."""
 
+import copy
 import tempfile
 import unittest
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 from m200.frontend import compile_source
@@ -63,15 +65,29 @@ class TimerModeTests(unittest.TestCase):
         check(rebuilt)
         self.assertEqual(rebuilt.timers, p.timers)
         self.assertEqual(Program.from_dict(p.as_dict()).timers, p.timers)
+        # G07 admits documented combinations using the ACTUAL template level.
+        # Keep all existing literal V/Q/wired-output timelines unchanged and
+        # apply them to the serialized native program as well.
+        template = Path(__file__).parent / "fixtures/official_tm200ce40t_timer_options_behavior.smbp"
+        before = template.read_bytes()
         destination = self.work / "modes.smbp"
-        destination.write_bytes(b"existing")
-        with self.assertRaisesRegex(
-            CompileError, "timer.*functional.level.*unverified"
-        ):
-            write_project(
-                p, Path(__file__).parent / "fixtures/synthetic.smbp", destination
-            )
-        self.assertEqual(destination.read_bytes(), b"existing")
+        write_project(p, template, destination)
+        actual = load_project(destination)
+        self.assertEqual(actual.timers, p.timers)
+        check(actual)
+        self.assertEqual(actual.metadata["official_editor"], "pending")
+        native_timer = ET.parse(destination).find("./SoftwareConfiguration/Timers/TimerTM")
+        self.assertEqual(
+            tuple(native_timer.findtext(k) for k in ("Address", "Index", "Type", "Base", "Preset", "IsRetentive", "IsDynamicPreset")),
+            ("%TM42", "42", {"Ton": "TON", "Tof": "TOF", "Pulse": "TP"}[kind],
+             "OneHundredMilliSeconds", str(initial), str(retentive).lower(), str(dynamic).lower()),
+        )
+        native_reverse = self.work / "native_reverse.cpp"
+        native_reverse.write_text(to_cpp(actual))
+        rebuilt_native = compile_source(native_reverse)
+        self.assertEqual(rebuilt_native.timers, p.timers)
+        check(rebuilt_native)
+        self.assertEqual(template.read_bytes(), before)
         return p
 
     def test_ton_retains_incomplete_value_then_resets_completed_activation(self):
@@ -253,24 +269,53 @@ class TimerModeTests(unittest.TestCase):
             with self.subTest(body=body), self.assertRaises(CompileError):
                 self.compile(body)
 
-    def test_import_keeps_options_and_reaches_explicit_profile_gate(self):
+    def test_import_keeps_documented_options_without_changing_actual_il(self):
         source = self.compile("plc::Ton t{0,100,3};void scan(){bool q=t.update(true);}")
+        template = Path(__file__).parent / "fixtures/official_tm200ce40t_timer_options_behavior.smbp"
+        before = template.read_bytes()
         dest = self.work / "plain.smbp"
-        write_project(source, Path(__file__).parent / "fixtures/synthetic.smbp", dest)
-        original = dest.read_text()
+        write_project(source, template, dest)
+        original = dest.read_bytes()
+        original_program = load_project(dest)
         for option in ("IsRetentive", "IsDynamicPreset"):
-            dest.write_text(
-                original.replace(
-                    f"<{option}>false</{option}>", f"<{option}>true</{option}>"
+            with self.subTest(option=option):
+                tree = ET.fromstring(original)
+                tree.find("./SoftwareConfiguration/Timers/TimerTM/" + option).text = "true"
+                dest.write_bytes(ET.tostring(tree))
+                mutated = dest.read_bytes()
+                actual = load_project(dest)
+                self.assertEqual(actual.timers, {0: Timer("TON", 300, 100,
+                    option == "IsRetentive", option == "IsDynamicPreset")})
+                self.assertEqual(actual.rungs, original_program.rungs)
+                self.assertEqual(actual.metadata["official_editor"], "pending")
+                self.assertEqual(dest.read_bytes(), mutated)
+        self.assertEqual(template.read_bytes(), before)
+
+    def test_option_levels_fail_atomically_even_with_forged_metadata(self):
+        for ret, dyn, token, message in (
+            (True, False, "FunctLevelMan6_0", r"timer retention requires functional level >=4\.0"),
+            (False, True, "FunctLevelMan17_0", r"timer dynamic preset requires functional level >=12\.0"),
+            (True, True, "FunctLevelMan17_0", r"timer dynamic preset requires functional level >=12\.0"),
+        ):
+            with self.subTest(ret=ret, dyn=dyn, token=token):
+                program = Program(
+                    [["BLK %TM0", "LD %M0", "IN", "OUT_BLK", "LD Q", "ST %M1", "END_BLK"]],
+                    {0: Timer("TON", 300, 100, ret, dyn)},
                 )
-            )
-            with (
-                self.subTest(option=option),
-                self.assertRaisesRegex(
-                    CompileError, "timer.*functional.level.*unverified"
-                ),
-            ):
-                load_project(dest)
+                program.metadata = {"ManagementLevel": "FunctLevelMan21_0", "official_editor": "verified"}
+                tree = ET.parse(Path(__file__).parent / "fixtures/synthetic.smbp")
+                tree.find("ManagementLevel").text = token
+                template = self.work / "low_level.smbp"
+                tree.write(template)
+                before = template.read_bytes()
+                snapshot = copy.deepcopy(program.as_dict())
+                destination = self.work / "preserved.smbp"
+                destination.write_bytes(b"existing destination")
+                with self.assertRaisesRegex(CompileError, message):
+                    write_project(program, template, destination)
+                self.assertEqual(destination.read_bytes(), b"existing destination")
+                self.assertEqual(template.read_bytes(), before)
+                self.assertEqual(program.as_dict(), snapshot)
 
 
 if __name__ == "__main__":

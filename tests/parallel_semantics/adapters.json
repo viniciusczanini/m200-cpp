@@ -1,0 +1,117 @@
+{
+  "schema": "m200.parallel-semantics.adapters.v1",
+  "execution_state": "PREPARED_NOT_EXECUTED_AWAITING_ROOT_FREEZE",
+  "bindings": [
+    {
+      "key": "source_pipeline",
+      "status": "prepared",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "entrypoint": "parallel_semantics.adapters:source_pipeline",
+      "delivery": "Integrated root freeze; source methods matched against lane CONTRACT.md, final DELIVERY.md still required."
+    },
+    {
+      "key": "G01_external_images",
+      "status": "prepared",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "entrypoint": "parallel_semantics.g01_external_images:external_images",
+      "delivery": "G01-adapter-proposal-1: real VM and PLC_NATIVE providers; exact original bit15/bit0 alias oracle, MW0 mutation and genuine no-provider controls on immutable natal-combined-4. No lifecycle or native hardware acceptance claim."
+    },
+    {
+      "key": "G01_lifecycle",
+      "status": "pending",
+      "entrypoint": null,
+      "delivery": "output/parallel-implementation-2026-11-06/lanes/G01/DELIVERY.md; exact cold/warm/STOP edge oracle required."
+    },
+    {
+      "key": "G07_lifecycle",
+      "status": "prepared",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "entrypoint": "parallel_semantics.host_adapters:timer_lifecycle",
+      "delivery": "G07 DELIVERY.md/source define Machine.timer_event/advance_time, detail::timer_event(TimerEvent), timer_advance_time; prepared only, never executed."
+    },
+    {
+      "key": "G08_domains",
+      "status": "pending",
+      "entrypoint": null,
+      "delivery": "G08 DELIVERY.md plus independent native or contract oracle; rejecting an unmodeled domain is not completed support."
+    },
+    {
+      "key": "G09_clock",
+      "status": "prepared",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "entrypoint": "parallel_semantics.g09_priority_adapters:clock",
+      "delivery": "G09 final RTC API plus frozen g09_adapters.sequence: original literal rollover and staged-invalid-calendar requests now have explicit test-owned bindings. Proposal prepared only; no tests/builds executed and no native atomicity/lifecycle claim."
+    },
+    {
+      "key": "G09_schedule",
+      "status": "prepared",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "entrypoint": "parallel_semantics.g09_priority_adapters:schedule",
+      "delivery": "Generic EIO0000003289.04 p160: same-output OR and SW114 cold defaultFFFF. Vendor ConversionHelper.ScheduleBlockDaysOfTheWeekMaskBuilder static CIL: Monday1/Tuesday2. Original interior12:30 probes use frozen real Schedule source helper and family-only cold reset. No boundary/native project/full lifecycle oracle is activated."
+    },
+    {
+      "key": "G11_async",
+      "status": "prepared",
+      "engines": [
+        "vm"
+      ],
+      "entrypoint": "parallel_semantics.host_adapters:modbus_async",
+      "delivery": "G11 CONTRACT.md; explicit raw-byte transport tests real CommunicationEngine. SDK transport integration remains pending, no mock state-machine success."
+    },
+    {
+      "key": "G07_bounds",
+      "status": "prepared",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "entrypoint": "parallel_semantics.g07_bounds:constructor_bounds",
+      "delivery": "natal-G07-integration-1; G07 constructor controls and Generic/target limits."
+    },
+    {
+      "key": "G02_bounds",
+      "status": "prepared",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "entrypoint": "parallel_semantics.combined_adapters:constant_bounds",
+      "delivery": "G02 final CONTRACT shared512 cells and explicit indexed ownership; actual constructors/compiler controls, no skips."
+    },
+    {
+      "key": "G02_taint",
+      "status": "prepared",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "entrypoint": "parallel_semantics.combined_adapters:taint_probe",
+      "delivery": "natal-combined-1 G02; actual Machine known-guard and SDK child-process guarded reads, not a fabricated taint model."
+    },
+    {
+      "key": "G09_frozen",
+      "status": "prepared",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "entrypoint": "parallel_semantics.g09_adapters:sequence",
+      "delivery": "Frozen RTC source SDK/VM cases on natal-combined-2; real 12-argument Schedule source cases on natal-combined-2b. RTC_EXEC native export remains gated; local schedule boundary policies are labelled in each case. G09_clock/G09_schedule priority proposals are separately registered and remain outside this frozen-only g09_report selection."
+    }
+  ]
+}

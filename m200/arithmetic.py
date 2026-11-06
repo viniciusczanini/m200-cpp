@@ -1,4 +1,4 @@
-"""Explicit local integer ALU flags; unknown result domains remain errors."""
+"""Scalar ALU flags; invalid integer data is modeled by scalar_numeric."""
 
 from .model import fail
 
@@ -6,6 +6,8 @@ INTEGER_STEMS = frozenset(
     (
         "copy",
         "add",
+        "inc",
+        "dec",
         "sub",
         "mul",
         "div",
@@ -36,6 +38,11 @@ class ArithmeticState:
     def __init__(self):
         self.carry = False
         self.overflow = False
+        self.float_status = 0
+
+    def floating_error(self, mask):
+        self.float_status |= mask
+        self.overflow = True
 
     def clear(self, index):
         if index == 17:

@@ -1,0 +1,9 @@
+{
+  "command": [
+    "make",
+    "optimization-stress"
+  ],
+  "cwd": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/source",
+  "returncode": 0,
+  "seconds": 7.1474455
+}

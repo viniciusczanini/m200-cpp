@@ -1,0 +1,17 @@
+{
+  "freeze_id": "natal-batch-final-1",
+  "compiler_sdk_pins": 72,
+  "compiler_sdk_changes": [],
+  "test_example_pins": 294,
+  "descriptor_count": 7,
+  "freeze_sha256": "bf7ca54ef038cec87aa7a235fbef3db30b533599fc5bd27c163a32e6b36be1e5",
+  "fields": [
+    "freeze_id",
+    "parent_freeze",
+    "source_root",
+    "compiler_sdk",
+    "descriptor_updates",
+    "notes",
+    "preparation_note"
+  ]
+}

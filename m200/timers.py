@@ -1,4 +1,7 @@
-"""Closed timer properties and explicit activation-relative timer mode model."""
+"""Native timer properties, mode state and documented timer lifecycle hooks.
+
+Tick phase is activation/resume relative, a local policy pending native traces.
+"""
 
 import re
 
@@ -30,6 +33,7 @@ class TimerState:
     def __init__(self, config):
         self.kind = config.kind
         self.base = config.base_ms
+        self.initial_preset = config.preset
         self.preset = config.preset
         self.retentive = config.retentive
         self.dynamic = config.dynamic_preset
@@ -40,6 +44,29 @@ class TimerState:
         self.current = 0
         self.processed_ticks = 0
         self.completed = False
+        self.offline_since = None
+
+    def cold_restart(self, now):
+        self.preset = self.initial_preset
+        self.active_preset = self.preset
+        self.start = None
+        self.previous = self.q = self.completed = False
+        self.current = self.processed_ticks = 0
+        self.offline_since = None
+
+    def power_off(self, now):
+        if self.offline_since is None:
+            self.refresh(now)
+            self.offline_since = now
+
+    def warm_restart(self, now):
+        if self.offline_since is not None:
+            if now < self.offline_since:
+                fail("timer lifecycle clock moved backwards")
+            if self.start is not None:
+                self.start += now - self.offline_since
+            self.offline_since = None
+        self.refresh(now)
 
     def complete(self):
         self.completed = True
@@ -48,6 +75,10 @@ class TimerState:
             self.start = None
 
     def refresh(self, now):
+        if self.offline_since is not None:
+            return
+        if self.start is not None and now < self.start:
+            fail("timer clock moved backwards")
         if self.start is not None and not self.completed:
             ticks = (now - self.start) // self.base
             delta = ticks - self.processed_ticks
@@ -68,6 +99,8 @@ class TimerState:
         return {"P": self.preset, "V": self.current, "Q": self.q}[field]
 
     def set_preset(self, value, now):
+        if self.offline_since is not None:
+            fail("timer preset write while power is off")
         preset_value(value)
         self.refresh(now)
         self.preset = value
@@ -92,6 +125,8 @@ class TimerState:
             self.complete()
 
     def update(self, enabled, now):
+        if self.offline_since is not None:
+            fail("timer IN update while power is off")
         self.refresh(now)
         if self.kind == "TON":
             if not enabled:

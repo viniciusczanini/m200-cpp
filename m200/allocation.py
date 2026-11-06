@@ -9,9 +9,10 @@ import re
 from collections import deque
 from dataclasses import dataclass
 
-from .flow import JUMPS, destinations, split_label
+from .flow import JUMPS, ENDS, destinations, split_label
 from .model import fail
 from .numeric import Number, TYPES
+from .communication import NUM_REFERENCE
 from .edges import OPS as EDGE_OPS
 from .edge_functions import parse as expression_edge
 from .copy_fusion import fuse as fuse_copies
@@ -20,7 +21,7 @@ from .emission_cleanup import cleanup as cleanup_emission
 
 REFERENCE = re.compile(r"%M(?:W|D|F)?[0-9]+")
 ASSIGNMENT = re.compile(
-    r"(?:OPER\s+)?\[\s*(%M(?:W|D|F)[0-9]+|%R[0-9]+\.(?:I|O)|%(?:TM|C)[0-9]+\.P|%(?:M[0-9]+|Q0\.[0-9]+):[0-9]+)(?:\[%MW[0-9]+\])?\s*:="
+    r"(?:OPER\s+)?\[\s*(" + NUM_REFERENCE + r"|%SW[0-9]+|%RTC[01]\.[A-Za-z]+|%SCH[0-9]+\.[A-Z]+|%DR[0-9]+\.S|%M(?:W|D|F)[0-9]+|%R[0-9]+\.(?:I|O)|%(?:TM|C)[0-9]+\.P|%(?:M[0-9]+|Q0\.[0-9]+):[0-9]+)(?:\[%MW[0-9]+\])?\s*:="
 )
 UNARY = re.compile(r"(?:OPER\s+)?\[\s*(?:INC|DEC)\s+(%M(?:W|D)[0-9]+)\s*\]")
 
@@ -74,6 +75,7 @@ def effects(rung, registers, constants, aliases=None):
             "S",
             "R",
             *JUMPS,
+            *ENDS,
             "BLK",
             "IN",
             "CU",
@@ -82,8 +84,10 @@ def effects(rung, registers, constants, aliases=None):
             "END_BLK",
             "EXECUTE",
             "ABORT",
+            "RTC_EXEC",
             "I",
             "O",
+            "U",
         ):
             fail("unmodelled instruction effects in memory allocation: " + line)
         if op in ("ST", "S", "R"):
@@ -274,12 +278,15 @@ class Storage:
         return alias + ":X" + str(bit % 16)
 
     def finalize(self, program, constants):
+        from .boolean_banks import config as boolean_config
+
+        stable_images = boolean_config(program).input_image_stable
         fusible = {
             ref: reg
             for ref, reg in self.registers.items()
             if not reg.persistent and ref not in self.groups
         }
-        if not program.subroutines:
+        if not program.subroutines and stable_images:
             _, out = live_ranges(
                 program,
                 fusible,
@@ -325,17 +332,12 @@ class Storage:
             ref: reg for ref, reg in self.registers.items() if not reg.persistent
         }
         if program.subroutines:
-            # No single-stream liveness/fusion may reuse a caller value across
-            # a native call. Initial prototype gives same-bank temporaries unique
-            # storage across every execution context.
-            graph = {
-                ref: {
-                    other
-                    for other, candidate in temporary.items()
-                    if other != ref and candidate.bank == reg.bank
-                }
-                for ref, reg in temporary.items()
-            }
+            from .subroutine_allocation import interference as sr_interference
+
+            graph = sr_interference(
+                program, temporary, {v: k == "1" for k, v in constants.items()},
+                self.members, effects,
+            )
         else:
             graph = interference(
                 program,
@@ -359,15 +361,16 @@ class Storage:
             for ref, (root, offset) in self.members.items()
         }
 
-        cleanup_emission(
-            program,
-            self.registers,
-            self.members,
-            self.groups,
-            names,
-            constants,
-            REFERENCE,
-        )
+        if stable_images:
+            cleanup_emission(
+                program,
+                self.registers,
+                self.members,
+                self.groups,
+                names,
+                constants,
+                REFERENCE,
+            )
 
         def rewrite(text):
             return REFERENCE.sub(lambda m: names.get(m[0], m[0]), text)
@@ -424,7 +427,7 @@ class Storage:
             "reserved_bits": len(self.reserved["bit"]),
             "reserved_words": len(self.reserved["word"]),
             "contiguous_groups": len(self.groups),
-            "method": "conservative unique cross-context scratch; globals/explicit addresses reserved"
+            "method": "call/return CFG liveness across SR contexts; globals/explicit addresses reserved"
             if program.subroutines
             else "conservative CFG liveness; globals unique; explicit addresses and communication buffers reserved",
         }

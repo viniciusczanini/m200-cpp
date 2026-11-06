@@ -90,6 +90,9 @@ def _enum_type(name):
 
 def allowed_attribute(tag, name, value):
     """Recognize only the observed .NET Type attribute in its exact field."""
+    from .rtc_xml import allowed_attribute as rtc_attribute
+    if rtc_attribute(tag, name, value):
+        return True
     if name != "Type":
         return False
     if tag == "IFunctionBlock":
@@ -190,6 +193,10 @@ def read_blocks(sw):
         if len(addresses) != 1:
             fail("communication block requires exactly one Address")
         address = _scalar(addresses[0])
+        if address.startswith("%RTC"):
+            from .rtc_xml import read_rtc_node
+            read_rtc_node(node)
+            continue
         kind, index = _address(address)
         if node.attrib != {"Type": _BLOCK_TYPES.get(kind)}:
             fail("unsupported or mismatched communication block Type")
@@ -432,3 +439,55 @@ def check_template_channels(root, configs):
         for config in configs.values():
             if config.link == "ETH1" and config.id not in remotes:
                 fail("ETH1 remote-server index is not configured")
+
+
+def check_dynamic_channels(root, program):
+    """Check channels that runtime property stores can select.
+
+    Initial FB XML remains the observed static format. Runtime stores live in
+    actual IL operation blocks; no new serialized parameter/graph names are
+    invented. A variable LINK requires both supported embedded channels to be
+    explicitly configured. IDs may still fail at runtime if not configured,
+    just as on a real controller; no remote servers are silently synthesized.
+    """
+    from .communication_properties import property_reference
+    from .numeric import instruction_operation, is_operation
+
+    links = set()
+    rungs = list(program.rungs) + [r for definition in program.subroutines.values() for r in definition.rungs]
+    for rung in rungs:
+        for line in rung:
+            if not is_operation(line):
+                continue
+            target, name, values = instruction_operation(line)
+            prop = property_reference(target, True)
+            if not prop:
+                continue
+            config = program.communications.get(prop[0])
+            if config is None:
+                fail("dynamic communication property has no configured block")
+            if prop[1] == "OBJTYPE" and config.kind == "WRITE_VAR":
+                single_possible = name != "copy" or values[0].code.startswith("%") or (int(values[0].code) & 65535) in (4, 5)
+                if single_possible and functional_level(_scalar(_find(root, "ManagementLevel"))) < (5, 0):
+                    fail("dynamic single-write ObjType requires functional level >= 5.0")
+            if prop[1] == "LINK":
+                if name == "copy" and not values[0].code.startswith("%"):
+                    selected = int(values[0].code) & 65535
+                    if selected in (1, 3):
+                        links.add("SL1" if selected == 1 else "ETH1")
+                else:
+                    links.update(("SL1", "ETH1"))
+    if "SL1" in links:
+        # Reuse the established serial settings validator using a read-only
+        # probe configuration; it is not added to the output program.
+        check_template_channels(root, {"%READ_VAR0": ModbusConfig(link="SL1")})
+    if "ETH1" in links:
+        tcp = _find(root, "HardwareConfiguration/Plc/Cpu/EthernetConfiguration/ModbusTcpSlave")
+        containers = [node for node in tcp if node.tag in {"Devices", "RemoteServers"}]
+        if len(containers) != 1:
+            fail("dynamic LINK requires explicit Ethernet remote-server configuration")
+        remotes = validate_remotes(containers[0])
+        if not remotes:
+            fail("dynamic LINK requires at least one configured Ethernet remote")
+        # Availability of a particular runtime index remains an FB status/error,
+        # not a reason to invent a configuration table or remote endpoint.

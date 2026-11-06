@@ -1,8 +1,7 @@
 from .model import Program, fail
 from .allocation import Storage
 from .indexed import is_indexed, is_bit_indexed
-from .numeric import Number, TYPES, boolean, expect, OPS, evaluate, read as read_number
-from .arithmetic import ArithmeticState
+from .numeric import Number, TYPES, boolean, expect, OPS
 from .conversions import needs_word_snapshot
 
 
@@ -200,9 +199,12 @@ class Lowerer:
             self.rung("LD " + guard, "AND " + value, "S " + target)
             self.rung("LD " + guard, "ANDN " + value, "R " + target)
 
-    def timer(self, index, config, enable):
-        out = self.bit("timer_%d_done" % index)
+    def timer(self, index, config, enable, capture=True):
         self.program.timers[index] = config
+        if not capture:
+            self.rung(f"BLK %TM{index}", "LD " + enable, "IN", "END_BLK")
+            return None
+        out = self.bit("timer_%d_done" % index)
         self.rung(
             f"BLK %TM{index}",
             "LD " + enable,
@@ -236,22 +238,21 @@ class Lowerer:
             "[" + target.code + ":=" + value.code + "]",
         )
 
-    def numeric(self, name, values):
+    def numeric(self, name, values, target=None):
         kind, args, token, shape = OPS[name]
-        if all(isinstance(v, int) or not v.code.startswith("%") for v in values):
-            evaluate(
-                name,
-                [v if isinstance(v, int) else read_number([], v) for v in values],
-                kind,
-                flags=ArithmeticState(),
-            )
+        if shape == "inplace":
+            out = target if target is not None else self.word(kind)
+            self.numeric_assign(out, values[0], self.guard)
+            self.rung("LD " + (self.guard if self.guard is not None else "1"),
+                      "[" + token + " " + out.code + "]")
+            return out
         prepared = []
         for value, argkind in zip(values, args):
             if argkind == "shift":
                 prepared.append(str(value))
             else:
                 value = expect(value, argkind)
-                if is_indexed(value.code):
+                if is_indexed(value.code) or (value.code.startswith("%K") and "[" in value.code):
                     value = self.copy(value, "indexed_operand_snapshot")
                 if needs_word_snapshot(token, value.code):
                     value = self.copy(value, "conversion_operand_snapshot")
@@ -259,7 +260,7 @@ class Lowerer:
                 if shape != "binary" and not value.code.startswith("%"):
                     value = self.copy(value)
                 prepared.append(value.code)
-        out = self.word(kind)
+        out = target if target is not None else self.word(kind)
         expression = (
             (prepared[0] + " " + token + " " + prepared[1])
             if shape == "binary"
@@ -278,9 +279,9 @@ class Lowerer:
             a.kind if a.kind != "literal" else b.kind if b.kind != "literal" else "i32"
         )
         a, b = expect(a, kind), expect(b, kind)
-        if is_indexed(a.code):
+        if is_indexed(a.code) or (a.code.startswith("%K") and "[" in a.code):
             a = self.copy(a, "indexed_comparison_snapshot")
-        if is_indexed(b.code):
+        if is_indexed(b.code) or (b.code.startswith("%K") and "[" in b.code):
             b = self.copy(b, "indexed_comparison_snapshot")
         if not a.code.startswith("%"):
             a = self.copy(a)

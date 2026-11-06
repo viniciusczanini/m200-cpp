@@ -1,4 +1,4 @@
-"""Copied native-project import only; no realcheckout admission or GUI claims."""
+"""Native SR import contracts; fixture authority and G06 replacement behavior."""
 
 import copy
 import hashlib
@@ -258,18 +258,35 @@ class NativeProjectImport(unittest.TestCase):
                 (value.name, value.section_number), ("Native independente", 42)
             )
 
-    def test_imported_export_still_refuses_without_touching_destination(self):
+    def test_imported_program_reexports_preserving_context_identity_and_behavior(self):
         p = load_project(source("sr0"))
         p.metadata["native_M_contact_approved"] = True
+        original = copy.deepcopy(p.as_dict())
+        template = source("sr0").read_bytes()
         with tempfile.TemporaryDirectory() as d:
-            for exists in [False, True]:
+            for exists in (False, True):
                 dest = Path(d) / ("existing.smbp" if exists else "absent.smbp")
-                before = b"original sentinel" if exists else None
                 if exists:
-                    dest.write_bytes(before)
-                with self.assertRaises(CompileError):
-                    write_project(p, source("sr0"), dest)
-                self.assertEqual(dest.read_bytes() if dest.exists() else None, before)
+                    dest.write_bytes(b"original sentinel")
+                write_project(p, source("sr0"), dest)
+                loaded = load_project(dest)
+                self.assertEqual(set(loaded.subroutines), {0})
+                for field in ("number", "name", "section_number"):
+                    self.assertEqual(getattr(loaded.subroutines[0], field), getattr(p.subroutines[0], field))
+                machine = Machine(loaded)
+                for controls, words in (((False, False), [30, 0, 10]),
+                                        ((True, False), [30, 1, 20])):
+                    machine.step({0: controls[0], 1: controls[1]}, 13)
+                    self.assertEqual(machine.words[:3], words)
+                reverse = Path(d) / "reverse.cpp"
+                reverse.write_text(to_cpp(loaded))
+                rebuilt = compile_source(reverse)
+                machine = Machine(rebuilt)
+                machine.step({0: True}, 13)
+                self.assertEqual(machine.words[:3], [30, 1, 20])
+                self.assertFalse(any(Path(d).glob(".m200-candidate-*")))
+        self.assertEqual(p.as_dict(), original)
+        self.assertEqual(source("sr0").read_bytes(), template)
 
     def test_no_SR_legacy_memory_stays_v1(self):
         p = load_project(FIXTURES / "official_tm200ce40t_memory.smbp")
@@ -324,15 +341,48 @@ class NativeProjectImport(unittest.TestCase):
                 self.assertFalse((out / "program.smbp").exists())
                 self.assertEqual(source(label).read_bytes(), original)
 
-    def test_unverified_multi_POU_and_mismatched_return_graph_remain_refused(self):
+    def test_multiple_independent_SR_wrappers_import_and_execute_in_order(self):
         def extra(q):
             c = copy.deepcopy(callee(q))
             c.find("Number").text = "63"
             c.find("Name").text = "second"
             c.find("SectionNumber").text = "3"
+            first = c.find("Rungs")[0]
+            first.find("InstructionLines")[-1].find("InstructionLine").text = "[%MW0:=31]"
+            first.find("LadderElements")[-1].find("OperationExpression").text = "%MW0 := 31"
             q.find("SoftwareConfiguration/Subroutines").append(c)
+            call = copy.deepcopy(master(q)[5])
+            call.find("InstructionLines")[-1].find("InstructionLine").text = "SR63"
+            call.find("LadderElements")[-1].find("Descriptor").text = "SR63"
+            master(q).insert(6, call)
 
-        self.refuse(extra)
+        with tempfile.TemporaryDirectory() as d:
+            path = self.mutated("sr0", extra, d)
+            raw = path.read_bytes()
+            p = load_project(path)
+            self.assertEqual(set(p.subroutines), {0, 63})
+            self.assertEqual((p.subroutines[63].name, p.subroutines[63].section_number), ("second", 3))
+            self.assertIn(["LD %I0.0", "SR63"], p.rungs)
+            reverse = Path(d) / "reverse.cpp"
+            reverse.write_text(to_cpp(p))
+            rebuilt = compile_source(reverse)
+            for program in (p, Program.from_dict(p.as_dict()), rebuilt):
+                machine = Machine(program)
+                for enabled, expected in ((False, [30, 0, 10]), (True, [30, 1, 31])):
+                    machine.step({0: enabled}, 13)
+                    self.assertEqual(machine.words[:3], expected)
+            self.assertEqual(path.read_bytes(), raw)
+
+    def test_multiple_master_POUs_and_mismatched_return_graph_remain_refused(self):
+        # Multiple SR wrappers are supported; additional Master POUs are not.
+        def extra_master(q):
+            pous = q.find("SoftwareConfiguration/Pous")
+            extra = copy.deepcopy(pous[0])
+            extra.find("SectionNumber").text = "1"
+            extra.find("Name").text = "unrequested master"
+            pous.append(extra)
+
+        self.refuse(extra_master)
 
         def end(q):
             n = body(q)[3]
@@ -341,7 +391,7 @@ class NativeProjectImport(unittest.TestCase):
 
         self.refuse(end, "sr63")
 
-    def test_no_SR_program_refuses_actual_active_SR_template_before_any_mutation(self):
+    def test_no_SR_program_replaces_active_SR_templates_and_removes_inherited_code(self):
         program = Program(rungs=[["LD %M0", "ST %M1"]])
         before_program = copy.deepcopy(program.as_dict())
         for label, _, _ in CASES:
@@ -354,16 +404,22 @@ class NativeProjectImport(unittest.TestCase):
                         if existing:
                             parent.mkdir()
                             dest.write_bytes(b"existing destination sentinel")
-                        before = dest.read_bytes() if existing else None
-                        with self.assertRaises(CompileError):
-                            write_project(program, source(label), dest)
-                        self.assertEqual(
-                            dest.read_bytes() if dest.exists() else None, before
-                        )
-                        self.assertEqual(parent.exists(), existing)
+                        write_project(program, source(label), dest)
+                        loaded = load_project(dest)
+                        self.assertEqual(loaded.subroutines, {})
+                        self.assertEqual(loaded.rungs, program.rungs)
+                        self.assertEqual(loaded.as_dict()["format"], "m200-cpp-il-v1")
+                        self.assertTrue(parent.exists())
+                        machine = Machine(loaded)
+                        machine.memory[0] = True
+                        self.assertEqual(machine.step({}, 10), [False] * 16)
+                        self.assertTrue(machine.memory[1])
+                        self.assertEqual(machine.words[:3], [0, 0, 0])
+                        q = E.parse(dest).getroot()
+                        self.assertEqual(len(q.find("SoftwareConfiguration/Subroutines")), 0)
                         self.assertEqual(source(label).read_bytes(), original)
                         self.assertEqual(program.as_dict(), before_program)
-        # The closed gate must not reject an ordinary, genuinely empty template.
+        # The ordinary empty template retains the same legacy program route.
         with tempfile.TemporaryDirectory() as d:
             dest = Path(d) / "ordinary.smbp"
             write_project(program, FIXTURES / "official_tm200ce40t_memory.smbp", dest)

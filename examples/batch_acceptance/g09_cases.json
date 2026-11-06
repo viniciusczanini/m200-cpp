@@ -1,0 +1,885 @@
+{
+  "schema": "m200.batch-acceptance.cases.v1",
+  "status": "prepared_not_executed_awaiting_integrated_freeze",
+  "calendar_rule": "All calendar seeds are explicit host-test inputs. Never use host wall time. S/SW algorithm chooses inclusive start/exclusive end; Schedule endpoint policies remain separately pending.",
+  "cases": [
+    {
+      "id": "g09-daily-start-stop",
+      "variant": "g09-calendar-lights",
+      "rtc_seed": {
+        "year": 2026,
+        "month": 11,
+        "day": 6,
+        "hours": 17,
+        "minutes": 59,
+        "seconds": 59,
+        "valid": true,
+        "available": true
+      },
+      "oracle": "Friday17:59:59 is before the daily18:00 start. One second later Q0 turns on. STOP suppresses lamp outputs while calendar and elapsed counter continue; release restores them.",
+      "scope": "Native S/SW algorithm with explicit18:00-inclusive/23:00-exclusive policy and local coherent snapshot; no claimed native multiword atomicity.",
+      "coverage_ids": [
+        "clock.snapshot",
+        "clock.absolute_counter",
+        "HW.RTC",
+        "HW.RTC_SYSTEM_WORDS"
+      ],
+      "frames": [
+        {
+          "label": "before-start",
+          "dt_ms": 1000,
+          "inputs": {},
+          "expect": {
+            "output_mask": 12,
+            "words": {
+              "100": 5,
+              "101": 89,
+              "102": 5977,
+              "103": 4358,
+              "104": 8230,
+              "110": 0,
+              "111": 0
+            }
+          }
+        },
+        {
+          "label": "at-start",
+          "dt_ms": 1000,
+          "inputs": {},
+          "expect": {
+            "output_mask": 13,
+            "words": {
+              "101": 0,
+              "102": 6144,
+              "110": 10
+            }
+          }
+        },
+        {
+          "label": "stop-at-start-plus1s",
+          "dt_ms": 1000,
+          "inputs": {
+            "2": true
+          },
+          "expect": {
+            "output_mask": 12,
+            "words": {
+              "101": 1,
+              "110": 20
+            }
+          }
+        },
+        {
+          "label": "release-stop",
+          "dt_ms": 1000,
+          "inputs": {},
+          "expect": {
+            "output_mask": 13,
+            "words": {
+              "101": 2,
+              "110": 30
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "g09-daily-end-overnight",
+      "variant": "g09-calendar-lights",
+      "rtc_seed": {
+        "year": 2026,
+        "month": 11,
+        "day": 6,
+        "hours": 22,
+        "minutes": 59,
+        "seconds": 59,
+        "valid": true,
+        "available": true
+      },
+      "oracle": "Daily Q0 is on at22:59:59. At23:00 it turns off and the explicit overnight OR turns Q1 on.",
+      "scope": "Application-defined daily/overnight boundaries, not inferred ScheduleBlock endpoints.",
+      "coverage_ids": [
+        "clock.snapshot",
+        "HW.RTC"
+      ],
+      "frames": [
+        {
+          "label": "last-daily-second",
+          "dt_ms": 1000,
+          "inputs": {},
+          "expect": {
+            "output_mask": 13,
+            "words": {
+              "101": 89,
+              "102": 8793,
+              "110": 0
+            }
+          }
+        },
+        {
+          "label": "daily-end-overnight-start",
+          "dt_ms": 1000,
+          "inputs": {},
+          "expect": {
+            "output_mask": 14,
+            "words": {
+              "101": 0,
+              "102": 8960,
+              "110": 10
+            }
+          }
+        },
+        {
+          "label": "overnight-held",
+          "dt_ms": 1000,
+          "inputs": {},
+          "expect": {
+            "output_mask": 14,
+            "words": {
+              "101": 1,
+              "110": 20
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "g09-year-date-rollover",
+      "variant": "g09-calendar-lights",
+      "rtc_seed": {
+        "year": 2026,
+        "month": 12,
+        "day": 31,
+        "hours": 23,
+        "minutes": 59,
+        "seconds": 59,
+        "valid": true,
+        "available": true
+      },
+      "oracle": "Thursday2026-12-31 rolls to Friday2027-01-01. November/December season gating turns both lamps off at the date boundary while validity stays true.",
+      "scope": "Explicit injected calendar rollover and business-season comparison; no power/STOP/cold/warm lifecycle inference.",
+      "coverage_ids": [
+        "clock.snapshot",
+        "HW.RTC_SYSTEM_WORDS"
+      ],
+      "frames": [
+        {
+          "label": "last-season-second",
+          "dt_ms": 1000,
+          "inputs": {},
+          "expect": {
+            "output_mask": 14,
+            "words": {
+              "100": 4,
+              "101": 89,
+              "102": 9049,
+              "103": 4657,
+              "104": 8230
+            }
+          }
+        },
+        {
+          "label": "new-date-and-year",
+          "dt_ms": 1000,
+          "inputs": {},
+          "expect": {
+            "output_mask": 4,
+            "words": {
+              "100": 5,
+              "101": 0,
+              "102": 0,
+              "103": 257,
+              "104": 8231
+            }
+          }
+        },
+        {
+          "label": "new-year-plus1s",
+          "dt_ms": 1000,
+          "inputs": {},
+          "expect": {
+            "output_mask": 4,
+            "words": {
+              "101": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "g09-overnight-end",
+      "variant": "g09-calendar-lights",
+      "rtc_seed": {
+        "year": 2026,
+        "month": 11,
+        "day": 7,
+        "hours": 1,
+        "minutes": 59,
+        "seconds": 59,
+        "valid": true,
+        "available": true
+      },
+      "oracle": "Overnight Q1 is on before02:00; the source's exclusive02:00 end turns it off exactly at02:00.",
+      "scope": "Application OR window, independent of ambiguous native Schedule wrap/end-minute policy.",
+      "coverage_ids": [
+        "HW.RTC"
+      ],
+      "frames": [
+        {
+          "label": "before-overnight-end",
+          "dt_ms": 1000,
+          "inputs": {},
+          "expect": {
+            "output_mask": 14,
+            "words": {
+              "100": 6,
+              "101": 89,
+              "102": 345,
+              "103": 4359
+            }
+          }
+        },
+        {
+          "label": "overnight-end",
+          "dt_ms": 1000,
+          "inputs": {},
+          "expect": {
+            "output_mask": 12,
+            "words": {
+              "101": 0,
+              "102": 512
+            }
+          }
+        },
+        {
+          "label": "after-overnight-end",
+          "dt_ms": 1000,
+          "inputs": {},
+          "expect": {
+            "output_mask": 12,
+            "words": {
+              "101": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "g09-bcd-set-held-buttons",
+      "variant": "g09-calendar-lights",
+      "rtc_seed": {
+        "year": 2026,
+        "month": 11,
+        "day": 6,
+        "hours": 17,
+        "minutes": 0,
+        "seconds": 0,
+        "valid": true,
+        "available": true
+      },
+      "oracle": "I0 rising commits17:59:58 through S50/SW50..53. Holding I0 must let time reach18:00 instead of rewriting58 each scan. A new rise commits again. I1 rising resets elapsed words without resetting battery calendar.",
+      "scope": "Valid BCD transaction and button edges only. Native S50 multiword atomicity and adjustment conflicts remain pending.",
+      "coverage_ids": [
+        "clock.set",
+        "clock.absolute_counter",
+        "HW.RTC_SYSTEM_WORDS"
+      ],
+      "frames": [
+        {
+          "label": "set-on-first-rise",
+          "dt_ms": 1000,
+          "inputs": {
+            "0": true
+          },
+          "words": {
+            "20": 88,
+            "21": 5977,
+            "22": 4358,
+            "23": 8230
+          },
+          "expect": {
+            "output_mask": 12,
+            "words": {
+              "101": 88,
+              "102": 5977,
+              "103": 4358,
+              "104": 8230,
+              "110": 0
+            }
+          }
+        },
+        {
+          "label": "held-set-does-not-rewrite",
+          "dt_ms": 1000,
+          "inputs": {
+            "0": true
+          },
+          "expect": {
+            "output_mask": 12,
+            "words": {
+              "101": 89,
+              "110": 10
+            }
+          }
+        },
+        {
+          "label": "held-set-crosses-start",
+          "dt_ms": 1000,
+          "inputs": {
+            "0": true
+          },
+          "expect": {
+            "output_mask": 13,
+            "words": {
+              "101": 0,
+              "102": 6144,
+              "110": 20
+            }
+          }
+        },
+        {
+          "label": "set-button-release",
+          "dt_ms": 1000,
+          "inputs": {},
+          "expect": {
+            "output_mask": 13,
+            "words": {
+              "101": 1,
+              "110": 30
+            }
+          }
+        },
+        {
+          "label": "new-set-rise",
+          "dt_ms": 1000,
+          "inputs": {
+            "0": true
+          },
+          "expect": {
+            "output_mask": 12,
+            "words": {
+              "101": 88,
+              "102": 5977,
+              "110": 40
+            }
+          }
+        },
+        {
+          "label": "elapsed-reset-separate-from-calendar",
+          "dt_ms": 1000,
+          "inputs": {
+            "1": true
+          },
+          "expect": {
+            "output_mask": 12,
+            "words": {
+              "101": 89,
+              "110": 0,
+              "111": 0
+            }
+          }
+        },
+        {
+          "label": "held-elapsed-reset-does-not-repeat",
+          "dt_ms": 1000,
+          "inputs": {
+            "1": true
+          },
+          "expect": {
+            "output_mask": 13,
+            "words": {
+              "101": 0,
+              "102": 6144,
+              "110": 10
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "g09-invalid-clock-stays-dark",
+      "variant": "g09-calendar-lights",
+      "rtc_seed": {
+        "year": 2026,
+        "month": 11,
+        "day": 6,
+        "hours": 18,
+        "minutes": 0,
+        "seconds": 0,
+        "valid": false,
+        "available": true
+      },
+      "oracle": "A present but invalid clock never enables the lamps. A valid staged transaction explicitly restores validity; missing data is not represented as valid zero time.",
+      "scope": "Explicit invalid seed and valid recovery, not absent physical peripheral or retention qualification.",
+      "coverage_ids": [
+        "clock.set",
+        "HW.RTC"
+      ],
+      "frames": [
+        {
+          "label": "invalid-evening",
+          "dt_ms": 1000,
+          "inputs": {},
+          "expect": {
+            "output_mask": 8,
+            "words": {
+              "102": 6144
+            }
+          }
+        },
+        {
+          "label": "invalid-clock-with-stop",
+          "dt_ms": 1000,
+          "inputs": {
+            "2": true
+          },
+          "expect": {
+            "output_mask": 8
+          }
+        },
+        {
+          "label": "valid-set-recovers-light",
+          "dt_ms": 1000,
+          "inputs": {
+            "0": true
+          },
+          "words": {
+            "20": 0,
+            "21": 6144,
+            "22": 4358,
+            "23": 8230
+          },
+          "expect": {
+            "output_mask": 13,
+            "words": {
+              "101": 0,
+              "102": 6144
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "g09-rtc-gated-clock-lights",
+      "variant": "g09-rtc-clock-lights",
+      "rtc_seed": {
+        "year": 2026,
+        "month": 11,
+        "day": 6,
+        "hours": 18,
+        "minutes": 0,
+        "seconds": 0,
+        "valid": true,
+        "available": true
+      },
+      "oracle": "Valid calendar window gates a20ms light Clock. Bits0/1 alternate, bit2 enabled, bit3 clock-valid, bit4 STOP. Reset and held STOP suppress both lamps; release restarts the low phase.",
+      "scope": "RTC plus elapsed-timer composition, not a substitute of elapsed Clock for calendar services.",
+      "coverage_ids": [
+        "fb.tm",
+        "HW.RTC_SYSTEM_WORDS"
+      ],
+      "frames": [
+        {
+          "label": "reset",
+          "dt_ms": 10,
+          "inputs": {
+            "0": true
+          },
+          "expect": {
+            "output_mask": 8
+          }
+        },
+        {
+          "label": "enable-low",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true
+          },
+          "expect": {
+            "output_mask": 14
+          }
+        },
+        {
+          "label": "held-low",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true
+          },
+          "expect": {
+            "output_mask": 14
+          }
+        },
+        {
+          "label": "phase-high",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true
+          },
+          "expect": {
+            "output_mask": 13
+          }
+        },
+        {
+          "label": "held-high",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true
+          },
+          "expect": {
+            "output_mask": 13
+          }
+        },
+        {
+          "label": "stop",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true,
+            "2": true
+          },
+          "expect": {
+            "output_mask": 24
+          }
+        },
+        {
+          "label": "held-stop",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true,
+            "2": true
+          },
+          "expect": {
+            "output_mask": 24
+          }
+        },
+        {
+          "label": "release-stop-low",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true
+          },
+          "expect": {
+            "output_mask": 14
+          }
+        },
+        {
+          "label": "restart-held-low",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true
+          },
+          "expect": {
+            "output_mask": 14
+          }
+        },
+        {
+          "label": "restart-high",
+          "dt_ms": 10,
+          "inputs": {
+            "1": true
+          },
+          "expect": {
+            "output_mask": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "g09-schedule-next-mast",
+      "variant": "g09-schedule-memory",
+      "rtc_seed": {
+        "year": 2026,
+        "month": 11,
+        "day": 6,
+        "hours": 22,
+        "minutes": 30,
+        "seconds": 0,
+        "valid": true,
+        "available": true
+      },
+      "oracle": "At22:30, schedule0 is inside18..23 and schedule15 outside19..20. End-hour22 and enable-mask writes affect schedule M outputs on the next MAST, while their numeric properties change immediately.",
+      "scope": "Interior times only, separate M60/M61 targets. Native endpoint equality/inclusivity, wrapping and same-output OR remain pending.",
+      "coverage_ids": [
+        "fb.schedule",
+        "HW.RTC_SCHEDULE"
+      ],
+      "frames": [
+        {
+          "label": "inside-evening-window",
+          "dt_ms": 100,
+          "inputs": {},
+          "expect": {
+            "output_mask": 13,
+            "words": {
+              "10": 23,
+              "11": -1
+            }
+          }
+        },
+        {
+          "label": "change-end-hour-after-evaluation",
+          "dt_ms": 100,
+          "inputs": {
+            "0": true
+          },
+          "expect": {
+            "output_mask": 13,
+            "words": {
+              "10": 22,
+              "11": -1
+            }
+          }
+        },
+        {
+          "label": "held-write-next-mast-off",
+          "dt_ms": 100,
+          "inputs": {
+            "0": true
+          },
+          "expect": {
+            "output_mask": 12,
+            "words": {
+              "10": 22
+            }
+          }
+        },
+        {
+          "label": "restore-end-hour-after-evaluation",
+          "dt_ms": 100,
+          "inputs": {
+            "2": true
+          },
+          "expect": {
+            "output_mask": 12,
+            "words": {
+              "10": 23
+            }
+          }
+        },
+        {
+          "label": "restored-on-next-mast",
+          "dt_ms": 100,
+          "inputs": {},
+          "expect": {
+            "output_mask": 13
+          }
+        },
+        {
+          "label": "disable-mask-after-evaluation",
+          "dt_ms": 100,
+          "inputs": {
+            "1": true
+          },
+          "expect": {
+            "output_mask": 5,
+            "words": {
+              "11": 0
+            }
+          }
+        },
+        {
+          "label": "held-disable-next-mast-off",
+          "dt_ms": 100,
+          "inputs": {
+            "1": true
+          },
+          "expect": {
+            "output_mask": 4
+          }
+        },
+        {
+          "label": "enable-mask-after-evaluation",
+          "dt_ms": 100,
+          "inputs": {
+            "3": true
+          },
+          "expect": {
+            "output_mask": 12,
+            "words": {
+              "11": -1
+            }
+          }
+        },
+        {
+          "label": "enabled-next-mast-on",
+          "dt_ms": 100,
+          "inputs": {},
+          "expect": {
+            "output_mask": 13
+          }
+        }
+      ]
+    },
+    {
+      "id": "g09-schedule-lamp-stop",
+      "variant": "g09-schedule-memory",
+      "rtc_seed": {
+        "year": 2026,
+        "month": 11,
+        "day": 6,
+        "hours": 19,
+        "minutes": 30,
+        "seconds": 0,
+        "valid": true,
+        "available": true
+      },
+      "oracle": "Both independent M schedules are active at19:30. Application STOP gates Q lamps without overwriting schedule-owned M60/M61; release restores both.",
+      "scope": "Interior overlap with distinct targets, not same-output schedule priority or ambiguous window boundaries.",
+      "coverage_ids": [
+        "fb.schedule",
+        "HW.RTC_SCHEDULE"
+      ],
+      "frames": [
+        {
+          "label": "two-interior-windows",
+          "dt_ms": 100,
+          "inputs": {},
+          "expect": {
+            "output_mask": 15,
+            "words": {
+              "10": 23,
+              "11": -1
+            }
+          }
+        },
+        {
+          "label": "stop-lamps",
+          "dt_ms": 100,
+          "inputs": {
+            "4": true
+          },
+          "expect": {
+            "output_mask": 12
+          }
+        },
+        {
+          "label": "held-stop",
+          "dt_ms": 100,
+          "inputs": {
+            "4": true
+          },
+          "expect": {
+            "output_mask": 12
+          }
+        },
+        {
+          "label": "release-stop",
+          "dt_ms": 100,
+          "inputs": {},
+          "expect": {
+            "output_mask": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "g09-schedule-reserves-unused-m-bits",
+      "variant": "g09-schedule-reservation",
+      "rtc_seed": {
+        "year": 2026,
+        "month": 11,
+        "day": 6,
+        "hours": 19,
+        "minutes": 30,
+        "seconds": 0,
+        "valid": true,
+        "available": true
+      },
+      "oracle": "Schedules own M0/M1 solely through configuration; application C++ never reads those addresses. Both are active initially, disable after SW1140 on the next MAST, and reenable one MAST after FFFF. Boolean scratch must not overwrite either public schedule output.",
+      "scope": "Allocation/control-flow reservation regression with test-harness-only M observation, distinct schedule targets and interior times; not native endpoint or physical evidence.",
+      "coverage_ids": [
+        "fb.schedule",
+        "HW.RTC_SCHEDULE"
+      ],
+      "frames": [
+        {
+          "label": "active-with-false-boolean-temporaries",
+          "dt_ms": 100,
+          "inputs": {},
+          "expect": {
+            "output_mask": 0,
+            "memory_bits": {
+              "0": true,
+              "1": true
+            }
+          }
+        },
+        {
+          "label": "active-with-true-and-temporaries",
+          "dt_ms": 100,
+          "inputs": {
+            "0": true,
+            "1": true
+          },
+          "expect": {
+            "output_mask": 3,
+            "memory_bits": {
+              "0": true,
+              "1": true
+            }
+          }
+        },
+        {
+          "label": "disable-after-current-evaluation",
+          "dt_ms": 100,
+          "inputs": {
+            "2": true,
+            "4": true
+          },
+          "expect": {
+            "output_mask": 5,
+            "memory_bits": {
+              "0": true,
+              "1": true
+            }
+          }
+        },
+        {
+          "label": "disabled-next-mast",
+          "dt_ms": 100,
+          "inputs": {
+            "4": true,
+            "7": true
+          },
+          "expect": {
+            "output_mask": 8,
+            "memory_bits": {
+              "0": false,
+              "1": false
+            }
+          }
+        },
+        {
+          "label": "reenable-after-current-evaluation",
+          "dt_ms": 100,
+          "inputs": {
+            "5": true
+          },
+          "expect": {
+            "output_mask": 4,
+            "memory_bits": {
+              "0": false,
+              "1": false
+            }
+          }
+        },
+        {
+          "label": "reenabled-with-different-temporaries",
+          "dt_ms": 100,
+          "inputs": {
+            "0": true,
+            "1": true,
+            "2": true,
+            "6": true
+          },
+          "expect": {
+            "output_mask": 6,
+            "memory_bits": {
+              "0": true,
+              "1": true
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

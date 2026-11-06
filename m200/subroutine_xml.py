@@ -1,9 +1,9 @@
-"""Isolated native leaf-SR wrapper codec; not whole-project or C++ support.
+"""Native SR wrapper codec, independent of whole-project graph/resource checks.
 
 Only the four observed wrapper fields are owned. Rung XML is structurally closed
 and its opcode syntax is decoded; this is not address/resource validation, graph
-binding verification or execution. Whole-project admission must still validate
-callee IL/configuration/graphs and return context, and remains gated today.
+binding verification or execution. Whole-project admission separately validates
+callee IL/configuration/graphs and return context.
 """
 
 from collections.abc import Mapping
@@ -15,6 +15,7 @@ import xml.etree.ElementTree as ET
 from .flow import split_label
 from .model import fail
 from .native_logic import decode
+from .sequence_graph import is_block as sequence_block, check_graph as check_sequence_graph
 from .subroutine_graph import (
     _container,
     _fields,
@@ -44,12 +45,29 @@ def _body(rungs):
         label, body = split_label(lines)
         if (fields["Label"].text or "") != (label or ""):
             fail("SR rung label and actual IL disagree")
+        if not body:
+            fail("SR rung has no executable body")
         # Native leaf calls cannot nest, even in unused or guarded bodies.
         if any(re.fullmatch(r"SR[0-9]+(?:\s.*)?", line) for line in body):
             fail("native SR calls cannot be nested")
-        decode(body)
+        if body[0].startswith(("BLK %READ_VAR", "BLK %WRITE_VAR", "BLK %WRITE_READ_VAR")):
+            from .communication_graph import full_candidate, parse_full_body
+            from .communication import parse_block
+
+            if full_candidate(lines):
+                parse_full_body(lines)
+            else:
+                parse_block(body)
+        else:
+            decode(body)
         graph = fields.get("LadderElements")
-        if graph is not None:
+        if sequence_block(body):
+            # Admit only the existing G08 canonical layout for this actual IL
+            # block, including its native identity, present pins and optional
+            # Drum F output. Do not whitelist sequence entities in other rungs.
+            # Shared config/capacity checks remain owned by the project layer.
+            check_sequence_graph(rung, body)
+        elif graph is not None:
             for entity in graph:
                 if entity.findtext("ElementType") not in {
                     "NormalContact",
@@ -58,6 +76,21 @@ def _body(rungs):
                     "Operation",
                     "Coil",
                     "End",
+                    "EndCn",
+                    "SetCoil",
+                    "ResetCoil",
+                    "Comparison",
+                    "RisingEdge",
+                    "FallingEdge",
+                    "Timer",
+                    "Counter",
+                    "Register",
+                    "Jump",
+                    "ReadVarBasic",
+                    "WriteVarBasic",
+                    "WriteReadVarBasic",
+                    "Short",
+                    "Open",
                 }:
                     fail("unverified native SR body graph type")
         count += len(lines)

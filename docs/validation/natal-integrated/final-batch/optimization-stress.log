@@ -1,0 +1,117 @@
+python3 tests/stress/optimization.py
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "name": "wire",
+      "cost": {
+        "rungs": 1,
+        "il_instructions": 2,
+        "memory_bits": 0,
+        "memory_words": 0,
+        "required_word_allocation": 0
+      },
+      "positions": 3
+    },
+    {
+      "name": "packed_io",
+      "cost": {
+        "rungs": 2,
+        "il_instructions": 4,
+        "memory_bits": 0,
+        "memory_words": 1,
+        "required_word_allocation": 1
+      },
+      "positions": 4
+    },
+    {
+      "name": "same_scan_q",
+      "cost": {
+        "rungs": 5,
+        "il_instructions": 11,
+        "memory_bits": 1,
+        "memory_words": 0,
+        "required_word_allocation": 0
+      },
+      "positions": 4
+    },
+    {
+      "name": "conditional_write",
+      "cost": {
+        "rungs": 6,
+        "il_instructions": 14,
+        "memory_bits": 2,
+        "memory_words": 0,
+        "required_word_allocation": 0
+      },
+      "positions": 5
+    },
+    {
+      "name": "nested_numeric_guards",
+      "cost": {
+        "rungs": 8,
+        "il_instructions": 18,
+        "memory_bits": 1,
+        "memory_words": 2,
+        "required_word_allocation": 11
+      },
+      "positions": 6
+    },
+    {
+      "name": "bool_chain",
+      "cost": {
+        "rungs": 6,
+        "il_instructions": 15,
+        "memory_bits": 2,
+        "memory_words": 0,
+        "required_word_allocation": 0
+      },
+      "positions": 5
+    },
+    {
+      "name": "bounded_loop",
+      "cost": {
+        "rungs": 13,
+        "il_instructions": 28,
+        "memory_bits": 1,
+        "memory_words": 4,
+        "required_word_allocation": 11
+      },
+      "positions": 4
+    },
+    {
+      "name": "early_return",
+      "cost": {
+        "rungs": 5,
+        "il_instructions": 11,
+        "memory_bits": 1,
+        "memory_words": 0,
+        "required_word_allocation": 0
+      },
+      "positions": 6
+    },
+    {
+      "name": "word_alias",
+      "cost": {
+        "rungs": 4,
+        "il_instructions": 8,
+        "memory_bits": 0,
+        "memory_words": 2,
+        "required_word_allocation": 22
+      },
+      "positions": 3
+    },
+    {
+      "name": "stateless_sr",
+      "cost": {
+        "rungs": 10,
+        "il_instructions": 21,
+        "memory_bits": 2,
+        "memory_words": 2,
+        "required_word_allocation": 12
+      },
+      "positions": 4
+    }
+  ],
+  "distinct_positions": 44
+}

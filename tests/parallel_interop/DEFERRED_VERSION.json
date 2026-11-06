@@ -1,0 +1,13 @@
+{
+  "schema": "m200.parallel-interop.deferred.v1",
+  "status": "DEFERRED_VERSION",
+  "reason": "User narrowed the Christmas release to G01/G02/G06/G07/G08/G09/G11 and explicitly retained RTC.",
+  "lanes": ["G12", "G13", "G14", "G15", "G16", "G17", "G18", "G19", "G20"],
+  "execution_authorized": false,
+  "prepared_corpus": "future_corpus.py",
+  "default_selection": "excluded",
+  "native_editor": "not_run",
+  "local_tests": "not_run",
+  "coverage_promotion": "none",
+  "note": "Prepared future requests are preserved, not validated. Unresolved oracles and runtime/native adapters remain pending. Existing baseline Modbus MBAP tests stay in active G11."
+}

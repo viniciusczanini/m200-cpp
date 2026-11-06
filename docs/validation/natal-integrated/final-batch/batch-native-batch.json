@@ -1,0 +1,127 @@
+{
+  "status": "not_run",
+  "target": "official_local_simulator_only",
+  "products": [
+    {
+      "variant": "supervisor",
+      "project": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/supervisor/generated.smbp",
+      "cases": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/supervisor/cases.json",
+      "project_sha256": "2d1ffff3df54d4032fd09d3b7d5dfad197808a87de5265079889e1794db3b74f",
+      "local_status": "passed_literal_subset",
+      "ready_for_final_native_batch": true,
+      "editor": "not_run",
+      "simulator": "not_run",
+      "physical": "pending"
+    },
+    {
+      "variant": "subroutine",
+      "project": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/subroutine/generated.smbp",
+      "cases": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/subroutine/cases.json",
+      "project_sha256": "f168ce0ba9ec82f9f97e4653ea8fa37e45b2b83526e7e21ecbd2a4be7ec0b507",
+      "local_status": "passed_literal_subset",
+      "ready_for_final_native_batch": true,
+      "editor": "not_run",
+      "simulator": "not_run",
+      "physical": "pending"
+    },
+    {
+      "variant": "modbus-no-transport",
+      "project": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/modbus-no-transport/generated.smbp",
+      "cases": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/modbus-no-transport/cases.json",
+      "project_sha256": "dc97f8c9cb4132c37aa058461597bffa639543bd1315d03065981135ac6ea562",
+      "local_status": "passed_literal_subset",
+      "ready_for_final_native_batch": true,
+      "editor": "not_run",
+      "simulator": "not_run",
+      "physical": "pending"
+    },
+    {
+      "variant": "subroutine-stateful",
+      "project": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/subroutine-stateful/generated.smbp",
+      "cases": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/subroutine-stateful/cases.json",
+      "project_sha256": "ec1bb3b01139ca8124ee337fb81a545b804d1d322428a1a306e45259549e06d8",
+      "local_status": "passed_literal_subset",
+      "ready_for_final_native_batch": true,
+      "editor": "not_run",
+      "simulator": "not_run",
+      "physical": "pending"
+    },
+    {
+      "variant": "g08-drum-clock-lights",
+      "project": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/g08-drum-clock-lights/generated.smbp",
+      "cases": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/g08-drum-clock-lights/cases.json",
+      "project_sha256": "f84f7461f4b8413f33b2d4b515bb73a406bf8be956773aa6126ebc34892fdf62",
+      "local_status": "passed_literal_subset",
+      "ready_for_final_native_batch": true,
+      "editor": "not_run",
+      "simulator": "not_run",
+      "physical": "pending"
+    },
+    {
+      "variant": "g08-drum-direct-outputs",
+      "project": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/g08-drum-direct-outputs/generated.smbp",
+      "cases": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/g08-drum-direct-outputs/cases.json",
+      "project_sha256": "2a3207f743c0b9f971a70621e120d08f0cf34c3fb7e1145a3f93ce45d3ab339f",
+      "local_status": "passed_literal_subset",
+      "ready_for_final_native_batch": true,
+      "editor": "not_run",
+      "simulator": "not_run",
+      "physical": "pending"
+    },
+    {
+      "variant": "g08-sequences-memory",
+      "project": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/g08-sequences-memory/generated.smbp",
+      "cases": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/g08-sequences-memory/cases.json",
+      "project_sha256": "5e0dfb8d79eae726018846921f1ff6ff0c3cb590cca97eb1ec84aa663e69d767",
+      "local_status": "passed_literal_subset",
+      "ready_for_final_native_batch": true,
+      "editor": "not_run",
+      "simulator": "not_run",
+      "physical": "pending"
+    },
+    {
+      "variant": "g09-calendar-lights",
+      "project": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/g09-calendar-lights/generated.smbp",
+      "cases": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/g09-calendar-lights/cases.json",
+      "project_sha256": "74568ff4e55302f2149bae88034fc61d5df7183f6bfecf144fe4f17035085eac",
+      "local_status": "passed_literal_subset",
+      "ready_for_final_native_batch": true,
+      "editor": "not_run",
+      "simulator": "not_run",
+      "physical": "pending"
+    },
+    {
+      "variant": "g09-rtc-clock-lights",
+      "project": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/g09-rtc-clock-lights/generated.smbp",
+      "cases": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/g09-rtc-clock-lights/cases.json",
+      "project_sha256": "32469ddbce6d0bac5ec447cae4a7fbcc03e25d159dcc1602fb7c9cbc788ba7b4",
+      "local_status": "passed_literal_subset",
+      "ready_for_final_native_batch": true,
+      "editor": "not_run",
+      "simulator": "not_run",
+      "physical": "pending"
+    },
+    {
+      "variant": "g09-schedule-memory",
+      "project": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/g09-schedule-memory/generated.smbp",
+      "cases": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/g09-schedule-memory/cases.json",
+      "project_sha256": "5ca8fdb505632966792a43fe5cf0833364056343de0a78c812bfa3fa7ab2cb17",
+      "local_status": "passed_literal_subset",
+      "ready_for_final_native_batch": true,
+      "editor": "not_run",
+      "simulator": "not_run",
+      "physical": "pending"
+    },
+    {
+      "variant": "g09-schedule-reservation",
+      "project": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/g09-schedule-reservation/generated.smbp",
+      "cases": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/g09-schedule-reservation/cases.json",
+      "project_sha256": "4cad17b2c2f8a9c75c6024aaeee9270f0f0dd71bf656feeee90a9eddff0ce097",
+      "local_status": "passed_literal_subset",
+      "ready_for_final_native_batch": true,
+      "editor": "not_run",
+      "simulator": "not_run",
+      "physical": "pending"
+    }
+  ]
+}

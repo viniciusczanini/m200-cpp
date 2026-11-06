@@ -1,0 +1,16 @@
+{
+  "command": [
+    "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+    "-m",
+    "unittest",
+    "-v",
+    "test_natal_subroutines"
+  ],
+  "cwd": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/permanent-sr-regressions/source",
+  "environment_overrides": {
+    "PYTHONPATH": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/permanent-sr-regressions/source/tests"
+  },
+  "returncode": 1,
+  "seconds": 8.404921208000001,
+  "module_execution_count": 1
+}

@@ -1,0 +1,7 @@
+{
+  "status": "passed_prepared_subset_with_pending_ids",
+  "failed_cases": [],
+  "pending_id_count": 41,
+  "all_pinned_inputs_unchanged": true,
+  "results": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/results.json"
+}

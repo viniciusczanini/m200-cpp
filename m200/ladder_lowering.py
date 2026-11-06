@@ -4,8 +4,12 @@ import copy
 import hashlib
 import json
 import re
+from dataclasses import fields as program_fields
 
 from .flow import JUMPS, ENDS, split_label, destinations
+from .sequences import INTERNAL_PINS as SEQUENCE_PINS, PINS as SEQUENCE_INPUTS, identity as sequence_identity
+from .sequence_graph import is_block as sequence_block, parse_block as sequence_graph_parse
+from .register_graph import parse_block as register_graph_parse
 from .lower import Lowerer
 from .native_logic import decode, STORES, OPEN, timer_index
 from .numeric import memory_words_used
@@ -14,13 +18,44 @@ from .model import fail
 from .bits import memory_bits_used
 from .edges import OPS as EDGE_OPS, BASE as EDGE_BASE, SERIES, LOADS
 from .edge_functions import parse as expression_edge
+from .boolean_banks import config as boolean_config
+from .boolean_graph import expression_series
 from .counter_xml import simple as simple_counter
+from .timer_xml import simple as simple_timer
 from .subroutine_contexts import call_target, decoded_rung, static_operand_view
 
 
-def needed(program):
+def _direct_local_return(instructions):
+    """Match the existing native End/EndCn series graph, within one SR.
+
+    Literal predicates still need a materialized contact for conditional END.
+    Master END has a different exit-lowering contract and never uses this path.
+    """
+    if instructions == [("END", "")]:
+        return True
+    if not instructions or instructions[-1][0] not in ("ENDC", "ENDCN"):
+        return False
+    contacts = instructions[:-1]
+    if not contacts:
+        return False
+    width = 0
+    for index, (op, arg) in enumerate(contacts):
+        allowed = ("LD", "LDN", "LDR", "LDF") if index == 0 else (
+            "AND", "ANDN", "ANDR", "ANDF"
+        )
+        if op not in allowed or arg in ("0", "1"):
+            return False
+        if arg.startswith("[") and op not in ("LD", "AND"):
+            return False
+        width += 2 if arg.startswith("[") else 1
+    return width <= 10
+
+
+def needed(program, *, _local_return=False):
     for raw in program.rungs:
         label, rung = split_label(raw)
+        if boolean_config(program).native_expression_edges and expression_series(raw) is not None:
+            continue
         if call_target(rung) is not None:
             if (
                 label is None
@@ -32,22 +67,23 @@ def needed(program):
             ):
                 continue
             return True
+        if sequence_block(rung):
+            try:
+                sequence_graph_parse(rung)
+                continue
+            except ValueError:
+                return True
         if rung[0].startswith("BLK "):
             if re.fullmatch(r"BLK %R[0-9]+", rung[0]):
-                if len(rung) == 8 and all(
-                    re.fullmatch(r"LD %(?:I0\.[0-9]+|M[0-9]+)", rung[i])
-                    for i in (1, 3, 5)
-                ):
+                try:
+                    register_graph_parse(rung)
+                    continue
+                except ValueError:
+                    return True
+            if rung[0].startswith("BLK %TM"):
+                if simple_timer(rung):
                     continue
                 return True
-            if rung[0].startswith("BLK %TM") and any(
-                len(parts) == 2
-                and parts[0] in ("LD", "LDN", "AND", "ANDN")
-                and parts[1] in ("0", "1")
-                for line in rung
-                for parts in [line.split(maxsplit=1)]
-            ):
-                return True  # Timer-pin SHORT/OPEN graphs are not yet bound.
             if rung[0].startswith("BLK %C"):
                 if simple_counter(rung):
                     continue
@@ -73,6 +109,8 @@ def needed(program):
                 continue
             return True
         instructions = decode(rung)
+        if _local_return and _direct_local_return(instructions):
+            continue
         if any(
             op in ("R", "S", "CU", "CD") and arg.startswith("%C") and "." not in arg
             for op, arg in instructions
@@ -89,13 +127,33 @@ def needed(program):
             for i, (op, _) in enumerate(instructions)
         ):
             return True
+        # A native IL predicate may be wider than one eleven-column Ladder
+        # row. Materialize its accumulator rather than rejecting the algorithm
+        # or drawing overlapping contacts/actions.
+        width = sum(2 if arg.startswith("[") else 1
+                    for op, arg in instructions[:-1] if op in SERIES)
+        if width > (9 if instructions[-1][0] == "NUM" else 10):
+            return True
     return False
 
 
-def normalize(program):
-    from .il import validate
+def normalize(
+    program, *, _local_return=False, _reserved=None, _reserved_labels=(),
+    _contexts_done=False,
+):
+    from .il import validate, _validate_flat
 
-    validate(program)
+    def validate_current(value):
+        if _local_return:
+            _validate_flat(value, require_resource_use=False)
+        else:
+            validate(value)
+
+    validate_current(program)
+    if program.subroutines and not _contexts_done:
+        from .subroutine_lowering import normalize_contexts
+
+        return normalize_contexts(program, normalize)
     original_rungs = program.rungs
     # LDN/ANDN digit operands are valid in the local IR, but the installed
     # editor accepts native SHORT/OPEN only with positive LD/AND opcodes.
@@ -115,18 +173,34 @@ def normalize(program):
     if canonical != program.rungs:
         program = copy.deepcopy(program)
         program.rungs = canonical
-    if not needed(program):
+    if not needed(program, _local_return=_local_return):
         return program
     if has_indexed_bits(program):
         fail("indexed-bit normalization bounds/profile are unverified")
     resources = static_operand_view(program)
     bits = memory_bits_used(resources)
+    words = memory_words_used(resources)
+    if _reserved is not None:
+        bits = bits | set(_reserved[0])
+        words = words | set(_reserved[1])
+    context_materialize_constants = (
+        bool(program.subroutines) or boolean_config(program).native_expression_edges
+    )
     lower = Lowerer(
         bits,
-        memory_words_used(resources),
-        materialize_constants=bool(program.subroutines),
+        words,
+        # Ordinary SR rungs support the same SHORT/OPEN contacts as Master.
+        # Lowerer.rung still materializes literals for BLK/ENDC/ENDCN; SR call
+        # predicates retain the existing Master materialization policy.
+        materialize_constants=context_materialize_constants,
     )
     used_labels = set(destinations(program))
+    used_labels.update(_reserved_labels)
+    if program.subroutines:
+        from .subroutine_contexts import context_views
+
+        for _, view in context_views(program):
+            used_labels.update(destinations(view))
     free_labels = iter(f"%L{i}" for i in range(64) if f"%L{i}" not in used_labels)
 
     def new_guard_label(purpose="safe comparison evaluation"):
@@ -137,10 +211,11 @@ def normalize(program):
             )
         return result
 
-    lower.program.timers = copy.deepcopy(program.timers)
-    lower.program.counters = copy.deepcopy(program.counters)
-    lower.program.registers = copy.deepcopy(program.registers)
-    lower.program.communications = copy.deepcopy(program.communications)
+    # Rebuilding rungs must preserve every typed resource/configuration image,
+    # including constants and families added by other compiler providers.
+    for field in program_fields(program):
+        if field.name not in {"rungs", "symbols", "metadata", "subroutines"}:
+            setattr(lower.program, field.name, copy.deepcopy(getattr(program, field.name)))
     lower.program.metadata = copy.deepcopy(program.metadata)
     lower.program.subroutines = copy.deepcopy(program.subroutines)
     acc = lower.bit("native_accumulator")
@@ -160,6 +235,14 @@ def normalize(program):
     for index, raw in enumerate(program.rungs):
         label, rung = split_label(raw)
         rung = [" ".join(line.split()) for line in rung]
+        # Decomposing LD 0/1; ENDC(N) into an accumulator copy is insufficient:
+        # copy fusion can forward that digit back into the native return. Use
+        # real constant contacts throughout a return-bearing source rung, while
+        # keeping ordinary SR SHORT/OPEN rungs on their existing compact path.
+        lower.materialize_constants = context_materialize_constants or (
+            _local_return
+            and any(line.split(maxsplit=1)[0] in ENDS for line in rung)
+        )
         first = len(lower.program.rungs)
         origins = program.metadata.get("rung_origins")
         lower.origin = (
@@ -177,12 +260,13 @@ def normalize(program):
             # raw digit must not become an accepted M contact just because an
             # unrelated expression requires whole-program normalization.
             lower.append(rung)
-        elif not needed(probe):
+        elif not needed(probe, _local_return=_local_return):
             # Each rung begins with a load/block, so its accumulator is not
             # live into the next one. Preserve already-canonical rungs.
             lower.rung(*rung)
         elif (
-            len(rung) == 3
+            not boolean_config(program).native_expression_edges
+            and len(rung) == 3
             and rung[0].split(maxsplit=1)[0] in LOADS
             and not rung[0].startswith("LDN [")
             and expression_edge(rung[1]) is not None
@@ -202,7 +286,20 @@ def normalize(program):
             saved = []
             groups = []
             register_pins = []
+            sequence_pins = {}
             for op, arg in decoded_rung(rung):
+                if op in SEQUENCE_PINS:
+                    if op == "SEQ_COMMIT":
+                        family, _ = sequence_identity(arg)
+                        lines = ["BLK " + arg]
+                        for pin in SEQUENCE_INPUTS[family]:
+                            if pin in sequence_pins:
+                                lines += ["LD " + sequence_pins[pin], pin]
+                        lower.rung(*lines, "END_BLK")
+                        sequence_pins = {}
+                    else:
+                        sequence_pins[op[4:]] = lower.copy(acc, "sequence_pin")
+                    continue
                 if op in ("REG_R", "REG_I", "REG_O"):
                     register_pins.append(lower.copy(acc, "register_pin"))
                     if op == "REG_O":
@@ -223,6 +320,12 @@ def normalize(program):
                     lower.rung("LD " + acc, "SR" + arg)
                     continue
                 if op in ENDS:
+                    if _local_return:
+                        if op == "END":
+                            lower.rung("END")
+                        else:
+                            lower.rung("LD " + acc, op)
+                        continue
                     if exit_label is None:
                         exit_label = new_guard_label("scan exit lowering")
                     lower.jump(
@@ -231,6 +334,9 @@ def normalize(program):
                     exit_count += 1
                     continue
                 if expression_edge(op) is not None:
+                    if boolean_config(program).native_expression_edges:
+                        lower.rung("LD " + acc, op, "ST " + acc)
+                        continue
                     state = expression_state(op)
                     result = lower.bit("expression_edge_result")
                     rising = op.startswith("RISING")
@@ -248,7 +354,9 @@ def normalize(program):
                         ("LDR " if op[-1] == "R" else "LDF ") + arg, "ST " + sample
                     )
                     op, arg = EDGE_BASE[op], sample
-                if op == "NUM":
+                if op == "RTC_EXEC":
+                    lower.rung("LD " + acc, "RTC_EXEC " + arg)
+                elif op == "NUM":
                     lower.rung("LD " + acc, arg)
                 elif op in ("LD", "LDN"):
                     if op == "LDN" and arg.startswith("["):
@@ -291,7 +399,7 @@ def normalize(program):
                     )
                 elif op == "IN":
                     i = timer_index(arg)
-                    lower.timer(i, program.timers[i], acc)
+                    lower.timer(i, program.timers[i], acc, capture=False)
                 elif (
                     op in ("R", "S", "CU", "CD")
                     and arg.startswith("%C")
@@ -315,7 +423,7 @@ def normalize(program):
     if exit_label is not None:
         lower.origin = {"generated": "scan exit anchor after all source rungs"}
         lower.label(exit_label)
-    prefix = lower.constant_rungs + resets
+    prefix = lower.constant_rungs + ([] if _local_return else resets)
     lower.program.rungs = prefix + lower.program.rungs
     lower.program.metadata["rung_origins"] = [
         {"generated": "native logic constants/state initialization"} for _ in prefix
@@ -345,5 +453,17 @@ def normalize(program):
             "initial_history": False,
             "policy": "snapshot input before output/state writes; history advances per execution",
         }
-    validate(normalized)
+    if _local_return and resets:
+        # A skipped first-scan call must not suppress RUN initialization. The
+        # owner places these in Master, independent of the call predicate.
+        # Rewrite the virtual state refs using the allocator's physical symbols.
+        states = {
+            name: ref for ref, name in normalized.symbols.items()
+            if name.startswith("expression_history_")
+        }
+        normalized.metadata["subroutine_run_initializers"] = [
+            ["LD %S13", "R " + states["expression_history_" + op]]
+            for op in expression_states
+        ]
+    validate_current(normalized)
     return normalized

@@ -1,0 +1,22 @@
+{
+  "schema": "m200.native-config-fixtures.v1",
+  "scope": "Exact historical editor saves for configuration-codec regression only; no promotion to an active generated profile or new native observation",
+  "existing_evidence": [
+    "docs/validation/REGISTER-CONFIG-FOUNDATION-RESULTS.json",
+    "docs/validation/REGISTER-NATIVE-OBSERVATIONS.json"
+  ],
+  "files": [
+    {
+      "path": "tests/fixtures/register_config_only/register_fifo_editor_saved.smbp",
+      "sha256": "85219725709cbe90641e25bedddd6bfa4f13011a55e01be4ba087f8f42b09189",
+      "bytes": 106489,
+      "historical_source": "output/editor-validation/native-register-shared-request/editor-saved/register_fifo_editor_saved.smbp"
+    },
+    {
+      "path": "tests/fixtures/register_config_only/register_lifo_editor_saved.smbp",
+      "sha256": "8d04a2bc22bc2466a928ea185d41641f53c5493e26a2a19d690ef8e55822c1ab",
+      "bytes": 106627,
+      "historical_source": "output/editor-validation/native-register-shared-request/editor-saved/register_lifo_editor_saved.smbp"
+    }
+  ]
+}

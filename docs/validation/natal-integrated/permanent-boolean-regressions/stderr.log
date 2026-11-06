@@ -1,0 +1,13 @@
+test_IO_module_channel_aliases_trap_before_provider (__main__.NatalBooleanTests) ... ok
+test_R_S018_clears_only_when_its_accumulator_is_true (__main__.NatalBooleanTests) ... ok
+test_S13_belongs_to_first_explicit_master_interval (__main__.NatalBooleanTests) ... ok
+test_alias_cannot_bypass_clear_only_action_permissions (__main__.NatalBooleanTests) ... ok
+test_balanced_push_if_pop_loop_keeps_literal_results (__main__.NatalBooleanTests) ... ok
+test_legacy_S050_project_reverse_keeps_RTC_semantics (__main__.NatalBooleanTests) ... ok
+test_nonmaster_calls_do_not_reapply_schedule_or_repeat_S13_init (__main__.NatalBooleanTests) ... ok
+test_stack_arms_and_short_circuit_mutations_cannot_leak (__main__.NatalBooleanTests) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 3.667s
+
+OK

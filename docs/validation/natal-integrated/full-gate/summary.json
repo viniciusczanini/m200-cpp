@@ -1,0 +1,82 @@
+{
+  "classification": "failure-classifications.json",
+  "classification_counts": {
+    "genuine_defects": 0,
+    "native_oracle_pending": 6,
+    "obsolete_assertions": 0,
+    "unbound_adapters": 2
+  },
+  "drift_audit": "drift-audit.json",
+  "evidence_hashes": {
+    "all-inputs-after.json": "aaa071a9a4259192acb1e6f3a12d8607b09c642ab84b2d00e197bc7ea468c03d",
+    "all-inputs-before.json": "aaa071a9a4259192acb1e6f3a12d8607b09c642ab84b2d00e197bc7ea468c03d",
+    "command.json": "94648068389c3f69d8c99458dd6f9513145336ff8457e8cabe53a0124a1f224a",
+    "compiler-pins-after.json": "ae2f6934ae4720623e1957e7bae5deaf31413987ede12dafe4fdd5af99f12356",
+    "compiler-pins-before.json": "ae2f6934ae4720623e1957e7bae5deaf31413987ede12dafe4fdd5af99f12356",
+    "drift-audit.json": "485e233b71ffb69f1c4fb30a30cf619f59606e1a936b16f865a45a29d0639e25",
+    "failure-blocks.json": "2097688fa22d864a8de7b2a4f9bcb8b2685dce343ca34d05fdb3383d7d22106a",
+    "failure-classifications.json": "6eb605ae895a17762448d606d0370cc2309aa03ef4c86fca59da264f257b5cd1",
+    "inventory-policy.json": "d7e67fe4fa646e30cf8d27fac15fa45245c95124b6707d0aa6c828a48a2c31e1",
+    "make-check.log": "29a3dcdedd04fe979e7f959aeac9258fa34640db038b29a15ae0a10ab0645764"
+  },
+  "failures": "failure-blocks.json",
+  "freeze_id": "natal-combined-7",
+  "full_gate_result": "INCOMPLETE_EXPLICIT_PENDING",
+  "integrity": {
+    "all_additions_changes_removals": 0,
+    "compiler_sdk_pins": 72,
+    "complete_input_bytes": 114559477,
+    "complete_input_files": 968,
+    "source_test_fixture_doc_research_before_after": "UNCHANGED"
+  },
+  "limits": "Sole full run; no source/expectation edits, filtered discovery, retries, GUI, Wine or CI. Revoada/budgets were not repeated.",
+  "native_preparation_retained": "../../../native-probe-preparation-1/summary.json",
+  "pending_outside_this_gate": [
+    "Official native editor/simulator and physical lifecycle qualification",
+    "G02SDKprimitive poison propagation; passingVMmaskcontrols do not establish it",
+    "RTC_EXEC native binding",
+    "12native observation questions from retained3project preparation; no runtime observations here"
+  ],
+  "positive_regression_evidence": {
+    "G01_expression_edges_follow_calls_not_scan_count.sdk": {
+      "log_line": 9,
+      "status": "PASS"
+    },
+    "G01_expression_edges_follow_calls_not_scan_count.vm": {
+      "log_line": 7,
+      "status": "PASS"
+    },
+    "G08_sc_middle_steps_neutral_full_pins_before_exclusive_reset.sdk": {
+      "log_line": 53,
+      "status": "PASS"
+    },
+    "G08_sc_middle_steps_neutral_full_pins_before_exclusive_reset.vm": {
+      "log_line": 51,
+      "status": "PASS"
+    },
+    "test_exact_actual_editor_saves_read_config_only_and_stay_product_gated": {
+      "log_line": 1011,
+      "status": "PASS"
+    }
+  },
+  "raw_result": {
+    "command": [
+      "make",
+      "check"
+    ],
+    "elapsed_seconds": 300.12,
+    "errors": 0,
+    "exit": 2,
+    "failure_blocks": 8,
+    "passed_methods": 1009,
+    "runs": 1,
+    "skips": 0,
+    "unittest_methods": 1017,
+    "unittest_seconds": 299.866
+  },
+  "scoped_executable_result": {
+    "methods": 1009,
+    "rule": "All1017methods were discovered without filtering.8explicit oracle/adapter pending methods remained rawFAIL; every other method loggedok. This does not close pending functionality or whole-family parity.",
+    "status": "PASS_WITHIN_EXECUTED_SCOPE"
+  }
+}

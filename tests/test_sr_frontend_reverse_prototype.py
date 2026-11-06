@@ -1,4 +1,4 @@
-"""Copied-sandbox full C++/IR/reverse checks, never real checkout support."""
+"""SR frontend/reverse contracts, including G06 loop and shared-resource support."""
 
 import tempfile
 from pathlib import Path
@@ -144,8 +144,6 @@ plc::Subroutine sr{0,leaf};void scan(){plc::output(0,false);plc::write_word(0,7)
             SOURCE.replace("63,leaf", '63,leaf,"name",-1'),
             SOURCE.replace("63,leaf", '63,leaf,"name",2147483648'),
             SOURCE.replace("63,leaf", "63,leaf,plc::read_word(0),2"),
-            SOURCE.replace("void leaf(){", "void leaf(){while(plc::input(2)){}"),
-            SOURCE.replace("void leaf(){", "void leaf(){goto local;local:;"),
         ]
         nested = """#include <plc.hpp>
 void other(){}plc::Subroutine b{1,other};void leaf(){b.call(false);}plc::Subroutine a{0,leaf};void scan(){a.call(true);}
@@ -155,6 +153,33 @@ void other(){}plc::Subroutine b{1,other};void leaf(){b.call(false);}plc::Subrout
             for i, s in enumerate(bad):
                 with self.subTest(i=i), self.assertRaises(CompileError):
                     self.build(s, d, "bad" + str(i) + ".cpp")
+
+    def test_bounded_loop_and_local_goto_have_real_leaf_control_flow(self):
+        sources = [
+            """#include <plc.hpp>
+void leaf(){plc::i16 visits=0;while(visits<3){visits=plc::add_i16(visits,1);}plc::write_word(7,visits);}
+plc::Subroutine sr{0,leaf};void scan(){plc::write_word(7,0);sr.call(plc::input(0));plc::write_word(8,77);plc::output(0,plc::read_word(7)==3);}
+""",
+            """#include <plc.hpp>
+void leaf(){goto local;plc::write_word(7,99);local:plc::write_word(7,3);}
+plc::Subroutine sr{0,leaf};void scan(){plc::write_word(7,0);sr.call(plc::input(0));plc::write_word(8,77);plc::output(0,plc::read_word(7)==3);}
+""",
+        ]
+        frames = [{"inputs": {"0": value}, "dt_ms": 11} for value in (False, True, False)]
+        for index, source in enumerate(sources):
+            with self.subTest(index=index), tempfile.TemporaryDirectory() as d:
+                path, p = self.build(source, d)
+                self.assertTrue(any(line.startswith("%L") for rung in p.subroutines[0].rungs for line in rung))
+                self.assertTrue(any(line == "SR0" for rung in p.rungs for line in rung))
+                reverse, rebuilt = self.build(to_cpp(p), d, "reverse.cpp")
+                for program in (p, Program.from_dict(p.as_dict()), rebuilt):
+                    machine = Machine(program, instruction_limit=1000)
+                    for frame, value in zip(frames, (0, 3, 0)):
+                        self.assertEqual(machine.step(frame["inputs"], 11)[0], value == 3)
+                        self.assertEqual(machine.words[7:9], [value, 77])
+                    self.assertEqual(machine.now, 33)
+                for cpp in (path, reverse):
+                    self.assertEqual([row[0] for row in run_native(cpp, frames)], [False, True, False])
 
     def test_legacy_cpp_and_reverse_remain_v1(self):
         with tempfile.TemporaryDirectory() as d:
@@ -246,15 +271,37 @@ void leaf();void other(){}plc::Subroutine a{63,leaf};plc::Subroutine b{0,other};
                 ):
                     self.build(s, d, "duplicate.cpp")
 
-    def test_unsupported_native_resource_or_edge_leaf_is_refused_at_compilation(self):
-        sources = [
-            "#include <plc.hpp>\nplc::Ton timer{0,10,2};void leaf(){timer.update(plc::input(0));}plc::Subroutine sr{0,leaf};void scan(){sr.call(true);}",
-            "#include <plc.hpp>\nvoid leaf(){plc::output(0,plc::input_rising(0));}plc::Subroutine sr{0,leaf};void scan(){sr.call(true);}",
+    def test_shared_timer_and_native_edge_leaf_have_literal_traces_and_reverse(self):
+        cases = [
+            ("""#include <plc.hpp>
+plc::Ton timer{0,10,2};void leaf(){bool q=timer.update(plc::input(0));plc::output(0,q);}
+plc::Subroutine sr{0,leaf};void scan(){sr.call(true);sr.call(true);plc::output(1,timer.done());}
+""", (False, True, True, True, True),
+             [[False, False], [False, False], [False, False], [True, True], [True, True]]),
+            ("""#include <plc.hpp>
+void leaf(){plc::output(0,plc::input_rising(0));}plc::Subroutine sr{0,leaf};void scan(){sr.call(true);}
+""", (False, True, True, False, True),
+             [[False], [True], [False], [False], [True]]),
         ]
-        with tempfile.TemporaryDirectory() as d:
-            for i, source in enumerate(sources):
-                with self.subTest(i=i), self.assertRaises(CompileError):
-                    self.build(source, d, "unsupported.cpp")
+        for index, (source, inputs, expected) in enumerate(cases):
+            frames = [{"inputs": {"0": value}, "dt_ms": 10} for value in inputs]
+            with self.subTest(index=index), tempfile.TemporaryDirectory() as d:
+                path, p = self.build(source, d)
+                if index == 0:
+                    self.assertEqual(set(p.timers), {0})
+                    self.assertEqual(sum(line == "BLK %TM0" for rung in p.subroutines[0].rungs for line in rung), 1)
+                    self.assertFalse(any(line == "BLK %TM0" for rung in p.rungs for line in rung))
+                    self.assertEqual(to_cpp(p).count("plc::Ton timer_0{"), 1)
+                else:
+                    self.assertTrue(any(line.startswith("LDR %I0.0") for rung in p.subroutines[0].rungs for line in rung))
+                reverse, rebuilt = self.build(to_cpp(p), d, "reverse.cpp")
+                self.assertEqual(rebuilt.timers, p.timers)
+                for program in (p, Program.from_dict(p.as_dict()), rebuilt):
+                    machine = Machine(program)
+                    self.assertEqual([machine.step(frame["inputs"], 10)[:len(expected[0])] for frame in frames], expected)
+                    self.assertEqual(machine.now, 50)
+                for cpp in (path, reverse):
+                    self.assertEqual([row[:len(expected[0])] for row in run_native(cpp, frames)], expected)
 
 
 if __name__ == "__main__":

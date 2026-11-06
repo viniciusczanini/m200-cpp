@@ -1,0 +1,58 @@
+{
+  "status": "passed_five_original_methods_plus_one_focused_corrected_method",
+  "new_module": "/Users/tommy/Offline/projects/m200-cpp/tests/test_natal_subroutines.py",
+  "module_sha256": "82521a18c4c8fcd6534ef87fb3c5b4bb71608503de50dbaa1fdc39cadb5440dc",
+  "source_freeze": "natal-combined-7",
+  "private_root": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/permanent-sr-regressions/source",
+  "tests": {
+    "initial_full_module_runs": 1,
+    "initial_methods": 6,
+    "initial_pass": 5,
+    "initial_selector_failure": 1,
+    "initial_seconds": 8.404921208000001,
+    "focused_runs": 1,
+    "focused_pass": 1,
+    "focused_seconds": 1.6720190000000001,
+    "five_green_methods_repeated": false,
+    "oracle_changes": "none"
+  },
+  "pins": {
+    "private_compiler_sdk_count": 72,
+    "private_compiler_sdk_changes": [],
+    "closed_source_compiler_sdk_changes": [],
+    "closed_source_new_test_exists": false,
+    "private_input_count": 295,
+    "private_changed_inputs": [
+      "tests/test_natal_subroutines.py"
+    ],
+    "only_change_is_documented_new_test_selector": true,
+    "root_module_matches_private": true
+  },
+  "revision": {
+    "cause": "Initial selector searched all SR rungs and matched an auxiliary NormalContact at row0, before the BLK %SC0 rung.",
+    "correction": "Select the rung whose actual IL contains BLK %SC0, then its NormalContact. Literal expected row1, source repro and frame/oracle values unchanged.",
+    "initial_module_sha256": "bf4fc64a94ce1cb417621fc0576ba811f6ace896960d020115bf0109d020714a",
+    "final_module_sha256": "82521a18c4c8fcd6534ef87fb3c5b4bb71608503de50dbaa1fdc39cadb5440dc",
+    "rerun_scope": "Only test_minimal_step_counter_SR_keeps_partial_CU_row_and_history; five passing methods not repeated."
+  },
+  "original_repros": {
+    "MINIMAL": {
+      "path": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/combined-5/test-batch/sequence-sr-minimal.cpp",
+      "sha256": "0741b8bb7be2fbc8ccdb6ef00354cf05edd37ea249a0ae2aa3565bd5731c1e2e",
+      "copied_byte_identical": true
+    },
+    "COMPOSED": {
+      "path": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/combined-5/test-batch/delivered_sequence_sr.cpp",
+      "sha256": "3f263870389b78fa55fc3e6f2848e3182e879fddb01564eeecef95f0ce569f57",
+      "copied_byte_identical": true
+    }
+  },
+  "scope": {
+    "root_files_created": [
+      "tests/test_natal_subroutines.py"
+    ],
+    "other_root_files_changed": "none",
+    "compiler_SDK_GUIfullsuite_CI": "not_changed_or_run",
+    "compatibility": "local regression only; no new capability or native qualification"
+  }
+}

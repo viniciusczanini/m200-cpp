@@ -1,0 +1,6 @@
+{
+  "status": "prepared_not_executed",
+  "products": 11,
+  "inventory_count": 250,
+  "manifest": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/manifest.json"
+}

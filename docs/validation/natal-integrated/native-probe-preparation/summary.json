@@ -1,0 +1,252 @@
+{
+  "compiler_freeze": "natal-combined-5",
+  "cost_boundary": "Static counts and allocation requirements only; not scan-time, watchdog, official admission or endpoint semantics proof. SC255 preparation admission/runtime/watchdog remains an official setup prerequisite.",
+  "evidence_hashes": {
+    "command.json": "a80f7541921803fa9f78c4bb6f40585dc71911714b773fc46783f742f54e369d",
+    "compiler-pins-after.json": "ec39f6553e037869f1b90f0ce5b2bca3ca8cae1672fca6b0a2f97c3cf2afc589",
+    "compiler-pins-before.json": "56283a9c8c388ce0c0bc0c28095442dd8e2abc752cd672d35eac62527217c65e",
+    "copied-inputs.json": "309aae56cc0436f22413b6a27fe71f27da6496cae61b3fe52b7b225ec81306af",
+    "drum/actual-native-program.json": "2331b5f221a17afb01a9b3a8f5cb930335a17957f9f2291b7448ffd36fbebbe4",
+    "drum/drum_actual_reverse.cpp": "abfb6dcb879f5f5ecbcd0c3962b39c714fd2333b067c7fdf3453c7f72c368de5",
+    "drum/drum_observe.smbp": "f1caff303abdbd212b2ee451ede90cb8090999326fd12df1a4f52cb643816d38",
+    "drum/drum_rebuilt.smbp": "7dc450dc210331354ba633588369b6c3ab6b4ce1bd72fe1c4a61f1ceb2dd7e01",
+    "drum/forward-costs.json": "a08ca4ba4f7a2b7c1f26029503f623b33fb67bee4d861415623f4fbd04bcb5b6",
+    "drum/forward-program.json": "40992a5d7fc2777b06d8b54e48b7a029e7e6ae6bf07747dea737aa4741380166",
+    "drum/native-costs.json": "a1493b2f8752281856fd2d432af43c2c79b1a45c6fd455e0891c12faaa667393",
+    "drum/rebuilt-costs.json": "e2c3aba0e36a03a96396a60170fda7e50b73fb746e3e1d9c6a4676620c99f7d7",
+    "drum/rebuilt-program.json": "4cebe40ef1500574c371db141a5cf279cb5cc92153bb12250d694ed022096fbd",
+    "frozen-inputs-after.json": "dae8925a242f2a1c43c847d91e2a85563e4dfe800d235aa3c761442bf754e446",
+    "frozen-inputs-before.json": "dae8925a242f2a1c43c847d91e2a85563e4dfe800d235aa3c761442bf754e446",
+    "inputs/PLAN.md": "7ff351bf63b83722675b7477c31bbc81d359084c57fa6fc4bb82ac06ab354249",
+    "inputs/drum_observe.cpp": "66f301c98b46140c4ed59afddf32cd76fb60028846a237c3d77f577056344981",
+    "inputs/manifest.json": "482163c4412700ac039a4911011426f90c2203ff26db276d95f204f534833c93",
+    "inputs/sbr_observe.cpp": "6fc1a0b70bf6c222f2e1172d9c86eb0a8be0f19365bf2b475b27c0d6ca458ed5",
+    "inputs/sc_observe.cpp": "2cb7bf26691d0d289b27f19683073c98d93487f7f1453915bc61a3f3f9d17888",
+    "pipeline.log": "3ce71ed63b143f3e5a113da3a728b8749f3b0db9a614a4c44bcf997df035e83b",
+    "prepare.py": "886192996cc71c4e07854cc225a09e63d9a42f5673cdc27981bf430ec9ad4341",
+    "reference-pins-before.json": "b493ebdb39ca16a94e9bb5db3c9baf1d31f1ee91454511b4230d793f02bbfbd0",
+    "results.json": "ed3f097cd5412c221aef6d422a348318b1a1bc996a2cdff497d1d5d15d3e18dc",
+    "sbr/actual-native-program.json": "7ce2cfec6ce9034c4a86461c05462e5ed711a1ac562ec069617b4129ae24de02",
+    "sbr/forward-costs.json": "8b4270d04107a58de249b708fd33975bc09acd9a9dbbf56be4ea0b3fa44e6bf7",
+    "sbr/forward-program.json": "536834a8683ea09db8b1dee3fe4a3eb2071412b6c3b72b0aa27e840c18b7b622",
+    "sbr/native-costs.json": "390409b9bbdd3e839649c7eae0853d6fb9c2b9cc67b935561b64d35e53d4b39a",
+    "sbr/rebuilt-costs.json": "2283708d091b56aac4ccfad31152d26764483343b67f3a0d2a981ce6dc44478e",
+    "sbr/rebuilt-program.json": "04937ad7ff3fdd49010181cac67c4599a57640e57b99ddf634792dd7df164bd8",
+    "sbr/sbr_actual_reverse.cpp": "540b79f669108a1d951dc4cdbbb984080fa4aab6981d8060c7373fd15ed0506b",
+    "sbr/sbr_observe.smbp": "710dac4f08c2137d8fc9155253895c99edd762a47135f40e6129f55fed1c45ad",
+    "sbr/sbr_rebuilt.smbp": "791bd6678a74cc1ba5a158651ff01b1347b344049d8fe205ee7fb1e4809705b8",
+    "sc/actual-native-program.json": "f88cf59126b004a73d9153283b014bdec1c046bad925282c2e3513a53d1d1625",
+    "sc/forward-costs.json": "d76a789ebc43bf9dd8d880b3523534e4566db91ab5a45ebe763ef304495d3b0a",
+    "sc/forward-program.json": "78b905edd762dffff159ef8fe49975f507af6a8b0c4173c408b26825b4904381",
+    "sc/native-costs.json": "737da1777eb38601b599172a7b79b5b43ee7d6b01c3e6aaacae9050e7086b812",
+    "sc/rebuilt-costs.json": "8792bbb3c00626d8122c61af50d17c13477fb285da4fed2829ad61e5346f19f5",
+    "sc/rebuilt-program.json": "b09a4d5449b05b8dacc979f653c4440e7a1e2a4979acd243dde46ac3aa868d62",
+    "sc/sc_actual_reverse.cpp": "66f15035973f5b4c5f4cde0927fdff617561a83176060bc212313e822495311e",
+    "sc/sc_observe.smbp": "e61622fe51fd44ef2d8d5c63c22c416bb8c844eeae15ee00503c823864b57c87",
+    "sc/sc_rebuilt.smbp": "5bab984c003c6b2118cacc750e9c36b50dad5eff5f24eb11107b36c828910f64"
+  },
+  "integrity": {
+    "all_frozen_inputs": 92,
+    "authored_reference_manifest_pins_match": true,
+    "compiler_sdk_pins": 72,
+    "source_template_plan_manifest_reference_inputs_unchanged": true
+  },
+  "native_questions": [
+    {
+      "actual": null,
+      "expected": null,
+      "id": "SBR_LEFT_FILL",
+      "status": "PENDING_NATIVE_OBSERVATION"
+    },
+    {
+      "actual": null,
+      "expected": null,
+      "id": "SBR_RIGHT_FILL",
+      "status": "PENDING_NATIVE_OBSERVATION"
+    },
+    {
+      "actual": null,
+      "expected": null,
+      "id": "SBR_PARTIAL_HISTORY",
+      "status": "PENDING_NATIVE_OBSERVATION"
+    },
+    {
+      "actual": null,
+      "expected": null,
+      "id": "SC_ZERO_CD",
+      "status": "PENDING_NATIVE_OBSERVATION"
+    },
+    {
+      "actual": null,
+      "expected": null,
+      "id": "SC_MAX_CU",
+      "status": "PENDING_NATIVE_OBSERVATION"
+    },
+    {
+      "actual": null,
+      "expected": null,
+      "id": "SC_RESET_RELEASE_HISTORY",
+      "status": "PENDING_NATIVE_OBSERVATION"
+    },
+    {
+      "actual": null,
+      "expected": null,
+      "id": "SC_RESET_NEW_CU_COLLISION",
+      "status": "PENDING_NATIVE_OBSERVATION"
+    },
+    {
+      "actual": null,
+      "expected": null,
+      "id": "DR_STEP_VISIBILITY",
+      "status": "PENDING_NATIVE_OBSERVATION"
+    },
+    {
+      "actual": null,
+      "expected": null,
+      "id": "DR_SKIP_PENDING",
+      "status": "PENDING_NATIVE_OBSERVATION"
+    },
+    {
+      "actual": null,
+      "expected": null,
+      "id": "DR_WRITE_NEW_U",
+      "status": "PENDING_NATIVE_OBSERVATION"
+    },
+    {
+      "actual": null,
+      "expected": null,
+      "id": "DR_RESET_NEW_U",
+      "status": "PENDING_NATIVE_OBSERVATION"
+    },
+    {
+      "actual": null,
+      "expected": null,
+      "id": "DR_WRITE_RESET",
+      "status": "PENDING_NATIVE_OBSERVATION"
+    }
+  ],
+  "native_unknown_questions": 12,
+  "official_batch_prerequisites": "Open/compile/inspect/save/reopen exact3artifacts; pin before/after official-save bytes/version/target; preserve question expected=null until actual recorded observation. No physical controller operation authorized.",
+  "preparation_id": "native-probe-preparation-1",
+  "projects": [
+    {
+      "exact_source": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/native-probe-preparation-1/inputs/sbr_observe.cpp",
+      "hardware_configuration_identical_to_authentic_template": true,
+      "local_admission": "PASS",
+      "management_level": "FunctLevelMan21_0",
+      "native_semantics": "PENDING_NATIVE_OBSERVATION",
+      "official_batch_input": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/native-probe-preparation-1/sbr/sbr_observe.smbp",
+      "probe": "sbr",
+      "project_bytes": 467692,
+      "project_sha256": "710dac4f08c2137d8fc9155253895c99edd762a47135f40e6129f55fed1c45ad",
+      "rebuilt_project": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/native-probe-preparation-1/sbr/sbr_rebuilt.smbp",
+      "rebuilt_sha256": "791bd6678a74cc1ba5a158651ff01b1347b344049d8fe205ee7fb1e4809705b8",
+      "runtime": "NOT_EXECUTED",
+      "source_sha256": "6fc1a0b70bf6c222f2e1172d9c86eb0a8be0f19365bf2b475b27c0d6ca458ed5",
+      "static_costs": {
+        "actual_native": {
+          "il_instructions": 274,
+          "memory_bits": 5,
+          "memory_words": 3,
+          "required_word_allocation": 16,
+          "rungs": 106
+        },
+        "forward": {
+          "il_instructions": 274,
+          "memory_bits": 5,
+          "memory_words": 3,
+          "required_word_allocation": 16,
+          "rungs": 106
+        },
+        "rebuilt_cpp": {
+          "il_instructions": 390,
+          "memory_bits": 8,
+          "memory_words": 3,
+          "required_word_allocation": 16,
+          "rungs": 164
+        }
+      },
+      "target": "TM200CE40T"
+    },
+    {
+      "exact_source": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/native-probe-preparation-1/inputs/sc_observe.cpp",
+      "hardware_configuration_identical_to_authentic_template": true,
+      "local_admission": "PASS",
+      "management_level": "FunctLevelMan21_0",
+      "native_semantics": "PENDING_NATIVE_OBSERVATION",
+      "official_batch_input": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/native-probe-preparation-1/sc/sc_observe.smbp",
+      "probe": "sc",
+      "project_bytes": 425876,
+      "project_sha256": "e61622fe51fd44ef2d8d5c63c22c416bb8c844eeae15ee00503c823864b57c87",
+      "rebuilt_project": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/native-probe-preparation-1/sc/sc_rebuilt.smbp",
+      "rebuilt_sha256": "5bab984c003c6b2118cacc750e9c36b50dad5eff5f24eb11107b36c828910f64",
+      "runtime": "NOT_EXECUTED",
+      "source_sha256": "2cb7bf26691d0d289b27f19683073c98d93487f7f1453915bc61a3f3f9d17888",
+      "static_costs": {
+        "actual_native": {
+          "il_instructions": 247,
+          "memory_bits": 8,
+          "memory_words": 6,
+          "required_word_allocation": 16,
+          "rungs": 94
+        },
+        "forward": {
+          "il_instructions": 247,
+          "memory_bits": 8,
+          "memory_words": 6,
+          "required_word_allocation": 16,
+          "rungs": 94
+        },
+        "rebuilt_cpp": {
+          "il_instructions": 365,
+          "memory_bits": 11,
+          "memory_words": 6,
+          "required_word_allocation": 16,
+          "rungs": 153
+        }
+      },
+      "target": "TM200CE40T"
+    },
+    {
+      "exact_source": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/native-probe-preparation-1/inputs/drum_observe.cpp",
+      "hardware_configuration_identical_to_authentic_template": true,
+      "local_admission": "PASS",
+      "management_level": "FunctLevelMan21_0",
+      "native_semantics": "PENDING_NATIVE_OBSERVATION",
+      "official_batch_input": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/native-probe-preparation-1/drum/drum_observe.smbp",
+      "probe": "drum",
+      "project_bytes": 425046,
+      "project_sha256": "f1caff303abdbd212b2ee451ede90cb8090999326fd12df1a4f52cb643816d38",
+      "rebuilt_project": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/native-probe-preparation-1/drum/drum_rebuilt.smbp",
+      "rebuilt_sha256": "7dc450dc210331354ba633588369b6c3ab6b4ce1bd72fe1c4a61f1ceb2dd7e01",
+      "runtime": "NOT_EXECUTED",
+      "source_sha256": "66f301c98b46140c4ed59afddf32cd76fb60028846a237c3d77f577056344981",
+      "static_costs": {
+        "actual_native": {
+          "il_instructions": 230,
+          "memory_bits": 8,
+          "memory_words": 12,
+          "required_word_allocation": 16,
+          "rungs": 93
+        },
+        "forward": {
+          "il_instructions": 230,
+          "memory_bits": 8,
+          "memory_words": 12,
+          "required_word_allocation": 16,
+          "rungs": 93
+        },
+        "rebuilt_cpp": {
+          "il_instructions": 326,
+          "memory_bits": 10,
+          "memory_words": 13,
+          "required_word_allocation": 16,
+          "rungs": 141
+        }
+      },
+      "target": "TM200CE40T"
+    }
+  ],
+  "scope": "Exact authored3input texts copied and compiled; authentic CE40T/Man21 native project export/import/actualreverse/sourcecompile/rebuiltSMBP. No source fixes, VM/SDK execution, GUI, Wine, CI, fullsuite or root/frozen-source mutations.",
+  "status": "3_OF_3_LOCAL_PIPELINE_ADMISSION_PASS"
+}

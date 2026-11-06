@@ -50,11 +50,23 @@ class InactivePulseAliasTests(unittest.TestCase):
         self.assertEqual(ET.tostring(root), before)
         self.assertEqual(SAVED.read_bytes(), self.original)
 
-    def test_exact_saved_profile_reaches_the_unchanged_timer_option_gate(self):
+    def test_exact_saved_profile_reaches_conservative_retention_level_gate(self):
         with self.assertRaisesRegex(
-            CompileError, "timer.mode functional.level mapping is unverified"
+            CompileError, r"timer retention requires functional level >=4\.0.*3\.3/4\.0"
         ):
             load_project(SAVED)
+        self.assertEqual(SAVED.read_bytes(), self.original)
+        # Paired control: the same actual FL3.2 and inactive aliases are valid
+        # when retention is off. Do not promote a stored flag to execution proof.
+        tree = ET.fromstring(self.original)
+        tree.find("./SoftwareConfiguration/Timers/TimerTM/IsRetentive").text = "false"
+        path = self.work / "ordinary_low_level.smbp"
+        path.write_bytes(ET.tostring(tree))
+        before = path.read_bytes()
+        actual = load_project(path)
+        self.assertFalse(actual.timers[0].retentive)
+        self.assertEqual((actual.timers[0].kind, actual.timers[0].base_ms, actual.timers[0].preset), ("TON", 100, 5))
+        self.assertEqual(path.read_bytes(), before)
         self.assertEqual(SAVED.read_bytes(), self.original)
 
     def test_current_and_legacy_aliases_both_validate_disabled_channels(self):

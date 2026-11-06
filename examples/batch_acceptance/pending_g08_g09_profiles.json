@@ -1,0 +1,327 @@
+{
+  "schema": "m200.batch-acceptance.pending-profiles.v1",
+  "status": "prepared_not_executed",
+  "activation_rule": "Entries are not active integrations. Root must confirm an immutable integrated freeze, verify its compiler pins, and create reviewed tests/batch_acceptance/integrations descriptors. Lane delivery alone is insufficient.",
+  "inventory_rule": "Keep all250 IDs classified and all DEFERRED_VERSION states intact. A prepared variant never promotes local/editor/simulator/physical acceptance.",
+  "entries": [
+    {
+      "work_package": "G08",
+      "cases": "examples/batch_acceptance/g08_cases.json",
+      "case_ids": [
+        "g08-interior-sequences"
+      ],
+      "contract": "output/parallel-implementation-2026-11-06/lanes/G08/DELIVERY.md",
+      "variant": {
+        "id": "g08-sequences-memory",
+        "source": "examples/batch_acceptance/sequences_memory.cpp",
+        "template": "tests/fixtures/official_tm200ce40t_memory.smbp",
+        "purpose": "Deterministic interior SBR/SC and three-step DR with M cams, button edges and a loop-derived lamp diagnostic.",
+        "exclusive_ownership": [
+          "SBR0",
+          "SC1",
+          "DR2",
+          "M40..42",
+          "Q0..11",
+          "MW10..14"
+        ],
+        "physical_execution": "pending; no connected loads",
+        "local_transport": "none",
+        "scenarios": [
+          "g08-interior-sequences"
+        ],
+        "expected_resources": {
+          "shift_bit_register_ids": [
+            0
+          ],
+          "step_counter_ids": [
+            1
+          ],
+          "drum_ids": [
+            2
+          ],
+          "timer_ids": [],
+          "subroutine_sections": {}
+        }
+      }
+    },
+    {
+      "work_package": "G08",
+      "cases": "examples/batch_acceptance/g08_cases.json",
+      "case_ids": [
+        "g08-drum-clock-lights"
+      ],
+      "contract": "output/parallel-implementation-2026-11-06/lanes/G08/DELIVERY.md",
+      "variant": {
+        "id": "g08-drum-clock-lights",
+        "source": "examples/batch_acceptance/drum_clock_lights.cpp",
+        "template": "tests/fixtures/official_tm200ce40t_memory.smbp",
+        "purpose": "DR M cams and20ms elapsed Clock feed ordinary lamp outputs with STOP/held/release/restart and a bounded loop.",
+        "exclusive_ownership": [
+          "DR0",
+          "TM0..1",
+          "M40..42",
+          "Q0..6",
+          "MW10..11"
+        ],
+        "physical_execution": "pending; virtual timing is not physical timing",
+        "local_transport": "none",
+        "scenarios": [
+          "g08-drum-clock-lights"
+        ],
+        "expected_resources": {
+          "drum_ids": [
+            0
+          ],
+          "timer_ids": [
+            0,
+            1
+          ],
+          "subroutine_sections": {}
+        }
+      }
+    },
+    {
+      "work_package": "G08",
+      "cases": "examples/batch_acceptance/g08_cases.json",
+      "case_ids": [
+        "g08-direct-cam-output-ownership"
+      ],
+      "contract": "output/parallel-implementation-2026-11-06/lanes/G08/DELIVERY.md",
+      "variant": {
+        "id": "g08-drum-direct-outputs",
+        "source": "examples/batch_acceptance/drum_direct_outputs.cpp",
+        "template": "tests/fixtures/official_tm200ce40t_memory.smbp",
+        "purpose": "Separate profile with exclusive native Q0..2 cams; application diagnostics use Q8 without overwriting cams.",
+        "exclusive_ownership": [
+          "DR7",
+          "native-cam-Q0..2",
+          "diagnostic-Q8",
+          "MW10"
+        ],
+        "physical_execution": "pending; no connected loads",
+        "local_transport": "none",
+        "scenarios": [
+          "g08-direct-cam-output-ownership"
+        ],
+        "expected_resources": {
+          "drum_ids": [
+            7
+          ],
+          "timer_ids": [],
+          "subroutine_sections": {}
+        }
+      }
+    },
+    {
+      "work_package": "G09",
+      "cases": "examples/batch_acceptance/g09_cases.json",
+      "case_ids": [
+        "g09-daily-start-stop",
+        "g09-daily-end-overnight",
+        "g09-year-date-rollover",
+        "g09-overnight-end",
+        "g09-bcd-set-held-buttons",
+        "g09-invalid-clock-stays-dark"
+      ],
+      "contract": "output/parallel-implementation-2026-11-06/lanes/G09/DELIVERY.md",
+      "variant": {
+        "id": "g09-calendar-lights",
+        "source": "examples/batch_acceptance/rtc_calendar_lights.cpp",
+        "template": "tests/fixtures/official_tm200ce40t_memory.smbp",
+        "purpose": "Native S/SW route with explicit battery calendar seed, BCD snapshot/set, daily/overnight windows, year rollover and button/elapsed reset controls.",
+        "exclusive_ownership": [
+          "S50",
+          "SW18..19",
+          "SW49..53",
+          "MW20..23",
+          "MW100..104",
+          "MD110",
+          "Q0..5"
+        ],
+        "physical_execution": "pending; native multiword atomicity is not claimed",
+        "local_transport": "none",
+        "observation_adapter": "rtc_seed_v1",
+        "scenarios": [
+          "g09-daily-start-stop",
+          "g09-daily-end-overnight",
+          "g09-year-date-rollover",
+          "g09-overnight-end",
+          "g09-bcd-set-held-buttons",
+          "g09-invalid-clock-stays-dark"
+        ],
+        "expected_resources": {
+          "timer_ids": [],
+          "rtc_ids": [],
+          "schedule_ids": [],
+          "subroutine_sections": {}
+        }
+      }
+    },
+    {
+      "work_package": "G09",
+      "cases": "examples/batch_acceptance/g09_cases.json",
+      "case_ids": [
+        "g09-rtc-gated-clock-lights"
+      ],
+      "contract": "output/parallel-implementation-2026-11-06/lanes/G09/DELIVERY.md",
+      "variant": {
+        "id": "g09-rtc-clock-lights",
+        "source": "examples/batch_acceptance/rtc_clock_lights.cpp",
+        "template": "tests/fixtures/official_tm200ce40t_memory.smbp",
+        "purpose": "RTC window gates a separate elapsed Clock, with reset and STOP/restart lamp controls.",
+        "exclusive_ownership": [
+          "TM0..1",
+          "SW51..52-read",
+          "S51-read",
+          "Q0..4"
+        ],
+        "physical_execution": "pending; no physical timing claim",
+        "local_transport": "none",
+        "observation_adapter": "rtc_seed_v1",
+        "scenarios": [
+          "g09-rtc-gated-clock-lights"
+        ],
+        "expected_resources": {
+          "timer_ids": [
+            0,
+            1
+          ],
+          "rtc_ids": [],
+          "schedule_ids": [],
+          "subroutine_sections": {}
+        }
+      }
+    },
+    {
+      "work_package": "G09",
+      "cases": "examples/batch_acceptance/g09_cases.json",
+      "case_ids": [
+        "g09-schedule-next-mast",
+        "g09-schedule-lamp-stop"
+      ],
+      "contract": "output/parallel-implementation-2026-11-06/lanes/G09/DELIVERY.md",
+      "variant": {
+        "id": "g09-schedule-memory",
+        "source": "examples/batch_acceptance/rtc_schedule_memory.cpp",
+        "template": "tests/fixtures/official_tm200ce40t_memory.smbp",
+        "purpose": "Sparse Schedule0/15 on distinct M targets; interior window, next-MAST property/mask changes and application STOP on Q lamps.",
+        "exclusive_ownership": [
+          "SCH0",
+          "SCH15",
+          "M60..61",
+          "SW114",
+          "MW10..11",
+          "Q0..3"
+        ],
+        "physical_execution": "pending; endpoint/wrap policies need native observations",
+        "local_transport": "none",
+        "observation_adapter": "rtc_seed_v1",
+        "scenarios": [
+          "g09-schedule-next-mast",
+          "g09-schedule-lamp-stop"
+        ],
+        "expected_resources": {
+          "timer_ids": [],
+          "rtc_ids": [],
+          "schedule_ids": [
+            0,
+            15
+          ],
+          "subroutine_sections": {}
+        }
+      }
+    },
+    {
+      "work_package": "G09",
+      "cases": "examples/batch_acceptance/g09_cases.json",
+      "case_ids": [
+        "g09-schedule-reserves-unused-m-bits"
+      ],
+      "contract": "output/parallel-implementation-2026-11-06/lanes/G09/DELIVERY.md",
+      "variant": {
+        "id": "g09-schedule-reservation",
+        "source": "examples/batch_acceptance/rtc_schedule_reservation.cpp",
+        "template": "tests/fixtures/official_tm200ce40t_memory.smbp",
+        "purpose": "Reserve configured M0/M1 schedule outputs even without source getters, under changing Boolean temporary values.",
+        "exclusive_ownership": [
+          "SCH0",
+          "SCH15",
+          "schedule-only-M0..1",
+          "SW114",
+          "Q0..3"
+        ],
+        "physical_execution": "pending; interior virtual calendar only",
+        "local_transport": "none",
+        "observation_adapter": "rtc_seed_v1",
+        "scenarios": [
+          "g09-schedule-reserves-unused-m-bits"
+        ],
+        "expected_resources": {
+          "timer_ids": [],
+          "rtc_ids": [],
+          "schedule_ids": [
+            0,
+            15
+          ],
+          "subroutine_sections": {}
+        }
+      }
+    }
+  ],
+  "pending_native_qualification": [
+    {
+      "ids": [
+        "fb.sbr"
+      ],
+      "case": "Set vacated endpoints, CU with bit0=1/CD with bit15=1; native fill remains unresolved",
+      "state": "PENDING_NATIVE"
+    },
+    {
+      "ids": [
+        "fb.sc"
+      ],
+      "case": "CD at0, CU at255 and active-changing bit writes",
+      "state": "PENDING_NATIVE"
+    },
+    {
+      "ids": [
+        "fb.sbr",
+        "fb.sc",
+        "fb.dr"
+      ],
+      "case": "Reset/direction collisions, simultaneous directions, omitted active pin history, first TRUE and cold/warm/STOP",
+      "state": "PENDING_NATIVE"
+    },
+    {
+      "ids": [
+        "fb.dr"
+      ],
+      "case": "Pending-step with reset/advance, one-step reset and aliased cams",
+      "state": "PENDING_NATIVE"
+    },
+    {
+      "ids": [
+        "fb.rtc"
+      ],
+      "case": "RTC_EXEC native block/pin/graph binding",
+      "state": "EXPLICIT_NATIVE_EXPORT_GATE"
+    },
+    {
+      "ids": [
+        "fb.schedule",
+        "HW.RTC_SCHEDULE"
+      ],
+      "case": "Native inclusive/equal endpoints, wrapping, invalid fields and same-output OR priority",
+      "state": "PENDING_NATIVE"
+    },
+    {
+      "ids": [
+        "clock.snapshot",
+        "clock.set",
+        "clock.adjust"
+      ],
+      "case": "Native multiword atomicity, S59 adjustment source conflict and physical battery/correction lifecycle",
+      "state": "PENDING_NATIVE"
+    }
+  ]
+}

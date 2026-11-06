@@ -1,4 +1,4 @@
-"""Three observed option contexts; all other XML contexts stay unverified."""
+"""Documented timer admission with independent oracles and pinned scoped evidence."""
 
 import copy
 import hashlib
@@ -181,47 +181,102 @@ class TimerOptionBindingTests(unittest.TestCase):
                     self.fail("Verified independent context rejected: " + str(exc))
                 self.assertEqual(load_project(dest).timers, p.timers)
 
-    def test_unverified_kind_base_or_combination_is_rejected_atomically(self):
+    def test_documented_kind_base_and_option_combinations_serialize_and_run(self):
+        # Literal native spellings/default, independent of production BASES.
+        bases = {1: "OneMilliSeconds", 10: "TenMilliSeconds",
+                 100: "OneHundredMilliSeconds", 1000: "OneSecond", 60000: None}
+        # Each row is (elapsed bases AFTER scan, IN, V at scan, Q at scan).
+        # These expected sequences are constants, not derived from TimerState.
+        timelines = {
+            "TON": [(1, True, 0, False), (1, True, 1, False),
+                    (1, True, 2, False), (0, True, 3, True), (0, False, 0, False)],
+            "TOF": [(0, True, 0, True), (1, False, 0, True),
+                    (1, False, 1, True), (1, False, 2, True),
+                    (0, False, 3, False), (0, True, 0, True)],
+            "TP": [(1, True, 0, True), (1, True, 1, True),
+                   (1, True, 2, True), (0, True, 3, False),
+                   (0, True, 3, False), (0, False, 0, False), (0, True, 0, True)],
+        }
+
+        def check(program, rows, base):
+            machine = Machine(program)
+            for frame, (dt, enabled, value, done) in enumerate(rows):
+                with self.subTest(frame=frame):
+                    self.assertEqual(machine.step({0: enabled}, dt * base)[0], done)
+                    self.assertEqual(tuple(machine.words[:2]), (value, 3))
+                    self.assertEqual(machine.memory[1], done)
+
         for kind in ("TON", "TOF", "TP"):
             for ret, dyn in ((True, False), (False, True), (True, True)):
-                for base in (1, 10, 100, 1000, 60000):
-                    if base == 1000 and (kind, ret, dyn) in (
-                        ("TON", True, False),
-                        ("TOF", True, False),
-                        ("TON", False, True),
-                    ):
-                        continue
+                for base, native_base in bases.items():
                     with self.subTest(kind=kind, base=base, ret=ret, dyn=dyn):
-                        dest = self.work / "unchanged.smbp"
+                        program = self.small_program(kind, base, ret, dyn)
+                        dest = self.work / "combination.smbp"
                         dest.write_bytes(b"previous user output\n")
-                        with self.assertRaises(CompileError):
-                            write_project(
-                                self.small_program(kind, base, ret, dyn), SAVED, dest
+                        if kind == "TP" and ret:
+                            # TP retention remains a genuine unsupported option,
+                            # including a simultaneous dynamic flag at FL14.0.
+                            with self.assertRaisesRegex(CompileError, "retentive TP is unsupported"):
+                                write_project(program, SAVED, dest)
+                            self.assertEqual(dest.read_bytes(), b"previous user output\n")
+                            continue
+                        program.rungs.insert(0, ["LD %I0.0", "ST %M0"])
+                        program.rungs += [
+                            ["LD %M1", "ST %Q0.0"],
+                            ["LD 1", "[%MW0 := %TM0.V]"],
+                            ["LD 1", "[%MW1 := %TM0.P]"],
+                        ]
+                        snapshot = copy.deepcopy(program.as_dict())
+                        write_project(program, SAVED, dest)
+                        actual = load_project(dest)
+                        self.assertEqual(actual.timers, program.timers)
+                        self.assertEqual(program.as_dict(), snapshot)
+                        self.assertEqual(actual.metadata["official_editor"], "pending")
+                        xml = ET.parse(dest)
+                        timer = xml.find("./SoftwareConfiguration/Timers/TimerTM")
+                        self.assertEqual(
+                            tuple(timer.findtext(k) for k in ("Address", "Index", "Type", "Preset", "IsRetentive", "IsDynamicPreset")),
+                            ("%TM0", "0", kind, "3", str(ret).lower(), str(dyn).lower()),
+                        )
+                        self.assertEqual(timer.findtext("Base"), native_base)
+                        self.assertEqual(xml.findtext("ManagementLevel"), LEVEL)
+                        self.assertEqual(
+                            ET.tostring(xml.find("HardwareConfiguration")),
+                            ET.tostring(ET.fromstring(self.raw).find("HardwareConfiguration")),
+                        )
+                        check(program, timelines[kind], base)
+                        check(actual, timelines[kind], base)
+                        # Seven type/flag combinations take the C++ path too;
+                        # changing base alone is covered by all 35 VM/XML cases.
+                        if base == 100:
+                            reverse = self.work / "combination.cpp"
+                            reverse.write_text(to_cpp(actual))
+                            rebuilt = compile_source(reverse)
+                            self.assertEqual(rebuilt.timers, program.timers)
+                            check(rebuilt, timelines[kind], base)
+                            frames = [{"dt_ms": dt * base, "inputs": {0: enabled}}
+                                      for dt, enabled, _, _ in timelines[kind]]
+                            self.assertEqual(
+                                [bits[0] for bits in run_native(reverse, frames)],
+                                [done for _, _, _, done in timelines[kind]],
                             )
-                        self.assertEqual(dest.read_bytes(), b"previous user output\n")
         self.assertEqual(SAVED.read_bytes(), self.raw)
 
     def test_actual_template_level_governs_not_program_metadata(self):
-        program = self.small_program()
-        program.metadata = {
-            "ManagementLevel": LEVEL,
-            "management_level": LEVEL,
-            "official_editor": "verified",
-        }
-        for token in (
-            None,
-            "",
-            "FunctLevelMan5_0",
-            "FunctLevelMan6_0",
-            "FunctLevelMan7_0",
-            "FunctLevelMan17_0",
-            "FunctLevelMan18_0",
-            "FunctLevelMan20_0",
-            "FunctLevelMan22_0",
-            LEVEL + " ",
-            "21",
+        # Hard-coded feature boundaries from O p55 and the pinned token map;
+        # the production classifier is not used to choose expected success.
+        level_cases = (
+            ("FunctLevelMan6_0", False, False),   # FL3.3, disputed retention
+            ("FunctLevelMan7_0", True, False),    # FL4.0
+            ("FunctLevelMan17_0", True, False),   # FL11.0
+            ("FunctLevelMan18_0", True, True),    # FL12.0
+            ("FunctLevelMan20_0", True, True),    # FL13.0
+            (LEVEL, True, True),                 # FL14.0
+        )
+        invalid_tokens = (None, "", "FunctLevelMan5_0", "FunctLevelMan22_0", LEVEL + " ", "21")
+        for token, retention_allowed, dynamic_allowed in (
+            *level_cases, *((token, False, False) for token in invalid_tokens)
         ):
-
             def edit(root):
                 node = root.find("ManagementLevel")
                 if token is None:
@@ -229,20 +284,50 @@ class TimerOptionBindingTests(unittest.TestCase):
                 else:
                     node.text = token
 
-            with self.subTest(token=token):
-                template = self.variant(edit)
-                original = template.read_bytes()
-                destination = self.work / "level.smbp"
-                destination.write_bytes(b"preserved")
-                with self.assertRaises(CompileError):
-                    write_project(program, template, destination)
-                with self.assertRaises(CompileError):
-                    load_project(template)
+            template = self.variant(edit)
+            original = template.read_bytes()
+            for ret, dyn in ((True, False), (False, True), (True, True)):
+                program = self.small_program(ret=ret, dyn=dyn)
+                # A forged high evidence/level marker may neither admit a low
+                # actual level nor block a valid actual token.
+                program.metadata = {"ManagementLevel": LEVEL, "management_level": LEVEL,
+                                    "official_editor": "verified"}
+                snapshot = copy.deepcopy(program.as_dict())
+                allowed = (not ret or retention_allowed) and (not dyn or dynamic_allowed)
+                with self.subTest(token=token, ret=ret, dyn=dyn, allowed=allowed):
+                    destination = self.work / "level.smbp"
+                    destination.write_bytes(b"preserved")
+                    if allowed:
+                        write_project(program, template, destination)
+                        actual = load_project(destination)
+                        self.assertEqual(actual.timers, program.timers)
+                        self.assertEqual(ET.parse(destination).findtext("ManagementLevel"), token)
+                        self.assertEqual(actual.metadata["official_editor"], "pending")
+                    else:
+                        with self.assertRaises(CompileError):
+                            write_project(program, template, destination)
+                        self.assertEqual(destination.read_bytes(), b"preserved")
+                    self.assertEqual(program.as_dict(), snapshot)
+                    self.assertEqual(template.read_bytes(), original)
+                    with self.assertRaises(CompileError):
+                        write_project(program, template, template)
+                    self.assertEqual(template.read_bytes(), original)
+            # This ORIGINAL template still includes a dynamic TON as well as
+            # retention: importing it requires BOTH features, unlike replacing
+            # its program with only one retentive timer on export.
+            with self.subTest(import_original_token=token):
+                if retention_allowed and dynamic_allowed:
+                    actual = load_project(template)
+                    self.assertEqual(actual.timers, {
+                        0: Timer("TON", 20000, 1000, True, False),
+                        1: Timer("TOF", 20000, 1000, True, False),
+                        2: Timer("TON", 20000, 1000, False, True),
+                    })
+                else:
+                    with self.assertRaises(CompileError):
+                        load_project(template)
                 self.assertEqual(template.read_bytes(), original)
-                self.assertEqual(destination.read_bytes(), b"preserved")
-                with self.assertRaises(CompileError):
-                    write_project(program, template, template)
-                self.assertEqual(template.read_bytes(), original)
+        self.assertEqual(SAVED.read_bytes(), self.raw)
 
     def test_forged_metadata_cannot_block_verified_actual_level(self):
         program = self.small_program()
@@ -275,7 +360,7 @@ class TimerOptionBindingTests(unittest.TestCase):
     def test_legacy_low_level_fixture_stays_blocked(self):
         before = LEGACY.read_bytes()
         with self.assertRaisesRegex(
-            CompileError, "timer.*functional.level.*unverified"
+            CompileError, r"timer retention requires functional level >=4\.0.*3\.3/4\.0"
         ):
             load_project(LEGACY)
         self.assertEqual(LEGACY.read_bytes(), before)
@@ -313,14 +398,13 @@ class TimerOptionBindingTests(unittest.TestCase):
                     load_project(malformed)
                 self.assertEqual(malformed.read_bytes(), before)
 
-    def test_import_rejects_unverified_options_without_graph_reinterpretation(self):
-        for tag, value in (
-            ("Base", "TenMilliSeconds"),
-            ("Base", "OneHundredMilliSeconds"),
-            ("IsDynamicPreset", "true"),
-            ("Type", "TP"),
+    def test_import_preserves_documented_config_changes_without_reinterpreting_graph(self):
+        original = load_project(SAVED)
+        for tag, value, expected in (
+            ("Base", "TenMilliSeconds", Timer("TON", 200, 10, True, False)),
+            ("Base", "OneHundredMilliSeconds", Timer("TON", 2000, 100, True, False)),
+            ("IsDynamicPreset", "true", Timer("TON", 20000, 1000, True, True)),
         ):
-
             def edit(root):
                 timer = root.find("./SoftwareConfiguration/Timers/TimerTM")
                 node = timer.find(tag)
@@ -329,11 +413,68 @@ class TimerOptionBindingTests(unittest.TestCase):
                 node.text = value
 
             with self.subTest(tag=tag, value=value):
-                malformed = self.variant(edit)
-                before = malformed.read_bytes()
+                path = self.variant(edit)
+                before = path.read_bytes()
+                actual = load_project(path)
+                self.assertEqual(actual.timers[0], expected)
+                self.assertEqual({i: t for i, t in actual.timers.items() if i != 0},
+                                 {i: t for i, t in original.timers.items() if i != 0})
+                self.assertEqual(actual.rungs, original.rungs)
+                self.assertEqual(actual.metadata["official_editor"], "pending")
+                self.assertEqual(
+                    ET.tostring(ET.parse(path).find("./SoftwareConfiguration/Pous")),
+                    ET.tostring(ET.fromstring(self.raw).find("./SoftwareConfiguration/Pous")),
+                )
+                self.assertEqual(path.read_bytes(), before)
+        # Same unchanged program/ports, but retention is genuinely unavailable
+        # for TP even at a sufficient actual level. A misspelled base is invalid.
+        for tag, value in (("Type", "TP"), ("Base", "TenMilliSecond")):
+            def edit(root):
+                timer = root.find("./SoftwareConfiguration/Timers/TimerTM")
+                node = timer.find(tag)
+                if node is None:
+                    node = ET.SubElement(timer, tag)
+                node.text = value
+            with self.subTest(invalid_tag=tag, invalid_value=value):
+                path = self.variant(edit)
+                before = path.read_bytes()
                 with self.assertRaises(CompileError):
-                    load_project(malformed)
-                self.assertEqual(malformed.read_bytes(), before)
+                    load_project(path)
+                dest = self.work / "preserved_config.smbp"
+                dest.write_bytes(b"keep config destination")
+                # Export replaces the template program: test an actually
+                # invalid candidate, not discarded old timer configuration.
+                invalid = self.small_program(kind="TP") if tag == "Type" else self.small_program(base=2)
+                with self.assertRaises(CompileError):
+                    write_project(invalid, SAVED, dest)
+                self.assertEqual(dest.read_bytes(), b"keep config destination")
+                self.assertEqual(path.read_bytes(), before)
+        self.assertEqual(SAVED.read_bytes(), self.raw)
+
+    def test_native_timer_identity_base_and_preset_boundaries_are_atomic(self):
+        def program(index, base, preset):
+            return Program(
+                [[f"BLK %TM{index}", "LD %M0", "IN", "OUT_BLK", "LD Q", "ST %M1", "END_BLK"]],
+                {index: Timer("TON", preset * base, base)},
+            )
+        for index, base, preset in ((0, 1, 0), (5, 1, 9999), (6, 10, 0), (254, 60000, 9999)):
+            with self.subTest(valid=(index, base, preset)):
+                p = program(index, base, preset)
+                path = self.work / "boundary.smbp"
+                write_project(p, SAVED, path)
+                self.assertEqual(load_project(path).timers, p.timers)
+        for index, base, preset in ((-1, 100, 3), (255, 100, 3), (6, 1, 3),
+                                    (0, 2, 3), (0, 100, -1), (0, 100, 10000)):
+            with self.subTest(invalid=(index, base, preset)):
+                p = program(index, base, preset)
+                snapshot = copy.deepcopy(p.as_dict())
+                path = self.work / "invalid_boundary.smbp"
+                path.write_bytes(b"keep boundary destination")
+                with self.assertRaises(CompileError):
+                    write_project(p, SAVED, path)
+                self.assertEqual(path.read_bytes(), b"keep boundary destination")
+                self.assertEqual(p.as_dict(), snapshot)
+        self.assertEqual(SAVED.read_bytes(), self.raw)
 
     def test_readonly_properties_and_invalid_presets_or_mode_types_fail_first(self):
         programs = [

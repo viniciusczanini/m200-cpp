@@ -1,0 +1,58 @@
+[
+  {
+    "body": "Traceback (most recent call last):\n  File \"/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/combined-7/source/tests/parallel_semantics/test_semantics.py\", line 27, in runTest\n    raise PendingOracleError(case.name+\": \"+case.oracle_status+\"; \"+case.basis)\nparallel_semantics.contracts.PendingOracleError: G08_sc_middle_steps_and_exclusive_reset: pending_native_reset_history; PENDING native reset/history qualification; original preliminary oracle retained: Generic pp155-158; middle transitions only, no guessed endpoint or ambiguous one-hot write.",
+    "case": "parallel_semantics.G08_sc_middle_steps_and_exclusive_reset.vm",
+    "header": "runTest (parallel_semantics.test_semantics.semantic_case.<locals>.SemanticCase)\nparallel_semantics.G08_sc_middle_steps_and_exclusive_reset.vm",
+    "index": 0,
+    "kind": "FAIL"
+  },
+  {
+    "body": "Traceback (most recent call last):\n  File \"/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/combined-7/source/tests/parallel_semantics/test_semantics.py\", line 27, in runTest\n    raise PendingOracleError(case.name+\": \"+case.oracle_status+\"; \"+case.basis)\nparallel_semantics.contracts.PendingOracleError: G08_sc_middle_steps_and_exclusive_reset: pending_native_reset_history; PENDING native reset/history qualification; original preliminary oracle retained: Generic pp155-158; middle transitions only, no guessed endpoint or ambiguous one-hot write.",
+    "case": "parallel_semantics.G08_sc_middle_steps_and_exclusive_reset.sdk",
+    "header": "runTest (parallel_semantics.test_semantics.semantic_case.<locals>.SemanticCase)\nparallel_semantics.G08_sc_middle_steps_and_exclusive_reset.sdk",
+    "index": 1,
+    "kind": "FAIL"
+  },
+  {
+    "body": "Traceback (most recent call last):\n  File \"/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/combined-7/source/tests/parallel_semantics/test_semantics.py\", line 27, in runTest\n    raise PendingOracleError(case.name+\": \"+case.oracle_status+\"; \"+case.basis)\nparallel_semantics.contracts.PendingOracleError: G01_edge_cold_warm_stop_RUN_history_is_not_guessed: pending_contract_or_native_oracle; Native lifecycle equivalence remains pending. CONTRACT/DELIVERY must state the exact local event policy before an oracle is admitted.",
+    "case": "parallel_semantics.G01_edge_cold_warm_stop_RUN_history_is_not_guessed.vm",
+    "header": "runTest (parallel_semantics.test_semantics.semantic_case.<locals>.SemanticCase)\nparallel_semantics.G01_edge_cold_warm_stop_RUN_history_is_not_guessed.vm",
+    "index": 2,
+    "kind": "FAIL"
+  },
+  {
+    "body": "Traceback (most recent call last):\n  File \"/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/combined-7/source/tests/parallel_semantics/test_semantics.py\", line 27, in runTest\n    raise PendingOracleError(case.name+\": \"+case.oracle_status+\"; \"+case.basis)\nparallel_semantics.contracts.PendingOracleError: G01_edge_cold_warm_stop_RUN_history_is_not_guessed: pending_contract_or_native_oracle; Native lifecycle equivalence remains pending. CONTRACT/DELIVERY must state the exact local event policy before an oracle is admitted.",
+    "case": "parallel_semantics.G01_edge_cold_warm_stop_RUN_history_is_not_guessed.sdk",
+    "header": "runTest (parallel_semantics.test_semantics.semantic_case.<locals>.SemanticCase)\nparallel_semantics.G01_edge_cold_warm_stop_RUN_history_is_not_guessed.sdk",
+    "index": 3,
+    "kind": "FAIL"
+  },
+  {
+    "body": "Traceback (most recent call last):\n  File \"/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/combined-7/source/tests/parallel_semantics/test_semantics.py\", line 27, in runTest\n    raise PendingOracleError(case.name+\": \"+case.oracle_status+\"; \"+case.basis)\nparallel_semantics.contracts.PendingOracleError: G08_unresolved_native_domains_remain_visible_gaps: pending_native_oracle; G08 explicitly retains unmodeled collision/endpoint domains; a refusal is not completed semantic coverage.",
+    "case": "parallel_semantics.G08_unresolved_native_domains_remain_visible_gaps.vm",
+    "header": "runTest (parallel_semantics.test_semantics.semantic_case.<locals>.SemanticCase)\nparallel_semantics.G08_unresolved_native_domains_remain_visible_gaps.vm",
+    "index": 4,
+    "kind": "FAIL"
+  },
+  {
+    "body": "Traceback (most recent call last):\n  File \"/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/combined-7/source/tests/parallel_semantics/test_semantics.py\", line 27, in runTest\n    raise PendingOracleError(case.name+\": \"+case.oracle_status+\"; \"+case.basis)\nparallel_semantics.contracts.PendingOracleError: G08_unresolved_native_domains_remain_visible_gaps: pending_native_oracle; G08 explicitly retains unmodeled collision/endpoint domains; a refusal is not completed semantic coverage.",
+    "case": "parallel_semantics.G08_unresolved_native_domains_remain_visible_gaps.sdk",
+    "header": "runTest (parallel_semantics.test_semantics.semantic_case.<locals>.SemanticCase)\nparallel_semantics.G08_unresolved_native_domains_remain_visible_gaps.sdk",
+    "index": 5,
+    "kind": "FAIL"
+  },
+  {
+    "body": "Traceback (most recent call last):\n  File \"/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/combined-7/source/tests/parallel_semantics/test_semantics.py\", line 29, in runTest\n    actual = execute(binding,engine,case.adapter_input(),Path(repo),Path(folder))\n  File \"/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/combined-7/source/tests/parallel_semantics/adapters.py\", line 26, in execute\n    raise PendingAdapterError(binding[\"key\"] + \" has no independent \" + engine + \" host binding yet\")\nparallel_semantics.contracts.PendingAdapterError: G11_async has no independent sdk host binding yet",
+    "case": "parallel_semantics.G11_busy_dynamic_buffer_change_does_not_redirect_active_read.sdk",
+    "header": "runTest (parallel_semantics.test_semantics.semantic_case.<locals>.SemanticCase)\nparallel_semantics.G11_busy_dynamic_buffer_change_does_not_redirect_active_read.sdk",
+    "index": 6,
+    "kind": "FAIL"
+  },
+  {
+    "body": "Traceback (most recent call last):\n  File \"/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/combined-7/source/tests/parallel_semantics/test_semantics.py\", line 29, in runTest\n    actual = execute(binding,engine,case.adapter_input(),Path(repo),Path(folder))\n  File \"/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/combined-7/source/tests/parallel_semantics/adapters.py\", line 26, in execute\n    raise PendingAdapterError(binding[\"key\"] + \" has no independent \" + engine + \" host binding yet\")\nparallel_semantics.contracts.PendingAdapterError: G11_async has no independent sdk host binding yet",
+    "case": "parallel_semantics.G11_abort_prevents_late_response_buffer_mutation.sdk",
+    "header": "runTest (parallel_semantics.test_semantics.semantic_case.<locals>.SemanticCase)\nparallel_semantics.G11_abort_prevents_late_response_buffer_mutation.sdk",
+    "index": 7,
+    "kind": "FAIL"
+  }
+]

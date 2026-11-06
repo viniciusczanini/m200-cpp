@@ -1,0 +1,74 @@
+{
+  "freeze_id": "natal-batch-final-1",
+  "status": "passed_prepared_subset_full_parity_incomplete",
+  "batch": {
+    "variants": 11,
+    "cases": 24,
+    "literal_positions": 201,
+    "local_routes": 7,
+    "route_observations": 1407,
+    "failed_cases": [],
+    "seconds": 21.645835124999998,
+    "pending_ids": 41,
+    "deferred_ids": 164,
+    "inventory_count": 250,
+    "inventory_local_states": {
+      "passed_literal_subset": 45,
+      "not_run_pending_case_or_contract": 41,
+      "DEFERRED_VERSION": 164
+    },
+    "all_batch_pins_unchanged": true,
+    "batch_pin_count": 98,
+    "full_parity": "incomplete"
+  },
+  "optimization": {
+    "status": "PASS",
+    "cases": 10,
+    "positions": 44,
+    "seconds": 7.1474455,
+    "all_budgets_within_maxima": true,
+    "results": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/source/output/optimization/results.json"
+  },
+  "Revoada": {
+    "status": "PASS sampled-clock contract",
+    "seconds": 22.4815705,
+    "source_sha256": "37e2386fe336e4ef411ad3eb7ee468c4800083708049b5d22c6b93bf1b17cb7d",
+    "sampled_positions": 9845,
+    "controls": 14,
+    "rungs": 46,
+    "IL": 103,
+    "M_unique": 5,
+    "M_span": 5,
+    "MW_unique": 7,
+    "MW_span": 181,
+    "timers": 0,
+    "results": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/source/output/final-batch-revoada/results.json",
+    "tradeoff": "First quantum500..600ms depends on START/clock phase; later600ms only when all rising/falling levels sampled. No missed-edge/saturation/monotonic-time guarantee or absolute START-phase parity."
+  },
+  "pins": {
+    "compiler_sdk": 72,
+    "compiler_sdk_changes": [],
+    "test_example_inputs_before": 294,
+    "test_example_inputs_after": 294,
+    "test_example_input_changes": []
+  },
+  "artifacts": {
+    "exact_native_manifest": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/native-final-batch.json",
+    "resource_budgets": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/resource-budgets.json",
+    "seven_route_results": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/results.json",
+    "finite250_inventory": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/manifest.json"
+  },
+  "execution_count": {
+    "prepare": 1,
+    "batch_run": 1,
+    "optimization_stress": 1,
+    "Revoada": 1
+  },
+  "scope": {
+    "GUI_Wine_CI": "not_run",
+    "core_root_source_test_mutations": "none",
+    "fullunit": "not_repeated",
+    "make_examples": "not_repeated",
+    "native_questions": "PENDING"
+  }
+}

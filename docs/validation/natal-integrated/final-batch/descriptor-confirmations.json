@@ -1,0 +1,54 @@
+{
+  "status": "confirmed_only_notice_compiler_pins_changed",
+  "descriptors": [
+    {
+      "descriptor": "tests/batch_acceptance/integrations/g08-drum-clock-lights.json",
+      "old_sha256": "03ab2c11cb6b4e8c218db4f6f4ab6281861758662a5f8c28c2096a59b21aef9f",
+      "final_sha256": "e9b71a6cd8711769850a095bc5698d4d0387d51f5a53e629febac68d66a8e31a",
+      "all_fields_except_notice_and_compiler_pins_unchanged": true,
+      "final_confirmed_core_pins": 72
+    },
+    {
+      "descriptor": "tests/batch_acceptance/integrations/g08-drum-direct-outputs.json",
+      "old_sha256": "2a546641973e45a7a4ce0b77f5aa2822cefbf5fd2ed0b565da10115b5b8dabfd",
+      "final_sha256": "30075208fa770336e1c05e5196e538ede8e59c80ffa691d7013ea54c78b58c4c",
+      "all_fields_except_notice_and_compiler_pins_unchanged": true,
+      "final_confirmed_core_pins": 72
+    },
+    {
+      "descriptor": "tests/batch_acceptance/integrations/g08-sequences-memory.json",
+      "old_sha256": "c319465643ceea01617d4c97b7b8fa075347005d26b129eeb628c281671ed88f",
+      "final_sha256": "283c85f84a59f0fa81cc97ad2d846a8d279b9b4ff8e0c5e00d11735755ef37fd",
+      "all_fields_except_notice_and_compiler_pins_unchanged": true,
+      "final_confirmed_core_pins": 72
+    },
+    {
+      "descriptor": "tests/batch_acceptance/integrations/g09-calendar-lights.json",
+      "old_sha256": "42025f22d6b62fb7860a2b8c194e8f2dd2572f36326418f6414616746156e2fd",
+      "final_sha256": "fe3c2f0ca56dfdab79a41c8e09505d4a3426c22518ac5b95d42d80b29df2420c",
+      "all_fields_except_notice_and_compiler_pins_unchanged": true,
+      "final_confirmed_core_pins": 72
+    },
+    {
+      "descriptor": "tests/batch_acceptance/integrations/g09-rtc-clock-lights.json",
+      "old_sha256": "43f319fba2481f5e8f7152ce1ee6d57bfdf910afee0490d2523c16d6f74bdc8c",
+      "final_sha256": "9f70d2bd7754cb55c103a1048f77531d61a86e2041c7326e77e0abdcf2fd7933",
+      "all_fields_except_notice_and_compiler_pins_unchanged": true,
+      "final_confirmed_core_pins": 72
+    },
+    {
+      "descriptor": "tests/batch_acceptance/integrations/g09-schedule-memory.json",
+      "old_sha256": "c15becc736225a43b305544e74f8a8b7b446a545a0b8f8a0f526fe28131aff78",
+      "final_sha256": "624fabeb501e712a057ba85b3e74d1cbbad6c76fa28bf1923e63a611c286b5d4",
+      "all_fields_except_notice_and_compiler_pins_unchanged": true,
+      "final_confirmed_core_pins": 72
+    },
+    {
+      "descriptor": "tests/batch_acceptance/integrations/g09-schedule-reservation.json",
+      "old_sha256": "6478650ae7bb8447281373bc5f3490d95476c7d656eaa3be1cafba3ba5ee09f2",
+      "final_sha256": "a83bbf0cef28ebcda1bc52c183f0df3c3d923ed6b059cf8b06699574bbbd13a1",
+      "all_fields_except_notice_and_compiler_pins_unchanged": true,
+      "final_confirmed_core_pins": 72
+    }
+  ]
+}

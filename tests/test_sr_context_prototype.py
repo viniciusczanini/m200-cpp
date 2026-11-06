@@ -1,4 +1,4 @@
-"""Ignored prototype checks; no real product/628-suite source changes."""
+"""SR context contracts; G06 extensions with independent literal oracles."""
 
 from pathlib import Path
 import tempfile
@@ -115,7 +115,8 @@ class PrototypeContexts(unittest.TestCase):
             with self.assertRaises(CompileError):
                 validate(p)
 
-    def test_unsupported_stateful_and_continuation_are_explicit(self):
+    def test_undefined_stateful_resource_and_call_continuation_are_explicit(self):
+        # Stateful SRs are supported; an unconfigured timer is still invalid.
         p = candidate()
         p.subroutines[0].rungs = [
             ["BLK %TM0", "LD %I0.0", "IN", "OUT_BLK", "LD Q", "ST %M1", "END_BLK"]
@@ -126,10 +127,61 @@ class PrototypeContexts(unittest.TestCase):
         p.rungs[5].append("ST %M90")
         with self.assertRaises(CompileError):
             validate(p)
-        p = candidate()
-        p.subroutines[0].rungs = [["%L0:", "LD 1", "ST %M0"]]
-        with self.assertRaises(CompileError):
-            validate(p)
+
+    def test_local_labels_loop_and_return_resume_the_caller(self):
+        p = Program(
+            rungs=[["LD 1", "[%MW7:=0]"], ["LD 1", "SR0"],
+                   ["LD 1", "[%MW8:=77]"]],
+            subroutines={0: SubroutineDefinition(0, "loop", 2, [
+                ["%L0:", "LD 1", "[%MW7:=%MW7+1]"],
+                ["LD [%MW7<3]", "JMPC %L0"],
+                ["END"],
+                ["LD 1", "[%MW7:=99]"],
+            ])},
+        )
+        validate(p)
+        machine = Machine(p, instruction_limit=100)
+        machine.step({}, 17)
+        self.assertEqual(machine.words[7:9], [3, 77])
+        self.assertEqual(machine.now, 17)
+        # A destination in another context cannot satisfy a leaf jump, and
+        # application label identities cannot be duplicated between contexts.
+        for duplicate in (False, True):
+            invalid = Program.from_dict(p.as_dict())
+            if duplicate:
+                invalid.rungs[0].insert(0, "%L0:")
+            else:
+                invalid.subroutines[0].rungs[1][-1] = "JMPC %L1"
+                invalid.rungs[0].insert(0, "%L1:")
+            with self.subTest(duplicate=duplicate), self.assertRaises(CompileError):
+                validate(invalid)
+
+    def test_configured_timer_is_shared_across_repeated_leaf_calls(self):
+        from m200.model import Timer
+        from m200.frontend import compile_source
+
+        p = Program(
+            rungs=[["LD 1", "SR0"], ["LD 1", "SR0"],
+                   ["LD %TM0.Q", "ST %Q0.0"],
+                   ["LD 1", "[%MW4:=%TM0.V]"]],
+            timers={0: Timer("TON", 20, 10)},
+            subroutines={0: SubroutineDefinition(0, "shared timer", 2, [
+                ["BLK %TM0", "LD %I0.0", "IN", "OUT_BLK", "LD Q", "ST %M1", "END_BLK"]
+            ])},
+        )
+        reverse = to_cpp(p)
+        self.assertEqual(reverse.count("plc::Ton timer_0{"), 1)
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "shared.cpp"
+            path.write_text(reverse)
+            rebuilt = compile_source(path)
+        self.assertEqual(rebuilt.timers, p.timers)
+        for program in (p, Program.from_dict(p.as_dict()), rebuilt):
+            machine = Machine(program)
+            for expected_done, expected_ticks in ((False, 0), (False, 1), (True, 2)):
+                self.assertEqual(machine.step({"0": True}, 10)[0], expected_done)
+                self.assertEqual(machine.words[4], expected_ticks)
+            self.assertEqual(machine.now, 30)
 
     def test_sdk_conditional_leaf_early_return_shares_native_scan_state(self):
         with tempfile.TemporaryDirectory() as folder:
@@ -233,29 +285,66 @@ void scan(){plc::write_word(0,10);plc::write_word(1,0);plc::output(1,false);plc:
                 self.assertEqual(rebuilt.words[:observed_words], expected_words)
                 self.assertEqual(run_native(source, [{"dt_ms": 10}]), [expected])
 
-    def test_indexed_leaf_refused_until_internal_guard_transfers_are_supported(self):
-        for body in ([["LD 1", "[%MW1:=%MW0[%MW0]]"]], [["LD %M0[%MW0]", "ST %Q0.0"]]):
-            p = Program(
-                rungs=[["LD 1", "SR0"]],
-                subroutines={0: SubroutineDefinition(0, "indexed", 2, body)},
-            )
-            for operation in (validate, Machine, to_cpp):
-                with self.assertRaisesRegex(CompileError, "indexed leaf"):
-                    operation(p)
+    def test_indexed_leaf_uses_shared_image_and_reports_runtime_bounds(self):
+        from m200.frontend import compile_source
 
-    def test_native_unconditional_leaf_end_requires_its_own_rung(self):
-        for body in (["END"], ["LD %I0.1", "ENDC"], ["LD %I0.1", "ENDCN"]):
-            p = Program(
-                rungs=[["LD %I0.0", "SR0"]],
-                subroutines={0: SubroutineDefinition(0, "leaf", 2, [body])},
-            )
-            validate(p)
-        for body in (["LD %I0.1", "END"], ["LDN %M0", "END"]):
-            p = Program(
-                rungs=[["LD %I0.0", "SR0"]],
-                subroutines={0: SubroutineDefinition(0, "leaf", 2, [body])},
-            )
-            with self.assertRaisesRegex(CompileError, "END must be the sole"):
+        # Index 2 is the final shared cell; index 3 falls back to base0 and sets
+        # S20. These literals are independent of any inline implementation.
+        for bits in (False, True):
+            for offset in (2, 3):
+                with self.subTest(bits=bits, offset=offset):
+                    before = [["LD 1", f"[%MW0:={offset}]"],
+                              ["LD 1", "ST %M2"] if bits else ["LD 1", "[%MW2:=22]"]]
+                    leaf = ([["LD %M0[%MW0]", "ST %Q0.0"]] if bits else
+                            [["LD 1", "[%MW1:=%MW0[%MW0]]"],
+                             ["LD [%MW1=22]", "ST %Q0.0"]])
+                    p = Program(
+                        rungs=before + [["LD 1", "SR0"], ["LD %S20", "ST %Q0.15"]],
+                        subroutines={0: SubroutineDefinition(0, "indexed", 2, leaf)},
+                    )
+                    validate(p)
+                    with tempfile.TemporaryDirectory() as folder:
+                        path = Path(folder) / "indexed.cpp"
+                        path.write_text(to_cpp(p))
+                        rebuilt = compile_source(path)
+                    for program in (p, Program.from_dict(p.as_dict()), rebuilt):
+                        machine = Machine(program)
+                        outputs = machine.step({}, 10)
+                        self.assertEqual(outputs[0], offset == 2)
+                        self.assertEqual(outputs[15], offset == 3)
+                        self.assertEqual(machine.index_error, offset == 3)
+                        if not bits:
+                            self.assertEqual(machine.words[1], 22 if offset == 2 else 3)
+        # Direct addresses outside the native banks are genuine invalid cases.
+        for leaf in ([["LD 1", "[%MW8000:=%MW0[%MW0]]"]],
+                     [["LD %M1024", "ST %Q0.0"]]):
+            p = Program(rungs=[["LD 1", "SR0"]],
+                        subroutines={0: SubroutineDefinition(0, "invalid", 2, leaf)})
+            with self.assertRaises(CompileError):
+                validate(p)
+
+    def test_unconditional_END_ignores_accumulator_and_returns_only_from_leaf(self):
+        # The local IL accepts a load before unconditional END. It still returns
+        # even with a false accumulator; native export may canonicalize the rung.
+        for terminal in (["END"], ["LD %I0.1", "END"], ["LDN %M0", "END"]):
+            for enabled in (False, True):
+                p = Program(
+                    rungs=[["LD 1", "SR0"], ["LD 1", "[%MW8:=77]"]],
+                    subroutines={0: SubroutineDefinition(0, "leaf", 2, [
+                        ["LD 1", "[%MW7:=20]"], terminal,
+                        ["LD 1", "[%MW7:=99]"],
+                    ])},
+                )
+                validate(p)
+                machine = Machine(p)
+                machine.step({"1": enabled}, 10)
+                self.assertEqual(machine.words[7:9], [20, 77])
+        for body in (["LD %I0.1", "END 0"],
+                     ["LD %I0.1", "END", "ST %M0"],
+                     ["LD %I0.1", "AND( %M0", "ENDC", ")"]):
+            p = Program(rungs=[["LD 1", "SR0"]],
+                        subroutines={0: SubroutineDefinition(0, "invalid", 2, [body])})
+            with self.assertRaises(CompileError):
                 validate(p)
 
     def test_cli_artifacts_source_maps_and_statistics_include_every_context(self):

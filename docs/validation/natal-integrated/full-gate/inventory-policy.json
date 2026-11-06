@@ -1,0 +1,17 @@
+{
+  "excluded_directories": [
+    ".cache",
+    ".git",
+    ".pytest_cache",
+    ".venv",
+    "__pycache__",
+    "output"
+  ],
+  "excluded_metadata": [
+    ".DS_Store"
+  ],
+  "input_bytes": 114559477,
+  "input_files": 968,
+  "scope": "Every regular file in the immutable source tree, including root files, source, SDK, all tests/fixtures, docs, examples and research; no extension filter",
+  "symlinks": "file symlinks hashed through target bytes if any"
+}

@@ -8,6 +8,7 @@ from pathlib import Path
 
 from .frontend import SDK
 from .model import fail
+from .timer_lifecycle import EVENT_CODES
 
 
 def run_native(source, frames):
@@ -36,14 +37,22 @@ bool read_unsigned(unsigned& value){
 #define PLC_NATIVE
 #include "%s"
 int main(){
-  unsigned dt; unsigned value;
+  unsigned dt; unsigned value; unsigned event;
   while(_M200NativeHarness::read_unsigned(dt)){
+    if(!_M200NativeHarness::read_unsigned(event))return 2;
     for(int i=0;i<24;++i){if(!_M200NativeHarness::read_unsigned(value))return 2;plc::detail::inputs[i]=value!=0;}
-    plc::detail::begin_scan();
-    scan();
+    if(event){
+      using Event=plc::detail::TimerEvent;
+      const Event events[]={Event::stop,Event::run,Event::power_off,Event::warm_restart,Event::cold_restart};
+      if(event>5)return 2;
+      plc::detail::timer_event(events[event-1]);
+    }
+    if(plc::detail::timer_running){
+      plc::detail::begin_scan();scan();plc::detail::first_scan=false;
+    }
     for(int i=0;i<16;++i)_M200NativeHarness::putchar(plc::detail::outputs[i]?'1':'0');
     _M200NativeHarness::putchar('\\n');
-    plc::detail::first_scan=false;plc::detail::now_ms+=dt;
+    plc::detail::timer_advance_time(dt);
   }
 }
 """
@@ -72,9 +81,12 @@ int main(){
             inputs = frame.get("inputs", {})
             if type(dt) is not int or not 0 <= dt <= 3600000:
                 fail("invalid dt_ms")
+            event = frame.get("timer_event")
+            if "timer_event" in frame and (type(event) is not str or event not in EVENT_CODES):
+                fail("invalid timer lifecycle trace event")
             rows.append(
                 " ".join(
-                    [str(dt)]
+                    [str(dt), str(EVENT_CODES.get(event, 0))]
                     + [
                         "1" if inputs.get(i, inputs.get(str(i), False)) else "0"
                         for i in range(24)

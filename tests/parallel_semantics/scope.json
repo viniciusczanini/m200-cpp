@@ -1,0 +1,17 @@
+{
+  "schema":"m200.parallel-semantics.scope.v1",
+  "state":"PREPARED_NOT_EXECUTED",
+  "active_groups":["G01","G02","G06","G07","G08","G09","G11"],
+  "priority":"Natal; G02 integer/flag semantics only. Earlier 799 regression is preserved separately.",
+  "deferred_groups":["G03","G04","G05","G10"],
+  "deferred_prefixes":["G03_","G04_","G05_","G10_"],
+  "deferred_cases":["G02_floating_status_and_S18_have_independent_recovery","G02_new_math_order_and_exact_results"],
+  "deferred_status":"DEFERRED_VERSION",
+  "rules":[
+    "Deferred prepared cases are listed in inventory but never collected as tests or counted as PASS/priority coverage.",
+    "A case may use a preexisting conversion helper to observe a G02 alias; this does not admit new G03 family work.",
+    "Missing adapters and independent oracles are active visible failures, never unittest skips or automatic successes.",
+    "No test/build execution before root explicitly releases the integrated source/API freeze.",
+    "GUI/Wine/native simulator are outside this test lane and deferred to the final coordinator campaign."
+  ]
+}

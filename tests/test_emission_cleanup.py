@@ -89,19 +89,27 @@ class EmissionCleanupTests(unittest.TestCase):
         machine.step({})
         self.assertEqual(machine.words[0] & 65535, 0xF123)
 
-    def test_float_self_copy_still_observes_invalid_numeric_data_when_enabled(self):
+    def test_float_self_copy_preserves_ieee_payload_without_arithmetic_effect(self):
         lower = Lowerer()
-        value = lower.word("f32", "invalid_if_enabled")
+        value = lower.word("f32", "ieee_copy_if_enabled")
         guard = lower.copy("%I0.0")
         lower.numeric_assign(value, value, guard)
         program = self.finish(lower)
         line = next(line for rung in program.rungs for line in rung if ":=" in line)
         address = int(re.search(r"%MF([0-9]+)", line)[1])
-        machine = Machine(program)
-        machine.words[address : address + 2] = [0, 0x7FC0]
-        machine.step({0: False})
-        with self.assertRaisesRegex(CompileError, "non-finite|numeric"):
-            machine.step({0: True})
+        # Include finite data, infinity, a quiet NaN payload and signaling NaN
+        # bits. A copy is not floating arithmetic and must preserve the bytes.
+        for payload in ([0, 0x3F80], [0, 0x7F80], [0x1234, 0x7FC0], [1, 0x7F80]):
+            with self.subTest(payload=payload):
+                machine = Machine(program)
+                machine.words[address:address + 2] = payload
+                machine.arithmetic.carry = machine.arithmetic.overflow = True
+                machine.arithmetic.float_status = 4
+                for enabled in (False, True):
+                    machine.step({0: enabled})
+                    self.assertEqual(machine.words[address:address + 2], list(payload))
+                    self.assertTrue(machine.arithmetic.carry and machine.arithmetic.overflow)
+                    self.assertEqual(machine.arithmetic.float_status, 4)
 
     def test_private_copy_cleanup_keeps_carry_and_overflow(self):
         lower = Lowerer(reserved_words={0, 1})

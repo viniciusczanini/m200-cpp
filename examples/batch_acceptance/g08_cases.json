@@ -1,0 +1,73 @@
+{
+  "schema":"m200.batch-acceptance.cases.v1",
+  "status":"prepared_not_executed_awaiting_integrated_freeze",
+  "cases":[
+    {
+      "id":"g08-interior-sequences","variant":"g08-sequences-memory",
+      "oracle":"SBR8->9->10->9->10, SC0->1->2->1->2 and DR0->1->2->2->0 follow separate fresh pins; held pins do not move again. Loop sums are6 at SC0/1 and15 at SC2. Explicit DR set_step2 is separate from reset/advance.",
+      "scope":"Only zero vacated endpoints, interior SC moves, exclusive reset and nonconflicting cams. Endpoint fill, endpoint wrap, collisions and lifecycle remain pending native qualification.",
+      "coverage_ids":["fb.sbr","fb.sc","fb.dr"],
+      "frames":[
+        {"label":"exclusive-reset","inputs":{"0":true},"expect":{"output_mask":1288,"words":{"10":0,"13":0,"14":6}}},
+        {"label":"reset-release","inputs":{},"expect":{"output_mask":1288}},
+        {"label":"seed-sbr-interior-bit8","inputs":{"3":true},"expect":{"output_mask":1289}},
+        {"label":"first-up","inputs":{"1":true},"expect":{"output_mask":1106,"words":{"10":1,"12":0,"13":1,"14":6}}},
+        {"label":"held-up","inputs":{"1":true},"expect":{"output_mask":1106}},
+        {"label":"up-release","inputs":{},"expect":{"output_mask":1106}},
+        {"label":"second-up","inputs":{"1":true},"expect":{"output_mask":2724,"words":{"10":2,"12":1,"13":2,"14":15}}},
+        {"label":"second-release","inputs":{},"expect":{"output_mask":2724}},
+        {"label":"interior-down","inputs":{"2":true},"expect":{"output_mask":1682,"words":{"10":2,"14":6}}},
+        {"label":"held-down","inputs":{"2":true},"expect":{"output_mask":1682}},
+        {"label":"down-release","inputs":{},"expect":{"output_mask":1682}},
+        {"label":"up-with-drum-wrap","inputs":{"1":true},"expect":{"output_mask":2340,"words":{"10":0,"12":2,"13":0,"14":15}}},
+        {"label":"release-before-step-write","inputs":{},"expect":{"output_mask":2340}},
+        {"label":"pending-step-applied-by-next-call","inputs":{"4":true},"expect":{"output_mask":2724,"words":{"10":2,"12":0,"13":2}}},
+        {"label":"step-write-release","inputs":{},"expect":{"output_mask":2724}},
+        {"label":"reset-after-direction-release","inputs":{"0":true},"expect":{"output_mask":1288,"words":{"10":0,"14":6}}}
+      ]
+    },
+    {
+      "id":"g08-drum-clock-lights","variant":"g08-drum-clock-lights",
+      "oracle":"Clock20ms on10ms scan starts produces first fresh phase at t30ms and next at t90ms after an exclusive reset. DR steps advance only on new high phases. STOP gates lamp outputs while preserving DR step; restart resumes from that step.",
+      "scope":"M cams40..42, ordinary output lamps0..2 and virtual-clock timing only. No RF/load/physical timing inference.",
+      "coverage_ids":["fb.dr","fb.tm"],
+      "frames":[
+        {"label":"reset","dt_ms":10,"inputs":{"0":true},"expect":{"output_mask":64,"words":{"10":0,"11":6}}},
+        {"label":"enable-phase-low","dt_ms":10,"inputs":{"1":true},"expect":{"output_mask":73,"words":{"10":0}}},
+        {"label":"hold-low","dt_ms":10,"inputs":{"1":true},"expect":{"output_mask":73}},
+        {"label":"phase-rise-step1","dt_ms":10,"inputs":{"1":true},"expect":{"output_mask":106,"words":{"10":1}}},
+        {"label":"hold-high-a","dt_ms":10,"inputs":{"1":true},"expect":{"output_mask":106}},
+        {"label":"hold-high-b","dt_ms":10,"inputs":{"1":true},"expect":{"output_mask":106}},
+        {"label":"phase-falls","dt_ms":10,"inputs":{"1":true},"expect":{"output_mask":74}},
+        {"label":"low-a","dt_ms":10,"inputs":{"1":true},"expect":{"output_mask":74}},
+        {"label":"low-b","dt_ms":10,"inputs":{"1":true},"expect":{"output_mask":74}},
+        {"label":"phase-rise-step2","dt_ms":10,"inputs":{"1":true},"expect":{"output_mask":108,"words":{"10":2}}},
+        {"label":"stop","dt_ms":10,"inputs":{"1":true,"2":true},"expect":{"output_mask":80,"words":{"10":2}}},
+        {"label":"held-stop","dt_ms":10,"inputs":{"1":true,"2":true},"expect":{"output_mask":80}},
+        {"label":"restart-low","dt_ms":10,"inputs":{"1":true},"expect":{"output_mask":76}},
+        {"label":"restart-hold","dt_ms":10,"inputs":{"1":true},"expect":{"output_mask":76}},
+        {"label":"restart-rise-wrap0","dt_ms":10,"inputs":{"1":true},"expect":{"output_mask":105,"words":{"10":0}}},
+        {"label":"release-enable","dt_ms":10,"inputs":{},"expect":{"output_mask":64}},
+        {"label":"final-reset","dt_ms":10,"inputs":{"0":true},"expect":{"output_mask":64,"words":{"10":0}}}
+      ]
+    },
+    {
+      "id":"g08-direct-cam-output-ownership","variant":"g08-drum-direct-outputs",
+      "oracle":"Exclusive DR7 cams drive Q0/Q1/Q2 as masks1/2/4. Diagnostic Q8 is Full only at step2, so its output mask is260. No application packed write overwrites cam outputs.",
+      "scope":"Separate native output-cam profile; no shared output target and no connected load qualification.",
+      "coverage_ids":["fb.dr"],
+      "frames":[
+        {"label":"reset-step0","inputs":{"0":true},"expect":{"output_mask":1,"words":{"10":0}}},
+        {"label":"release-reset","inputs":{},"expect":{"output_mask":1}},
+        {"label":"advance-step1","inputs":{"1":true},"expect":{"output_mask":2,"words":{"10":1}}},
+        {"label":"held-step1","inputs":{"1":true},"expect":{"output_mask":2}},
+        {"label":"release-step1","inputs":{},"expect":{"output_mask":2}},
+        {"label":"advance-step2","inputs":{"1":true},"expect":{"output_mask":260,"words":{"10":2}}},
+        {"label":"release-step2","inputs":{},"expect":{"output_mask":260}},
+        {"label":"advance-wrap0","inputs":{"1":true},"expect":{"output_mask":1,"words":{"10":0}}},
+        {"label":"release-wrap","inputs":{},"expect":{"output_mask":1}},
+        {"label":"exclusive-reset-again","inputs":{"0":true},"expect":{"output_mask":1}}
+      ]
+    }
+  ]
+}

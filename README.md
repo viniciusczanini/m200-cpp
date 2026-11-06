@@ -81,16 +81,20 @@ The editor and PLC steps are validation gates. The CLI does not download program
 ## Current coverage
 
 These are **locally implemented subsets**, not declarations of complete official support.
+The seven-package Natal candidate has separate [integration evidence](docs/validation/NATAL-INTEGRATION-PROGRESS.md);
+its final regression and expanded official-editor acceptance remain open.
 
 | Area | Available locally | Important boundary |
 |---|---|---|
-| Boolean logic and I/O | State, sequential assignments, conditions, short-circuit logic, 24 embedded inputs and 16 outputs | Special I/O modes, immediate access, and physical behavior remain open |
-| Typed numbers | `i16`, `i32`, `f32`, 53 explicit numeric intrinsics, comparisons, shared MW/MD/MF memory | Ordinary C++ arithmetic and implicit promotions are restricted; numeric error recovery is incomplete |
+| Boolean logic and I/O | State, sequential assignments, conditions, short-circuit logic, 24 embedded inputs, 16 outputs, word-bit aliases, explicit image providers and BooleanStack | Special I/O modes, immediate access, native restart history and physical behavior remain open; see [Boolean semantics](docs/G01-BOOLEAN.md) |
+| Typed numbers | `i16`, `i32`, `f32`, explicit numeric intrinsics, INC/DEC, comparisons, shared MW/MD/MF memory, constants and flags | Ordinary C++ arithmetic/promotions are restricted; destination/copy APIs preserve indeterminate integer state, while primitive SDK value propagation and broader recovery remain incomplete; see [numeric guide](docs/NUMERIC.md) |
 | Arrays and control flow | Fixed-capacity typed arrays, computed indices, `while`/`for`/`do`, `break`, `continue`, labels, `goto`, early `return;` and END-family IL | Returns commit prior output writes; verified native series END graphs can be imported; Jump export and allocation overhead still apply |
-| Timers, edges, counters | TON/TOF/TP, clock and edge APIs, timer properties, native counters | Several modes have local models but blocked SMBP export; timing and lifecycle need external tests |
+| Timers, edges, counters | TON/TOF/TP, clocks, properties, conditional/repeated updates, documented retentive/dynamic combinations and native counters | Actual template level, identity/base/preset and mode checks apply; native timing/lifecycle qualification remains separate; see [timers](docs/TIMERS-G07.md) |
 | FIFO/LIFO Registers | Four shared native IDs, sixteen i16 words per instance, input/output words, empty/full, per-call updates and actual reverse | Native storage is separate from MW; current Man21 canonical I/M graphs are scoped, broader lifecycle and call profiles need individual qualification; see [Register guide](docs/REGISTERS.md) |
-| Modbus | READ/WRITE/WRITE_READ models; FC1/2/3/4/5/6/15/16/23; explicit local transports | SMBP export covers READ holding/input words and discrete-input/coil bits, WRITE holding words/coil bits/single values, and static MW WRITE_READ at the observed Man21/SL1 profile; READ I/WRITE Q/WRITE_READ MW support bare Execute/Abort with normal M contacts and full-pin M contacts/coils; further native pin profiles and physical communication remain open |
-| Subroutines | C++ descriptors, shared scan contexts, local execution, reverse conversion and native export | Export: one stateless leaf section 2 at actual Man21; nested/stateful leaves and broader native layouts remain gated; see [SDK guide](docs/SUBROUTINES.md) |
+| Native sequences | Shared SBR/SC/Drum identities, bits/cams/properties, native configuration/graphics and actual reverse, including SR composition | Endpoint/reset/direction/cam collisions and native lifecycle have explicit pending domains; see [sequence guide](docs/NATIVE-SEQUENCES.md) |
+| RTC and schedules | Calendar/system words, staged date updates, snapshots, absolute counter and schedules with shared-output OR | The S/SW/calendar/schedule route exports; the local RTC_EXEC block still lacks a native binding. Boundary/lifecycle and exact editor observations remain scoped; see [RTC guide](docs/RTC.md) |
+| Modbus | READ/WRITE/WRITE_READ models; FC1/2/3/4/5/6/15/16/23; explicit local transports, dynamic properties, request snapshots, abort and channel ownership | Native graph/profile limits apply. Dynamic buffer/count/object writes conservatively require the full word image; SDK asynchronous transport and physical transactions retain separate gates |
+| Subroutines | Multiple SR0..63, shared stateful resources, local loops/labels/returns, native export and actual reverse | Native nested SR calls are prohibited by the target; expanded layouts still need exact editor acceptance; see [SDK guide](docs/SUBROUTINES.md) |
 | Projects and reverse conversion | Conservative SMBP parsing, IL/Ladder consistency checks, source maps, C++ reconstruction | Arbitrary vendor projects are not supported; unknown active constructs fail explicitly |
 
 The source language intentionally uses explicit PLC operations:
@@ -124,7 +128,10 @@ The recorded **2026-11-06 validation rounds** contain:
 
 | Evidence | Recorded result |
 |---|---:|
-| Latest combined unit/regression suite | 799 passing tests / 220.444 s / zero skips |
+| Historical published Register unit/regression checkpoint | 799 passing tests / 220.444 s / zero skips |
+| First seven-package candidate full regression | 1,007 tests; 123 failures, 4 errors, 1 skip; retained while fixes and contract reviews proceed |
+| Final combined local gate | 1,017 tests: 1,009 passed, eight explicit pending failures, zero errors/skips; exit2, incomplete |
+| Final composed project batch | 24 cases, 201 positions, seven routes: 1,407 matching observations; 11 project profiles |
 | Earlier baseline unit/regression suite | 417 passing tests |
 | Historical stress and public-program traces | 288,372 base scan frames |
 | Combined state/array, timer/counter and numeric candidates | 276 distinct candidate frames |
@@ -133,6 +140,12 @@ The recorded **2026-11-06 validation rounds** contain:
 | Separate exhaustive BCD32 SDK oracle | 100,000,000 valid vectors |
 
 The BCD vectors are **not scans** and are excluded from the scan total. Repeated runs and comparison stages are also excluded. The [local results](docs/validation/LOCAL-RESULTS.md) and [conversion result manifest](docs/validation/CONVERSION-LOCAL-RESULTS.json) record the exact scope, commands, and hashes. These are historical results tied to the recorded files, not an automatically refreshed build badge or proof of universal equivalence.
+
+The [Natal integration record](docs/validation/NATAL-INTEGRATION-PROGRESS.md)
+keeps later composed tests, focused fixes and the failed combined run separate.
+Prepared [native sequence probes](examples/native_validation/README.md) have
+passed local project/reverse preparation; their twelve native outcome questions
+remain pending until the planned official-simulator observations.
 
 Exact [generated single-write products](docs/validation/MODBUS-SINGLE-GENERATED-PROJECT-RESULTS.md), [generated WRITE_READ_VAR product](docs/validation/MODBUS-WRITE-READ-GENERATED-PROJECT-RESULTS.md) and [generated timer products](docs/validation/TIMER-GENERATED-PROJECT-RESULTS.md) have separate official-editor evidence; the saved timer/watch artifact has the runtime observations recorded there. The [integrated FIFO/LIFO checkpoint](docs/validation/REGISTER-INTEGRATION-RESULTS.md) records799 local tests, exact dual output saved/freshly reopened with No error and separate repeated-call FIFO runtime observations; the dual runtime and broader contexts remain pending. Earlier [native diagnostics](docs/validation/REGISTER-NATIVE-OBSERVATIONS.md), [reset/held-request observations](docs/validation/REGISTER-COLLISION-OBSERVATIONS.md) and [self-status trials](docs/validation/REGISTER-SELF-STATUS-OBSERVATIONS.md) retain their distinct hand-built scope and refresh limits.
 

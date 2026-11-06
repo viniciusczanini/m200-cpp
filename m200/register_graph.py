@@ -1,6 +1,8 @@
 """Closed canonical Register graph codec grounded in native saved graphs.
 
-Only the bare R/I/O body with three normal direct I0 or M contacts is admitted.
+The observed bare R/I/O body has three direct I0/M contacts. The optional E/F
+coil extension is derived from native metadata and documented output rows, and
+requires its own active CE40T save/reopen acceptance.
 This codec describes pin addresses and geometry. The project and execution layers
 own allocations, FIFO/LIFO state and hardware-profile qualification.
 """
@@ -38,23 +40,30 @@ class RegisterInputs:
     reset: str
     store: str
     retrieve: str
+    outputs: tuple = ()
 
     def __post_init__(self):
         _index(self.index)
         for value in (self.reset, self.store, self.retrieve):
             _contact(value)
+        seen = set()
+        for flag, op, target in self.outputs:
+            from .model import address
+            if flag not in ("E", "F") or flag in seen or op not in ("ST", "S", "R") or address(target, True)[0] not in ("M", "Q0."):
+                fail("invalid canonical Register output")
+            seen.add(flag)
 
 
 def parse_block(lines):
     if (
         not isinstance(lines, (list, tuple))
-        or len(lines) != 8
+        or len(lines) < 8
         or any(not isinstance(line, str) for line in lines)
     ):
         fail("Register graph requires the closed eight-line R/I/O body")
     body = [" ".join(line.split()) for line in lines]
     key = re.fullmatch(r"BLK %R([0-3])", body[0])
-    if not key or (body[2], body[4], body[6], body[7]) != ("R", "I", "O", "END_BLK"):
+    if not key or (body[2], body[4], body[6], body[-1]) != ("R", "I", "O", "END_BLK"):
         fail("unsupported Register block identity or pin order")
     values = []
     for position in (1, 3, 5):
@@ -62,17 +71,33 @@ def parse_block(lines):
         if len(parts) != 2 or parts[0] != "LD":
             fail("unverified Register contact action; plain LD required")
         values.append(parts[1])
-    return RegisterInputs(int(key[1]), *values)
+    outputs = []
+    if len(body) > 8:
+        if body[7] != "OUT_BLK" or len(body) not in (11, 13):
+            fail("unsupported canonical Register output section")
+        for position in range(8, len(body) - 1, 2):
+            load, action = body[position].split(), body[position + 1].split()
+            if len(load) != 2 or load[0] != "LD" or load[1] not in ("E", "F") or len(action) != 2:
+                fail("Register outputs require LD E/F and one plain coil")
+            outputs.append((load[1], *action))
+        if [o[0] for o in outputs] != sorted(o[0] for o in outputs):
+            fail("Register outputs must be ordered E/F")
+    return RegisterInputs(int(key[1]), *values, tuple(outputs))
 
 
 def graphics(lines):
     inputs = parse_block(lines)
-    return [
+    result = [
         ("NormalContact", inputs.reset, 0, 0, "Left, Right"),
         ("NormalContact", inputs.store, 1, 0, "Left, Right"),
         ("NormalContact", inputs.retrieve, 2, 0, "Left, Right"),
-        ("Register", "%R" + str(inputs.index), 0, 1, "Left"),
+        ("Register", "%R" + str(inputs.index), 0, 1, "Left, Right" if inputs.outputs else "Left"),
     ]
+    for flag, op, target in inputs.outputs:
+        row = 0 if flag == "E" else 1
+        result += [("Line", "", row, column, "Left, Right") for column in range(3, 10)]
+        result.append(({"ST": "Coil", "S": "SetCoil", "R": "ResetCoil"}[op], target, row, 10, "Left"))
+    return result
 
 
 def _container(node, tag):
@@ -124,13 +149,14 @@ def _rung(node):
             continue
         value = _scalar(fields[tag])
         if tag == "Label" and value:
-            fail("Register graph labels are outside this isolated profile")
+            from .flow import label_name
+            label_name(value)
         if tag == "IsLadderSelected" and value not in ("true", "false"):
             fail("invalid Register Ladder selection")
     instructions = fields["InstructionLines"]
     _container(instructions, "InstructionLines")
-    if len(instructions) != 8:
-        fail("Register graph requires exactly eight instruction entries")
+    if len(instructions) not in (8, 9, 11, 12, 13, 14):
+        fail("Register graph requires eight inputs/body lines and optional canonical E/F outputs")
     lines = []
     for entry in instructions:
         _container(entry, "InstructionLineEntity")
@@ -138,6 +164,10 @@ def _rung(node):
         for value in values.values():
             _scalar(value)
         lines.append(values["InstructionLine"].text or "")
+    from .flow import split_label
+    label, lines = split_label(lines)
+    if (fields["Label"].text or "" if "Label" in fields else "") != (label or ""):
+        fail("Register instruction label and Label field disagree")
     inputs = parse_block(lines)
     graph = fields.get("LadderElements")
     if graph is not None:
@@ -146,21 +176,21 @@ def _rung(node):
 
 
 def _check_graph(graph, expected):
-    if graph is None or len(graph) != 4:
-        fail("Register requires its complete observed four-entity graph")
+    if graph is None or len(graph) != len(expected):
+        fail("Register requires its complete canonical graph (bare graph observed; wired output extension unvalidated)")
     actual = []
-    required = {"ElementType", "Descriptor", "Row", "Column", "ChosenConnection"}
+    required = {"ElementType", "Row", "Column", "ChosenConnection"}
     for entry in graph:
         _container(entry, "LadderEntity")
-        fields = _fields(entry, required | {"Comment", "Symbol"}, required)
+        fields = _fields(entry, required | {"Descriptor", "Comment", "Symbol"}, required)
         values = {tag: _scalar(value) for tag, value in fields.items()}
         row, column = values["Row"], values["Column"]
-        if row not in ("0", "1", "2") or column not in ("0", "1"):
+        if row not in ("0", "1", "2") or column not in tuple(str(i) for i in range(11)):
             fail("unverified or noncanonical Register graph coordinates")
         actual.append(
             (
                 values["ElementType"],
-                values["Descriptor"],
+                values.get("Descriptor", ""),
                 int(row),
                 int(column),
                 values["ChosenConnection"],

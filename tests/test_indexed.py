@@ -1,5 +1,6 @@
 """Indexed memory semantics and lowering, with independent boundary oracles."""
 
+import copy
 import tempfile
 import unittest
 import xml.etree.ElementTree as ET
@@ -85,12 +86,38 @@ class IndexedTests(unittest.TestCase):
                 validate(Program([["LD 1", instruction]]))
 
     def test_timer_output_cannot_write_index_error_flag(self):
-        p = Program(
-            [["BLK %TM0", "LD 1", "IN", "OUT_BLK", "LD Q", "ST %S20", "END_BLK"]],
-            {0: Timer("TON", 0, 100)},
-        )
-        with self.assertRaisesRegex(CompileError, "read-only|only"):
-            validate(p)
+        for op in ("ST", "STN", "S"):
+            p = Program(
+                [["BLK %TM0", "LD 1", "IN", "OUT_BLK", "LD Q", op + " %S20", "END_BLK"]],
+                {0: Timer("TON", 0, 100)},
+            )
+            before = copy.deepcopy(p.as_dict())
+            with self.subTest(op=op), self.assertRaisesRegex(
+                CompileError, "system bit has no permission for " + op + ": %S20"
+            ):
+                validate(p)
+            self.assertEqual(p.as_dict(), before)
+            destination = self.work / "protected_timer_output.smbp"
+            destination.write_bytes(b"protected destination")
+            with self.assertRaises(CompileError):
+                write_project(p, Path(__file__).parent / "fixtures/synthetic.smbp", destination)
+            self.assertEqual(destination.read_bytes(), b"protected destination")
+        for action in ("ST %M0", "ST %Q0.0", "R %S20"):
+            with self.subTest(allowed_action=action):
+                p = Program(
+                    [["BLK %TM0", "LD 1", "IN", "OUT_BLK", "LD Q", action, "END_BLK"]],
+                    {0: Timer("TON", 0, 100)},
+                )
+                validate(p)
+                machine = Machine(p)
+                machine.index_error = True
+                machine.step(dt_ms=0)
+                if action == "ST %M0":
+                    self.assertTrue(machine.memory[0])
+                elif action == "ST %Q0.0":
+                    self.assertTrue(machine.outputs[0])
+                else:
+                    self.assertFalse(machine.index_error)
 
     def test_cpp_profile_limit_is_preserved_when_compiler_memory_is_higher(self):
         self.equivalent(

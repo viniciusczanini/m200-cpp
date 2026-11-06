@@ -1,0 +1,385 @@
+{
+  "freeze_id": "natal-combined-3",
+  "cases": 24,
+  "backend_checks": 47,
+  "runner": "tests/parallel_semantics/g0108_report.py",
+  "engines": "Per-case; source context guards are VM/frontend only",
+  "bindings": {
+    "source_pipeline": "parallel_semantics.adapters:source_pipeline",
+    "G0108_bounds": "parallel_semantics.combined_adapters:constant_bounds",
+    "G0108_cycles": "parallel_semantics.g0108_adapters:cycles",
+    "G0108_external": "parallel_semantics.g0108_adapters:external"
+  },
+  "inventory": [
+    {
+      "name": "G01_new_shared_KW_SW17_RTC_word_bit_images",
+      "adapter": "source_pipeline",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "basis": "One G02 KW/KD image, one SW17 status and one RTC staged year. Bit15 and false S/R preserve aliases and unrelated bits. S50 commit is local; no native snapshot atomicity assertion."
+    },
+    {
+      "name": "G01_new_stack_snapshot_last_MW_and_input_alias",
+      "adapter": "source_pipeline",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "basis": "Snapshot value survives overwrite at MW7999; no implicit MW8000 scratch cell is available."
+    },
+    {
+      "name": "G01_new_stack_exact_32_values_LIFO",
+      "adapter": "source_pipeline",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "basis": "Documented local 32-expression capacity; opposite alternating literals expose LIFO order and snapshot reuse."
+    },
+    {
+      "name": "G01_new_stack_balanced_branch_and_loop",
+      "adapter": "source_pipeline",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "basis": "Local restricted C++ balancing at each branch and loop iteration; skipped branches do not retain stack entries."
+    },
+    {
+      "name": "G01_new_full_1024_M_assignment_domain",
+      "adapter": "source_pipeline",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "basis": "M200 Boolean capacity1024. Every M identity is explicitly assigned; boundary observations must survive compiler liveness without unrequested private M."
+    },
+    {
+      "name": "G01_new_explicit_master_sample_and_nonmaster_expression_history",
+      "adapter": "G0108_cycles",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "basis": "Local MAST sample is stable across repeated task bodies; writes after sample affect next master boundary. Expression history updates per executed call, not per master boundary. First-false history is local policy."
+    },
+    {
+      "name": "G01_new_nonmaster_does_not_reapply_RTC_schedule",
+      "adapter": "G0108_cycles",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "basis": "One master boundary applies the existing RTC schedule; non-master bodies must not reapply it. This composes the new sampling API with already-tested schedule policy."
+    },
+    {
+      "name": "G01_new_S13_is_first_master_cycle_not_first_task_body",
+      "adapter": "G0108_cycles",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "basis": "Coordinator-confirmed explicit host contract: non-master calls retain the current first-cycle flag; opening the second master boundary ends the previous first cycle in VM and SDK. Not a claim about unobserved physical warm/cold lifecycle."
+    },
+    {
+      "name": "G01_new_live_input_snapshots_cross_external_callback",
+      "adapter": "G0108_external",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "basis": "Live-I context materializes values at evaluation points. Explicit external S66 callback changes I0.0 between reads; no scheduler or physical I/O is invented."
+    },
+    {
+      "name": "G01_new_external_word_status_banks_RMW",
+      "adapter": "G0108_external",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "basis": "Each external value/status identity is explicit. QW word-bit write performs owning-word RMW, preserving every other bit; status/IW objects remain read-only."
+    },
+    {
+      "name": "G08_new_SBR_endpoint_bits_are_discarded_on_safe_vacated_zero",
+      "adapter": "source_pipeline",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "basis": "Generic pp153-155 shifts discard outgoing bit. Vacated endpoint starts zero, avoiding unresolved fill with a set vacated endpoint."
+    },
+    {
+      "name": "G08_new_SC_all_256_steps_without_endpoint_wrap",
+      "adapter": "source_pipeline",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "basis": "Generic pp155-158 one-hot steps0..255; exactly255 fresh CU requests reach255. No CU at255 or CD at0 is assigned a guessed outcome."
+    },
+    {
+      "name": "G08_new_DR_eight_steps_sixteen_cams_distinct_M_Q",
+      "adapter": "source_pipeline",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "basis": "Generic pp147-151 native DR capacity8steps/16cam slots. Independent one-hot/inverse masks test every step, F at7, held U, wrap and distinct M/Q destinations. Initial cam application is labelled cold-construction local policy."
+    },
+    {
+      "name": "G08_new_single_step_DR_without_reset_is_deterministic",
+      "adapter": "source_pipeline",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "basis": "Local construction applies cams even before first call. One configured step stays0 with F true for ordinary U; reset in this configuration is deliberately PENDING native."
+    },
+    {
+      "name": "G08_new_shared_leaf_SR_observes_intermediate_sequence_state",
+      "adapter": "source_pipeline",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "basis": "One shared identity per family across repeated synchronous SR calls; native-style state snapshots before/after second call. Per-call first/cold history remains labelled local policy pending official lifecycle trials."
+    },
+    {
+      "name": "G01_new_closed_addresses_permissions_and_bit_domains",
+      "adapter": "G0108_bounds",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "basis": "M200/documented SDK domains; true invalid identities/permissions, not unresolved native transitions."
+    },
+    {
+      "name": "G01_new_stack_capacity_underflow_guards",
+      "adapter": "G0108_bounds",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "basis": "M200/documented SDK domains; true invalid identities/permissions, not unresolved native transitions."
+    },
+    {
+      "name": "G01_new_stack_source_balance_context_guards",
+      "adapter": "G0108_bounds",
+      "engines": [
+        "vm"
+      ],
+      "basis": "M200/documented SDK domains; true invalid identities/permissions, not unresolved native transitions."
+    },
+    {
+      "name": "G08_new_documented_identity_bit_cam_boundaries",
+      "adapter": "G0108_bounds",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "basis": "M200/documented SDK domains; true invalid identities/permissions, not unresolved native transitions."
+    },
+    {
+      "name": "G01_new_string_word_bits_preserve_partial_taint_guards",
+      "adapter": "G0108_bounds",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "basis": "M200/documented SDK domains; true invalid identities/permissions, not unresolved native transitions."
+    },
+    {
+      "name": "G08_new_negative_identity_duplicate_cam_and_pin_mask_guards",
+      "adapter": "G0108_bounds",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "basis": "M200/documented SDK domains; true invalid identities/permissions, not unresolved native transitions."
+    },
+    {
+      "name": "G01_new_string_bit_repairs_restore_exact_word_keep_other_flags",
+      "adapter": "source_pipeline",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "basis": "Exact literal payload after all16 string-address writes repair an unknown word; S18 stays set and independent SW17 stays5. No unspecified value is inspected before full repair."
+    },
+    {
+      "name": "G01_new_explicit_copy_word_partial_mask_then_independent_full_repairs",
+      "adapter": "source_pipeline",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "basis": "G02 supported explicit copy API preserves known bit0 and unknown masks without inspecting unspecified payload. Both actual images are repaired independently before whole-word observations; S18 stays set."
+    },
+    {
+      "name": "G01_new_explicit_copy_keeps_unknown_mask_after_source_repair",
+      "adapter": "G0108_bounds",
+      "engines": [
+        "vm",
+        "sdk"
+      ],
+      "basis": "M200/documented SDK domains; true invalid identities/permissions, not unresolved native transitions."
+    }
+  ],
+  "pending_native_questions": [
+    {
+      "name": "G08_native_PENDING_SBR_set_vacated_endpoint",
+      "status": "PENDING_NATIVE_ORACLE",
+      "source": "#include <plc.hpp>\nplc::ShiftBitRegister a{0};void scan(){a.set_bit(0,true);a.update(false,true,false);}",
+      "observe": [
+        "%SBR0.0..15"
+      ],
+      "question": "After CU with old bit0=1, is vacated bit0 zero, retained or transferred?",
+      "expected": null,
+      "classification": "Tool runtime gap; never a PLC impossibility or semantic PASS"
+    },
+    {
+      "name": "G08_native_PENDING_SBR_two_fresh_directions",
+      "status": "PENDING_NATIVE_ORACLE",
+      "source": "#include <plc.hpp>\nplc::ShiftBitRegister a{0};void scan(){a.set_bit(4,true);a.update(false,true,true);}",
+      "observe": [
+        "%SBR0.0..15"
+      ],
+      "question": "Collision priority/no-op and histories after both pins are held/released separately.",
+      "expected": null,
+      "classification": "Tool runtime gap; never a PLC impossibility or semantic PASS"
+    },
+    {
+      "name": "G08_native_PENDING_SBR_reset_with_held_history",
+      "status": "PENDING_NATIVE_ORACLE",
+      "source": "#include <plc.hpp>\nplc::ShiftBitRegister a{0};void scan(){a.update(false,true,false);a.update(true,false,false);}",
+      "observe": [
+        "%SBR0.0..15"
+      ],
+      "question": "Does exclusive reset clear prior CU history, and what happens after held CU?",
+      "expected": null,
+      "classification": "Tool runtime gap; never a PLC impossibility or semantic PASS"
+    },
+    {
+      "name": "G08_native_PENDING_SC_CD_at_zero",
+      "status": "PENDING_NATIVE_ORACLE",
+      "source": "#include <plc.hpp>\nplc::StepCounter a{0};void scan(){a.update(false,false,true);}",
+      "observe": [
+        "%SC0.0",
+        "%SC0.255"
+      ],
+      "question": "Wrap, saturation, invalid/empty state or other native endpoint behavior?",
+      "expected": null,
+      "classification": "Tool runtime gap; never a PLC impossibility or semantic PASS"
+    },
+    {
+      "name": "G08_native_PENDING_SC_CU_at_255",
+      "status": "PENDING_NATIVE_ORACLE",
+      "source": "#include <plc.hpp>\nplc::StepCounter a{0};void scan(){for(plc::i16 i=0;i<256;i=plc::add_i16(i,1)){a.update(false,false,false);a.update(false,true,false);}}",
+      "observe": [
+        "%SC0.0",
+        "%SC0.255"
+      ],
+      "question": "256th fresh CU endpoint and subsequent opposite request.",
+      "expected": null,
+      "classification": "Tool runtime gap; never a PLC impossibility or semantic PASS"
+    },
+    {
+      "name": "G08_native_PENDING_SC_active_changing_write",
+      "status": "PENDING_NATIVE_ORACLE",
+      "source": "#include <plc.hpp>\nplc::StepCounter a{0};void scan(){a.set_bit(7,true);}",
+      "observe": [
+        "%SC0.0",
+        "%SC0.7"
+      ],
+      "question": "Does write select a step, permit multiple true bits or reject at firmware runtime?",
+      "expected": null,
+      "classification": "Tool runtime gap; never a PLC impossibility or semantic PASS"
+    },
+    {
+      "name": "G08_native_PENDING_DR_pending_step_plus_fresh_U",
+      "status": "PENDING_NATIVE_ORACLE",
+      "source": "#include <plc.hpp>\nplc::Drum a{0,3};void scan(){a.set_step(2);a.update(false,true);}",
+      "observe": [
+        "%DR0.S",
+        "%DR0.F"
+      ],
+      "question": "Priority and visibility of pending literal step write against U edge.",
+      "expected": null,
+      "classification": "Tool runtime gap; never a PLC impossibility or semantic PASS"
+    },
+    {
+      "name": "G08_native_PENDING_DR_single_step_reset",
+      "status": "PENDING_NATIVE_ORACLE",
+      "source": "#include <plc.hpp>\nplc::Drum a{0,1};void scan(){a.update(true,false);}",
+      "observe": [
+        "%DR0.S",
+        "%DR0.F"
+      ],
+      "question": "F during reset for one configured step.",
+      "expected": null,
+      "classification": "Tool runtime gap; never a PLC impossibility or semantic PASS"
+    },
+    {
+      "name": "G08_native_PENDING_DR_aliased_cam_bindings",
+      "status": "PENDING_NATIVE_ORACLE",
+      "source": "#include <plc.hpp>\nplc::Drum a{0,2,plc::DrumCam{0,plc::DrumOutput::Memory,100,1},plc::DrumCam{1,plc::DrumOutput::Memory,100,2}};void scan(){a.update(false,true);}",
+      "observe": [
+        "%DR0.S",
+        "%M100"
+      ],
+      "question": "Column priority/OR/last-write across conflicting same-output cams.",
+      "expected": null,
+      "classification": "Tool runtime gap; never a PLC impossibility or semantic PASS"
+    },
+    {
+      "name": "G08_native_PENDING_omitted_active_direction_history",
+      "status": "PENDING_NATIVE_ORACLE",
+      "source": "#include <plc.hpp>\nplc::ShiftBitRegister a{0};void scan(){a.update(false,true,false);a.update_pins(1,false,false,false);}",
+      "observe": [
+        "%SBR0.0..15"
+      ],
+      "question": "How omitted pin history changes after an earlier active pin.",
+      "expected": null,
+      "classification": "Tool runtime gap; never a PLC impossibility or semantic PASS"
+    },
+    {
+      "name": "G01_native_PENDING_edge_lifecycle",
+      "status": "PENDING_NATIVE_ORACLE",
+      "expected": null,
+      "source": "#include <plc.hpp>\nvoid scan(){plc::output(0,plc::input_rising(0));plc::output(1,plc::input_falling(0));plc::output(2,plc::rising(0,plc::input(0)));}",
+      "observe": [
+        "%I0.0",
+        "%Q0.0..2",
+        "RUN/STOP",
+        "S0/S1"
+      ],
+      "sequence": [
+        "cold with I true",
+        "RUN steady",
+        "STOP",
+        "I false/true while stopped",
+        "warm RUN with I true",
+        "first and second steady scan"
+      ],
+      "question": "Initial/history reset and physical input sampling phase across actual controller lifecycle.",
+      "classification": "Local per-call/sample policy is tested separately; native lifecycle remains unresolved"
+    }
+  ],
+  "known_runtime_gaps": [
+    {
+      "name": "G02_value_returning_unknown_read_to_write",
+      "status": "KNOWN_RUNTIME_GAP_PENDING",
+      "scope": "C++ primitive value-returning path cannot propagate poison; explicit destination/copy APIs are the supported Natal recovery route",
+      "source": "plc::div_word(0,7,0);plc::clear_arithmetic_error();plc::write_bit(\"%MW0:X0\",true);plc::write_word(1,plc::read_word(0));",
+      "observed_VM": "Completes by copying indeterminate mask",
+      "observed_SDK": "Traps on unknown whole-word read",
+      "expected_native_value": null,
+      "evidence_preserved": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/combined-3/test-semantics/additional-runtime-guards/cases/G01_new_string_word_bits_preserve_partial_taint_guards",
+      "authority": "Coordinator clarification of G02 DELIVERY; no poison C++ wrapper expansion in Natal version",
+      "supported_controls": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/combined-3/test-semantics/explicit-copy-supported-controls/results.json",
+      "counted_as_PASS": false
+    }
+  ]
+}

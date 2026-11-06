@@ -5,6 +5,7 @@ from collections import Counter
 from .model import fail
 from .counter_xml import read_configs as read_counters
 from .register_xml import read_registers
+from .sequence_xml import read_sequences
 from .subroutine_xml import read_subroutines
 from .numeric import word_address
 from .communication_xml import (
@@ -24,8 +25,11 @@ EMPTY -= {"MemoryWords", "MemoryDoubleWords", "MemoryFloats"}
 EMPTY.discard("FunctionBlocks")
 EMPTY.discard("Counters")
 EMPTY.discard("Registers")
+EMPTY.discard("ScheduleBlocks")
+EMPTY -= {"Drums", "ShiftBitRegisters", "StepCounters"}
 
 EMPTY.discard("Subroutines")
+EMPTY -= {"ConstantWords", "ConstantDoubleWords", "ConstantMemoryFloats"}
 UI_ONLY = {
     "DisplayUserLabelsConfiguration",
     "GlobalProperties",
@@ -53,8 +57,19 @@ REPEATED = {
     "Timers": {"TimerTM"},
     "Counters": {"Counter"},
     "Registers": {"Register"},
+    "ScheduleBlocks": {"ScheduleBlock"},
+    "Drums": {"Drum"},
+    "Bits": {"BitForDrum"},
+    "Steps": {"Step"},
+    "ShiftBitRegisters": {"ShiftBitRegister"},
+    "StepCounters": {"StepCounter"},
+    "BitSymbols": {"string"},
+    "StepSymbols": {"string"},
     "Subroutines": {"Subroutine"},
     "MemoryBits": {"MemoryBit"},
+    "ConstantWords": {"ConstantWord"},
+    "ConstantDoubleWords": {"ConstantDoubleWord"},
+    "ConstantMemoryFloats": {"ConstantFloat"},
     "MemoryWords": {"MemoryWord"},
     "MemoryDoubleWords": {"MemoryDoubleWord"},
     "MemoryFloats": {"MemoryFloat"},
@@ -78,7 +93,7 @@ CPU_ARRAYS = set(
 TECHNICAL = set(
     "PtoConfiguration ComConfiguration Compatibility FastCounterMax FourInputsEventTask GrafcetBitsMax InternalRamStart LabelsMax LfRegistersMax MemoryConstantWordsMax MemoryWordsMax NumRelays NumRelaysMax NumTransistors NumTransistorsMax PidAmountMax PlcNumberSysBits PlcNumberSysWords PlcStartAddrSysBits PlcType TimersMax AnalogInputPrecision AnalogOutputPrecision StepCountersMax CountersMax DrumsMax ExternalRamSize ExternalRamSizeWithDisplay ExternalRamStart InternalRamAppStart InternalRamSize InternalBitsMax InternalEepromSize ScheduleBlocksMax ShiftBitRegistersMax SubroutinesMax SupportDoubleWord SupportEvents SupportFloatingPoint NumberOf1MsTimerBase".split()
 )
-TECHNICAL |= {"MetadataAreaSize", "UdfbInstanceMax", "UdfMax", "UdfObjectsMax"}
+TECHNICAL |= {"RtcMax", "InternalRtc", "InternalRTC", "MetadataAreaSize", "UdfbInstanceMax", "UdfMax", "UdfObjectsMax"}
 
 
 def fields(node, allowed):
@@ -114,7 +129,7 @@ def unique_tree(root):
             if in_fb and allowed_attribute(node.tag, attribute, value):
                 continue
             if not (
-                node.tag == "UnitId"
+                (node.tag == "UnitId" or (node.tag == "string" and parents and parents[-1] in ("BitSymbols", "StepSymbols")))
                 and attribute == "{http://www.w3.org/2001/XMLSchema-instance}nil"
                 and value == "true"
                 and not len(node)
@@ -472,12 +487,20 @@ def configuration(root):
     fields(sw, SOFTWARE)
     if len(sw.findall("MastTask")) != 1:
         fail("one explicit MastTask profile is required")
+    from .scalar_constants import read_configs as read_constants
+    read_constants(sw)
     read_counters(sw)
     read_registers(sw)
+    from .rtc_xml import read_rtcs, read_schedules
+    read_rtcs(sw)
+    read_schedules(sw)
+    read_sequences(sw)
     read_subroutines(sw)
     for part in sw:
         if part.tag == "FunctionBlocks":
             read_blocks(sw)
+        elif part.tag in ("ConstantWords", "ConstantDoubleWords", "ConstantMemoryFloats"):
+            pass  # Strictly parsed together above to preserve alias agreement.
         elif part.tag in EMPTY:
             empty(part)
         elif part.tag.endswith("MemoryAllocation"):

@@ -1,0 +1,527 @@
+{
+  "schema": "m200.natal.integration-progress.v1",
+  "date": "2026-11-06",
+  "release_status": "INCOMPLETE; local regression and official acceptance not closed",
+  "scope": [
+    "G01",
+    "G02",
+    "G06",
+    "G07",
+    "G08",
+    "G09",
+    "G11"
+  ],
+  "current_candidate": {
+    "freeze_id": "natal-combined-7",
+    "compiler_sdk": {
+      "m200/sequences.py": "1b87cb1dbc19d3a97efa2b688fdee9f678da0f508e0805005a6bda2fc170c1b2",
+      "m200/counters.py": "0e4ed9d8fe6f4356f3d6b6986558a0f9caa019daa3f741b12522d1fdd6f376ce",
+      "m200/timer_graph.py": "d4223e3b9a23ee83230fe533018eacc3941ae158d90e1dee0348fc62f335e18b",
+      "m200/arithmetic.py": "a32d9331b9026fd402d8cb82723175222908deab1ae207a3dc042b98445912f4",
+      "m200/arrays.py": "d4574f6e48ab98f70feb3f474f30bbf387117f5db3ddde395525a21a77da42ed",
+      "m200/jsonio.py": "c4d8447354b4f48205a8d5bfc58e1a3919656ba2073ecc5982b2f8fd6253fd70",
+      "m200/bits.py": "1993f3646b65db10dbbdb04f9373fddf155b73a767755721f8cf573ba48a8b4e",
+      "m200/registers.py": "83bd345753d1f4d3f12504e550604ab9b71204442b15f30256c760395c5c0675",
+      "m200/boolean_banks.py": "ebfecc25ca04ae2ccde48fe3d4d2829fece7ffd348cee780ec4cbe54c7d3f9e8",
+      "m200/subroutine_native.py": "0e87be61d107eee8e101482289cbcf795a4ba75c307ca83bd7dd0570b2b1d72d",
+      "m200/boolean_bdd.py": "b3de9c79a5b14953256117afa22df8aaf2b37eb71689f224ca2d66e78a02882f",
+      "m200/config.py": "c2baa8741706de741105f4f9f37d54a2082ffd8204a8b05328ae2bf7980c2d79",
+      "m200/communication_graph.py": "3b6e9a8ffc3c9ae1203106b37385141f8007719e55e010a29eec07732e3a3d61",
+      "m200/copy_fusion.py": "91762279cb68b9c9fef16f496ea4e4616425785386ad25cb66af689abc3b70c6",
+      "m200/dead_stores.py": "d6ca98f60a1d521136d313d9390abd1952f49530d512bea8c492f792ab6b3dec",
+      "m200/timer_profile.py": "44c47b63b94cd597d7fffc730fa95fe5918bb79c0314d5854dc0137ad43610f3",
+      "m200/subroutine_allocation.py": "fa96d0ab72a8c46c13d9d1674de7a690a81a1057f3d83bb26b6ca0574c280033",
+      "m200/edge_functions.py": "c58b059d15ee7387ed7e65f841ad549f3b30c3781a258c0a6340a96e9cd92a24",
+      "m200/communication_properties.py": "e6a6282bfff3a73fae49e070072c111e0f0bb413564f9947b6800950ecb34733",
+      "m200/sequence_frontend.py": "37447e7217b1898aee186ee4796c7419cad74d9feccf746570104bf865632297",
+      "m200/reverse.py": "0ecdf1a9b2e842a56c841892a2ef4b1611a9ad64d6ff63f7739a3f1ab2e2a241",
+      "m200/conversions.py": "0922116a83ef1bcacda5fb9a588f2bc10d522a7c1ca7f301148ea88e6e370250",
+      "m200/subroutine_lowering.py": "4e12bb2e0f5b8c7778b10a7d18e7a828c2d93e76ce00b2ff5e92e4a6ab7227a3",
+      "m200/scalar_numeric.py": "bca5fbc0d26acf40fb236cc3b3aad8d0b1f099cb9b51eb8572cbc009a0fc5ca4",
+      "m200/subroutine_graph.py": "c23e099d7dc8ba8b62432d79a668786576b5a21032118c6e9d25bf553191e511",
+      "m200/native_logic.py": "13c70decbb49d7704d28cfe2b6be350547c3839fe22d3b5561f7b5654fffce0d",
+      "m200/register_graph.py": "0efbf69a3beaea6069445af5de214ac29b075fb2a7335fd2944b1566b41abdda",
+      "m200/register_xml.py": "19c983c562a45b176d8b919026888fbee5a1098346b674ca350f3f1f1bde839c",
+      "m200/frontend.py": "673771f9e8b39d5b0f3bb751c628b3d503b9a049f7f649b746f40d2d35307173",
+      "m200/__init__.py": "77c5815a3596eebca3e939d1ad39abba46fa4edc4df148aaa7e47f13e5eda0ab",
+      "m200/flow.py": "090035e4abc84354287c934898430c0da038a81a11452526e4d87a70def55607",
+      "m200/edges.py": "e590a801d00b94d20a2dd1f428635aa299e3bd59bcbfe2442f5ffa4fd3d64713",
+      "m200/native.py": "00658f1ac3f39052f35989f68cb541fe0e6a4a7c9c2bf18c907499ba143a06ba",
+      "m200/subroutine_xml.py": "f68800292691cfa9a598e83a19fa6a07d08ec959866f759e2d003c5b2840aaf5",
+      "m200/rtc_xml.py": "c555242a30418eba50e66cd2fc1788131938eef6ef7d58d3f254f7d21e4d69d4",
+      "m200/communication_xml.py": "9fefb153ab3084a0914e1c81b64a6b528247324608c8f69777012a795819bae0",
+      "m200/model.py": "49990664ad51918261dcce584666bc1e8c27cb9a56fbe7fcbc9e18305e65dd9d",
+      "m200/lower.py": "1518e1164e2969b2e5f8449c123a2e1585af2c9c3790337f80ac2a1c58a32e8a",
+      "m200/cli.py": "9d5e18b9f47a8f2a0d2ee6da07fedce997d058e527e784c6e92dc25cfa12979e",
+      "m200/capabilities.py": "e94e59743ee0eae98c476938f8eafe04966c0823b825b1d070980d15d41348a0",
+      "m200/io_lowering.py": "3a79c87373e2ba2c635b5b0b32d78c48ded1044247d550454bbc72bcbd110c12",
+      "m200/communication.py": "c79315f926a5ae8a64f63f4f9c9f10610c1160f1e7f9330b600eaa6f8f61251f",
+      "m200/ladder_lowering.py": "9b0170dcfd16cc4c01e23ad4ae374cbc3875dc865e3bfd61c9e646f712ad32a5",
+      "m200/counter_graph.py": "80abf1241ee5095a121c47e1a196de03f1e7ed37fe0c54626b2a3f3eba4a9e8c",
+      "m200/numeric.py": "a966b2ea049f87b35330aa6432ad715aac7fde708858946a634743376fc4eb54",
+      "m200/rtc.py": "036a231d053f30a9fd322439ce88007bb4cd9d22c6c5c75b739bea424d5c43ac",
+      "m200/modbus.py": "cdbda6b1e97b6ee1afa076dc9df466bcc57a34cf4006ab2e9bb8bf5248a8d961",
+      "m200/allocation.py": "722a05e8675aa3cfa88866efa942cd4af8ba47c56400b5c32a2c27c462acab9d",
+      "m200/il.py": "18d097b39cad4673a9cadbad17d6ccc6f44ef3b8bd078b8bba084dd9b8aae51f",
+      "m200/emission_cleanup.py": "b2e42eb01929b93135db6ac085143505eeff9e0af2c449986cc510d9278321eb",
+      "m200/sequence_graph.py": "42db695b28382fbd283335d3e38f612463a5c3a5bc97502aaeedc89c42186072",
+      "m200/levels.py": "439eba12b9bf189795449983755b55d92f77261678a983c4ed9e94b5eb341149",
+      "m200/timers.py": "dd2b3a286853a7ef6b52b866d1d0b94300adcc81d0e23bd6b493b87467195d9f",
+      "m200/timer_il.py": "e4b912fa54e4dc896752eb3581dc62ddb0b457f82f5f715708faa923cc4f05f1",
+      "m200/sequence_reverse.py": "83eb4eaea72fa74fdc2980974e9ef9f8accaae697631fddfad7586bca6bade93",
+      "m200/boolean_graph.py": "97783dc139c50f72ec8056141f4caa4a4ceef46d8dbf8921116e183fca82e25e",
+      "m200/timer_lifecycle.py": "bfd06e1fd9f07294487a3933003f6e7213628172b4b29961601de78dd1ca4dd5",
+      "m200/subroutine_contexts.py": "858aee89166094ea1c2dab641251e7791d914e0d83d549daadf60f1959703a56",
+      "m200/timer_xml.py": "8c109924459ec04f6ac17d08c254e394919e352f32a2558d1e6a78d8fd13999e",
+      "m200/scalar_constants.py": "c36fb562574bb000c9f83666c19d4a002e89ccbf23bb3b970eae904b64cf3111",
+      "m200/rtc_frontend.py": "b5e5a29e39b43251d83941e2398f4188a2b4d469aea8224e879b7e02ae32d944",
+      "m200/boolean_frontend.py": "1b0fa7d79349a38f722510afe2950547c0f40b04bd1332ce4c3f3c5989b18db4",
+      "m200/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "m200/register_il.py": "5f21a754ffc45c9b10de8f8db9cf903d0ebaa1bef68c350c863b95aac8bdfe6a",
+      "m200/sequence_xml.py": "d7f7db0e0b2724a897f413c274618b58b3faf9b0979f9d36d21164f2830fce31",
+      "m200/project.py": "ccbf78c7588d8006dab599cbee6791b917fbb085336e2b8e228b4a22c88cb1d6",
+      "m200/indexed.py": "0b8ca542e2be87392d8de2a75ef8ad0d48534b28d7f82d1e24fd1bf38fc8343b",
+      "m200/counter_xml.py": "a87177f18a698b1f442a7c16eb66748a6d2c06c9c966ac199c6275bb1e326554",
+      "sdk/plc_boolean.hpp": "6cf3fbcdb968dbdb6197351885c43f7761cd7e8830f7a15d3c949f36d2ae2e58",
+      "sdk/plc.hpp": "0725a0c13f4ccdea5b02f2a8d6c0c85c5a9808ee6ee9f9b2a4e53550c9810236",
+      "sdk/scalar_numeric.hpp": "7509aead5771a3b111aef5df813e7797dcaaf065732c73414a21f309fd3913e7",
+      "sdk/plc_sequences.hpp": "8ca0dcda056a56d27d55e24305803aafc219e7f679af97c91c349b294d0d7184"
+    },
+    "validation": "Full default discovery completed:1009PASS,8explicitpendingFAIL,0ERROR,0SKIP; makeexit2; wholeacceptanceINCOMPLETE"
+  },
+  "historical_local_results": [
+    {
+      "freeze_id": "natal-combined-3",
+      "status": "23_cases_passed_DR_step_assignment_blocked",
+      "cases_passed": 23,
+      "frames": 185,
+      "routes_per_frame": 7,
+      "observations": 1295,
+      "blocked": [
+        {
+          "id": "g08-interior-sequences",
+          "frames": 16,
+          "error": "M200-E: unmodelled instruction effects in memory allocation: [%DR2.S:=2]"
+        }
+      ],
+      "examples_exit": 0,
+      "optimization_stress": {
+        "status": "PASS",
+        "cases": [
+          {
+            "name": "wire",
+            "cost": {
+              "rungs": 1,
+              "il_instructions": 2,
+              "memory_bits": 0,
+              "memory_words": 0,
+              "required_word_allocation": 0
+            },
+            "positions": 3
+          },
+          {
+            "name": "packed_io",
+            "cost": {
+              "rungs": 2,
+              "il_instructions": 4,
+              "memory_bits": 0,
+              "memory_words": 1,
+              "required_word_allocation": 1
+            },
+            "positions": 4
+          },
+          {
+            "name": "same_scan_q",
+            "cost": {
+              "rungs": 5,
+              "il_instructions": 11,
+              "memory_bits": 1,
+              "memory_words": 0,
+              "required_word_allocation": 0
+            },
+            "positions": 4
+          },
+          {
+            "name": "conditional_write",
+            "cost": {
+              "rungs": 6,
+              "il_instructions": 14,
+              "memory_bits": 2,
+              "memory_words": 0,
+              "required_word_allocation": 0
+            },
+            "positions": 5
+          },
+          {
+            "name": "nested_numeric_guards",
+            "cost": {
+              "rungs": 8,
+              "il_instructions": 18,
+              "memory_bits": 1,
+              "memory_words": 2,
+              "required_word_allocation": 11
+            },
+            "positions": 6
+          },
+          {
+            "name": "bool_chain",
+            "cost": {
+              "rungs": 6,
+              "il_instructions": 15,
+              "memory_bits": 2,
+              "memory_words": 0,
+              "required_word_allocation": 0
+            },
+            "positions": 5
+          },
+          {
+            "name": "bounded_loop",
+            "cost": {
+              "rungs": 13,
+              "il_instructions": 28,
+              "memory_bits": 1,
+              "memory_words": 4,
+              "required_word_allocation": 11
+            },
+            "positions": 4
+          },
+          {
+            "name": "early_return",
+            "cost": {
+              "rungs": 5,
+              "il_instructions": 11,
+              "memory_bits": 1,
+              "memory_words": 0,
+              "required_word_allocation": 0
+            },
+            "positions": 6
+          },
+          {
+            "name": "word_alias",
+            "cost": {
+              "rungs": 4,
+              "il_instructions": 8,
+              "memory_bits": 0,
+              "memory_words": 2,
+              "required_word_allocation": 22
+            },
+            "positions": 3
+          },
+          {
+            "name": "stateless_sr",
+            "cost": {
+              "rungs": 10,
+              "il_instructions": 21,
+              "memory_bits": 2,
+              "memory_words": 2,
+              "required_word_allocation": 12
+            },
+            "positions": 4
+          }
+        ],
+        "distinct_positions": 44
+      },
+      "revoada_same_source": {
+        "status": "PASS sampled-clock contract",
+        "source": "examples/christmas/revoada20_clock_10.cpp",
+        "source_sha256": "37e2386fe336e4ef411ad3eb7ee468c4800083708049b5d22c6b93bf1b17cb7d",
+        "SMBP": "output/test-batch-natal-combined-3-Revoada/program.smbp",
+        "SMBP_sha256": "e0395eb9553d509b2e41c6bcc976f85193971b1ace111d0170057103c69050fc",
+        "start_phase_cases": [
+          {
+            "START_ms": 0,
+            "first_quantum_ms": 550,
+            "later_quantum_ms": 600,
+            "positions": 2459
+          },
+          {
+            "START_ms": 49,
+            "first_quantum_ms": 501,
+            "later_quantum_ms": 600,
+            "positions": 2458
+          },
+          {
+            "START_ms": 50,
+            "first_quantum_ms": 500,
+            "later_quantum_ms": 600,
+            "positions": 2459
+          },
+          {
+            "START_ms": 75,
+            "first_quantum_ms": 575,
+            "later_quantum_ms": 600,
+            "positions": 2469
+          }
+        ],
+        "control_positions": 14,
+        "onehot_order_double_endpoints_and_two_loops": true,
+        "timers": 0,
+        "rungs": 46,
+        "IL": 103,
+        "M_unique": 5,
+        "M_span": 5,
+        "MW_unique": 7,
+        "MW_span": 181,
+        "tradeoff": "First quantum500..600ms depends on START/clock phase; later600ms only when all rising/falling levels sampled. No missed-edge/saturation/monotonic-time guarantee or absolute START-phase parity."
+      }
+    },
+    {
+      "freeze_id": "natal-combined-3b",
+      "status": "passed_focused_DR_set_step_pipeline",
+      "case": "g08-interior-sequences",
+      "frames": 16,
+      "routes": 7,
+      "observations": 112,
+      "oracle_corrections": []
+    },
+    {
+      "freeze_id": "natal-combined-3c",
+      "status": "PASS_FOCUSED",
+      "checks": {
+        "DR_S_literal_set_step": "PASS: VM/SDK/JSON/SMBP/actual reverse/recompiled SMBP",
+        "original_packed_baseline_method": "PASS",
+        "packed_literal_width16_17_32_signed_full_bank": "PASS: independent literal masks, neighbors preserved, VM/SDK/JSON/SMBP/actual reverse/recompiled SMBP; 0scratchMW original and reverse",
+        "timer_property_stress": "PASS:2methods, including8192scans/16configurations; historical report preserved; official editor and physical PLC pending"
+      },
+      "pending": [
+        "RTC_EXEC native binding",
+        "official native editor/simulator lifecycle and endpoints",
+        "whole-family native parity"
+      ]
+    }
+  ],
+  "first_combined_full_regression": {
+    "freeze_id": "natal-combined-3",
+    "command": [
+      "make",
+      "check"
+    ],
+    "exit": 2,
+    "tests": 1007,
+    "failures": 123,
+    "errors": 4,
+    "skips": 1,
+    "classification_counts": {
+      "BASELINE_DIAGNOSTIC_EXPECTATION_ROOT_REVIEW": 12,
+      "BASELINE_NUMERIC_FAULT_POLICY_ROOT_REVIEW": 28,
+      "BASELINE_OPERATION_CATALOG_EXPECTATION_ROOT_REVIEW": 1,
+      "BASELINE_SR_CONTRACT_EXPECTATION_ROOT_REVIEW": 19,
+      "BASELINE_TIMER_ADMISSION_EXPECTATION_ROOT_REVIEW": 46,
+      "CONFIRMED_BASES_IMPORT_COMPATIBILITY_DEFECT": 2,
+      "CONFIRMED_PACKED_LITERAL_CARRIER_DEFECT": 1,
+      "PENDING_NATIVE_RESET_HISTORY": 2,
+      "PENDING_PREPARATION_ADAPTER_OR_NATIVE_ORACLE": 14,
+      "PRELIMINARY_SOURCE_IDENTITY_CONFLICT": 1,
+      "REAL_FRONTEND_ALLOCATION_GAP": 1
+    },
+    "status": "FAIL retained; focused later fixes do not overwrite this run",
+    "input_drift": "Four batch descriptor notice/compiler-pin fields changed during run; source72 pins unchanged. Closed test input snapshot required next gate."
+  },
+  "source_evidence": {
+    "combined-3/freeze.json": "a9f77349b6396050567c3fab8583c9c6c11fa3172929051712eb6009fa1cff58",
+    "combined-3/test-batch/summary.json": "90029612742fcdbce37dd9cb1ff1572bdd6571af4f3edf4dbd35bd69bcc6f27b",
+    "combined-3/test-interop/failure-classification.json": "2ae37b658d8955a7cf90ff199f5d705126da8fcf14e3657f8f1c26d18076e0a8",
+    "combined-3/test-interop/make-check.log": "e205cecb1bc2b2a85c6fd1a5a06c9047bd4d28dbc5de1a79c7f4912c697e117d",
+    "combined-3b/freeze.json": "4f49c087987f86f78f29d2f7ff97bc052d4a1868f31deec09db030f72a32869e",
+    "combined-3b/test-batch/summary.json": "7f7b77b75a29b1dc02b31fe91c3ff5c249bc6a41209a9302e9da3fa9788611a0",
+    "combined-3c/freeze.json": "3b0b2a34b1e280d8088dd8e99d05e19b6d57dfc9b51a24ba2251efb719cab31a",
+    "combined-3c/test-interop/summary.json": "6d02b1ca0f4307a29330d2806b7252a9c9a1a84cc53605f575e9c0860edbb095",
+    "combined-4/freeze.json": "07afadc818c056b2a11a1ef9a9d7a0812b3ee853550a9f66a89da079a14e6402",
+    "combined-4/test-batch/summary.json": "931bb941c5db81b94c875489636a8f4d3097adcab54ae8c35c0966b31499414a",
+    "combined-4/test-interop/summary.json": "aad1a5e2546b21417a322f64ae6d4537428ecd4c4acdd64e91b9c8e55d83b18b",
+    "numeric-contract-review-1/test-interop/summary.json": "a0651fe671796dff51149451a79ed3c86ab86983eb5bef2d1d9ef6e976e84a1a",
+    "rtc-priority-review-1/test-batch/summary.json": "cc85b4cac7288da09113fb7488503f5b96e404d6be72d75674335d360f1de12e",
+    "sr-contract-review-1/test-batch/summary.json": "2c43073db397cddfd877faad9ce3e886b7c5643d0d3b098719b0d7de9d96f58e",
+    "combined-5/test-interop/summary.json": "0d64acf47e9e385d7adcdec9484be6384aab833ab527e0a454e7b91b2eda8794",
+    "combined-5/freeze.json": "4d3c6d52bae2d8424cc6bfbab123222b87cddc0b8d38aadae080a2aa2ac6e550",
+    "combined-7/test-interop/full-gate/summary.json": "a02d5bf1451c01e462ca9c298feb285c94a490fbfd1f25bbb558586d9ad6b59f",
+    "batch-final-1/test-batch/summary.json": "67871e3bc703d2d326a4e223f252fcde85919f9aa334becce40e420ea244f783"
+  },
+  "official_campaign": "not run for these combined candidates; exact generated artifacts still require final batch",
+  "physical_controller": "future Windows/SSH and actual TM200CE40T acceptance pending",
+  "ci": "all tests local; GitHub Actions stays disabled",
+  "reviewed_test_contracts": [
+    "six numeric modules:75 methods on candidate4; only3S18 controlsred, then two affectedmethods green on5",
+    "four SR modules:57methodsPASS on candidate4",
+    "six timer modules:101methodsPASS on candidate5",
+    "three RTC prepared cases:6VM/SDKchecks and20probesPASS on candidate4",
+    "G01 external-image prepared adapter:2VM/SDKchecks+2missingprovidercontrolsPASS on candidate4; mergedregistry retestpending5"
+  ],
+  "next_actions": [
+    "Publish scopedexperimentalcheckpoint with8rawpendingfailures and exactevidence",
+    "Run finiteofficialeditor/simulator campaign after freshvisibilitycheck",
+    "KeepSDKasync/poison/nativeoracles/physicalacceptance explicit"
+  ],
+  "final_local_regression": {
+    "classification": "failure-classifications.json",
+    "classification_counts": {
+      "genuine_defects": 0,
+      "native_oracle_pending": 6,
+      "obsolete_assertions": 0,
+      "unbound_adapters": 2
+    },
+    "drift_audit": "drift-audit.json",
+    "evidence_hashes": {
+      "all-inputs-after.json": "aaa071a9a4259192acb1e6f3a12d8607b09c642ab84b2d00e197bc7ea468c03d",
+      "all-inputs-before.json": "aaa071a9a4259192acb1e6f3a12d8607b09c642ab84b2d00e197bc7ea468c03d",
+      "command.json": "94648068389c3f69d8c99458dd6f9513145336ff8457e8cabe53a0124a1f224a",
+      "compiler-pins-after.json": "ae2f6934ae4720623e1957e7bae5deaf31413987ede12dafe4fdd5af99f12356",
+      "compiler-pins-before.json": "ae2f6934ae4720623e1957e7bae5deaf31413987ede12dafe4fdd5af99f12356",
+      "drift-audit.json": "485e233b71ffb69f1c4fb30a30cf619f59606e1a936b16f865a45a29d0639e25",
+      "failure-blocks.json": "2097688fa22d864a8de7b2a4f9bcb8b2685dce343ca34d05fdb3383d7d22106a",
+      "failure-classifications.json": "6eb605ae895a17762448d606d0370cc2309aa03ef4c86fca59da264f257b5cd1",
+      "inventory-policy.json": "d7e67fe4fa646e30cf8d27fac15fa45245c95124b6707d0aa6c828a48a2c31e1",
+      "make-check.log": "29a3dcdedd04fe979e7f959aeac9258fa34640db038b29a15ae0a10ab0645764"
+    },
+    "failures": "failure-blocks.json",
+    "freeze_id": "natal-combined-7",
+    "full_gate_result": "INCOMPLETE_EXPLICIT_PENDING",
+    "integrity": {
+      "all_additions_changes_removals": 0,
+      "compiler_sdk_pins": 72,
+      "complete_input_bytes": 114559477,
+      "complete_input_files": 968,
+      "source_test_fixture_doc_research_before_after": "UNCHANGED"
+    },
+    "limits": "Sole full run; no source/expectation edits, filtered discovery, retries, GUI, Wine or CI. Revoada/budgets were not repeated.",
+    "native_preparation_retained": "../../../native-probe-preparation-1/summary.json",
+    "pending_outside_this_gate": [
+      "Official native editor/simulator and physical lifecycle qualification",
+      "G02SDKprimitive poison propagation; passingVMmaskcontrols do not establish it",
+      "RTC_EXEC native binding",
+      "12native observation questions from retained3project preparation; no runtime observations here"
+    ],
+    "positive_regression_evidence": {
+      "G01_expression_edges_follow_calls_not_scan_count.sdk": {
+        "log_line": 9,
+        "status": "PASS"
+      },
+      "G01_expression_edges_follow_calls_not_scan_count.vm": {
+        "log_line": 7,
+        "status": "PASS"
+      },
+      "G08_sc_middle_steps_neutral_full_pins_before_exclusive_reset.sdk": {
+        "log_line": 53,
+        "status": "PASS"
+      },
+      "G08_sc_middle_steps_neutral_full_pins_before_exclusive_reset.vm": {
+        "log_line": 51,
+        "status": "PASS"
+      },
+      "test_exact_actual_editor_saves_read_config_only_and_stay_product_gated": {
+        "log_line": 1011,
+        "status": "PASS"
+      }
+    },
+    "raw_result": {
+      "command": [
+        "make",
+        "check"
+      ],
+      "elapsed_seconds": 300.12,
+      "errors": 0,
+      "exit": 2,
+      "failure_blocks": 8,
+      "passed_methods": 1009,
+      "runs": 1,
+      "skips": 0,
+      "unittest_methods": 1017,
+      "unittest_seconds": 299.866
+    },
+    "scoped_executable_result": {
+      "methods": 1009,
+      "rule": "All1017methods were discovered without filtering.8explicit oracle/adapter pending methods remained rawFAIL; every other method loggedok. This does not close pending functionality or whole-family parity.",
+      "status": "PASS_WITHIN_EXECUTED_SCOPE"
+    }
+  },
+  "public_evidence": "docs/validation/natal-integrated/full-gate/summary.json",
+  "final_composition": {
+    "freeze_id": "natal-batch-final-1",
+    "status": "passed_prepared_subset_full_parity_incomplete",
+    "batch": {
+      "variants": 11,
+      "cases": 24,
+      "literal_positions": 201,
+      "local_routes": 7,
+      "route_observations": 1407,
+      "failed_cases": [],
+      "seconds": 21.645835124999998,
+      "pending_ids": 41,
+      "deferred_ids": 164,
+      "inventory_count": 250,
+      "inventory_local_states": {
+        "passed_literal_subset": 45,
+        "not_run_pending_case_or_contract": 41,
+        "DEFERRED_VERSION": 164
+      },
+      "all_batch_pins_unchanged": true,
+      "batch_pin_count": 98,
+      "full_parity": "incomplete"
+    },
+    "optimization": {
+      "status": "PASS",
+      "cases": 10,
+      "positions": 44,
+      "seconds": 7.1474455,
+      "all_budgets_within_maxima": true,
+      "results": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/source/output/optimization/results.json"
+    },
+    "Revoada": {
+      "status": "PASS sampled-clock contract",
+      "seconds": 22.4815705,
+      "source_sha256": "37e2386fe336e4ef411ad3eb7ee468c4800083708049b5d22c6b93bf1b17cb7d",
+      "sampled_positions": 9845,
+      "controls": 14,
+      "rungs": 46,
+      "IL": 103,
+      "M_unique": 5,
+      "M_span": 5,
+      "MW_unique": 7,
+      "MW_span": 181,
+      "timers": 0,
+      "results": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/source/output/final-batch-revoada/results.json",
+      "tradeoff": "First quantum500..600ms depends on START/clock phase; later600ms only when all rising/falling levels sampled. No missed-edge/saturation/monotonic-time guarantee or absolute START-phase parity."
+    },
+    "pins": {
+      "compiler_sdk": 72,
+      "compiler_sdk_changes": [],
+      "test_example_inputs_before": 294,
+      "test_example_inputs_after": 294,
+      "test_example_input_changes": []
+    },
+    "artifacts": {
+      "exact_native_manifest": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/native-final-batch.json",
+      "resource_budgets": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/resource-budgets.json",
+      "seven_route_results": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/results.json",
+      "finite250_inventory": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/manifest.json"
+    },
+    "execution_count": {
+      "prepare": 1,
+      "batch_run": 1,
+      "optimization_stress": 1,
+      "Revoada": 1
+    },
+    "scope": {
+      "GUI_Wine_CI": "not_run",
+      "core_root_source_test_mutations": "none",
+      "fullunit": "not_repeated",
+      "make_examples": "not_repeated",
+      "native_questions": "PENDING"
+    }
+  },
+  "portable_regressions": {
+    "boolean": {
+      "module": "tests/test_natal_boolean.py",
+      "methods": 8,
+      "status": "PASS; newmodule only, one execution",
+      "evidence": "docs/validation/natal-integrated/permanent-boolean-regressions/results.json"
+    },
+    "subroutines": {
+      "module": "tests/test_natal_subroutines.py",
+      "methods": 6,
+      "status": "PASS by five unchanged methods in initial run plus one corrected-selector method in focused run; no product/oracle change",
+      "evidence": "docs/validation/natal-integrated/permanent-sr-regressions/summary.json"
+    },
+    "source": "Same72compiler/SDK hashes as full7; these14methods are separate additional runs, not part of1017fullgatecount"
+  }
+}

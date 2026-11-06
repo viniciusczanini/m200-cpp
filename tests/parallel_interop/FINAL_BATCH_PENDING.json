@@ -1,0 +1,17 @@
+{
+  "schema": "m200.parallel-interop.final-batch-pending.v1",
+  "prepared_local_cases": "cases_final_static.py",
+  "local_execution": "NOT_RUN; waiting for coordinator's final integrated freeze",
+  "official_execution": "NOT_RUN; deferred final batch",
+  "pending": [
+    "RTC_EXEC native instruction order/graph binding: explicit gate, no native block support claimed",
+    "RTC multiword S/SW snapshot coherence during rollover and native S50 commit visibility",
+    "RTC battery, drift, adjustment SW59/S59 conflict, cold/warm/STOP and persistence",
+    "Schedule inclusive/equal endpoints, midnight/year wrap, write priority and lifecycle",
+    "New native SBR/SC/DR active CE40T config/graph open/compile/save/reopen",
+    "SBR/SC collisions/vacated endpoints, SC endpoints, DR aliased cams and pending-step collisions",
+    "Native Boolean falling-edge graph layout, first-call/cold/warm/STOP and physical sampling phase",
+    "External Boolean IO/SW endpoints and task/preemption integration without explicit adapters"
+  ],
+  "policy": "Prepared/static-route or refusal guard evidence never promotes an unbound runtime or whole-family feature. Earlier G11 PASS evidence is preserved, not rerun."
+}

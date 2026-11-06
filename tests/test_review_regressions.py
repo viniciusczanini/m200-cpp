@@ -64,14 +64,28 @@ class ReviewRegressions(unittest.TestCase):
                     Program([["LD 1", "ST %Q0.0"]], symbols=symbols, metadata=metadata)
                 )
 
-    def test_active_nonfinite_read_is_rejected_by_both_local_engines(self):
-        p = self.code(
-            "void scan(){plc::write_dword(0,2139095040);plc::output(0,plc::read_real(0)>0.0f);}"
-        )
-        with self.assertRaisesRegex(CompileError, "non-finite"):
-            Machine(p).step()
-        with self.assertRaises(CompileError):
-            run_native(self.source, [{}])
+    def test_active_nonfinite_read_uses_ieee_comparison_without_arithmetic_error(self):
+        for raw, greater, equal_self in [
+            (2139095040, True, True),       # +infinity
+            (-8388608, False, True),       # -infinity
+            (2143294004, False, False),    # quiet NaN, payload 0x1234
+        ]:
+            with self.subTest(raw=raw):
+                p = self.code(
+                    "void scan(){plc::write_dword(0," + str(raw) + ");"
+                    "plc::output(0,plc::read_real(0)>0.0f);"
+                    "plc::output(1,plc::read_real(0)==plc::read_real(0));"
+                    "plc::output(2,!plc::system(18));"
+                    "plc::output(3,plc::floating_status()==0);"
+                    "plc::output(4,plc::read_dword(0)==" + str(raw) + ");}"
+                )
+                machine = Machine(p)
+                expected = [greater, equal_self, True, True, True] + [False] * 11
+                self.assertEqual(machine.step(), expected)
+                self.assertFalse(machine.arithmetic.overflow)
+                self.assertEqual(machine.arithmetic.float_status, 0)
+                self.assertEqual(machine.words[0] | machine.words[1] << 16, raw & 0xFFFFFFFF)
+                self.assertEqual(run_native(self.source, [{}]), [expected])
 
     def test_graph_whitespace_cannot_merge_numeric_tokens(self):
         import xml.etree.ElementTree as ET

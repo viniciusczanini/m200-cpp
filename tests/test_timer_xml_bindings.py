@@ -1,4 +1,4 @@
-"""Exact editor-saved/reopened 10ms binding, preserving other timer gates."""
+"""Pinned 10ms binding plus documented option serialization, not new GUI proof."""
 
 import dataclasses
 import hashlib
@@ -87,22 +87,33 @@ class TimerXmlBindingTests(unittest.TestCase):
         self.assertEqual(malformed.read_bytes(), before)
         self.assertEqual(SAVED_10MS.read_bytes(), self.original)
 
-    def test_unverified_options_stay_blocked_and_preserve_existing_destination(self):
+    def test_documented_options_serialize_while_invalid_tp_retention_is_atomic(self):
         for option in ("retentive", "dynamic_preset"):
             with self.subTest(option=option):
                 program = self.program()
-                program.timers[0] = dataclasses.replace(
-                    program.timers[0], **{option: True}
-                )
+                program.timers[0] = dataclasses.replace(program.timers[0], **{option: True})
                 destination = self.work / (option + ".smbp")
-                destination.write_bytes(b"preserved user destination\n")
-                with self.assertRaisesRegex(
-                    CompileError, "timer.*functional.level.*unverified"
-                ):
-                    write_project(program, SAVED_10MS, destination)
+                destination.write_bytes(b"previous user destination")
+                write_project(program, SAVED_10MS, destination)
+                actual = load_project(destination)
+                self.assertEqual(actual.timers, program.timers)
+                self.assertEqual(actual.rungs, program.rungs)
+                self.assertEqual(actual.metadata["official_editor"], "pending")
+                tree = ET.parse(destination)
+                timer = tree.find("./SoftwareConfiguration/Timers/TimerTM")
                 self.assertEqual(
-                    destination.read_bytes(), b"preserved user destination\n"
+                    tuple(timer.findtext(k) for k in ("Type", "Base", "Preset", "IsRetentive", "IsDynamicPreset")),
+                    ("TON", "TenMilliSeconds", "5", str(option == "retentive").lower(),
+                     str(option == "dynamic_preset").lower()),
                 )
+                self.assertEqual(tree.findtext("ManagementLevel"), "FunctLevelMan21_0")
+                valid_bytes = destination.read_bytes()
+                invalid = self.program()
+                invalid.timers[2] = dataclasses.replace(invalid.timers[2], retentive=True)
+                with self.assertRaisesRegex(CompileError, "retentive TP is unsupported"):
+                    write_project(invalid, SAVED_10MS, destination)
+                self.assertEqual(destination.read_bytes(), valid_bytes)
+        # Historical bytes/provenance describe only the options-off fixture.
         self.assertEqual(SAVED_10MS.read_bytes(), self.original)
 
 

@@ -44,6 +44,13 @@ class Program:
     counters: dict = field(default_factory=dict)
     subroutines: dict = field(default_factory=dict)
     registers: dict = field(default_factory=dict)
+    constants: dict = field(default_factory=dict)
+    rtcs: dict = field(default_factory=dict)
+    schedules: dict = field(default_factory=dict)
+    boolean: object = None
+    shift_bit_registers: dict = field(default_factory=dict)
+    step_counters: dict = field(default_factory=dict)
+    drums: dict = field(default_factory=dict)
 
     def as_dict(self):
         result = {
@@ -56,12 +63,23 @@ class Program:
             "communications": {k: v.to_dict() for k, v in self.communications.items()},
             "counters": {str(k): asdict(v) for k, v in self.counters.items()},
         }
+        if self.constants:
+            result["constants"] = {str(k): v for k, v in self.constants.items()}
         if self.subroutines:
             result["subroutines"] = {
                 str(k): asdict(v) for k, v in self.subroutines.items()
             }
         if self.registers:
             result["registers"] = {str(k): asdict(v) for k, v in self.registers.items()}
+        if self.rtcs:
+            result["rtcs"] = {str(k): asdict(v) for k, v in self.rtcs.items()}
+        if self.schedules:
+            result["schedules"] = {str(k): asdict(v) for k, v in self.schedules.items()}
+        if self.boolean is not None:
+            result["boolean"] = self.boolean.to_dict()
+        for name in ("shift_bit_registers", "step_counters", "drums"):
+            if getattr(self, name):
+                result[name] = {str(k): asdict(v) for k, v in getattr(self, name).items()}
         return result
 
     @classmethod
@@ -78,6 +96,13 @@ class Program:
             "communications",
             "counters",
             "registers",
+            "constants",
+            "rtcs",
+            "schedules",
+            "boolean",
+            "shift_bit_registers",
+            "step_counters",
+            "drums",
             *(("subroutines",) if data.get("format") == "m200-cpp-il-v2" else ()),
         }:
             fail("unknown program JSON fields")
@@ -158,6 +183,18 @@ class Program:
                 }:
                     fail("invalid subroutine JSON definition")
                 subroutines[int(key)] = SubroutineDefinition(**value)
+        raw_constants = data.get("constants", {})
+        if not isinstance(raw_constants, dict) or any(not isinstance(k, str) or re.fullmatch(r"0|[1-9][0-9]*", k) is None for k in raw_constants):
+            fail("invalid constant image JSON")
+        from .scalar_constants import validate as validate_constants
+        constants = {int(k): v for k, v in raw_constants.items()}
+        validate_constants(constants)
+        from .rtc import configs_from_json, RtcConfig, ScheduleConfig
+        rtcs = configs_from_json(data.get("rtcs", {}), RtcConfig, 2)
+        schedules = configs_from_json(data.get("schedules", {}), ScheduleConfig, 16)
+        from .boolean_banks import BooleanConfig
+
+        from .sequences import configurations_from_json
         return cls(
             data["rungs"],
             timers,
@@ -167,10 +204,37 @@ class Program:
             counters,
             subroutines,
             registers,
+            constants=constants,
+            rtcs=rtcs,
+            schedules=schedules,
+            boolean=BooleanConfig.from_dict(data["boolean"]) if "boolean" in data else None,
+            shift_bit_registers=configurations_from_json(data.get("shift_bit_registers", {}), "SBR"),
+            step_counters=configurations_from_json(data.get("step_counters", {}), "SC"),
+            drums=configurations_from_json(data.get("drums", {}), "DR"),
         )
 
 
 def address(text, writable=False):
+    if ":X" in text:
+        from .boolean_banks import word_bit
+
+        bank, word, channel, bit = word_bit(text, writable)
+        return bank + "bit", (word * 16 + bit) if channel is None else (word, channel, bit)
+    from .rtc import reference as rtc_reference
+    rtc = rtc_reference(text, writable)
+    if rtc:
+        if rtc[0] != "rtc" or rtc[2] not in ("Done", "Error"):
+            fail("numeric RTC/schedule property is not a bit: " + text)
+        return "RTC." + rtc[2], rtc[1]
+    from .sequences import reference as sequence_reference
+    sequence = sequence_reference(text, writable)
+    if sequence:
+        family, index, prop = sequence
+        if family == "DR":
+            if prop != "F":
+                fail("numeric Drum property is not a bit: " + text)
+            return "DR.F", index
+        return family + ".bit", index * (16 if family == "SBR" else 256) + int(prop)
     from .registers import reference as register_reference
 
     register = register_reference(text, writable)
@@ -185,11 +249,6 @@ def address(text, writable=False):
         if field not in ("E", "D", "F"):
             fail("numeric counter property is not a bit: " + text)
         return "C." + field, index
-    if ":X" in text:
-        from .bits import word_bit
-
-        word, bit = word_bit(text)
-        return "MWbit", word * 16 + bit
     if text.startswith("%TM"):
         from .timers import reference
 
@@ -211,9 +270,11 @@ def address(text, writable=False):
     limits = {"I0.": 24, "Q0.": 16, "M": 1024, "S": 160}
     if number >= limits[kind]:
         fail("address outside target range: " + text)
-    if kind == "S" and number not in (4, 5, 6, 7, 13, 17, 18, 20):
-        fail("unsupported system bit: " + text)
-    if writable and kind not in ("M", "Q0."):
+    if kind == "S":
+        from .boolean_banks import system_bit
+
+        system_bit(number, "ST" if writable else None)
+    if writable and kind not in ("M", "Q0.", "S"):
         fail("address is read-only: " + text)
     return kind, number
 

@@ -1,0 +1,34 @@
+{
+  "G11_previous_PASS": "preserved without rerun",
+  "RTC_EXEC_native_binding": "explicit pending gate only",
+  "builds_run": false,
+  "core_or_sdk_modified": false,
+  "execution_gate": "wait for coordinator final integrated freeze",
+  "explicit_pending_native_binding_case": 1,
+  "files": {
+    "FINAL_BATCH_PENDING.json": "876ae88c3b73ac6126c1aeafa54ef0006f674531214848a6a1bf48d0249f6af3",
+    "cases_final_static.py": "d9425d8b12e388d8417eca70bd14397774540c97c15c27957aa4e3897876073d",
+    "run.py": "9e3c030719338a156a37e858f5704f6daeb32db70213c2c56429e9fe245d6095"
+  },
+  "lane_contract_delivery_sha256": {
+    "G01": {
+      "CONTRACT.md": "126d16a8391ef28fd5862127d7c2abff6bbc4ff77c93aa1ad549672b9b5c30ca",
+      "DELIVERY.md": "fcbf1c479f34b7f13d67279a1d2602e04c2a7705e9d866a84ff9d204cb234a0d"
+    },
+    "G08": {
+      "CONTRACT.md": "b8d09d1563624195445f16d243dd9bfbc7515b562b60a0895271e32301cc87ac",
+      "DELIVERY.md": "2e11702dcfc0bf6554194b711d244849fd928c0641ddd7ad598a0d472ef03703"
+    },
+    "G09": {
+      "CONTRACT.md": "2bb3579fb7c6b2142bc39952fe7e780a342317218ddec8aa0cdc057f38df9e98",
+      "DELIVERY.md": "1de16a77e21efa6018c5baa58fa3b62707bf94a1f65fad57e3a6383d78fe66f4"
+    }
+  },
+  "pending_case_policy": "RTC_EXEC verifies refusal/destination preservation then reports PENDING, never a native execution PASS.",
+  "prepared_cases": 10,
+  "prepared_static_route_and_negative_controls": 9,
+  "scope": "Static G01/G08/G09 source/native configuration/graph/actual-reverse/permissions/ownership; no broad runtime timing campaign",
+  "status": "PREPARED_NOT_RUN",
+  "syntax_check_run": false,
+  "tests_run": false
+}

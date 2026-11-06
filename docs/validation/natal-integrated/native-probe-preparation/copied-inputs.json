@@ -1,0 +1,26 @@
+[
+  {
+    "bytes": 2446,
+    "copy": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/native-probe-preparation-1/inputs/sbr_observe.cpp",
+    "original": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/G08-native-plan-1/sbr_observe.cpp",
+    "sha256": "6fc1a0b70bf6c222f2e1172d9c86eb0a8be0f19365bf2b475b27c0d6ca458ed5"
+  },
+  {
+    "bytes": 2201,
+    "copy": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/native-probe-preparation-1/inputs/sc_observe.cpp",
+    "original": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/G08-native-plan-1/sc_observe.cpp",
+    "sha256": "2cb7bf26691d0d289b27f19683073c98d93487f7f1453915bc61a3f3f9d17888"
+  },
+  {
+    "bytes": 2220,
+    "copy": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/native-probe-preparation-1/inputs/drum_observe.cpp",
+    "original": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/G08-native-plan-1/drum_observe.cpp",
+    "sha256": "66f301c98b46140c4ed59afddf32cd76fb60028846a237c3d77f577056344981"
+  },
+  {
+    "bytes": 15112,
+    "copy": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/native-probe-preparation-1/inputs/PLAN.md",
+    "original": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/G08-native-plan-1/PLAN.md",
+    "sha256": "7ff351bf63b83722675b7477c31bbc81d359084c57fa6fc4bb82ac06ab354249"
+  }
+]

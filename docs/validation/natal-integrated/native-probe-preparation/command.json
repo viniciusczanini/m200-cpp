@@ -1,0 +1,11 @@
+{
+  "command": [
+    "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+    "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/native-probe-preparation-1/prepare.py"
+  ],
+  "cwd": "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/combined-5/source",
+  "started_utc": "2026-11-06T22:24:36.037062+00:00",
+  "exit": 0,
+  "seconds": 1.566,
+  "driver_sha256": "886192996cc71c4e07854cc225a09e63d9a42f5673cdc27981bf430ec9ad4341"
+}

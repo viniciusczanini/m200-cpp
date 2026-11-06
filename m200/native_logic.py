@@ -8,50 +8,15 @@ from .flow import JUMPS, ENDS
 from .edges import OPS as EDGE_OPS, LOADS
 from .edge_functions import parse as expression_edge
 from .counters import body as counter_body, ACTIONS as COUNTER_ACTIONS
+from . import timer_il
 
 STORES = ("ST", "STN", "S", "R")
 LOGIC = ("LD", "LDN", "AND", "ANDN", "OR", "ORN", "XOR", "XORN", *EDGE_OPS)
 STACK = ("MPS", "MRD", "MPP")
 OPEN = ("AND(", "OR(")
-
-
-def timer_index(arg):
-    m = re.fullmatch(r"%TM(0|[1-9][0-9]*)", arg)
-    if not m or int(m[1]) >= 255:
-        fail("invalid native timer address: " + arg)
-    return int(m[1])
-
-
-def timer_body(rung):
-    if any(not line.strip() for line in rung):
-        fail("empty native instruction")
-    if not rung or not rung[0].startswith("BLK %TM"):
-        return None
-    index = timer_index(rung[0].split(maxsplit=1)[1])
-    if rung[-1] != "END_BLK" or rung.count("IN") != 1 or rung.count("OUT_BLK") != 1:
-        fail("unsupported or non-reversible timer block")
-    at = rung.index("IN")
-    out = rung.index("OUT_BLK")
-    if (
-        at < 2
-        or out != at + 1
-        or rung[out + 1 : out + 2] != ["LD Q"]
-        or out + 2 >= len(rung) - 1
-    ):
-        fail("unsupported or non-reversible timer block")
-    before = rung[1:at]
-    after = rung[out + 2 : -1]
-    if any(
-        line.split(maxsplit=1)[0] not in (*LOGIC, *OPEN, "N", ")")
-        and expression_edge(line.split(maxsplit=1)[0]) is None
-        for line in before
-    ):
-        fail("unsupported timer input instruction")
-    if any(
-        line.split(maxsplit=1)[0] in (*JUMPS, "IN", "BLK", *STACK) for line in after
-    ):
-        fail("unsupported timer output instruction")
-    return before + [f"IN %TM{index}", f"LD %TM{index}.Q"] + after
+# Compatibility names used by the other native backends.
+timer_index = timer_il.index
+timer_body = timer_il.body
 
 
 def decode(rung):
@@ -59,9 +24,12 @@ def decode(rung):
         fail("empty native instruction")
     from .register_il import body as register_body, PIN_OPS
 
+    from .sequences import parse_body as sequence_body, INTERNAL_PINS
+    sequence = sequence_body(rung)
     register = register_body(rung)
     body = counter_body(rung) if register is None else register
     body = timer_body(rung) if body is None else body
+    body = sequence if sequence is not None else body
     rung = body if body is not None else rung
     result = []
     stack = 0
@@ -113,7 +81,11 @@ def decode(rung):
             parentheses += 1
             if parentheses > 32:
                 fail("parenthesis depth exceeds 32")
-        elif op in (*STORES, *JUMPS, "IN", "NUM", *COUNTER_ACTIONS, *PIN_OPS):
+        elif op in (*STORES, *JUMPS, "IN", "NUM", "RTC_EXEC", *COUNTER_ACTIONS, *PIN_OPS, *INTERNAL_PINS):
+            if op == "RTC_EXEC" and i != len(rung) - 1:
+                fail("internal RTC_EXEC must terminate its rung")
+            if op in INTERNAL_PINS and sequence is None:
+                fail("internal sequence action outside native block")
             if op in PIN_OPS and register is None:
                 fail("internal Register action outside a native Register block")
             if parentheses:
@@ -129,7 +101,7 @@ def decode(rung):
         elif op not in LOGIC:
             fail("unsupported IL instruction/order: " + line)
         if (
-            op in (*LOGIC, *STORES, *JUMPS, "IN", *COUNTER_ACTIONS, *PIN_OPS)
+            op in (*LOGIC, *STORES, *JUMPS, "IN", *COUNTER_ACTIONS, *PIN_OPS, *INTERNAL_PINS)
             and not arg
         ):
             fail("missing operand for " + op)
@@ -142,8 +114,10 @@ def decode(rung):
         *ENDS,
         "IN",
         "NUM",
+        "RTC_EXEC",
         *COUNTER_ACTIONS,
         *PIN_OPS,
+        *INTERNAL_PINS,
     ):
         fail("rung has no terminal action")
     return result

@@ -2,6 +2,7 @@
 
 import re
 from .model import fail
+from .communication_properties import FIELDS, property_reference
 
 KINDS = {
     "ReadVar": "READ_VAR",
@@ -9,10 +10,10 @@ KINDS = {
     "WriteReadVar": "WRITE_READ_VAR",
 }
 BOOL_FIELDS = {"DONE": "done", "BUSY": "busy", "ABORTED": "aborted", "ERROR": "error"}
-NUM_FIELDS = {"COMMERROR": ("i16", "comm_error"), "OPERERROR": ("i32", "oper_error")}
+NUM_FIELDS = {"COMMERROR": ("i16", "comm_error"), "OPERERROR": ("i32", "oper_error"), **{suffix: ("i16", "property") for suffix in FIELDS}}
 ADDRESS = r"%(?:WRITE_READ_VAR|WRITE_VAR|READ_VAR)(?:0|[1-9][0-9]*)"
-REFERENCE = ADDRESS + r"\.(?:DONE|BUSY|ABORTED|ERROR|COMMERROR|OPERERROR)"
-NUM_REFERENCE = ADDRESS + r"\.(?:COMMERROR|OPERERROR)"
+REFERENCE = ADDRESS + r"\.(?:DONE|BUSY|ABORTED|ERROR|" + "|".join(NUM_FIELDS) + ")"
+NUM_REFERENCE = ADDRESS + r"\.(?:" + "|".join(NUM_FIELDS) + ")"
 
 
 def block_address(value):
@@ -30,6 +31,8 @@ def status_reference(value):
         return None
     key, field = m.groups()
     block_address(key)
+    if field in FIELDS:
+        property_reference(value)
     if field not in BOOL_FIELDS and field not in NUM_FIELDS:
         fail("unsupported communication status: " + value)
     return key, field

@@ -22,10 +22,12 @@ from .arrays import Array, reference as array_reference
 from .numeric import Number, OPS, READS, WRITES, TYPES, boolean, expect, literal
 from .modbus import ModbusConfig
 from .communication import KINDS, BOOL_FIELDS, NUM_FIELDS
+from .communication_properties import property_field, BUFFER_FIELDS
 from .indexed import is_indexed, is_bit_indexed
 from .bits import bit_string
 from .edges import API as EDGE_API
 from .edge_functions import API as EXPRESSION_API
+from . import boolean_frontend
 from .counters import (
     Counter,
     METHODS as COUNTER_METHODS,
@@ -33,6 +35,10 @@ from .counters import (
     preset_value as counter_preset,
 )
 from .registers import RegisterConfig, GETTERS as REGISTER_GETTERS
+from .scalar_numeric import DIRECT_UNARY, DIRECT_RECOVERY, system_word
+from .scalar_constants import READS as CONSTANT_READS, CLASSES as CONSTANT_CLASSES, put as put_constant
+
+from .sequence_frontend import BY_CLASS as SEQUENCE_CLASSES, constructor as sequence_constructor, declare as sequence_declare, expression as sequence_expression
 
 PACK_READS = {
     f"read_{bank}_bits_{kind}": (bank, kind)
@@ -104,7 +110,7 @@ class Frontend:
                 if not (
                     node.get("kind") == "NamespaceDecl"
                     and node.get("name") == "plc"
-                    and loc.get("file") == str(SDK / "plc.hpp")
+                    and loc.get("file") in (str(SDK / "plc.hpp"), str(SDK / "plc_boolean.hpp"))
                 ):
                     fail(
                         "only declarations from the bundled plc.hpp header are supported"
@@ -146,6 +152,7 @@ class Frontend:
         reserved_words = set()
         self.word_count = None
         self.bit_count = None
+        self.constant_count = None
         for n in walk(tree):
             if (
                 n.get("kind") == "ArraySubscriptExpr"
@@ -153,6 +160,14 @@ class Frontend:
             ):
                 base = strip(n["inner"][0])
                 self.dynamic_arrays.add(base.get("referencedDecl", {}).get("id"))
+        for n in walk(tree):
+            if n.get("kind") == "VarDecl" and n.get("type", {}).get("qualType") == "plc::ConstantMemory":
+                ctor = next((x for x in n.get("inner", []) if x.get("kind") == "CXXConstructExpr"), None)
+                if self.constant_count is not None or ctor is None or len(ctor.get("inner", [])) != 1:
+                    self.error(n, "one ConstantMemory image with a literal count is required")
+                self.constant_count = self.const(ctor["inner"][0])
+                if not 1 <= self.constant_count <= 512:
+                    self.error(n, "ConstantMemory count outside shared 1..512-word bank")
         for n in walk(tree):
             if n.get("kind") == "VarDecl" and n.get("type", {}).get("qualType") in (
                 "plc::WordMemory",
@@ -180,6 +195,9 @@ class Frontend:
                 setattr(self, attribute, count)
                 (reserved_words if is_word else reserved).update(range(count))
         for n in walk(tree):
+            if n.get("kind") == "VarDecl" and n.get("type", {}).get("qualType") == "plc::Drum":
+                _, _, cfg = sequence_constructor(self, n, "Drum")
+                reserved.update(int(cam.output[2:]) for cam in cfg.cams if cam.output.startswith("%M"))
             if n.get("kind") == "VarDecl" and n.get("type", {}).get(
                 "desugaredQualType", n.get("type", {}).get("qualType", "")
             ) in ["plc::" + k for k in KINDS]:
@@ -224,6 +242,24 @@ class Frontend:
                     for source in (args[:1] + args[2:3], args[1:3]):
                         _, start, count = self.packed_reference("m", source, n, "i32")
                         reserved.update(range(start, start + count))
+                if key in DIRECT_UNARY or key in DIRECT_RECOVERY:
+                    _, typ = (DIRECT_UNARY | DIRECT_RECOVERY)[key]
+                    index = self.index(args[0], (self.word_count or 8000) - TYPES[typ][1] + 1, n)
+                    reserved_words.update(range(index, index + TYPES[typ][1]))
+                if key in ("copy_word", "copy_dword", "copy_real"):
+                    width = 1 if key == "copy_word" else 2
+                    for arg in args:
+                        index = self.index(arg, (self.word_count or 8000) - width + 1, n)
+                        reserved_words.update(range(index, index + width))
+                if key in {name + "_indexed" for name in CONSTANT_READS}:
+                    if self.word_count is None or self.constant_count is None:
+                        self.error(n, "indexed constants require WordMemory and ConstantMemory images")
+                    typ = CONSTANT_READS[key.removesuffix("_indexed")]
+                    self.index(args[0], self.constant_count - TYPES[typ][1] + 1, n)
+                    self.index(args[1], self.word_count, n)
+                if key == "rtc_snapshot":
+                    base = self.index(args[0], (self.word_count or 8000) - 4, n)
+                    reserved_words.update(range(base, base + 5))
                 if key in READS or key in WRITES:
                     typ = (READS | WRITES)[key]
                     count = self.word_count or 8000
@@ -237,7 +273,17 @@ class Frontend:
                     typ = (INDEXED_READS | INDEXED_WRITES)[key]
                     self.index(args[0], self.word_count - TYPES[typ][1] + 1, n)
                     self.index(args[1], self.word_count, n)
+        for n in walk(tree):
+            if n.get("kind") == "VarDecl" and n.get("type", {}).get("qualType") == "plc::Schedule":
+                ctor = next((c for c in n.get("inner", []) if c.get("kind") == "CXXConstructExpr"), None)
+                args = ctor.get("inner", []) if ctor else []
+                if len(args) == 12 and self.const(args[1]) == 0:
+                    reserved.add(self.index(args[2], 1024, n))
+        boolean_frontend.prepare(self, tree, walk, reserved, reserved_words)
         self.lower = Lowerer(reserved, reserved_words)
+        if self.constant_count is not None:
+            self.lower.program.metadata["constant_words"] = self.constant_count
+        boolean_frontend.attach(self)
         self.loops = []
         self.source_labels = {}
         self.scan_exit = None
@@ -444,7 +490,10 @@ class Frontend:
     def input(self, index):
         if index not in self.inputs:
             self.inputs[index] = f"%I0.{index}"
-        return self.inputs[index]
+        value = self.inputs[index]
+        if not self.boolean_config.input_image_stable:
+            return self.lower.copy(value, "live_input_snapshot")
+        return value
 
     def output(self, index):
         if index not in self.outputs:
@@ -521,6 +570,22 @@ class Frontend:
             self.lower.assign(offset, Number("literal", "-32768"), invalid)
         return "%M" + str(base) + "[" + offset.code + "]"
 
+    def direct_timer_call(self, node):
+        """Only a whole statement/RHS may introduce a stateful timer call.
+
+        This keeps nested Boolean expressions from eagerly executing a timer
+        that C++ short-circuit evaluation would have skipped.
+        """
+        node = strip(node)
+        if node.get("kind") != "CXXMemberCallExpr":
+            return False
+        member = node.get("inner", [{}])[0]
+        if member.get("name") not in ("update", "execute"):
+            return False
+        obj = strip(member.get("inner", [{}])[0])
+        ref = obj.get("referencedDecl", {}).get("id")
+        return ref in self.instances and self.instances[ref][0] in ("Ton", "Tof", "Pulse")
+
     def expr(self, node, env=None, side_effect=False):
         env = env or {}
         node = strip(node)
@@ -579,7 +644,8 @@ class Frontend:
             if not isinstance(a, Number):
                 a = self.lower.copy(boolean(a), "binary_left_snapshot")
             old_guard = self.lower.guard
-            if node["opcode"] in ("&&", "||"):
+            conditional_rhs = node["opcode"] in ("&&", "||")
+            if conditional_rhs:
                 boolean(a)
                 rhs_guard = a if node["opcode"] == "&&" else self.lower.neg(a)
                 self.lower.guard = (
@@ -587,9 +653,13 @@ class Frontend:
                     if old_guard is None
                     else self.lower.binary("&&", old_guard, rhs_guard)
                 )
+            if conditional_rhs:
+                self.boolean_stack_conditional_depth += 1
             try:
                 b = self.expr(children[1], env)
             finally:
+                if conditional_rhs:
+                    self.boolean_stack_conditional_depth -= 1
                 self.lower.guard = old_guard
             if isinstance(a, Number) or isinstance(b, Number):
                 if node["opcode"] not in ("==", "!=", "<", ">", "<=", ">="):
@@ -601,6 +671,8 @@ class Frontend:
         if kind == "CallExpr":
             name, args = self.call(node)
             key = name.removeprefix("plc::")
+            if name == "plc::read_bit":
+                return boolean_frontend.read(self, args, node)
             if name in EXPRESSION_API:
                 if self.active:
                     self.error(
@@ -647,6 +719,43 @@ class Frontend:
                 return self.lower.copy(
                     self.indexed_bit_reference(args, node), "indexed_bit_read"
                 )
+            if key in CONSTANT_READS or key in {fn + "_indexed" for fn in CONSTANT_READS}:
+                indexed = key.endswith("_indexed")
+                typ = CONSTANT_READS[key.removesuffix("_indexed")]
+                i = self.index(args[0], (self.constant_count or 512) - TYPES[typ][1] + 1, node)
+                code = "%K" + {"i16":"W", "i32":"D", "f32":"F"}[typ] + str(i)
+                if indexed:
+                    j = self.index(args[1], self.word_count or 8000, node)
+                    return self.lower.copy(Number(typ, code + "[%MW" + str(j) + "]"), "constant_indexed_snapshot")
+                return Number(typ, code)
+            if name in ("plc::read_system_word", "plc::floating_status"):
+                i = self.const(args[0]) if args else 17
+                from .rtc import numeric_reference as rtc_word
+                if not system_word("%SW" + str(i)) and rtc_word("%SW" + str(i)) is None:
+                    self.error(node, "unsupported system-word provider: " + str(i))
+                return Number("i16", "%SW" + str(i))
+            if key == "absolute_counter_100ms":
+                # Native counter uses radix32768, not ordinary binary packing.
+                # high/low/high retry preserves coherence across counter carry.
+                if self.active:
+                    self.error(node, "absolute counter snapshot is not a pure helper")
+                high = self.lower.word("i16", "absolute_high")
+                low = self.lower.word("i16", "absolute_low")
+                verify = self.lower.word("i16", "absolute_verify")
+                start = self.lower.new_label()
+                self.lower.label(start)
+                self.lower.assign(high, Number("i16", "%SW19"))
+                self.lower.assign(low, Number("i16", "%SW18"))
+                self.lower.assign(verify, Number("i16", "%SW19"))
+                equal = self.lower.comparison("==", high, verify)
+                self.lower.jump(start, equal, negate=True)
+                hi32 = self.lower.numeric("int_to_dint", [high])
+                negative = self.lower.comparison("<", high, literal(0, "i16"))
+                unsigned_hi = self.lower.numeric("add_i32", [hi32, literal(65536, "i32")])
+                self.lower.assign(hi32, unsigned_hi, negative)
+                shifted = self.lower.numeric("mul_i32", [hi32, literal(32768, "i32")])
+                lo32 = self.lower.numeric("int_to_dint", [low])
+                return self.lower.numeric("add_i32", [shifted, lo32])
             if key in READS:
                 typ = READS[key]
                 index = self.index(args[0], 8000 - TYPES[typ][1] + 1, node)
@@ -707,6 +816,9 @@ class Frontend:
                 return result
             self.error(node, "unsupported call: " + name)
         if kind == "CXXMemberCallExpr":
+            handled, value = boolean_frontend.member(self, node, env)
+            if handled:
+                return value
             member = children[0]
             obj = strip(member.get("inner", [{}])[0])
             ref = obj.get("referencedDecl", {}).get("id")
@@ -715,13 +827,19 @@ class Frontend:
                     self.error(node, "unsupported Subroutine method")
                 if self.in_subroutine is not None or self.active:
                     self.error(
-                        node, "native nested SR calls are outside the leaf prototype"
+                        node, "native SR nesting is prohibited by the controller profile"
                     )
                 signal = boolean(self.expr(children[1], env))
                 if self.lower.guard is not None:
                     signal = self.lower.binary("&&", self.lower.guard, signal)
                 self.lower.rung("LD " + signal, "SR" + str(self.instances[ref][1]))
                 return None
+            if ref in self.instances and self.instances[ref][0] in ("Rtc", "Schedule"):
+                from .rtc_frontend import member as calendar_member
+                kind, index = self.instances[ref]
+                return calendar_member(self, node, kind, index, member.get("name"), children[1:], env)
+            if ref in self.instances and self.instances[ref][0] in SEQUENCE_CLASSES:
+                return sequence_expression(self, node, ref, member, children[1:], env)
             if ref in self.instances and self.instances[ref][0] in ("Fifo", "Lifo"):
                 index = self.instances[ref][1]
                 method = member.get("name")
@@ -824,6 +942,22 @@ class Frontend:
             ):
                 _, (index, config) = self.instances[ref]
                 method = member.get("name")
+                if method in ("update", "execute"):
+                    if self.active:
+                        self.error(node, "timer calls are not allowed inside pure helpers")
+                    if not side_effect:
+                        self.error(node, "timer update requires a standalone statement, initializer or assignment")
+                    self.calls.add(ref)
+                    guard = self.lower.guard
+                    end = self.lower.new_label() if guard is not None else None
+                    if end is not None:
+                        # A skipped call must not update IN or evaluate its input.
+                        self.lower.jump(end, guard, negate=True)
+                    signal = self.lower.copy(boolean(self.expr(children[1], env)))
+                    value = self.lower.timer(index, config, signal, capture=method == "update")
+                    if end is not None:
+                        self.lower.label(end)
+                    return value
                 if method in ("preset", "value", "done", "set_preset"):
                     self.lower.program.timers[index] = config
                     if method == "set_preset":
@@ -845,6 +979,16 @@ class Frontend:
             if ref in self.instances and self.instances[ref][0] in KINDS:
                 typ, (key, cfg) = self.instances[ref]
                 name = member.get("name")
+                if name in ("property", "set_property"):
+                    suffix = property_field(cfg.kind, self.const(children[1]))
+                    self.comm_observed.add(ref)
+                    target = Number("i16", key + "." + suffix)
+                    if name == "property":
+                        return target
+                    if (suffix in BUFFER_FIELDS or suffix in {"QUANTITY", "WRITEQUANTITY", "READQUANTITY", "OBJTYPE"}) and self.word_count != 8000:
+                        self.error(node, "dynamic communication buffer/quantity requires explicit plc::WordMemory{8000}; bounded range inference remains pending")
+                    self.lower.assign(target, expect(self.expr(children[2], env), "i16"), self.lower.guard)
+                    return "0"
                 if name != "update":
                     self.comm_observed.add(ref)
                     suffix = {v: k for k, v in BOOL_FIELDS.items()}.get(name)
@@ -928,7 +1072,9 @@ class Frontend:
     def declaration(self, node, guard=None, global_scope=False):
         if node.get("kind") != "VarDecl":
             self.error(node, "unsupported declaration")
-        if node["type"]["qualType"] in ("plc::WordMemory", "plc::BitMemory"):
+        if boolean_frontend.declaration(self, node, guard, global_scope):
+            return
+        if node["type"]["qualType"] in ("plc::WordMemory", "plc::BitMemory", "plc::ConstantMemory"):
             if not global_scope:
                 self.error(node, "memory image must be a global declaration")
             return
@@ -971,6 +1117,19 @@ class Frontend:
             if not global_scope:
                 self.error(node, "stateful instances must be global")
             kind = typ[5:]
+            if kind in CONSTANT_CLASSES:
+                ctor = next((x for x in node.get("inner", []) if x.get("kind") == "CXXConstructExpr"), None)
+                args = ctor.get("inner", []) if ctor is not None else []
+                if len(args) != 2:
+                    self.error(node, "scalar constant requires index and literal value")
+                typ = CONSTANT_CLASSES[kind]
+                index = self.index(args[0], (self.constant_count or 512) - TYPES[typ][1] + 1, node)
+                value = expect(self.expr(args[1]), typ)
+                if value.code.startswith("%"):
+                    self.error(node, "scalar constant initializer must be a typed literal")
+                put_constant(self.lower.program.constants, index, typ, float(value.code) if typ == "f32" else int(value.code))
+                self.lower.program.symbols["%K" + {"i16":"W", "i32":"D", "f32":"F"}[typ] + str(index)] = node["name"]
+                return
             if kind == "Subroutine":
                 if node["id"] not in self.subroutine_specs:
                     self.error(node, "Subroutine descriptors must be global")
@@ -989,6 +1148,9 @@ class Frontend:
                 self.next_communication[kind] += 1
                 self.instances[node["id"]] = (kind, ("%" + cfg.kind + str(index), cfg))
                 return
+            if kind in SEQUENCE_CLASSES:
+                sequence_declare(self, node, kind)
+                return
             if kind not in (
                 "Ton",
                 "Tof",
@@ -999,6 +1161,8 @@ class Frontend:
                 "Counter",
                 "Fifo",
                 "Lifo",
+                "Rtc",
+                "Schedule",
             ):
                 self.error(node, "unsupported library instance")
             ctor = next(
@@ -1007,6 +1171,10 @@ class Frontend:
             )
             if ctor is None:
                 self.error(node, "missing constructor")
+            if kind in ("Rtc", "Schedule"):
+                from .rtc_frontend import declare as declare_calendar
+                declare_calendar(self, node, ctor, kind)
+                return
             if kind in ("Fifo", "Lifo"):
                 args = ctor.get("inner", [])
                 if len(args) != 1:
@@ -1112,7 +1280,7 @@ class Frontend:
             self.init.append((target, "1" if value["value"] else "0"))
         else:
             self.lower.assign(
-                target, self.expr(initial[0], side_effect=guard is None), guard
+                target, self.expr(initial[0], side_effect=guard is None or self.direct_timer_call(initial[0])), guard
             )
 
     def array_declaration(self, node, typ, count, guard, global_scope):
@@ -1170,12 +1338,17 @@ class Frontend:
                 self.lower.assign(target, value, guard)
 
     def statement(self, node, guard=None):
+        stacks_before = boolean_frontend.open_stacks(self)
+        if node["kind"] in ("BreakStmt", "ContinueStmt", "ReturnStmt", "GotoStmt", "LabelStmt") and stacks_before:
+            self.error(node, "BooleanStack must be balanced before a control transfer/label")
         old = self.lower.origin
         old_guard = self.lower.guard
         self.lower.origin = self.location(node)
         self.lower.guard = guard
         try:
             self._statement(node, guard)
+            if node["kind"] in ("WhileStmt", "ForStmt", "DoStmt") and boolean_frontend.open_stacks(self) != stacks_before:
+                self.error(node, "BooleanStack must be balanced within each branch/loop context")
         finally:
             self.lower.origin = old
             self.lower.guard = old_guard
@@ -1196,12 +1369,17 @@ class Frontend:
                 self.branch_with_labels(node, guard)
                 return
             cond = self.lower.copy(boolean(self.expr(children[0])), "branch_condition")
+            # A condition may consume an unconditional stack value. Each arm
+            # must balance against the state after evaluating that condition.
+            branch_stacks = boolean_frontend.open_stacks(self)
             yes = cond if guard is None else self.lower.binary("&&", guard, cond)
             self.statement(children[1], yes)
+            boolean_frontend.require_stacks(self, branch_stacks, children[1])
             if len(children) == 3:
                 no = self.lower.neg(cond)
                 no = no if guard is None else self.lower.binary("&&", guard, no)
                 self.statement(children[2], no)
+                boolean_frontend.require_stacks(self, branch_stacks, children[2])
         elif kind in ("WhileStmt", "ForStmt", "DoStmt"):
             self.loop(node, guard)
         elif kind in ("BreakStmt", "ContinueStmt"):
@@ -1238,7 +1416,7 @@ class Frontend:
         elif kind == "BinaryOperator" and node.get("opcode") == "=":
             lhs = strip(children[0])
             ref = lhs.get("referencedDecl", {}).get("id")
-            value = self.expr(children[1], side_effect=guard is None)
+            value = self.expr(children[1], side_effect=guard is None or self.direct_timer_call(children[1]))
             if lhs["kind"] == "ArraySubscriptExpr":
                 if (isinstance(value, Number) and value.code.startswith("%")) or (
                     isinstance(value, str) and value not in ("0", "1")
@@ -1257,8 +1435,57 @@ class Frontend:
         elif kind == "CallExpr":
             name, args = self.call(node)
             key = name.removeprefix("plc::")
+            if name in ("plc::write_bit", "plc::set_bit", "plc::reset_bit"):
+                boolean_frontend.write(self, name, args, node, guard)
+                return
             if name in EXPRESSION_API:
                 self.expr(node)
+                return
+            if name in ("plc::write_system_word", "plc::clear_floating_status"):
+                i = self.const(args[0]) if args else 17
+                target = "%SW" + str(i)
+                from .rtc import numeric_reference as rtc_word
+                if not system_word(target, True) and rtc_word(target, True) is None:
+                    self.error(node, "unsupported or read-only system-word provider: " + str(i))
+                value = expect(self.expr(args[1]), "i16") if args else literal(0, "i16")
+                self.lower.assign(Number("i16", target), value, guard)
+                return
+            if key in ("copy_word", "copy_dword", "copy_real"):
+                typ = {"copy_word": "i16", "copy_dword": "i32", "copy_real": "f32"}[key]
+                bound = 8000 - TYPES[typ][1] + 1
+                dest, source = (self.index(arg, bound, node) for arg in args)
+                self.lower.assign(Number(typ, "%" + TYPES[typ][0] + str(dest)),
+                                  Number(typ, "%" + TYPES[typ][0] + str(source)), guard)
+                return
+            if key in DIRECT_UNARY:
+                intrinsic, typ = DIRECT_UNARY[key]
+                i = self.index(args[0], 8000 - TYPES[typ][1] + 1, node)
+                self.lower.rung("LD " + (guard if guard is not None else "1"),
+                                "[" + OPS[intrinsic][2] + " %" + TYPES[typ][0] + str(i) + "]")
+                return
+            if key in DIRECT_RECOVERY:
+                intrinsic, typ = DIRECT_RECOVERY[key]
+                i = self.index(args[0], 8000 - TYPES[typ][1] + 1, node)
+                values = [expect(self.expr(arg), typ) for arg in args[1:]]
+                # Numeric lowering and final assignment retain the same guard.
+                self.lower.numeric(intrinsic, values, target=Number(typ, "%" + TYPES[typ][0] + str(i)))
+                return
+            if key == "rtc_snapshot":
+                base = self.index(args[0], (self.word_count or 8000) - 4, node)
+                # Five scalar native reads; no unsupported multiword atomicity claim.
+                for offset in range(5):
+                    self.lower.assign(Number("i16", f"%MW{base + offset}"), Number("i16", f"%SW{49 + offset}"), guard)
+                return
+            if key == "write_system":
+                from .rtc import WRITE_BITS
+                index = self.const(args[0])
+                if type(index) is not int or index not in WRITE_BITS:
+                    self.error(node, "RTC/system bit is unsupported or read-only")
+                value = boolean(self.expr(args[1]))
+                if value in ("0", "1"):
+                    self.lower.rung("LD " + (guard if guard is not None else "1"), ("S" if value == "1" else "R") + f" %S{index}")
+                else:
+                    self.lower.assign(f"%S{index}", value, guard)
                 return
             if key == "write_word_bit":
                 index = self.index(args[0], self.word_count or 8000, node)
@@ -1270,13 +1497,25 @@ class Frontend:
             if key in PACK_WRITES:
                 bank, typ = PACK_WRITES[key]
                 text, start, count = self.packed_reference(bank, args, node, typ)
-                value = self.lower.copy(
-                    expect(self.expr(args[2]), typ), "packed_assignment_snapshot"
-                )
+                value = expect(self.expr(args[2]), typ)
+                carrier = typ
+                # Literals are immutable and need no snapshot cell. Keep the
+                # capture for memory/resource operands and overlapping views.
+                if value.code.startswith("%"):
+                    value = self.lower.copy(value, "packed_assignment_snapshot")
+                else:
+                    # Native text infers literal carriers from the bit span.
+                    # Keep the low bits while avoiding an i32 literal being
+                    # rejected as an out-of-range i16 in a narrow destination.
+                    carrier = "i16" if count <= 16 else "i32"
+                    width = 16 if carrier == "i16" else 32
+                    raw = int(value.code) & ((1 << width) - 1)
+                    signed = raw - (1 << width) if raw >= (1 << (width - 1)) else raw
+                    value = literal(signed, carrier)
                 if bank == "output":
                     for i in range(count):
                         self.output(start + i)
-                self.lower.assign(Number(typ, text), value, guard)
+                self.lower.assign(Number(carrier, text), value, guard)
                 return
             if key == "copy_m_bits":
                 text, _, count = self.packed_reference(
@@ -1327,7 +1566,7 @@ class Frontend:
                 self.error(node, "only output/write_m calls may be used as statements")
             self.lower.assign(target, self.expr(args[1]), guard)
         elif kind == "CXXMemberCallExpr":
-            self.expr(node, side_effect=guard is None)
+            self.expr(node, side_effect=guard is None or self.direct_timer_call(node))
         elif kind == "NullStmt":
             pass
         else:
@@ -1344,12 +1583,20 @@ class Frontend:
         old_guard = self.lower.guard
         self.lower.guard = None
         try:
-            self.lower.jump(otherwise, boolean(self.expr(children[0])), negate=True)
+            condition_stacks = boolean_frontend.open_stacks(self)
+            condition = boolean(self.expr(children[0]))
+            # A goto into an arm may skip this condition. Preserve the
+            # label/transfer gate instead of changing a statically open stack.
+            boolean_frontend.require_stacks(self, condition_stacks, children[0])
+            branch_stacks = boolean_frontend.open_stacks(self)
+            self.lower.jump(otherwise, condition, negate=True)
             self.statement(children[1])
+            boolean_frontend.require_stacks(self, branch_stacks, children[1])
             if len(children) == 3:
                 self.lower.jump(end)
                 self.lower.label(otherwise)
                 self.statement(children[2])
+                boolean_frontend.require_stacks(self, branch_stacks, children[2])
             self.lower.label(end)
         finally:
             self.lower.guard = old_guard
@@ -1434,7 +1681,7 @@ class Frontend:
                     if n["type"]["qualType"] != "void ()" or any(
                         c["kind"] == "ParmVarDecl" for c in n.get("inner", [])
                     ):
-                        self.error(n, "Subroutine functions must be void() leaves")
+                        self.error(n, "Subroutine functions must have signature void()")
                 else:
                     body = next(
                         (x for x in n.get("inner", []) if x["kind"] == "CompoundStmt"),
@@ -1488,22 +1735,11 @@ class Frontend:
             leaf_body = next(
                 n for n in function["inner"] if n["kind"] == "CompoundStmt"
             )
-            if any(
-                n.get("kind")
-                in (
-                    "LabelStmt",
-                    "GotoStmt",
-                    "WhileStmt",
-                    "ForStmt",
-                    "DoStmt",
-                    "BreakStmt",
-                    "ContinueStmt",
-                )
+            self.source_labels = {
+                n["declId"]: self.lower.new_label()
                 for n in walk(leaf_body)
-            ):
-                self.error(
-                    function, "prototype subroutine leaves do not admit labels or loops"
-                )
+                if n.get("kind") == "LabelStmt"
+            }
             start, origin_start = len(self.lower.program.rungs), len(self.lower.origins)
             self.in_subroutine = number
             try:
@@ -1525,6 +1761,8 @@ class Frontend:
             if n.get("kind") == "LabelStmt"
         }
         self.statement(body)
+        if boolean_frontend.open_stacks(self):
+            self.error(body, "BooleanStack has unmatched pushes at scan exit")
         if self.scan_exit is not None:
             # Keep the shared return destination. Native Q writes already update
             # the process image; the PLC transfers it physically at scan end.
@@ -1542,10 +1780,13 @@ class Frontend:
                 {v: k == "1" for k, v in self.lower.constants.items()},
             )
         )
+        # Configured Drum cams own cold/restart output values. Do not insert a
+        # RUN-entry reset that erases them on an unchanged step.
+        required -= {int(cam.output[4:]) for cfg in self.lower.program.drums.values() for cam in cfg.cams if cam.output.startswith("%Q0.")}
         prefix = reset_rungs(required)
         tail = []
         self.lower.program.metadata["io_lowering"] = {
-            "mode": "native I/Q process images; isolated MAST",
+            "mode": "native I/Q process images; isolated MAST" if self.boolean_config.input_image_stable else "explicit live-I evaluation snapshots; owning task adapter required",
             "run_initialization_outputs": sorted(required),
         }
         prefix += self.lower.constant_rungs
