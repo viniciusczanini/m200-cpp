@@ -276,10 +276,16 @@ class Storage:
             for ref, reg in self.registers.items()
             if not reg.persistent and ref not in self.groups
         }
-        _, out = live_ranges(
-            program, fusible, {v: k == "1" for k, v in constants.items()}, self.members
-        )
-        fuse_copies(program, self.registers, self.members, self.groups, REFERENCE, out)
+        if not program.subroutines:
+            _, out = live_ranges(
+                program,
+                fusible,
+                {v: k == "1" for k, v in constants.items()},
+                self.members,
+            )
+            fuse_copies(
+                program, self.registers, self.members, self.groups, REFERENCE, out
+            )
         fixed = {bank: set(cells) for bank, cells in self.reserved.items()}
         mapping = {}
 
@@ -305,12 +311,25 @@ class Storage:
         temporary = {
             ref: reg for ref, reg in self.registers.items() if not reg.persistent
         }
-        graph = interference(
-            program,
-            temporary,
-            {v: k == "1" for k, v in constants.items()},
-            self.members,
-        )
+        if program.subroutines:
+            # No single-stream liveness/fusion may reuse a caller value across
+            # a native call. Initial prototype gives same-bank temporaries unique
+            # storage across every execution context.
+            graph = {
+                ref: {
+                    other
+                    for other, candidate in temporary.items()
+                    if other != ref and candidate.bank == reg.bank
+                }
+                for ref, reg in temporary.items()
+            }
+        else:
+            graph = interference(
+                program,
+                temporary,
+                {v: k == "1" for k, v in constants.items()},
+                self.members,
+            )
         ordinal = {ref: i for i, ref in enumerate(temporary)}
         for ref in sorted(
             temporary, key=lambda r: (-len(graph[r]), -temporary[r].width, ordinal[r])
@@ -331,6 +350,10 @@ class Storage:
             return REFERENCE.sub(lambda m: names.get(m[0], m[0]), text)
 
         program.rungs = [[rewrite(line) for line in rung] for rung in program.rungs]
+        for definition in program.subroutines.values():
+            definition.rungs = [
+                [rewrite(line) for line in rung] for rung in definition.rungs
+            ]
         owners = {bank: {} for bank in fixed}
         for ref, reg in self.registers.items():
             for cell in range(mapping[ref], mapping[ref] + reg.width):
@@ -378,8 +401,17 @@ class Storage:
             "reserved_bits": len(self.reserved["bit"]),
             "reserved_words": len(self.reserved["word"]),
             "contiguous_groups": len(self.groups),
-            "method": "conservative CFG liveness; globals unique; explicit addresses and communication buffers reserved",
+            "method": "conservative unique cross-context scratch; globals/explicit addresses reserved"
+            if program.subroutines
+            else "conservative CFG liveness; globals unique; explicit addresses and communication buffers reserved",
         }
-        if sum(map(len, program.rungs)) > 10000:
+        if (
+            sum(map(len, program.rungs))
+            + sum(
+                sum(map(len, definition.rungs))
+                for definition in program.subroutines.values()
+            )
+            > 10000
+        ):
             fail("experimental instruction budget exceeded after optimization")
         return program

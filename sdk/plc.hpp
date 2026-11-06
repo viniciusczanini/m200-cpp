@@ -53,6 +53,16 @@ inline void clear_arithmetic_error(){detail::arithmetic_error=false;}
 inline bool clock_ms(unsigned period) {
     return ((detail::now_ms / (period/2)) & 1) != 0;
 }
+namespace detail { inline int sr_depth=0; inline bool sr_used[64]={}; }
+class Subroutine {
+    int index; void (*body)(); const char* metadata_name=nullptr; int metadata_section=-1;
+public:
+    Subroutine(int n,void (*f)()):index(n),body(f){if(n<0||n>=64||!f||detail::sr_used[n])__builtin_trap();detail::sr_used[n]=true;}
+    Subroutine(int n,void (*f)(),const char* name,int section):Subroutine(n,f){if(!name||!*name||section<0)__builtin_trap();metadata_name=name;metadata_section=section;}
+    Subroutine(const Subroutine&)=delete;
+    Subroutine& operator=(const Subroutine&)=delete;
+    void call(bool enable){if(!enable)return;if(detail::sr_depth)__builtin_trap();++detail::sr_depth;body();--detail::sr_depth;}
+};
 class TimerState {
     int kind, base=1, configured=0, active=0, current=0;
     bool previous=false, result=false, retain=false, dynamic=false, completed=false;
@@ -457,6 +467,7 @@ struct ReadVar:Communication { ReadVar(Link l,int id,int t,Object o,int f,int q,
 struct WriteVar:Communication { WriteVar(Link l,int id,int t,Object o,int f,int q,int d):Communication(1,l,id,t,o,f,q,d){} WriteVar(int n,Link l,int id,int t,Object o,int f,int q,int d):Communication(1,l,id,t,o,f,q,d,0,1,0,n){} };
 struct WriteReadVar:Communication { WriteReadVar(Link l,int id,int t,int f,int q,int d,int rf,int rq,int rd):Communication(2,l,id,t,Object::HoldingWords,f,q,d,rf,rq,rd){} WriteReadVar(int n,Link l,int id,int t,int f,int q,int d,int rf,int rq,int rd):Communication(2,l,id,t,Object::HoldingWords,f,q,d,rf,rq,rd,n){} };
 #else
+struct Subroutine { Subroutine(int,void(*)()); Subroutine(int,void(*)(),const char*,int); void call(bool); };
 struct ReadVar { ReadVar(Link,int,int,Object,int,int,int); ReadVar(int,Link,int,int,Object,int,int,int); bool update(bool,bool); bool done()const; bool busy()const; bool aborted()const; bool error()const; i16 comm_error()const; i32 oper_error()const; };
 struct WriteVar { WriteVar(Link,int,int,Object,int,int,int); WriteVar(int,Link,int,int,Object,int,int,int); bool update(bool,bool); bool done()const; bool busy()const; bool aborted()const; bool error()const; i16 comm_error()const; i32 oper_error()const; };
 struct WriteReadVar { WriteReadVar(Link,int,int,int,int,int,int,int,int); WriteReadVar(int,Link,int,int,int,int,int,int,int,int); bool update(bool,bool); bool done()const; bool busy()const; bool aborted()const; bool error()const; i16 comm_error()const; i32 oper_error()const; };

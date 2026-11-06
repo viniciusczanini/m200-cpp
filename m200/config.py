@@ -4,6 +4,7 @@ import re
 from collections import Counter
 from .model import fail
 from .counter_xml import read_configs as read_counters
+from .subroutine_xml import read_subroutines
 from .numeric import word_address
 from .communication_xml import (
     allowed_attribute,
@@ -21,6 +22,7 @@ EMPTY = set(
 EMPTY -= {"MemoryWords", "MemoryDoubleWords", "MemoryFloats"}
 EMPTY.discard("FunctionBlocks")
 EMPTY.discard("Counters")
+EMPTY.discard("Subroutines")
 UI_ONLY = {
     "DisplayUserLabelsConfiguration",
     "GlobalProperties",
@@ -47,6 +49,7 @@ REPEATED = {
     "LadderElements": {"LadderEntity"},
     "Timers": {"TimerTM"},
     "Counters": {"Counter"},
+    "Subroutines": {"Subroutine"},
     "MemoryBits": {"MemoryBit"},
     "MemoryWords": {"MemoryWord"},
     "MemoryDoubleWords": {"MemoryDoubleWord"},
@@ -466,6 +469,7 @@ def configuration(root):
     if len(sw.findall("MastTask")) != 1:
         fail("one explicit MastTask profile is required")
     read_counters(sw)
+    read_subroutines(sw)
     for part in sw:
         if part.tag == "FunctionBlocks":
             read_blocks(sw)

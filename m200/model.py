@@ -26,6 +26,15 @@ class Timer:
 
 
 @dataclass
+class SubroutineDefinition:
+    number: int
+    name: str
+    section_number: int
+    rungs: list
+    origins: list = field(default_factory=list)
+
+
+@dataclass
 class Program:
     rungs: list = field(default_factory=list)
     timers: dict = field(default_factory=dict)
@@ -33,10 +42,11 @@ class Program:
     metadata: dict = field(default_factory=dict)
     communications: dict = field(default_factory=dict)
     counters: dict = field(default_factory=dict)
+    subroutines: dict = field(default_factory=dict)
 
     def as_dict(self):
-        return {
-            "format": "m200-cpp-il-v1",
+        result = {
+            "format": "m200-cpp-il-v2" if self.subroutines else "m200-cpp-il-v1",
             "target": "TM200CE40T",
             "rungs": self.rungs,
             "timers": {str(k): asdict(v) for k, v in self.timers.items()},
@@ -45,6 +55,11 @@ class Program:
             "communications": {k: v.to_dict() for k, v in self.communications.items()},
             "counters": {str(k): asdict(v) for k, v in self.counters.items()},
         }
+        if self.subroutines:
+            result["subroutines"] = {
+                str(k): asdict(v) for k, v in self.subroutines.items()
+            }
+        return result
 
     @classmethod
     def from_dict(cls, data):
@@ -59,9 +74,13 @@ class Program:
             "metadata",
             "communications",
             "counters",
+            *(("subroutines",) if data.get("format") == "m200-cpp-il-v2" else ()),
         }:
             fail("unknown program JSON fields")
-        if data.get("format") != "m200-cpp-il-v1" or data.get("target") != "TM200CE40T":
+        if (
+            data.get("format") not in ("m200-cpp-il-v1", "m200-cpp-il-v2")
+            or data.get("target") != "TM200CE40T"
+        ):
             fail("unsupported program format or target")
         if not isinstance(data.get("rungs"), list) or not isinstance(
             data.get("timers"), dict
@@ -99,6 +118,28 @@ class Program:
             counters = {int(k): Counter(**v) for k, v in raw_counters.items()}
         except (TypeError, ValueError):
             fail("invalid counter JSON")
+        subroutines = {}
+        if data.get("format") == "m200-cpp-il-v2":
+            raw = data.get("subroutines")
+            if not isinstance(raw, dict) or not raw:
+                fail("v2 requires explicit subroutine contexts")
+            for key, value in raw.items():
+                if (
+                    not isinstance(key, str)
+                    or re.fullmatch(r"0|[1-9][0-9]*", key) is None
+                    or len(key) > 2
+                    or int(key) >= 64
+                ):
+                    fail("invalid subroutine JSON identity")
+                if not isinstance(value, dict) or set(value) != {
+                    "number",
+                    "name",
+                    "section_number",
+                    "rungs",
+                    "origins",
+                }:
+                    fail("invalid subroutine JSON definition")
+                subroutines[int(key)] = SubroutineDefinition(**value)
         return cls(
             data["rungs"],
             timers,
@@ -106,6 +147,7 @@ class Program:
             data.get("metadata", {}),
             {k: ModbusConfig.from_dict(v) for k, v in comms.items()},
             counters,
+            subroutines,
         )
 
 

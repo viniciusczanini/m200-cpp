@@ -5,6 +5,7 @@ experimental, even when their IL/graph representations agree locally.
 """
 
 import hashlib
+import copy
 import os
 import re
 import tempfile
@@ -13,7 +14,14 @@ from pathlib import Path
 
 from .il import validate
 from .config import configuration, unique_tree
-from .model import Program, Timer, address, fail
+from .model import Program, Timer, SubroutineDefinition, address, fail
+from .subroutine_xml import read_subroutines, write_subroutines, Subroutine
+from .subroutine_contexts import call_target
+from .subroutine_graph import (
+    read_graph as check_subroutine_call_graph,
+    graphics as subroutine_call_graphics,
+    _rung_surface,
+)
 from .timer_profile import BASES, validate_options
 from .flow import ENDS, split_label
 from .indexed import has_indexed, direct_word_limit, has_indexed_bits
@@ -267,6 +275,13 @@ def graphics(rung, timer_column=3, communication_contact_column=0):
 
 def check_graph(rung_node, lines, program=None):
     _, lines = split_label(lines)
+    if program is not None and program.subroutines:
+        _rung_surface(rung_node)
+        if call_target(lines) is not None:
+            check_subroutine_call_graph(rung_node)
+            return
+        if _check_observed_subroutine_tautology(rung_node, lines):
+            return
     if lines[0].startswith("BLK %C"):
         resources = (
             None
@@ -362,6 +377,66 @@ def check_graph(rung_node, lines, program=None):
         fail("IL and Ladder graphics do not agree")
 
 
+def _check_observed_subroutine_tautology(node, lines):
+    """Only the actual SR fixture's parallel I1/NOT I1 shape, not general LD."""
+    if len(lines) != 3 or lines[:2] != ["LD %I0.1", "ORN %I0.1"]:
+        return False
+    graph = node.find("LadderElements")
+    if graph is None or not len(graph):
+        return False  # Existing ordinary IL-only handling still applies.
+    if is_operation(lines[-1]):
+        typ, end, connection = "Operation", 9, "Left, Right"
+        target = numeric_graph(typ, lines[-1][1:-1])
+    elif lines[-1].startswith("ST "):
+        typ, end, connection = "Coil", 10, "Left"
+        target = lines[-1].split(maxsplit=1)[1]
+    else:
+        fail("unverified SR parallel terminal action")
+    expected = [
+        ("NormalContact", "%I0.1", "0", "0", "Down, Left, Right"),
+        ("NegatedContact", "%I0.1", "1", "0", "Up, Left"),
+        *[("Line", "", "0", str(i), "Left, Right") for i in range(1, end)],
+        (typ, target, "0", str(end), connection),
+    ]
+    actual = []
+    for entity in graph:
+        element_type = entity.findtext("ElementType", "")
+        field = "OperationExpression" if element_type == "Operation" else "Descriptor"
+        value = entity.findtext(field, "")
+        for other in ("Descriptor", "OperationExpression", "ComparisonExpression"):
+            if other != field and entity.findtext(other, ""):
+                fail("unverified SR parallel graph expression field")
+        if element_type == "Operation":
+            value = numeric_graph(element_type, value)
+        actual.append(
+            (
+                element_type,
+                value,
+                entity.findtext("Row"),
+                entity.findtext("Column"),
+                entity.findtext("ChosenConnection"),
+            )
+        )
+    if sorted(actual) != sorted(expected):
+        fail("SR parallel IL and observed native graph do not agree")
+    return True
+
+
+def _resource_context_views(program):
+    """Nonexecuting operand/allocation views; never flatten execution contexts."""
+    yield program
+    for definition in program.subroutines.values():
+        view = copy.copy(program)
+        view.rungs = definition.rungs
+        view.subroutines = {}
+        view.metadata = dict(program.metadata)
+        if definition.origins:
+            view.metadata["rung_origins"] = definition.origins
+        else:
+            view.metadata.pop("rung_origins", None)
+        yield view
+
+
 def numeric_graph(typ, expression):
     # Parse token boundaries; removing whitespace could turn MW40 00 into MW4000.
     parsed = (
@@ -398,6 +473,53 @@ def load_project(path):
     graph_nodes = []
     origins = []
     full_groups = []
+    native_subroutines = read_subroutines(sw)
+    if native_subroutines:
+        pous = sw.find("Pous")
+        if (
+            root.findtext("ManagementLevel") != "FunctLevelMan21_0"
+            or root.findtext(
+                "HardwareConfiguration/Plc/Cpu/TechnicalConfiguration/SubroutinesMax"
+            )
+            != "64"
+        ):
+            fail("unverified native SR functional-level/capacity profile")
+        if (
+            pous is None
+            or len(pous) != 1
+            or pous[0].findtext("SectionNumber") != "0"
+            or len(native_subroutines) != 1
+        ):
+            fail(
+                "prototype native SR import supports one master and one independent leaf"
+            )
+        for number, definition in native_subroutines.items():
+            if definition.section_number == 0:
+                fail("native SR section identity collides with its master")
+            context_lines, context_origins = [], []
+            for native_index, node in enumerate(definition.rungs):
+                _, lines = _rung_surface(node)
+                context_lines.append(lines)
+                context_origins.append(
+                    {
+                        "file": Path(path).name,
+                        "generated": "native SR%s section %s rung %s | %s"
+                        % (
+                            number,
+                            definition.section_number,
+                            native_index,
+                            node.findtext("Name", ""),
+                        ),
+                    }
+                )
+                graph_nodes.append((node, lines))
+            p.subroutines[number] = SubroutineDefinition(
+                number,
+                definition.name,
+                definition.section_number,
+                context_lines,
+                context_origins,
+            )
     p.communications = read_blocks(sw)
     check_template_channels(root, p.communications)
     timer_nodes = sw.find("Timers")
@@ -537,8 +659,10 @@ def load_project(path):
     ):
         for word in sw.findall(collection + "/" + entry):
             p.symbols[word.findtext("Address")] = word.findtext("Symbol", "")
+    if full_groups or p.subroutines:
+        p.metadata["rung_origins"] = origins
     if full_groups:
-        p.metadata.update(rung_origins=origins, native_full_pin_groups=full_groups)
+        p.metadata["native_full_pin_groups"] = full_groups
     validate(p)
     # Validate the complete IL before examining its graphics. A status may be
     # read before its configured FB is called later in the same scan.
@@ -566,13 +690,17 @@ def validate_timer_profile(program, level_token=None):
 
 def validate_allocations(sw, program, level_token=None):
     validate_timer_profile(program, level_token)
-    if has_indexed_bits(program):
+    views = list(_resource_context_views(program))
+    if any(has_indexed_bits(view) for view in views):
         fail("indexed-bit functional-level mapping is unverified for SMBP")
-    bits = memory_bits_used(program)
+    if program.subroutines and any(has_indexed(view) for view in views):
+        fail("prototype native SR indexed-context allocation is unverified")
+    bits = set().union(*(memory_bits_used(view) for view in views))
+    words_used = set().union(*(memory_words_used(view) for view in views))
     requirements = {
         "MemoryWordsMemoryAllocation": (
             8000,
-            max(memory_words_used(program), default=-1) + 1,
+            max(words_used, default=-1) + 1,
         ),
         "MemoryBitsMemoryAllocation": (1024, max(bits, default=-1) + 1),
         "TimersMemoryAllocation": (255, max(program.timers, default=-1) + 1),
@@ -605,6 +733,86 @@ def validate_allocations(sw, program, level_token=None):
             )
 
 
+def _subroutine_semantics(program):
+    # Generated native-file origins differ; every executable/identity field is
+    # authoritative and must survive staged readback.
+    return {
+        number: (value.number, value.name, value.section_number, value.rungs)
+        for number, value in program.subroutines.items()
+    }
+
+
+def _leaf_graphics(lines):
+    if lines != ["END"]:
+        if lines[-1] == "ENDCN":
+            fail("prototype native SR ENDCN leaf graph binding is unverified")
+        if not (
+            lines[-1] == "ENDC"
+            or is_operation(lines[-1])
+            or lines[-1].split(maxsplit=1)[0] in ("ST", "S", "R")
+        ):
+            fail("prototype leaf action cannot be serialized without normalization")
+        for line in lines[:-1]:
+            parts = line.split(maxsplit=1)
+            if len(parts) != 2 or parts[1] in ("0", "1"):
+                fail("prototype leaf constants require a materialized shared M contact")
+    return [
+        (t, a, 0, c, "Left" if t in LEFT_ONLY else "Left, Right")
+        for t, a, c in graphics(lines)
+    ]
+
+
+def _sr_export_profile(program, root, sw):
+    if not program.subroutines:
+        return
+    pous = sw.find("Pous")
+    if (
+        root.findtext("ManagementLevel") != "FunctLevelMan21_0"
+        or root.findtext(
+            "HardwareConfiguration/Plc/Cpu/TechnicalConfiguration/SubroutinesMax"
+        )
+        != "64"
+        or pous is None
+        or len(pous) != 1
+        or pous[0].findtext("SectionNumber") != "0"
+        or len(program.subroutines) != 1
+        or next(iter(program.subroutines.values())).section_number != 2
+    ):
+        fail(
+            "unverified native SR export profile; require Man21, Master0 and one independent leaf section2"
+        )
+    for definition in program.subroutines.values():
+        for lines in definition.rungs:
+            label, body = split_label(lines)
+            if label is not None:
+                fail("native leaf labels are not bound")
+            _leaf_graphics(body)  # Never apply Master END/control lowering to a leaf.
+
+
+def _write_rung_body(rung, lines, items, explicit_descriptors=False):
+    graph = element(rung, "LadderElements")
+    for typ, arg, row, column, connection in items:
+        entity = element(graph, "LadderEntity")
+        element(entity, "ElementType", typ)
+        if arg or explicit_descriptors:
+            field = {
+                "Comparison": "ComparisonExpression",
+                "Operation": "OperationExpression",
+            }.get(typ, "Descriptor")
+            element(entity, field, arg)
+            if field == "Descriptor":
+                element(entity, "Comment", "")
+                element(entity, "Symbol", "")
+        element(entity, "Row", row)
+        element(entity, "Column", column)
+        element(entity, "ChosenConnection", connection)
+    il = element(rung, "InstructionLines")
+    for line in lines:
+        instruction = element(il, "InstructionLineEntity")
+        element(instruction, "InstructionLine", line)
+        element(instruction, "Comment", "")
+
+
 def write_project(program, template, destination):
     validate(program)
     if has_indexed_bits(program):
@@ -613,6 +821,9 @@ def write_project(program, template, destination):
 
     root = parse(template)
     sw = configuration(root)
+    if read_subroutines(sw):
+        fail("prototype SR SMBP export is gated for active template Subroutines")
+    _sr_export_profile(program, root, sw)
     validate_timer_profile(program, root.findtext("ManagementLevel"))
     program = normalize(program)
     first_section = section_base(sw.find("Pous"))
@@ -642,11 +853,12 @@ def write_project(program, template, destination):
         program, root
     ):
         r = element(rungs, "RungEntity")
-        graph = element(r, "LadderElements")
         _, body = split_label(lines)
         items = (
             full_communication_graphics(full_communication)
             if full_communication is not None
+            else subroutine_call_graphics(body)
+            if program.subroutines and call_target(body) is not None
             else counter_graphics(body)
             if body[0].startswith("BLK %C")
             else [
@@ -654,30 +866,13 @@ def write_project(program, template, destination):
                 for t, a, c in graphics(lines)
             ]
         )
-        for typ, arg, row, column, connection in items:
-            e = element(graph, "LadderEntity")
-            element(e, "ElementType", typ)
-            if arg or full_communication is not None:
-                field = {
-                    "Comparison": "ComparisonExpression",
-                    "Operation": "OperationExpression",
-                }.get(typ, "Descriptor")
-                element(e, field, arg)
-                if field == "Descriptor" and arg:
-                    element(e, "Comment", "")
-                    element(e, "Symbol", "")
-            element(e, "Row", row)
-            element(e, "Column", column)
-            element(
-                e,
-                "ChosenConnection",
-                connection,
-            )
-        il = element(r, "InstructionLines")
-        for line in lines:
-            instruction = element(il, "InstructionLineEntity")
-            element(instruction, "InstructionLine", line)
-            element(instruction, "Comment", "")
+        _write_rung_body(
+            r,
+            lines,
+            items,
+            full_communication is not None
+            or (bool(program.subroutines) and call_target(body) is not None),
+        )
         origin = program.metadata.get("rung_origins", [])
         source = "; ".join(
             "%s:%s:%s"
@@ -703,6 +898,26 @@ def write_project(program, template, destination):
         label, _ = split_label(lines)
         element(r, "Label", label or "")
         element(r, "IsLadderSelected", "true")
+    if program.subroutines:
+        wrappers = {}
+        for number, definition in program.subroutines.items():
+            nodes = []
+            for i, lines in enumerate(definition.rungs):
+                node = ET.Element("RungEntity")
+                _write_rung_body(node, lines, _leaf_graphics(lines))
+                element(node, "Name", "cpp_sr%s_%04d" % (number, i))
+                element(
+                    node,
+                    "MainComment",
+                    "Experimental generated leaf; official validation pending",
+                )
+                element(node, "Label", "")
+                element(node, "IsLadderSelected", "true")
+                nodes.append(node)
+            wrappers[number] = Subroutine(
+                number, definition.name, definition.section_number, tuple(nodes)
+            )
+        write_subroutines(wrappers, sw)
     timers = element(sw, "Timers")
     for i, t in sorted(program.timers.items()):
         if t.base_ms not in (*BASES, 60000):
@@ -743,7 +958,15 @@ def write_project(program, template, destination):
     element(allocation, "Allocation", "Automatic")
     allocation = element(sw, "TimersMemoryAllocation")
     element(allocation, "Allocation", "Automatic")
-    required = max(memory_words_used(program), default=-1) + 1
+    required = (
+        max(
+            set().union(
+                *(memory_words_used(view) for view in _resource_context_views(program))
+            ),
+            default=-1,
+        )
+        + 1
+    )
     if required:
         # Manual/ForcedCount is observed for this exact collection. Do not infer
         # a separate enum from the allocation of bits or timers.
@@ -773,6 +996,7 @@ def write_project(program, template, destination):
             or loaded.communications != program.communications
             or loaded.timers != program.timers
             or loaded.counters != program.counters
+            or _subroutine_semantics(loaded) != _subroutine_semantics(program)
         ):
             fail("internal XML round trip changed program/configuration")
         os.replace(candidate, destination)

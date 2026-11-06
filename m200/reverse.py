@@ -1,8 +1,11 @@
 from .il import validate
-from .model import address, fail
+import json
+
+from .model import address, fail, Program
+from .subroutine_contexts import decoded_rung, static_operand_view
 from .timers import reference as timer_reference
 from .flow import JUMPS, ENDS, split_label
-from .native_logic import decode, STORES, OPEN
+from .native_logic import STORES, OPEN
 from .bits import word_bit, is_string, bit_string
 from .edges import OPS as EDGE_OPS, BASE as EDGE_BASE, cpp as edge_cpp
 from .edge_functions import parse as expression_edge
@@ -121,14 +124,30 @@ def to_cpp(program):
         )
     for i, c in sorted(program.counters.items()):
         lines.append(f"plc::Counter counter_{i}{{{i},{c.preset}}};")
-    if has_indexed(program):
+    resources = static_operand_view(program)
+    if has_indexed(resources):
         lines.append(
-            "plc::WordMemory native_word_image{%d};" % direct_word_limit(program)
+            "plc::WordMemory native_word_image{%d};" % direct_word_limit(resources)
         )
-    if has_indexed_bits(program):
-        lines.append("plc::BitMemory native_bit_image{%d};" % direct_bit_limit(program))
+    if has_indexed_bits(resources):
+        lines.append(
+            "plc::BitMemory native_bit_image{%d};" % direct_bit_limit(resources)
+        )
     for key, cfg in sorted(program.communications.items()):
         lines.append(constructor_cpp(key, cfg))
+    for number, definition in sorted(program.subroutines.items()):
+        # Leaf contexts are stateless and use the same explicit PLC addresses.
+        # Reuse ordinary IL emission without copying a scan harness, globals or
+        # committing another input/output image inside the leaf.
+        leaf = Program(rungs=definition.rungs)
+        source = to_cpp(leaf)
+        body = source.split("void scan() {", 1)[1].rsplit("}", 1)[0]
+        lines.append("void native_subroutine_body_%d() {" % number + body + "}")
+        name = json.dumps(definition.name, ensure_ascii=False)
+        lines.append(
+            "plc::Subroutine native_subroutine_%d{%d,native_subroutine_body_%d,%s,%d};"
+            % (number, number, number, name, definition.section_number)
+        )
     lines += ["", "void scan() {", "  bool accumulator = false;"]
     for i in sorted(program.timers):
         lines.append("  bool timer_%d_result = false;" % i)
@@ -141,7 +160,7 @@ def to_cpp(program):
         ):
             continue
         saved_depth = group_depth = 0
-        for op, _ in decode(body):
+        for op, _ in decoded_rung(body):
             if op == "MPS":
                 saved_depth += 1
                 max_saved = max(max_saved, saved_depth)
@@ -168,7 +187,10 @@ def to_cpp(program):
                 continue
         saved = []
         groups = []
-        for op, arg in decode(rung):
+        for op, arg in decoded_rung(rung):
+            if op == "CALL_SR":
+                lines.append("  native_subroutine_%s.call(accumulator);" % arg)
+                continue
             if op in ENDS:
                 lines.append(
                     "  return;"

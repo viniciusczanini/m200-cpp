@@ -100,7 +100,7 @@ class SubroutineGraphTests(unittest.TestCase):
         bad += [
             [first, last]
             for first, last in itertools.product(
-                ("LDN %I0.0", "LD %I0.1", "LD %M0", "LD 1"), ("SR0",)
+                ("LDN %I0.0", "LD %I0.1", "LD %M1024", "LD 1"), ("SR0",)
             )
         ]
         bad += [

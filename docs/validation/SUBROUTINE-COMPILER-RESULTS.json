@@ -1,0 +1,101 @@
+{
+  "format": "m200-subroutine-compiler-checkpoint-v1",
+  "scope": "Genuine C++ compiler product; local regression, official save/reopen and bounded simulator output observation; physical PLC pending",
+  "target": "TM200CE40T, official Basic1.4 build484 local simulator",
+  "unit_regression": {
+    "tests": 684,
+    "seconds": 224.974,
+    "skips": 0,
+    "copied_input_count": 727,
+    "inputs_stable": true,
+    "log_sha256": "16d682d6b949ba4475971a5a78e80a756aeaf177d31a1ced9716d332f8301089",
+    "source_pin_sha256": "523d383b0c2996eef429358fec8e5dbad64808a5d81b203a54b9b3d0167520a9"
+  },
+  "source": {
+    "path": "examples/editor_validation/cpp_subroutine_implicit.cpp",
+    "bytes": 468,
+    "sha256": "0bc464f7dc379e5356ef559ddd976da8cb16c7ab3e3de814de8185b400e77125"
+  },
+  "generated": {
+    "path": "output/diagnostics/subroutine-end-to-end-prototype-2026-11-06/genuine-export-candidate/build/program.smbp",
+    "bytes": 176597,
+    "sha256": "8b69d70a73702e9660a4c774c6213b9e2826fb2025bb89d3baa329ace5fe79bd"
+  },
+  "official_saved": {
+    "path": "output/diagnostics/subroutine-end-to-end-prototype-2026-11-06/genuine-export-candidate/observed/cpp_subroutine_implicit_editor_saved.smbp",
+    "bytes": 182326,
+    "sha256": "3ca0a94ac5a87c67b7cce91a0f8cd9e9d338bf20262c3c8df8243bd7bebe9f8f"
+  },
+  "Programming_No_error": true,
+  "fresh_reopen_after_other_project": true,
+  "strict_per_context_reload_equal": true,
+  "XML_order_note": "Master/leaf must be compared by context, not whole-tree InstructionLine walk",
+  "official_simulator": {
+    "status": "No error / Online / Run; applications identical",
+    "phases": [
+      {
+        "I0": 0,
+        "Q0_through3": "0010",
+        "capture": "docs/validation/editor-evidence/subroutine-compiler/phase-0.png"
+      },
+      {
+        "I0": 1,
+        "Q0_through3": "1110",
+        "capture": "docs/validation/editor-evidence/subroutine-compiler/phase-1.png"
+      },
+      {
+        "I0": 0,
+        "Q0_through3": "0010",
+        "capture": "docs/validation/editor-evidence/subroutine-compiler/phase-2.png"
+      }
+    ]
+  },
+  "observed_phase_count": 3,
+  "scans_not_counted": true,
+  "word_watch_not_observed": true,
+  "local_word_oracle_only": {
+    "I0off": [
+      30,
+      0,
+      10
+    ],
+    "I0on": [
+      30,
+      1,
+      20
+    ]
+  },
+  "cleanup_at_trial_end": {
+    "No_error_Not_Connected": true,
+    "panel_absent": true,
+    "PID64167_absent": true,
+    "TCP502_listener_absent": true,
+    "attribution": "Lab operator observations, not replayed by report author"
+  },
+  "physical_PLC_not_used": true,
+  "root_observation_record_sha256": "661a1ad3e62a9e04b6b76320550007f7f87957e7e8d1325296a71c799a908c7b",
+  "journal_sha256": "4c34be7d3aa9241fa88700a0205533ff450246057941a7891d50f20a2dee7d07",
+  "captures": [
+    {
+      "path": "docs/validation/editor-evidence/subroutine-compiler/fresh-reopen.png",
+      "bytes": 413844,
+      "sha256": "9aafccbcf34aa90e03c992136caa76ad1d277ae83cc92d58bc8ff327ffb5ceee"
+    },
+    {
+      "path": "docs/validation/editor-evidence/subroutine-compiler/phase-0.png",
+      "bytes": 18323,
+      "sha256": "b3d8df80d660c1fa967d19e3a68eeff518eb366910240e0fb57a2c64ed10a247"
+    },
+    {
+      "path": "docs/validation/editor-evidence/subroutine-compiler/phase-1.png",
+      "bytes": 18378,
+      "sha256": "7c76a061116165c23546a70bb5697290c6f0ab0891171ef58e7b711fea64364b"
+    },
+    {
+      "path": "docs/validation/editor-evidence/subroutine-compiler/phase-2.png",
+      "bytes": 18323,
+      "sha256": "b3d8df80d660c1fa967d19e3a68eeff518eb366910240e0fb57a2c64ed10a247"
+    }
+  ],
+  "panel_note": "First and third panels have identical bytes; chronology and input actions are recorded by the operator journal."
+}

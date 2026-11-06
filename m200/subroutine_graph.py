@@ -1,8 +1,8 @@
 """Isolated observed native SR call graph; not wired into the compiler.
 
-The closed call is LD %I0.0 followed by SR0..SR63. Exact CE40T saves establish
-SR0/SR63 geometry; primary sources establish the identity domain. This module
-adds no M-contact, other input, negated predicate, scheduling or execution support.
+The closed call is a normal M contact or exact I0.0 followed by SR0..SR63.
+Exact CE40T saves establish I0.0 and M20 geometry; primary resource domains
+bound M0..1023 and SR0..63. No other input or negated predicate is inferred.
 """
 
 from dataclasses import dataclass
@@ -20,9 +20,21 @@ def _number(value):
 @dataclass(frozen=True)
 class SubroutineCall:
     number: int
+    predicate: str = "%I0.0"
 
     def __post_init__(self):
         _number(self.number)
+        _predicate(self.predicate)
+
+
+def _predicate(value):
+    if value == "%I0.0":
+        return
+    match = (
+        re.fullmatch(r"%M(0|[1-9][0-9]*)", value) if isinstance(value, str) else None
+    )
+    if match is None or len(match[1]) > 4 or int(match[1]) >= 1024:
+        fail("unverified SR predicate; use a canonical normal M0..1023 or exact I0.0")
 
 
 def parse_call(lines):
@@ -33,18 +45,20 @@ def parse_call(lines):
     ):
         fail("SR call graph requires the closed two-line call")
     body = [" ".join(line.split()) for line in lines]
-    if body[0] != "LD %I0.0":
-        fail("unverified SR predicate; only plain LD %I0.0 is bound")
+    if not body[0].startswith("LD "):
+        fail("SR graph requires a normal LD contact")
+    predicate = body[0][3:]
+    _predicate(predicate)
     match = re.fullmatch(r"SR(0|[1-9][0-9]*)", body[1])
     if match is None or len(match[1]) > 2:
         fail("invalid native SR call identity")
-    return SubroutineCall(int(match[1]))
+    return SubroutineCall(int(match[1]), predicate)
 
 
 def graphics(lines):
     call = parse_call(lines)
     return (
-        [("NormalContact", "%I0.0", 0, 0, "Left, Right")]
+        [("NormalContact", call.predicate, 0, 0, "Left, Right")]
         + [("Line", "", 0, column, "Left, Right") for column in range(1, 10)]
         + [("Jump", "SR" + str(call.number), 0, 10, "Left")]
     )

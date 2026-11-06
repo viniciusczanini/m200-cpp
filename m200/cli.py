@@ -1,3 +1,4 @@
+import copy
 import argparse
 import hashlib
 import json
@@ -30,7 +31,59 @@ ARTIFACTS = {
 }
 
 
+def render_il(program):
+    def rungs_text(rungs):
+        return "\n\n".join(
+            "; Rung %d\n%s" % (n, "\n".join(r)) for n, r in enumerate(rungs)
+        )
+
+    if not program.subroutines:
+        return rungs_text(program.rungs) + "\n"
+    parts = ["; MASTER\n" + rungs_text(program.rungs)]
+    for number, definition in sorted(program.subroutines.items()):
+        parts.append(
+            "; FREE POU SR%d | Name %s | SectionNumber %d\n%s"
+            % (
+                number,
+                json.dumps(definition.name, ensure_ascii=False),
+                definition.section_number,
+                rungs_text(definition.rungs),
+            )
+        )
+    return "\n\n".join(parts) + "\n"
+
+
+def source_map(program):
+    def rows(rungs, origins):
+        return [
+            {"rung": i, "origin": origins[i] if i < len(origins) else {}}
+            for i in range(len(rungs))
+        ]
+
+    result = {
+        "source": program.metadata.get("source"),
+        "source_sha256": program.metadata.get("source_sha256"),
+        "rungs": rows(program.rungs, program.metadata.get("rung_origins", [])),
+        "symbols": program.symbols,
+    }
+    if program.subroutines:
+        result["format"] = "m200-cpp-source-map-v2"
+        result["master"] = {"rungs": result.pop("rungs")}
+        result["subroutines"] = {
+            str(n): {
+                "number": n,
+                "name": definition.name,
+                "section_number": definition.section_number,
+                "rungs": rows(definition.rungs, definition.origins),
+            }
+            for n, definition in sorted(program.subroutines.items())
+        }
+    return result
+
+
 def build_artifacts(program, output, template=None):
+    if program.subroutines:
+        validate(program)
     out = Path(output)
     if out.exists():
         if not out.is_dir() or any(
@@ -71,28 +124,10 @@ def build_artifacts(program, output, template=None):
         (stage / "program.m200.json").write_text(
             json.dumps(program.as_dict(), indent=2) + "\n"
         )
-        (stage / "program.il").write_text(
-            "\n\n".join(
-                "; Rung %d\n%s" % (n, "\n".join(r)) for n, r in enumerate(program.rungs)
-            )
-            + "\n"
-        )
+        (stage / "program.il").write_text(render_il(program))
         (stage / "program.audit.cpp").write_text(to_cpp(program))
-        origins = program.metadata.get("rung_origins", [])
         (stage / "source-map.json").write_text(
-            json.dumps(
-                {
-                    "source": program.metadata.get("source"),
-                    "source_sha256": program.metadata.get("source_sha256"),
-                    "rungs": [
-                        {"rung": i, "origin": origins[i] if i < len(origins) else {}}
-                        for i in range(len(program.rungs))
-                    ],
-                    "symbols": program.symbols,
-                },
-                indent=2,
-            )
-            + "\n"
+            json.dumps(source_map(program), indent=2) + "\n"
         )
         if template:
             write_project(program, template, stage / "program.smbp")
@@ -174,16 +209,26 @@ def read_program(path):
 
 
 def report(program):
-    addresses = memory_bits_used(program)
-    words = memory_words_used(program)
+    view = program
+    if program.subroutines:
+        validate(program)
+        view = copy.copy(program)
+        view.rungs = program.rungs + [
+            rung
+            for definition in program.subroutines.values()
+            for rung in definition.rungs
+        ]
+        view.subroutines = {}
+    addresses = memory_bits_used(view)
+    words = memory_words_used(view)
     functions = []
-    for rung in program.rungs:
+    for rung in view.rungs:
         for line in rung:
             parts = line.split(maxsplit=1)
             function = expression_edge(parts[0]) if parts else None
             if function is not None:
                 functions.append(function)
-    return {
+    result = {
         "tool": "m200-cpp",
         "version": __version__,
         "target": "TM200CE40T",
@@ -207,8 +252,8 @@ def report(program):
             "rising_functions": sum(kind == "RISING" for kind, _ in functions),
             "falling_functions": sum(kind == "FALLING" for kind, _ in functions),
             "expression_function_index_model": "0..254 per kind; native functional-level mapping pending; SMBP expands to private M",
-            "rungs": len(program.rungs),
-            "il_instructions": sum(map(len, program.rungs)),
+            "rungs": len(view.rungs),
+            "il_instructions": sum(map(len, view.rungs)),
         },
         "validation": {
             "official_editor": "pending",
@@ -226,6 +271,31 @@ def report(program):
             "Communication endpoints must be configured explicitly; successful local Modbus exchanges do not establish physical PLC compatibility.",
         ],
     }
+    if program.subroutines:
+        result["resources"].update(
+            master_rungs=len(program.rungs),
+            subroutine_definitions=len(program.subroutines),
+            subroutine_identity_capacity=64,
+        )
+        result["execution_contexts"] = {
+            "master": {
+                "rungs": len(program.rungs),
+                "il_instructions": sum(map(len, program.rungs)),
+            },
+            "subroutines": {
+                str(n): {
+                    "name": d.name,
+                    "section_number": d.section_number,
+                    "rungs": len(d.rungs),
+                    "il_instructions": sum(map(len, d.rungs)),
+                }
+                for n, d in sorted(program.subroutines.items())
+            },
+        }
+        result["limitations"].append(
+            "Prototype direct leaf SR contexts only; native M-contact/section profiles and SMBP export remain gated; code-size totals are not scan cost or watchdog proof."
+        )
+    return result
 
 
 def main(argv=None):

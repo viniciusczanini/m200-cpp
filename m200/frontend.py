@@ -9,7 +9,14 @@ import subprocess
 from pathlib import Path
 
 from .lower import Lowerer
-from .model import address, fail, timer_config, CompileError, Timer
+from .model import (
+    address,
+    fail,
+    timer_config,
+    CompileError,
+    Timer,
+    SubroutineDefinition,
+)
 from .timers import preset_value
 from .arrays import Array, reference as array_reference
 from .numeric import Number, OPS, READS, WRITES, TYPES, boolean, expect, literal
@@ -233,6 +240,9 @@ class Frontend:
         self.loops = []
         self.source_labels = {}
         self.scan_exit = None
+        self.subroutine_specs = {}
+        self.subroutine_functions = set()
+        self.in_subroutine = None
         if any(len(modes) > 1 for modes in self.communication_modes.values()):
             fail(
                 "do not mix automatic and explicit communication indices of the same kind"
@@ -261,6 +271,113 @@ class Frontend:
         if node.get("kind") == "UnaryOperator" and node.get("opcode") == "-":
             return -self.const(node["inner"][0])
         self.error(node, "a literal integer is required here")
+
+    def subroutine_constructor(self, node, ordinal):
+        ctor = next(
+            (n for n in node.get("inner", []) if n.get("kind") == "CXXConstructExpr"),
+            None,
+        )
+        args = ctor.get("inner", []) if ctor is not None else []
+        if len(args) not in (2, 4):
+            self.error(
+                node, "Subroutine requires literal identity and a registered void leaf"
+            )
+        number = self.const(args[0])
+        if not 0 <= number < 64 or any(
+            s[0] == number for s in self.subroutine_specs.values()
+        ):
+            self.error(node, "invalid or duplicate native subroutine number")
+        target = strip(args[1])
+        if target.get("kind") == "UnaryOperator" and target.get("opcode") == "&":
+            target = strip(target.get("inner", [{}])[0])
+        ref = target.get("referencedDecl", {})
+        if target.get("kind") != "DeclRefExpr" or ref.get("kind") != "FunctionDecl":
+            self.error(node, "Subroutine body must be a named void function")
+        definitions = [
+            f
+            for f in self.functions.values()
+            if f.get("name") == ref.get("name")
+            and f.get("type", {}).get("qualType") == "void ()"
+            and any(n.get("kind") == "CompoundStmt" for n in f.get("inner", []))
+        ]
+        if len(definitions) != 1:
+            self.error(node, "Subroutine body requires one void() definition")
+        function = definitions[0]
+        if function.get("name") == "scan":
+            self.error(node, "scan cannot be its own subroutine")
+        name, section = function["name"], 2 + ordinal
+        if len(args) == 4:
+            text = strip(args[2])
+            if text.get("kind") != "StringLiteral" or not re.fullmatch(
+                r"const char\[[0-9]+\]", text.get("type", {}).get("qualType", "")
+            ):
+                self.error(
+                    node, "Subroutine metadata name must be an ordinary literal string"
+                )
+            # Clang has already decoded C++ escapes and renders narrow bytes as
+            # canonical quoted text, with octal escapes for UTF-8 bytes.
+            raw = text.get("value", "")
+            if not (raw.startswith('"') and raw.endswith('"')):
+                self.error(node, "invalid literal subroutine name")
+            value = bytearray()
+            i = 1
+            escapes = {
+                "n": 10,
+                "r": 13,
+                "t": 9,
+                "b": 8,
+                "f": 12,
+                "v": 11,
+                "a": 7,
+                "\\": 92,
+                '"': 34,
+                "'": 39,
+                "?": 63,
+            }
+            while i < len(raw) - 1:
+                char = raw[i]
+                if char != "\\":
+                    value.extend(char.encode("utf-8"))
+                    i += 1
+                    continue
+                i += 1
+                if i >= len(raw) - 1:
+                    self.error(node, "invalid literal subroutine escape")
+                match = re.match(r"[0-7]{1,3}", raw[i:])
+                if match:
+                    value.append(int(match[0], 8))
+                    i += len(match[0])
+                elif raw[i] in escapes:
+                    value.append(escapes[raw[i]])
+                    i += 1
+                else:
+                    self.error(node, "unverified literal subroutine escape")
+            try:
+                name = value.decode("utf-8")
+            except UnicodeDecodeError:
+                self.error(node, "Subroutine name must be valid UTF-8")
+            if not name.strip() or any(
+                not (
+                    ord(c) in (9, 10, 13)
+                    or 32 <= ord(c) <= 0xD7FF
+                    or 0xE000 <= ord(c) <= 0xFFFD
+                    or 0x10000 <= ord(c) <= 0x10FFFF
+                )
+                for c in name
+            ):
+                self.error(node, "Subroutine name must be nonblank XML text")
+            section = self.const(args[3])
+            if not 0 <= section <= 2147483647:
+                self.error(node, "Subroutine section must be a nonnegative Int32")
+        if any(s[1] == name or s[2] == section for s in self.subroutine_specs.values()):
+            self.error(node, "ambiguous duplicate subroutine name or section")
+        self.subroutine_specs[node["id"]] = (number, name, section, function)
+        self.subroutine_functions.update(
+            f["id"]
+            for f in self.functions.values()
+            if f.get("name") == function["name"]
+            and f.get("type", {}).get("qualType") == "void ()"
+        )
 
     def communication_config(self, node):
         kind = node["type"].get("desugaredQualType", node["type"]["qualType"])[5:]
@@ -597,6 +714,18 @@ class Frontend:
             member = children[0]
             obj = strip(member.get("inner", [{}])[0])
             ref = obj.get("referencedDecl", {}).get("id")
+            if ref in self.instances and self.instances[ref][0] == "Subroutine":
+                if member.get("name") != "call" or len(children) != 2:
+                    self.error(node, "unsupported Subroutine method")
+                if self.in_subroutine is not None or self.active:
+                    self.error(
+                        node, "native nested SR calls are outside the leaf prototype"
+                    )
+                signal = boolean(self.expr(children[1], env))
+                if self.lower.guard is not None:
+                    signal = self.lower.binary("&&", self.lower.guard, signal)
+                self.lower.rung("LD " + signal, "SR" + str(self.instances[ref][1]))
+                return None
             if ref in self.instances and self.instances[ref][0] == "Counter":
                 index = self.instances[ref][1]
                 method = member.get("name")
@@ -792,6 +921,14 @@ class Frontend:
             if not global_scope:
                 self.error(node, "stateful instances must be global")
             kind = typ[5:]
+            if kind == "Subroutine":
+                if node["id"] not in self.subroutine_specs:
+                    self.error(node, "Subroutine descriptors must be global")
+                self.instances[node["id"]] = (
+                    kind,
+                    self.subroutine_specs[node["id"]][0],
+                )
+                return
             if kind in KINDS:
                 cfg = self.communication_specs[node["id"]]
                 index = self.explicit_communications.get(
@@ -1011,6 +1148,11 @@ class Frontend:
                     node,
                     "scan() supports only a bare return; split void expressions into a statement",
                 )
+            if self.in_subroutine is not None:
+                self.lower.rung("END") if guard is None else self.lower.rung(
+                    "LD " + guard, "ENDC"
+                )
+                return
             if self.scan_exit is None:
                 if self.lower.next_label >= 64:
                     self.error(
@@ -1200,6 +1342,17 @@ class Frontend:
 
     def compile(self):
         scans = []
+        declarations = [
+            n
+            for n in self.top
+            if n.get("kind") == "VarDecl"
+            and n.get("type", {}).get(
+                "desugaredQualType", n.get("type", {}).get("qualType")
+            )
+            == "plc::Subroutine"
+        ]
+        for ordinal, node in enumerate(declarations):
+            self.subroutine_constructor(node, ordinal)
         for n in self.top:
             if n["kind"] == "VarDecl":
                 self.declaration(n, global_scope=True)
@@ -1216,6 +1369,11 @@ class Frontend:
                     )
                 if n.get("name") == "scan":
                     scans.append(n)
+                elif n["id"] in self.subroutine_functions:
+                    if n["type"]["qualType"] != "void ()" or any(
+                        c["kind"] == "ParmVarDecl" for c in n.get("inner", [])
+                    ):
+                        self.error(n, "Subroutine functions must be void() leaves")
                 else:
                     body = next(
                         (x for x in n.get("inner", []) if x["kind"] == "CompoundStmt"),
@@ -1247,7 +1405,7 @@ class Frontend:
         # Validate even unused helpers with the same expression allowlist, without
         # retaining their emitted gates or changing the real I/O allocation.
         for f in self.functions.values():
-            if f.get("name") == "scan":
+            if f.get("name") == "scan" or f["id"] in self.subroutine_functions:
                 continue
             saved = (self.lower, self.inputs, self.outputs, self.active)
             self.lower = Lowerer(self.lower.used)
@@ -1262,6 +1420,43 @@ class Frontend:
                 boolean(self.expr(helper_body["inner"][0]["inner"][0], params))
             finally:
                 self.lower, self.inputs, self.outputs, self.active = saved
+        # All bodies share one allocator and one master scan input/output image.
+        # No leaf prefix/tail/finalize may create a second controller scan.
+        for number, name, section, function in self.subroutine_specs.values():
+            leaf_body = next(
+                n for n in function["inner"] if n["kind"] == "CompoundStmt"
+            )
+            if any(
+                n.get("kind")
+                in (
+                    "LabelStmt",
+                    "GotoStmt",
+                    "WhileStmt",
+                    "ForStmt",
+                    "DoStmt",
+                    "BreakStmt",
+                    "ContinueStmt",
+                )
+                for n in walk(leaf_body)
+            ):
+                self.error(
+                    function, "prototype subroutine leaves do not admit labels or loops"
+                )
+            start, origin_start = len(self.lower.program.rungs), len(self.lower.origins)
+            self.in_subroutine = number
+            try:
+                self.statement(leaf_body)
+                if len(self.lower.program.rungs) == start:
+                    self.lower.rung("END")
+            finally:
+                self.in_subroutine = None
+            rungs = self.lower.program.rungs[start:]
+            origins = self.lower.origins[origin_start:]
+            del self.lower.program.rungs[start:]
+            del self.lower.origins[origin_start:]
+            self.lower.program.subroutines[number] = SubroutineDefinition(
+                number, name, section, rungs, origins
+            )
         self.source_labels = {
             n["declId"]: self.lower.new_label()
             for n in walk(body)
@@ -1335,6 +1530,12 @@ def compile_source(path):
     if result.returncode:
         fail("Clang rejected C++:\n" + result.stderr)
     program = Frontend(json.loads(result.stdout), path).compile()
+    if program.subroutines:
+        # Compile every registered leaf, including unused ones, through the same
+        # closed context validator before returning a supposedly compiled IR.
+        from .il import validate
+
+        validate(program)
     program.metadata.update(
         {
             "source": path.name,

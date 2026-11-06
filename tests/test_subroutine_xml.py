@@ -242,12 +242,19 @@ class SubroutineXmlTests(unittest.TestCase):
             with self.assertRaises(CompileError):
                 Subroutine(*values)
 
-    def test_whole_project_gate_remains_closed(self):
+    def test_exact_native_project_imports_separate_typed_context(self):
         from m200.project import load_project
 
         path = ROOT / "tests/fixtures/official_tm200ce40t_subroutine_sr0.smbp"
-        with self.assertRaises(CompileError):
-            load_project(path)
+        program = load_project(path)
+        self.assertEqual(len(program.rungs), 10)
+        self.assertEqual(set(program.subroutines), {0})
+        leaf = program.subroutines[0]
+        self.assertEqual(
+            (leaf.number, leaf.name, leaf.section_number), (0, "LAB_SR0_LEAF", 2)
+        )
+        self.assertEqual(len(leaf.rungs), 3)
+        self.assertEqual(len(leaf.origins), 3)
 
     def test_invalid_xml_characters_and_oversized_decimal_are_refused(self):
         for name in ("bad\x00name", "bad\ud800name", "bad\uffffname"):

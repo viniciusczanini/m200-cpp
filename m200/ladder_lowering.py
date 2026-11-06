@@ -3,6 +3,7 @@
 import copy
 import hashlib
 import json
+import re
 
 from .flow import JUMPS, ENDS, split_label, destinations
 from .lower import Lowerer
@@ -14,11 +15,23 @@ from .bits import memory_bits_used
 from .edges import OPS as EDGE_OPS, BASE as EDGE_BASE, SERIES, LOADS
 from .edge_functions import parse as expression_edge
 from .counter_xml import simple as simple_counter
+from .subroutine_contexts import call_target, decoded_rung, static_operand_view
 
 
 def needed(program):
     for raw in program.rungs:
-        _, rung = split_label(raw)
+        label, rung = split_label(raw)
+        if call_target(rung) is not None:
+            if (
+                label is None
+                and len(rung) == 2
+                and (
+                    rung[0] == "LD %I0.0"
+                    or re.fullmatch(r"LD %M(?:0|[1-9][0-9]*)", rung[0])
+                )
+            ):
+                continue
+            return True
         if rung[0].startswith("BLK "):
             if rung[0].startswith("BLK %C"):
                 if simple_counter(rung):
@@ -79,8 +92,9 @@ def normalize(program):
         return normalized
     if has_indexed_bits(program):
         fail("indexed-bit normalization bounds/profile are unverified")
-    bits = memory_bits_used(program)
-    lower = Lowerer(bits, memory_words_used(program))
+    resources = static_operand_view(program)
+    bits = memory_bits_used(resources)
+    lower = Lowerer(bits, memory_words_used(resources))
     used_labels = set(destinations(program))
     free_labels = iter(f"%L{i}" for i in range(64) if f"%L{i}" not in used_labels)
 
@@ -96,6 +110,7 @@ def normalize(program):
     lower.program.counters = copy.deepcopy(program.counters)
     lower.program.communications = copy.deepcopy(program.communications)
     lower.program.metadata = copy.deepcopy(program.metadata)
+    lower.program.subroutines = copy.deepcopy(program.subroutines)
     acc = lower.bit("native_accumulator")
     expression_states = {}
     resets = []
@@ -121,7 +136,7 @@ def normalize(program):
             else {"generated": f"native logic source rung {index}"}
         )
         probe = copy.copy(program)
-        probe.rungs = [rung]
+        probe.rungs = [raw]
         if not needed(probe):
             # Each rung begins with a load/block, so its accumulator is not
             # live into the next one. Preserve already-canonical rungs.
@@ -151,7 +166,12 @@ def normalize(program):
         else:
             saved = []
             groups = []
-            for op, arg in decode(rung):
+            for op, arg in decoded_rung(rung):
+                if op == "CALL_SR":
+                    # The call ends its source rung. Its predicate is captured
+                    # before the leaf can mutate shared words/bits or outputs.
+                    lower.rung("LD " + acc, "SR" + arg)
+                    continue
                 if op in ENDS:
                     if exit_label is None:
                         exit_label = new_guard_label("scan exit lowering")

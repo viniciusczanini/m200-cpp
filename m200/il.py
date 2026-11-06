@@ -70,6 +70,12 @@ def bit_operand(text, writable=False):
 
 
 def validate(program):
+    from .subroutine_contexts import validate_contexts
+
+    validate_contexts(program, _validate_flat)
+
+
+def _validate_flat(program):
     if not isinstance(program.rungs, list) or any(
         not isinstance(r, list) or any(not isinstance(s, str) for s in r)
         for r in program.rungs
@@ -256,31 +262,46 @@ class Machine:
         if type(instruction_limit) is not int or not 1 <= instruction_limit <= 10000000:
             fail("invalid local execution limit")
         self.program = program
-        self.decoded = []
-        for raw in program.rungs:
-            _, body = split_label(raw)
-            communication = (
-                body[0].startswith("BLK ")
-                and body[0].split(maxsplit=1)[1] in program.communications
-            )
-            self.decoded.append(None if communication else decode(body))
+        from .subroutine_contexts import decoded_rung, static_operand_view
+
+        self.context_rungs = {
+            None: program.rungs,
+            **{i: sr.rungs for i, sr in program.subroutines.items()},
+        }
+        self.context_decoded = {}
+        for context, rungs in self.context_rungs.items():
+            values = []
+            for raw in rungs:
+                _, body = split_label(raw)
+                communication = (
+                    body[0].startswith("BLK ")
+                    and body[0].split(maxsplit=1)[1] in program.communications
+                )
+                values.append(None if communication else decoded_rung(raw))
+            self.context_decoded[context] = values
+        self.decoded = self.context_decoded[None]
+        all_rungs = [rung for rungs in self.context_rungs.values() for rung in rungs]
+        all_decoded = [
+            rung for rungs in self.context_decoded.values() for rung in rungs
+        ]
         self.labels = destinations(program)
         self.instruction_limit = instruction_limit
         self.memory = [False] * 1024
         self.words = [0] * 8000
         self.index_error = False
-        self.index_word_limit = direct_word_limit(program)
-        self.index_bit_limit = direct_bit_limit(program)
+        resources = static_operand_view(program)
+        self.index_word_limit = direct_word_limit(resources)
+        self.index_bit_limit = direct_bit_limit(resources)
         self.communication = CommunicationEngine(communication_transport)
         self.operations = {
             line: instruction_operation(line)
-            for rung in program.rungs
+            for rung in all_rungs
             for line in rung
             if is_operation(line)
         }
         self.comparisons = {
             parts[1]: comparison(parts[1])
-            for rung in program.rungs
+            for rung in all_rungs
             for line in rung
             for parts in [line.split(maxsplit=1)]
             if not is_operation(line) and len(parts) == 2 and parts[1].startswith("[")
@@ -294,7 +315,7 @@ class Machine:
             for arg in sorted(
                 {
                     arg
-                    for rung in self.decoded
+                    for rung in all_decoded
                     if rung is not None
                     for op, arg in rung
                     if op in EDGE_OPS
@@ -304,7 +325,7 @@ class Machine:
         self.edge_events = {}
         self.expression_history = {
             op: False
-            for rung in self.decoded
+            for rung in all_decoded
             if rung is not None
             for op, _ in rung
             if expression_edge(op) is not None
@@ -456,8 +477,16 @@ class Machine:
                     "local execution limit exceeded; physical watchdog is not simulated"
                 )
 
-        while pc < len(self.program.rungs):
-            _, rung = split_label(self.program.rungs[pc])
+        context = None
+        return_pc = None
+        while True:
+            if pc >= len(self.context_rungs[context]):
+                if context is None:
+                    break
+                context, pc, return_pc = None, return_pc, None
+                continue
+            _, rung = split_label(self.context_rungs[context][pc])
+            current_decoded = self.context_decoded[context][pc]
             pc += 1
             if rung[0].startswith("BLK "):
                 if rung[0].split(maxsplit=1)[1] in self.program.communications:
@@ -477,13 +506,23 @@ class Machine:
             acc = False
             saved = []
             groups = []
-            for op, arg in self.decoded[pc - 1]:
+            for op, arg in current_decoded:
                 consume(1)  # an early END must not consume its skipped suffix
                 if op in ENDS:
                     if op == "END" or (acc if op == "ENDC" else not acc):
                         # Finish this task's scan, including the bookkeeping below.
                         # No controller STOP state or task scheduler is simulated.
-                        pc = len(self.program.rungs)
+                        if context is None:
+                            pc = len(self.program.rungs)
+                        else:
+                            context, pc, return_pc = None, return_pc, None
+                        break
+                    continue
+                if op == "CALL_SR":
+                    if acc:
+                        if context is not None or return_pc is not None:
+                            fail("native SR nesting is prohibited")
+                        context, return_pc, pc = int(arg), pc, 0
                         break
                     continue
                 if op in self.expression_history:

@@ -1,0 +1,107 @@
+{
+  "scope": "Copied sandbox fixture only; authentic native diagnostic, not compiler output",
+  "source": "output/editor-validation/native-m-contact-bindings-2026-11-06/observed/sr0/subroutine_sr0_m20_editor_saved.smbp",
+  "bytes": 141240,
+  "sha256": "b850091e79c974dec8be14de36694428091d5a82ad6257a6ddfe5f1d882cc692",
+  "root_observation": {
+    "source": "output/editor-validation/native-m-contact-bindings-2026-11-06/subroutine_sr0_m20_contact_il_only.smbp",
+    "saved": "output/editor-validation/native-m-contact-bindings-2026-11-06/observed/sr0/subroutine_sr0_m20_editor_saved.smbp",
+    "bytes": 141240,
+    "sha256": "b850091e79c974dec8be14de36694428091d5a82ad6257a6ddfe5f1d882cc692",
+    "all_lexical_IL_equal": true,
+    "all14_rungs_Ladder_selected": true,
+    "call_graph_entities": [
+      {
+        "ElementType": "NormalContact",
+        "Descriptor": "%M20",
+        "Comment": "",
+        "Row": "0",
+        "Column": "0",
+        "ChosenConnection": "Left, Right"
+      },
+      {
+        "ElementType": "Line",
+        "Descriptor": "",
+        "Row": "0",
+        "Column": "1",
+        "ChosenConnection": "Left, Right"
+      },
+      {
+        "ElementType": "Line",
+        "Descriptor": "",
+        "Row": "0",
+        "Column": "2",
+        "ChosenConnection": "Left, Right"
+      },
+      {
+        "ElementType": "Line",
+        "Descriptor": "",
+        "Row": "0",
+        "Column": "3",
+        "ChosenConnection": "Left, Right"
+      },
+      {
+        "ElementType": "Line",
+        "Descriptor": "",
+        "Row": "0",
+        "Column": "4",
+        "ChosenConnection": "Left, Right"
+      },
+      {
+        "ElementType": "Line",
+        "Descriptor": "",
+        "Row": "0",
+        "Column": "5",
+        "ChosenConnection": "Left, Right"
+      },
+      {
+        "ElementType": "Line",
+        "Descriptor": "",
+        "Row": "0",
+        "Column": "6",
+        "ChosenConnection": "Left, Right"
+      },
+      {
+        "ElementType": "Line",
+        "Descriptor": "",
+        "Row": "0",
+        "Column": "7",
+        "ChosenConnection": "Left, Right"
+      },
+      {
+        "ElementType": "Line",
+        "Descriptor": "",
+        "Row": "0",
+        "Column": "8",
+        "ChosenConnection": "Left, Right"
+      },
+      {
+        "ElementType": "Line",
+        "Descriptor": "",
+        "Row": "0",
+        "Column": "9",
+        "ChosenConnection": "Left, Right"
+      },
+      {
+        "ElementType": "Jump",
+        "Descriptor": "SR0",
+        "Row": "0",
+        "Column": "10",
+        "ChosenConnection": "Left"
+      }
+    ],
+    "fresh_reopen_pending": false,
+    "not_compiler_output": true,
+    "runtime_not_tested": true,
+    "fresh_reopen_Programming_status": "No error / Not Connected",
+    "fresh_reopen_after": "register_fifo_m20_m21_m22_contacts_il_only",
+    "fresh_reopen_root_personally_viewed": true,
+    "fresh_reopen_capture": {
+      "path": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793976816369933000-2146.png",
+      "bytes": 390379,
+      "sha256": "40f058793b16b52fbf3f1e14e8e1ce1993b3a22e7da811aa568e66229cdab746"
+    }
+  },
+  "bound_call": "LD %M20 / SR0; eleven entities with NormalContact at0/0 and Jump at0/10; exact ordinary I0.0 profile retained",
+  "generalization": "Canonical M0..1023 from documented memory resource domain; SR0..63 primary identity domain; other contact classes remain unverified"
+}
