@@ -131,6 +131,8 @@ Exact [generated single-write products](docs/validation/MODBUS-SINGLE-GENERATED-
 
 The [standalone subroutine foundation](docs/validation/SUBROUTINE-FOUNDATION-RESULTS.md) records the latest 628-test checkpoint and exact SR0/SR63 saved fixtures. Its wrapper and call-graph codecs are isolated components: subroutines remain unsupported in C++, SDK, VM, reverse and whole-project import/export. Native diagnostic observations and an ignored integration prototype are separate from this product checkpoint.
 
+The [native M-contact observations](docs/validation/NATIVE-M-CONTACT-BINDING-OBSERVATIONS.md) qualify actual editor conversion/save/reopen for an M20-controlled SR0 call and an M20/M21/M22-controlled FIFO block. These hand-built diagnostics supply binding evidence for subsequent compiler integration; they add no runtime or whole-toolchain support claim.
+
 Three [genuine bare Execute/Abort Modbus products](docs/validation/MODBUS-BARE-ABORT-GENERATED-PROJECT-RESULTS.md) also passed official save and fresh reopen with No error. Their public C++ examples cover READ discrete inputs, WRITE coils with aliased status stores, and asymmetric WRITE_READ buffers gated by a 10 ms timer. A separate bounded WR simulator launch remained in STOP; native communication transactions and physical interoperability remain unverified.
 
 The [standalone Register graph foundation](docs/validation/REGISTER-GRAPH-FOUNDATION-RESULTS.md) records the earlier 587-test checkpoint and exact FIFO/LIFO graphical fixtures. It remains separate from whole-project Register compilation and execution support.

@@ -1,0 +1,5260 @@
+{
+  "date": "2026-11-06",
+  "classification": "PASS exact native M-contact static conversion/save/fresh-reopen and independent whole-tree readback",
+  "scope": "Two hand-built IL-only diagnostic derivatives; no compiler-generated product or runtime qualification",
+  "official_environment": {
+    "target": "TM200CE40T",
+    "editor": "EcoStruxure Machine Expert Basic1.4 build484",
+    "actual_level": "FunctLevelMan21_0",
+    "operator": "Root only; reviewer did not operate GUI/Wine/process/network",
+    "observed_UI": "Programming No error / Not Connected",
+    "existing_Untrusted_DLL_banner": "Visible; no cause or resolution inferred"
+  },
+  "procedure": "Frozen byte-scoped IL-only candidates copied to writable P: files; official master conversion and Ctrl+S; actual saved bytes preserved as filesystem clones; another project opened before each saved-clone fresh Programming reopen. No Save As claim.",
+  "cases": [
+    {
+      "case": "fifo",
+      "source": {
+        "path": "output/editor-validation/native-register-evaluation-2026-11-06/observed/fifo/register_fifo_canonical_three_ld_editor_saved.smbp",
+        "bytes": 105416,
+        "sha256": "f6198b7054f1f1b6dbd016f6df756ef2ebd150a99d26bc59e86069944d000fa4"
+      },
+      "candidate": {
+        "path": "output/editor-validation/native-m-contact-bindings-2026-11-06/register_fifo_m20_m21_m22_contacts_il_only.smbp",
+        "bytes": 105454,
+        "sha256": "45668bb3d0120b8d409d5eb315e363e909dffa8b2edeffb30747226f3e112e54"
+      },
+      "saved": {
+        "path": "output/editor-validation/native-m-contact-bindings-2026-11-06/observed/fifo/register_fifo_m_contacts_editor_saved.smbp",
+        "bytes": 117097,
+        "sha256": "e05bf55077084557c9cc11a5237cdb677611c9cedff3cf22f921f19716932639"
+      },
+      "source_to_candidate": {
+        "single_raw_byte_span_only": true,
+        "exact_raw_restoration_to_source": true,
+        "exact_typed_restoration_to_source": true,
+        "span_start": 11422,
+        "span_end": 14474,
+        "replacement_bytes": 3090,
+        "inserted_snapshot_pairs": [
+          [
+            0,
+            20
+          ],
+          [
+            1,
+            21
+          ],
+          [
+            2,
+            22
+          ]
+        ]
+      },
+      "candidate_to_saved": {
+        "literal_expected_whole_tree_equal_ignoring_only_whitespace_indentation": true,
+        "all_lexical_IL_equal": true,
+        "master_rungs": 9,
+        "master_IL": 24,
+        "all_project_rungs": 9,
+        "all_project_IL": 24,
+        "all_saved_rungs_Ladder_selected": true,
+        "changed_master_rungs": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "graph_counts_by_master_rung": [
+          10,
+          10,
+          10,
+          11,
+          11,
+          11,
+          4,
+          11,
+          11
+        ],
+        "native_body_graph": [
+          {
+            "ElementType": "NormalContact",
+            "Descriptor": "%M20",
+            "Comment": "",
+            "Row": "0",
+            "Column": "0",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "NormalContact",
+            "Descriptor": "%M21",
+            "Comment": "",
+            "Row": "1",
+            "Column": "0",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "NormalContact",
+            "Descriptor": "%M22",
+            "Comment": "",
+            "Row": "2",
+            "Column": "0",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "Register",
+            "Descriptor": "%R0",
+            "Comment": "",
+            "Row": "0",
+            "Column": "1",
+            "ChosenConnection": "Left"
+          }
+        ],
+        "all_non_Pous_software_children_exact": [
+          "Subroutines",
+          "WatchLists",
+          "CustomSymbols",
+          "ConstantWordsMemoryAllocation",
+          "MemoryBitsMemoryAllocation",
+          "MemoryWordsMemoryAllocation",
+          "TimersMemoryAllocation",
+          "CountersMemoryAllocation",
+          "RegistersMemoryAllocation",
+          "DrumsMemoryAllocation",
+          "SbrsMemoryAllocation",
+          "ScsMemoryAllocation",
+          "FcsMemoryAllocation",
+          "SchsMemoryAllocation",
+          "HscsMemoryAllocation",
+          "PtosMemoryAllocation",
+          "MemoryBits",
+          "SystemBits",
+          "SystemWords",
+          "GrafcetSteps",
+          "MemoryWords",
+          "MemoryDoubleWords",
+          "MemoryFloats",
+          "ConstantWords",
+          "ConstantDoubleWords",
+          "ConstantMemoryFloats",
+          "Timers",
+          "Counters",
+          "FastCounters",
+          "Registers",
+          "Drums",
+          "ShiftBitRegisters",
+          "StepCounters",
+          "ScheduleBlocks",
+          "Pids",
+          "MessageBlocks",
+          "FunctionBlocks",
+          "MotionTaskTables",
+          "FastTask",
+          "MastTask",
+          "CpuBehavior",
+          "TraceTimeBase",
+          "UserFunctionPous",
+          "UserFunctionBlockPous",
+          "UserDefineFunctionBlocks"
+        ],
+        "protected_subtrees": [
+          {
+            "typed_exact_including_text_tails_attributes_order": true,
+            "raw_subtree_bytes_equal": true,
+            "bytes": 24116,
+            "sha256": "e4b356c22950df5da97a1c380e150891394bf5b6dc9f7f4b110198e312a4e629",
+            "XML_path": "HardwareConfiguration"
+          },
+          {
+            "typed_exact_including_text_tails_attributes_order": true,
+            "raw_subtree_bytes_equal": true,
+            "bytes": 1033,
+            "sha256": "6d097396da6bee8aa62569c455a60ff721cedb6795c72632bf9c69f86b041271",
+            "XML_path": "SoftwareConfiguration/WatchLists"
+          },
+          {
+            "typed_exact_including_text_tails_attributes_order": true,
+            "raw_subtree_bytes_equal": true,
+            "bytes": 13,
+            "sha256": "e0c8a8bc61d1c478a9b6d03ae4cc79d41cfced39b1f45a2711e7ecedf1352dde",
+            "XML_path": "SoftwareConfiguration/Registers"
+          },
+          {
+            "typed_exact_including_text_tails_attributes_order": true,
+            "raw_subtree_bytes_equal": true,
+            "bytes": 18,
+            "sha256": "cc6fdc77988c1903dd1c32cb2ebe9cd9b5bd4486b2ff49b086bac5c4acb1fcf3",
+            "XML_path": "SoftwareConfiguration/FunctionBlocks"
+          },
+          {
+            "typed_exact_including_text_tails_attributes_order": true,
+            "raw_subtree_bytes_equal": true,
+            "bytes": 55,
+            "sha256": "269e70f688203a19785c68da6bfbe4c4d8b667f984351c780c53a8ac8b20490a",
+            "XML_path": "SoftwareConfiguration/FastTask"
+          },
+          {
+            "typed_exact_including_text_tails_attributes_order": true,
+            "raw_subtree_bytes_equal": true,
+            "bytes": 115,
+            "sha256": "f112cb8ab42e76539df493df791e54c5498cad97be41a27af135148e5d47d975",
+            "XML_path": "SoftwareConfiguration/MastTask"
+          },
+          {
+            "typed_exact_including_text_tails_attributes_order": true,
+            "raw_subtree_bytes_equal": true,
+            "bytes": 215,
+            "sha256": "91263dfd04de54731639f9b1d03ddbc1417d3fed0fdbe72182ac222354060380",
+            "XML_path": "SoftwareConfiguration/CpuBehavior"
+          },
+          {
+            "typed_exact_including_text_tails_attributes_order": true,
+            "raw_subtree_bytes_equal": true,
+            "bytes": 15,
+            "sha256": "e102edfd2e6c72c8b1e6dcd8e165a0e09a1d196cb6a7f201b5aa7c8619926595",
+            "XML_path": "SoftwareConfiguration/Subroutines"
+          },
+          {
+            "typed_exact_including_text_tails_attributes_order": true,
+            "raw_subtree_bytes_equal": true,
+            "bytes": 17,
+            "sha256": "887d036159ad141b3b888557e381bb07016d3a7349fe78820a5cb402b4ba7714",
+            "XML_path": "SoftwareConfiguration/CustomSymbols"
+          }
+        ],
+        "allocations13": [
+          {
+            "tag": "ConstantWordsMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 33,
+            "sha256": "05347cb6c1beb64a20095df04faedc87ba079856d80c93de4f400e8c9263c595",
+            "fields": {}
+          },
+          {
+            "tag": "MemoryBitsMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 140,
+            "sha256": "f396e5aed8dc849b125e7592ea0901fd8246ebf4412c32a1892cfa44d718d17b",
+            "fields": {
+              "Allocation": "Manual",
+              "ForcedCount": "512"
+            }
+          },
+          {
+            "tag": "MemoryWordsMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 143,
+            "sha256": "0565b35e68b63d30cdfb59a6c0119008d8ab77fa9d6c25cf5c1daa55ccd820fb",
+            "fields": {
+              "Allocation": "Manual",
+              "ForcedCount": "2000"
+            }
+          },
+          {
+            "tag": "TimersMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 26,
+            "sha256": "0a2986c88c99c032efb22af5f6ec219e72567c8f29c1887d960432a09f4a9e29",
+            "fields": {}
+          },
+          {
+            "tag": "CountersMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 28,
+            "sha256": "2d3ceda73c6ea8026f1f6dd4b3c5f643e4a9f0759fb603a27d473ebe1864a6ca",
+            "fields": {}
+          },
+          {
+            "tag": "RegistersMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 29,
+            "sha256": "9ff693f2ebc392ee53f0d730479137ba275821b5055d94757dc1d9b8f7dba087",
+            "fields": {}
+          },
+          {
+            "tag": "DrumsMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 25,
+            "sha256": "ff457714d98956075891d8233ab25c8a7e99d7527b633e9596865f3997bafc72",
+            "fields": {}
+          },
+          {
+            "tag": "SbrsMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 24,
+            "sha256": "ec4c89b584b30563d9d11a471e5726a932b7a3b1e1f9aaf3393081839d3aaff9",
+            "fields": {}
+          },
+          {
+            "tag": "ScsMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 23,
+            "sha256": "e1a520b438ee2d42830346e4590131986f8c908983ede985d4a546909ad3111d",
+            "fields": {}
+          },
+          {
+            "tag": "FcsMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 23,
+            "sha256": "4c1fd01c8564e616186d3d9346918af4cbd3bca84649fe534cdea7e166279e27",
+            "fields": {}
+          },
+          {
+            "tag": "SchsMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 24,
+            "sha256": "c60faa773650439c403dadea3bacf2dd5a42e033f8ebb85be0a9055f3c0343b5",
+            "fields": {}
+          },
+          {
+            "tag": "HscsMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 24,
+            "sha256": "5c271fd5a087db5b4ae7f7c363a73bdd2055a1b3406b3324a441fbef689ab1bb",
+            "fields": {}
+          },
+          {
+            "tag": "PtosMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 24,
+            "sha256": "866984b3d63e797db96579b0b2106e0b7303bd145030380bc46e75f67a3ac67b",
+            "fields": {}
+          }
+        ],
+        "all_rung_Name_MainComment_Label_and_instruction_comments_preserved": true,
+        "unowned_rungs_exact_including_existing_graphs": true,
+        "content_delta_counts": {
+          "text:Name": 1,
+          "text:FullName": 1,
+          "added_subtree:LadderEntity": 37,
+          "text:InstructionLine": 6,
+          "text:IsLadderSelected": 4
+        },
+        "content_deltas": [
+          {
+            "path": "ProjectDescriptor/Name[2]",
+            "kind": "text",
+            "before": "register_fifo_canonical_three_ld",
+            "after": "register_fifo_m20_m21_m22_contacts_il_only",
+            "formatting_only": false
+          },
+          {
+            "path": "ProjectDescriptor/FullName[3]",
+            "kind": "text",
+            "before": "P:\\compiler-validation-2026-11-06\\register_fifo_canonical_three_ld.smbp",
+            "after": "P:\\compiler-validation-2026-11-06\\register_fifo_m20_m21_m22_contacts_il_only.smbp",
+            "formatting_only": false
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/LadderElements[0]/LadderEntity[0]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "NormalContact",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "%I0.0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Comment",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/LadderElements[0]/LadderEntity[1]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "1",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/LadderElements[0]/LadderEntity[2]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "2",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/LadderElements[0]/LadderEntity[3]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "3",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/LadderElements[0]/LadderEntity[4]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "4",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/LadderElements[0]/LadderEntity[5]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "5",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/LadderElements[0]/LadderEntity[6]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "6",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/LadderElements[0]/LadderEntity[7]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "7",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/LadderElements[0]/LadderEntity[8]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "8",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/LadderElements[0]/LadderEntity[9]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "9",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/LadderElements[0]/LadderEntity[10]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n            ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Coil",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "%M20",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Comment",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "10",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/InstructionLines[1]/InstructionLineEntity[0]/InstructionLine[0]",
+            "kind": "text",
+            "before": "LD %I0.0",
+            "after": "LD    %I0.0",
+            "formatting_only": false
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/InstructionLines[1]/InstructionLineEntity[1]/InstructionLine[0]",
+            "kind": "text",
+            "before": "ST %M20",
+            "after": "ST    %M20",
+            "formatting_only": false
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/IsLadderSelected[5]",
+            "kind": "text",
+            "before": "false",
+            "after": "true",
+            "formatting_only": false
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/LadderElements[0]/LadderEntity[0]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "NormalContact",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "%I0.1",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Comment",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/LadderElements[0]/LadderEntity[1]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "1",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/LadderElements[0]/LadderEntity[2]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "2",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/LadderElements[0]/LadderEntity[3]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "3",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/LadderElements[0]/LadderEntity[4]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "4",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/LadderElements[0]/LadderEntity[5]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "5",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/LadderElements[0]/LadderEntity[6]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "6",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/LadderElements[0]/LadderEntity[7]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "7",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/LadderElements[0]/LadderEntity[8]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "8",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/LadderElements[0]/LadderEntity[9]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "9",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/LadderElements[0]/LadderEntity[10]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n            ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Coil",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "%M21",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Comment",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "10",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/InstructionLines[1]/InstructionLineEntity[0]/InstructionLine[0]",
+            "kind": "text",
+            "before": "LD %I0.1",
+            "after": "LD    %I0.1",
+            "formatting_only": false
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/InstructionLines[1]/InstructionLineEntity[1]/InstructionLine[0]",
+            "kind": "text",
+            "before": "ST %M21",
+            "after": "ST    %M21",
+            "formatting_only": false
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/IsLadderSelected[5]",
+            "kind": "text",
+            "before": "false",
+            "after": "true",
+            "formatting_only": false
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]/LadderEntity[0]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "NormalContact",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "%I0.2",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Comment",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]/LadderEntity[1]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "1",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]/LadderEntity[2]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "2",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]/LadderEntity[3]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "3",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]/LadderEntity[4]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "4",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]/LadderEntity[5]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "5",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]/LadderEntity[6]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "6",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]/LadderEntity[7]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "7",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]/LadderEntity[8]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "8",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]/LadderEntity[9]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "9",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]/LadderEntity[10]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n            ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Coil",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "%M22",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Comment",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "10",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/InstructionLines[1]/InstructionLineEntity[0]/InstructionLine[0]",
+            "kind": "text",
+            "before": "LD %I0.2",
+            "after": "LD    %I0.2",
+            "formatting_only": false
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/InstructionLines[1]/InstructionLineEntity[1]/InstructionLine[0]",
+            "kind": "text",
+            "before": "ST %M22",
+            "after": "ST    %M22",
+            "formatting_only": false
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/IsLadderSelected[5]",
+            "kind": "text",
+            "before": "false",
+            "after": "true",
+            "formatting_only": false
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/LadderElements[0]/LadderEntity[0]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "NormalContact",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "%M20",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Comment",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/LadderElements[0]/LadderEntity[1]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "NormalContact",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "%M21",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Comment",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "1",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/LadderElements[0]/LadderEntity[2]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "NormalContact",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "%M22",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Comment",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "2",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/LadderElements[0]/LadderEntity[3]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n            ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Register",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "%R0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Comment",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "1",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/IsLadderSelected[5]",
+            "kind": "text",
+            "before": "false",
+            "after": "true",
+            "formatting_only": false
+          }
+        ],
+        "indentation_only_deltas": [
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]",
+            "kind": "text",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/LadderElements[0]",
+            "kind": "text",
+            "before": "",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/LadderElements[0]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/InstructionLines[1]",
+            "kind": "text",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/InstructionLines[1]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/InstructionLines[1]/InstructionLineEntity[0]",
+            "kind": "text",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/InstructionLines[1]/InstructionLineEntity[0]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/InstructionLines[1]/InstructionLineEntity[0]/InstructionLine[0]",
+            "kind": "tail",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/InstructionLines[1]/InstructionLineEntity[0]/Comment[1]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/InstructionLines[1]/InstructionLineEntity[1]",
+            "kind": "text",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/InstructionLines[1]/InstructionLineEntity[1]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/InstructionLines[1]/InstructionLineEntity[1]/InstructionLine[0]",
+            "kind": "tail",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/InstructionLines[1]/InstructionLineEntity[1]/Comment[1]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/Name[2]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/MainComment[3]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/Label[4]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[3]/IsLadderSelected[5]",
+            "kind": "tail",
+            "before": "\n",
+            "after": "\n          ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]",
+            "kind": "text",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/LadderElements[0]",
+            "kind": "text",
+            "before": "",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/LadderElements[0]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/InstructionLines[1]",
+            "kind": "text",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/InstructionLines[1]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/InstructionLines[1]/InstructionLineEntity[0]",
+            "kind": "text",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/InstructionLines[1]/InstructionLineEntity[0]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/InstructionLines[1]/InstructionLineEntity[0]/InstructionLine[0]",
+            "kind": "tail",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/InstructionLines[1]/InstructionLineEntity[0]/Comment[1]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/InstructionLines[1]/InstructionLineEntity[1]",
+            "kind": "text",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/InstructionLines[1]/InstructionLineEntity[1]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/InstructionLines[1]/InstructionLineEntity[1]/InstructionLine[0]",
+            "kind": "tail",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/InstructionLines[1]/InstructionLineEntity[1]/Comment[1]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/Name[2]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/MainComment[3]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/Label[4]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[4]/IsLadderSelected[5]",
+            "kind": "tail",
+            "before": "\n",
+            "after": "\n          ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]",
+            "kind": "text",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]",
+            "kind": "text",
+            "before": "",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/InstructionLines[1]",
+            "kind": "text",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/InstructionLines[1]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/InstructionLines[1]/InstructionLineEntity[0]",
+            "kind": "text",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/InstructionLines[1]/InstructionLineEntity[0]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/InstructionLines[1]/InstructionLineEntity[0]/InstructionLine[0]",
+            "kind": "tail",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/InstructionLines[1]/InstructionLineEntity[0]/Comment[1]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/InstructionLines[1]/InstructionLineEntity[1]",
+            "kind": "text",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/InstructionLines[1]/InstructionLineEntity[1]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/InstructionLines[1]/InstructionLineEntity[1]/InstructionLine[0]",
+            "kind": "tail",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/InstructionLines[1]/InstructionLineEntity[1]/Comment[1]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/Name[2]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/MainComment[3]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/Label[4]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/IsLadderSelected[5]",
+            "kind": "tail",
+            "before": "\n",
+            "after": "\n          ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]",
+            "kind": "text",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/LadderElements[0]",
+            "kind": "text",
+            "before": "",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/LadderElements[0]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]",
+            "kind": "text",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[0]",
+            "kind": "text",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[0]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[0]/InstructionLine[0]",
+            "kind": "tail",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[0]/Comment[1]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[1]",
+            "kind": "text",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[1]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[1]/InstructionLine[0]",
+            "kind": "tail",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[1]/Comment[1]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[2]",
+            "kind": "text",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[2]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[2]/InstructionLine[0]",
+            "kind": "tail",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[2]/Comment[1]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[3]",
+            "kind": "text",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[3]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[3]/InstructionLine[0]",
+            "kind": "tail",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[3]/Comment[1]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[4]",
+            "kind": "text",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[4]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[4]/InstructionLine[0]",
+            "kind": "tail",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[4]/Comment[1]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[5]",
+            "kind": "text",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[5]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[5]/InstructionLine[0]",
+            "kind": "tail",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[5]/Comment[1]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[6]",
+            "kind": "text",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[6]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[6]/InstructionLine[0]",
+            "kind": "tail",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[6]/Comment[1]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[7]",
+            "kind": "text",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[7]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[7]/InstructionLine[0]",
+            "kind": "tail",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[7]/Comment[1]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/Name[2]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/MainComment[3]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/Label[4]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/IsLadderSelected[5]",
+            "kind": "tail",
+            "before": "\n",
+            "after": "\n          ",
+            "formatting_only": true
+          }
+        ]
+      },
+      "metadata_review": {
+        "candidate_root_identity_preserved_source": true,
+        "saved_root_Name": "register_fifo_m20_m21_m22_contacts_il_only",
+        "saved_root_FullName": "P:\\compiler-validation-2026-11-06\\register_fifo_m20_m21_m22_contacts_il_only.smbp",
+        "saved_name_tracks_writable_working_candidate_not_preserved_clone_basename": true,
+        "changed_rung_comments_preserved": [
+          "Hand-built IL-only binding diagnostic; native M-contact acceptance pending; not compiler output",
+          "Hand-built IL-only binding diagnostic; native M-contact acceptance pending; not compiler output",
+          "Hand-built IL-only binding diagnostic; native M-contact acceptance pending; not compiler output",
+          "IL-only evaluation probe; native binding and behavior pending"
+        ],
+        "preparation_pending_words_are_historical_comments_not_runtime_proof": true,
+        "saved_clone_hash_not_original_candidate_hash": true,
+        "save_record_snapshot": {
+          "path": "output/reports/native-m-contact-readback-independent-review-2026-11-06/fifo-save-record-snapshot.json",
+          "bytes": 1653,
+          "sha256": "3913f77932549d5e051c9b0e6633a0e8d2003c002bcc4259feda7b824743833b"
+        },
+        "fresh_reopen_pending_at_snapshot": false
+      },
+      "limits": [
+        "Independent XML/readback audit only; root alone owns editor acceptance observations.",
+        "Hand-built diagnostic, not genuine compiler product.",
+        "No simulator/RUN/transaction/physical proof or new compiler gate admission.",
+        "Current standalone graph codecs still close over direct I contacts; exact M observations are follow-up evidence, not implemented support."
+      ],
+      "root_save_record": {
+        "path": "output/editor-validation/native-m-contact-bindings-2026-11-06/observed/fifo/save-record.json",
+        "bytes": 1653,
+        "sha256": "3913f77932549d5e051c9b0e6633a0e8d2003c002bcc4259feda7b824743833b"
+      },
+      "exact_root_save_record": {
+        "source": "output/editor-validation/native-m-contact-bindings-2026-11-06/register_fifo_m20_m21_m22_contacts_il_only.smbp",
+        "saved": "output/editor-validation/native-m-contact-bindings-2026-11-06/observed/fifo/register_fifo_m_contacts_editor_saved.smbp",
+        "bytes": 117097,
+        "sha256": "e05bf55077084557c9cc11a5237cdb677611c9cedff3cf22f921f19716932639",
+        "all_lexical_IL_equal": true,
+        "all9_rungs_Ladder_selected": true,
+        "block_graph_entities": [
+          {
+            "ElementType": "NormalContact",
+            "Descriptor": "%M20",
+            "Comment": "",
+            "Row": "0",
+            "Column": "0",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "NormalContact",
+            "Descriptor": "%M21",
+            "Comment": "",
+            "Row": "1",
+            "Column": "0",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "NormalContact",
+            "Descriptor": "%M22",
+            "Comment": "",
+            "Row": "2",
+            "Column": "0",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "Register",
+            "Descriptor": "%R0",
+            "Comment": "",
+            "Row": "0",
+            "Column": "1",
+            "ChosenConnection": "Left"
+          }
+        ],
+        "fresh_reopen_pending": false,
+        "not_compiler_output": true,
+        "runtime_not_tested": true,
+        "fresh_reopen_Programming_status": "No error / Not Connected",
+        "fresh_reopen_after": "subroutine_sr0_m20_editor_saved",
+        "fresh_reopen_root_personally_viewed": true,
+        "fresh_reopen_capture": {
+          "path": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793976893450357000-2146.png",
+          "bytes": 400281,
+          "sha256": "da9ae36480c1cfd2ed487551d4f0db81ea7e9fbcf6c3525f4db6003b556a17db"
+        }
+      },
+      "independent_readback_record": {
+        "path": "output/reports/native-m-contact-readback-independent-review-2026-11-06/fifo-readback.json",
+        "bytes": 159434,
+        "sha256": "a631b14ab6d4e272ba5d081c1a7437b0c6979171642e312bddde4bdc2f099c3c"
+      },
+      "raw_XML_inputs": {
+        "source": {
+          "CRLF_only": true,
+          "UTF8_BOM": true,
+          "XML_declaration": "<?xml version=\"1.0\" encoding=\"utf-8\"?>",
+          "comments_or_DOCTYPE_or_extra_processing_instructions": false
+        },
+        "candidate": {
+          "CRLF_only": true,
+          "UTF8_BOM": true,
+          "XML_declaration": "<?xml version=\"1.0\" encoding=\"utf-8\"?>",
+          "comments_or_DOCTYPE_or_extra_processing_instructions": false
+        },
+        "saved": {
+          "CRLF_only": true,
+          "UTF8_BOM": true,
+          "XML_declaration": "<?xml version=\"1.0\" encoding=\"utf-8\"?>",
+          "comments_or_DOCTYPE_or_extra_processing_instructions": false
+        }
+      }
+    },
+    {
+      "case": "sr0",
+      "source": {
+        "path": "output/editor-validation/native-subroutines-2026-11-06/observed/sr0/subroutine_sr0_editor_saved.smbp",
+        "bytes": 137327,
+        "sha256": "49438bcbed59cde889547869d8c033f377dfb7e60153136a57cb48e135b0e21a"
+      },
+      "candidate": {
+        "path": "output/editor-validation/native-m-contact-bindings-2026-11-06/subroutine_sr0_m20_contact_il_only.smbp",
+        "bytes": 134651,
+        "sha256": "33bc2a5e4fa48c72761271f4333fa0158da0af651dba1aa7e6182bad3c1f8c72"
+      },
+      "saved": {
+        "path": "output/editor-validation/native-m-contact-bindings-2026-11-06/observed/sr0/subroutine_sr0_m20_editor_saved.smbp",
+        "bytes": 141240,
+        "sha256": "b850091e79c974dec8be14de36694428091d5a82ad6257a6ddfe5f1d882cc692"
+      },
+      "source_to_candidate": {
+        "single_raw_byte_span_only": true,
+        "exact_raw_restoration_to_source": true,
+        "exact_typed_restoration_to_source": true,
+        "span_start": 21159,
+        "span_end": 24989,
+        "replacement_bytes": 1154,
+        "inserted_snapshot_pairs": [
+          [
+            0,
+            20
+          ]
+        ]
+      },
+      "candidate_to_saved": {
+        "literal_expected_whole_tree_equal_ignoring_only_whitespace_indentation": true,
+        "all_lexical_IL_equal": true,
+        "master_rungs": 11,
+        "master_IL": 30,
+        "all_project_rungs": 14,
+        "all_project_IL": 39,
+        "all_saved_rungs_Ladder_selected": true,
+        "changed_master_rungs": [
+          5,
+          6
+        ],
+        "graph_counts_by_master_rung": [
+          11,
+          11,
+          11,
+          11,
+          11,
+          11,
+          11,
+          11,
+          11,
+          12,
+          11
+        ],
+        "native_body_graph": [
+          {
+            "ElementType": "NormalContact",
+            "Descriptor": "%M20",
+            "Comment": "",
+            "Row": "0",
+            "Column": "0",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "Line",
+            "Descriptor": "",
+            "Row": "0",
+            "Column": "1",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "Line",
+            "Descriptor": "",
+            "Row": "0",
+            "Column": "2",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "Line",
+            "Descriptor": "",
+            "Row": "0",
+            "Column": "3",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "Line",
+            "Descriptor": "",
+            "Row": "0",
+            "Column": "4",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "Line",
+            "Descriptor": "",
+            "Row": "0",
+            "Column": "5",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "Line",
+            "Descriptor": "",
+            "Row": "0",
+            "Column": "6",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "Line",
+            "Descriptor": "",
+            "Row": "0",
+            "Column": "7",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "Line",
+            "Descriptor": "",
+            "Row": "0",
+            "Column": "8",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "Line",
+            "Descriptor": "",
+            "Row": "0",
+            "Column": "9",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "Jump",
+            "Descriptor": "SR0",
+            "Row": "0",
+            "Column": "10",
+            "ChosenConnection": "Left"
+          }
+        ],
+        "all_non_Pous_software_children_exact": [
+          "Subroutines",
+          "WatchLists",
+          "CustomSymbols",
+          "ConstantWordsMemoryAllocation",
+          "MemoryBitsMemoryAllocation",
+          "MemoryWordsMemoryAllocation",
+          "TimersMemoryAllocation",
+          "CountersMemoryAllocation",
+          "RegistersMemoryAllocation",
+          "DrumsMemoryAllocation",
+          "SbrsMemoryAllocation",
+          "ScsMemoryAllocation",
+          "FcsMemoryAllocation",
+          "SchsMemoryAllocation",
+          "HscsMemoryAllocation",
+          "PtosMemoryAllocation",
+          "MemoryBits",
+          "SystemBits",
+          "SystemWords",
+          "GrafcetSteps",
+          "MemoryWords",
+          "MemoryDoubleWords",
+          "MemoryFloats",
+          "ConstantWords",
+          "ConstantDoubleWords",
+          "ConstantMemoryFloats",
+          "Timers",
+          "Counters",
+          "FastCounters",
+          "Registers",
+          "Drums",
+          "ShiftBitRegisters",
+          "StepCounters",
+          "ScheduleBlocks",
+          "Pids",
+          "MessageBlocks",
+          "FunctionBlocks",
+          "MotionTaskTables",
+          "FastTask",
+          "MastTask",
+          "CpuBehavior",
+          "TraceTimeBase",
+          "UserFunctionPous",
+          "UserFunctionBlockPous",
+          "UserDefineFunctionBlocks"
+        ],
+        "protected_subtrees": [
+          {
+            "typed_exact_including_text_tails_attributes_order": true,
+            "raw_subtree_bytes_equal": true,
+            "bytes": 24116,
+            "sha256": "e4b356c22950df5da97a1c380e150891394bf5b6dc9f7f4b110198e312a4e629",
+            "XML_path": "HardwareConfiguration"
+          },
+          {
+            "typed_exact_including_text_tails_attributes_order": true,
+            "raw_subtree_bytes_equal": true,
+            "bytes": 813,
+            "sha256": "3a41ba0a63c7bd4d5d55e129ea5764e10e641976da7d340b6faf90563813c101",
+            "XML_path": "SoftwareConfiguration/WatchLists"
+          },
+          {
+            "typed_exact_including_text_tails_attributes_order": true,
+            "raw_subtree_bytes_equal": true,
+            "bytes": 13,
+            "sha256": "e0c8a8bc61d1c478a9b6d03ae4cc79d41cfced39b1f45a2711e7ecedf1352dde",
+            "XML_path": "SoftwareConfiguration/Registers"
+          },
+          {
+            "typed_exact_including_text_tails_attributes_order": true,
+            "raw_subtree_bytes_equal": true,
+            "bytes": 18,
+            "sha256": "cc6fdc77988c1903dd1c32cb2ebe9cd9b5bd4486b2ff49b086bac5c4acb1fcf3",
+            "XML_path": "SoftwareConfiguration/FunctionBlocks"
+          },
+          {
+            "typed_exact_including_text_tails_attributes_order": true,
+            "raw_subtree_bytes_equal": true,
+            "bytes": 55,
+            "sha256": "269e70f688203a19785c68da6bfbe4c4d8b667f984351c780c53a8ac8b20490a",
+            "XML_path": "SoftwareConfiguration/FastTask"
+          },
+          {
+            "typed_exact_including_text_tails_attributes_order": true,
+            "raw_subtree_bytes_equal": true,
+            "bytes": 115,
+            "sha256": "f112cb8ab42e76539df493df791e54c5498cad97be41a27af135148e5d47d975",
+            "XML_path": "SoftwareConfiguration/MastTask"
+          },
+          {
+            "typed_exact_including_text_tails_attributes_order": true,
+            "raw_subtree_bytes_equal": true,
+            "bytes": 215,
+            "sha256": "91263dfd04de54731639f9b1d03ddbc1417d3fed0fdbe72182ac222354060380",
+            "XML_path": "SoftwareConfiguration/CpuBehavior"
+          },
+          {
+            "typed_exact_including_text_tails_attributes_order": true,
+            "raw_subtree_bytes_equal": true,
+            "bytes": 12828,
+            "sha256": "32ff9a88abe3c7d284869b19d304f127d99953b1daae84d1b25c4286a43f72eb",
+            "XML_path": "SoftwareConfiguration/Subroutines"
+          },
+          {
+            "typed_exact_including_text_tails_attributes_order": true,
+            "raw_subtree_bytes_equal": true,
+            "bytes": 17,
+            "sha256": "887d036159ad141b3b888557e381bb07016d3a7349fe78820a5cb402b4ba7714",
+            "XML_path": "SoftwareConfiguration/CustomSymbols"
+          }
+        ],
+        "allocations13": [
+          {
+            "tag": "ConstantWordsMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 33,
+            "sha256": "05347cb6c1beb64a20095df04faedc87ba079856d80c93de4f400e8c9263c595",
+            "fields": {}
+          },
+          {
+            "tag": "MemoryBitsMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 140,
+            "sha256": "f396e5aed8dc849b125e7592ea0901fd8246ebf4412c32a1892cfa44d718d17b",
+            "fields": {
+              "Allocation": "Manual",
+              "ForcedCount": "512"
+            }
+          },
+          {
+            "tag": "MemoryWordsMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 143,
+            "sha256": "0565b35e68b63d30cdfb59a6c0119008d8ab77fa9d6c25cf5c1daa55ccd820fb",
+            "fields": {
+              "Allocation": "Manual",
+              "ForcedCount": "2000"
+            }
+          },
+          {
+            "tag": "TimersMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 26,
+            "sha256": "0a2986c88c99c032efb22af5f6ec219e72567c8f29c1887d960432a09f4a9e29",
+            "fields": {}
+          },
+          {
+            "tag": "CountersMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 28,
+            "sha256": "2d3ceda73c6ea8026f1f6dd4b3c5f643e4a9f0759fb603a27d473ebe1864a6ca",
+            "fields": {}
+          },
+          {
+            "tag": "RegistersMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 29,
+            "sha256": "9ff693f2ebc392ee53f0d730479137ba275821b5055d94757dc1d9b8f7dba087",
+            "fields": {}
+          },
+          {
+            "tag": "DrumsMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 25,
+            "sha256": "ff457714d98956075891d8233ab25c8a7e99d7527b633e9596865f3997bafc72",
+            "fields": {}
+          },
+          {
+            "tag": "SbrsMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 24,
+            "sha256": "ec4c89b584b30563d9d11a471e5726a932b7a3b1e1f9aaf3393081839d3aaff9",
+            "fields": {}
+          },
+          {
+            "tag": "ScsMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 23,
+            "sha256": "e1a520b438ee2d42830346e4590131986f8c908983ede985d4a546909ad3111d",
+            "fields": {}
+          },
+          {
+            "tag": "FcsMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 23,
+            "sha256": "4c1fd01c8564e616186d3d9346918af4cbd3bca84649fe534cdea7e166279e27",
+            "fields": {}
+          },
+          {
+            "tag": "SchsMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 24,
+            "sha256": "c60faa773650439c403dadea3bacf2dd5a42e033f8ebb85be0a9055f3c0343b5",
+            "fields": {}
+          },
+          {
+            "tag": "HscsMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 24,
+            "sha256": "5c271fd5a087db5b4ae7f7c363a73bdd2055a1b3406b3324a441fbef689ab1bb",
+            "fields": {}
+          },
+          {
+            "tag": "PtosMemoryAllocation",
+            "raw_bytes_equal": true,
+            "typed_exact": true,
+            "bytes": 24,
+            "sha256": "866984b3d63e797db96579b0b2106e0b7303bd145030380bc46e75f67a3ac67b",
+            "fields": {}
+          }
+        ],
+        "all_rung_Name_MainComment_Label_and_instruction_comments_preserved": true,
+        "unowned_rungs_exact_including_existing_graphs": true,
+        "content_delta_counts": {
+          "text:Name": 1,
+          "text:FullName": 1,
+          "added_subtree:LadderEntity": 22,
+          "text:InstructionLine": 2,
+          "text:IsLadderSelected": 2
+        },
+        "content_deltas": [
+          {
+            "path": "ProjectDescriptor/Name[2]",
+            "kind": "text",
+            "before": "subroutine_sr0_watch3",
+            "after": "subroutine_sr0_m20_contact_il_only",
+            "formatting_only": false
+          },
+          {
+            "path": "ProjectDescriptor/FullName[3]",
+            "kind": "text",
+            "before": "P:\\compiler-validation-2026-11-06\\subroutine_sr0_watch3.smbp",
+            "after": "P:\\compiler-validation-2026-11-06\\subroutine_sr0_m20_contact_il_only.smbp",
+            "formatting_only": false
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]/LadderEntity[0]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "NormalContact",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "%I0.0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Comment",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]/LadderEntity[1]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "1",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]/LadderEntity[2]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "2",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]/LadderEntity[3]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "3",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]/LadderEntity[4]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "4",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]/LadderEntity[5]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "5",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]/LadderEntity[6]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "6",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]/LadderEntity[7]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "7",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]/LadderEntity[8]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "8",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]/LadderEntity[9]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "9",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]/LadderEntity[10]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n            ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Coil",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "%M20",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Comment",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "10",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/InstructionLines[1]/InstructionLineEntity[0]/InstructionLine[0]",
+            "kind": "text",
+            "before": "LD %I0.0",
+            "after": "LD    %I0.0",
+            "formatting_only": false
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/InstructionLines[1]/InstructionLineEntity[1]/InstructionLine[0]",
+            "kind": "text",
+            "before": "ST %M20",
+            "after": "ST    %M20",
+            "formatting_only": false
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/IsLadderSelected[5]",
+            "kind": "text",
+            "before": "false",
+            "after": "true",
+            "formatting_only": false
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/LadderElements[0]/LadderEntity[0]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "NormalContact",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "%M20",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Comment",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/LadderElements[0]/LadderEntity[1]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "1",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/LadderElements[0]/LadderEntity[2]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "2",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/LadderElements[0]/LadderEntity[3]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "3",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/LadderElements[0]/LadderEntity[4]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "4",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/LadderElements[0]/LadderEntity[5]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "5",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/LadderElements[0]/LadderEntity[6]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "6",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/LadderElements[0]/LadderEntity[7]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "7",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/LadderElements[0]/LadderEntity[8]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "8",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/LadderElements[0]/LadderEntity[9]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n              ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Line",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "9",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left, Right",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/LadderElements[0]/LadderEntity[10]",
+            "kind": "added_subtree",
+            "before": null,
+            "after": [
+              "LadderEntity",
+              [],
+              "\n                ",
+              "\n            ",
+              [
+                [
+                  "ElementType",
+                  [],
+                  "Jump",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Descriptor",
+                  [],
+                  "SR0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Row",
+                  [],
+                  "0",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "Column",
+                  [],
+                  "10",
+                  "\n                ",
+                  []
+                ],
+                [
+                  "ChosenConnection",
+                  [],
+                  "Left",
+                  "\n              ",
+                  []
+                ]
+              ]
+            ]
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/IsLadderSelected[5]",
+            "kind": "text",
+            "before": "false",
+            "after": "true",
+            "formatting_only": false
+          }
+        ],
+        "indentation_only_deltas": [
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]",
+            "kind": "text",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]",
+            "kind": "text",
+            "before": "",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/LadderElements[0]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/InstructionLines[1]",
+            "kind": "text",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/InstructionLines[1]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/InstructionLines[1]/InstructionLineEntity[0]",
+            "kind": "text",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/InstructionLines[1]/InstructionLineEntity[0]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/InstructionLines[1]/InstructionLineEntity[0]/InstructionLine[0]",
+            "kind": "tail",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/InstructionLines[1]/InstructionLineEntity[0]/Comment[1]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/InstructionLines[1]/InstructionLineEntity[1]",
+            "kind": "text",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/InstructionLines[1]/InstructionLineEntity[1]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/InstructionLines[1]/InstructionLineEntity[1]/InstructionLine[0]",
+            "kind": "tail",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/InstructionLines[1]/InstructionLineEntity[1]/Comment[1]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/Name[2]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/MainComment[3]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/Label[4]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[5]/IsLadderSelected[5]",
+            "kind": "tail",
+            "before": "\n",
+            "after": "\n          ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]",
+            "kind": "text",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/LadderElements[0]",
+            "kind": "text",
+            "before": "",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/LadderElements[0]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]",
+            "kind": "text",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[0]",
+            "kind": "text",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[0]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[0]/InstructionLine[0]",
+            "kind": "tail",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[0]/Comment[1]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[1]",
+            "kind": "text",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[1]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[1]/InstructionLine[0]",
+            "kind": "tail",
+            "before": "\n      ",
+            "after": "\n                ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/InstructionLines[1]/InstructionLineEntity[1]/Comment[1]",
+            "kind": "tail",
+            "before": "\n    ",
+            "after": "\n              ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/Name[2]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/MainComment[3]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/Label[4]",
+            "kind": "tail",
+            "before": "\n  ",
+            "after": "\n            ",
+            "formatting_only": true
+          },
+          {
+            "path": "ProjectDescriptor/SoftwareConfiguration[5]/Pous[0]/ProgramOrganizationUnits[0]/Rungs[2]/RungEntity[6]/IsLadderSelected[5]",
+            "kind": "tail",
+            "before": "\n",
+            "after": "\n          ",
+            "formatting_only": true
+          }
+        ]
+      },
+      "metadata_review": {
+        "candidate_root_identity_preserved_source": true,
+        "saved_root_Name": "subroutine_sr0_m20_contact_il_only",
+        "saved_root_FullName": "P:\\compiler-validation-2026-11-06\\subroutine_sr0_m20_contact_il_only.smbp",
+        "saved_name_tracks_writable_working_candidate_not_preserved_clone_basename": true,
+        "changed_rung_comments_preserved": [
+          "Hand-built IL-only binding diagnostic; native M-contact acceptance pending; not compiler output",
+          "IL-only native SR diagnostic; native graph/save/reopen/runtime proof pending"
+        ],
+        "preparation_pending_words_are_historical_comments_not_runtime_proof": true,
+        "saved_clone_hash_not_original_candidate_hash": true,
+        "save_record_snapshot": {
+          "path": "output/reports/native-m-contact-readback-independent-review-2026-11-06/sr0-save-record-snapshot.json",
+          "bytes": 2572,
+          "sha256": "152c67f82aafd765b38a1f66588bee90a7139b6fc308b3addeed9bfe2de276c1"
+        },
+        "fresh_reopen_pending_at_snapshot": false
+      },
+      "limits": [
+        "Independent XML/readback audit only; root alone owns editor acceptance observations.",
+        "Hand-built diagnostic, not genuine compiler product.",
+        "No simulator/RUN/transaction/physical proof or new compiler gate admission.",
+        "Current standalone graph codecs still close over direct I contacts; exact M observations are follow-up evidence, not implemented support."
+      ],
+      "root_save_record": {
+        "path": "output/editor-validation/native-m-contact-bindings-2026-11-06/observed/sr0/save-record.json",
+        "bytes": 2572,
+        "sha256": "152c67f82aafd765b38a1f66588bee90a7139b6fc308b3addeed9bfe2de276c1"
+      },
+      "exact_root_save_record": {
+        "source": "output/editor-validation/native-m-contact-bindings-2026-11-06/subroutine_sr0_m20_contact_il_only.smbp",
+        "saved": "output/editor-validation/native-m-contact-bindings-2026-11-06/observed/sr0/subroutine_sr0_m20_editor_saved.smbp",
+        "bytes": 141240,
+        "sha256": "b850091e79c974dec8be14de36694428091d5a82ad6257a6ddfe5f1d882cc692",
+        "all_lexical_IL_equal": true,
+        "all14_rungs_Ladder_selected": true,
+        "call_graph_entities": [
+          {
+            "ElementType": "NormalContact",
+            "Descriptor": "%M20",
+            "Comment": "",
+            "Row": "0",
+            "Column": "0",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "Line",
+            "Descriptor": "",
+            "Row": "0",
+            "Column": "1",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "Line",
+            "Descriptor": "",
+            "Row": "0",
+            "Column": "2",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "Line",
+            "Descriptor": "",
+            "Row": "0",
+            "Column": "3",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "Line",
+            "Descriptor": "",
+            "Row": "0",
+            "Column": "4",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "Line",
+            "Descriptor": "",
+            "Row": "0",
+            "Column": "5",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "Line",
+            "Descriptor": "",
+            "Row": "0",
+            "Column": "6",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "Line",
+            "Descriptor": "",
+            "Row": "0",
+            "Column": "7",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "Line",
+            "Descriptor": "",
+            "Row": "0",
+            "Column": "8",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "Line",
+            "Descriptor": "",
+            "Row": "0",
+            "Column": "9",
+            "ChosenConnection": "Left, Right"
+          },
+          {
+            "ElementType": "Jump",
+            "Descriptor": "SR0",
+            "Row": "0",
+            "Column": "10",
+            "ChosenConnection": "Left"
+          }
+        ],
+        "fresh_reopen_pending": false,
+        "not_compiler_output": true,
+        "runtime_not_tested": true,
+        "fresh_reopen_Programming_status": "No error / Not Connected",
+        "fresh_reopen_after": "register_fifo_m20_m21_m22_contacts_il_only",
+        "fresh_reopen_root_personally_viewed": true,
+        "fresh_reopen_capture": {
+          "path": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793976816369933000-2146.png",
+          "bytes": 390379,
+          "sha256": "40f058793b16b52fbf3f1e14e8e1ce1993b3a22e7da811aa568e66229cdab746"
+        }
+      },
+      "independent_readback_record": {
+        "path": "output/reports/native-m-contact-readback-independent-review-2026-11-06/sr0-readback.json",
+        "bytes": 85849,
+        "sha256": "9f95011ba8f0b4ec0ab9c8e138449c1b24e27c35ec15345d397621d0ce29f0d9"
+      },
+      "raw_XML_inputs": {
+        "source": {
+          "CRLF_only": true,
+          "UTF8_BOM": true,
+          "XML_declaration": "<?xml version=\"1.0\" encoding=\"utf-8\"?>",
+          "comments_or_DOCTYPE_or_extra_processing_instructions": false
+        },
+        "candidate": {
+          "CRLF_only": true,
+          "UTF8_BOM": true,
+          "XML_declaration": "<?xml version=\"1.0\" encoding=\"utf-8\"?>",
+          "comments_or_DOCTYPE_or_extra_processing_instructions": false
+        },
+        "saved": {
+          "CRLF_only": true,
+          "UTF8_BOM": true,
+          "XML_declaration": "<?xml version=\"1.0\" encoding=\"utf-8\"?>",
+          "comments_or_DOCTYPE_or_extra_processing_instructions": false
+        }
+      }
+    }
+  ],
+  "public_PNGs": [
+    {
+      "case": "fifo",
+      "stage": "actual saved native full binding graph",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793976725389805000-2146.png",
+      "path": "docs/validation/editor-evidence/native-m-contact/fifo-m-contacts-saved-graph.png",
+      "bytes": 387030,
+      "sha256": "52d32ccc3acef1245a5bdc6c91aecc9969b5cb4c69a43d0a07e5f390d52ac199",
+      "root_personally_viewed": true,
+      "independently_visually_reviewed": true,
+      "visible_status": "No error / Not Connected",
+      "transformation": "None; exact filesystem byte copy"
+    },
+    {
+      "case": "fifo",
+      "stage": "fresh saved-clone Programming reopen after another project",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793976893450357000-2146.png",
+      "path": "docs/validation/editor-evidence/native-m-contact/fifo-m-contacts-reopen.png",
+      "bytes": 400281,
+      "sha256": "da9ae36480c1cfd2ed487551d4f0db81ea7e9fbcf6c3525f4db6003b556a17db",
+      "root_personally_viewed": true,
+      "independently_visually_reviewed": true,
+      "visible_status": "No error / Not Connected",
+      "transformation": "None; exact filesystem byte copy"
+    },
+    {
+      "case": "sr0",
+      "stage": "actual saved native full binding graph",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793976585228067000-2146.png",
+      "path": "docs/validation/editor-evidence/native-m-contact/sr0-m20-saved-graph.png",
+      "bytes": 394426,
+      "sha256": "8438560cdb9866062b6f27af0a9eebafabfe291797c86bb7ec7f2f598bb7f9d8",
+      "root_personally_viewed": true,
+      "independently_visually_reviewed": true,
+      "visible_status": "No error / Not Connected",
+      "transformation": "None; exact filesystem byte copy"
+    },
+    {
+      "case": "sr0",
+      "stage": "fresh saved-clone Programming reopen after another project",
+      "source": "/Users/tommy/Offline/plc-mac-lab/logs/skill-1793976816369933000-2146.png",
+      "path": "docs/validation/editor-evidence/native-m-contact/sr0-m20-reopen.png",
+      "bytes": 390379,
+      "sha256": "40f058793b16b52fbf3f1e14e8e1ce1993b3a22e7da811aa568e66229cdab746",
+      "root_personally_viewed": true,
+      "independently_visually_reviewed": true,
+      "visible_status": "No error / Not Connected",
+      "transformation": "None; exact filesystem byte copy"
+    }
+  ],
+  "public_PNG_count": 4,
+  "unique_public_PNG_hash_count": 4,
+  "journal": {
+    "record": {
+      "path": "output/editor-validation/native-m-contact-bindings-2026-11-06/runtime-actions.jsonl",
+      "bytes": 7132,
+      "sha256": "df2ce88295144819acddc4ff958d384d9d1742ea1d4061e0554ccbe4b1ff39f7"
+    },
+    "recorded_complete_full_argument_entries": 11,
+    "all_exit0": true,
+    "included_labels": [
+      "SR-M-Programming",
+      "SR-M-select-IL",
+      "SR-M-convert-master",
+      "SR-M-save",
+      "SR-M-call-graph",
+      "FIFO-M-Programming",
+      "FIFO-M-convert-master",
+      "FIFO-M-save",
+      "FIFO-M-block-graph",
+      "SR-M-fresh-reopen-Programming",
+      "FIFO-M-fresh-reopen-Programming"
+    ],
+    "scope": "Recorded static UI operations; the historical runtime-actions filename does not assert simulator execution"
+  },
+  "comparison_method": {
+    "source_to_candidate": "Independent byte-prefix/suffix and raw restoration proof for one changed RungEntity span; typed restoration after removing inserted snapshots and reinstating source rung",
+    "candidate_to_saved": "Build a literal expected copy using fixed graph geometry/operands, exact working-file identities and LD/ST spacing; compare whole typed tree including attributes, child order and significant text/tails; retain all indentation-only text/tail differences separately",
+    "protected_configuration": "Every non-Pous SoftwareConfiguration child exact; nine named protected subtrees and all13 allocations additionally raw-byte identical",
+    "unexplained_deltas": []
+  },
+  "metadata_notes": [
+    "Name/FullName update to writable candidate identity; preserving a saved clone under another basename does not rewrite those fields.",
+    "Rung Names/MainComments/Labels and instruction comments retain identical values. Indentation tails on converted rungs change and are recorded.",
+    "Preparation comments/manifest pending flags are historical author text, not executable authority or an updated runtime record.",
+    "FIFO Registers container remains empty as in the authentic source; native saved graph view displays Type FIFO. No new serialized mode is invented.",
+    "No C++ source-origin or genuine-product claim applies to these hand-built diagnostics."
+  ],
+  "reviewer_helper_history": {
+    "initial_indentation_failure": {
+      "path": "output/reports/native-m-contact-readback-independent-review-2026-11-06/initial-reviewer-indentation-assumption.log",
+      "bytes": 521,
+      "sha256": "fe18f24b477f5cdc7696192a14ed6f0d490cd900f59221f5c9801f4eaca35a24"
+    },
+    "cause": "Helper required unchanged indentation-only metadata tail bytes; scalar values were equal",
+    "correction": "Compare significant metadata values and retain every exact whitespace delta",
+    "XML_format_check_initial_BOM_assumption": {
+      "path": "output/reports/native-m-contact-readback-independent-review-2026-11-06/initial-reviewer-BOM-assumption.log",
+      "bytes": 358,
+      "sha256": "f3e251037cae87a6723c41506031e6f4139220d90eed556bbbc239f058520a52"
+    },
+    "final_XML_format_check": "All six source/candidate/saved XML files preserve UTF8 BOM, CRLF and same declaration; no comments/DOCTYPE/extra PI",
+    "product_defect": false
+  },
+  "source_pins": {
+    "scope": "Existing172 source/fixture inputs from standalone SR foundation snapshot",
+    "count": 172,
+    "record": {
+      "path": "output/diagnostics/subroutine-foundation-2026-11-06/review-source-pin.json",
+      "bytes": 20037,
+      "sha256": "2a25d07f45f58ea3d70b3acb5336e8f0d13b990523582407388d297c53bbeba5"
+    },
+    "sha256": {
+      ".gitattributes": "0a554fc9391f8d0f24fe8b3967061e0b87e341d98b5131aa0142fb6b7908d747",
+      "docs/capabilities/COUNTER-SOURCES.json": "2da70defcc1c7dedbea5dbf97e3d53df0e74a766cfde231852954af4419ddfbd",
+      "docs/capabilities/INDEXED-SOURCES.json": "8d9e40c40a2ea1df365bed39b50321aae2370aa3e48f10dab496d7d3c143ad1a",
+      "docs/validation/TIMER-MODE-STRESS-RESULTS.json": "2422e4df23cfe7c1d4c844b34e651490bb444c1862805f6c79b3ccd093b0d00d",
+      "docs/validation/TIMER-PROPERTY-STRESS-RESULTS.json": "190531e18e869974dbff6b2827041a290e2a2481fe915bd69eb0eb5ef984d526",
+      "m200/__init__.py": "77c5815a3596eebca3e939d1ad39abba46fa4edc4df148aaa7e47f13e5eda0ab",
+      "m200/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "m200/allocation.py": "f21e8753757ebf1c54874c18c3385a7d79ce52992514725920c29a1ca6281be9",
+      "m200/arithmetic.py": "bd0a83b4cc3257d2734a2ad1131137ce0608c2688a0565842b41759c336df75a",
+      "m200/arrays.py": "d4574f6e48ab98f70feb3f474f30bbf387117f5db3ddde395525a21a77da42ed",
+      "m200/bits.py": "d76ca8b8bb587a6811cfb3e157c00385ba0a836b8eb669afdda9af4e635b6a61",
+      "m200/boolean_bdd.py": "b3de9c79a5b14953256117afa22df8aaf2b37eb71689f224ca2d66e78a02882f",
+      "m200/capabilities.py": "e94e59743ee0eae98c476938f8eafe04966c0823b825b1d070980d15d41348a0",
+      "m200/cli.py": "22110f728cd456b9fae20a2ae1c2f9a03ba3fede808ee220318071c09a9d6a14",
+      "m200/communication.py": "105c1aef50e7ee00bc7c7142a5b6805d4ddf5f18fc04c5e60a52b78841a6b3b0",
+      "m200/communication_graph.py": "3b6e9a8ffc3c9ae1203106b37385141f8007719e55e010a29eec07732e3a3d61",
+      "m200/communication_xml.py": "2762f0fd89552de18e21bb632e536eb4c1a9449702cdfb6444dfb58bb606aac2",
+      "m200/config.py": "5411e6a28bd67da9a45c1660f1c62673443b249ac76948ede80b57c6e322f73e",
+      "m200/conversions.py": "0922116a83ef1bcacda5fb9a588f2bc10d522a7c1ca7f301148ea88e6e370250",
+      "m200/copy_fusion.py": "39c8f498518c46d35ad61ec2c53564a61748a4957eae25e8d241a3c7e4b98816",
+      "m200/counter_graph.py": "80abf1241ee5095a121c47e1a196de03f1e7ed37fe0c54626b2a3f3eba4a9e8c",
+      "m200/counter_xml.py": "a87177f18a698b1f442a7c16eb66748a6d2c06c9c966ac199c6275bb1e326554",
+      "m200/counters.py": "0e4ed9d8fe6f4356f3d6b6986558a0f9caa019daa3f741b12522d1fdd6f376ce",
+      "m200/edge_functions.py": "c58b059d15ee7387ed7e65f841ad549f3b30c3781a258c0a6340a96e9cd92a24",
+      "m200/edges.py": "e590a801d00b94d20a2dd1f428635aa299e3bd59bcbfe2442f5ffa4fd3d64713",
+      "m200/flow.py": "090035e4abc84354287c934898430c0da038a81a11452526e4d87a70def55607",
+      "m200/frontend.py": "2b56e3ca231ccb3cbb9a5371051928b360559400566c771a4cd678db07c0504a",
+      "m200/il.py": "f177243b0b658414b8e2f3da7eac7a7ed62b7996f5faa2154b96377f9538db83",
+      "m200/indexed.py": "0b8ca542e2be87392d8de2a75ef8ad0d48534b28d7f82d1e24fd1bf38fc8343b",
+      "m200/jsonio.py": "c4d8447354b4f48205a8d5bfc58e1a3919656ba2073ecc5982b2f8fd6253fd70",
+      "m200/ladder_lowering.py": "66bffd608bc2e554b61f56eacf608efe7749b89d19dc5c9d4fc13e004913fb52",
+      "m200/levels.py": "439eba12b9bf189795449983755b55d92f77261678a983c4ed9e94b5eb341149",
+      "m200/lower.py": "d9cc4e13b0e886a0c0d7bd85880d621d76f8c371943f4d4d1549f111ab1aa657",
+      "m200/modbus.py": "a391ce5ff71520cea4f6b74d9ae984ba6cb4d6fff36b9d44fe05396e68c2e32b",
+      "m200/model.py": "e786ea2d03ea7d9c98c641fe6ed84a00a2076f51a1974ce1209355ef4dad0e11",
+      "m200/native.py": "016a6af7d7f7b1de11dab9bee1477faa9f4d393f75bbf09e1b3bf5daa5e6ac4f",
+      "m200/native_logic.py": "6a5990a9b75186ca678172491605a8485747ec004c685a3c4d22b025be8a53de",
+      "m200/numeric.py": "b29de2050a070dcbf23ab4e942642f45ad22a580d70b078f5b74111dfde629c5",
+      "m200/project.py": "da62b18ea0e87f9b881e673af7a610aa6de57297b0ff182e3a0dbfaedca32708",
+      "m200/register_graph.py": "301cd66e5cc473ced8aa7be29fc0881484857a9072b8f490dac17e54496a459c",
+      "m200/register_xml.py": "8cccf50926e13978df2389afb48cf37409b451e8b4b80be86e1f3299dd292f71",
+      "m200/reverse.py": "a84be951d8f3e113fb74065c024198408efd584c3b16794a3f88e1f04507a0d1",
+      "m200/subroutine_graph.py": "39463c5145710c6395b809e55e9a8a910c7197710b4f6ffcdfa569f5db733667",
+      "m200/subroutine_xml.py": "0b52b1980132ce50c3a89a480125d45b568e1521c9d4c43f60d575762c972e4b",
+      "m200/timer_profile.py": "ca3f7855752418db88698ab0a6fff8ead02f67d8c63c767baeb7b0f985fd346e",
+      "m200/timers.py": "384e3c26facd76ed8da5449d001348fe1c1dd818a73532ab9c782e6a9b0fedf6",
+      "output/editor-validation/native-register-shared-request/editor-saved/register_fifo_editor_saved.smbp": "85219725709cbe90641e25bedddd6bfa4f13011a55e01be4ba087f8f42b09189",
+      "output/editor-validation/native-register-shared-request/editor-saved/register_lifo_editor_saved.smbp": "8d04a2bc22bc2466a928ea185d41641f53c5493e26a2a19d690ef8e55822c1ab",
+      "sdk/plc.hpp": "b1d6f04ab2ce88d4e37ac781a299f134c5882971f2d593ead502be3877e784b3",
+      "tests/editor_validation/run.py": "d204fa45b64dba7b33fb05c707c2f8f8362ec8f6714d19cc84ac5d4e475e55f6",
+      "tests/editor_validation/sequence_timers.py": "eb8700e346af43f3ae53ddf5034e4b7230502da8cc66e6991c7e1712670f8702",
+      "tests/fixtures/native_counter_branch_graphs.json": "fb77d8c8838c01d3b3404a47f11ff2c46d26f5057ece2e5b35f50b0e15975886",
+      "tests/fixtures/native_counter_graphs.json": "0830c6669cded99441496d3d496b8dbb67d133f7a8ace160daae40868d35029a",
+      "tests/fixtures/native_timer_graphs.json": "e8f82d22bca8b5c6a480598dfceb33bf2744feada776812b98261060132b518c",
+      "tests/fixtures/official_tm200ce40t_end.provenance.json": "e451a56395e51ad3af7f2aa35ce715c391c2b10e062ca1a31d98626702d61ada",
+      "tests/fixtures/official_tm200ce40t_end.smbp": "11b4772aab31b5759ebf5a0315125cd4f1f0005dd0bad943c64de9af9eb2ea31",
+      "tests/fixtures/official_tm200ce40t_endc.provenance.json": "e3d62c63824a4171f0b8654c8ebcdcc13631f4d5b754406f6d4d017c3363b87a",
+      "tests/fixtures/official_tm200ce40t_endc.smbp": "10d49746b54f4b8ef14dee3a51e8f08607aabebc5e142ade76f3643a1369451f",
+      "tests/fixtures/official_tm200ce40t_endcn.provenance.json": "da9e593ab5e5b8dc3acb3848044d767ddf4b42a5f12f09ee29cc79d9e1b8c66c",
+      "tests/fixtures/official_tm200ce40t_endcn.smbp": "5c76b1dabede9dc85c2c155f01c00d981262d804c150ccb7a7efbc07ba0496dc",
+      "tests/fixtures/official_tm200ce40t_memory.provenance.json": "b9826924298610100516b075c671362c87b85ff35e2489e0df661ea8cdd89730",
+      "tests/fixtures/official_tm200ce40t_memory.smbp": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf",
+      "tests/fixtures/official_tm200ce40t_memory_editor_saved.provenance.json": "7e5e29c8401bc9cdf9b4d340807b17b2a2af0d9a935f5a8fcc2d74d60fcda32a",
+      "tests/fixtures/official_tm200ce40t_memory_editor_saved.smbp": "4b6120f1151f840ae234e6f79135c51ec78e0fd3df21736c542894d52402a6bc",
+      "tests/fixtures/official_tm200ce40t_modbus_bare_abort_read.provenance.json": "2996f59a99bc0b3ada6e6ed5a0710385af585deeb255c687c9f0c38231d7fd42",
+      "tests/fixtures/official_tm200ce40t_modbus_bare_abort_read.smbp": "222de155bd4061649a017859f8775322974c3e06b3a85204ff85ae015e35b3e4",
+      "tests/fixtures/official_tm200ce40t_modbus_bare_abort_write.provenance.json": "af9f67dba2d31a96d37f278ff3af38f72bfe41a14dc5a577eecdd731c18ecf61",
+      "tests/fixtures/official_tm200ce40t_modbus_bare_abort_write.smbp": "1489ad6bdcdde1101708088d37ee2eacb326ee23a3c6ac8c0d91cbe25f51fb7d",
+      "tests/fixtures/official_tm200ce40t_modbus_bare_abort_write_read.provenance.json": "c4403129ec28518b3af4d7d18adf041db9eceea6dd6e29dd603f93d24d67f586",
+      "tests/fixtures/official_tm200ce40t_modbus_bare_abort_write_read.smbp": "ce46d988bcdaf5e9f0add2d17daff51deb0074240a937ca5f85aeed933ea8890",
+      "tests/fixtures/official_tm200ce40t_modbus_full_pin_read.provenance.json": "8d30908043d3bd1d4a66bd4bcb0f86c050ca6999451303c3f9c91f4db92d79fd",
+      "tests/fixtures/official_tm200ce40t_modbus_full_pin_read.smbp": "8154e130ce73b6a1b6e90f5876264437ec36778207fc38c3a3661152059f9e50",
+      "tests/fixtures/official_tm200ce40t_modbus_full_pin_write.provenance.json": "f5c556d3896a6e824509c25ca50b70e8c2dca2c71c5d4b80331fbaacbe2ef7dc",
+      "tests/fixtures/official_tm200ce40t_modbus_full_pin_write.smbp": "ae6ffad294a36e79656f36845f2a0bebf19df6f3e60b8aa7b82597b867b79af3",
+      "tests/fixtures/official_tm200ce40t_modbus_full_pin_write_read.provenance.json": "5c7d0e2ef28bc3bfd34fe2e8e858b3db939edf1e64f271fd33449e2ca01d97b8",
+      "tests/fixtures/official_tm200ce40t_modbus_full_pin_write_read.smbp": "9e7a3359a99c433bdebe7eaca21235960de806fdfb8151a678e39345e4b3588f",
+      "tests/fixtures/official_tm200ce40t_modbus_read_i.provenance.json": "95582f622e7ad61c46d9d902c6408245cc6e5e3db511770515a2bbc332a9d5a9",
+      "tests/fixtures/official_tm200ce40t_modbus_read_i.smbp": "1c857a39e418d602b30f132ebc311f60521eb70fdb44ddbe94fc39ff9430d214",
+      "tests/fixtures/official_tm200ce40t_modbus_read_q.provenance.json": "ab73aff0a34a9cdf8d6fa312535c8bd1e8de46f1bbd07c6f2813bc8a30e5a3c0",
+      "tests/fixtures/official_tm200ce40t_modbus_read_q.smbp": "4994ba0c7aee1ffc5127f15e673215dc9a5b9ef521877255e243b3cb3cef8d4f",
+      "tests/fixtures/official_tm200ce40t_modbus_single_coil.provenance.json": "082e0e4424bad622c62a77ea8ae9775029670c188890ee7179d5a68bd4b69180",
+      "tests/fixtures/official_tm200ce40t_modbus_single_coil.smbp": "4b72a0380555290934a4eea0492e3f9c0491b08f0741bd9f7ded49666845ef8f",
+      "tests/fixtures/official_tm200ce40t_modbus_single_reg.provenance.json": "9190f49a2bb35c59ebf47344388d4d02e9b8eede5b9f279dd2bfcbb0edbc8c22",
+      "tests/fixtures/official_tm200ce40t_modbus_single_reg.smbp": "d24a3b572bc565d9d1cb9d4111ffd231d28422384e7b08bd977c85198b995ed8",
+      "tests/fixtures/official_tm200ce40t_modbus_write_q.provenance.json": "e1a264b49644905d6ea7ac7752112eece4d8bfc62adec68f70ae3d3aeef0af52",
+      "tests/fixtures/official_tm200ce40t_modbus_write_q.smbp": "da5f8bb39369d888f86c09b136222756a42127410d0c867574c80dacb66c465e",
+      "tests/fixtures/official_tm200ce40t_modbus_write_read.provenance.json": "582257c462d3c509bd7c8a245070aedb1bf6809ea08d683e570cb4fc87806034",
+      "tests/fixtures/official_tm200ce40t_modbus_write_read.smbp": "6a7edd820fcaee97cc4c1c783005f0a88a0409c98934e7b6964fbce1004bb52e",
+      "tests/fixtures/official_tm200ce40t_register_fifo_three_ld.provenance.json": "44d133c0c01788d8f07d6a1c0f8a75dcb9710e19e43fc2b1477a9dbe6e3a376d",
+      "tests/fixtures/official_tm200ce40t_register_fifo_three_ld.smbp": "f6198b7054f1f1b6dbd016f6df756ef2ebd150a99d26bc59e86069944d000fa4",
+      "tests/fixtures/official_tm200ce40t_register_lifo_three_ld.provenance.json": "7f969a7de6b559b6c023c2ad854cf8267e81b64916d348b295b5764567d16e5f",
+      "tests/fixtures/official_tm200ce40t_register_lifo_three_ld.smbp": "a82e4dd97f37c469dae5d30f68b12cf3d11f55f0131f171d7e6b0a3b5c37cf0a",
+      "tests/fixtures/official_tm200ce40t_subroutine_sr0.provenance.json": "f22502f3be85dcf6ff8cf1c4fcee8c9dece406ef92ca99064b7dd6b0c2f6f42f",
+      "tests/fixtures/official_tm200ce40t_subroutine_sr0.smbp": "49438bcbed59cde889547869d8c033f377dfb7e60153136a57cb48e135b0e21a",
+      "tests/fixtures/official_tm200ce40t_subroutine_sr63.provenance.json": "300ddc9bc3a7b76b0e70cfe2cfe9a0017ae902dac0626e2531c44b5ec52c43b8",
+      "tests/fixtures/official_tm200ce40t_subroutine_sr63.smbp": "ff05369c686e8bc1887612afdbfcfd57d24e0e4e1e51d8d2b2b443824a2fa652",
+      "tests/fixtures/official_tm200ce40t_timer_10ms.provenance.json": "3b6c2e9f09e8da42c4e68e86fb03e417d11b33372d97fe069164121615bb2971",
+      "tests/fixtures/official_tm200ce40t_timer_10ms.smbp": "934affc43bd7e3d918b529b5cbfaee5aabd6bc062006edcd5c3cacf0d7f2bc45",
+      "tests/fixtures/official_tm200ce40t_timer_options_behavior.provenance.json": "106137384b9f4b7c38786e066e9158e1d53042e6d6260f953279d78c9bb23477",
+      "tests/fixtures/official_tm200ce40t_timer_options_behavior.smbp": "5358e5334696e1838e8b34b9efaa84fafb2a7bd97802d2d2ee32ae94a7f52214",
+      "tests/fixtures/official_tm200ce40t_timer_ret_ton_fl3_2.provenance.json": "deb0b3c186c0f36292e165d02ae869a44d2d391ca9c200dccccc1aecc936bff0",
+      "tests/fixtures/official_tm200ce40t_timer_ret_ton_fl3_2.smbp": "35a9d891711ff3eb74d745f30c14cbb3574b7cd61b0cec876320263e28a1fbd6",
+      "tests/fixtures/synthetic.smbp": "5c04625cb62d03bd8d2982430970bbb3fb81070205c302d4e39f5a5b78a7f515",
+      "tests/public/control-flow-manifest.json": "9c90f5da2e907305d50f8dbb6a5d64e77306a2b92b501d7f0a79e9380a2d07a9",
+      "tests/public/control_flow.py": "65f9d5f2aba359e6c316aa133c577496114e3981728cf5ce60ada5ecbad7ae72",
+      "tests/public/fetch.py": "196a8b6233a222fd1ebb86a89ced34dda368568bd0a82407cc792d45760af5ba",
+      "tests/public/manifest.json": "7c54959214e085d2852a6601a27a48cf212744cb26ce5aadac6ab8f4d6386324",
+      "tests/public/run.py": "c87893404e91a1b90e648303aafa647c7e9d9199c1e6b86e30ea1c0710b27fda",
+      "tests/stress/bit_objects.py": "a39468f5ae36159b378cda34f2bfbe81abdf42fa1cb1fbf5cca0e6325b9c0489",
+      "tests/stress/boolean_audit.py": "ecd800fad5e3eb05948eb833f77a6098fb0e44aaecf8c0a81b60f1c529de146a",
+      "tests/stress/control_flow.py": "ad7814da8c24d58557b9f749252f624e86d71dd28f1873f8b84dcbf5dece6586",
+      "tests/stress/conversions.py": "da56e75ab3d233470151c3efbd4a9c836e1dcfd3c5469945bdbebb0c61f073d0",
+      "tests/stress/counter_graphs.py": "455889489bfb813b1ecaa27efbd2cd40592373ec61ea7c2f82618eb3256b1285",
+      "tests/stress/counters.py": "477b0685314abb2bafa58f27989df132a9b374dac8a4dc4a882a87d5fcd9acd6",
+      "tests/stress/digital_io.py": "0bece2a8e6ec6eee1d07054522d6766a238caa9f7d911cbe3f09afddb4090506",
+      "tests/stress/dynamic_arrays.py": "df53722713450024bfce76434e1e548ceabccde25b7b5654417d8a2a889566ac",
+      "tests/stress/expression_edges.py": "d8dc293380b5aa3de06c3d764dab8324a974fd8d7f9d6962dbd776b9abc5d82a",
+      "tests/stress/il_properties.py": "f2269c4d4beb32ea1e9e014aea71b67f3a05839ec137d5f9be237fa833f25644",
+      "tests/stress/indexed.py": "d8937c58e751f515b6d65dcc4f3d1d1a2545d4dee9ed673f73e02fa4f77426a3",
+      "tests/stress/integer_flags.py": "1f26ac9b9adcb349c381ae03288ed6588c2fb6eda691003089e85072f9a2b689",
+      "tests/stress/modbus_full_pin.py": "98b443a7211d1269a637973f4438add6f0fc8522d1f18e2e0954cd044aabd409",
+      "tests/stress/native_edges.py": "29bb2bcff1568a0e6adfacd46840dbd20f6f159043df4da86b4a5765a1c986da",
+      "tests/stress/native_logic.py": "c70a0a69556ab796c18b53d0b2d5ce4b3f1dbd45df9093c8760fff17b6c9551b",
+      "tests/stress/run.py": "f8a317eea4fa0e016ce3c5dd9de2ee534ee333c659cf51396e27ce386d91b7d7",
+      "tests/stress/timer_modes.py": "e49f7526f0fec09d072721deeb33b4c0a5a098fc75151a7293644f24e4441baf",
+      "tests/stress/timer_properties.py": "8d1353d38757664145ea233273d629faa623b04e946e33598ca65b9590085f65",
+      "tests/test_adversarial.py": "70697b896097c6c84093595d03fa244498aa9e1dd92b767654bf9683c752a2c7",
+      "tests/test_allocation.py": "30841d4cbd34aa72a5423150773c1f9cb69ba81a8b550b2b82b8be735cce98ff",
+      "tests/test_arrays.py": "e41d1d729a04fa7cea78c6511eb1f5c77908a022f02475b9b3d056984049efcd",
+      "tests/test_bit_communication_xml.py": "f93c7ee89d31159f6b366ce0a0286bc3ff5ce34c62085b3b57afaf304f1cad9c",
+      "tests/test_bit_objects.py": "9fc13a3081ad8c13d0276364d0b6b62beed307a8e4af61752fcf98c7d0a5ce8f",
+      "tests/test_capabilities.py": "15d1fab381fb0aa052e4bd985cc077ebce402964071e1d66ca5d6b763b62716e",
+      "tests/test_communication_compiler.py": "07e10834d084472242e0043f60b3d8e687b628c2536ab89adb6b7c7c9607f209",
+      "tests/test_communication_project.py": "62c93e9bceffa04150a72c7527adb48e2c959799eb7218460dbbe6ac791785a6",
+      "tests/test_communication_xml.py": "836dfeb3312c14cf036bd75aeef9cd7acf344fcc01cbd49b7cb9f14f01622a19",
+      "tests/test_control_flow.py": "8c2ad3d223641ee562ad74236c9ec04429c5bb24a1755fcffdaa562a856509db",
+      "tests/test_conversions.py": "7db2481732b54abbd0a188b1ac0c04eb2b37948e88d9a1b3e6f6b71bb875ecc7",
+      "tests/test_copy_fusion.py": "bef86dfabf49e5a25aa2193eed4107346a74657dd4619a581770f3d181487740",
+      "tests/test_counter_graphs.py": "cbcae6b9e643342c6333433b011accc3e97f620d33621df029496d79b523e935",
+      "tests/test_counters.py": "ff93ed6f67bf6c86fe688efb636aafbce53025b9fd9eb6542f2fabdb895265ed",
+      "tests/test_dynamic_arrays.py": "6714bd13bd8b0b1bcb3443cfa713e3ddaa0045e5f4be3b9854f94c282d719cc2",
+      "tests/test_expression_edges.py": "2971d2147c3172619923a2bb587fff2b7f5ca7f6f10c7a6a84d157dd96a50526",
+      "tests/test_inactive_pulse_aliases.py": "8c89f7d08e8889b6bca59b0b0e818585465a0d8473269725e3273acc5d2446ce",
+      "tests/test_indexed.py": "e8e9d248f90c47197a982ca2410efcae37f070b1c11b41ce0d26145cc8e92589",
+      "tests/test_indexed_bits.py": "5e7c05ab57931ed15012a580adc3034a36ed6c78b3df0ddc59ad9b8a5aca6a6f",
+      "tests/test_integer_flags.py": "750f324db795037de77e71ca4bf10927973a28dab55c3fbb971ea547d98bc289",
+      "tests/test_mast_task_profile.py": "6bcbc398b4a2048c44a92433dc9d1f03755b5186814c0136fea4cdde04125d93",
+      "tests/test_modbus.py": "6a5d5b4e04363514b44b199793593e2d887a4d6dbbbd69937f34d91eb42b7546",
+      "tests/test_modbus_bare_abort_native_profile.py": "1e0f9bb9c219179e8196d0bf3d654c023f5a3b331ab8b6acd38c677e049e91da",
+      "tests/test_modbus_full_pin_native_profile.py": "99c30dad93f2424555fe541519155cbd32068196daa85b279463d0d943790baf",
+      "tests/test_modbus_single_native_profile.py": "7223bf9af49a238a2c2ea2b9f6b49b91ee978cc38837a92643955373458e194d",
+      "tests/test_modbus_transport_recovery.py": "564d4d062d98871885cd3a62d773bdf3617117e86ded0b551a0cd3bbdc6deb9a",
+      "tests/test_modbus_write_read_native_profile.py": "8d005fef26232e814b151a8b84af1d5ada3527df720eddd517a34ca4fb539223",
+      "tests/test_native_edges.py": "1671d2c49540d1dfc9b709e47fa6b0521505b73f92bad755a06f8f047b51f3eb",
+      "tests/test_native_end_graphs.py": "ff6f41418a2dff5579afd6dffceb95f6526ff5b7f1626a7b28c7d4394ef260cb",
+      "tests/test_native_logic.py": "aaa004e025625c9107441f17c5b7578fede443eb24d24e59985c2d22c035d7c7",
+      "tests/test_numeric.py": "6d072af3241154ab4823f9ff4ffc797ea830ba25bf0fcb5d28c69b7f7b247aef",
+      "tests/test_numeric_stress.py": "2453fe9b4352ec4a2e5dceea9c1462a8487f7283fe6904618df7d7101a61cca9",
+      "tests/test_official_profile.py": "a846191a137e8cf492fcfc92721fddf491a547cdbe9b6a6c33073fa667fd9543",
+      "tests/test_public_regressions.py": "2dbedd883358b74d7c082ae750a107e3a57a889758eec1b61501b810b3dca532",
+      "tests/test_register_graph.py": "fb64a51ea25a5c67f4e9d893c4bba00e7a8541b0ee1132316c5b30f8f3337da1",
+      "tests/test_register_xml.py": "07ebf1a24864e75551c561e6a5ce9ea049d2212568c19ef9d4a008952a577de3",
+      "tests/test_review_regressions.py": "458f5c6690fa7c9afc3035a27a9a40eb5167729d25e4faa53bd3c902dcffdd83",
+      "tests/test_scan_exit.py": "deac144a54f822fbd52a1205d90ccedccd0725874ff47fe6ffd83c385c1091e5",
+      "tests/test_subroutine_graph.py": "fd409e0eaca5641e5646a17e5e87e8140d7540aca432c685a2610ff18a0ea4ef",
+      "tests/test_subroutine_xml.py": "35a5ddf6295cfff8de764ff72bda2afc8850665c02d3271d5c184f216a153cbc",
+      "tests/test_timer_modes.py": "d85e8526a32b60859c507fefd596eaeb53c5580d397fc705167f51f159d69fb3",
+      "tests/test_timer_option_bindings.py": "e07b68561a990fa72af70557bad9ae5a60a2e88230bc9dae53a4f9c2e0e67e73",
+      "tests/test_timer_properties.py": "daf92505702d81502023602b3102c4cc34c84a621ba99a90ebb3662daf277012",
+      "tests/test_timer_property_stress.py": "33c85057f20ddd3d1d619a413db8ef2630feee3d584d2e60a9c583dd29c6eabd",
+      "tests/test_timer_xml_bindings.py": "9982273f54099987b6e06be84d02ec525ff9f7dc3876121a5f04c81f719b8095",
+      "tests/test_toolchain.py": "08f6edf37688853d09fc33627e88d2e0a7d358ec8173b4395c4def758d34f860"
+    },
+    "all_unchanged": true
+  },
+  "artifact_pins": [
+    {
+      "path": "output/reports/native-m-contact-readback-independent-review-2026-11-06/audit.py",
+      "bytes": 11355,
+      "sha256": "b0a312c28dcefe95c02c383099e98ea0da63098b39948e47c3d7ca1cb423c4e1"
+    },
+    {
+      "path": "output/reports/native-m-contact-readback-independent-review-2026-11-06/audit.log",
+      "bytes": 1138,
+      "sha256": "f369f836a26553d1069c3ae614cc5fe85be2db19b1325b498070cf7788f4117e"
+    },
+    {
+      "path": "output/reports/native-m-contact-readback-independent-review-2026-11-06/RESULTS.json",
+      "bytes": 280320,
+      "sha256": "cd1d404790dafb2ebb89155d5560d62a177bb2ab13791e0e2fc30fa7b62674fa"
+    },
+    {
+      "path": "output/reports/native-m-contact-readback-independent-review-2026-11-06/publish_report.py",
+      "bytes": 7550,
+      "sha256": "2ca91b519843dc103ae17a705a582b6c157aaab777190e00ef892d6310525a46"
+    },
+    {
+      "path": "output/editor-validation/native-m-contact-bindings-2026-11-06/prepare.py",
+      "bytes": 6683,
+      "sha256": "ac3d86994c00f6bd25ca4461d4223491792a89178b5cef2a597cba6989c7a176"
+    },
+    {
+      "path": "output/editor-validation/native-m-contact-bindings-2026-11-06/manifest.json",
+      "bytes": 6139,
+      "sha256": "b2076f650ec5933c999e5bad55943e61bb83d378aef10eeb36e84ed9b81f2b5b"
+    },
+    {
+      "path": "output/editor-validation/native-m-contact-bindings-2026-11-06/FINAL-MANIFEST.json",
+      "bytes": 2547,
+      "sha256": "abdc4709cabeedfb9991d95d5d3a186897cfb6b84dac9fe037f9db3c9893bbd4"
+    }
+  ],
+  "limits": [
+    "Static native No error/conversion/save/reopen qualifies only these exact plain M-contact graphs, bodies, target and actual level.",
+    "No simulator launch, RUN, scans, input changes, FIFO lifecycle/edge/priority behavior, repeated calls, accumulator/stack or physical execution is newly tested.",
+    "Hand-built diagnostics are not genuine compiler exports. Whole-project Register/subroutine support and expanded graph domains remain implementation work at this checkpoint.",
+    "No source/test/fixture/codec/README/TASK_QUEUE changes or full unit-suite rerun in this observation lane.",
+    "Other indices, negated/edge/composite contacts, graph forms, levels and behavior need their own evidence; full parity remains the goal."
+  ],
+  "operations_by_reviewer": {
+    "public_observation_docs_and_four_exact_PNGs_added": true,
+    "source_test_fixture_or_codec_changed": false,
+    "README_or_TASK_QUEUE_changed": false,
+    "GUI_Wine_process_port_network_firmware_or_physical_action": false,
+    "stage_commit_push": false
+  }
+}
