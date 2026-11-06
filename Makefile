@@ -1,4 +1,4 @@
-.PHONY: check examples stress digital-io-stress expression-edge-stress counter-stress counter-graph-stress integer-flag-stress conversion-stress public-fetch public-check public-flow-fetch public-flow-check public-indexed-fetch public-counter-fetch
+.PHONY: check examples stress optimization-stress digital-io-stress expression-edge-stress counter-stress counter-graph-stress integer-flag-stress conversion-stress public-fetch public-check public-flow-fetch public-flow-check public-indexed-fetch public-counter-fetch
 check:
 	python3 -m unittest discover -s tests -v
 examples:
@@ -33,6 +33,7 @@ examples:
 	python3 -m m200 compile examples/conversions.cpp -o output/conversions
 	python3 -m m200 check examples/conversions.cpp --trace examples/trace.json
 stress:
+	python3 tests/stress/optimization.py
 	python3 tests/stress/run.py
 	python3 tests/stress/control_flow.py
 	python3 tests/stress/indexed.py
@@ -50,6 +51,8 @@ stress:
 	python3 tests/stress/conversions.py
 conversion-stress:
 	python3 tests/stress/conversions.py
+optimization-stress:
+	python3 tests/stress/optimization.py
 integer-flag-stress:
 	python3 tests/stress/integer_flags.py
 counter-graph-stress:

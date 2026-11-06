@@ -1,0 +1,507 @@
+{
+  "format": "m200-adjacent-guard-results-v1",
+  "date": "2026-11-06",
+  "baseline_commit": "13cfb9e4b6a864932c9365412a4fafe1def30c38",
+  "compiler_inputs": {
+    "m200/copy_fusion.py": "04b000bd63571b2cd06e0b77fa9a8eb5883cb46dc2ce88fc9060c4dd6340bb9f",
+    "tests/test_guard_fusion.py": "a45ca9051fcf5661ce2295a1082fcd8d68ddfff37fe78f3a02df4115064bdda1"
+  },
+  "unit_regression_suite": {
+    "tests": 712,
+    "reported_seconds": 214.046,
+    "inputs": 740,
+    "inputs_stable": true,
+    "log_sha256": "79e19ba3d6b29f901cef4018488b26479e62a726389a352c64f6e18edc0870c5",
+    "input_pin_sha256": "e2fbb25310a01e27c668bc4fbead6c917e78b367b1217668dc0c01d6c348696d"
+  },
+  "independent_review_sha256": "c1547adf0f64da2f4f65d7f21b08b8867456a9a558d6386836e28a2a169f8cda",
+  "same_cpp": {
+    "path": "examples/christmas/revoada20_clock_10.cpp",
+    "sha256": "37e2386fe336e4ef411ad3eb7ee468c4800083708049b5d22c6b93bf1b17cb7d",
+    "before": {
+      "rungs": 55,
+      "IL": 126
+    },
+    "after": {
+      "rungs": 51,
+      "IL": 114
+    },
+    "candidate_sha256": "9318e78ccf32142b64df5720578c729e5ddcc4d189b098201ae2e417d6d70672"
+  },
+  "clock_local_check": {
+    "phase_cases": [
+      {
+        "START_ms": 0,
+        "first_quantum_ms": 550,
+        "later_quantum_ms": 600,
+        "positions": 2459
+      },
+      {
+        "START_ms": 49,
+        "first_quantum_ms": 501,
+        "later_quantum_ms": 600,
+        "positions": 2458
+      },
+      {
+        "START_ms": 50,
+        "first_quantum_ms": 500,
+        "later_quantum_ms": 600,
+        "positions": 2459
+      },
+      {
+        "START_ms": 75,
+        "first_quantum_ms": 575,
+        "later_quantum_ms": 600,
+        "positions": 2469
+      }
+    ],
+    "distinct_sequence_positions": 9845,
+    "control_positions": 14,
+    "timing_contract_unchanged": true
+  },
+  "generic_before_after": [
+    {
+      "name": "wire",
+      "baseline": {
+        "rungs": 1,
+        "il_instructions": 2,
+        "memory_bits": 0,
+        "memory_words": 0,
+        "required_word_allocation": 0
+      },
+      "working": {
+        "rungs": 1,
+        "il_instructions": 2,
+        "memory_bits": 0,
+        "memory_words": 0,
+        "required_word_allocation": 0
+      },
+      "positions": 3
+    },
+    {
+      "name": "packed_io",
+      "baseline": {
+        "rungs": 4,
+        "il_instructions": 9,
+        "memory_bits": 2,
+        "memory_words": 1,
+        "required_word_allocation": 1
+      },
+      "working": {
+        "rungs": 4,
+        "il_instructions": 9,
+        "memory_bits": 2,
+        "memory_words": 1,
+        "required_word_allocation": 1
+      },
+      "positions": 4
+    },
+    {
+      "name": "same_scan_q",
+      "baseline": {
+        "rungs": 5,
+        "il_instructions": 11,
+        "memory_bits": 1,
+        "memory_words": 0,
+        "required_word_allocation": 0
+      },
+      "working": {
+        "rungs": 5,
+        "il_instructions": 11,
+        "memory_bits": 1,
+        "memory_words": 0,
+        "required_word_allocation": 0
+      },
+      "positions": 4
+    },
+    {
+      "name": "conditional_write",
+      "baseline": {
+        "rungs": 6,
+        "il_instructions": 14,
+        "memory_bits": 2,
+        "memory_words": 0,
+        "required_word_allocation": 0
+      },
+      "working": {
+        "rungs": 6,
+        "il_instructions": 14,
+        "memory_bits": 2,
+        "memory_words": 0,
+        "required_word_allocation": 0
+      },
+      "positions": 5
+    },
+    {
+      "name": "nested_numeric_guards",
+      "baseline": {
+        "rungs": 13,
+        "il_instructions": 31,
+        "memory_bits": 4,
+        "memory_words": 2,
+        "required_word_allocation": 11
+      },
+      "working": {
+        "rungs": 10,
+        "il_instructions": 23,
+        "memory_bits": 3,
+        "memory_words": 2,
+        "required_word_allocation": 11
+      },
+      "positions": 6
+    },
+    {
+      "name": "bool_chain",
+      "baseline": {
+        "rungs": 6,
+        "il_instructions": 15,
+        "memory_bits": 2,
+        "memory_words": 0,
+        "required_word_allocation": 0
+      },
+      "working": {
+        "rungs": 6,
+        "il_instructions": 15,
+        "memory_bits": 2,
+        "memory_words": 0,
+        "required_word_allocation": 0
+      },
+      "positions": 5
+    },
+    {
+      "name": "bounded_loop",
+      "baseline": {
+        "rungs": 17,
+        "il_instructions": 37,
+        "memory_bits": 3,
+        "memory_words": 4,
+        "required_word_allocation": 11
+      },
+      "working": {
+        "rungs": 17,
+        "il_instructions": 37,
+        "memory_bits": 3,
+        "memory_words": 4,
+        "required_word_allocation": 11
+      },
+      "positions": 4
+    },
+    {
+      "name": "early_return",
+      "baseline": {
+        "rungs": 7,
+        "il_instructions": 16,
+        "memory_bits": 2,
+        "memory_words": 0,
+        "required_word_allocation": 0
+      },
+      "working": {
+        "rungs": 7,
+        "il_instructions": 16,
+        "memory_bits": 2,
+        "memory_words": 0,
+        "required_word_allocation": 0
+      },
+      "positions": 6
+    },
+    {
+      "name": "word_alias",
+      "baseline": {
+        "rungs": 5,
+        "il_instructions": 11,
+        "memory_bits": 1,
+        "memory_words": 2,
+        "required_word_allocation": 22
+      },
+      "working": {
+        "rungs": 5,
+        "il_instructions": 11,
+        "memory_bits": 1,
+        "memory_words": 2,
+        "required_word_allocation": 22
+      },
+      "positions": 3
+    },
+    {
+      "name": "stateless_sr",
+      "baseline": {
+        "rungs": 10,
+        "il_instructions": 21,
+        "memory_bits": 2,
+        "memory_words": 2,
+        "required_word_allocation": 12
+      },
+      "working": {
+        "rungs": 10,
+        "il_instructions": 21,
+        "memory_bits": 2,
+        "memory_words": 2,
+        "required_word_allocation": 12
+      },
+      "positions": 4
+    }
+  ],
+  "portable_budgets": {
+    "status": "PASS",
+    "cases": [
+      {
+        "name": "wire",
+        "cost": {
+          "rungs": 1,
+          "il_instructions": 2,
+          "memory_bits": 0,
+          "memory_words": 0,
+          "required_word_allocation": 0
+        },
+        "positions": 3
+      },
+      {
+        "name": "packed_io",
+        "cost": {
+          "rungs": 4,
+          "il_instructions": 9,
+          "memory_bits": 2,
+          "memory_words": 1,
+          "required_word_allocation": 1
+        },
+        "positions": 4
+      },
+      {
+        "name": "same_scan_q",
+        "cost": {
+          "rungs": 5,
+          "il_instructions": 11,
+          "memory_bits": 1,
+          "memory_words": 0,
+          "required_word_allocation": 0
+        },
+        "positions": 4
+      },
+      {
+        "name": "conditional_write",
+        "cost": {
+          "rungs": 6,
+          "il_instructions": 14,
+          "memory_bits": 2,
+          "memory_words": 0,
+          "required_word_allocation": 0
+        },
+        "positions": 5
+      },
+      {
+        "name": "nested_numeric_guards",
+        "cost": {
+          "rungs": 10,
+          "il_instructions": 23,
+          "memory_bits": 3,
+          "memory_words": 2,
+          "required_word_allocation": 11
+        },
+        "positions": 6
+      },
+      {
+        "name": "bool_chain",
+        "cost": {
+          "rungs": 6,
+          "il_instructions": 15,
+          "memory_bits": 2,
+          "memory_words": 0,
+          "required_word_allocation": 0
+        },
+        "positions": 5
+      },
+      {
+        "name": "bounded_loop",
+        "cost": {
+          "rungs": 17,
+          "il_instructions": 37,
+          "memory_bits": 3,
+          "memory_words": 4,
+          "required_word_allocation": 11
+        },
+        "positions": 4
+      },
+      {
+        "name": "early_return",
+        "cost": {
+          "rungs": 7,
+          "il_instructions": 16,
+          "memory_bits": 2,
+          "memory_words": 0,
+          "required_word_allocation": 0
+        },
+        "positions": 6
+      },
+      {
+        "name": "word_alias",
+        "cost": {
+          "rungs": 5,
+          "il_instructions": 11,
+          "memory_bits": 1,
+          "memory_words": 2,
+          "required_word_allocation": 22
+        },
+        "positions": 3
+      },
+      {
+        "name": "stateless_sr",
+        "cost": {
+          "rungs": 10,
+          "il_instructions": 21,
+          "memory_bits": 2,
+          "memory_words": 2,
+          "required_word_allocation": 12
+        },
+        "positions": 4
+      }
+    ],
+    "distinct_positions": 44,
+    "manifest_sha256": "cbe056cc2ad7b4cfbac55954b9e1ec6e0971e27218fe63f47c031cce3bea4073",
+    "runner_sha256": "d220fbe7248c1a39a4975fdcd4acf8b0cd63667ae0a2e07f96af5a9024a99d01"
+  },
+  "budget_runner": {
+    "path": "tests/stress/optimization.py",
+    "added_after_full_unit_run": true,
+    "routes": [
+      "compiled IL VM",
+      "exported/reimported SMBP VM",
+      "reconstructed C++ recompiled VM",
+      "original native SDK outputs",
+      "reconstructed native SDK outputs"
+    ],
+    "named_words_checked_in_VM_routes": true,
+    "native_words_collected": false,
+    "impossible_zero_rung_wire_budget_rejected": true
+  },
+  "remaining_clock_rungs": {
+    "startup: used-output initialization": {
+      "rungs": 1,
+      "IL": 2
+    },
+    "startup: compiler boolean constants": {
+      "rungs": 2,
+      "IL": 5
+    },
+    "startup: persistent globals": {
+      "rungs": 4,
+      "IL": 8
+    },
+    "clock/input sampling and edge predicates": {
+      "rungs": 7,
+      "IL": 16
+    },
+    "STOP/RESET and START rearm": {
+      "rungs": 9,
+      "IL": 20
+    },
+    "beat counting and phase wrap": {
+      "rungs": 7,
+      "IL": 17
+    },
+    "mask default": {
+      "rungs": 1,
+      "IL": 2
+    },
+    "reflection and position": {
+      "rungs": 7,
+      "IL": 16
+    },
+    "bounded shift loop and loop setup": {
+      "rungs": 10,
+      "IL": 22
+    },
+    "packed output argument snapshot and commit": {
+      "rungs": 2,
+      "IL": 4
+    },
+    "phase diagnostic write": {
+      "rungs": 1,
+      "IL": 2
+    }
+  },
+  "official_editor": {
+    "offline_Programming_No_error": true,
+    "official_save": {
+      "saved_bytes": 267260,
+      "saved_sha256": "2801170694e0d782e720705a8a336d84b61e1f2a79fa154f92fd08a334730911",
+      "original_sha256": "9318e78ccf32142b64df5720578c729e5ddcc4d189b098201ae2e417d6d70672",
+      "rungs": 51,
+      "IL": 114,
+      "rungs_equal": true
+    },
+    "fresh_reopen_after_other_project_No_error": true,
+    "simulator_Online_Run": true,
+    "START_I0_Q0_on": true,
+    "complete_cycle_quantitative_observation": false,
+    "untrusted_DLL_banner_unchanged": true,
+    "physical_PLC": false,
+    "STOP_all_outputs_off": true,
+    "held_START_after_STOP_release_stays_off": true,
+    "movement_samples_manually_viewed": [
+      5,
+      6
+    ],
+    "capture_decode": {
+      "total": 75,
+      "decoded": 67,
+      "all_decoded_onehot": true,
+      "refused": 8,
+      "refusal": "Q4 glyph Jaccard0.895 below0.90; decoder threshold unchanged",
+      "full_cycle_automated_pass": false
+    },
+    "official_stop_simulator_cleanup": {
+      "Mac_pid_98275_gone": true,
+      "TCP502_listener_absent": true
+    }
+  },
+  "physical_plc": "pending",
+  "application_reverse_local_check": {
+    "status": "PASS",
+    "original_rungs": 51,
+    "original_IL": 114,
+    "rebuilt_rungs": 60,
+    "rebuilt_IL": 133,
+    "sequence_positions": 2461,
+    "control_positions": 14,
+    "editor_acceptance": false,
+    "official_saved_reverse_cpp_bytes_equal_to_tested_audit": true,
+    "recovered_cpp_sha256": "5b89dcc24a8eb09df4116ad426d95b917be5beba288cbd26ed7f0e4314303411"
+  },
+  "captures": [
+    {
+      "path": "docs/validation/editor-evidence/guard-fusion/fresh-reopen-no-error.png",
+      "sha256": "9afbdad5dddb5c52e6551013ffb114089f4815faa203a1f5d101c6da702c0f5e",
+      "bytes": 416305
+    },
+    {
+      "path": "docs/validation/editor-evidence/guard-fusion/online-run.png",
+      "sha256": "6d8b5cb918354b793e2d0bf0111649f88067569a67e249968e095823dde0990b",
+      "bytes": 311590
+    },
+    {
+      "path": "docs/validation/editor-evidence/guard-fusion/start-q0.png",
+      "sha256": "c8b95d0ae6bcefa8fd3e621eeb9a6c6e9feefcb06fb3976997c2684adb9359fd",
+      "bytes": 18106
+    },
+    {
+      "path": "docs/validation/editor-evidence/guard-fusion/motion-q5.png",
+      "bytes": 18437,
+      "sha256": "49acb2643c1c36b75c85a720ee34c220bf80143550fc7987c7db1f32cebc5e75"
+    },
+    {
+      "path": "docs/validation/editor-evidence/guard-fusion/motion-q6.png",
+      "bytes": 18488,
+      "sha256": "2bad0148961d4d19f37f5f0da263e4cd18237a1781efdfebe7c11a53f5e1605c"
+    },
+    {
+      "path": "docs/validation/editor-evidence/guard-fusion/stop-all-off.png",
+      "bytes": 18306,
+      "sha256": "d39544843b2fb36869b7fcede68da3edd2132fac0b92173f4930d8c439fc8c1b"
+    },
+    {
+      "path": "docs/validation/editor-evidence/guard-fusion/held-start-stays-off.png",
+      "bytes": 18239,
+      "sha256": "c4d4e401bd3919815439748bd29884d30cc6a105295198b31ad3695f41cf6c14"
+    }
+  ]
+}

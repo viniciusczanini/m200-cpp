@@ -112,7 +112,7 @@ The [architecture and semantics guide](docs/ARCHITECTURE.md) explains memory ali
 ./m200c capabilities --all    # Full source-backed catalogue
 ```
 
-Generic [compiler optimization](docs/OPTIMIZATION.md) now uses native process images, dead private-store elimination and low-address allocation. The unchanged clock example compiles to 55 rungs/126 instructions, down from 122/261; seven used words require extent 181 instead of 4006. Source algorithms and loops are preserved.
+Generic [compiler optimization](docs/OPTIMIZATION.md) uses native process images, dead private-store elimination, low-address allocation and repeated-guard fusion. The unchanged clock example now compiles to **51 rungs/114 instructions**, down from 122/261; seven used words require extent 181 instead of 4006. Source algorithms and loops are preserved. The exact artifact passed official save/fresh reopen with No error and bounded simulator movement/STOP observations. Ten frozen generic benchmarks enforce code-size and memory ceilings; physical timing remains unverified.
 
 ## Validation
 
@@ -120,7 +120,7 @@ The recorded **2026-11-06 validation rounds** contain:
 
 | Evidence | Recorded result |
 |---|---:|
-| Latest combined unit/regression suite | 703 passing tests / 222.366 s / zero skips |
+| Latest combined unit/regression suite | 712 passing tests / 214.046 s / zero skips |
 | Earlier baseline unit/regression suite | 417 passing tests |
 | Historical stress and public-program traces | 288,372 base scan frames |
 | Combined state/array, timer/counter and numeric candidates | 276 distinct candidate frames |
@@ -155,6 +155,7 @@ Run validation **locally**:
 ```sh
 make check           # Unit and regression tests
 make examples        # Compile and check the bundled examples
+make optimization-stress # Fixed generic codegen budgets and forward/reverse traces
 make stress          # Local deterministic stress suites
 ```
 

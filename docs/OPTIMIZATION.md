@@ -1,6 +1,6 @@
 # Compiler optimization
 
-The compiler reduces Ladder overhead automatically while preserving source order and observable scan behavior. The comparison below uses the **same C++ file**, SHA256 `37e2386fe336e4ef411ad3eb7ee468c4800083708049b5d22c6b93bf1b17cb7d`, compiled by baseline `1bfd233` and the validated compiler. Its reflection/shift algorithm and real loops are unchanged.
+The compiler reduces Ladder overhead automatically while preserving source order and observable scan behavior. The comparison below uses the **same C++ file**, SHA256 `37e2386fe336e4ef411ad3eb7ee468c4800083708049b5d22c6b93bf1b17cb7d`, compiled by baseline `1bfd233` and the 703-test checkpoint `13cfb9e`. Its reflection/shift algorithm and real loops are unchanged.
 
 | Resource | Before | After |
 |---|---:|---:|
@@ -23,3 +23,17 @@ Three generic changes produce the reduction:
 The exact 55/126 candidate opened with Programming No error and was saved. The simulator reached Online/Run; START showed Q0 on and the user confirmed motion. Fresh reopen and a quantitative complete cycle were not performed for this optimized candidate; physical PLC validation remains separate. The officially saved project passed local reverse/recompile/native checks over 2461 sequence positions and 14 control positions. Its reconstructed 72/165 project has not been opened in the editor.
 
 The [example's](../examples/christmas/revoada20_clock_10.cpp) sampled-S5 clock contract remains unchanged: first quantum depends on phase; missed complete periods are not inferred. Static instruction counts do not establish physical timing or broader task/immediate-I/O behavior.
+
+## Adjacent guard checkpoint
+
+The next compiler change removes repeated captured guards, preserving the comparison once in its original position. It only rewrites adjacent, unlabelled rungs with a private scalar guard and a private result that is dead after its consumer. Flags, shared/partial guards, live values and label entries remain protected. Final operand validation still applies after virtual addresses are allocated.
+
+The same application now uses **51 rungs / 114 IL**, compared with 55/126 at `13cfb9e` and 122/261 at the original baseline. The nine new regression methods and independent review cover false guards, flags, virtual numeric operands, aliasing, values live into the next scan and existing indexed-contact refusals. **712 unit/regression tests passed in 214.046 s**, with 740 inputs unchanged during that run. `make examples` also passed.
+
+Ten [frozen generic benchmarks](../tests/optimization/README.md) now enforce explicit upper bounds on rungs, IL and memory. Their 44 literal trace positions pass through IL, exported/reimported SMBP, recovered C++ and original/recovered native SDK execution. Nested numeric guards improve from 13/31 to 10/23; the other nine cases keep their costs. Run `make optimization-stress` locally. The runner also rejected a deliberately impossible zero-rung wire budget.
+
+The sampled-clock application passes 9845 positions across four START phases plus 14 button-control positions. Its recovered-C++ rebuild is now 60/133 and passes 2461 sequence positions plus 14 controls through local VM/native checks. Overlapping traces are not added into one larger total.
+
+The exact 51-rung CLI artifact opened as Ladder with **No error**, was officially saved with identical 51/114 instructions, then freshly reopened after another project with No error. Its saved bytes reached Online/Run in the official simulator: START lit Q0, observed outputs advanced, STOP turned them off, and held START did not rearm after STOP release. Official cleanup removed the simulator process and TCP502 listener. Reverse conversion of the official save produces exactly the already tested audit-C++ bytes.
+
+A 75-frame read-only capture decoded 67 one-hot frames; eight were refused by the unchanged font decoder's Q4 glyph threshold. These are sampled movement/button observations, not a complete automated visual-cycle or physical timing pass. The existing untrusted-DLL banner remains unchanged. See the [new results](validation/GUARD-FUSION-RESULTS.json) and the optimization-first [completion plan](superpowers/plans/2026-11-06-compiler-finish.md).

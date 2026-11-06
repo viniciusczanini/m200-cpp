@@ -85,6 +85,38 @@ def fuse(program, registers, members, groups, reference, live_out):
                 )
             ):
                 return a[:-1] + ["ST " + dest]
+        # A captured private guard is stable across this comparison and ST.
+        # G AND (G AND P) needs one evaluation of P, in the original position.
+        # Flag/system/word-bit guards and shared/partial stores are excluded.
+        if len(a) == 3 and len(b) == 3:
+            load, guard = bits(a[0])
+            predicate_op, predicate = bits(a[1])
+            store, temp = bits(a[2])
+            next_load, next_guard = bits(b[0])
+            operator, value = bits(b[1])
+            last, dest = bits(b[2])
+            if (
+                load == next_load == "LD"
+                and guard == next_guard
+                and temporary(guard, "bit")
+                and guard != temp
+                and predicate_op == operator == "AND"
+                and predicate.startswith("[")
+                and predicate.endswith("]")
+                and store == last == "ST"
+                and value == temp
+                and temporary(temp, "bit")
+                and (
+                    counts[temp] == 2
+                    or (temp not in live_out[end] and refs(b)[temp] == 1)
+                )
+            ):
+                # Operands still have virtual addresses at this stage. Keep
+                # the comparison verbatim; final validation checks its type,
+                # physical bounds and existing indexed-contact restrictions.
+                replacement = a[:-1] + ["ST " + dest]
+                if bounded(replacement):
+                    return replacement
         if len(a) == 2 and len(b) == 2 and a[0] == b[0]:
             load, guard = bits(a[0])
             definition = WORD_ASSIGN.fullmatch(a[1])

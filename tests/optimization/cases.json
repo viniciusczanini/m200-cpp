@@ -1,0 +1,635 @@
+{
+  "format": "m200-codegen-budgets-v1",
+  "cases": [
+    {
+      "name": "wire",
+      "source": "wire.cpp",
+      "source_sha256": "769027241e42e082dddfb4697adec1eea97c1671d88c03090671ec929191ba06",
+      "frames": [
+        {
+          "inputs": {
+            "0": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 0,
+          "expected_words_i16": {}
+        },
+        {
+          "inputs": {
+            "0": true
+          },
+          "dt_ms": 10,
+          "expected_mask": 1,
+          "expected_words_i16": {}
+        },
+        {
+          "inputs": {
+            "0": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 0,
+          "expected_words_i16": {}
+        }
+      ],
+      "max_cost": {
+        "rungs": 1,
+        "il_instructions": 2,
+        "memory_bits": 0,
+        "memory_words": 0,
+        "required_word_allocation": 0
+      }
+    },
+    {
+      "name": "packed_io",
+      "source": "packed_io.cpp",
+      "source_sha256": "34d135b0cf45e61353fa5c01f33e3d2c44a506178e7670d7b16216f0ac4a9f1d",
+      "frames": [
+        {
+          "inputs": {
+            "0": false,
+            "1": false,
+            "2": false,
+            "3": false,
+            "4": false,
+            "5": false,
+            "6": false,
+            "7": false,
+            "8": false,
+            "9": false,
+            "10": false,
+            "11": false,
+            "12": false,
+            "13": false,
+            "14": false,
+            "15": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 0,
+          "expected_words_i16": {}
+        },
+        {
+          "inputs": {
+            "0": true,
+            "1": false,
+            "2": false,
+            "3": false,
+            "4": false,
+            "5": false,
+            "6": false,
+            "7": false,
+            "8": false,
+            "9": false,
+            "10": false,
+            "11": false,
+            "12": false,
+            "13": false,
+            "14": false,
+            "15": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 1,
+          "expected_words_i16": {}
+        },
+        {
+          "inputs": {
+            "0": false,
+            "1": true,
+            "2": false,
+            "3": true,
+            "4": true,
+            "5": false,
+            "6": true,
+            "7": false,
+            "8": true,
+            "9": false,
+            "10": true,
+            "11": false,
+            "12": false,
+            "13": true,
+            "14": false,
+            "15": true
+          },
+          "dt_ms": 10,
+          "expected_mask": 42330,
+          "expected_words_i16": {}
+        },
+        {
+          "inputs": {
+            "0": true,
+            "1": true,
+            "2": true,
+            "3": true,
+            "4": true,
+            "5": true,
+            "6": true,
+            "7": true,
+            "8": true,
+            "9": true,
+            "10": true,
+            "11": true,
+            "12": true,
+            "13": true,
+            "14": true,
+            "15": true
+          },
+          "dt_ms": 10,
+          "expected_mask": 65535,
+          "expected_words_i16": {}
+        }
+      ],
+      "max_cost": {
+        "rungs": 4,
+        "il_instructions": 9,
+        "memory_bits": 2,
+        "memory_words": 1,
+        "required_word_allocation": 1
+      }
+    },
+    {
+      "name": "same_scan_q",
+      "source": "same_scan_q.cpp",
+      "source_sha256": "6d327002686b6b7655b8884a54f562e208390225b6e8d2efdb0f7dc90ce4deb5",
+      "frames": [
+        {
+          "inputs": {
+            "0": false,
+            "1": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 2,
+          "expected_words_i16": {}
+        },
+        {
+          "inputs": {
+            "0": true,
+            "1": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 0,
+          "expected_words_i16": {}
+        },
+        {
+          "inputs": {
+            "0": true,
+            "1": true
+          },
+          "dt_ms": 10,
+          "expected_mask": 5,
+          "expected_words_i16": {}
+        },
+        {
+          "inputs": {
+            "0": false,
+            "1": true
+          },
+          "dt_ms": 10,
+          "expected_mask": 3,
+          "expected_words_i16": {}
+        }
+      ],
+      "max_cost": {
+        "rungs": 5,
+        "il_instructions": 11,
+        "memory_bits": 1,
+        "memory_words": 0,
+        "required_word_allocation": 0
+      }
+    },
+    {
+      "name": "conditional_write",
+      "source": "conditional_write.cpp",
+      "source_sha256": "f126d0c6cbc4e43c56de7e176a4e9d451923c87cb806f77eb6f53cb75895188b",
+      "frames": [
+        {
+          "inputs": {
+            "0": false,
+            "1": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 0,
+          "expected_words_i16": {}
+        },
+        {
+          "inputs": {
+            "0": true,
+            "1": true
+          },
+          "dt_ms": 10,
+          "expected_mask": 3,
+          "expected_words_i16": {}
+        },
+        {
+          "inputs": {
+            "0": false,
+            "1": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 3,
+          "expected_words_i16": {}
+        },
+        {
+          "inputs": {
+            "0": true,
+            "1": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 0,
+          "expected_words_i16": {}
+        },
+        {
+          "inputs": {
+            "0": false,
+            "1": true
+          },
+          "dt_ms": 10,
+          "expected_mask": 0,
+          "expected_words_i16": {}
+        }
+      ],
+      "max_cost": {
+        "rungs": 6,
+        "il_instructions": 14,
+        "memory_bits": 2,
+        "memory_words": 0,
+        "required_word_allocation": 0
+      }
+    },
+    {
+      "name": "nested_numeric_guards",
+      "source": "nested_numeric_guards.cpp",
+      "source_sha256": "4f765c0b8f7d85e347490f3fef99cca3fabbd1db09e8d4737f6497068c752801",
+      "frames": [
+        {
+          "inputs": {
+            "0": false,
+            "1": false,
+            "2": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 0,
+          "expected_words_i16": {
+            "10": -1
+          }
+        },
+        {
+          "inputs": {
+            "0": true,
+            "1": false,
+            "2": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 0,
+          "expected_words_i16": {
+            "10": -1
+          }
+        },
+        {
+          "inputs": {
+            "0": true,
+            "1": true,
+            "2": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 1,
+          "expected_words_i16": {
+            "10": 4
+          }
+        },
+        {
+          "inputs": {
+            "0": true,
+            "1": true,
+            "2": true
+          },
+          "dt_ms": 10,
+          "expected_mask": 0,
+          "expected_words_i16": {
+            "10": 12
+          }
+        },
+        {
+          "inputs": {
+            "0": false,
+            "1": true,
+            "2": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 0,
+          "expected_words_i16": {
+            "10": 4
+          }
+        },
+        {
+          "inputs": {
+            "0": true,
+            "1": true,
+            "2": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 1,
+          "expected_words_i16": {
+            "10": 4
+          }
+        }
+      ],
+      "max_cost": {
+        "rungs": 10,
+        "il_instructions": 23,
+        "memory_bits": 3,
+        "memory_words": 2,
+        "required_word_allocation": 11
+      }
+    },
+    {
+      "name": "bool_chain",
+      "source": "bool_chain.cpp",
+      "source_sha256": "def73e2b97229a6468b0586c7249821972ca597d66aab4b71faed8fbfc6d11e3",
+      "frames": [
+        {
+          "inputs": {
+            "0": false,
+            "1": false,
+            "2": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 0,
+          "expected_words_i16": {}
+        },
+        {
+          "inputs": {
+            "0": true,
+            "1": false,
+            "2": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 3,
+          "expected_words_i16": {}
+        },
+        {
+          "inputs": {
+            "0": true,
+            "1": true,
+            "2": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 0,
+          "expected_words_i16": {}
+        },
+        {
+          "inputs": {
+            "0": false,
+            "1": false,
+            "2": true
+          },
+          "dt_ms": 10,
+          "expected_mask": 2,
+          "expected_words_i16": {}
+        },
+        {
+          "inputs": {
+            "0": true,
+            "1": true,
+            "2": true
+          },
+          "dt_ms": 10,
+          "expected_mask": 3,
+          "expected_words_i16": {}
+        }
+      ],
+      "max_cost": {
+        "rungs": 6,
+        "il_instructions": 15,
+        "memory_bits": 2,
+        "memory_words": 0,
+        "required_word_allocation": 0
+      }
+    },
+    {
+      "name": "bounded_loop",
+      "source": "bounded_loop.cpp",
+      "source_sha256": "a2c4039b13e65cc934c40e87402dfa10cd49f99a0c543728d995aaf354b10eff",
+      "frames": [
+        {
+          "inputs": {
+            "0": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 1,
+          "expected_words_i16": {
+            "10": 3
+          }
+        },
+        {
+          "inputs": {
+            "0": true
+          },
+          "dt_ms": 10,
+          "expected_mask": 2,
+          "expected_words_i16": {
+            "10": 10
+          }
+        },
+        {
+          "inputs": {
+            "0": true
+          },
+          "dt_ms": 10,
+          "expected_mask": 2,
+          "expected_words_i16": {
+            "10": 10
+          }
+        },
+        {
+          "inputs": {
+            "0": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 1,
+          "expected_words_i16": {
+            "10": 3
+          }
+        }
+      ],
+      "max_cost": {
+        "rungs": 17,
+        "il_instructions": 37,
+        "memory_bits": 3,
+        "memory_words": 4,
+        "required_word_allocation": 11
+      }
+    },
+    {
+      "name": "early_return",
+      "source": "early_return.cpp",
+      "source_sha256": "d8d01f2c2cf963ab953dae99fc9579887a760c93ea942ca4629ad84c819fd9b3",
+      "frames": [
+        {
+          "inputs": {
+            "0": true,
+            "1": true
+          },
+          "dt_ms": 10,
+          "expected_mask": 0,
+          "expected_words_i16": {}
+        },
+        {
+          "inputs": {
+            "0": false,
+            "1": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 2,
+          "expected_words_i16": {}
+        },
+        {
+          "inputs": {
+            "0": true,
+            "1": true
+          },
+          "dt_ms": 10,
+          "expected_mask": 2,
+          "expected_words_i16": {}
+        },
+        {
+          "inputs": {
+            "0": false,
+            "1": true
+          },
+          "dt_ms": 10,
+          "expected_mask": 3,
+          "expected_words_i16": {}
+        },
+        {
+          "inputs": {
+            "0": true,
+            "1": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 3,
+          "expected_words_i16": {}
+        },
+        {
+          "inputs": {
+            "0": false,
+            "1": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 2,
+          "expected_words_i16": {}
+        }
+      ],
+      "max_cost": {
+        "rungs": 7,
+        "il_instructions": 16,
+        "memory_bits": 2,
+        "memory_words": 0,
+        "required_word_allocation": 0
+      }
+    },
+    {
+      "name": "word_alias",
+      "source": "word_alias.cpp",
+      "source_sha256": "66ea30f704850fa12e1b5ed25829e6c26404c8dd51096ca74b69db86e4fb026b",
+      "frames": [
+        {
+          "inputs": {
+            "0": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 1,
+          "expected_words_i16": {
+            "20": 2,
+            "21": 1
+          }
+        },
+        {
+          "inputs": {
+            "0": true
+          },
+          "dt_ms": 10,
+          "expected_mask": 3,
+          "expected_words_i16": {
+            "20": 2,
+            "21": 3
+          }
+        },
+        {
+          "inputs": {
+            "0": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 1,
+          "expected_words_i16": {
+            "20": 2,
+            "21": 1
+          }
+        }
+      ],
+      "max_cost": {
+        "rungs": 5,
+        "il_instructions": 11,
+        "memory_bits": 1,
+        "memory_words": 2,
+        "required_word_allocation": 22
+      }
+    },
+    {
+      "name": "stateless_sr",
+      "source": "stateless_sr.cpp",
+      "source_sha256": "ebf3d3f3214ad6d76c12635596dfb2b6114f756243196f99fe7809043bdbccd2",
+      "frames": [
+        {
+          "inputs": {
+            "0": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 1,
+          "expected_words_i16": {
+            "10": 10,
+            "11": 10
+          }
+        },
+        {
+          "inputs": {
+            "0": true
+          },
+          "dt_ms": 10,
+          "expected_mask": 3,
+          "expected_words_i16": {
+            "10": 20,
+            "11": 20
+          }
+        },
+        {
+          "inputs": {
+            "0": true
+          },
+          "dt_ms": 10,
+          "expected_mask": 3,
+          "expected_words_i16": {
+            "10": 20,
+            "11": 20
+          }
+        },
+        {
+          "inputs": {
+            "0": false
+          },
+          "dt_ms": 10,
+          "expected_mask": 1,
+          "expected_words_i16": {
+            "10": 10,
+            "11": 10
+          }
+        }
+      ],
+      "max_cost": {
+        "rungs": 10,
+        "il_instructions": 21,
+        "memory_bits": 2,
+        "memory_words": 2,
+        "required_word_allocation": 12
+      }
+    }
+  ]
+}

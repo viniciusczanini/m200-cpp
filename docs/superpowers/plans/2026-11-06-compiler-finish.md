@@ -40,24 +40,26 @@
 - [x] Final combined suite: 703 passed, zero skips; integrated compiler/test inputs match the tested copy.
 - [x] Exact generated file accepted as Ladder, saved, and running in the official simulator. Record fresh reopen as pending for this candidate.
 - [x] Saved project → C++ → project preserves 2461 sequence positions and 14 button-control cases locally; disclose reconstructed cost 72/165.
-- [ ] Publish this exact increment and verify remote commit and Actions-disabled setting.
+- [x] Publish this exact increment and verify remote commit and Actions-disabled setting: `13cfb9e4b6a864932c9365412a4fafe1def30c38` on remote `main`; Actions disabled.
 
 **Done when:** The tested compiler, example, concise English usage and result manifest are on the personal public repository. No new optimization is folded silently into the 703-test checkpoint.
 
 ## Task 2: Close the current compiler optimization defects
 
-**Files:** `m200/copy_fusion.py`, `m200/allocation.py`, `m200/dead_stores.py`; add focused `tests/test_guard_fusion.py` and extend the existing optimization tests only where needed. Keep benchmark results in `docs/validation/OPTIMIZATION-RESULTS.json` with distinct checkpoints.
+**Files:** `m200/copy_fusion.py`, `m200/allocation.py`, `m200/dead_stores.py`, `tests/test_guard_fusion.py`, `tests/optimization/`, `tests/stress/optimization.py`. Keep separate result checkpoints in `docs/validation/{OPTIMIZATION,GUARD-FUSION}-RESULTS.json`.
 
 **Interface:** `fuse(program, registers, members, groups, reference, live_out)` retains its signature; all optimized programs still pass `validate` and the existing exporter/decompiler.
 
-- [ ] Write a failing size regression for adjacent `G AND (G AND P)` lowering. Add semantic controls for false guards, a live temporary, aliasing and labels; preserve existing indexed/flag gates.
-- [ ] Implement the narrowly proved fusion. Preserve predicate evaluation exactly once, in its original position. Re-run the targeted tests and independent review.
-- [ ] Add an explicit regression proving a dead pure private boolean read is eliminated, while numeric/indexed/edge/timer effects remain observable.
-- [ ] Audit the remaining benchmark IL once: list each remaining generated rung by purpose. Resolve proven redundant guards/copies/label scaffolding; keep necessary resource/scan semantics. Do not begin another open-ended optimization search.
-- [ ] Pin a compact generic benchmark set: direct I/O, packed I/O, same-scan output reads, conditional writes, nested conditions, boolean chains, bounded loops, early exits, arrays/aliases and SR calls. Store rungs, IL, unique M/MW and required address extent. Use explicit size ceilings for the patterns being fixed and require no unexplained regression elsewhere.
-- [ ] Check the same-source application and recovered-C++ round trip against their independent expected behavior. Keep loops as actual control flow, without frame tables or one rung per application state.
-- [ ] Freeze, run `make check`, `make examples` and affected local stress scripts once; review failures before publication.
-- [ ] Open/save/fresh-reopen the exact optimized CLI output and check a bounded official simulator sequence. Publish the exact tested bytes and new costs.
+- [x] Write a failing size regression for adjacent `G AND (G AND P)` lowering. Add semantic controls for false guards, a live temporary, aliasing and labels; preserve existing indexed/flag gates.
+- [x] Implement the narrowly proved fusion. Preserve predicate evaluation exactly once, in its original position. Nine focused methods and independent review passed; same C++ now 51/114.
+- [x] Add an explicit regression proving a dead pure private boolean read is eliminated, while numeric/indexed/edge/timer effects remain observable.
+- [x] Audit the remaining 51 benchmark rungs once and classify their purpose; keep the fixed audit in `GUARD-FUSION-RESULTS.json`.
+- [ ] Resolve the two remaining named emission overheads from that audit: the coalesced private word self-copy and label-only scratch anchors. Prove flag, alias, entry-path and cross-scan behavior before removing either. Keep necessary startup and clock history. Do not start another open-ended optimization search.
+- [x] Pin ten generic benchmarks in `tests/optimization/` for I/O, conditions, loops, early exits, aliases and SRs, with literal traces and explicit rung/IL/memory ceilings. The standalone runner also checks reverse conversion and rejects a deliberately impossible budget.
+- [x] Check the unchanged application against four START phases and button cases; check actual forward/reverse programs locally. Loops remain actual control flow, without frame tables or one rung per application state.
+- [x] Freeze and run local checks for the guard checkpoint: `make check` 712 PASS, `make examples` PASS, ten budget cases/44 positions PASS. Later changes to either named overhead require their own frozen validation checkpoint.
+- [x] Open/save/fresh-reopen the exact 51/114 CLI output with No error; observe RUN, movement, STOP and held-START no-rearm in the official simulator. Record parser refusals separately from those bounded observations.
+- [ ] Publish the guard checkpoint and its portable size budgets. The two named emission overheads above remain priority 0 afterwards.
 
 **Done when:** The named redundant patterns are eliminated, benchmark ceilings pass, same-source behavior and reverse conversion pass, and the frozen artifact passes the editor gate. Global optimality, a smaller program found by changing the application, and unmeasured physical scan time are not release criteria. Further optional optimizations move after Task 7; a capacity failure in a valid native program remains a required compiler defect.
 
