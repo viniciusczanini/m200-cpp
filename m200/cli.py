@@ -17,6 +17,7 @@ from .jsonio import loads
 from .capabilities import summary as capability_summary, catalogue, lookup
 from .numeric import OPS, READS, WRITES, TYPES, memory_words_used
 from .bits import memory_bits_used
+from .edge_functions import parse as expression_edge
 from .communication import KINDS
 
 ARTIFACTS = {
@@ -97,6 +98,10 @@ def build_artifacts(program, output, template=None):
             write_project(program, template, stage / "program.smbp")
         result = report(program)
         result["project_generated"] = bool(template)
+        if template:
+            result["generated_project_resources"] = report(
+                load_project(stage / "program.smbp")
+            )["resources"]
         result["artifacts"] = {
             f.name: hashlib.sha256(f.read_bytes()).hexdigest()
             for f in sorted(stage.iterdir())
@@ -171,6 +176,13 @@ def read_program(path):
 def report(program):
     addresses = memory_bits_used(program)
     words = memory_words_used(program)
+    functions = []
+    for rung in program.rungs:
+        for line in rung:
+            parts = line.split(maxsplit=1)
+            function = expression_edge(parts[0]) if parts else None
+            if function is not None:
+                functions.append(function)
     return {
         "tool": "m200-cpp",
         "version": __version__,
@@ -188,6 +200,9 @@ def report(program):
             "timer_capacity": 255,
             "communication_blocks": len(program.communications),
             "communication_capacity_per_kind": 32,
+            "rising_functions": sum(kind == "RISING" for kind, _ in functions),
+            "falling_functions": sum(kind == "FALLING" for kind, _ in functions),
+            "expression_function_index_model": "0..254 per kind; native functional-level mapping pending; SMBP expands to private M",
             "rungs": len(program.rungs),
             "il_instructions": sum(map(len, program.rungs)),
         },
@@ -284,7 +299,12 @@ def main(argv=None):
                 "native_edge_contacts": {
                     "api": ["input_rising", "input_falling", "m_rising", "m_falling"],
                     "il": ["LDR", "LDF", "ANDR", "ANDF", "ORR", "ORF", "XORR", "XORF"],
-                    "scope": "Direct embedded I0/M; events sampled per address at scan start, unaffected by repeated/skipped contacts; M writes appear next scan. Input phase/startup/restart and official acceptance pending. RISINGn/FALLINGn blocks and R/F parenthesis modifiers remain separate gaps.",
+                    "scope": "Direct embedded I0/M; events sampled per address at scan start, unaffected by repeated/skipped contacts; M writes appear next scan. Input phase/startup/restart and official acceptance pending. Expression functions are modeled separately; raw edge-block XML and R/F parenthesis modifiers remain gaps.",
+                },
+                "expression_edge_functions": {
+                    "api": ["rising(index,bool)", "falling(index,bool)"],
+                    "il": ["RISINGn", "FALLINGn"],
+                    "scope": "Unique static IDs0..254 per kind; local per-execution histories, conditional/short-circuit/loop calls. SMBP expands to persistent private M and gates, not raw edge-block enums. Phase/startup/repetition and official profile remain unverified; expansion overhead is a compiler limitation.",
                 },
                 "native_logic_ir": [
                     "STN",

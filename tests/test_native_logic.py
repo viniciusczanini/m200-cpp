@@ -340,6 +340,9 @@ class NativeLogicTests(unittest.TestCase):
             [[True, True]] * 2,
         )
 
+    def test_series_tabs_export_without_another_rung_forcing_normalization(self):
+        self.equivalent(Program([["LD\t[%MW0=0]", "ST %Q0.0"]]), [{}] * 2, [[True]] * 2)
+
     def test_unknown_block_graphics_fail_with_compile_error(self):
         with self.assertRaises(CompileError):
             graphics(

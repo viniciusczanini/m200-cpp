@@ -17,10 +17,12 @@ class Lowerer:
         self.origins = []
         self.used_words = set(reserved_words)
         self.guard = None
+        self.instruction_count = 0
 
     def append(self, lines):
         self.program.rungs.append(list(lines))
         self.origins.append(dict(self.origin))
+        self.instruction_count += len(lines)
 
     def bit(self, symbol="temporary", persistent=False):
         result = self.storage.bit(symbol, persistent)
@@ -57,8 +59,10 @@ class Lowerer:
                 line = parts[0] + " " + self.constants[key]
             normalized.append(line)
         self.append(normalized)
-        if sum(map(len, self.program.rungs)) > 10000:
-            fail("experimental instruction budget exceeded")
+        if self.instruction_count > 100000:
+            fail(
+                "compiler construction instruction budget exceeded; emitted size is not established"
+            )
 
     def new_label(self):
         if self.next_label >= 64:
@@ -107,6 +111,20 @@ class Lowerer:
         boolean(value)
         out = self.bit()
         self.rung("LDN " + value, "ST " + out)
+        return out
+
+    def expression_edge(self, op, signal, guard=None):
+        boolean(signal)
+        out = self.bit("expression_edge_result")
+        end = None
+        if guard is not None:
+            self.assign(out, "0")
+            end = self.new_label()
+            self.jump(end, guard, negate=True)
+        snapshot = self.copy(signal, "expression_edge_input")
+        self.rung("LD " + snapshot, op, "ST " + out)
+        if end is not None:
+            self.label(end)
         return out
 
     def binary(self, operator, a, b):
@@ -207,7 +225,7 @@ class Lowerer:
                 if is_indexed(value.code):
                     value = self.copy(value, "indexed_operand_snapshot")
                 # Object operands are required by several native functions.
-                if not value.code.startswith("%"):
+                if shape != "binary" and not value.code.startswith("%"):
                     value = self.copy(value)
                 prepared.append(value.code)
         out = self.word(kind)

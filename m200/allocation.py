@@ -14,6 +14,8 @@ from .flow import JUMPS, destinations, split_label
 from .model import fail
 from .numeric import Number, TYPES
 from .edges import OPS as EDGE_OPS
+from .edge_functions import parse as expression_edge
+from .copy_fusion import fuse as fuse_copies
 
 REFERENCE = re.compile(r"%M(?:W|D|F)?[0-9]+")
 ASSIGNMENT = re.compile(
@@ -57,7 +59,7 @@ def effects(rung, registers, constants, aliases=None):
         must = False
         unary = UNARY.fullmatch(line)
         assignment = ASSIGNMENT.match(line)
-        if not (assignment or unary) and op not in (
+        if not (assignment or unary or expression_edge(op) is not None) and op not in (
             "LD",
             "LDN",
             "AND",
@@ -118,7 +120,7 @@ def effects(rung, registers, constants, aliases=None):
                 definitions.add(target)
                 line_definitions.add(target)
         steps.append((line_reads, line_definitions, line_writes))
-        if op in EDGE_OPS:
+        if op in EDGE_OPS or expression_edge(op) is not None:
             acc = None
         elif op in ("LD", "LDN"):
             acc = known_bit(arg, constants)
@@ -147,11 +149,10 @@ def effects(rung, registers, constants, aliases=None):
     return reads, definitions, writes, acc, steps
 
 
-def interference(program, registers, constants, aliases=None):
+def live_ranges(program, registers, constants, aliases=None):
     count = len(program.rungs)
-    graph = {ref: set() for ref in registers}
     if not count:
-        return graph
+        return [], []
     labels = destinations(program)
     uses, defs, steps, successors = [], [], [], []
     for index, raw in enumerate(program.rungs):
@@ -199,8 +200,14 @@ def interference(program, registers, constants, aliases=None):
             for previous in predecessors[index] - queued:
                 pending.append(previous)
                 queued.add(previous)
+    return steps, [set().union(*(live[s] for s in successors[i])) for i in range(count)]
+
+
+def interference(program, registers, constants, aliases=None):
+    graph = {ref: set() for ref in registers}
+    steps, live_out = live_ranges(program, registers, constants, aliases)
     for i, instructions in enumerate(steps):
-        out = set().union(*(live[s] for s in successors[i]))
+        out = live_out[i]
         for read, defined, written in reversed(instructions):
             for target in written:
                 for other in out:
@@ -262,6 +269,15 @@ class Storage:
         return alias + ":X" + str(bit % 16)
 
     def finalize(self, program, constants):
+        fusible = {
+            ref: reg
+            for ref, reg in self.registers.items()
+            if not reg.persistent and ref not in self.groups
+        }
+        _, out = live_ranges(
+            program, fusible, {v: k == "1" for k, v in constants.items()}, self.members
+        )
+        fuse_copies(program, self.registers, self.members, self.groups, REFERENCE, out)
         fixed = {bank: set(cells) for bank, cells in self.reserved.items()}
         mapping = {}
 
@@ -362,4 +378,6 @@ class Storage:
             "contiguous_groups": len(self.groups),
             "method": "conservative CFG liveness; globals unique; explicit addresses and communication buffers reserved",
         }
+        if sum(map(len, program.rungs)) > 10000:
+            fail("experimental instruction budget exceeded after optimization")
         return program

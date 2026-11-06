@@ -13,6 +13,7 @@ from .flow import JUMPS, destinations, label_name, split_label
 from .native_logic import decode, STORES, OPEN, timer_index
 from .bits import is_string, references as bit_references, signed_pattern
 from .edges import OPS as EDGE_OPS, BASE as EDGE_BASE, LOADS, operand as edge_operand
+from .edge_functions import parse as expression_edge
 from .indexed import (
     ANY_INDEXED,
     is_indexed,
@@ -125,6 +126,7 @@ def validate(program):
             fail("invalid timer base/preset")
     labels = destinations(program)
     jumps = []
+    expression_uses = set()
     for raw_rung in program.rungs:
         label, rung = split_label(raw_rung)
         if not rung:
@@ -151,6 +153,11 @@ def validate(program):
                 bit_operand(abort[1])
                 continue
         for op, arg in decode(rung):
+            if expression_edge(op) is not None:
+                if op in expression_uses:
+                    fail("duplicate expression edge instruction identity: " + op)
+                expression_uses.add(op)
+                continue
             if op == "NUM":
                 target, name, values = instruction_operation(arg)
                 if (
@@ -257,6 +264,13 @@ class Machine:
             )
         }
         self.edge_events = {}
+        self.expression_history = {
+            op: False
+            for rung in self.decoded
+            if rung is not None
+            for op, _ in rung
+            if expression_edge(op) is not None
+        }
         self.timers = {i: TimerState(t) for i, t in program.timers.items()}
 
     def read(self, operand, inputs):
@@ -400,6 +414,16 @@ class Machine:
             saved = []
             groups = []
             for op, arg in self.decoded[pc - 1]:
+                if op in self.expression_history:
+                    current = acc
+                    previous = self.expression_history[op]
+                    acc = (
+                        (current and not previous)
+                        if op.startswith("RISING")
+                        else (previous and not current)
+                    )
+                    self.expression_history[op] = current
+                    continue
                 if op == "NUM":
                     if acc:
                         target, name, values = self.operations[arg]

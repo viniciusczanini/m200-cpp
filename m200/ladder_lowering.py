@@ -12,6 +12,7 @@ from .indexed import has_indexed_bits
 from .model import fail
 from .bits import memory_bits_used
 from .edges import OPS as EDGE_OPS, BASE as EDGE_BASE, SERIES, LOADS
+from .edge_functions import parse as expression_edge
 
 
 def needed(program):
@@ -30,7 +31,11 @@ def needed(program):
                 len(rung) == 7
                 and rung[5].startswith("ST ")
                 and not negated_comparison
-                and not any(line.split(maxsplit=1)[0] in EDGE_OPS for line in rung)
+                and not any(
+                    line.split(maxsplit=1)[0] in EDGE_OPS
+                    or expression_edge(line.split(maxsplit=1)[0]) is not None
+                    for line in rung
+                )
             ):
                 continue
             return True
@@ -54,7 +59,14 @@ def normalize(program):
 
     validate(program)
     if not needed(program):
-        return program
+        canonical = [
+            [" ".join(line.split()) for line in rung] for rung in program.rungs
+        ]
+        if canonical == program.rungs:
+            return program
+        normalized = copy.deepcopy(program)
+        normalized.rungs = canonical
+        return normalized
     if has_indexed_bits(program):
         fail("indexed-bit normalization bounds/profile are unverified")
     bits = memory_bits_used(program)
@@ -74,11 +86,46 @@ def normalize(program):
     lower.program.communications = copy.deepcopy(program.communications)
     lower.program.metadata = copy.deepcopy(program.metadata)
     acc = lower.bit("native_accumulator")
+    expression_states = {}
+    resets = []
+
+    def expression_state(op):
+        if op not in expression_states:
+            expression_states[op] = lower.bit(
+                "expression_history_" + op, persistent=True
+            )
+            resets.append(["LD %S13", "R " + expression_states[op]])
+        return expression_states[op]
+
     for index, raw in enumerate(program.rungs):
         label, rung = split_label(raw)
+        rung = [" ".join(line.split()) for line in rung]
         first = len(lower.program.rungs)
         lower.origin = {"generated": f"native logic source rung {index}"}
-        if (
+        probe = copy.copy(program)
+        probe.rungs = [rung]
+        if not needed(probe):
+            # Each rung begins with a load/block, so its accumulator is not
+            # live into the next one. Preserve already-canonical rungs.
+            lower.rung(*rung)
+        elif (
+            len(rung) == 3
+            and rung[0].split(maxsplit=1)[0] in LOADS
+            and not rung[0].startswith("LDN [")
+            and expression_edge(rung[1]) is not None
+            and rung[2].split(maxsplit=1)[0] in ("ST", "S", "R")
+        ):
+            state = expression_state(rung[1])
+            snapshot = lower.bit("expression_edge_input")
+            lower.rung(rung[0], "ST " + snapshot)
+            rising = rung[1].startswith("RISING")
+            lower.rung(
+                "LD " + (snapshot if rising else state),
+                "ANDN " + (state if rising else snapshot),
+                rung[2],
+            )
+            lower.rung("LD " + snapshot, "ST " + state)
+        elif (
             rung[0].startswith("BLK ")
             and rung[0].split(maxsplit=1)[1] in program.communications
         ):
@@ -87,6 +134,18 @@ def normalize(program):
             saved = []
             groups = []
             for op, arg in decode(rung):
+                if expression_edge(op) is not None:
+                    state = expression_state(op)
+                    result = lower.bit("expression_edge_result")
+                    rising = op.startswith("RISING")
+                    lower.rung(
+                        "LD " + (acc if rising else state),
+                        "ANDN " + (state if rising else acc),
+                        "ST " + result,
+                    )
+                    lower.assign(state, acc)
+                    lower.assign(acc, result)
+                    continue
                 if op in EDGE_OPS:
                     sample = lower.bit("native_edge_snapshot")
                     lower.rung(
@@ -151,10 +210,10 @@ def normalize(program):
                     )
         if label:
             lower.program.rungs[first].insert(0, label + ":")
-    prefix = lower.constant_rungs
+    prefix = lower.constant_rungs + resets
     lower.program.rungs = prefix + lower.program.rungs
     lower.program.metadata["rung_origins"] = [
-        {"generated": "native logic constants"} for _ in prefix
+        {"generated": "native logic constants/state initialization"} for _ in prefix
     ] + lower.origins
     lower.program.symbols.update(program.symbols)
     normalized = lower.storage.finalize(lower.program, lower.constants)
@@ -166,5 +225,13 @@ def normalize(program):
         ).hexdigest(),
         "method": "explicit accumulator/stack snapshots; existing series contacts, coils and Timer blocks",
     }
+    if expression_states:
+        normalized.metadata["expression_edge_expansion"] = {
+            "rising": sum(op.startswith("RISING") for op in expression_states),
+            "falling": sum(op.startswith("FALLING") for op in expression_states),
+            "persistent_memory_bits": len(expression_states),
+            "initial_history": False,
+            "policy": "snapshot input before output/state writes; history advances per execution",
+        }
     validate(normalized)
     return normalized

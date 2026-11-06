@@ -6,7 +6,9 @@ existente não demonstra por si só a semântica de contatos LDR/LDF.
 
 Atualização: a etapa seguinte implementa os oito contatos I0/M segundo
 `NATIVE-EDGE-CONTACTS.md`. Esta pesquisa preserva as evidências e conflitos;
-RISINGn/FALLINGn e validação externa continuam pendentes.
+O modelo local de RISINGn/FALLINGn foi acrescentado depois, conforme
+`EXPRESSION-EDGES.md`; emissão raw dos blocos e validação externa continuam
+pendentes. As observações abaixo preservam a pesquisa original.
 
 Fonte primária lida: [EIO0000003289.04](https://www.se.com/us/en/download/document/EIO0000003289/),
 pp37–45 e 47–48. Mesmo PDF preservado em `INDEXED-SOURCES.json`, SHA256

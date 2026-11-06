@@ -120,6 +120,15 @@ da chamada. Fase das entradas, partida/retomada e aceitação oficial aguardam
 validação externa. Exemplo `examples/native_edges.cpp`; contrato
 `docs/capabilities/NATIVE-EDGE-CONTACTS.md`.
 
+Para bordas de uma expressão no ponto da execução, use `plc::rising(id,bool)`
+ou `plc::falling(id,bool)`. Cada tipo tem IDs estáticos distintos0..254;
+saltos preservam o histórico e laços executam novamente o mesmo ponto.
+Chamadas condicionais e &&/|| respeitam a avaliação de C++. O exportador
+expande os blocos em M/gates de Ladder básico; o relatório registra os recursos
+do projeto efetivamente gerado. O modelo de histórico/partida ainda aguarda
+comprovação externa. Exemplo `examples/expression_edges.cpp`; contrato
+`docs/capabilities/EXPRESSION-EDGES.md` e custos em `docs/capabilities/COPY-FUSION.md`.
+
 ## Números e inventário completo de pesquisa
 
 ```cpp

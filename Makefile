@@ -1,4 +1,4 @@
-.PHONY: check examples stress digital-io-stress public-fetch public-check public-flow-fetch public-flow-check public-indexed-fetch
+.PHONY: check examples stress digital-io-stress expression-edge-stress public-fetch public-check public-flow-fetch public-flow-check public-indexed-fetch
 check:
 	python3 -m unittest discover -s tests -v
 examples:
@@ -24,6 +24,8 @@ examples:
 	python3 -m m200 check examples/bit_objects.cpp --trace examples/trace.json
 	python3 -m m200 compile examples/native_edges.cpp -o output/native-edges
 	python3 -m m200 check examples/native_edges.cpp --trace examples/trace.json
+	python3 -m m200 compile examples/expression_edges.cpp -o output/expression-edges
+	python3 -m m200 check examples/expression_edges.cpp --trace examples/trace.json
 stress:
 	python3 tests/stress/run.py
 	python3 tests/stress/control_flow.py
@@ -35,6 +37,9 @@ stress:
 	python3 tests/stress/bit_objects.py
 	python3 tests/stress/digital_io.py
 	python3 tests/stress/native_edges.py
+	python3 tests/stress/expression_edges.py
+expression-edge-stress:
+	python3 tests/stress/expression_edges.py
 digital-io-stress:
 	python3 tests/stress/digital_io.py
 public-fetch:

@@ -33,6 +33,9 @@ inline bool input_rising(int n){if(n<0||n>=24)__builtin_trap();return detail::in
 inline bool input_falling(int n){if(n<0||n>=24)__builtin_trap();return detail::input_fall[n];}
 inline bool m_rising(int n){if(n<0||n>=(detail::bit_memory_limit?detail::bit_memory_limit:1024))__builtin_trap();return detail::memory_rise[n];}
 inline bool m_falling(int n){if(n<0||n>=(detail::bit_memory_limit?detail::bit_memory_limit:1024))__builtin_trap();return detail::memory_fall[n];}
+namespace detail {inline bool rising_history[255]={},falling_history[255]={};}
+inline bool rising(int n,bool value){if(n<0||n>=255)__builtin_trap();bool result=value&&!detail::rising_history[n];detail::rising_history[n]=value;return result;}
+inline bool falling(int n,bool value){if(n<0||n>=255)__builtin_trap();bool result=detail::falling_history[n]&&!value;detail::falling_history[n]=value;return result;}
 inline void write_m(int n,bool v) { detail::memory[n] = v; }
 struct BitMemory { explicit BitMemory(int count){if(count<1||count>1024)__builtin_trap();detail::bit_memory_limit=count;} };
 inline bool system(int n) {
@@ -130,6 +133,8 @@ bool input_rising(int);
 bool input_falling(int);
 bool m_rising(int);
 bool m_falling(int);
+bool rising(int,bool);
+bool falling(int,bool);
 void write_m(int,bool);
 struct BitMemory { explicit BitMemory(int); };
 bool read_m_indexed(int,int);

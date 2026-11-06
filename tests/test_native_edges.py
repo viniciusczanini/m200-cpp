@@ -230,7 +230,7 @@ void scan(){plc::output(0,input_rising(plc::input(0)));}""")
             )
         with self.assertRaises(CompileError):
             self.compile("bool x=plc::input_rising(0);void scan(){plc::output(0,x);}")
-        for op in ["RISING0", "FALLING0", "AND(R %M0", "OR(F %M0"]:
+        for op in ["RISINGX", "FALLING255", "AND(R %M0", "OR(F %M0"]:
             with self.subTest(op=op), self.assertRaises(CompileError):
                 validate(Program([["LD %M0", op, "ST %Q0.0"]]))
 

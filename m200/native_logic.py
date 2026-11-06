@@ -6,6 +6,7 @@ from .model import fail
 from .numeric import is_operation
 from .flow import JUMPS
 from .edges import OPS as EDGE_OPS, LOADS
+from .edge_functions import parse as expression_edge
 
 STORES = ("ST", "STN", "S", "R")
 LOGIC = ("LD", "LDN", "AND", "ANDN", "OR", "ORN", "XOR", "XORN", *EDGE_OPS)
@@ -40,7 +41,9 @@ def timer_body(rung):
     before = rung[1:at]
     after = rung[out + 2 : -1]
     if any(
-        line.split(maxsplit=1)[0] not in (*LOGIC, *OPEN, "N", ")") for line in before
+        line.split(maxsplit=1)[0] not in (*LOGIC, *OPEN, "N", ")")
+        and expression_edge(line.split(maxsplit=1)[0]) is None
+        for line in before
     ):
         fail("unsupported timer input instruction")
     if any(
@@ -67,7 +70,10 @@ def decode(rung):
             arg = parts[1] if len(parts) == 2 else ""
         if i == 0 and op not in LOADS and not (len(rung) == 1 and op == "JMP"):
             fail("rung must begin with a supported load")
-        if op in (*STACK, "N", ")"):
+        if expression_edge(op) is not None:
+            if arg:
+                fail("expression edge function takes no operand")
+        elif op in (*STACK, "N", ")"):
             if arg:
                 fail("unexpected operand for " + op)
             if op in STACK:

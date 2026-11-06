@@ -5,6 +5,7 @@ from .flow import JUMPS, split_label
 from .native_logic import decode, STORES, OPEN
 from .bits import word_bit, is_string, bit_string
 from .edges import OPS as EDGE_OPS, BASE as EDGE_BASE, cpp as edge_cpp
+from .edge_functions import parse as expression_edge
 from .indexed import (
     is_indexed,
     parse as parse_indexed,
@@ -149,6 +150,11 @@ def to_cpp(program):
         saved = []
         groups = []
         for op, arg in decode(rung):
+            function = expression_edge(op)
+            if function is not None:
+                kind, i = function
+                lines.append(f"  accumulator = plc::{kind.lower()}({i},accumulator);")
+                continue
             if op == "NUM":
                 line = arg
                 target, name, values = instruction_operation(line)

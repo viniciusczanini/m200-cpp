@@ -18,6 +18,7 @@ from .communication import KINDS, BOOL_FIELDS, NUM_FIELDS
 from .indexed import is_indexed, is_bit_indexed
 from .bits import bit_string
 from .edges import API as EDGE_API
+from .edge_functions import API as EXPRESSION_API
 
 PACK_READS = {
     f"read_{bank}_bits_{kind}": (bank, kind)
@@ -114,6 +115,7 @@ class Frontend:
         self.dynamic_arrays = set()
         self.instances = {}
         self.calls = set()
+        self.expression_uses = set()
         self.active = []
         self.inputs = {}
         self.outputs = {}
@@ -474,6 +476,21 @@ class Frontend:
         if kind == "CallExpr":
             name, args = self.call(node)
             key = name.removeprefix("plc::")
+            if name in EXPRESSION_API:
+                if self.active:
+                    self.error(
+                        node,
+                        "stateful expression edge calls are not allowed inside pure helpers",
+                    )
+                op = EXPRESSION_API[name] + str(self.index(args[0], 255, node))
+                if op in self.expression_uses:
+                    self.error(
+                        node,
+                        "duplicate static expression edge instruction identity: " + op,
+                    )
+                self.expression_uses.add(op)
+                signal = boolean(self.expr(args[1], env))
+                return self.lower.expression_edge(op, signal, self.lower.guard)
             if key in EDGE_API and name == "plc::" + key:
                 bank, edge = EDGE_API[key]
                 index = self.index(
@@ -955,6 +972,9 @@ class Frontend:
         elif kind == "CallExpr":
             name, args = self.call(node)
             key = name.removeprefix("plc::")
+            if name in EXPRESSION_API:
+                self.expr(node)
+                return
             if key == "write_word_bit":
                 index = self.index(args[0], self.word_count or 8000, node)
                 bit = self.index(args[1], 16, node)

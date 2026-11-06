@@ -416,3 +416,63 @@ RISINGn/FALLINGn, modificadores de parênteses, ciclo de vida e demais recursos
 permanecem lacunas, sem reduzir a meta de equivalência integral. Editor e PLC
 físico pendentes; biblioteca incompleta e objetivo ativo. Tudo local, sem CI,
 publicação ou transferência/atuação no PLC.
+
+
+## Continuação do objetivo: bordas de expressão e capacidade no caminho inverso
+
+Após `e7c40fd`, RISINGn/FALLINGn têm gramática fechada, IDs0..254 separados
+por tipo, API bool `plc::rising/falling(id,value)`, VM/SDK, reversão e expansão
+em Ladder básico. O histórico avança em cada execução, inclusive entrada
+false; skip preserva o último valor avaliado. Condições, &&/||, aninhamento,
+laços, grupos e entradas de Timer têm testes. Histórico inicial false e
+repetição no mesmo scan são políticas locais ainda sem prova externa.
+
+O backend reserva M persistente e captura a entrada antes de escrever saída
+ou histórico. Não emite raw RisingEdgeBlock/FallingEdgeBlock nem presume o
+mapeamento interno do nível funcional. O relatório de compilação diferencia
+recursos do IR dos recursos do arquivo efetivamente gerado; overhead de
+expansão é limitação da ferramenta, sem reduzir a meta integral.
+
+O teste que observa todos os resultados das 255 funções de cada tipo revelou
+estouro do budget na recompilação/reexportação. O teste foi mantido e passou
+após preservar rungs já canônicos e fundir cópias privadas antes da alocação.
+A fusão considera owners/aliases e vida no CFG, incluindo saltos para trás e
+vida entre scans; mantém ordem de leituras com efeitos, labels e limites de
+colunas. Os budgets de construção100.000 e emissão10.000 são da ferramenta,
+sem demonstrar capacidade física ou tempo de scan. Contratos detalhados:
+`../capabilities/EXPRESSION-EDGES.md` e `../capabilities/COPY-FUSION.md`.
+
+Rodada final: **331 testes em 117,791 s**, exemplos, ensaios públicos, lint,
+formatação e diff passaram. Os onze scripts da receita stress foram rodados
+localmente, com quatro workers e logs/statuses separados; o alvo `make stress`
+não foi invocado. O stress novo tem **12 casos/6.144 scans**, incluindo todas
+as 510 identidades, oracle independente de chamadas e C++ do arquivo XML
+realmente exportado recompilado e exportado novamente. Os originais autênticos
+T10/15/20 são rungs inteiros isolados, com hash conferido e harness de Q/S6/MD
+explícito; gráfico raw e projeto estrangeiro inteiro não são declarados aceitos.
+Um erro no harness T20 foi corrigido para Q0.11 após ler o original; não houve
+alteração de bytes de nenhum original.
+
+A matriz das **24 entradas x16 saídas x2 polaridades =768 ligações** passou de
+novo: 49 casos/12.800 scans, incluindo walking ones/zeros, retenção, condições,
+inversão, leitura após escrita e transferência packed no mesmo ciclo. Os testes
+de Modbus e demais recursos existentes passaram novamente. Isso comprova a
+imagem lógica local; eletrônica, filtros, fallback e ciclo de vida físicos
+continuam pendentes.
+
+Total final: **150.868 scans de stress +18.176 públicos =169.044**, sem somar
+reruns, frames unitários, etapas de comparação ou os 28.000 scans extras dos
+revisores. A revisão de bordas encontrou LDN de comparação e whitespace na
+exportação, ambos com regressões RED/GREEN corrigidas. A revisão da fusão não
+relatou achados importantes/críticos; depois dela foi acrescentada uma regressão
+de largura de colunas no IR do Lowerer, também RED/GREEN. Ver
+`EXPRESSION-EDGE-REVIEW.md`.
+
+Resultados e hashes atuais: `EXPRESSION-EDGE-LOCAL-RESULTS.json`,
+`EXPRESSION-EDGE-STRESS-RESULTS.json` e os dez relatórios de stress/públicos
+referenciados no primeiro. Os relatórios locais das etapas anteriores são
+históricos; o código e cada relatório atual foram conferidos por hash. Editor,
+perfil exato e PLC pendentes. Biblioteca incompleta e objetivo integral ativo;
+contadores, demais flags/objetos/periféricos, tarefas e outras lacunas da tabela
+continuam trabalho aberto. Tudo local, sem CI, publicação ou transmissão/atuação
+no PLC.

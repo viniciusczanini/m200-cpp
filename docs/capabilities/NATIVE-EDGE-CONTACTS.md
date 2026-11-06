@@ -25,8 +25,9 @@ Fase exata de I, partida/retomada e eventos/tarefas continuam sem comprovação
 externa. Esses limites não são uma garantia de equivalência física.
 
 As classes RisingEdge/FallingEdge existentes continuam detectores no ponto da
-chamada. RISINGn/FALLINGn nativos e modificadores R/F de parênteses são uma
-lacuna separada; não se alegam implementados por estes contatos.
+chamada. RISINGn/FALLINGn têm um contrato separado em `EXPRESSION-EDGES.md`,
+acrescentado depois desta etapa; não se alegam implementados por estes contatos.
+XML raw dos blocos e modificadores R/F de parênteses continuam lacunas.
 
 ## Caminhos e Ladder
 
