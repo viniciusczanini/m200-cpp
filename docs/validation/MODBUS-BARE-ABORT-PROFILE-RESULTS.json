@@ -1,0 +1,1049 @@
+{
+  "date": "2026-11-06",
+  "classification": "PASS within exact closed native bare binding and local-model scope",
+  "base_commit_before_documentation": "fdbd6053931c268a2b40ab59328d7d7887dee602",
+  "increment": {
+    "baseline_methods": 587,
+    "new_methods": 15,
+    "total_methods": 602,
+    "focused_methods": 93,
+    "focused_seconds": 9.923,
+    "TDD_three_fixture_RED": "15 methods,24 assertion/subtest failures,0.781s at existing bare import/export refusals; full15/27 control passed"
+  },
+  "full_regression": {
+    "unittest": {
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 290.762,
+      "path": "output/diagnostics/modbus-bare-abort-profile-2026-11-06/full-regression.log",
+      "sha256": "c6d4c96029ca06b5dec55f5d6e8c39fb95c681e01f91d3ba1fd5887b627a6c83",
+      "bytes": 65679,
+      "methods": 602,
+      "reported_seconds": 290.617,
+      "skips": 0
+    },
+    "checks": [
+      {
+        "command": [
+          "/Users/tommy/.cache/uv/archive-v0/1O413pzy7Uuv0G71/bin/ruff",
+          "check",
+          "m200/__init__.py",
+          "m200/__main__.py",
+          "m200/allocation.py",
+          "m200/arithmetic.py",
+          "m200/arrays.py",
+          "m200/bits.py",
+          "m200/boolean_bdd.py",
+          "m200/capabilities.py",
+          "m200/cli.py",
+          "m200/communication.py",
+          "m200/communication_graph.py",
+          "m200/communication_xml.py",
+          "m200/config.py",
+          "m200/conversions.py",
+          "m200/copy_fusion.py",
+          "m200/counter_graph.py",
+          "m200/counter_xml.py",
+          "m200/counters.py",
+          "m200/edge_functions.py",
+          "m200/edges.py",
+          "m200/flow.py",
+          "m200/frontend.py",
+          "m200/il.py",
+          "m200/indexed.py",
+          "m200/jsonio.py",
+          "m200/ladder_lowering.py",
+          "m200/levels.py",
+          "m200/lower.py",
+          "m200/modbus.py",
+          "m200/model.py",
+          "m200/native.py",
+          "m200/native_logic.py",
+          "m200/numeric.py",
+          "m200/project.py",
+          "m200/register_graph.py",
+          "m200/register_xml.py",
+          "m200/reverse.py",
+          "m200/timer_profile.py",
+          "m200/timers.py",
+          "tests/editor_validation/run.py",
+          "tests/editor_validation/sequence_timers.py",
+          "tests/public/control_flow.py",
+          "tests/public/fetch.py",
+          "tests/public/run.py",
+          "tests/stress/bit_objects.py",
+          "tests/stress/boolean_audit.py",
+          "tests/stress/control_flow.py",
+          "tests/stress/conversions.py",
+          "tests/stress/counter_graphs.py",
+          "tests/stress/counters.py",
+          "tests/stress/digital_io.py",
+          "tests/stress/dynamic_arrays.py",
+          "tests/stress/expression_edges.py",
+          "tests/stress/il_properties.py",
+          "tests/stress/indexed.py",
+          "tests/stress/integer_flags.py",
+          "tests/stress/modbus_full_pin.py",
+          "tests/stress/native_edges.py",
+          "tests/stress/native_logic.py",
+          "tests/stress/run.py",
+          "tests/stress/timer_modes.py",
+          "tests/stress/timer_properties.py",
+          "tests/test_adversarial.py",
+          "tests/test_allocation.py",
+          "tests/test_arrays.py",
+          "tests/test_bit_communication_xml.py",
+          "tests/test_bit_objects.py",
+          "tests/test_capabilities.py",
+          "tests/test_communication_compiler.py",
+          "tests/test_communication_project.py",
+          "tests/test_communication_xml.py",
+          "tests/test_control_flow.py",
+          "tests/test_conversions.py",
+          "tests/test_copy_fusion.py",
+          "tests/test_counter_graphs.py",
+          "tests/test_counters.py",
+          "tests/test_dynamic_arrays.py",
+          "tests/test_expression_edges.py",
+          "tests/test_inactive_pulse_aliases.py",
+          "tests/test_indexed.py",
+          "tests/test_indexed_bits.py",
+          "tests/test_integer_flags.py",
+          "tests/test_mast_task_profile.py",
+          "tests/test_modbus.py",
+          "tests/test_modbus_bare_abort_native_profile.py",
+          "tests/test_modbus_full_pin_native_profile.py",
+          "tests/test_modbus_single_native_profile.py",
+          "tests/test_modbus_transport_recovery.py",
+          "tests/test_modbus_write_read_native_profile.py",
+          "tests/test_native_edges.py",
+          "tests/test_native_end_graphs.py",
+          "tests/test_native_logic.py",
+          "tests/test_numeric.py",
+          "tests/test_numeric_stress.py",
+          "tests/test_official_profile.py",
+          "tests/test_public_regressions.py",
+          "tests/test_register_graph.py",
+          "tests/test_register_xml.py",
+          "tests/test_review_regressions.py",
+          "tests/test_scan_exit.py",
+          "tests/test_timer_modes.py",
+          "tests/test_timer_option_bindings.py",
+          "tests/test_timer_properties.py",
+          "tests/test_timer_property_stress.py",
+          "tests/test_timer_xml_bindings.py",
+          "tests/test_toolchain.py"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.043,
+        "path": "output/diagnostics/modbus-bare-abort-profile-2026-11-06/ruff-check.log",
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "bytes": 19
+      },
+      {
+        "command": [
+          "/Users/tommy/.cache/uv/archive-v0/1O413pzy7Uuv0G71/bin/ruff",
+          "format",
+          "--check",
+          "m200/__init__.py",
+          "m200/__main__.py",
+          "m200/allocation.py",
+          "m200/arithmetic.py",
+          "m200/arrays.py",
+          "m200/bits.py",
+          "m200/boolean_bdd.py",
+          "m200/capabilities.py",
+          "m200/cli.py",
+          "m200/communication.py",
+          "m200/communication_graph.py",
+          "m200/communication_xml.py",
+          "m200/config.py",
+          "m200/conversions.py",
+          "m200/copy_fusion.py",
+          "m200/counter_graph.py",
+          "m200/counter_xml.py",
+          "m200/counters.py",
+          "m200/edge_functions.py",
+          "m200/edges.py",
+          "m200/flow.py",
+          "m200/frontend.py",
+          "m200/il.py",
+          "m200/indexed.py",
+          "m200/jsonio.py",
+          "m200/ladder_lowering.py",
+          "m200/levels.py",
+          "m200/lower.py",
+          "m200/modbus.py",
+          "m200/model.py",
+          "m200/native.py",
+          "m200/native_logic.py",
+          "m200/numeric.py",
+          "m200/project.py",
+          "m200/register_graph.py",
+          "m200/register_xml.py",
+          "m200/reverse.py",
+          "m200/timer_profile.py",
+          "m200/timers.py",
+          "tests/editor_validation/run.py",
+          "tests/editor_validation/sequence_timers.py",
+          "tests/public/control_flow.py",
+          "tests/public/fetch.py",
+          "tests/public/run.py",
+          "tests/stress/bit_objects.py",
+          "tests/stress/boolean_audit.py",
+          "tests/stress/control_flow.py",
+          "tests/stress/conversions.py",
+          "tests/stress/counter_graphs.py",
+          "tests/stress/counters.py",
+          "tests/stress/digital_io.py",
+          "tests/stress/dynamic_arrays.py",
+          "tests/stress/expression_edges.py",
+          "tests/stress/il_properties.py",
+          "tests/stress/indexed.py",
+          "tests/stress/integer_flags.py",
+          "tests/stress/modbus_full_pin.py",
+          "tests/stress/native_edges.py",
+          "tests/stress/native_logic.py",
+          "tests/stress/run.py",
+          "tests/stress/timer_modes.py",
+          "tests/stress/timer_properties.py",
+          "tests/test_adversarial.py",
+          "tests/test_allocation.py",
+          "tests/test_arrays.py",
+          "tests/test_bit_communication_xml.py",
+          "tests/test_bit_objects.py",
+          "tests/test_capabilities.py",
+          "tests/test_communication_compiler.py",
+          "tests/test_communication_project.py",
+          "tests/test_communication_xml.py",
+          "tests/test_control_flow.py",
+          "tests/test_conversions.py",
+          "tests/test_copy_fusion.py",
+          "tests/test_counter_graphs.py",
+          "tests/test_counters.py",
+          "tests/test_dynamic_arrays.py",
+          "tests/test_expression_edges.py",
+          "tests/test_inactive_pulse_aliases.py",
+          "tests/test_indexed.py",
+          "tests/test_indexed_bits.py",
+          "tests/test_integer_flags.py",
+          "tests/test_mast_task_profile.py",
+          "tests/test_modbus.py",
+          "tests/test_modbus_bare_abort_native_profile.py",
+          "tests/test_modbus_full_pin_native_profile.py",
+          "tests/test_modbus_single_native_profile.py",
+          "tests/test_modbus_transport_recovery.py",
+          "tests/test_modbus_write_read_native_profile.py",
+          "tests/test_native_edges.py",
+          "tests/test_native_end_graphs.py",
+          "tests/test_native_logic.py",
+          "tests/test_numeric.py",
+          "tests/test_numeric_stress.py",
+          "tests/test_official_profile.py",
+          "tests/test_public_regressions.py",
+          "tests/test_register_graph.py",
+          "tests/test_register_xml.py",
+          "tests/test_review_regressions.py",
+          "tests/test_scan_exit.py",
+          "tests/test_timer_modes.py",
+          "tests/test_timer_option_bindings.py",
+          "tests/test_timer_properties.py",
+          "tests/test_timer_property_stress.py",
+          "tests/test_timer_xml_bindings.py",
+          "tests/test_toolchain.py"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.01,
+        "path": "output/diagnostics/modbus-bare-abort-profile-2026-11-06/ruff-format.log",
+        "sha256": "567cf9662cb4d79c3e23b3904f6b02d25d7ae3d1f3da6155dd946d1e871cad4e",
+        "bytes": 28
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.018,
+        "path": "output/diagnostics/modbus-bare-abort-profile-2026-11-06/diff-check.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    ],
+    "pinned_python_files": 106,
+    "source_pin": {
+      "path": "output/diagnostics/modbus-bare-abort-profile-2026-11-06/source-pin.json",
+      "sha256": "3fe10a6292a801c096d8572d9c57bf3ece560755d6d9c8bb78debc78f4802c6e",
+      "inputs": 164
+    },
+    "pins_unchanged": true,
+    "changed_inputs": [],
+    "scope": "Exact 164 listed inputs; no claim about unlisted concurrent documentation",
+    "pass": true
+  },
+  "closed_profile": {
+    "target": "TM200CE40T",
+    "actual_level": "FunctLevelMan21_0",
+    "human_level": "14.0",
+    "actual_link": "SL1 master",
+    "objects": {
+      "READ_VAR": "I / FC2",
+      "WRITE_VAR": "Q / FC15",
+      "WRITE_READ_VAR": "MW / FC23"
+    },
+    "inputs": "Canonical normal direct M0..M1023 contacts",
+    "native_rungs": 1,
+    "native_lexical_IL_lines": 6,
+    "native_graph_entities": 3,
+    "canonical_rungs": 1,
+    "canonical_IL_lines": 6,
+    "parameterization": "Existing typed bounds/full buffers and actual fields, never fixture hash dispatch"
+  },
+  "serialization": {
+    "preferred_full": "Complete adjacent same-key ordered DONE/BUSY/ABORTED/ERROR ST M quartet with no interior labels/entries still collapses to15IL/27entities",
+    "safe_fallback": "Bare6/3 consumes one rung; partial/reordered/interleaved/labelled/ordinary S-R-Q status rungs remain separate and ordered",
+    "bare_origins": "One ordinary source origin; full five-origin suffix and group hints never reconstruct executable content",
+    "IL_only": "Established unselected empty-graph four/six-line import retained",
+    "partial_native_9_11_13": "Still refused; separate ordinary status rungs do not establish partial native graph support"
+  },
+  "fixtures": [
+    {
+      "kind": "read",
+      "saved": {
+        "path": "tests/fixtures/official_tm200ce40t_modbus_bare_abort_read.smbp",
+        "bytes": 88863,
+        "sha256": "222de155bd4061649a017859f8775322974c3e06b3a85204ff85ae015e35b3e4"
+      },
+      "provenance": {
+        "path": "tests/fixtures/official_tm200ce40t_modbus_bare_abort_read.provenance.json",
+        "bytes": 3869,
+        "sha256": "2996f59a99bc0b3ada6e6ed5a0710385af585deeb255c687c9f0c38231d7fd42"
+      },
+      "native_IL": [
+        "BLK %READ_VAR0",
+        "LD %M20",
+        "EXECUTE",
+        "LD %M21",
+        "ABORT",
+        "END_BLK"
+      ],
+      "native_graph": [
+        [
+          "NormalContact",
+          "%M20",
+          "0",
+          "0",
+          "Left, Right"
+        ],
+        [
+          "NormalContact",
+          "%M21",
+          "1",
+          "0",
+          "Left, Right"
+        ],
+        [
+          "ReadVarBasic",
+          "%READ_VAR0",
+          "0",
+          "1",
+          "Left"
+        ]
+      ],
+      "preservation": {
+        "normalized_IL_sequence_equal": true,
+        "hardware_semantics_equal": true,
+        "typed_function_block_semantics_equal": true,
+        "hardware_canonical_sha256": "a3f0dc223eac3387b7ea387076aa025d3efb13adfede6a93844a7257495a2c8a",
+        "function_blocks_canonical_sha256": "9a4b9994eb26bbc0c3e86f7a9c8f23b786773fb4d4f8cace5924dffa914c1758"
+      },
+      "official_stage": "Controlled hand-built IL derivative: conversion, Ctrl+S and fresh saved-clone Programming reopen No error; no compile/runtime transaction claim"
+    },
+    {
+      "kind": "write",
+      "saved": {
+        "path": "tests/fixtures/official_tm200ce40t_modbus_bare_abort_write.smbp",
+        "bytes": 88872,
+        "sha256": "1489ad6bdcdde1101708088d37ee2eacb326ee23a3c6ac8c0d91cbe25f51fb7d"
+      },
+      "provenance": {
+        "path": "tests/fixtures/official_tm200ce40t_modbus_bare_abort_write.provenance.json",
+        "bytes": 3892,
+        "sha256": "af9f67dba2d31a96d37f278ff3af38f72bfe41a14dc5a577eecdd731c18ecf61"
+      },
+      "native_IL": [
+        "BLK %WRITE_VAR0",
+        "LD %M22",
+        "EXECUTE",
+        "LD %M23",
+        "ABORT",
+        "END_BLK"
+      ],
+      "native_graph": [
+        [
+          "NormalContact",
+          "%M22",
+          "0",
+          "0",
+          "Left, Right"
+        ],
+        [
+          "NormalContact",
+          "%M23",
+          "1",
+          "0",
+          "Left, Right"
+        ],
+        [
+          "WriteVarBasic",
+          "%WRITE_VAR0",
+          "0",
+          "1",
+          "Left"
+        ]
+      ],
+      "preservation": {
+        "normalized_IL_sequence_equal": true,
+        "hardware_semantics_equal": true,
+        "typed_function_block_semantics_equal": true,
+        "hardware_canonical_sha256": "a3f0dc223eac3387b7ea387076aa025d3efb13adfede6a93844a7257495a2c8a",
+        "function_blocks_canonical_sha256": "8aec4ba47d50d47c056f35228c1f01dc72e8c9119e6518b5d6eeed9840c89235"
+      },
+      "official_stage": "Controlled hand-built IL derivative: conversion, Ctrl+S and fresh saved-clone Programming reopen No error; no compile/runtime transaction claim"
+    },
+    {
+      "kind": "write_read",
+      "saved": {
+        "path": "tests/fixtures/official_tm200ce40t_modbus_bare_abort_write_read.smbp",
+        "bytes": 90288,
+        "sha256": "ce46d988bcdaf5e9f0add2d17daff51deb0074240a937ca5f85aeed933ea8890"
+      },
+      "provenance": {
+        "path": "tests/fixtures/official_tm200ce40t_modbus_bare_abort_write_read.provenance.json",
+        "bytes": 3942,
+        "sha256": "c4403129ec28518b3af4d7d18adf041db9eceea6dd6e29dd603f93d24d67f586"
+      },
+      "native_IL": [
+        "BLK %WRITE_READ_VAR0",
+        "LD %M24",
+        "EXECUTE",
+        "LD %M25",
+        "ABORT",
+        "END_BLK"
+      ],
+      "native_graph": [
+        [
+          "NormalContact",
+          "%M24",
+          "0",
+          "0",
+          "Left, Right"
+        ],
+        [
+          "NormalContact",
+          "%M25",
+          "1",
+          "0",
+          "Left, Right"
+        ],
+        [
+          "WriteReadVarBasic",
+          "%WRITE_READ_VAR0",
+          "0",
+          "1",
+          "Left"
+        ]
+      ],
+      "preservation": {
+        "normalized_IL_sequence_equal": true,
+        "hardware_semantics_equal": true,
+        "typed_function_block_semantics_equal": true,
+        "hardware_canonical_sha256": "a3f0dc223eac3387b7ea387076aa025d3efb13adfede6a93844a7257495a2c8a",
+        "function_blocks_canonical_sha256": "810b088809009b477e88001341f9ca0f517d226962b8020496687155b290cb25"
+      },
+      "official_stage": "Controlled hand-built IL derivative: conversion, Ctrl+S and fresh saved-clone Programming reopen No error; no compile/runtime transaction claim"
+    }
+  ],
+  "independent_review": {
+    "classification": "PASS; no actionable finding in bounded native binding/local-model scope",
+    "main": {
+      "status": "PASS bounded independent frozen-core probes",
+      "source_pin_sha256": "df19fb2bce6054a371c54df4ec23f886b2733676735dfa2ba2c80a0dd7884d43",
+      "source_inputs_verified_unchanged": 163,
+      "counts": {
+        "authentic_import_exports": 3,
+        "bounded_parameter_exports": 36,
+        "graph_entity_permutation_imports": 18,
+        "malformed_graph_import_refusals": 138,
+        "status_permutation_exports": 24,
+        "ordinary_status_decompositions": 8,
+        "audit_comment_ignores": 9,
+        "atomic_destination_refusals": 63,
+        "literal_local_protocol_recipes": 3
+      },
+      "alias_trace": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          2
+        ]
+      ],
+      "origin_boundary_preserved": true,
+      "no_full_suite_or_official_transaction_claim": true
+    },
+    "supplement": {
+      "status": "PASS supplementary frozen-core probes",
+      "source_pin_sha256": "df19fb2bce6054a371c54df4ec23f886b2733676735dfa2ba2c80a0dd7884d43",
+      "all_source_pins_unchanged": 163,
+      "counts": {
+        "partial_native_body_refusals": 9,
+        "full_native_order_or_geometry_refusals": 15,
+        "bare_opcode_refusals": 9,
+        "mixed_bare_full_origin_roundtrips": 3,
+        "late_atomic_output_refusals": 6,
+        "literal_absent_transport_representations": 4
+      },
+      "absent_transport_literal_Q0_3": [
+        [
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          true,
+          false,
+          false,
+          false
+        ],
+        [
+          true,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          true,
+          false,
+          false,
+          false
+        ]
+      ],
+      "scope": "Local reference/SDK behavior; no official runtime/transaction claim or full suite."
+    },
+    "helper_correction": "Initial OR normalization assertion was too strict; initial log/artifacts preserved, final exact-origin and independent truth-table check passed. No product edit/finding.",
+    "full_suite_verification": {
+      "classification": "PASS; terminal602/290.617s/zero skips, all164 current pins and original163 review pins verified read-only; no rerun",
+      "artifact": {
+        "path": "output/reports/modbus-bare-abort-independent-review-2026-11-06/TERMINAL-602-VERIFICATION.json",
+        "bytes": 1449,
+        "sha256": "ae79052be16207546913a5b96f0fd1de241d233be51d56875d260ada7f19d9e3"
+      }
+    }
+  },
+  "coordinated_stress": {
+    "script": {
+      "path": "tests/stress/modbus_full_pin.py",
+      "bytes": 58856,
+      "sha256": "98b443a7211d1269a637973f4438add6f0fc8522d1f18e2e0954cd044aabd409"
+    },
+    "positions": 74,
+    "starts": 19,
+    "seconds": 13.125,
+    "separate_public_record": "docs/validation/MODBUS-COMPLEX-FULL-PIN-LOCAL-RESULTS.json",
+    "counts_not_added_to_unit_methods_or_historical_frames": true,
+    "stage": "Post602 standalone validation-only input-byte assertion strengthening",
+    "verification": {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/verification.json",
+      "bytes": 3954,
+      "sha256": "fe641504cf18bebb9d51578544fb3df3ab73dde8d48cae1de70dca640513ab7f"
+    }
+  },
+  "source_inputs": {
+    "base_commit": "fdbd6053931c268a2b40ab59328d7d7887dee602",
+    "expected_test_methods": 602,
+    "new_bare_profile_methods": 15,
+    "review_inputs": 163,
+    "coordinated_final_stress_inputs": 1,
+    "scope": "Exact 164 listed inputs; no claim about unlisted concurrent documentation",
+    "sha256": {
+      ".gitattributes": "827d619bb21db55def1ab74b2963d4b470aacf3bcda302422a23332d3db3cade",
+      "docs/capabilities/COUNTER-SOURCES.json": "2da70defcc1c7dedbea5dbf97e3d53df0e74a766cfde231852954af4419ddfbd",
+      "docs/capabilities/INDEXED-SOURCES.json": "8d9e40c40a2ea1df365bed39b50321aae2370aa3e48f10dab496d7d3c143ad1a",
+      "docs/validation/TIMER-MODE-STRESS-RESULTS.json": "2422e4df23cfe7c1d4c844b34e651490bb444c1862805f6c79b3ccd093b0d00d",
+      "docs/validation/TIMER-PROPERTY-STRESS-RESULTS.json": "190531e18e869974dbff6b2827041a290e2a2481fe915bd69eb0eb5ef984d526",
+      "m200/__init__.py": "77c5815a3596eebca3e939d1ad39abba46fa4edc4df148aaa7e47f13e5eda0ab",
+      "m200/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "m200/allocation.py": "f21e8753757ebf1c54874c18c3385a7d79ce52992514725920c29a1ca6281be9",
+      "m200/arithmetic.py": "bd0a83b4cc3257d2734a2ad1131137ce0608c2688a0565842b41759c336df75a",
+      "m200/arrays.py": "d4574f6e48ab98f70feb3f474f30bbf387117f5db3ddde395525a21a77da42ed",
+      "m200/bits.py": "d76ca8b8bb587a6811cfb3e157c00385ba0a836b8eb669afdda9af4e635b6a61",
+      "m200/boolean_bdd.py": "b3de9c79a5b14953256117afa22df8aaf2b37eb71689f224ca2d66e78a02882f",
+      "m200/capabilities.py": "e94e59743ee0eae98c476938f8eafe04966c0823b825b1d070980d15d41348a0",
+      "m200/cli.py": "22110f728cd456b9fae20a2ae1c2f9a03ba3fede808ee220318071c09a9d6a14",
+      "m200/communication.py": "105c1aef50e7ee00bc7c7142a5b6805d4ddf5f18fc04c5e60a52b78841a6b3b0",
+      "m200/communication_graph.py": "3b6e9a8ffc3c9ae1203106b37385141f8007719e55e010a29eec07732e3a3d61",
+      "m200/communication_xml.py": "2762f0fd89552de18e21bb632e536eb4c1a9449702cdfb6444dfb58bb606aac2",
+      "m200/config.py": "5411e6a28bd67da9a45c1660f1c62673443b249ac76948ede80b57c6e322f73e",
+      "m200/conversions.py": "0922116a83ef1bcacda5fb9a588f2bc10d522a7c1ca7f301148ea88e6e370250",
+      "m200/copy_fusion.py": "39c8f498518c46d35ad61ec2c53564a61748a4957eae25e8d241a3c7e4b98816",
+      "m200/counter_graph.py": "80abf1241ee5095a121c47e1a196de03f1e7ed37fe0c54626b2a3f3eba4a9e8c",
+      "m200/counter_xml.py": "a87177f18a698b1f442a7c16eb66748a6d2c06c9c966ac199c6275bb1e326554",
+      "m200/counters.py": "0e4ed9d8fe6f4356f3d6b6986558a0f9caa019daa3f741b12522d1fdd6f376ce",
+      "m200/edge_functions.py": "c58b059d15ee7387ed7e65f841ad549f3b30c3781a258c0a6340a96e9cd92a24",
+      "m200/edges.py": "e590a801d00b94d20a2dd1f428635aa299e3bd59bcbfe2442f5ffa4fd3d64713",
+      "m200/flow.py": "090035e4abc84354287c934898430c0da038a81a11452526e4d87a70def55607",
+      "m200/frontend.py": "2b56e3ca231ccb3cbb9a5371051928b360559400566c771a4cd678db07c0504a",
+      "m200/il.py": "f177243b0b658414b8e2f3da7eac7a7ed62b7996f5faa2154b96377f9538db83",
+      "m200/indexed.py": "0b8ca542e2be87392d8de2a75ef8ad0d48534b28d7f82d1e24fd1bf38fc8343b",
+      "m200/jsonio.py": "c4d8447354b4f48205a8d5bfc58e1a3919656ba2073ecc5982b2f8fd6253fd70",
+      "m200/ladder_lowering.py": "66bffd608bc2e554b61f56eacf608efe7749b89d19dc5c9d4fc13e004913fb52",
+      "m200/levels.py": "439eba12b9bf189795449983755b55d92f77261678a983c4ed9e94b5eb341149",
+      "m200/lower.py": "d9cc4e13b0e886a0c0d7bd85880d621d76f8c371943f4d4d1549f111ab1aa657",
+      "m200/modbus.py": "a391ce5ff71520cea4f6b74d9ae984ba6cb4d6fff36b9d44fe05396e68c2e32b",
+      "m200/model.py": "e786ea2d03ea7d9c98c641fe6ed84a00a2076f51a1974ce1209355ef4dad0e11",
+      "m200/native.py": "016a6af7d7f7b1de11dab9bee1477faa9f4d393f75bbf09e1b3bf5daa5e6ac4f",
+      "m200/native_logic.py": "6a5990a9b75186ca678172491605a8485747ec004c685a3c4d22b025be8a53de",
+      "m200/numeric.py": "b29de2050a070dcbf23ab4e942642f45ad22a580d70b078f5b74111dfde629c5",
+      "m200/project.py": "da62b18ea0e87f9b881e673af7a610aa6de57297b0ff182e3a0dbfaedca32708",
+      "m200/register_graph.py": "301cd66e5cc473ced8aa7be29fc0881484857a9072b8f490dac17e54496a459c",
+      "m200/register_xml.py": "8cccf50926e13978df2389afb48cf37409b451e8b4b80be86e1f3299dd292f71",
+      "m200/reverse.py": "a84be951d8f3e113fb74065c024198408efd584c3b16794a3f88e1f04507a0d1",
+      "m200/timer_profile.py": "ca3f7855752418db88698ab0a6fff8ead02f67d8c63c767baeb7b0f985fd346e",
+      "m200/timers.py": "384e3c26facd76ed8da5449d001348fe1c1dd818a73532ab9c782e6a9b0fedf6",
+      "output/editor-validation/native-register-shared-request/editor-saved/register_fifo_editor_saved.smbp": "85219725709cbe90641e25bedddd6bfa4f13011a55e01be4ba087f8f42b09189",
+      "output/editor-validation/native-register-shared-request/editor-saved/register_lifo_editor_saved.smbp": "8d04a2bc22bc2466a928ea185d41641f53c5493e26a2a19d690ef8e55822c1ab",
+      "sdk/plc.hpp": "b1d6f04ab2ce88d4e37ac781a299f134c5882971f2d593ead502be3877e784b3",
+      "tests/editor_validation/run.py": "d204fa45b64dba7b33fb05c707c2f8f8362ec8f6714d19cc84ac5d4e475e55f6",
+      "tests/editor_validation/sequence_timers.py": "eb8700e346af43f3ae53ddf5034e4b7230502da8cc66e6991c7e1712670f8702",
+      "tests/fixtures/native_counter_branch_graphs.json": "fb77d8c8838c01d3b3404a47f11ff2c46d26f5057ece2e5b35f50b0e15975886",
+      "tests/fixtures/native_counter_graphs.json": "0830c6669cded99441496d3d496b8dbb67d133f7a8ace160daae40868d35029a",
+      "tests/fixtures/native_timer_graphs.json": "e8f82d22bca8b5c6a480598dfceb33bf2744feada776812b98261060132b518c",
+      "tests/fixtures/official_tm200ce40t_end.provenance.json": "e451a56395e51ad3af7f2aa35ce715c391c2b10e062ca1a31d98626702d61ada",
+      "tests/fixtures/official_tm200ce40t_end.smbp": "11b4772aab31b5759ebf5a0315125cd4f1f0005dd0bad943c64de9af9eb2ea31",
+      "tests/fixtures/official_tm200ce40t_endc.provenance.json": "e3d62c63824a4171f0b8654c8ebcdcc13631f4d5b754406f6d4d017c3363b87a",
+      "tests/fixtures/official_tm200ce40t_endc.smbp": "10d49746b54f4b8ef14dee3a51e8f08607aabebc5e142ade76f3643a1369451f",
+      "tests/fixtures/official_tm200ce40t_endcn.provenance.json": "da9e593ab5e5b8dc3acb3848044d767ddf4b42a5f12f09ee29cc79d9e1b8c66c",
+      "tests/fixtures/official_tm200ce40t_endcn.smbp": "5c76b1dabede9dc85c2c155f01c00d981262d804c150ccb7a7efbc07ba0496dc",
+      "tests/fixtures/official_tm200ce40t_memory.provenance.json": "b9826924298610100516b075c671362c87b85ff35e2489e0df661ea8cdd89730",
+      "tests/fixtures/official_tm200ce40t_memory.smbp": "df5a293169d062d54b9d1f37909f15476cb7841d300c9b01a39c23ccd2924fbf",
+      "tests/fixtures/official_tm200ce40t_memory_editor_saved.provenance.json": "7e5e29c8401bc9cdf9b4d340807b17b2a2af0d9a935f5a8fcc2d74d60fcda32a",
+      "tests/fixtures/official_tm200ce40t_memory_editor_saved.smbp": "4b6120f1151f840ae234e6f79135c51ec78e0fd3df21736c542894d52402a6bc",
+      "tests/fixtures/official_tm200ce40t_modbus_bare_abort_read.provenance.json": "2996f59a99bc0b3ada6e6ed5a0710385af585deeb255c687c9f0c38231d7fd42",
+      "tests/fixtures/official_tm200ce40t_modbus_bare_abort_read.smbp": "222de155bd4061649a017859f8775322974c3e06b3a85204ff85ae015e35b3e4",
+      "tests/fixtures/official_tm200ce40t_modbus_bare_abort_write.provenance.json": "af9f67dba2d31a96d37f278ff3af38f72bfe41a14dc5a577eecdd731c18ecf61",
+      "tests/fixtures/official_tm200ce40t_modbus_bare_abort_write.smbp": "1489ad6bdcdde1101708088d37ee2eacb326ee23a3c6ac8c0d91cbe25f51fb7d",
+      "tests/fixtures/official_tm200ce40t_modbus_bare_abort_write_read.provenance.json": "c4403129ec28518b3af4d7d18adf041db9eceea6dd6e29dd603f93d24d67f586",
+      "tests/fixtures/official_tm200ce40t_modbus_bare_abort_write_read.smbp": "ce46d988bcdaf5e9f0add2d17daff51deb0074240a937ca5f85aeed933ea8890",
+      "tests/fixtures/official_tm200ce40t_modbus_full_pin_read.provenance.json": "8d30908043d3bd1d4a66bd4bcb0f86c050ca6999451303c3f9c91f4db92d79fd",
+      "tests/fixtures/official_tm200ce40t_modbus_full_pin_read.smbp": "8154e130ce73b6a1b6e90f5876264437ec36778207fc38c3a3661152059f9e50",
+      "tests/fixtures/official_tm200ce40t_modbus_full_pin_write.provenance.json": "f5c556d3896a6e824509c25ca50b70e8c2dca2c71c5d4b80331fbaacbe2ef7dc",
+      "tests/fixtures/official_tm200ce40t_modbus_full_pin_write.smbp": "ae6ffad294a36e79656f36845f2a0bebf19df6f3e60b8aa7b82597b867b79af3",
+      "tests/fixtures/official_tm200ce40t_modbus_full_pin_write_read.provenance.json": "5c7d0e2ef28bc3bfd34fe2e8e858b3db939edf1e64f271fd33449e2ca01d97b8",
+      "tests/fixtures/official_tm200ce40t_modbus_full_pin_write_read.smbp": "9e7a3359a99c433bdebe7eaca21235960de806fdfb8151a678e39345e4b3588f",
+      "tests/fixtures/official_tm200ce40t_modbus_read_i.provenance.json": "95582f622e7ad61c46d9d902c6408245cc6e5e3db511770515a2bbc332a9d5a9",
+      "tests/fixtures/official_tm200ce40t_modbus_read_i.smbp": "1c857a39e418d602b30f132ebc311f60521eb70fdb44ddbe94fc39ff9430d214",
+      "tests/fixtures/official_tm200ce40t_modbus_read_q.provenance.json": "ab73aff0a34a9cdf8d6fa312535c8bd1e8de46f1bbd07c6f2813bc8a30e5a3c0",
+      "tests/fixtures/official_tm200ce40t_modbus_read_q.smbp": "4994ba0c7aee1ffc5127f15e673215dc9a5b9ef521877255e243b3cb3cef8d4f",
+      "tests/fixtures/official_tm200ce40t_modbus_single_coil.provenance.json": "082e0e4424bad622c62a77ea8ae9775029670c188890ee7179d5a68bd4b69180",
+      "tests/fixtures/official_tm200ce40t_modbus_single_coil.smbp": "4b72a0380555290934a4eea0492e3f9c0491b08f0741bd9f7ded49666845ef8f",
+      "tests/fixtures/official_tm200ce40t_modbus_single_reg.provenance.json": "9190f49a2bb35c59ebf47344388d4d02e9b8eede5b9f279dd2bfcbb0edbc8c22",
+      "tests/fixtures/official_tm200ce40t_modbus_single_reg.smbp": "d24a3b572bc565d9d1cb9d4111ffd231d28422384e7b08bd977c85198b995ed8",
+      "tests/fixtures/official_tm200ce40t_modbus_write_q.provenance.json": "e1a264b49644905d6ea7ac7752112eece4d8bfc62adec68f70ae3d3aeef0af52",
+      "tests/fixtures/official_tm200ce40t_modbus_write_q.smbp": "da5f8bb39369d888f86c09b136222756a42127410d0c867574c80dacb66c465e",
+      "tests/fixtures/official_tm200ce40t_modbus_write_read.provenance.json": "582257c462d3c509bd7c8a245070aedb1bf6809ea08d683e570cb4fc87806034",
+      "tests/fixtures/official_tm200ce40t_modbus_write_read.smbp": "6a7edd820fcaee97cc4c1c783005f0a88a0409c98934e7b6964fbce1004bb52e",
+      "tests/fixtures/official_tm200ce40t_register_fifo_three_ld.provenance.json": "44d133c0c01788d8f07d6a1c0f8a75dcb9710e19e43fc2b1477a9dbe6e3a376d",
+      "tests/fixtures/official_tm200ce40t_register_fifo_three_ld.smbp": "f6198b7054f1f1b6dbd016f6df756ef2ebd150a99d26bc59e86069944d000fa4",
+      "tests/fixtures/official_tm200ce40t_register_lifo_three_ld.provenance.json": "7f969a7de6b559b6c023c2ad854cf8267e81b64916d348b295b5764567d16e5f",
+      "tests/fixtures/official_tm200ce40t_register_lifo_three_ld.smbp": "a82e4dd97f37c469dae5d30f68b12cf3d11f55f0131f171d7e6b0a3b5c37cf0a",
+      "tests/fixtures/official_tm200ce40t_timer_10ms.provenance.json": "3b6c2e9f09e8da42c4e68e86fb03e417d11b33372d97fe069164121615bb2971",
+      "tests/fixtures/official_tm200ce40t_timer_10ms.smbp": "934affc43bd7e3d918b529b5cbfaee5aabd6bc062006edcd5c3cacf0d7f2bc45",
+      "tests/fixtures/official_tm200ce40t_timer_options_behavior.provenance.json": "106137384b9f4b7c38786e066e9158e1d53042e6d6260f953279d78c9bb23477",
+      "tests/fixtures/official_tm200ce40t_timer_options_behavior.smbp": "5358e5334696e1838e8b34b9efaa84fafb2a7bd97802d2d2ee32ae94a7f52214",
+      "tests/fixtures/official_tm200ce40t_timer_ret_ton_fl3_2.provenance.json": "deb0b3c186c0f36292e165d02ae869a44d2d391ca9c200dccccc1aecc936bff0",
+      "tests/fixtures/official_tm200ce40t_timer_ret_ton_fl3_2.smbp": "35a9d891711ff3eb74d745f30c14cbb3574b7cd61b0cec876320263e28a1fbd6",
+      "tests/fixtures/synthetic.smbp": "5c04625cb62d03bd8d2982430970bbb3fb81070205c302d4e39f5a5b78a7f515",
+      "tests/public/control-flow-manifest.json": "9c90f5da2e907305d50f8dbb6a5d64e77306a2b92b501d7f0a79e9380a2d07a9",
+      "tests/public/control_flow.py": "65f9d5f2aba359e6c316aa133c577496114e3981728cf5ce60ada5ecbad7ae72",
+      "tests/public/fetch.py": "196a8b6233a222fd1ebb86a89ced34dda368568bd0a82407cc792d45760af5ba",
+      "tests/public/manifest.json": "7c54959214e085d2852a6601a27a48cf212744cb26ce5aadac6ab8f4d6386324",
+      "tests/public/run.py": "c87893404e91a1b90e648303aafa647c7e9d9199c1e6b86e30ea1c0710b27fda",
+      "tests/stress/bit_objects.py": "a39468f5ae36159b378cda34f2bfbe81abdf42fa1cb1fbf5cca0e6325b9c0489",
+      "tests/stress/boolean_audit.py": "ecd800fad5e3eb05948eb833f77a6098fb0e44aaecf8c0a81b60f1c529de146a",
+      "tests/stress/control_flow.py": "ad7814da8c24d58557b9f749252f624e86d71dd28f1873f8b84dcbf5dece6586",
+      "tests/stress/conversions.py": "da56e75ab3d233470151c3efbd4a9c836e1dcfd3c5469945bdbebb0c61f073d0",
+      "tests/stress/counter_graphs.py": "455889489bfb813b1ecaa27efbd2cd40592373ec61ea7c2f82618eb3256b1285",
+      "tests/stress/counters.py": "477b0685314abb2bafa58f27989df132a9b374dac8a4dc4a882a87d5fcd9acd6",
+      "tests/stress/digital_io.py": "0bece2a8e6ec6eee1d07054522d6766a238caa9f7d911cbe3f09afddb4090506",
+      "tests/stress/dynamic_arrays.py": "df53722713450024bfce76434e1e548ceabccde25b7b5654417d8a2a889566ac",
+      "tests/stress/expression_edges.py": "d8dc293380b5aa3de06c3d764dab8324a974fd8d7f9d6962dbd776b9abc5d82a",
+      "tests/stress/il_properties.py": "f2269c4d4beb32ea1e9e014aea71b67f3a05839ec137d5f9be237fa833f25644",
+      "tests/stress/indexed.py": "d8937c58e751f515b6d65dcc4f3d1d1a2545d4dee9ed673f73e02fa4f77426a3",
+      "tests/stress/integer_flags.py": "1f26ac9b9adcb349c381ae03288ed6588c2fb6eda691003089e85072f9a2b689",
+      "tests/stress/modbus_full_pin.py": "3337af2420b1b259c30137b18dde64cd0d0dedcbb4e70703fa5faa54656db867",
+      "tests/stress/native_edges.py": "29bb2bcff1568a0e6adfacd46840dbd20f6f159043df4da86b4a5765a1c986da",
+      "tests/stress/native_logic.py": "c70a0a69556ab796c18b53d0b2d5ce4b3f1dbd45df9093c8760fff17b6c9551b",
+      "tests/stress/run.py": "f8a317eea4fa0e016ce3c5dd9de2ee534ee333c659cf51396e27ce386d91b7d7",
+      "tests/stress/timer_modes.py": "e49f7526f0fec09d072721deeb33b4c0a5a098fc75151a7293644f24e4441baf",
+      "tests/stress/timer_properties.py": "8d1353d38757664145ea233273d629faa623b04e946e33598ca65b9590085f65",
+      "tests/test_adversarial.py": "70697b896097c6c84093595d03fa244498aa9e1dd92b767654bf9683c752a2c7",
+      "tests/test_allocation.py": "30841d4cbd34aa72a5423150773c1f9cb69ba81a8b550b2b82b8be735cce98ff",
+      "tests/test_arrays.py": "e41d1d729a04fa7cea78c6511eb1f5c77908a022f02475b9b3d056984049efcd",
+      "tests/test_bit_communication_xml.py": "f93c7ee89d31159f6b366ce0a0286bc3ff5ce34c62085b3b57afaf304f1cad9c",
+      "tests/test_bit_objects.py": "9fc13a3081ad8c13d0276364d0b6b62beed307a8e4af61752fcf98c7d0a5ce8f",
+      "tests/test_capabilities.py": "15d1fab381fb0aa052e4bd985cc077ebce402964071e1d66ca5d6b763b62716e",
+      "tests/test_communication_compiler.py": "07e10834d084472242e0043f60b3d8e687b628c2536ab89adb6b7c7c9607f209",
+      "tests/test_communication_project.py": "62c93e9bceffa04150a72c7527adb48e2c959799eb7218460dbbe6ac791785a6",
+      "tests/test_communication_xml.py": "836dfeb3312c14cf036bd75aeef9cd7acf344fcc01cbd49b7cb9f14f01622a19",
+      "tests/test_control_flow.py": "8c2ad3d223641ee562ad74236c9ec04429c5bb24a1755fcffdaa562a856509db",
+      "tests/test_conversions.py": "7db2481732b54abbd0a188b1ac0c04eb2b37948e88d9a1b3e6f6b71bb875ecc7",
+      "tests/test_copy_fusion.py": "bef86dfabf49e5a25aa2193eed4107346a74657dd4619a581770f3d181487740",
+      "tests/test_counter_graphs.py": "cbcae6b9e643342c6333433b011accc3e97f620d33621df029496d79b523e935",
+      "tests/test_counters.py": "ff93ed6f67bf6c86fe688efb636aafbce53025b9fd9eb6542f2fabdb895265ed",
+      "tests/test_dynamic_arrays.py": "6714bd13bd8b0b1bcb3443cfa713e3ddaa0045e5f4be3b9854f94c282d719cc2",
+      "tests/test_expression_edges.py": "2971d2147c3172619923a2bb587fff2b7f5ca7f6f10c7a6a84d157dd96a50526",
+      "tests/test_inactive_pulse_aliases.py": "8c89f7d08e8889b6bca59b0b0e818585465a0d8473269725e3273acc5d2446ce",
+      "tests/test_indexed.py": "e8e9d248f90c47197a982ca2410efcae37f070b1c11b41ce0d26145cc8e92589",
+      "tests/test_indexed_bits.py": "5e7c05ab57931ed15012a580adc3034a36ed6c78b3df0ddc59ad9b8a5aca6a6f",
+      "tests/test_integer_flags.py": "750f324db795037de77e71ca4bf10927973a28dab55c3fbb971ea547d98bc289",
+      "tests/test_mast_task_profile.py": "6bcbc398b4a2048c44a92433dc9d1f03755b5186814c0136fea4cdde04125d93",
+      "tests/test_modbus.py": "6a5d5b4e04363514b44b199793593e2d887a4d6dbbbd69937f34d91eb42b7546",
+      "tests/test_modbus_bare_abort_native_profile.py": "1e0f9bb9c219179e8196d0bf3d654c023f5a3b331ab8b6acd38c677e049e91da",
+      "tests/test_modbus_full_pin_native_profile.py": "99c30dad93f2424555fe541519155cbd32068196daa85b279463d0d943790baf",
+      "tests/test_modbus_single_native_profile.py": "7223bf9af49a238a2c2ea2b9f6b49b91ee978cc38837a92643955373458e194d",
+      "tests/test_modbus_transport_recovery.py": "564d4d062d98871885cd3a62d773bdf3617117e86ded0b551a0cd3bbdc6deb9a",
+      "tests/test_modbus_write_read_native_profile.py": "8d005fef26232e814b151a8b84af1d5ada3527df720eddd517a34ca4fb539223",
+      "tests/test_native_edges.py": "1671d2c49540d1dfc9b709e47fa6b0521505b73f92bad755a06f8f047b51f3eb",
+      "tests/test_native_end_graphs.py": "ff6f41418a2dff5579afd6dffceb95f6526ff5b7f1626a7b28c7d4394ef260cb",
+      "tests/test_native_logic.py": "aaa004e025625c9107441f17c5b7578fede443eb24d24e59985c2d22c035d7c7",
+      "tests/test_numeric.py": "6d072af3241154ab4823f9ff4ffc797ea830ba25bf0fcb5d28c69b7f7b247aef",
+      "tests/test_numeric_stress.py": "2453fe9b4352ec4a2e5dceea9c1462a8487f7283fe6904618df7d7101a61cca9",
+      "tests/test_official_profile.py": "a846191a137e8cf492fcfc92721fddf491a547cdbe9b6a6c33073fa667fd9543",
+      "tests/test_public_regressions.py": "2dbedd883358b74d7c082ae750a107e3a57a889758eec1b61501b810b3dca532",
+      "tests/test_register_graph.py": "fb64a51ea25a5c67f4e9d893c4bba00e7a8541b0ee1132316c5b30f8f3337da1",
+      "tests/test_register_xml.py": "07ebf1a24864e75551c561e6a5ce9ea049d2212568c19ef9d4a008952a577de3",
+      "tests/test_review_regressions.py": "458f5c6690fa7c9afc3035a27a9a40eb5167729d25e4faa53bd3c902dcffdd83",
+      "tests/test_scan_exit.py": "deac144a54f822fbd52a1205d90ccedccd0725874ff47fe6ffd83c385c1091e5",
+      "tests/test_timer_modes.py": "d85e8526a32b60859c507fefd596eaeb53c5580d397fc705167f51f159d69fb3",
+      "tests/test_timer_option_bindings.py": "e07b68561a990fa72af70557bad9ae5a60a2e88230bc9dae53a4f9c2e0e67e73",
+      "tests/test_timer_properties.py": "daf92505702d81502023602b3102c4cc34c84a621ba99a90ebb3662daf277012",
+      "tests/test_timer_property_stress.py": "33c85057f20ddd3d1d619a413db8ef2630feee3d584d2e60a9c583dd29c6eabd",
+      "tests/test_timer_xml_bindings.py": "9982273f54099987b6e06be84d02ec525ff9f7dc3876121a5f04c81f719b8095",
+      "tests/test_toolchain.py": "08f6edf37688853d09fc33627e88d2e0a7d358ec8173b4395c4def758d34f860"
+    }
+  },
+  "changed_existing_input_paths": [
+    "m200/communication_graph.py",
+    "m200/project.py",
+    "tests/test_bit_communication_xml.py",
+    "tests/test_modbus_full_pin_native_profile.py",
+    "tests/test_modbus_write_read_native_profile.py"
+  ],
+  "unchanged_execution_and_configuration_implementation": [
+    "m200/communication.py",
+    "m200/communication_xml.py",
+    "m200/frontend.py",
+    "m200/reverse.py",
+    "m200/il.py",
+    "m200/modbus.py",
+    "m200/ladder_lowering.py",
+    "SDK"
+  ],
+  "remaining_tool_gaps": [
+    "Unobserved bare/full object, level and link contexts",
+    "Negated/constant/direct I-Q native bare inputs",
+    "Direct partial native9/11/13 and other attached pin layouts",
+    "Dynamic communication fields and port/task interactions",
+    "Genuine newly generated bare product official-editor acceptance",
+    "Official communication runtime, real serial timing and physical TM200CE40T proof"
+  ],
+  "operations": {
+    "all_builds_tests_local": true,
+    "GUI_Wine_network_serial_firmware_physical_by_this_lane": false,
+    "CI_or_GitHub_Actions_run": false,
+    "stage_commit_push_by_this_lane": false
+  },
+  "artifact_pins": [
+    {
+      "path": "output/diagnostics/modbus-bare-abort-profile-2026-11-06/source-pin.json",
+      "bytes": 18714,
+      "sha256": "3fe10a6292a801c096d8572d9c57bf3ece560755d6d9c8bb78debc78f4802c6e"
+    },
+    {
+      "path": "output/diagnostics/modbus-bare-abort-profile-2026-11-06/source-after.json",
+      "bytes": 18452,
+      "sha256": "2a0a98fc3c0b97961d5a848c442e8229e13d0a8ea98beb7ed89669474e129e45"
+    },
+    {
+      "path": "output/diagnostics/modbus-bare-abort-profile-2026-11-06/full-regression.log",
+      "bytes": 65679,
+      "sha256": "c6d4c96029ca06b5dec55f5d6e8c39fb95c681e01f91d3ba1fd5887b627a6c83"
+    },
+    {
+      "path": "output/diagnostics/modbus-bare-abort-profile-2026-11-06/full-result.json",
+      "bytes": 9758,
+      "sha256": "67a205124d2f626f258381e98298fc5053f2fab1dc882e210982aaed6039714f"
+    },
+    {
+      "path": "output/diagnostics/modbus-bare-abort-profile-2026-11-06/ruff-check.log",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "output/diagnostics/modbus-bare-abort-profile-2026-11-06/ruff-format.log",
+      "bytes": 28,
+      "sha256": "567cf9662cb4d79c3e23b3904f6b02d25d7ae3d1f3da6155dd946d1e871cad4e"
+    },
+    {
+      "path": "output/diagnostics/modbus-bare-abort-profile-2026-11-06/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "output/diagnostics/modbus-bare-abort-profile-2026-11-06/focused-result.json",
+      "bytes": 1639,
+      "sha256": "2dd9ddd7c480a414aebb2de26a52ffe52cbed06c64df59dca984c02e5137fdce"
+    },
+    {
+      "path": "output/diagnostics/modbus-bare-abort-profile-2026-11-06/review-source-pin.json",
+      "bytes": 18689,
+      "sha256": "df19fb2bce6054a371c54df4ec23f886b2733676735dfa2ba2c80a0dd7884d43"
+    },
+    {
+      "path": "output/diagnostics/modbus-bare-abort-profile-2026-11-06/run_final.py",
+      "bytes": 4176,
+      "sha256": "07e792ccfdc39d15ec89dc33f3c061a52dacd631c45e64396c7c89f130ca86bc"
+    },
+    {
+      "path": "output/reports/modbus-bare-abort-plan-2026-11-06/three-profile-red.log",
+      "bytes": 35319,
+      "sha256": "b61b0dc97a7c3b862a0c6fc4dcb19166bea070ae609392f6dc0ef00b7d4ccf9d"
+    },
+    {
+      "path": "output/reports/modbus-bare-abort-plan-2026-11-06/focused-combined.log",
+      "bytes": 12933,
+      "sha256": "7cd597bf5720f9641b83df1976b95bba117d8bcacf28f310b187b987214b3a03"
+    },
+    {
+      "path": "output/reports/modbus-bare-abort-independent-review-2026-11-06/REVIEW.md",
+      "bytes": 4789,
+      "sha256": "6a47904e988f8f320f3a0c0c165c445511416c521eb2359c87b16ee2f7cd9a52"
+    },
+    {
+      "path": "output/reports/modbus-bare-abort-independent-review-2026-11-06/verification.json",
+      "bytes": 8169,
+      "sha256": "35e3203593727060164bc0f64dc481311c0e9f09e5806eeddb078a29c9a00edd"
+    },
+    {
+      "path": "output/reports/modbus-bare-abort-independent-review-2026-11-06/probe_frozen.py",
+      "bytes": 16980,
+      "sha256": "71cd29fb922119a8c07466bdb1f7126a636a493cb464dbdaaf62bfd5cccd5288"
+    },
+    {
+      "path": "output/reports/modbus-bare-abort-independent-review-2026-11-06/probe-results.json",
+      "bytes": 875,
+      "sha256": "60a819964ede182d90c4d166f271d5caf66c6d74f6f6926d47d143524b722401"
+    },
+    {
+      "path": "output/reports/modbus-bare-abort-independent-review-2026-11-06/probe-frozen.log",
+      "bytes": 875,
+      "sha256": "60a819964ede182d90c4d166f271d5caf66c6d74f6f6926d47d143524b722401"
+    },
+    {
+      "path": "output/reports/modbus-bare-abort-independent-review-2026-11-06/supplement_frozen.py",
+      "bytes": 8024,
+      "sha256": "2d6e39aed3b1d8aeb42ae4ab733ed3f5252605540f75c2f9dcc20ca3f361c41e"
+    },
+    {
+      "path": "output/reports/modbus-bare-abort-independent-review-2026-11-06/supplement-results.json",
+      "bytes": 1101,
+      "sha256": "1a3c3f5924b4ced5171d22c4b1d955a7b8cebbf826b8faca64ea133d29cd8f5c"
+    },
+    {
+      "path": "output/reports/modbus-bare-abort-independent-review-2026-11-06/supplement-frozen.log",
+      "bytes": 1101,
+      "sha256": "1a3c3f5924b4ced5171d22c4b1d955a7b8cebbf826b8faca64ea133d29cd8f5c"
+    },
+    {
+      "path": "output/reports/modbus-bare-abort-independent-review-2026-11-06/probe-frozen-initial-normalization-check.log",
+      "bytes": 639,
+      "sha256": "b96a31f828cf0dec67f11fa718a3468c1275ed703a15e0ddc6b47cc9be178807"
+    },
+    {
+      "path": "output/reports/modbus-bare-integration-stress-2026-11-06/artifacts-2/results.json",
+      "bytes": 400951,
+      "sha256": "406d99d398dd43f0ef0980753b641214bcfbae98ae1dd99b01504244a8a3baa9"
+    },
+    {
+      "path": "output/reports/modbus-bare-integration-stress-2026-11-06/artifacts-2/input-pin.json",
+      "bytes": 4590,
+      "sha256": "096070b267edca51824cc66773b197349615ad17e99167072cd9fb71b4d92ac1"
+    },
+    {
+      "path": "output/reports/modbus-bare-integration-stress-2026-11-06/artifacts-2/MANIFEST.json",
+      "bytes": 15685,
+      "sha256": "05ae2c9455b323effb70e9bbb394ca507b5d93106a98f5f5ff01640a28521f70"
+    },
+    {
+      "path": "output/reports/modbus-bare-integration-stress-2026-11-06/artifacts-2/SHA256SUMS",
+      "bytes": 9097,
+      "sha256": "342d567561f01c03d736f77022530d6a49154df66de736027a7d6ee11c193715"
+    },
+    {
+      "path": "output/reports/modbus-bare-integration-stress-2026-11-06/terminal-2.log",
+      "bytes": 1614,
+      "sha256": "ff22acbd25047d87d5af0482fa81ceb5e9d417037b41b9c4ca4f58a265d1eefd"
+    },
+    {
+      "path": "output/reports/modbus-bare-abort-independent-review-2026-11-06/TERMINAL-602-VERIFICATION.json",
+      "bytes": 1449,
+      "sha256": "ae79052be16207546913a5b96f0fd1de241d233be51d56875d260ada7f19d9e3"
+    },
+    {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/verification.json",
+      "bytes": 3954,
+      "sha256": "fe641504cf18bebb9d51578544fb3df3ab73dde8d48cae1de70dca640513ab7f"
+    },
+    {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/PRE-FIX-SNAPSHOT.json",
+      "bytes": 3098,
+      "sha256": "42a25929ae5340fedbd472875f85e99144acae52bfef2476d9788ff1385f81a3"
+    },
+    {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/red.log",
+      "bytes": 1236,
+      "sha256": "a7a006ad1b0d7cffca55fae035fa109057423007b287267f03262955ac84f4b6"
+    },
+    {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/green.log",
+      "bytes": 169,
+      "sha256": "dee4454c6ffe29d5d92dd9d9a4d9ccd9ad81f2e69caf37fb6865d64b346d7212"
+    },
+    {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/assert-only.diff",
+      "bytes": 546,
+      "sha256": "84ab4ae653aaf9631c183efeccd47a481900f4c0aa730488438a87543001737e"
+    },
+    {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/terminal.log",
+      "bytes": 1617,
+      "sha256": "e70d0566d26e36798cefba7cb9a2a8f012939c06e7eb66a346a504575de54f4c"
+    },
+    {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/run/results.json",
+      "bytes": 400951,
+      "sha256": "b59ad6e8292974443d94a2478aee98daeb6191cd800c302acece9827b53fc243"
+    },
+    {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/run/input-pin.json",
+      "bytes": 4590,
+      "sha256": "1f86e1a126bf53411786ae61e049e7a99f4a5bf2b0a440bce8f647bb47f27341"
+    },
+    {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/ruff-check.log",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/ruff-format.log",
+      "bytes": 25,
+      "sha256": "fd2299c9f1c6dc869070883e281051bfe93aacf66c1a3b0069f45b4aa410ca50"
+    }
+  ],
+  "historical_reports_changed": false,
+  "source_inputs_scope": "Exact historical602 snapshot: all164 pins unchanged at that run end, including then-final3337 stress script. A later standalone single-assert script strengthening is separately pinned below; original163 review inputs remain unchanged.",
+  "coordinated_stress_at_602_checkpoint": {
+    "script": {
+      "path": "output/diagnostics/modbus-bare-abort-profile-2026-11-06/source-inputs/tests/stress/modbus_full_pin.py",
+      "bytes": 58708,
+      "sha256": "3337af2420b1b259c30137b18dde64cd0d0dedcbb4e70703fa5faa54656db867"
+    },
+    "positions": 74,
+    "starts": 19,
+    "seconds": 11.064,
+    "separate_public_record": "docs/validation/MODBUS-COMPLEX-FULL-PIN-LOCAL-RESULTS.json",
+    "counts_not_added_to_unit_methods_or_historical_frames": true,
+    "repository_path_at_checkpoint": "tests/stress/modbus_full_pin.py"
+  },
+  "post_602_oracle_strengthening": {
+    "verification": {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/verification.json",
+      "bytes": 3954,
+      "sha256": "fe641504cf18bebb9d51578544fb3df3ab73dde8d48cae1de70dca640513ab7f"
+    },
+    "single_assert_only": true,
+    "RED_log": {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/red.log",
+      "bytes": 1236,
+      "sha256": "a7a006ad1b0d7cffca55fae035fa109057423007b287267f03262955ac84f4b6"
+    },
+    "GREEN_log": {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/green.log",
+      "bytes": 169,
+      "sha256": "dee4454c6ffe29d5d92dd9d9a4d9ccd9ad81f2e69caf37fb6865d64b346d7212"
+    },
+    "real_CompileError_still_required": true,
+    "all163_core_review_inputs_unchanged": true,
+    "historical602_script_sha256": "3337af2420b1b259c30137b18dde64cd0d0dedcbb4e70703fa5faa54656db867",
+    "historical602_count": 602,
+    "historical602_seconds": 290.617,
+    "historical602_not_rerun": true,
+    "new_unit_methods": 0,
+    "product_bug_demonstrated": false
+  },
+  "historical164_inputs_retained_copy_root": "output/diagnostics/modbus-bare-abort-profile-2026-11-06/source-inputs"
+}

@@ -85,7 +85,7 @@ These are **locally implemented subsets**, not declarations of complete official
 | Typed numbers | `i16`, `i32`, `f32`, 53 explicit numeric intrinsics, comparisons, shared MW/MD/MF memory | Ordinary C++ arithmetic and implicit promotions are restricted; numeric error recovery is incomplete |
 | Arrays and control flow | Fixed-capacity typed arrays, computed indices, `while`/`for`/`do`, `break`, `continue`, labels, `goto`, early `return;` and END-family IL | Returns commit prior output writes; verified native series END graphs can be imported; Jump export and allocation overhead still apply |
 | Timers, edges, counters | TON/TOF/TP, clock and edge APIs, timer properties, native counters | Several modes have local models but blocked SMBP export; timing and lifecycle need external tests |
-| Modbus | READ/WRITE/WRITE_READ models; FC1/2/3/4/5/6/15/16/23; explicit local transports | SMBP export covers READ holding/input words and discrete-input/coil bits, WRITE holding words/coil bits/single values, and static MW WRITE_READ at the observed Man21/SL1 profile; full-pin READ I/WRITE Q/WRITE_READ MW also support normal M contacts/coils; further pin forms and physical communication remain open |
+| Modbus | READ/WRITE/WRITE_READ models; FC1/2/3/4/5/6/15/16/23; explicit local transports | SMBP export covers READ holding/input words and discrete-input/coil bits, WRITE holding words/coil bits/single values, and static MW WRITE_READ at the observed Man21/SL1 profile; READ I/WRITE Q/WRITE_READ MW support bare Execute/Abort with normal M contacts and full-pin M contacts/coils; further native pin profiles and physical communication remain open |
 | Projects and reverse conversion | Conservative SMBP parsing, IL/Ladder consistency checks, source maps, C++ reconstruction | Arbitrary vendor projects are not supported; unknown active constructs fail explicitly |
 
 The source language intentionally uses explicit PLC operations:
@@ -117,7 +117,7 @@ The recorded **2026-11-06 validation rounds** contain:
 
 | Evidence | Recorded result |
 |---|---:|
-| Latest combined unit/regression suite | 587 passing tests |
+| Latest combined unit/regression suite | 602 passing tests |
 | Earlier baseline unit/regression suite | 417 passing tests |
 | Historical stress and public-program traces | 288,372 base scan frames |
 | Combined state/array, timer/counter and numeric candidates | 276 distinct candidate frames |
@@ -129,9 +129,11 @@ The BCD vectors are **not scans** and are excluded from the scan total. Repeated
 
 Exact [generated single-write products](docs/validation/MODBUS-SINGLE-GENERATED-PROJECT-RESULTS.md), [generated WRITE_READ_VAR product](docs/validation/MODBUS-WRITE-READ-GENERATED-PROJECT-RESULTS.md) and [generated timer products](docs/validation/TIMER-GENERATED-PROJECT-RESULTS.md) have separate official-editor evidence; only the saved timer/watch artifact has the runtime observations recorded there. [Native FIFO/LIFO diagnostics](docs/validation/REGISTER-NATIVE-OBSERVATIONS.md) also have bounded simulator evidence; they are hand-built research inputs, and Register compilation remains unfinished. Separate [FIFO reset and held-request observations](docs/validation/REGISTER-COLLISION-OBSERVATIONS.md) preserve first-call latches and the limits of the recorded evidence. Two [FIFO self-status trials](docs/validation/REGISTER-SELF-STATUS-OBSERVATIONS.md) separately record the first-call sample, later held state and refresh limits.
 
-The [standalone Register graph foundation](docs/validation/REGISTER-GRAPH-FOUNDATION-RESULTS.md) records the latest 587-test checkpoint and exact FIFO/LIFO graphical fixtures. It remains separate from whole-project Register compilation and execution support.
+The [standalone Register graph foundation](docs/validation/REGISTER-GRAPH-FOUNDATION-RESULTS.md) records the earlier 587-test checkpoint and exact FIFO/LIFO graphical fixtures. It remains separate from whole-project Register compilation and execution support.
 
-The [latest native full-pin checkpoint](docs/validation/MODBUS-FULL-PIN-PROFILE-RESULTS.md) records 568 local tests, including connected Execute/Abort and four ordered status coils in the observed profiles. Exact original IL and graphics are checked before normalization; source origins and human comments are preserved. All three [genuine full-pin CLI products](docs/validation/MODBUS-FULL-PIN-GENERATED-PROJECT-RESULTS.md) subsequently passed official-editor save and fresh reopen; communication execution remains unverified. Separate [bare Execute/Abort native bindings](docs/validation/MODBUS-BARE-ABORT-NATIVE-OBSERVATIONS.md) now record the three-element official drawings; their compiler integration is the next increment.
+The [bare Execute/Abort checkpoint](docs/validation/MODBUS-BARE-ABORT-PROFILE-RESULTS.md) records the latest 602-test suite and three exact six-line/three-entity native fixtures. Complete ordered M status quartets still prefer the full-pin form; partial, reordered, labelled or interleaved ordinary status rungs remain separate and retain their order. The [native binding observations](docs/validation/MODBUS-BARE-ABORT-NATIVE-OBSERVATIONS.md) record official conversion/save/fresh reopen; generated bare-product editor acceptance and actual communication are separate validation stages.
+
+The [earlier native full-pin checkpoint](docs/validation/MODBUS-FULL-PIN-PROFILE-RESULTS.md) records 568 local tests, including connected Execute/Abort and four ordered status coils in the observed profiles. Exact original IL and graphics are checked before normalization; source origins and human comments are preserved. All three [genuine full-pin CLI products](docs/validation/MODBUS-FULL-PIN-GENERATED-PROJECT-RESULTS.md) subsequently passed official-editor save and fresh reopen; communication execution remains unverified.
 
 The [earlier WRITE_READ_VAR checkpoint](docs/validation/MODBUS-WRITE-READ-PROFILE-RESULTS.md) records 544 local tests and the static asymmetric Man21/SL1 binding. This includes [18 standalone Register configuration tests](docs/validation/REGISTER-CONFIG-FOUNDATION-RESULTS.md); one uses optional pinned local editor saves and skips when they are absent. The Register codec is not integrated into C++ or whole-project support.
 

@@ -425,7 +425,7 @@ class ModbusWriteReadNativeProfileTests(unittest.TestCase):
             {"%WRITE_READ_VAR0": self.config()},
         )
 
-    def test_exact_graph_closure_abort_full_pin_and_late_invalid_block_stay_closed(
+    def test_graph_closure_bare_abort_and_invalid_native_ir_keep_distinct_contracts(
         self,
     ):
         for change in (
@@ -480,8 +480,13 @@ class ModbusWriteReadNativeProfileTests(unittest.TestCase):
                 "END_BLK",
             ]
         ]
-        with self.assertRaisesRegex(CompileError, "ABORT"):
-            write_project(abort, FIXTURE, destination)
+        bare_destination = self.work / "bare.smbp"
+        write_project(abort, FIXTURE, bare_destination)
+        self.assertEqual(load_project(bare_destination).rungs, abort.rungs)
+        self.assertEqual(len(ET.parse(bare_destination).findall(".//LadderEntity")), 3)
+        self.assertEqual(
+            len(ET.parse(bare_destination).findall(".//InstructionLine")), 6
+        )
         full = self.program()
         full.rungs = [
             [

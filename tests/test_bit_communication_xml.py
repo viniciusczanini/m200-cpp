@@ -307,7 +307,9 @@ class BitCommunicationXMLTests(unittest.TestCase):
             with self.subTest(change=change), self.assertRaises(CompileError):
                 self.load_tree(tree)
 
-    def test_mismatched_kind_and_abort_preserve_existing_output(self):
+    def test_mismatched_kind_and_unverified_abort_contact_preserve_existing_output(
+        self,
+    ):
         valid = ModbusConfig(obj_type=1, first_obj=17, quantity=17, index_data=200)
         for cfg in (
             ModbusConfig(kind="WRITE_READ_VAR", index_data=300, index_data_in=400),
@@ -332,10 +334,10 @@ class BitCommunicationXMLTests(unittest.TestCase):
                     write_project(program, self.fixture("read_i"), destination)
                 self.assertEqual(destination.read_bytes(), b"PRESERVE EXISTING PROJECT")
         abort = Program(
-            [["BLK %READ_VAR0", "LD %M10", "EXECUTE", "LD %M13", "ABORT", "END_BLK"]],
+            [["BLK %READ_VAR0", "LDN %M10", "EXECUTE", "LD %M13", "ABORT", "END_BLK"]],
             communications={"%READ_VAR0": valid},
         )
-        with self.assertRaisesRegex(CompileError, "ABORT"):
+        with self.assertRaisesRegex(CompileError, "input contact"):
             write_project(abort, self.fixture("read_i"), destination)
         self.assertEqual(destination.read_bytes(), b"PRESERVE EXISTING PROJECT")
 

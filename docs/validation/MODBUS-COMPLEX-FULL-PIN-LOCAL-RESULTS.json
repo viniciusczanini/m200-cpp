@@ -1,0 +1,560 @@
+{
+  "date": "2026-11-06",
+  "status": "pass",
+  "scope": "Final standalone validation-only rejected-input byte assertion strengthening after the exact historical602 checkpoint; no product semantics changed.",
+  "public_script": {
+    "path": "tests/stress/modbus_full_pin.py",
+    "bytes": 58856,
+    "sha256": "98b443a7211d1269a637973f4438add6f0fc8522d1f18e2e0954cd044aabd409"
+  },
+  "reproduction": [
+    "python3",
+    "tests/stress/modbus_full_pin.py",
+    "--output",
+    "/fresh/nonexistent/output-directory"
+  ],
+  "requirements": [
+    "Python standard library",
+    "Local clang++ toolchain; M200_CLANG honored",
+    "Public m200 modules, sdk/plc.hpp and three public exact full-pin fixtures/provenances"
+  ],
+  "private_prerequisites": false,
+  "new_run": {
+    "status": "pass",
+    "elapsed_seconds": 13.125,
+    "distinct_recipes": 3,
+    "distinct_timeline_positions": 74,
+    "distinct_exchange_starts": 19,
+    "negative_scenarios": 5,
+    "negative_destination_checks": 8,
+    "native_graph_negative_scenarios": 6,
+    "positive_decomposition_forms": 2,
+    "positive_decomposition_destination_checks": 6,
+    "control_entry_trace": {
+      "status": "pass",
+      "distinct_timeline_positions": 7,
+      "exchange_starts": 1,
+      "completions": 1,
+      "skipped_invocations": [
+        2,
+        3,
+        5
+      ],
+      "VM_paths": [
+        "source_IR",
+        "serialized_IR",
+        "project",
+        "reverse_IR",
+        "reverse_project"
+      ],
+      "native_absent_paths": 2,
+      "literal_positive_outputs_Q0_3": [
+        "0000",
+        "0100",
+        "0100",
+        "1100",
+        "1010",
+        "0010",
+        "0000"
+      ],
+      "literal_absent_outputs_Q0_3": [
+        "0000",
+        "0001",
+        "0001",
+        "1001",
+        "0001",
+        "0001",
+        "0000"
+      ],
+      "new_compiler_bundles": 2,
+      "shape": {
+        "canonical_rungs": 36,
+        "canonical_instructions": 78
+      }
+    },
+    "deliberate_fault_mutation_controls": 1,
+    "input_pins_unchanged": true,
+    "verified_bundles": 6,
+    "verified_group_origin_sets": 10,
+    "network_GUI_Wine_physical_CI": false,
+    "full_suite_run": false,
+    "limits": [
+      "Native callbacks replay literal outcomes; they test C++ composition, not a native protocol implementation.",
+      "SL1 arbitration, clock, edge and error behavior are local reference-model policies.",
+      "Representation paths repeat 67 base positions plus seven control-entry positions, not extra distinct cases.",
+      "No exact-complex-project official editor, simulator or physical PLC validation."
+    ]
+  },
+  "input_pin_count": 47,
+  "source_input_sha256": {
+    "m200/__init__.py": "77c5815a3596eebca3e939d1ad39abba46fa4edc4df148aaa7e47f13e5eda0ab",
+    "m200/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "m200/allocation.py": "f21e8753757ebf1c54874c18c3385a7d79ce52992514725920c29a1ca6281be9",
+    "m200/arithmetic.py": "bd0a83b4cc3257d2734a2ad1131137ce0608c2688a0565842b41759c336df75a",
+    "m200/arrays.py": "d4574f6e48ab98f70feb3f474f30bbf387117f5db3ddde395525a21a77da42ed",
+    "m200/bits.py": "d76ca8b8bb587a6811cfb3e157c00385ba0a836b8eb669afdda9af4e635b6a61",
+    "m200/boolean_bdd.py": "b3de9c79a5b14953256117afa22df8aaf2b37eb71689f224ca2d66e78a02882f",
+    "m200/capabilities.py": "e94e59743ee0eae98c476938f8eafe04966c0823b825b1d070980d15d41348a0",
+    "m200/cli.py": "22110f728cd456b9fae20a2ae1c2f9a03ba3fede808ee220318071c09a9d6a14",
+    "m200/communication.py": "105c1aef50e7ee00bc7c7142a5b6805d4ddf5f18fc04c5e60a52b78841a6b3b0",
+    "m200/communication_graph.py": "3b6e9a8ffc3c9ae1203106b37385141f8007719e55e010a29eec07732e3a3d61",
+    "m200/communication_xml.py": "2762f0fd89552de18e21bb632e536eb4c1a9449702cdfb6444dfb58bb606aac2",
+    "m200/config.py": "5411e6a28bd67da9a45c1660f1c62673443b249ac76948ede80b57c6e322f73e",
+    "m200/conversions.py": "0922116a83ef1bcacda5fb9a588f2bc10d522a7c1ca7f301148ea88e6e370250",
+    "m200/copy_fusion.py": "39c8f498518c46d35ad61ec2c53564a61748a4957eae25e8d241a3c7e4b98816",
+    "m200/counter_graph.py": "80abf1241ee5095a121c47e1a196de03f1e7ed37fe0c54626b2a3f3eba4a9e8c",
+    "m200/counter_xml.py": "a87177f18a698b1f442a7c16eb66748a6d2c06c9c966ac199c6275bb1e326554",
+    "m200/counters.py": "0e4ed9d8fe6f4356f3d6b6986558a0f9caa019daa3f741b12522d1fdd6f376ce",
+    "m200/edge_functions.py": "c58b059d15ee7387ed7e65f841ad549f3b30c3781a258c0a6340a96e9cd92a24",
+    "m200/edges.py": "e590a801d00b94d20a2dd1f428635aa299e3bd59bcbfe2442f5ffa4fd3d64713",
+    "m200/flow.py": "090035e4abc84354287c934898430c0da038a81a11452526e4d87a70def55607",
+    "m200/frontend.py": "2b56e3ca231ccb3cbb9a5371051928b360559400566c771a4cd678db07c0504a",
+    "m200/il.py": "f177243b0b658414b8e2f3da7eac7a7ed62b7996f5faa2154b96377f9538db83",
+    "m200/indexed.py": "0b8ca542e2be87392d8de2a75ef8ad0d48534b28d7f82d1e24fd1bf38fc8343b",
+    "m200/jsonio.py": "c4d8447354b4f48205a8d5bfc58e1a3919656ba2073ecc5982b2f8fd6253fd70",
+    "m200/ladder_lowering.py": "66bffd608bc2e554b61f56eacf608efe7749b89d19dc5c9d4fc13e004913fb52",
+    "m200/levels.py": "439eba12b9bf189795449983755b55d92f77261678a983c4ed9e94b5eb341149",
+    "m200/lower.py": "d9cc4e13b0e886a0c0d7bd85880d621d76f8c371943f4d4d1549f111ab1aa657",
+    "m200/modbus.py": "a391ce5ff71520cea4f6b74d9ae984ba6cb4d6fff36b9d44fe05396e68c2e32b",
+    "m200/model.py": "e786ea2d03ea7d9c98c641fe6ed84a00a2076f51a1974ce1209355ef4dad0e11",
+    "m200/native.py": "016a6af7d7f7b1de11dab9bee1477faa9f4d393f75bbf09e1b3bf5daa5e6ac4f",
+    "m200/native_logic.py": "6a5990a9b75186ca678172491605a8485747ec004c685a3c4d22b025be8a53de",
+    "m200/numeric.py": "b29de2050a070dcbf23ab4e942642f45ad22a580d70b078f5b74111dfde629c5",
+    "m200/project.py": "da62b18ea0e87f9b881e673af7a610aa6de57297b0ff182e3a0dbfaedca32708",
+    "m200/register_graph.py": "301cd66e5cc473ced8aa7be29fc0881484857a9072b8f490dac17e54496a459c",
+    "m200/register_xml.py": "8cccf50926e13978df2389afb48cf37409b451e8b4b80be86e1f3299dd292f71",
+    "m200/reverse.py": "a84be951d8f3e113fb74065c024198408efd584c3b16794a3f88e1f04507a0d1",
+    "m200/timer_profile.py": "ca3f7855752418db88698ab0a6fff8ead02f67d8c63c767baeb7b0f985fd346e",
+    "m200/timers.py": "384e3c26facd76ed8da5449d001348fe1c1dd818a73532ab9c782e6a9b0fedf6",
+    "sdk/plc.hpp": "b1d6f04ab2ce88d4e37ac781a299f134c5882971f2d593ead502be3877e784b3",
+    "tests/stress/modbus_full_pin.py": "98b443a7211d1269a637973f4438add6f0fc8522d1f18e2e0954cd044aabd409",
+    "tests/fixtures/official_tm200ce40t_modbus_full_pin_read.smbp": "8154e130ce73b6a1b6e90f5876264437ec36778207fc38c3a3661152059f9e50",
+    "tests/fixtures/official_tm200ce40t_modbus_full_pin_read.provenance.json": "8d30908043d3bd1d4a66bd4bcb0f86c050ca6999451303c3f9c91f4db92d79fd",
+    "tests/fixtures/official_tm200ce40t_modbus_full_pin_write.smbp": "ae6ffad294a36e79656f36845f2a0bebf19df6f3e60b8aa7b82597b867b79af3",
+    "tests/fixtures/official_tm200ce40t_modbus_full_pin_write.provenance.json": "f5c556d3896a6e824509c25ca50b70e8c2dca2c71c5d4b80331fbaacbe2ef7dc",
+    "tests/fixtures/official_tm200ce40t_modbus_full_pin_write_read.smbp": "9e7a3359a99c433bdebe7eaca21235960de806fdfb8151a678e39345e4b3588f",
+    "tests/fixtures/official_tm200ce40t_modbus_full_pin_write_read.provenance.json": "5c7d0e2ef28bc3bfd34fe2e8e858b3db939edf1e64f271fd33449e2ca01d97b8"
+  },
+  "author_frozen_core_pin": {
+    "path": "output/diagnostics/modbus-bare-abort-profile-2026-11-06/review-source-pin.json",
+    "bytes": 18689,
+    "sha256": "df19fb2bce6054a371c54df4ec23f886b2733676735dfa2ba2c80a0dd7884d43"
+  },
+  "author_core_inputs_verified": 163,
+  "cases": [
+    {
+      "name": "multi",
+      "timeline_positions": 44,
+      "shape": {
+        "canonical_rungs": 140,
+        "canonical_instructions": 306,
+        "native_rungs": 128,
+        "native_instructions": 309,
+        "full_pin_groups": 3,
+        "group_graph_entities": [
+          27,
+          27,
+          27
+        ],
+        "configs_timers_equal": true
+      },
+      "source": {
+        "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/run/multi.cpp",
+        "bytes": 2258,
+        "sha256": "40c1199198d53c5b2ff33377858f50698cbaa13305af73f4dc9375c2a60e4aec"
+      },
+      "results": {
+        "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/run/multi-results.json",
+        "bytes": 252704,
+        "sha256": "868fbf8e0f90673c2a5e24facec062667c357a01f467b73203dc7f48496937cc"
+      },
+      "negative_cases": [
+        {
+          "case": "actual_template_FunctLevelMan20_0",
+          "destination": "absent",
+          "error": "M200-E: unverified WRITE_READ_VAR functional-level profile",
+          "atomic": true
+        },
+        {
+          "case": "actual_template_FunctLevelMan20_0",
+          "destination": "existing",
+          "error": "M200-E: unverified WRITE_READ_VAR functional-level profile",
+          "atomic": true
+        },
+        {
+          "case": "actual_template_FunctLevelMan7_0",
+          "destination": "absent",
+          "error": "M200-E: unverified WRITE_READ_VAR functional-level profile",
+          "atomic": true
+        },
+        {
+          "case": "actual_template_FunctLevelMan7_0",
+          "destination": "existing",
+          "error": "M200-E: unverified WRITE_READ_VAR functional-level profile",
+          "atomic": true
+        },
+        {
+          "case": "actual_SL1_slave",
+          "destination": "absent",
+          "error": "M200-E: SL1 requires explicit RS485 Modbus RTU master configuration",
+          "atomic": true
+        },
+        {
+          "case": "actual_SL1_slave",
+          "destination": "existing",
+          "error": "M200-E: SL1 requires explicit RS485 Modbus RTU master configuration",
+          "atomic": true
+        },
+        {
+          "case": "unverified_full_pin_READ_MW",
+          "destination": "absent",
+          "error": "M200-E: unverified bare EXECUTE/ABORT communication link/object profile",
+          "atomic": true
+        },
+        {
+          "case": "unverified_full_pin_READ_MW",
+          "destination": "existing",
+          "error": "M200-E: unverified bare EXECUTE/ABORT communication link/object profile",
+          "atomic": true
+        },
+        {
+          "case": "incomplete_two_word_buffer",
+          "error": "M200-E: Modbus local data buffer exceeds address space",
+          "stage": "typed config construction"
+        }
+      ]
+    },
+    {
+      "name": "cascade",
+      "timeline_positions": 23,
+      "shape": {
+        "canonical_rungs": 92,
+        "canonical_instructions": 201,
+        "native_rungs": 84,
+        "native_instructions": 203,
+        "full_pin_groups": 2,
+        "group_graph_entities": [
+          27,
+          27
+        ],
+        "configs_timers_equal": true
+      },
+      "source": {
+        "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/run/cascade.cpp",
+        "bytes": 1148,
+        "sha256": "f6675ce31d4ee2eee43370877fc9a757a3ca3ef89d03a479ec8c59e5b0bbc7a1"
+      },
+      "results": {
+        "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/run/cascade-results.json",
+        "bytes": 78418,
+        "sha256": "ab358a58518ccf348434c4868754c93eda659091b2acd4a74c1c10ac08dabfac"
+      },
+      "negative_cases": []
+    }
+  ],
+  "positive_decomposition": {
+    "status": "pass",
+    "positive_forms": 2,
+    "same_target_alias_variant": 1,
+    "successful_destination_checks": [
+      {
+        "case": "reordered_status_stores",
+        "destination": "absent",
+        "status": "pass",
+        "exact_rung_store_label_order": true,
+        "caller_and_template_preserved": true,
+        "successful_complete_output": true,
+        "bare_graph_entities": 3,
+        "other_full_pin_groups": 2,
+        "same_target_last_DONE_store_checked": false
+      },
+      {
+        "case": "reordered_status_stores",
+        "destination": "existing",
+        "status": "pass",
+        "exact_rung_store_label_order": true,
+        "caller_and_template_preserved": true,
+        "successful_complete_output": true,
+        "bare_graph_entities": 3,
+        "other_full_pin_groups": 2,
+        "same_target_last_DONE_store_checked": false
+      },
+      {
+        "case": "reordered_same_target_alias",
+        "destination": "absent",
+        "status": "pass",
+        "exact_rung_store_label_order": true,
+        "caller_and_template_preserved": true,
+        "successful_complete_output": true,
+        "bare_graph_entities": 3,
+        "other_full_pin_groups": 2,
+        "same_target_last_DONE_store_checked": true
+      },
+      {
+        "case": "reordered_same_target_alias",
+        "destination": "existing",
+        "status": "pass",
+        "exact_rung_store_label_order": true,
+        "caller_and_template_preserved": true,
+        "successful_complete_output": true,
+        "bare_graph_entities": 3,
+        "other_full_pin_groups": 2,
+        "same_target_last_DONE_store_checked": true
+      },
+      {
+        "case": "interior_label_control_entry",
+        "destination": "absent",
+        "status": "pass",
+        "exact_rung_store_label_order": true,
+        "caller_and_template_preserved": true,
+        "successful_complete_output": true,
+        "bare_graph_entities": 3,
+        "other_full_pin_groups": 2,
+        "same_target_last_DONE_store_checked": false
+      },
+      {
+        "case": "interior_label_control_entry",
+        "destination": "existing",
+        "status": "pass",
+        "exact_rung_store_label_order": true,
+        "caller_and_template_preserved": true,
+        "successful_complete_output": true,
+        "bare_graph_entities": 3,
+        "other_full_pin_groups": 2,
+        "same_target_last_DONE_store_checked": false
+      }
+    ],
+    "native_graph_negative_checks": [
+      {
+        "case": "missing_abort",
+        "error": "M200-E: communication requires its complete observed 3-entity graph",
+        "input_bytes_preserved": true
+      },
+      {
+        "case": "unknown_field",
+        "error": "M200-E: unsupported full-pin Ladder entity fields",
+        "input_bytes_preserved": true
+      },
+      {
+        "case": "extra_output",
+        "error": "M200-E: communication requires its complete observed 3-entity graph",
+        "input_bytes_preserved": true
+      },
+      {
+        "case": "wrong_class",
+        "error": "M200-E: full-pin communication IL and Ladder graphics do not agree",
+        "input_bytes_preserved": true
+      },
+      {
+        "case": "wrong_connection",
+        "error": "M200-E: full-pin communication IL and Ladder graphics do not agree",
+        "input_bytes_preserved": true
+      },
+      {
+        "case": "wrong_abort",
+        "error": "M200-E: full-pin communication IL and Ladder graphics do not agree",
+        "input_bytes_preserved": true
+      }
+    ],
+    "reused_base_timeline_positions_not_added_to_frame_count": 44
+  },
+  "control_entry": {
+    "status": "pass",
+    "distinct_timeline_positions": 7,
+    "exchange_starts": 1,
+    "completions": 1,
+    "skipped_invocations": [
+      2,
+      3,
+      5
+    ],
+    "VM_paths": [
+      "source_IR",
+      "serialized_IR",
+      "project",
+      "reverse_IR",
+      "reverse_project"
+    ],
+    "native_absent_paths": 2,
+    "literal_positive_outputs_Q0_3": [
+      "0000",
+      "0100",
+      "0100",
+      "1100",
+      "1010",
+      "0010",
+      "0000"
+    ],
+    "literal_absent_outputs_Q0_3": [
+      "0000",
+      "0001",
+      "0001",
+      "1001",
+      "0001",
+      "0001",
+      "0000"
+    ],
+    "new_compiler_bundles": 2,
+    "shape": {
+      "canonical_rungs": 36,
+      "canonical_instructions": 78
+    }
+  },
+  "literal_method": "Hand-written independent controls/status/error/buffer/packet tables; expected values do not invoke product encoding/decoding/timer/communication engines.",
+  "counting": "44 multi +23 cascade +7 control-entry positions =74 distinct positions; repeated representations/decomposition variants do not add positions. 18 base starts +1 control-entry start =19.",
+  "response_counts": {
+    "completed_responses": 14,
+    "pending_exchanges_cancelled": 5,
+    "base_injected_exception_responses": 1
+  },
+  "intentional_prefix_fault": {
+    "status": "caught_as_required",
+    "mutation": "Commit the two complete FC23 prefix words before rejecting the truncated response",
+    "first_mismatch": {
+      "scan": 34,
+      "now_ms": 430,
+      "address": "%MW400",
+      "actual_unsigned": 32769,
+      "expected_unsigned": 9320
+    },
+    "new_distinct_timeline_positions": 0,
+    "production_code_changed": false
+  },
+  "historical_snapshots": [
+    {
+      "snapshot": {
+        "path": "output/reports/modbus-complex-full-pin-public-frozen-972616-2026-11-06/SNAPSHOT.json",
+        "bytes": 20219,
+        "sha256": "8f9501dea978bdef7ba92e19827fe21a505c589193dea75dd27476bbb6adfd26"
+      },
+      "files_verified": 115,
+      "preserved": true
+    },
+    {
+      "snapshot": {
+        "path": "output/reports/modbus-complex-full-pin-public-frozen-166bc26f-2026-11-06/SNAPSHOT.json",
+        "bytes": 21671,
+        "sha256": "5888b617bb50adb7370c957c67feeacd0ef50f00a73bc2b788cb0a904715b78a"
+      },
+      "files_verified": 123,
+      "preserved": true
+    },
+    {
+      "snapshot": {
+        "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/PRE-FIX-SNAPSHOT.json",
+        "bytes": 3098,
+        "sha256": "42a25929ae5340fedbd472875f85e99144acae52bfef2476d9788ff1385f81a3"
+      },
+      "files_copied": 5,
+      "preserved": true,
+      "note": "Exact3337 public script and four pre-assert public reports copied; original602 run and independent-review artifacts remain byte-exact in their retained directories."
+    }
+  ],
+  "execution_limits": [
+    "VM protocol lifecycle is a pure in-process reference model, without sockets.",
+    "Native callbacks replay literal status/error/commits to check C++ composition, not an independent native protocol stack.",
+    "Native source/reverse absent transport checks do not fabricate success.",
+    "No GUI/Wine/official simulator/physical PLC/serial timing/CI or full regression run in this stage.",
+    "Exact complex generated project editor/runtime validation remains pending."
+  ],
+  "guards": {
+    "existing_output_refused": true,
+    "optimized_Python_refused": true,
+    "final_existing_output_log": {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/guard-existing.log",
+      "bytes": 158,
+      "sha256": "7d7c3c8f8163ee5b2ee8225eeecc2b07bf273fc6a2c8fa5c61fb6bc940276f69"
+    },
+    "final_optimized_python_log": {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/guard-optimized.log",
+      "bytes": 130,
+      "sha256": "dfcab3d72102356ea411d2c5eea706ddf24f444e957207c703d89207db4b2de1"
+    }
+  },
+  "evidence": {
+    "results": {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/run/results.json",
+      "bytes": 400951,
+      "sha256": "b59ad6e8292974443d94a2478aee98daeb6191cd800c302acece9827b53fc243"
+    },
+    "input_pin": {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/run/input-pin.json",
+      "bytes": 4590,
+      "sha256": "1f86e1a126bf53411786ae61e049e7a99f4a5bf2b0a440bce8f647bb47f27341"
+    },
+    "literal_oracles": {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/run/literal-oracles.json",
+      "bytes": 76132,
+      "sha256": "fb839b0e81fb3242369413c4718a1542b55a1e48d247942b2bc22b5935ef7e4d"
+    },
+    "verification": {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/run/verification.json",
+      "bytes": 7071,
+      "sha256": "e85cdf25be62b8d6506dc1ab8f7bddcb81ae4b010ce398da402dedbd2131dfdd"
+    },
+    "inventory": {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/run/MANIFEST.json",
+      "bytes": 15685,
+      "sha256": "f5078c03cc63c0eef0263a01d34df7ef2a730e4fcc994104d0e519f20163c231"
+    },
+    "checksums": {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/run/SHA256SUMS",
+      "bytes": 9097,
+      "sha256": "74e76071d6f5491276e65b38aa8a2286f6f0c18905daa3a6cc1f28b81fcedca8"
+    },
+    "decomposition": {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/run/decomposition-results.json",
+      "bytes": 3363,
+      "sha256": "59ba15366777485b0cbb42d976e768e152728d171ecad4b35f7f58b9c39b82f0"
+    },
+    "control_entry": {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/run/control-entry-oracle.json",
+      "bytes": 1017,
+      "sha256": "ea686b45bb1020aa37a93938e7edff716bb95ac9b8850bc9922e0986d1de3ce8"
+    }
+  },
+  "terminal_log": {
+    "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/terminal.log",
+    "bytes": 1617,
+    "sha256": "e70d0566d26e36798cefba7cb9a2a8f012939c06e7eb66a346a504575de54f4c"
+  },
+  "historical_RED_old_refusals": {
+    "path": "output/reports/modbus-bare-integration-stress-2026-11-06/red-old-refusals.log",
+    "bytes": 827,
+    "sha256": "0519b00f4c275fa6fc6abf54ad3bb3a9521e962b88eeccdd07424239af2bc154"
+  },
+  "lint": "Ruff0.17.3 check/format passed for this script only.",
+  "source_freeze": {
+    "final_script_no_further_changes": true,
+    "exact47_input_copies": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/source-inputs",
+    "all163_author_core_inputs_unchanged": true
+  },
+  "full_suite_claim": false,
+  "new_unit_test_count_claim": false,
+  "post_602_oracle_strengthening": {
+    "verification": {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/verification.json",
+      "bytes": 3954,
+      "sha256": "fe641504cf18bebb9d51578544fb3df3ab73dde8d48cae1de70dca640513ab7f"
+    },
+    "single_assert_only": true,
+    "RED_log": {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/red.log",
+      "bytes": 1236,
+      "sha256": "a7a006ad1b0d7cffca55fae035fa109057423007b287267f03262955ac84f4b6"
+    },
+    "GREEN_log": {
+      "path": "output/reports/modbus-bare-stress-input-preservation-fix-2026-11-06/green.log",
+      "bytes": 169,
+      "sha256": "dee4454c6ffe29d5d92dd9d9a4d9ccd9ad81f2e69caf37fb6865d64b346d7212"
+    },
+    "real_CompileError_still_required": true,
+    "all163_core_review_inputs_unchanged": true,
+    "historical602_script_sha256": "3337af2420b1b259c30137b18dde64cd0d0dedcbb4e70703fa5faa54656db867",
+    "historical602_count": 602,
+    "historical602_seconds": 290.617,
+    "historical602_not_rerun": true,
+    "new_unit_methods": 0,
+    "product_bug_demonstrated": false
+  }
+}

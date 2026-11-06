@@ -467,7 +467,9 @@ class ModbusFullPinNativeProfileTests(unittest.TestCase):
         write_project(program, self.fixture("read"), destination)
         self.assertEqual(load_project(destination).rungs, program.rungs)
 
-    def test_unsafe_partial_groups_and_late_failures_preserve_all_inputs(self):
+    def test_partial_groups_decompose_and_genuine_late_failures_preserve_all_inputs(
+        self,
+    ):
         valid = load_project(self.fixture("write_read"))
         valid.metadata.pop("rung_origins", None)
         for change in (
@@ -505,7 +507,42 @@ class ModbusFullPinNativeProfileTests(unittest.TestCase):
             else:
                 program.rungs[0][1] = "LD 1"
             with self.subTest(change=change):
-                self.assert_preserved_failure(program, self.fixture("write_read"))
+                if change in ("other_key", "negated_input", "constant_input"):
+                    self.assert_preserved_failure(program, self.fixture("write_read"))
+                else:
+                    # These are valid ordinary status rungs once a bare update
+                    # can be emitted. They must not be collapsed or reordered.
+                    before = copy.deepcopy(program.as_dict())
+                    template = self.fixture("write_read")
+                    original = template.read_bytes()
+                    destination = self.work / (change + "-decomposed.smbp")
+                    write_project(program, template, destination)
+                    native = ET.parse(destination).findall(".//RungEntity")
+                    self.assertEqual(len(native), len(program.rungs))
+                    self.assertEqual(
+                        [
+                            [
+                                " ".join((node.text or "").split())
+                                for node in rung.findall(
+                                    "InstructionLines/InstructionLineEntity/InstructionLine"
+                                )
+                            ]
+                            for rung in native
+                        ],
+                        program.rungs,
+                    )
+                    blocks = [
+                        r
+                        for r in native
+                        if r.findtext(
+                            "InstructionLines/InstructionLineEntity/InstructionLine", ""
+                        ).startswith("BLK ")
+                    ]
+                    self.assertEqual(len(blocks), 1)
+                    self.assertEqual(len(blocks[0].find("LadderElements")), 3)
+                    self.assertEqual(load_project(destination).rungs, program.rungs)
+                    self.assertEqual(program.as_dict(), before)
+                    self.assertEqual(template.read_bytes(), original)
         late = copy.deepcopy(valid)
         late.communications["%WRITE_READ_VAR1"] = copy.deepcopy(
             late.communications["%WRITE_READ_VAR0"]
@@ -514,6 +551,9 @@ class ModbusFullPinNativeProfileTests(unittest.TestCase):
             [line.replace("%WRITE_READ_VAR0", "%WRITE_READ_VAR1") for line in rung]
             for rung in valid.rungs[:-1]
         ]
+        # A missing output now permits safe decomposition. Keep a genuine late
+        # unverified native predicate after the first valid full group instead.
+        late.rungs[len(valid.rungs)][1] = "LDN %M10"
         self.assert_preserved_failure(late, self.fixture("write_read"))
 
     def test_labelled_block_and_jump_around_full_group_preserve_skipped_coils(self):

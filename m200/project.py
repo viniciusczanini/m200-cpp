@@ -507,6 +507,11 @@ def load_project(path):
                     p.rungs.append(lines)
                     origins.append(origin)
                     graph_nodes.append((r, lines))
+                elif len(canonical) == 1:
+                    # An observed bare Execute/Abort graph is already canonical:
+                    # one update, one source origin, no full-pin audit payload.
+                    p.rungs.extend(canonical)
+                    origins.append(origin)
                 else:
                     group_origins = import_full_communication_origins(r, origin)
                     full_groups.append(
@@ -691,7 +696,7 @@ def write_project(program, template, destination):
             + full_communication_origin_comment(
                 [origin[j] if j < len(origin) else {} for j in range(i, i + consumed)]
             )
-            if full_communication is not None
+            if full_communication is not None and consumed == 5
             else source + " | Experimental generated logic; official validation pending"
         )
         element(r, "MainComment", comment)

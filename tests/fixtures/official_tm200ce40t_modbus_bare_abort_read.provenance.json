@@ -1,0 +1,95 @@
+{
+  "source": "User local Schneider Basic lab; root official IL-to-Ladder conversion, Ctrl+S and fresh reopen of preserved actual saved-byte clone",
+  "editor": "EcoStruxure Machine Expert Basic 1.4 build 484",
+  "target": "TM200CE40T",
+  "file": "official_tm200ce40t_modbus_bare_abort_read.smbp",
+  "sha256": "222de155bd4061649a017859f8775322974c3e06b3a85204ff85ae015e35b3e4",
+  "bytes": 88863,
+  "copied_date": "2026-11-06",
+  "original_modified": false,
+  "source_saved": {
+    "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/observed/read/native_modbus_bare_abort_read_i_editor_saved.smbp",
+    "bytes": 88863,
+    "sha256": "222de155bd4061649a017859f8775322974c3e06b3a85204ff85ae015e35b3e4"
+  },
+  "parent_candidate": {
+    "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/native_modbus_bare_abort_read_i.smbp",
+    "bytes": 85558,
+    "sha256": "01e6994cb64d07ec10eb48ac807cf6554c6f521e8b85e38b61464d9d75685c48"
+  },
+  "procedure": "Writable lab P: clone opened; six-line IL converted to Ladder and viewed No error; Ctrl+S; actual saved bytes preserved as an editor-saved clone; another project opened before fresh reopen of that clone, Programming No error. No GUI Save As operation is claimed.",
+  "root_observation": {
+    "saved_sha256": "222de155bd4061649a017859f8775322974c3e06b3a85204ff85ae015e35b3e4",
+    "saved_bytes": 88863,
+    "root_personally_viewed_NoError_clean_save": true,
+    "one_rung_six_IL": true,
+    "native_graph_entities": 3,
+    "fresh_reopen_pending": false,
+    "RUN_Execute_network": false,
+    "root_personally_viewed_reopen_Programming_NoError": true,
+    "other_project_before_reopen": "native_modbus_bare_abort_write_q",
+    "saved_sha256_after_reopen": "222de155bd4061649a017859f8775322974c3e06b3a85204ff85ae015e35b3e4"
+  },
+  "source_observation_record": {
+    "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/observed/read/root-gui-observations.json",
+    "bytes": 517,
+    "sha256": "4c6c553a99c7970d4156af688b2e68d10483ded929ae205e6c808dbe1dc2d846"
+  },
+  "captures": [
+    {
+      "phase": "clean save after conversion: No error",
+      "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/observed/read/save.png",
+      "bytes": 334126,
+      "sha256": "67c8a3d1dcfd48b1e11912221d2207caf4c9552d86970fe4b7e6b7bb46d7ea98"
+    },
+    {
+      "phase": "fresh reopen after another project: No error",
+      "path": "output/editor-validation/native-modbus-bare-abort-2026-11-06/observed/read/reopen.png",
+      "bytes": 327364,
+      "sha256": "47c0fdf286fbfbb7d848d685ffa502763af74a479792c28359020586de181137"
+    }
+  ],
+  "preservation": {
+    "normalized_IL_sequence_equal": true,
+    "hardware_semantics_equal": true,
+    "typed_function_block_semantics_equal": true,
+    "hardware_canonical_sha256": "a3f0dc223eac3387b7ea387076aa025d3efb13adfede6a93844a7257495a2c8a",
+    "function_blocks_canonical_sha256": "9a4b9994eb26bbc0c3e86f7a9c8f23b786773fb4d4f8cace5924dffa914c1758"
+  },
+  "binding_scope": "Exact six-line Execute/Abort body and three-entity native READ I graph at actual Man21/SL1 master, with normal M inputs; no official compilation or runtime transaction proof",
+  "native_IL": [
+    "BLK %READ_VAR0",
+    "LD %M20",
+    "EXECUTE",
+    "LD %M21",
+    "ABORT",
+    "END_BLK"
+  ],
+  "native_graph": [
+    [
+      "NormalContact",
+      "%M20",
+      "0",
+      "0",
+      "Left, Right"
+    ],
+    [
+      "NormalContact",
+      "%M21",
+      "1",
+      "0",
+      "Left, Right"
+    ],
+    [
+      "ReadVarBasic",
+      "%READ_VAR0",
+      "0",
+      "1",
+      "Left"
+    ]
+  ],
+  "runtime_exchange": "not attempted",
+  "native_compile": "not claimed",
+  "password_fields": "all blank",
+  "public_portable_test_basis": "The exact saved SMBP bytes are included; ignored captures are provenance references, not test dependencies."
+}

@@ -1,7 +1,7 @@
-"""Observed full-pin communication bodies and their exact native Ladder binding.
+"""Observed bare/full-pin communication bodies and exact native Ladder bindings.
 
-The execution IR remains the established six-line update followed by four
-qualified status stores. This module never extends parse_block's return contract.
+The execution IR remains established six-line updates and separate qualified
+status stores. This module never extends parse_block's return contract.
 """
 
 from dataclasses import dataclass
@@ -33,6 +33,29 @@ def _memory(value):
     if int(value[2:]) >= 1024:
         fail("full-pin memory contact/coil exceeds target range")
     return value
+
+
+@dataclass(frozen=True)
+class BareBody:
+    key: str
+    execute: str
+    abort: str
+
+    def native_lines(self):
+        return [
+            "BLK " + self.key,
+            "LD " + self.execute,
+            "EXECUTE",
+            "LD " + self.abort,
+            "ABORT",
+            "END_BLK",
+        ]
+
+    def canonical(self, label=None):
+        lines = self.native_lines()
+        if label is not None:
+            lines.insert(0, label + ":")
+        return [lines]
 
 
 @dataclass(frozen=True)
@@ -83,6 +106,16 @@ def full_candidate(raw):
     )
 
 
+def parse_bare_body(raw):
+    _, lines = split_label(raw)
+    if len(lines) != 6:
+        fail("unsupported bare communication body length")
+    key, execute, abort = parse_block(lines)
+    if execute[0] != "LD" or abort[0] != "LD":
+        fail("unverified bare communication input contact profile")
+    return BareBody(key, _memory(execute[1]), _memory(abort[1]))
+
+
 def parse_full_body(raw):
     _, lines = split_label(raw)
     if len(lines) != 15:
@@ -116,24 +149,34 @@ def parse_full_body(raw):
 
 
 def check_profile(root, configurations, body):
+    profile = "bare EXECUTE/ABORT" if isinstance(body, BareBody) else "full-pin"
     if root.findtext("ManagementLevel") != "FunctLevelMan21_0":
-        fail("unverified full-pin communication functional-level profile")
+        fail("unverified %s communication functional-level profile" % profile)
     kind, _ = block_address(body.key)
     config = configurations.get(body.key)
     if config is None or config.kind != kind:
-        fail("undefined or mismatched full-pin communication configuration")
+        fail("undefined or mismatched %s communication configuration" % profile)
     if config.link != "SL1" or config.obj_type != OBJECTS[kind]:
-        fail("unverified full-pin communication link/object profile")
+        fail("unverified %s communication link/object profile" % profile)
 
 
 def graphics(body):
     kind, _ = block_address(body.key)
+    inputs = [
+        ("NormalContact", body.execute, 0, 0, "Left, Right"),
+        ("NormalContact", body.abort, 1, 0, "Left, Right"),
+        (
+            CLASSES[kind],
+            body.key,
+            0,
+            1,
+            "Left" if isinstance(body, BareBody) else "Left, Right",
+        ),
+    ]
+    if isinstance(body, BareBody):
+        return inputs
     return (
-        [
-            ("NormalContact", body.execute, 0, 0, "Left, Right"),
-            ("NormalContact", body.abort, 1, 0, "Left, Right"),
-            (CLASSES[kind], body.key, 0, 1, "Left, Right"),
-        ]
+        inputs
         + [
             ("Line", "", row, column, "Left, Right")
             for column in (5, 6, 7, 8, 9)
@@ -158,8 +201,12 @@ def check_graph(rung_node, body):
     if rung_node.findtext("IsLadderSelected") not in ("true", "false"):
         fail("invalid full-pin Ladder selection")
     graph = rung_node.find("LadderElements")
-    if graph is None or len(graph) != 27:
-        fail("full-pin communication requires its complete observed 27-entity graph")
+    expected_count = 3 if isinstance(body, BareBody) else 27
+    if graph is None or len(graph) != expected_count:
+        fail(
+            "communication requires its complete observed %s-entity graph"
+            % expected_count
+        )
     actual = []
     required = {"ElementType", "Descriptor", "Row", "Column", "ChosenConnection"}
     allowed = required | {"Comment", "Symbol"}
@@ -199,9 +246,22 @@ def check_graph(rung_node, body):
 
 
 def import_rung(rung_node, raw, root, configurations):
-    if not full_candidate(raw):
-        return None
-    body = parse_full_body(raw)
+    if full_candidate(raw):
+        body = parse_full_body(raw)
+    else:
+        _, lines = split_label(raw)
+        graph = rung_node.find("LadderElements")
+        # Preserve established unselected IL-only imports, including predicates
+        # not yet observed in native graphs. Selected empty graphics fail later.
+        if (
+            len(lines) != 6
+            or not lines[0].startswith("BLK ")
+            or lines[0].split(maxsplit=1)[1] not in configurations
+            or graph is None
+            or not len(graph)
+        ):
+            return None
+        body = parse_bare_body(raw)
     check_profile(root, configurations, body)
     # Check original geometry/IL before any canonical representation can hide it.
     check_graph(rung_node, body)
@@ -268,11 +328,14 @@ def serialized_rungs(program, root):
             len(lines) == 6
             and lines[0].startswith("BLK ")
             and lines[0].split(maxsplit=1)[1] in program.communications
-            and index + 4 < len(program.rungs)
         ):
-            key, execute, abort = parse_block(lines)
+            bare = parse_bare_body(raw)
+            key = bare.key
+            check_profile(root, program.communications, bare)
             outputs = []
             for offset, status in enumerate(STATUS_ORDER, 1):
+                if index + offset >= len(program.rungs):
+                    break
                 following = program.rungs[index + offset]
                 # Interior labels are control entries even when currently unused.
                 if (
@@ -282,17 +345,21 @@ def serialized_rungs(program, root):
                 ):
                     break
                 outputs.append(following[1][3:])
-            if len(outputs) == 4:
-                if execute[0] != "LD" or abort[0] != "LD":
-                    fail("unverified full-pin communication input contact profile")
-                candidate = FullBody(
+            if len(outputs) == 4 and all(
+                re.fullmatch(r"%M(?:0|[1-9][0-9]{0,3})", target)
+                and int(target[2:]) < 1024
+                for target in outputs
+            ):
+                body = FullBody(
                     key,
-                    _memory(execute[1]),
-                    _memory(abort[1]),
-                    tuple(_memory(target) for target in outputs),
+                    bare.execute,
+                    bare.abort,
+                    tuple(outputs),
                 )
-                check_profile(root, program.communications, candidate)
-                body = candidate
+            else:
+                # Non-groupable ordinary status rungs retain their own order,
+                # labels and actions after the single native update.
+                body = bare
         if body is None:
             yield index, raw, None, 1
             index += 1
@@ -300,5 +367,6 @@ def serialized_rungs(program, root):
             native = body.native_lines()
             if label is not None:
                 native.insert(0, label + ":")
-            yield index, native, body, 5
-            index += 5
+            consumed = 5 if isinstance(body, FullBody) else 1
+            yield index, native, body, consumed
+            index += consumed
