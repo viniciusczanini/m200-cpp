@@ -117,7 +117,7 @@ The recorded **2026-11-06 validation rounds** contain:
 
 | Evidence | Recorded result |
 |---|---:|
-| Latest combined unit/regression suite | 462 passing tests |
+| Latest combined unit/regression suite | 469 passing tests |
 | Earlier baseline unit/regression suite | 417 passing tests |
 | Historical stress and public-program traces | 288,372 base scan frames |
 | Combined state/array, timer/counter and numeric candidates | 276 distinct candidate frames |
@@ -127,7 +127,7 @@ The recorded **2026-11-06 validation rounds** contain:
 
 The BCD vectors are **not scans** and are excluded from the scan total. Repeated runs and comparison stages are also excluded. The [local results](docs/validation/LOCAL-RESULTS.md) and [conversion result manifest](docs/validation/CONVERSION-LOCAL-RESULTS.json) record the exact scope, commands, and hashes. These are historical results tied to the recorded files, not an automatically refreshed build badge or proof of universal equivalence.
 
-The [latest END/timer integration record](docs/validation/NATIVE-END-TIMER-10MS-RESULTS.md) records the 462-test integration and exact fixtures. The [earlier scan-exit/Modbus record](docs/validation/SCAN-EXIT-INTEGRATION-RESULTS.md) preserves the 441-test checkpoint. The [earlier regression manifest](docs/validation/OFFICIAL-EDITOR-LOCAL-RESULTS.json) records the authentic-profile and memory-only constant fixes. The [combined-program manifest](docs/validation/COMPLEX-LOCAL-RESULTS.json) includes independent expected values and six exact candidates; their official execution is tracked separately. Follow the [complex test walkthrough](examples/editor_validation/README.md) and [three-timer sequence](examples/editor_validation/SEQUENCE_TIMERS.md) to reproduce them locally; [the sequence manifest](docs/validation/SEQUENCE-TIMERS-LOCAL-RESULTS.json) records its separate timing and button traces.
+The [latest inactive pulse-alias integration record](docs/validation/INACTIVE-PULSE-ALIAS-RESULTS.md) records 469 tests and preservation of two inactive descriptor forms; active axes and timer-option gates remain unchanged. The [earlier END/timer record](docs/validation/NATIVE-END-TIMER-10MS-RESULTS.md) preserves the 462-test integration and exact fixtures. The [earlier scan-exit/Modbus record](docs/validation/SCAN-EXIT-INTEGRATION-RESULTS.md) preserves the 441-test checkpoint. The [earlier regression manifest](docs/validation/OFFICIAL-EDITOR-LOCAL-RESULTS.json) records the authentic-profile and memory-only constant fixes. The [combined-program manifest](docs/validation/COMPLEX-LOCAL-RESULTS.json) includes independent expected values and six exact candidates; their official execution is tracked separately. Follow the [complex test walkthrough](examples/editor_validation/README.md) and [three-timer sequence](examples/editor_validation/SEQUENCE_TIMERS.md) to reproduce them locally; [the sequence manifest](docs/validation/SEQUENCE-TIMERS-LOCAL-RESULTS.json) records its separate timing and button traces.
 
 `check` compares the 16-output traces of native original C++, emitted IL, and reconstructed C++ for the supplied inputs and elapsed times. Deeper tests also inspect memory, flags, aliases, and independent oracles. The implementations share parts of the local model, so agreement does not replace official simulation or hardware measurements. `certify` deliberately refuses to claim certification.
 

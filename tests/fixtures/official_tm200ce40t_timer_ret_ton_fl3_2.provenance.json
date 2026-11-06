@@ -1,0 +1,44 @@
+{
+  "source": "User local Schneider Basic Wine lab; exact official-editor save of timer matrix case 03",
+  "source_path": "output/editor-validation/timer-profiles/timer_profile_03_ret_ton_fl3_2_editor_saved.smbp",
+  "editor": "EcoStruxure Machine Expert Basic 1.4 build 484",
+  "target": "TM200CE40T",
+  "copied_utc": "2026-11-06",
+  "file": "official_tm200ce40t_timer_ret_ton_fl3_2.smbp",
+  "sha256": "35a9d891711ff3eb74d745f30c14cbb3574b7cd61b0cec876320263e28a1fbd6",
+  "bytes": 87336,
+  "original_modified": false,
+  "parent_candidate": {
+    "file": "timer_profile_03_ret_ton_fl3_2.smbp",
+    "sha256": "f54bffa66cc80e7f0e781079821c1de2e3c77885c6b502849179c119c27b53fa"
+  },
+  "observed_save": {
+    "reported_by": "root local desktop GUI operator",
+    "validation_status": "No error",
+    "management_level": "FunctLevelMan5_0",
+    "human_level": "3.2",
+    "timer_retention_flag": "preserved true; execution at this level is unproven"
+  },
+  "inactive_pulse_outputs": [
+    {
+      "address": "%PLS0/%PWM0/%PTO0",
+      "index": "0",
+      "global_index": "0",
+      "preset": "1",
+      "ref_input": "NotUsed",
+      "z_phase_input": "NotUsed",
+      "probe_input": "NotUsed"
+    },
+    {
+      "address": "%PLS1/%PWM1/%PTO1",
+      "index": "1",
+      "global_index": "1",
+      "preset": "1",
+      "ref_input": "NotUsed",
+      "z_phase_input": "NotUsed",
+      "probe_input": "NotUsed"
+    }
+  ],
+  "related_research": "docs/capabilities/TIMER-LEVEL-BINDING-RESEARCH.md",
+  "scope": "Exact preservation evidence for two legacy inactive PTO display aliases. No active PTO support, timer-option support, minimum-level execution, native compilation, simulator or physical-controller compatibility is established. The fixture intentionally remains rejected by the separate timer-option project gate."
+}

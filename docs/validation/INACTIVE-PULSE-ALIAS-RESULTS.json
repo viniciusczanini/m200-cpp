@@ -1,0 +1,218 @@
+{
+  "format": "m200-inactive-pulse-alias-results-v1",
+  "date": "2026-11-06",
+  "target": "TM200CE40T",
+  "baseline_commit": "8ce9264c74dfe360736a45fb3c3b591293a6ce2f",
+  "scope": "Preserve two exact inactive pulse-output display aliases per index. No active pulse-axis or timer-option feature is enabled.",
+  "source_pin": {
+    "artifact": {
+      "path": "output/editor-validation/inactive-pulse-aliases/source-pin.json",
+      "bytes": 1110,
+      "sha256": "5a9106265b9277bfe0401c63e74f256919c2a273c15d5b63b0642dbf88e00b9e"
+    },
+    "status": "All4patchinputs and3unchangedgatefiles match the full-suite pin at publication capture",
+    "scope_files_sha256": {
+      "m200/config.py": "a77c79f392515338169aeccb033801997b924d58c211e866335379df5da21d75",
+      "tests/test_inactive_pulse_aliases.py": "8c89f7d08e8889b6bca59b0b0e818585465a0d8473269725e3273acc5d2446ce",
+      "tests/fixtures/official_tm200ce40t_timer_ret_ton_fl3_2.smbp": "35a9d891711ff3eb74d745f30c14cbb3574b7cd61b0cec876320263e28a1fbd6",
+      "tests/fixtures/official_tm200ce40t_timer_ret_ton_fl3_2.provenance.json": "deb0b3c186c0f36292e165d02ae869a44d2d391ca9c200dccccc1aecc936bff0"
+    },
+    "unchanged_gate_files": {
+      "m200/project.py": {
+        "sha256": "c72eda60704239f510f95de4df7fcd21ea0d493cd4ffba6472a1c5142374f461",
+        "equal_to_baseline": true
+      },
+      "m200/timer_profile.py": {
+        "sha256": "1338b8dda86c775be488b3ddc097eee170049e97168f82ac1aa9c25cf4ea6034",
+        "equal_to_baseline": true
+      },
+      "sdk/plc.hpp": {
+        "sha256": "b1d6f04ab2ce88d4e37ac781a299f134c5882971f2d593ead502be3877e784b3",
+        "equal_to_baseline": true
+      }
+    },
+    "scope_limit": "Patch-scoped source/fixture pin, not an atomic whole-repository source snapshot. Unsettled research/lab experiments and mutable documentation are excluded."
+  },
+  "full_regression": {
+    "command": [
+      "make",
+      "check"
+    ],
+    "underlying_command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "status": "passed",
+    "tests": 469,
+    "seconds": 157.67,
+    "previous_checkpoint_tests": 462,
+    "new_tests": 7,
+    "log": {
+      "path": "output/editor-validation/inactive-pulse-aliases/full-regression.log",
+      "bytes": 48378,
+      "sha256": "4a710a13b5359698b0637c90c04323af45027caaa9aa7a88892b1e00edf23985"
+    }
+  },
+  "focused_implementation": {
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "tests.test_inactive_pulse_aliases",
+      "-v"
+    ],
+    "status": "passed",
+    "tests": 7,
+    "seconds": 0.255,
+    "green_log": {
+      "path": "output/editor-validation/inactive-pulse-aliases/focused-green.log",
+      "bytes": 983,
+      "sha256": "823616163075e67b2f2567d9c7b41f034a8d809b82a5622ecc63fc7391694802"
+    },
+    "red_log": {
+      "path": "output/editor-validation/inactive-pulse-aliases/focused-red.log",
+      "bytes": 5671,
+      "sha256": "1688396357466644ceafc397adfb0ff31d5b71b36321cb01ff78dcbcfc673074"
+    }
+  },
+  "independent_review": {
+    "report": "docs/validation/INACTIVE-PULSE-ALIAS-REVIEW.md",
+    "status": "no actionable defect found",
+    "focused_tests": 7,
+    "focused_seconds": 0.263,
+    "focused_log": {
+      "path": "output/editor-validation/inactive-pulse-alias-review/focused-tests.log",
+      "bytes": 1025,
+      "sha256": "bd1393f3f84433ace34207451b61604d4e3208ef30b110326922684e2bed44a0"
+    },
+    "positive_configuration_probes": 5,
+    "negative_mutations_rejected": 108,
+    "hardware_and_source_preserving_exports": 4,
+    "invalid_template_destination_preservation_cases": 3,
+    "details": {
+      "path": "output/editor-validation/inactive-pulse-alias-review/independent-probes.json",
+      "bytes": 15992,
+      "sha256": "16fb3d2040580e3b46ea22c7e7f3a222ab18ef0270078371ce7c96ba4221e357"
+    },
+    "counting": "Review tests/probes are additional review activity, not extra unit tests or distinct scan frames."
+  },
+  "counting": "469is the combined unit-test total, including the7newtests. Focused7-test runs and independent review repetitions/probes must not be added to469. Historical stress/public/candidate frame totals are unchanged and were not rerun for this increment.",
+  "authentic_fixture": {
+    "artifact": {
+      "path": "tests/fixtures/official_tm200ce40t_timer_ret_ton_fl3_2.smbp",
+      "bytes": 87336,
+      "sha256": "35a9d891711ff3eb74d745f30c14cbb3574b7cd61b0cec876320263e28a1fbd6"
+    },
+    "provenance": {
+      "path": "tests/fixtures/official_tm200ce40t_timer_ret_ton_fl3_2.provenance.json",
+      "bytes": 1812,
+      "sha256": "deb0b3c186c0f36292e165d02ae869a44d2d391ca9c200dccccc1aecc936bff0"
+    },
+    "source_artifact": "output/editor-validation/timer-profiles/timer_profile_03_ret_ton_fl3_2_editor_saved.smbp",
+    "observed_save": {
+      "reported_by": "root local desktop GUI operator",
+      "validation_status": "No error",
+      "management_level": "FunctLevelMan5_0",
+      "human_level": "3.2",
+      "timer_retention_flag": "preserved true; execution at this level is unproven"
+    },
+    "aliases": [
+      {
+        "address": "%PLS0/%PWM0/%PTO0",
+        "index": "0",
+        "global_index": "0",
+        "preset": "1",
+        "ref_input": "NotUsed",
+        "z_phase_input": "NotUsed",
+        "probe_input": "NotUsed"
+      },
+      {
+        "address": "%PLS1/%PWM1/%PTO1",
+        "index": "1",
+        "global_index": "1",
+        "preset": "1",
+        "ref_input": "NotUsed",
+        "z_phase_input": "NotUsed",
+        "probe_input": "NotUsed"
+      }
+    ],
+    "configuration_validation": "passes without tree/file mutation",
+    "whole_project_import": "still rejected by unchanged timer-mode functional-level mapping gate",
+    "timer_retention_scope": "The true retention flag preserved in this saved diagnostic does not establish support or execution at functional level3.2."
+  },
+  "closed_allowlist": {
+    "indices": [
+      "0",
+      "1"
+    ],
+    "addresses_per_index": [
+      "%PLS{i}/%PWM{i}/%PTO{i}",
+      "%PLS{i}/%PWM{i}/%PTO{i}/%FREQGEN{i}"
+    ],
+    "global_index": "must equal Index exactly",
+    "preset": "1only",
+    "axis_inputs": {
+      "RefInput": "NotUsed",
+      "ZPhaseInput": "NotUsed",
+      "ProbeInput": "NotUsed"
+    },
+    "validation_preserved": [
+      "No arbitrary suffix stripping, prefix matching or case folding",
+      "No index aliasing, duplicates or forged resource identities",
+      "No active or incomplete axis configuration",
+      "Unknown fields/attributes remain rejected",
+      "Invalid input/template/destination bytes remain preserved"
+    ]
+  },
+  "lint": {
+    "version": "ruff0.17.3",
+    "check": {
+      "command": [
+        "ruff",
+        "check",
+        "m200/config.py",
+        "tests/test_inactive_pulse_aliases.py"
+      ],
+      "status": "passed",
+      "log": {
+        "path": "output/editor-validation/inactive-pulse-alias-review/publication-ruff-check.log",
+        "bytes": 19,
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      }
+    },
+    "format": {
+      "command": [
+        "ruff",
+        "format",
+        "--check",
+        "m200/config.py",
+        "tests/test_inactive_pulse_aliases.py"
+      ],
+      "status": "passed",
+      "files": 2,
+      "log": {
+        "path": "output/editor-validation/inactive-pulse-alias-review/publication-ruff-format-check.log",
+        "bytes": 26,
+        "sha256": "3bc53bf3e981a98a34a852e175bf9b77af841edea74fca595d9aedcbaf9a4938"
+      }
+    },
+    "diff_check": "passed"
+  },
+  "preservation": {
+    "historical_reports": "No earlier historical integration manifest rewritten",
+    "research_coordination": "Modbus researcher remains read-only; new research document and unsettled GUI/timer profiles are excluded from this result.",
+    "evidence_task": "Documentation and read-only verification only; no core/config/test/fixture edits, staging, commit or GUI operation."
+  },
+  "limitations": [
+    "Inactive descriptor preservation only; active PTO/PLS/PWM/FREQGEN remains unfinished.",
+    "Timer retentive/dynamic option gates are unchanged.",
+    "No native compilation/runtime, physical I/O, timing or complete library parity established by this increment."
+  ],
+  "physical_plc": "pending",
+  "complete_library": false
+}

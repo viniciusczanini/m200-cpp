@@ -7,9 +7,9 @@ The full TM200CE40T parity goal remains active. Work is pulled from this queue w
 | P0 | Diagnose three-timer simulator crash in ProcessMbitsEdges | GUI operator + separate Wine runtime chat | Unresolved; controlled probes ready | Crash preserved; exact original reached Online/identical/RUN; compare bounded candidates before changes |
 | P1 | Exercise TON/TP/TOF sequence, held/repeated buttons, STOP/RESET/permissive interactions | Official GUI operator | Completion, held/fresh START, TON abort and RESET passed; further cases queued | Observe TP abort/drain, permission loss and rejected busy edges with direct words |
 | P1 | Save/reopen I/O and complex projects; validate normal launcher persistence | Official GUI operator | Sequence save/readback/reopen passed; other projects and launcher restart queued | Preserve original bytes; compare editor-saved IL/configuration and reverse C++ |
-| P1 | Publish validated increments with English documentation | Main agent | Validated integration checkpoint | Next combined 462 tests passed; Actions disabled; publish reviewed source and evidence |
-| P2 | Native END/ENDC/ENDCN and C++ early-scan exit parity | Compiler lane | Native graph import implemented; combined 462 tests passed; Jump export retained | Publish reviewed native graph bindings; extend actual runtime controls separately |
-| P2 | Reconcile timer bases, retentive/dynamic modes and functional-level gates | Capability/schema lane | 10 ms binding implemented and saved/reopened; option/level matrix running | Real editor-created configuration plus exact generated candidate validation; no enum-only promotion |
+| P1 | Publish validated increments with English documentation | Main agent | Inactive pulse-alias fix independently reviewed | Combined 469 tests passed; Actions disabled; publish scoped source and evidence |
+| P2 | Native END/ENDC/ENDCN and C++ early-scan exit parity | Compiler lane | Published in 8ce9264; native graph import implemented; Jump export retained | Extend actual native runtime controls separately |
+| P2 | Reconcile timer bases, retentive/dynamic modes and functional-level gates | Capability/schema lane | 10 ms binding saved/reopened; inactive legacy aliases preserved; option/level matrix running | Real editor-created configuration plus exact generated candidate validation; no enum-only promotion |
 | P2 | Complete local Modbus coverage with official configured projects | Protocol/runtime lane | Transport fix and independent review passed; official profiles queued | READ/WRITE/WRITE_READ and transport/status edge cases; separate local protocol, editor, simulator and hardware evidence |
 | P3 | Native program structure: subroutines, tasks/events, UDF/UDFB and Grafcet | Compiler lane | Queued | Closed parser/lowering/reverse/runtime support and negative tests |
 | P3 | Numeric gaps: native expressions, constant tables, float/system flags and error recovery | Compiler lane | Queued | Supported domains and flags from sources, independent oracles, real editor/simulator tests |
@@ -19,12 +19,13 @@ The full TM200CE40T parity goal remains active. Work is pulled from this queue w
 ## Prepared GUI cases
 
 - 15 timer-profile candidates: 10 ms, retentive TON/TOF across FL3.2/3.3/4.0, dynamic across FL11/12, TP-retentive negative, and TM5/TM6 at 1 ms. Man6 remains a documented conflict, not presumed acceptance.
-- 3 IL-only native END-family candidates for authentic graphical binding discovery; the first ENDC candidate opened with No error and was converted to Ladder by the official editor. Binding implementation remains queued. No invented graphs or disabled validation.
+- All 3 native END-family diagnostics were converted to Ladder and saved with No error; their exact fixtures now support closed graphical import. Native-END runtime observations remain pending; Jump export is retained.
 - 5 bounded sequence-crash controls: Manual1024 variants and minimal TON/TP/TOF, TP and TOF programs.
 
 ## Completed evidence
 
-- 441 combined regression tests passed in the current formatted integration. The earlier baseline had 417 regression tests and all 15 stress recipe scripts passed locally; 288,372 distinct public/stress frames.
+- 469 combined regression tests passed for the inactive pulse-alias increment; the previous END/timer checkpoint passed 462. The earlier baseline had 417 regression tests and all 15 stress recipe scripts passed locally; 288,372 distinct public/stress frames.
+- Current and legacy inactive pulse aliases are preserved with closed per-index validation. Independent review rejected 108 forged/active mutations; active axes and timer-option gates remain unchanged. See the [scoped result](docs/validation/INACTIVE-PULSE-ALIAS-RESULTS.md).
 - Six combined candidates passed 276 distinct local candidate frames.
 - Three-timer I/O/memory candidates passed 4,834 distinct local candidate frames, eight comparison stages each and deliberate behavior mutations.
 - Early scan exit passed 114 local candidate frames and 11 official simulator input/output phases.

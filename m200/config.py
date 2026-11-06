@@ -189,7 +189,10 @@ def inactive_pulse_outputs(node):
             or index in seen
             or output.findtext("GlobalIndex") != index
             or output.findtext("Address")
-            != f"%PLS{index}/%PWM{index}/%PTO{index}/%FREQGEN{index}"
+            not in (
+                f"%PLS{index}/%PWM{index}/%PTO{index}",
+                f"%PLS{index}/%PWM{index}/%PTO{index}/%FREQGEN{index}",
+            )
             or output.findtext("Preset") != "1"
         ):
             fail("unsupported pulse output defaults")
