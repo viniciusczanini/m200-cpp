@@ -1,0 +1,10 @@
+{
+  "command": [
+    "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+    "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/final-cost-check.py"
+  ],
+  "cwd": "/Users/tommy/Offline/projects/m200-cpp",
+  "compile_count": 1,
+  "runtime_executions": 0,
+  "returncode": 0
+}

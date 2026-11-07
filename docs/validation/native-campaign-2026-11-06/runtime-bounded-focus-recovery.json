@@ -1,0 +1,27 @@
+{
+  "time_ns": 1794010242794867000,
+  "parent_timebox_seconds": 600,
+  "command": [
+    "osascript",
+    "-e",
+    "tell application \"System Events\"",
+    "-e",
+    "if frontmost of application process \"ChatGPT\" and (value of attribute \"AXFullScreen\" of first window of application process \"ChatGPT\") then",
+    "-e",
+    "key code 123 using control down",
+    "-e",
+    "return \"revealed adjacent desktop from verified ChatGPT fullscreen\"",
+    "-e",
+    "else",
+    "-e",
+    "error \"Expected ChatGPT fullscreen before Space recovery\"",
+    "-e",
+    "end if",
+    "-e",
+    "end tell"
+  ],
+  "exit": 0,
+  "stdout": "revealed adjacent desktop from verified ChatGPT fullscreen\n",
+  "stderr": "",
+  "helper_unchanged": true
+}

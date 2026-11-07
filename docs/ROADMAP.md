@@ -59,6 +59,11 @@ remains incomplete; this release priority does not erase the remaining inventory
   save and freshly reopen with **No error**, and three formerly refused official
   saves pass actual-program reverse/rebuild. The simulator batch remains
   incomplete. [Native checkpoint](validation/NATAL-NATIVE-CHECKPOINT.md).
+- Source/SDK are frozen at `77bba32`. The bounded simulator session is closed:
+  36 output points passed in six further profiles, in addition to the supervisor.
+  Four composed profiles were not executed; the three unknown-outcome probes
+  remain pending. This is an [experimental handoff](validation/NATAL-DELIVERY.md),
+  not a fully qualified release or full-controller completion.
 
 ## Delivered and working
 
@@ -87,8 +92,8 @@ does not complete every mode, lifecycle, configuration or transaction case.
 |---|---|---|
 | 1 | Integration and fourteen portable Boolean/SR regression methods completed and published | Done at `c706f6b` |
 | 2 | Local regression/composition/optimization executed; classify and close required pending acceptance cases | Eight explicit failures remain visible; no unchanged full-suite repeat |
-| 3 | Complete the fixed fourteen-project editor campaign and its simulator scenarios | Coordinator owns GUI; independent agents check saved content and acceptance gaps |
-| 4 | Publish the final native results and precise supported limits | Source/docs/local results already public; native report remains pending; no remote CI |
+| 3 | Editor campaign completed; bounded simulator session closed with explicit unexecuted cases | Seven composed profiles partly observed, four not executed; qualification incomplete |
+| 4 | Publish source, examples, exact native results and supported limits | Experimental handoff published; no remote CI |
 
 Physical acceptance remains a later external gate. The thirteen stopped
 packages are not prerequisites for this release and must not be restarted by

@@ -146,6 +146,9 @@ keeps later composed tests, focused fixes and the failed combined run separate.
 The [native acceptance checkpoint](docs/validation/NATAL-NATIVE-CHECKPOINT.md)
 records the fourteen-project editor batch, two vendor-discovered fixes,
 actual saved-project readback and the remaining simulator work.
+The [frozen experimental handoff](docs/validation/NATAL-DELIVERY.md) closes the
+bounded simulator session with seven profiles partly observed and four not
+executed. It preserves the remaining qualification gaps explicitly.
 Prepared [native sequence probes](examples/native_validation/README.md) have
 passed local project/reverse preparation; their twelve native outcome questions
 remain pending until the planned official-simulator observations.
