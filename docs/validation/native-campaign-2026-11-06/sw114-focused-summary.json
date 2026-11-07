@@ -1,0 +1,69 @@
+{
+  "status": "passed_scoped_SW114_and_original_schedule_regeneration",
+  "private_freeze": "native-sw114-fix-1-test",
+  "SW114_tests": {
+    "negative_methods_passed_initially": 2,
+    "positive_methods_passed_focused": 3,
+    "positive_positions": 10,
+    "routes": 7,
+    "observations": 70,
+    "initial_observer_mismatch": "raw u16 word image versus public i16; corrected only actual observation serialization",
+    "expected_values_changed": false,
+    "focused_seconds": 3.9543959159999997,
+    "module_sha256": "6e5917f78f00a7aa42ec678b5921e362ccd1073207849ae8f65fa0b205a9fa3e"
+  },
+  "existing_RTC_control": {
+    "name": "G09_frozen_schedule_sparse_OR_weekday_mask_and_next_MAST",
+    "engines": 2,
+    "tests_passed": 2,
+    "seconds": 1.044499709
+  },
+  "original_projects": {
+    "projects": 2,
+    "unchanged_cases": 3,
+    "positions": 19,
+    "routes": 7,
+    "observations": 133,
+    "status": "passed_two_original_projects_unchanged_oracles",
+    "seconds": 2.859925375,
+    "CPU": "TM200CE40T",
+    "functional_level": "FunctLevelMan21_0",
+    "manifest": "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/native-sw114-fix-1/artifacts/manifest.json"
+  },
+  "pins": {
+    "compiler_sdk": 73,
+    "compiler_sdk_changes": [],
+    "input_count_before": 298,
+    "input_count_after": 298,
+    "input_changes": [
+      "tests/test_natal_sw114.py"
+    ],
+    "documented_change": "Only own new test observer correction; all examples/oracles/templates unchanged"
+  },
+  "native_domain": [
+    {
+      "variant": "g09-schedule-memory",
+      "SW114_native_writes": [
+        "[%SW114:=0]",
+        "[%SW114:=16#FFFF]"
+      ],
+      "signed_MW_carrier_copies": 2,
+      "direct_SW114_comparisons": 0
+    },
+    {
+      "variant": "g09-schedule-reservation",
+      "SW114_native_writes": [
+        "[%SW114:=0]",
+        "[%SW114:=16#FFFF]"
+      ],
+      "signed_MW_carrier_copies": 0,
+      "direct_SW114_comparisons": 0
+    }
+  ],
+  "scope": {
+    "compiler_SDK_edits_by_test_agent": "none",
+    "fullsuite_GUI_Wine_CI": "not_run",
+    "other_SW_unsigned_domains": "not_inferred",
+    "native_compile_save_reopen": "root_only_PENDING"
+  }
+}

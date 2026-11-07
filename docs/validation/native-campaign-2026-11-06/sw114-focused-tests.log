@@ -1,0 +1,8 @@
+test_signed_masks_and_relations_survive_native_project_and_reverse (test_natal_sw114.NatalSW114Regressions) ... ok
+test_exact_negative_assignment_and_equality_vendor_repro (test_natal_sw114.NatalSW114Regressions) ... ok
+test_dynamic_i16_write_and_comparison_keep_signed_order (test_natal_sw114.NatalSW114Regressions) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 3.852s
+
+OK

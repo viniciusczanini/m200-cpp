@@ -1,0 +1,17 @@
+test_actual_saved_default_omission_imports_reverses_and_rebuilds (test_natal_native_defaults.NatalNativeDefaultTests) ... ok
+test_missing_meaningful_drum_configuration_is_not_synthesized (test_natal_native_defaults.NatalNativeDefaultTests) ... ok
+test_out_of_range_native_properties_and_block_ids_are_refused (test_natal_native_defaults.NatalNativeDefaultTests) ... ok
+test_minimal_step_counter_SR_keeps_partial_CU_row_and_history (test_natal_subroutines.NatalSubroutineRegressions) ... ok
+test_malformed_SR_sequence_and_return_graphs_refuse_atomically (test_natal_subroutines.NatalSubroutineRegressions) ... 
+======================================================================
+FAIL: test_malformed_SR_sequence_and_return_graphs_refuse_atomically (test_natal_subroutines.NatalSubroutineRegressions) (index=4)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/readback-default-fix-1/source/tests/test_natal_subroutines.py", line 246, in test_malformed_SR_sequence_and_return_graphs_refuse_atomically
+    load_project(forged)
+AssertionError: CompileError not raised
+
+----------------------------------------------------------------------
+Ran 5 tests in 4.262s
+
+FAILED (failures=1)

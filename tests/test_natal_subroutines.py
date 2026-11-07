@@ -229,7 +229,8 @@ void scan(){plc::write_m(10,plc::input(0));sr.call(plc::read_m(20));plc::write_w
                 (composed, lambda q: entity(q, "Drum").find("Descriptor").__setattr__("text", "%DR7")),
                 (composed, lambda q: next(e for e in rung(q, "%SC1").findall("LadderElements/LadderEntity") if e.findtext("ElementType") == "NormalContact").find("Row").__setattr__("text", "0")),
                 (composed, lambda q: rung(q, "%SBR0").remove(rung(q, "%SBR0").find("LadderElements"))),
-                (composed, lambda q: q.find("SoftwareConfiguration/StepCounters").remove(q.find("SoftwareConfiguration/StepCounters/StepCounter"))),
+                # Vendor saves omit fixed SC defaults; meaningful Drum cams must remain explicit.
+                (composed, lambda q: q.find("SoftwareConfiguration/Drums").remove(q.find("SoftwareConfiguration/Drums/Drum"))),
                 (literal_return("ENDC", 1), lambda q: entity(q, "End").find("ElementType").__setattr__("text", "EndCn")),
                 (drum_F(), lambda q: entity(q, "Drum").find("ChosenConnection").__setattr__("text", "Left")),
             ]

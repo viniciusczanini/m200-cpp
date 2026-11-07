@@ -1,0 +1,138 @@
+{
+  "approved_test_contract_correction": {
+    "after_sha256": "a69f1847d1e73464eca87acbb88448c6c4fbea13cc7ff64667c7872d6c52d103",
+    "before_sha256": "82521a18c4c8fcd6534ef87fb3c5b4bb71608503de50dbaa1fdc39cadb5440dc",
+    "exact_before_after_patch": "approved-test-diff.patch",
+    "historical_RED": "../readback-default-fix-1/focused-tests.log preservedunchanged",
+    "only_mutation": "caseindex4 nowremovesmeaningfulreferencedDR2row,insteadoflegitimatefixedSCdefaultomission",
+    "short_vendor_rationale_comment_added": true,
+    "status": "PASS",
+    "unittest_methods_retested": 1
+  },
+  "evidence_hashes": {
+    "affected-method-command.json": "bc6a1ceca196fa020eda5467514c81d063ef8ac42a16ee61258da5cf7052f8cd",
+    "affected-method.log": "0ac74a7e9201eed5ff7e44eca6b3f7ecd9218800c1626e514e9bfc5a631261e0",
+    "approved-test-change.json": "64cfcf51482579dc68e2d48896a7a3d610c3689a50a47a9ea887ed4ada398ddf",
+    "approved-test-diff.patch": "2a03b6ff018e9135d533d08d463c28dd4635de0fce48e4dde7ad710e2afcfe32",
+    "check_saved_schedules.py": "f88e99a44a4b970e1bf2f4c37c11a829ac9b8b878c2072bb113b08937f4e88e9",
+    "compiler-pins-after.json": "92d60567d5a0f35b1e7b818397882ef8da739760c03768fa41658e23b45f7f59",
+    "fixed-product-comparisons.json": "ef4c5e909952d5846a0ff6a89d94a123d1e77b60fb4558d338629b4c9bc2e967",
+    "fixed-schedule-command.json": "1a6f819152306b5747f6b2138067cbfa16f704f17f4113919b291c244018f63e",
+    "fixed-schedule-inputs-after.json": "95c597bfafa1bdf97284edc1db0e33314ad0df6b28bd5a8f82db3651647564bb",
+    "fixed-schedule-inputs-before.json": "95c597bfafa1bdf97284edc1db0e33314ad0df6b28bd5a8f82db3651647564bb",
+    "fixed-schedule-readback.log": "b43ce0ac9e7c82251eb1736f2d5f5d28cd27af319b0388f3cac41ee337c39b90",
+    "fixed-schedule-results.json": "7d03c41d6560b10beb442cd306a69431bcbcc7a1f919ac0287e83f20a8c02e72",
+    "freeze.json": "eda1681460b995780a28de15a2b4df2121938831394e9c3fd523298f84114545",
+    "selected-products.json": "1375b32b6a42811d7691be743340edfd719b5f4661656d47a494e77674c78c78",
+    "source-test-inputs-after.json": "f3edc1e1d7e733ca2e4fa8d6785d7f02d3f5b44b01bef3f4b7149d2c02788058",
+    "source-test-inputs-before.json": "f3edc1e1d7e733ca2e4fa8d6785d7f02d3f5b44b01bef3f4b7149d2c02788058",
+    "test_natal_subroutines-before.py": "82521a18c4c8fcd6534ef87fb3c5b4bb71608503de50dbaa1fdc39cadb5440dc"
+  },
+  "fixed_official_saved_products": [
+    {
+      "cases": 2,
+      "cases_sha256": "b2b225f219fdcc44cc14d246206185e9ef96a48fc274b697d7401e8dcb5ec53e",
+      "exact_master_context_resource_comparison": {
+        "executable_contexts": true,
+        "master_IL": true,
+        "typed_resources": true
+      },
+      "fixed_generated_sha256": "db31b2ad09db535186e103a6c5c279b34b953af4c226ee5c5fb5fa5ca2f16cd0",
+      "fixed_official_saved_sha256": "30c4cf15803871941eab5f3f0a525cb6ef55aa036cb09fc92da4639aee89740a",
+      "metadata_differences": [
+        {
+          "original": "db31b2ad09db535186e103a6c5c279b34b953af4c226ee5c5fb5fa5ca2f16cd0",
+          "path": "/project_sha256",
+          "saved": "30c4cf15803871941eab5f3f0a525cb6ef55aa036cb09fc92da4639aee89740a"
+        }
+      ],
+      "original_historical_cases_sha256": "b2b225f219fdcc44cc14d246206185e9ef96a48fc274b697d7401e8dcb5ec53e",
+      "positions": 13,
+      "same_original_case_data": true,
+      "source_cpp_sha256": "a8d39e89be0aa1820175cb2f03705d6f5e5798867e863e0f6c04c52c0e383e03",
+      "symbol_differences": [],
+      "variant": "g09-schedule-memory",
+      "vendor_representation": {
+        "graph_geometry_actions_equal_after_validated_expression_whitespace_normalization": true,
+        "original_CRLF_pairs": 0,
+        "original_bytes": 119268,
+        "project_names": {
+          "original": "m200-cpp EXPERIMENTAL",
+          "saved": "g09-schedule-memory-fixed"
+        },
+        "project_paths": {
+          "original": "g09-schedule-memory-fixed.smbp",
+          "saved": "P:\\compiler-final-2026-11-06-c706f6b\\g09-schedule-memory-fixed.smbp"
+        },
+        "saved_CRLF_pairs": 3079,
+        "saved_UTF8_BOM": true,
+        "saved_bytes": 122123,
+        "source_origins_and_names_are_informational": true
+      }
+    },
+    {
+      "cases": 1,
+      "cases_sha256": "d0cf8fbf274675944eb6fe3ec055614f7575d5edc867bcf162b4221386c67085",
+      "exact_master_context_resource_comparison": {
+        "executable_contexts": true,
+        "master_IL": true,
+        "typed_resources": true
+      },
+      "fixed_generated_sha256": "b1ad7664929019731cb5d4f87c17be5d1abb18a96f67276ddb8f5bca768bc42f",
+      "fixed_official_saved_sha256": "25d873c056b9609d4384a86831c4f0a464971bf4b4a555ed6aff2df2f709b4ea",
+      "metadata_differences": [
+        {
+          "original": "b1ad7664929019731cb5d4f87c17be5d1abb18a96f67276ddb8f5bca768bc42f",
+          "path": "/project_sha256",
+          "saved": "25d873c056b9609d4384a86831c4f0a464971bf4b4a555ed6aff2df2f709b4ea"
+        }
+      ],
+      "original_historical_cases_sha256": "d0cf8fbf274675944eb6fe3ec055614f7575d5edc867bcf162b4221386c67085",
+      "positions": 6,
+      "same_original_case_data": true,
+      "source_cpp_sha256": "c830530274c77af419526d20db28147ddf785936be0ade12a8d27215c38cc821",
+      "symbol_differences": [],
+      "variant": "g09-schedule-reservation",
+      "vendor_representation": {
+        "graph_geometry_actions_equal_after_validated_expression_whitespace_normalization": true,
+        "original_CRLF_pairs": 0,
+        "original_bytes": 151634,
+        "project_names": {
+          "original": "m200-cpp EXPERIMENTAL",
+          "saved": "g09-schedule-reservation-fixed"
+        },
+        "project_paths": {
+          "original": "g09-schedule-reservation-fixed.smbp",
+          "saved": "P:\\compiler-final-2026-11-06-c706f6b\\g09-schedule-reservation-fixed.smbp"
+        },
+        "saved_CRLF_pairs": 3917,
+        "saved_UTF8_BOM": true,
+        "saved_bytes": 156107,
+        "source_origins_and_names_are_informational": true
+      }
+    }
+  ],
+  "freeze_id": "readback-schedule-fix-1-current73",
+  "historical_failures_preserved": [
+    "OldScheduleProgramErrorsandemptyILsave",
+    "Priorfaileddefaultreadbackfilesandreports",
+    "ApprovedtestoldRED/rawlog"
+  ],
+  "integrity": {
+    "before_after_unchanged": true,
+    "fixed_input_paths": 17,
+    "private_compiler_sdk_pins": 73,
+    "source_test_files": 304
+  },
+  "literal_results": {
+    "cases": 3,
+    "original_oracles_unchanged": true,
+    "positions_per_route": 19,
+    "result": "PASS_LOCAL_VM_SDK_ONLY",
+    "routes": 5,
+    "total_local_position_observations": 95
+  },
+  "native_UI_scope": "Coordinatorreportedfixedopen+freshreopenNoerrorandLadderforthese2savedhashes. ThisagentdidnotoperateGUI; readback/localtracesdonotclaimnativeRTCorPLCexecution/timing.",
+  "result": "PASS_APPROVED_SINGLE_METHOD_AND_TWO_FIXED_ACTUAL_SAVES",
+  "scope_limits": "Onlyaffectedtestmethodand2fixedsavedproducts; nofullsuite/fullmodule,GUI/Wine/helper/mailboxactionsorunrelatedsourcefix.12G08nativequestionsremainPENDING."
+}

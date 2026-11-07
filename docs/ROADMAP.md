@@ -54,8 +54,11 @@ remains incomplete; this release priority does not erase the remaining inventory
   reopens show **No error**; both schedule projects show program errors. The
   schedule-memory messages reject negative direct `%SW114` literals, whose
   native range is 0–65535. Saved-content checks also found omitted default SBR/SC
-  entries that the importer still requires. Both defects remain required fixes;
-  the simulator batch is not complete.
+  entries that the importer required. Both defects have focused fixes and
+  regression checks. The unchanged schedule C++ now produces files that open,
+  save and freshly reopen with **No error**, and three formerly refused official
+  saves pass actual-program reverse/rebuild. The simulator batch remains
+  incomplete. [Native checkpoint](validation/NATAL-NATIVE-CHECKPOINT.md).
 
 ## Delivered and working
 

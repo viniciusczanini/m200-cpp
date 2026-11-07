@@ -5,3 +5,5 @@ tests/fixtures/official_tm200ce40t_timer*.smbp -text whitespace=cr-at-eol
 tests/fixtures/official_tm200ce40t_modbus*.smbp -text whitespace=cr-at-eol
 tests/fixtures/official_tm200ce40t_register_*.smbp -text whitespace=cr-at-eol
 tests/fixtures/official_tm200ce40t_subroutine_*.smbp -text whitespace=cr-at-eol
+# Preserve raw unittest output, including whitespace on a failing subtest line.
+docs/validation/native-campaign-2026-11-06/*.log -text -whitespace

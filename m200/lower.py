@@ -3,6 +3,7 @@ from .allocation import Storage
 from .indexed import is_indexed, is_bit_indexed
 from .numeric import Number, TYPES, boolean, expect, OPS
 from .conversions import needs_word_snapshot
+from .rtc_native_words import assignment_source, needs_signed_carrier
 
 
 class Lowerer:
@@ -235,7 +236,7 @@ class Lowerer:
             return
         self.rung(
             "LD " + (guard if guard is not None else "1"),
-            "[" + target.code + ":=" + value.code + "]",
+            "[" + target.code + ":=" + assignment_source(target, value) + "]",
         )
 
     def numeric(self, name, values, target=None):
@@ -252,6 +253,11 @@ class Lowerer:
                 prepared.append(str(value))
             else:
                 value = expect(value, argkind)
+                if needs_signed_carrier(value):
+                    # SW114 is unsigned in the native editor, while its public
+                    # i16 value/ALU flags use a signed MW carrier. Keep the copy
+                    # at this operation, without changing the shared SW image.
+                    value = self.copy(value, "signed_system_word_operand")
                 if is_indexed(value.code) or (value.code.startswith("%K") and "[" in value.code):
                     value = self.copy(value, "indexed_operand_snapshot")
                 if needs_word_snapshot(token, value.code):
@@ -279,6 +285,14 @@ class Lowerer:
             a.kind if a.kind != "literal" else b.kind if b.kind != "literal" else "i32"
         )
         a, b = expect(a, kind), expect(b, kind)
+        # Hexadecimal alone fixes equality literal bounds but would leave
+        # SW114's native unsigned relational order. Snapshot either operand
+        # into a signed MW for all six public comparisons, including SW114
+        # versus another word and a literal on the left.
+        if needs_signed_carrier(a):
+            a = self.copy(a, "signed_system_word_comparison")
+        if needs_signed_carrier(b):
+            b = self.copy(b, "signed_system_word_comparison")
         if is_indexed(a.code) or (a.code.startswith("%K") and "[" in a.code):
             a = self.copy(a, "indexed_comparison_snapshot")
         if is_indexed(b.code) or (b.code.startswith("%K") and "[" in b.code):

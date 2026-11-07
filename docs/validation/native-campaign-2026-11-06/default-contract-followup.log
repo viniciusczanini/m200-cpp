@@ -1,0 +1,6 @@
+test_malformed_SR_sequence_and_return_graphs_refuse_atomically (test_natal_subroutines.NatalSubroutineRegressions) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.222s
+
+OK

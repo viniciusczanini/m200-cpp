@@ -143,6 +143,9 @@ The BCD vectors are **not scans** and are excluded from the scan total. Repeated
 
 The [Natal integration record](docs/validation/NATAL-INTEGRATION-PROGRESS.md)
 keeps later composed tests, focused fixes and the failed combined run separate.
+The [native acceptance checkpoint](docs/validation/NATAL-NATIVE-CHECKPOINT.md)
+records the fourteen-project editor batch, two vendor-discovered fixes,
+actual saved-project readback and the remaining simulator work.
 Prepared [native sequence probes](examples/native_validation/README.md) have
 passed local project/reverse preparation; their twelve native outcome questions
 remain pending until the planned official-simulator observations.

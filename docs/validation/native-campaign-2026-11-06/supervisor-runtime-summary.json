@@ -1,0 +1,63 @@
+{
+  "project": "supervisor_official",
+  "project_sha256": "af16cb94cecbeb2c54f3b34278ce671cf9b8b5db04c88c75087a697b54474c73",
+  "target": "local Schneider simulator TM200CE40T firmware1.14.1.0",
+  "identical_PC_controller_applications_observed": true,
+  "RUN_observed": true,
+  "cases": {
+    "IO": [
+      {
+        "input": 0,
+        "high_mask": 1,
+        "release_mask": 0,
+        "result": "PASS"
+      },
+      {
+        "input": 7,
+        "high_mask": 128,
+        "release_mask": 0,
+        "result": "PASS"
+      },
+      {
+        "input": 8,
+        "high_mask": 256,
+        "release_mask": 0,
+        "result": "PASS"
+      },
+      {
+        "input": 15,
+        "high_mask": 32768,
+        "release_mask": 0,
+        "result": "PASS"
+      }
+    ],
+    "timers": {
+      "held_enable_mask": 3,
+      "released_mask": 0,
+      "result": "PASS_STABLE_TON_TOF_STATES",
+      "unobserved": "20ms TP pulse/timer deadlines not measured"
+    },
+    "fifo_lifo": {
+      "first_pop_mask": 144,
+      "second_pop_mask": 101,
+      "held_did_not_repeat": true,
+      "result": "PASS_OUTPUT_ENCODING_AND_ORDER",
+      "visual_decoder_refusals": 3
+    },
+    "lights": {
+      "enabled_samples": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "inhibit_mask": 8,
+      "inhibit_release_mask": 6,
+      "disabled_mask": 0,
+      "result": "PASS_INHIBIT_AND_ENABLE_ONLY",
+      "alternation_and_period": "PENDING; bounded captures observed only phase6; not inferred"
+    }
+  },
+  "physical": "NOT_RUN",
+  "complete_native_campaign": false
+}

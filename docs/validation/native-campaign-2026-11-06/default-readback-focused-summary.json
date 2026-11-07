@@ -1,0 +1,111 @@
+{
+  "actual_vendor_pairs": [
+    {
+      "exact_IL_context_resources": {
+        "executable_contexts": true,
+        "master_IL": true,
+        "typed_resources": true
+      },
+      "original_sha256": "5e0dfb8d79eae726018846921f1ff6ff0c3cb590cca97eb1ec84aa663e69d767",
+      "saved_sha256": "cc2d50682ed3050a080ba1ed364b67c7a162006661cd692a7e0a2e5691262586",
+      "stages": [
+        "load_both_actual_projects",
+        "actual_saved_reverse_source_compile",
+        "rebuilt_SMBP_export_import"
+      ],
+      "status": "PASS_STATIC_PRESERVATION_ONLY_NATIVE_QUESTIONS_PENDING",
+      "variant": "g08-sequences-memory"
+    },
+    {
+      "exact_IL_context_resources": {
+        "executable_contexts": true,
+        "master_IL": true,
+        "typed_resources": true
+      },
+      "original_sha256": "710dac4f08c2137d8fc9155253895c99edd762a47135f40e6129f55fed1c45ad",
+      "saved_sha256": "01937b50300f8942bff1bfca3165920e0df87f037c48508f62082538792fd26a",
+      "stages": [
+        "load_both_actual_projects",
+        "actual_saved_reverse_source_compile",
+        "rebuilt_SMBP_export_import"
+      ],
+      "status": "PASS_STATIC_PRESERVATION_ONLY_NATIVE_QUESTIONS_PENDING",
+      "variant": "sbr-observation"
+    },
+    {
+      "exact_IL_context_resources": {
+        "executable_contexts": true,
+        "master_IL": true,
+        "typed_resources": true
+      },
+      "original_sha256": "e61622fe51fd44ef2d8d5c63c22c416bb8c844eeae15ee00503c823864b57c87",
+      "saved_sha256": "382f85f26169313920cd461ed4f3825928e019452debdd111e8dce4e224b7806",
+      "stages": [
+        "load_both_actual_projects",
+        "actual_saved_reverse_source_compile",
+        "rebuilt_SMBP_export_import"
+      ],
+      "status": "PASS_STATIC_PRESERVATION_ONLY_NATIVE_QUESTIONS_PENDING",
+      "variant": "sc-observation"
+    }
+  ],
+  "before_after_unchanged": true,
+  "evidence_hashes": {
+    "check_extra_controls.py": "0f7551650dbe01d0088eff5428f2ac0be1783abd5371b7f09a44ec4efa17da90",
+    "check_vendor_pairs.py": "9cf48b5b9cee1d80b81812507c7dbe00551797c35aa99e82faaf64f378dd0262",
+    "compiler-pins-after.json": "b2cfbcc0eaa3c8e42d2564535ec2ee493fa9eb6d90e1da9d1224d09841880fa4",
+    "extra-controls-command.json": "45ca86d0a59badd4ffaf9b7168e24bb365c150f4dcc3013a6e444d502dd7ce85",
+    "extra-controls.log": "0f7ad51c2e6076765bac5db953d94937fe2905f010dcdca1c1fe13280212b408",
+    "failure-classification.json": "e2158bc792777768ad3f28168c871746302ca9ab27379b7c98f1fb3b08590838",
+    "focused-tests-command.json": "78bdd263efaeeece9b37c13c9cda7505d3428181e281b5e3ae4ac14b10d39ae4",
+    "focused-tests.log": "1247d0cc30272f97b43a002a36f55a5499bfb943dc5f4007f6a53c542bc7caa3",
+    "freeze.json": "85ead728cb17de8205ec1dc3396c68c54596fa473a607d9e47dd7564046f70e9",
+    "selected-products.json": "151058e7ad88d57143066651fa43972ece67fd5cd86bd859dd887d8449f9f654",
+    "source-test-inputs-after.json": "4f347eef772356907defaf0f178bca97d8fd3593172ad57dc9a77abd012e9132",
+    "source-test-inputs-before.json": "4f347eef772356907defaf0f178bca97d8fd3593172ad57dc9a77abd012e9132",
+    "vendor-inputs-after.json": "e70aad57dcca14b0f3a9dcb653a1f4b81a485c026a2960d9b72bfe11902a6100",
+    "vendor-inputs-before.json": "e70aad57dcca14b0f3a9dcb653a1f4b81a485c026a2960d9b72bfe11902a6100",
+    "vendor-pairs-command.json": "49ec87faec3414b233bffb2e9e6f1731e0ea3e937da0ee3a08f23d73b97882aa",
+    "vendor-pairs.log": "8c53110079c7fad8f15f359fb375ea95d7b72d9b74d13460b780ca98a2b36eef",
+    "vendor-results.json": "68553b74cef9856c253f1c1739a4f8e227f1882c28a89ad24704b23867bf5256",
+    "vendor-selected.json": "70847746c86fd848fe06630195d7324532a5d4d70d666bde3f017e59194d9c4c"
+  },
+  "existing_focused_tests": {
+    "SCpartialSR": "PASS",
+    "malformed_SR_graphs": "Raw1FAIL:defaultStepCounterrowremovalnowvalid;6otherforgerysubtestsmainlygraphstillrefused"
+  },
+  "extra_controls": {
+    "methods": 5,
+    "scope": [
+      "explicitnondefaultsymbolsretained;XMLnotmutated",
+      "malformedexplicitrowsstrictbeforefallback",
+      "referenceIDtype/range;onlyuseddefaults;noDrumsynthesis",
+      "wrongMan20profileandtamperedcapacity7refused",
+      "property-onlySBR7/block-onlySC6onlyinSR;actualreversecompile;noRuntime"
+    ],
+    "status": "PASS"
+  },
+  "freeze_id": "readback-default-fix-1-73pins",
+  "historical_failed_readback_summary_sha256": "8be3c272b123aca21fdcd803dfd5770ac17e4f5db181e33d3672943329e01502",
+  "native_boundary": "All3formerlyrefusedvendorfilesload/reverse/recompile/rebuiltSMBPnowpassstaticpreservation. Noambiguousnative/runtimeexecuted;12questionsremainPENDING. Historicalfailuresnotrewritten.",
+  "overall": "FOCUSED_PRODUCT_CHECKS_PASS_WITH_ONE_OBSOLETE_EXISTING_ASSERTION_RED",
+  "portable_default_tests": {
+    "methods": 3,
+    "negative_controls": "SBRbit16/ID8;SCbit256/ID8;missingDR2meaningfulconfigurationrefused",
+    "positive_composites": 3,
+    "reverse_rebuild": true,
+    "status": "PASS"
+  },
+  "private_compiler_sdk_pins": 73,
+  "private_source_test_files_pinned": 304,
+  "raw_unittest_totals": {
+    "classification": "obsoleteassertion;notnewproductdefect",
+    "error": 0,
+    "failed_subtests": 1,
+    "methods": 10,
+    "passing_methods": 9,
+    "skip": 0
+  },
+  "scope_limits": "No fullsuite, GUI/Wine/helperactions, source/compilerfixorrootexistingtestedits. CurrentG09fixpresentintheprivatecorebutnotclaimedvalidatedbythisG08scope.",
+  "vendor_input_paths_pinned": 12
+}

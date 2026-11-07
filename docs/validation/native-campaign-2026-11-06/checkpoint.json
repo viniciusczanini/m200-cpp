@@ -1,0 +1,160 @@
+{
+  "date": "2026-11-06",
+  "original_batch_commit": "c706f6bb9be22bb9018a92213196af59f536fe05",
+  "status": "EDITOR_GATE_PASSED_AFTER_TWO_SCOPED_FIXES; RUNTIME_CAMPAIGN_IN_PROGRESS",
+  "model": "TM200CE40T",
+  "editor": "EcoStruxure Machine Expert Basic1.4 build484, Wine9CX24/.NET4.8",
+  "profile_count": 14,
+  "profiles": [
+    {
+      "profile": "supervisor",
+      "original_generated_sha256": "2d1ffff3df54d4032fd09d3b7d5dfad197808a87de5265079889e1794db3b74f",
+      "selected_artifact": "supervisor.smbp",
+      "generated_open_validation": "No error; Configuration identifies TM200CE40T; Programming shows generated Ladder; Not Connected",
+      "official_fresh_reopen": "No error; Ladder visible on generated or fresh-reopened project",
+      "saved_sha256": "af16cb94cecbeb2c54f3b34278ce671cf9b8b5db04c88c75087a697b54474c73",
+      "runtime": "PARTIAL"
+    },
+    {
+      "profile": "subroutine",
+      "original_generated_sha256": "f168ce0ba9ec82f9f97e4653ea8fa37e45b2b83526e7e21ecbd2a4be7ec0b507",
+      "selected_artifact": "subroutine.smbp",
+      "generated_open_validation": "No error",
+      "official_fresh_reopen": "No error; Ladder visible on generated or fresh-reopened project",
+      "saved_sha256": "32b8a16c5c617090bde231e89d56c13d043266d8f4a7bbf8373ca04af4f0ed8e",
+      "runtime": "PENDING"
+    },
+    {
+      "profile": "modbus-no-transport",
+      "original_generated_sha256": "dc97f8c9cb4132c37aa058461597bffa639543bd1315d03065981135ac6ea562",
+      "selected_artifact": "modbus-no-transport.smbp",
+      "generated_open_validation": "No error",
+      "official_fresh_reopen": "No error; Ladder visible on generated or fresh-reopened project",
+      "saved_sha256": "55f9313570ec799b94ee7f693a31979f321c02bf43fa24dd8c49565f00cc9538",
+      "runtime": "PENDING"
+    },
+    {
+      "profile": "subroutine-stateful",
+      "original_generated_sha256": "ec1bb3b01139ca8124ee337fb81a545b804d1d322428a1a306e45259549e06d8",
+      "selected_artifact": "subroutine-stateful.smbp",
+      "generated_open_validation": "No error",
+      "official_fresh_reopen": "No error; Ladder visible on generated or fresh-reopened project",
+      "saved_sha256": "e8d41f7821c573dfbdb35a0a867dc9fe3131981fa98af7630b9ef870e7e8eb17",
+      "runtime": "PENDING"
+    },
+    {
+      "profile": "g08-drum-clock-lights",
+      "original_generated_sha256": "f84f7461f4b8413f33b2d4b515bb73a406bf8be956773aa6126ebc34892fdf62",
+      "selected_artifact": "g08-drum-clock-lights.smbp",
+      "generated_open_validation": "No error",
+      "official_fresh_reopen": "No error; Ladder visible on generated or fresh-reopened project",
+      "saved_sha256": "3f419942e36a51e4716314fa31b4cc4efd74519d306eaa62ccee285f23d06dfb",
+      "runtime": "PENDING"
+    },
+    {
+      "profile": "g08-drum-direct-outputs",
+      "original_generated_sha256": "2a3207f743c0b9f971a70621e120d08f0cf34c3fb7e1145a3f93ce45d3ab339f",
+      "selected_artifact": "g08-drum-direct-outputs.smbp",
+      "generated_open_validation": "No error",
+      "official_fresh_reopen": "No error; Ladder visible on generated or fresh-reopened project",
+      "saved_sha256": "745532804c0ac5bd393ee8dfac45d312d438e1145e079266303a942438a2a5c3",
+      "runtime": "PENDING"
+    },
+    {
+      "profile": "g08-sequences-memory",
+      "original_generated_sha256": "5e0dfb8d79eae726018846921f1ff6ff0c3cb590cca97eb1ec84aa663e69d767",
+      "selected_artifact": "g08-sequences-memory.smbp",
+      "generated_open_validation": "No error; native SBR/SC/DR Ladder and TM200CE40T target visually confirmed in additive follow-up",
+      "official_fresh_reopen": "No error; Ladder visible on generated or fresh-reopened project",
+      "saved_sha256": "cc2d50682ed3050a080ba1ed364b67c7a162006661cd692a7e0a2e5691262586",
+      "runtime": "PENDING"
+    },
+    {
+      "profile": "g09-calendar-lights",
+      "original_generated_sha256": "74568ff4e55302f2149bae88034fc61d5df7183f6bfecf144fe4f17035085eac",
+      "selected_artifact": "g09-calendar-lights.smbp",
+      "generated_open_validation": "No error",
+      "official_fresh_reopen": "No error; Ladder visible on generated or fresh-reopened project",
+      "saved_sha256": "f2332006734d2ac2cc65b5b2ecc6e01451a2b176ea0da79be850e89ce4e91258",
+      "runtime": "PENDING"
+    },
+    {
+      "profile": "g09-rtc-clock-lights",
+      "original_generated_sha256": "32469ddbce6d0bac5ec447cae4a7fbcc03e25d159dcc1602fb7c9cbc788ba7b4",
+      "selected_artifact": "g09-rtc-clock-lights.smbp",
+      "generated_open_validation": "No error",
+      "official_fresh_reopen": "No error; Ladder visible on generated or fresh-reopened project",
+      "saved_sha256": "8698ff1dc82805ecbb3fc065f77059298f6d173c90b4c64ac8891e3e6d809486",
+      "runtime": "PENDING"
+    },
+    {
+      "profile": "g09-schedule-memory",
+      "original_generated_sha256": "5ca8fdb505632966792a43fe5cf0833364056343de0a78c812bfa3fa7ab2cb17",
+      "selected_artifact": "g09-schedule-memory-fixed.smbp",
+      "generated_open_validation": "No error",
+      "official_fresh_reopen": "No error; Ladder visible on generated or fresh-reopened project",
+      "saved_sha256": "30c4cf15803871941eab5f3f0a525cb6ef55aa036cb09fc92da4639aee89740a",
+      "runtime": "PENDING",
+      "fixed_generated_sha256": "db31b2ad09db535186e103a6c5c279b34b953af4c226ee5c5fb5fa5ca2f16cd0",
+      "superseded_native_errors": [
+        {
+          "rung": 3,
+          "text": "-1 is out of authorized bounds (0...65535)."
+        },
+        {
+          "rung": 7,
+          "text": "-1 is out of authorized bounds (0...65535)."
+        }
+      ]
+    },
+    {
+      "profile": "g09-schedule-reservation",
+      "original_generated_sha256": "4cad17b2c2f8a9c75c6024aaeee9270f0f0dd71bf656feeee90a9eddff0ce097",
+      "selected_artifact": "g09-schedule-reservation-fixed.smbp",
+      "generated_open_validation": "No error",
+      "official_fresh_reopen": "No error; Ladder visible on generated or fresh-reopened project",
+      "saved_sha256": "25d873c056b9609d4384a86831c4f0a464971bf4b4a555ed6aff2df2f709b4ea",
+      "runtime": "PENDING",
+      "fixed_generated_sha256": "b1ad7664929019731cb5d4f87c17be5d1abb18a96f67276ddb8f5bca768bc42f",
+      "superseded_native_errors": [
+        {
+          "rung": 18,
+          "text": "-1 is out of authorized bounds (0...65535)."
+        }
+      ]
+    },
+    {
+      "profile": "sbr-observation",
+      "original_generated_sha256": "710dac4f08c2137d8fc9155253895c99edd762a47135f40e6129f55fed1c45ad",
+      "selected_artifact": "sbr_observe.smbp",
+      "generated_open_validation": "No error",
+      "official_fresh_reopen": "No error; Ladder visible on generated or fresh-reopened project",
+      "saved_sha256": "01937b50300f8942bff1bfca3165920e0df87f037c48508f62082538792fd26a",
+      "runtime": "PENDING"
+    },
+    {
+      "profile": "sc-observation",
+      "original_generated_sha256": "e61622fe51fd44ef2d8d5c63c22c416bb8c844eeae15ee00503c823864b57c87",
+      "selected_artifact": "sc_observe.smbp",
+      "generated_open_validation": "No error",
+      "official_fresh_reopen": "No error; Ladder visible on generated or fresh-reopened project",
+      "saved_sha256": "382f85f26169313920cd461ed4f3825928e019452debdd111e8dce4e224b7806",
+      "runtime": "PENDING"
+    },
+    {
+      "profile": "drum-observation",
+      "original_generated_sha256": "f1caff303abdbd212b2ee451ede90cb8090999326fd12df1a4f52cb643816d38",
+      "selected_artifact": "drum_observe.smbp",
+      "generated_open_validation": "No error",
+      "official_fresh_reopen": "No error; Ladder visible on generated or fresh-reopened project",
+      "saved_sha256": "f50dfa9c2de563cb9fae40daf60571e4df86ec9c0d9c5bdabb11df9e8af56b5c",
+      "runtime": "PENDING"
+    }
+  ],
+  "limits": [
+    "Fresh editor reopen is not runtime acceptance.",
+    "Native simulator is not physical hardware qualification.",
+    "Unknown sequence endpoint/history outcomes remain pending.",
+    "Independent SDK asynchronous Modbus backend remains unavailable."
+  ]
+}

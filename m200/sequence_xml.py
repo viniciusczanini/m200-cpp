@@ -2,7 +2,10 @@
 
 Default rows: authored Material Handling M200.smbe. Active properties/defaults:
 Entities.dll Drum StepsNumber=8, BitForDrum.Outputs='', Step.Used=false and
-Available=true. Native acceptance of new active CE40T rows is pending.
+Available=true. The official CE40T/Man21 save identified in the G08 readback
+fix diagnosis omits referenced default SBR/SC rows while preserving their IL;
+those fixed defaults may be resolved from validated referenced instance IDs.
+Meaningful Drum configuration is never inferred from a reference.
 """
 import xml.etree.ElementTree as ET
 from .model import fail
@@ -71,7 +74,18 @@ def _boolean(node, default):
     return value == "true"
 
 
-def read_sequences(sw):
+def read_sequences(sw, *, referenced_sbrs=(), referenced_scs=()):
+    """Read explicit rows plus referenced fixed-default SBR/SC identities.
+
+    Native CE40T/Man21 save cc2d5068...1262586 omits default SBR0/SC1 rows.
+    Explicit rows are parsed strictly before defaults are considered and win
+    over those defaults, preserving symbols and all accepted persisted fields.
+    Only supplied integer IDs0..7 are resolved; no unused pool is synthesized.
+    The caller derives these IDs from actual native IL, including SR contexts.
+    Program/operand/profile/allocation/graph validation remains mandatory.
+    Neither the XML tree nor input iterables are modified. DR has no fallback:
+    its step count and cam bindings cannot be recovered from its identity.
+    """
     result = {name: {} for name in FAMILIES.values()}
     for family, (collection, entry_type) in COLLECTIONS.items():
         nodes = sw.findall(collection)
@@ -134,6 +148,16 @@ def read_sequences(sw):
                         fail("unbound nonzero Drum cam cannot be silently discarded")
                 cfg = DrumConfig(count, cams)
             result[FAMILIES[family]][index] = cfg
+    for family, references in (("SBR", referenced_sbrs), ("SC", referenced_scs)):
+        try:
+            indexes = iter(references)
+        except TypeError:
+            fail("referenced " + family + " IDs must be iterable")
+        configs = result[FAMILIES[family]]
+        for index in indexes:
+            if type(index) is not int or not 0 <= index < 8:
+                fail("referenced " + family + " index must be an integer in 0..7")
+            configs.setdefault(index, CONFIGS[family]())
     return result
 
 

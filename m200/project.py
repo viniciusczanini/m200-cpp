@@ -63,7 +63,7 @@ from .counter_xml import (
 from .registers import RegisterConfig
 from .sequence_xml import read_sequences, write_sequences
 from .sequence_graph import is_block as sequence_block, graphics as sequence_graphics, check_graph as check_sequence_graph
-from .sequences import FAMILIES as SEQUENCE_FAMILIES
+from .sequences import FAMILIES as SEQUENCE_FAMILIES, referenced_ids as sequence_ids
 from .register_xml import read_registers, write_registers, RegisterMode
 from .register_graph import (
     graphics as register_graphics,
@@ -672,7 +672,12 @@ def load_project(path):
     if any(expression_edge(line.split(maxsplit=1)[0]) is not None for rung in static_operand_view(p).rungs for line in rung if line.strip()):
         p.boolean = BooleanConfig(native_expression_edges=True)
     validate_boolean_profile(p, root.findtext("ManagementLevel"))
-    for name, configs in read_sequences(sw).items():
+    sequence_rungs = static_operand_view(p).rungs
+    for name, configs in read_sequences(
+        sw,
+        referenced_sbrs=sequence_ids(sequence_rungs, "SBR"),
+        referenced_scs=sequence_ids(sequence_rungs, "SC"),
+    ).items():
         setattr(p, name, configs)
     _sequence_profile(p, root)
     _register_profile(p, root)

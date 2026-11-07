@@ -1,0 +1,79 @@
+test_dynamic_i16_write_and_comparison_keep_signed_order (test_natal_sw114.NatalSW114Regressions) ... FAIL
+test_exact_negative_assignment_and_equality_vendor_repro (test_natal_sw114.NatalSW114Regressions) ... FAIL
+test_invalid_or_unmodeled_system_word_indices_refuse (test_natal_sw114.NatalSW114Regressions) ... ok
+test_public_value_bounds_remain_i16_despite_native_unsigned_encoding (test_natal_sw114.NatalSW114Regressions) ... ok
+test_signed_masks_and_relations_survive_native_project_and_reverse (test_natal_sw114.NatalSW114Regressions) ... FAIL
+
+======================================================================
+FAIL: test_dynamic_i16_write_and_comparison_keep_signed_order (test_natal_sw114.NatalSW114Regressions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/native-sw114-fix-1/source/tests/test_natal_sw114.py", line 157, in test_dynamic_i16_write_and_comparison_keep_signed_order
+    self.pipeline(Path(d), source, frames, expected)
+  File "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/native-sw114-fix-1/source/tests/test_natal_sw114.py", line 110, in pipeline
+    self.assertEqual(actual, expected)
+AssertionError: Lists differ: [{'ou[26 chars]20': 65535}}, {'output_mask': 6, 'words': {'20[91 chars]35}}] != [{'ou[26 chars]20': -1}}, {'output_mask': 6, 'words': {'20': [86 chars]-1}}]
+
+First differing element 0:
+{'output_mask': 6, 'words': {'20': 65535}}
+{'output_mask': 6, 'words': {'20': -1}}
+
+- [{'output_mask': 6, 'words': {'20': 65535}},
+?                                     ^^^^^
+
++ [{'output_mask': 6, 'words': {'20': -1}},
+?                                     ^^
+
+-  {'output_mask': 6, 'words': {'20': 32768}},
++  {'output_mask': 6, 'words': {'20': -32768}},
+?                                     +
+
+   {'output_mask': 10, 'words': {'20': 0}},
+-  {'output_mask': 9, 'words': {'20': 65535}}]
+?                                     ^^^^^
+
++  {'output_mask': 9, 'words': {'20': -1}}]
+?                                     ^^
+
+
+======================================================================
+FAIL: test_exact_negative_assignment_and_equality_vendor_repro (test_natal_sw114.NatalSW114Regressions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/native-sw114-fix-1/source/tests/test_natal_sw114.py", line 136, in test_exact_negative_assignment_and_equality_vendor_repro
+    self.pipeline(Path(d), source, [{"inputs": {}}],
+  File "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/native-sw114-fix-1/source/tests/test_natal_sw114.py", line 110, in pipeline
+    self.assertEqual(actual, expected)
+AssertionError: Lists differ: [{'output_mask': 1, 'words': {'20': 65535}}] != [{'output_mask': 1, 'words': {'20': -1}}]
+
+First differing element 0:
+{'output_mask': 1, 'words': {'20': 65535}}
+{'output_mask': 1, 'words': {'20': -1}}
+
+- [{'output_mask': 1, 'words': {'20': 65535}}]
+?                                     ^^^^^
+
++ [{'output_mask': 1, 'words': {'20': -1}}]
+?                                     ^^
+
+
+======================================================================
+FAIL: test_signed_masks_and_relations_survive_native_project_and_reverse (test_natal_sw114.NatalSW114Regressions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/native-sw114-fix-1/source/tests/test_natal_sw114.py", line 126, in test_signed_masks_and_relations_survive_native_project_and_reverse
+    self.pipeline(Path(d), SIGNED_MASKS, frames, expected)
+  File "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/native-sw114-fix-1/source/tests/test_natal_sw114.py", line 110, in pipeline
+    self.assertEqual(actual, expected)
+AssertionError: Lists differ: [{'ou[42 chars]21': 32768}}, {'output_mask': 3621, 'words': {[186 chars] 0}}] != [{'ou[42 chars]21': -32768}}, {'output_mask': 3621, 'words': [183 chars] 0}}]
+
+First differing element 0:
+{'output_mask': 7834, 'words': {'20': 32767, '21': 32768}}
+{'output_mask': 7834, 'words': {'20': 32767, '21': -32768}}
+
+Diff is 907 characters long. Set self.maxDiff to None to see it.
+
+----------------------------------------------------------------------
+Ran 5 tests in 1.079s
+
+FAILED (failures=3)
