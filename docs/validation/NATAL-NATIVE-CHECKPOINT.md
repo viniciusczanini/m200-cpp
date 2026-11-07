@@ -1,6 +1,6 @@
 # Natal native acceptance checkpoint
 
-2026-11-06. **Editor validation has advanced; simulator acceptance is still in progress.**
+2026-11-06. **The finite editor/simulator campaign is closed with explicit limits.**
 This is an experimental software checkpoint, not a complete-controller or physical
 PLC qualification. The release scope remains [Natal da Liberdade](../GOAL.md).
 
@@ -62,14 +62,30 @@ without relaxing its threshold. The [runtime summary](native-campaign-2026-11-06
 keeps these distinctions. The simulator was stopped through the official UI;
 its process and TCP 502 listener exited before the next project was opened.
 
-## Remaining acceptance
+## Subsequent finite campaign results
 
-Finish the listed simulator scenarios for the other composed profiles, including
-stateful subroutines, native sequences, RTC/calendar/schedules and admitted
-Modbus behavior. Preserve unknown probe outcomes as unknown until observed.
-The independent SDK asynchronous Modbus backend remains an explicit limitation;
-a no-transport result does not qualify successful communication or cancellation.
-Publish the final runtime record after this finite campaign.
+The [first bounded session](native-campaign-2026-11-06/RUNTIME-RESULTS.md) added
+36 matching output checks across six profiles: subroutines, repeated stateful
+calls, interior sequences, direct Drum outputs, calendar and schedule controls.
+Its four unexecuted timebox records remain historical evidence.
+
+The [four-profile follow-up](native-campaign-2026-11-06/runtime-remaining-4/SUMMARY.md)
+added 40 matching output checks. DR/RTC light phases and inhibit controls were
+observed; schedule reservation Q controls matched. Existing native READ diagnostic
+rungs showed COMMERROR=6/OPERERROR=0, without a predeclared numeric expectation or
+established cause. This is an observed error path, not a successful transaction.
+All eleven composed profiles now have some runtime evidence; that does not
+qualify every behavior or timing. The three unknown-outcome sequence probes,
+reservation live M0/M1 values and other stated limits remain pending.
+
+The [independent asynchronous SDK backend](G11-SDK-ASYNC-RESULTS.md) subsequently
+passed local raw-PDU snapshot/cancellation/codec checks. Its SDK result is
+separate from the official simulator observations. The exact native Modbus
+emission stayed identical to its pinned baseline.
+
+See the [Natal handoff](NATAL-DELIVERY.md) for the current scope and final local
+regression evidence. Already implemented extra capabilities are retained;
+deferred full-controller work does not block this experimental delivery.
 
 Windows transfer, physical ports/loads, hardware timing, retention and real
 communication peers remain later external gates. All checks run locally;

@@ -1,0 +1,6 @@
+test_timeout_channel_ownership_and_abort_release (test_modbus_sdk_async.NativeModbusAsync) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 2.805s
+
+OK

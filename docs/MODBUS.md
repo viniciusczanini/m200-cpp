@@ -34,10 +34,13 @@ Channel ownership, response validation, timeouts and errors have local models.
 The default missing transport still reports failure rather than invented success.
 
 Scripted/loopback VM protocol tests and SDK execution are separate evidence.
-The independent asynchronous SDK state/transport path remains pending: a callback
-stub returning desired statuses cannot replace that evidence. Native
-transactions and physical interoperability. Expanded property/graph acceptance
-belongs to the exact final editor/simulator batch. See the
+The PLC_NATIVE SDK now has an independent scan-driven PDU codec/state machine
+in `sdk/plc_modbus_async.hpp`, with explicit raw transport callbacks described
+below. Both original snapshot/abort cases passed on VM and SDK, and six new
+methods exercised 43 distinct SDK stimuli across all nine admitted function
+codes. See the [independent SDK report](validation/G11-SDK-ASYNC-RESULTS.md).
+Native transactions, physical interoperability and expanded property/graph
+acceptance remain separate final editor/simulator stages. See the
 [integration results](validation/NATAL-INTEGRATION-PROGRESS.md).
 
 ## Baseline native profiles and protocol reference
@@ -80,10 +83,63 @@ Proveniência detalhada: [MODBUS-FORMAT-RESEARCH.md](capabilities/MODBUS-FORMAT-
 
 ## Execução e testes locais
 
-`Machine(program, communication_transport=...)` recebe explicitamente MemoryTransport ou LoopbackTCPTransport. O segundo aceita apenas 127.0.0.1, sem DNS, e só abre um socket quando o programa inicia uma troca. O padrão não abre conexão: uma tentativa sem transporte resulta em erro 255/15. O SDK C++ nativo segue esse caso padrão e oferece um callback explícito para transportes de teste.
+`Machine(program, communication_transport=...)` recebe explicitamente MemoryTransport ou LoopbackTCPTransport. O segundo aceita apenas 127.0.0.1, sem DNS, e só abre um socket quando o programa inicia uma troca. O padrão não abre conexão: uma tentativa sem transporte resulta em erro 255/15. O SDK C++ nativo segue esse caso padrão. O transporte bruto explícito e o hook legado são descritos abaixo.
 
 O engine verifica respostas e MBAP, limita filas/recepção, ignora respostas fora da troca vigente e não tenta novamente automaticamente. Uma troca ocupa o link; simultaneidade de Abort e Execute, recusa por link ocupado e limpeza de códigos numéricos com Execute FALSE são políticas conservadoras do modelo local onde a evidência do PLC não é suficiente. Não representam uma promessa sobre o escalonamento físico. O modelo não contém transporte serial RTU/ASCII/CRC físico; no programa exportado esse transporte pertence ao runtime oficial do PLC.
 
 Os testes incluem sockets reais locais, fragmentação, IDs errados, exceções Modbus, timeout, aborto, esgotamento de sockets, buffers extremos e ida/volta de índices. Um teste completo compila C++, gera/reimporta SMBP e recebe words de um servidor Modbus TCP em loopback através do executor IL.
 
 Referências primárias: [Schneider Generic Functions Library, edição 04](https://www.se.com/us/en/download/document/EIO0000003289/), pp 171–186 e 204–205; [Basic Operating Guide, edição 04](https://www.se.com/us/en/download/document/EIO0000003281/), pp 47–48 sobre alocação; [Modbus Application Protocol V1.1b3](https://www.modbus.org/file/secure/modbusprotocolspecification.pdf); [Modbus TCP Implementation Guide V1.0b](https://www.modbus.org/file/secure/messagingimplementationguide.pdf).
+
+
+## PLC_NATIVE raw asynchronous PDU transport
+
+Install `plc::detail::modbus_transport = {context, start, poll, cancel};` explicitly.
+`start(void*, const CommunicationConfig&, const unsigned char* pdu, unsigned size,
+unsigned long long now_ms)` returns `ModbusStartResult{accepted, token,
+comm_error, oper_error}`. An accepted token, including zero, belongs to that
+request. The SDK retains its config and outgoing PDU/data snapshot until terminal
+completion/cancel; the transport must not modify their storage.
+
+`poll(void*, ModbusToken, now_ms, unsigned char* response, unsigned capacity)`
+returns `ModbusPollResult{kind, size, comm_error, oper_error}`. The kind is
+`ModbusPollKind::Pending`, `Response`, `BroadcastComplete` or `Error`. Response is
+one complete raw PDU, at most253 bytes; the callback must honor the buffer
+capacity. `cancel(void*, ModbusToken)` retires pending transport resources. A
+successful poll consumes its token; rejected starts own their cleanup. Cancel
+must also tolerate a token already consumed by a malformed/exception response. Callbacks
+are nonthrowing, nonreentrant and synchronous; pending I/O is represented by a
+token, never by blocking a scan. They must route each reply to its exact token.
+No socket, CRC, MBAP, wall-clock peer or physical port is supplied implicitly.
+
+The SDK controls edges, per-link ownership, Busy/Done/Aborted/Error, numeric
+errors, captured timeout and atomic MW response mutation. It encodes and validates
+FC1/2/3/4/5/6/15/16/23 with the limits above, big-endian registers and LSB-first
+packed bits. Write replies must echo the request; partial/malformed responses and
+invalid Modbus exceptions mutate no MW. Outgoing global-image words pass through
+`read_word` so an indeterminate source cannot silently become wire data. Validated
+receive words use `write_word`, recovering only overwritten word masks while
+preserving S17/S18/SW17 and all unrelated cells. Canceled tokens are never polled again.
+Active requests retain a copy of callbacks/context across global rebinding.
+Context and functions must outlive their accepted transactions. Communication
+instances are noncopyable identities and cancel unfinished raw work at destruction.
+Storage is fixed by the253-byte PDU maximum,125 read words and two embedded links;
+no private PLC MW reservation or retry/queue is introduced.
+
+First TRUE creates no edge. Abort takes priority over polling and timeout while
+Busy; timeout uses captured100ms units and zero disables expiry. Invalid effective
+config gives6/0, occupied link255/11, missing/incomplete transport255/15, malformed
+reply0/2 and valid Modbus exception254/exception code. SL1 WRITE id0 succeeds only
+with explicit `BroadcastComplete`; a unicast request rejects that acknowledgement.
+Terminal status remains while Execute is TRUE; if completion occurs with Execute
+FALSE, it is visible for that invocation and cleared on the next idle FALSE call.
+These are the currently admitted local VM policies, not proof of native timing.
+
+The existing `detail::communication_hook` signature remains a deprecated explicit
+status-provider compatibility path when no raw transport is installed; it is not
+the independent engine. An already Busy legacy request retains its captured hook
+and config until terminal completion even if either global hook/transport changes.
+Raw transport takes precedence for subsequent work. Legacy callback I/O/state and
+mixed-mode contention remain the provider's responsibility. Single-threaded scan
+invocations are required; this does not add tasks, lifecycle scheduling, SEND/EXCH,
+IOScanner or an external Modbus connection.

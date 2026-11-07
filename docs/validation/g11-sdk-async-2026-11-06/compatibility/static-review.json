@@ -1,0 +1,26 @@
+{
+  "atomicity": "Complete function/count/length/padding/echo/exception checks and local125word staging precede firstreceivewrite; sourcewords readthroughread_word beforeclaim/start; validatedstores usewrite_word.",
+  "bounded_storage": {
+    "PDU_bytes": 253,
+    "link_owner_slots": 2,
+    "maximum_encoded_bound": "FC16 6+2*123=252;FC23 10+2*121=252;FC15 6+1968/8=252;maxreadresponse252; validated spans precede access",
+    "read_staging_words": 125,
+    "source": "sdk/plc_modbus_async.hpp:modbus_parameters_valid/modbus_encode/modbus_decode"
+  },
+  "clock": {
+    "change": "modbus_clock monotonicguard is called unconditionally byCommunication.update, includinglegacy/default.",
+    "limit": "No generalreset/coldwarm/task/lifecycle qualification claimed; noadmittedfrontendclockrewind identified.",
+    "observed_compatibility": "8admittedexistingtests,legacy10frames\u00d72anddefault10frames\u00d77allPASS. Theirclockstimuli aremonotonic."
+  },
+  "documentation_boundary": "MODBUS.md marks scan-drivenPDUmodelandlocalVMpolicies; noimplicit socket/CRC/MBAP/device/native timing claim.",
+  "findings": [],
+  "legacy_and_host_boundary": "Legacycallbacksignature/layout/constructors/nonPLCdeclarations unchanged; Busy pinslegacycallback/config; rawprecedence onlyoutsidelegacyBusy; includerestrictedPLC_NATIVE.",
+  "ownership_and_cancel": {
+    "capture": "Active config,destination,PDU,transportcontext/functions copied beforeacceptedstart; activebranch used beforemutableglobaldispatch.",
+    "link_contention": "Fixed2owner slots; oneacceptedrawexchange perlink; noSDKqueue/retry.",
+    "retirement": "activefalse/destinationnull/tokenretired and linkreleased beforecancelcallback; no pollingretiredtransaction.",
+    "token_zero": "Token0isnotusedasactiveflag;release calls capturedcancel evenforzero."
+  },
+  "result": "NO_CONCRETE_COMPATIBILITY_DEFECT_FOUND_IN_REVIEWED_SCOPE",
+  "scope": "Reviewonly; TESTE1ownsnewrawcodec/asyncscenariooracles. No broadnative/runtimepolicyinferred."
+}

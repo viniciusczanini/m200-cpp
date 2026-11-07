@@ -1,0 +1,106 @@
+{
+  "all_attempts": 50,
+  "data_deduplication": "Canonical UTF-8 JSON with sorted keys; identical requests/actuals share content-addressed object files. Original per-attempt file hashes remain recorded where available.",
+  "documents": {
+    "evidence/DELIVERY.md": {
+      "normalization": "Only path locations/executable prefixes normalized; data, expected values and diagnostic text retained.",
+      "original_sha256": "099dbd36db8a8219eb73876e5434c871beb5c648e3da4a93278eb7078de919bf",
+      "published_sha256": "099dbd36db8a8219eb73876e5434c871beb5c648e3da4a93278eb7078de919bf"
+    },
+    "evidence/FINAL.json": {
+      "normalization": "Only path locations/executable prefixes normalized; data, expected values and diagnostic text retained.",
+      "original_sha256": "3da58484ab2960ae9d2c12d3bf9cc05aeb5d8087784aa7ce39b9cef3a73b4057",
+      "published_sha256": "28409460b212062cdb28c148ff7c8f9ea81b56fcb290b6488b814a2623945db4"
+    },
+    "evidence/focused-channel-command.json": {
+      "normalization": "Only path locations/executable prefixes normalized; data, expected values and diagnostic text retained.",
+      "original_sha256": "3e02718d25fe8f9f7f7676daa724bbffc4cba4d9d581ffa749bd090878d2d82b",
+      "published_sha256": "5d029e2a67d627cd1777e98d2ffa75cf53b5a633eb348ad4378c40b013289538"
+    },
+    "evidence/freeze.json": {
+      "normalization": "Only path locations/executable prefixes normalized; data, expected values and diagnostic text retained.",
+      "original_sha256": "7dc9a2330d9221ead72406a697592c37c2273867fe84f1d4faed65a56f98ddcc",
+      "published_sha256": "c0ab091d88a82c09dfaeecfa2101677c05b2a1231e8f1a1923b3efc37e78a792"
+    },
+    "evidence/harness-revision.json": {
+      "normalization": "Only path locations/executable prefixes normalized; data, expected values and diagnostic text retained.",
+      "original_sha256": "c68830dcf21dae325acadfb91ce6d8e14a35a0bd8106cee53d06b0e8c6d6dcef",
+      "published_sha256": "6061c0d7bf0b15067b55b9ee32d83d1dea791ab46af427e7ed15e2f9f87ea8bb"
+    },
+    "evidence/input-pins-after.json": {
+      "normalization": "Only path locations/executable prefixes normalized; data, expected values and diagnostic text retained.",
+      "original_sha256": "be467b24c22a85e56dcb9c3b93ea74dc82050b7270f0cf7036a682849cea99dd",
+      "published_sha256": "98263be2197a6e2fa442454d8b1cdb7365087cf33ad0e6863ae2ec609187cccb"
+    },
+    "evidence/input-pins-before.json": {
+      "normalization": "Only path locations/executable prefixes normalized; data, expected values and diagnostic text retained.",
+      "original_sha256": "1ad88bc24451a78f509dc4dc31af119a3f7fcee4de3a9321c9176dcb5462139e",
+      "published_sha256": "763f19e5607580ec36318c94a2cbe17e239bd8c97bf033f81c5d2912aabcf860"
+    },
+    "evidence/original-oracles.json": {
+      "normalization": "Only path locations/executable prefixes normalized; data, expected values and diagnostic text retained.",
+      "original_sha256": "4a023a31184539746698502ea1b78de1e4d634b4f6411b9cca3eb926aa996035",
+      "published_sha256": "81733c34e3a243676835d2cafc7c09e3983d946d620d147829f0e0925a49f58c"
+    },
+    "evidence/preparation-pins.json": {
+      "normalization": "Only path locations/executable prefixes normalized; data, expected values and diagnostic text retained.",
+      "original_sha256": "7b756ad183dc4469f8dd64b7bd2b4acff365c668f73ddc3b293bf15c78d81d6e",
+      "published_sha256": "dd5121aa1d99903610df0618e1a397b798054844daf9f01226cd38004d431707"
+    },
+    "evidence/priority-results.json": {
+      "normalization": "Only path locations/executable prefixes normalized; data, expected values and diagnostic text retained.",
+      "original_sha256": "e19ed38d1e65a84a201f98dc624acababdba62016150275790dd6934ede7983a",
+      "published_sha256": "f4fcb0c395891e4c97f7337f0e71df58484cc2572a90104d3a9e1ffbe0939b8f"
+    },
+    "evidence/raw-vector-command.json": {
+      "normalization": "Only path locations/executable prefixes normalized; data, expected values and diagnostic text retained.",
+      "original_sha256": "74a7a7ef35b35ce091c7b00605b7225c40eff2499a801a62738c930c6d119b27",
+      "published_sha256": "87982d31a1f4a9641210a88d302f5887d1772380ffd919367569e6e8302a8903"
+    },
+    "evidence/summary.json": {
+      "normalization": "Only path locations/executable prefixes normalized; data, expected values and diagnostic text retained.",
+      "original_sha256": "40a736a13641f218653a3c650f7231e6e6661fe1965fd1e22245016edf0a50d8",
+      "published_sha256": "79db666d3f70dc7ab4b82e6fe897b3593de04ccfc61e5f3dc17711d72713ee34"
+    },
+    "logs/focused-channel.log": {
+      "normalization": "Only path locations/executable prefixes normalized; data, expected values and diagnostic text retained.",
+      "original_sha256": "86545d98a97a58b512401fd336d9281cded8b51481461f9e9800ffbee68f9656",
+      "published_sha256": "86545d98a97a58b512401fd336d9281cded8b51481461f9e9800ffbee68f9656"
+    },
+    "logs/priority.log": {
+      "normalization": "Only path locations/executable prefixes normalized; data, expected values and diagnostic text retained.",
+      "original_sha256": "a837a8891b7c81089e069b331da14731c7b2d4a99052469b9d4690975379eb47",
+      "published_sha256": "a837a8891b7c81089e069b331da14731c7b2d4a99052469b9d4690975379eb47"
+    },
+    "logs/raw-vectors.log": {
+      "normalization": "Only path locations/executable prefixes normalized; data, expected values and diagnostic text retained.",
+      "original_sha256": "a8c146f4d4e7664b8e3b886a3951932b8b20da4dbf741fa327be06c15fbebbc6",
+      "published_sha256": "4024006ab18c0e08ae64a93b1b13a59dc6b98649fa323a29a0d676602c6eee71"
+    }
+  },
+  "expected_unknown_word_traps": 1,
+  "file_inventory": "file-inventory.json",
+  "file_inventory_sha256": "92ca5592a38cbfe06295eeb0b4f457555a5967bfe030f1e46cc58739b310d400",
+  "historical_harness_compile_failures": 1,
+  "indexed_files": 239,
+  "limits": "No binaries, GUI, network peer, physical acceptance or whole-suite PASS. Six native-oracle cases are unchanged. Packaging executed no test/build.",
+  "local_result": "Original two cases VM/SDK passed; five complete raw-vector methods passed initially; only the affected channel/timeout method repeated after a test-only name collision fix.",
+  "original_priority_methods": 4,
+  "packaging_integrity": {
+    "all_references_resolve": true,
+    "binary_files": 0,
+    "private_absolute_paths": 0,
+    "references_checked": 455,
+    "tests_or_builds_during_packaging": 0
+  },
+  "path_policy": "No private absolute paths. Object references are package-relative; repo and work are explicit logical roots resolved by the reproduction script.",
+  "schema": "m200.g11-sdk-async.publication-evidence.v1",
+  "sdk_compile_attempts": 48,
+  "sdk_unique_stimuli": 43,
+  "source_files": {
+    "tests/parallel_semantics/adapters.json": "f0b3175743ce2ba049bccdf76820650e9a965266a83674312b7b2c6753509ef2",
+    "tests/parallel_semantics/g11_sdk_host.py": "16f14b80797cc87154bea326415aa67b1d23e34ffa6c1ce4a9e8c83de95fea8b",
+    "tests/test_modbus_sdk_async.py": "50891659cf915ea5968f349359d84f6f131aa14256d2adfd9b85bdfac66ae810"
+  },
+  "status": "SCOPED_LOCAL_PASS_NO_PUBLICATION_RETEST"
+}

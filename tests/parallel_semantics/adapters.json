@@ -68,10 +68,11 @@
       "key": "G11_async",
       "status": "prepared",
       "engines": [
-        "vm"
+        "vm",
+        "sdk"
       ],
-      "entrypoint": "parallel_semantics.host_adapters:modbus_async",
-      "delivery": "G11 CONTRACT.md; explicit raw-byte transport tests real CommunicationEngine. SDK transport integration remains pending, no mock state-machine success."
+      "entrypoint": "parallel_semantics.g11_sdk_host:modbus_async",
+      "delivery": "G11-native-async-1 real raw-PDU SDK transport; private validation proposal. Original VM provider/oracles unchanged."
     },
     {
       "key": "G07_bounds",

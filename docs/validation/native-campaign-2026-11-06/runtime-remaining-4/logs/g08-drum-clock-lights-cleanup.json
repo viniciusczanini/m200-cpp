@@ -1,0 +1,162 @@
+{
+  "time_ns": 1794011977755253000,
+  "no_simulator_window_process_502_listener": true,
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "@control/control.py",
+        "status",
+        "--all"
+      ],
+      "exit": 0,
+      "response": {
+        "lab": "@lab",
+        "windows": [
+          {
+            "id": 2153,
+            "pid": 24358,
+            "title": "",
+            "onscreen": false,
+            "bounds": {
+              "X": 0,
+              "Height": 39,
+              "Y": 0,
+              "Width": 2056
+            }
+          },
+          {
+            "id": 2152,
+            "pid": 24358,
+            "title": "",
+            "onscreen": false,
+            "bounds": {
+              "X": 0,
+              "Height": 39,
+              "Y": 0,
+              "Width": 2056
+            }
+          },
+          {
+            "id": 2151,
+            "pid": 24358,
+            "title": "",
+            "onscreen": false,
+            "bounds": {
+              "X": 0,
+              "Height": 39,
+              "Y": 0,
+              "Width": 2056
+            }
+          },
+          {
+            "id": 2150,
+            "pid": 24358,
+            "title": "",
+            "onscreen": false,
+            "bounds": {
+              "X": 0,
+              "Height": 39,
+              "Y": 0,
+              "Width": 2056
+            }
+          },
+          {
+            "id": 2146,
+            "pid": 24358,
+            "title": "g08-drum-clock-lights_official - EcoStruxure Machine Expert - Basic",
+            "onscreen": true,
+            "bounds": {
+              "X": -4,
+              "Height": 1298,
+              "Y": 35,
+              "Width": 2064
+            }
+          },
+          {
+            "id": 2137,
+            "pid": 24358,
+            "title": "",
+            "onscreen": false,
+            "bounds": {
+              "X": 0,
+              "Height": 64,
+              "Y": 829,
+              "Width": 64
+            }
+          },
+          {
+            "id": 6251,
+            "pid": 78776,
+            "title": "",
+            "onscreen": false,
+            "bounds": {
+              "X": 1733,
+              "Height": 21,
+              "Y": 130,
+              "Width": 82
+            }
+          },
+          {
+            "id": 1854,
+            "pid": 78776,
+            "title": "",
+            "onscreen": false,
+            "bounds": {
+              "X": 0,
+              "Height": 500,
+              "Y": 829,
+              "Width": 500
+            }
+          },
+          {
+            "id": 1243,
+            "pid": 99872,
+            "title": "",
+            "onscreen": false,
+            "bounds": {
+              "X": 0,
+              "Height": 500,
+              "Y": 829,
+              "Width": 500
+            }
+          },
+          {
+            "id": 1855,
+            "pid": 78773,
+            "title": "",
+            "onscreen": false,
+            "bounds": {
+              "X": 0,
+              "Height": 500,
+              "Y": 829,
+              "Width": 500
+            }
+          }
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "command": [
+        "ps",
+        "-axo",
+        "pid=,comm=,args="
+      ],
+      "exit": 0,
+      "stderr": "",
+      "simulator_processes": []
+    },
+    {
+      "command": [
+        "lsof",
+        "-nP",
+        "-iTCP:502",
+        "-sTCP:LISTEN"
+      ],
+      "exit": 1,
+      "stdout": "",
+      "stderr": ""
+    }
+  ]
+}

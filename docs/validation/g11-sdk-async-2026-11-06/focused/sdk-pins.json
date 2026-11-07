@@ -1,0 +1,7 @@
+{
+  "sdk/plc.hpp": "0ab4b1f538c45282252b80ac4577974ede33b02f423860a40b16c4ed863d0067",
+  "sdk/plc_boolean.hpp": "6cf3fbcdb968dbdb6197351885c43f7761cd7e8830f7a15d3c949f36d2ae2e58",
+  "sdk/plc_modbus_async.hpp": "5e1279de801d649a64111b9fdaf4c568d4c00876566bd5716a8946576b06ae98",
+  "sdk/plc_sequences.hpp": "8ca0dcda056a56d27d55e24305803aafc219e7f679af97c91c349b294d0d7184",
+  "sdk/scalar_numeric.hpp": "7509aead5771a3b111aef5df813e7797dcaaf065732c73414a21f309fd3913e7"
+}

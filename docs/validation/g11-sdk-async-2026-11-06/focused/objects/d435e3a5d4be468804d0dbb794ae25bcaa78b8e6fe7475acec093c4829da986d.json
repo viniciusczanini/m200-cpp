@@ -1,0 +1,35 @@
+{
+  "blocks": {
+    "block": {
+      "first_obj": 0,
+      "id": 1,
+      "index_data": 100,
+      "kind": "READ_VAR",
+      "link": "SL1",
+      "obj_type": 0,
+      "quantity": 2,
+      "timeout_100ms": 100
+    }
+  },
+  "events": [
+    {
+      "calls": [
+        {
+          "abort": false,
+          "block": "block",
+          "execute": false
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "abort": false,
+          "block": "block",
+          "execute": true
+        }
+      ]
+    }
+  ],
+  "transport": "partial"
+}

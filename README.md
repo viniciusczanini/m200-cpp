@@ -130,7 +130,8 @@ The recorded **2026-11-06 validation rounds** contain:
 |---|---:|
 | Historical published Register unit/regression checkpoint | 799 passing tests / 220.444 s / zero skips |
 | First seven-package candidate full regression | 1,007 tests; 123 failures, 4 errors, 1 skip; retained while fixes and contract reviews proceed |
-| Final combined local gate | 1,017 tests: 1,009 passed, eight explicit pending failures, zero errors/skips; exit2, incomplete |
+| Historical combined local gate | 1,017 tests: 1,009 passed, eight explicit pending failures, zero errors/skips; exit2, incomplete |
+| Final SDK integration gate | 1,045 tests: 1,038 passed, seven failed; missing-corpus failure resolved by one affected-method PASS; six native-oracle gaps remain, raw full exit2 |
 | Final composed project batch | 24 cases, 201 positions, seven routes: 1,407 matching observations; 11 project profiles |
 | Earlier baseline unit/regression suite | 417 passing tests |
 | Historical stress and public-program traces | 288,372 base scan frames |
@@ -145,10 +146,15 @@ The [Natal integration record](docs/validation/NATAL-INTEGRATION-PROGRESS.md)
 keeps later composed tests, focused fixes and the failed combined run separate.
 The [native acceptance checkpoint](docs/validation/NATAL-NATIVE-CHECKPOINT.md)
 records the fourteen-project editor batch, two vendor-discovered fixes,
-actual saved-project readback and the remaining simulator work.
-The [frozen experimental handoff](docs/validation/NATAL-DELIVERY.md) closes the
-bounded simulator session with seven profiles partly observed and four not
-executed. It preserves the remaining qualification gaps explicitly.
+actual saved-project readback and bounded simulator observations.
+The [experimental Natal handoff](docs/validation/NATAL-DELIVERY.md) now includes
+some runtime evidence for all eleven composed profiles. The four-profile
+follow-up passed 40 output checks and observed DR/RTC phases; precise timing and
+successful native Modbus exchange remain unqualified.
+The [independent Modbus SDK backend](docs/validation/G11-SDK-ASYNC-RESULTS.md)
+passed the original VM/SDK snapshot/abort cases and 43 distinct SDK raw-PDU
+stimuli across nine function codes. Already implemented extra capabilities are
+retained; the thirteen deferred packages do not block this Natal delivery.
 Prepared [native sequence probes](examples/native_validation/README.md) have
 passed local project/reverse preparation; their twelve native outcome questions
 remain pending until the planned official-simulator observations.
@@ -176,13 +182,18 @@ The [earlier single-write Modbus checkpoint](docs/validation/MODBUS-SINGLE-PROFI
 Run validation **locally**:
 
 ```sh
+make public-indexed-fetch # Prepare hash-pinned public fixtures used by timer stress
 make check           # Unit and regression tests
 make examples        # Compile and check the bundled examples
 make optimization-stress # Fixed generic codegen budgets and forward/reverse traces
 make stress          # Local deterministic stress suites
 ```
 
-Pinned public-project tests are separate: `make public-fetch` explicitly downloads their source fixtures, then `make public-check` runs locally. `make public-flow-fetch` / `make public-flow-check` cover the additional control-flow corpus. Downloads are not implicit in those check targets.
+The timer-property regression requires the hash-pinned indexed public fixture;
+prepare its corpus explicitly before `make check`. Tests never download missing
+inputs automatically. Other public-project tests use `make public-fetch` then
+`make public-check`; `make public-flow-fetch` / `make public-flow-check` cover
+the additional control-flow corpus. Downloads are not implicit in check targets.
 
 **No remote CI is used. GitHub Actions must remain disabled for this repository.** GitHub stores the versioned source; validation runs on the developer's machine.
 
@@ -193,7 +204,8 @@ Pinned public-project tests are separate: `make public-fetch` explicitly downloa
 | [Getting started](docs/GETTING_STARTED.md) | Setup, CLI commands, traces, artifacts, reverse conversion, editor handoff |
 | [Compiler optimization](docs/OPTIMIZATION.md) | Same-source size comparison, I/O semantics, allocation and validation |
 | [Architecture and semantics](docs/ARCHITECTURE.md) | Compiler stages, supported language, resource allocation, execution rules, current gates |
-| [Functional parity contract](docs/PARITY.md) | Final target and acceptance criteria |
+| [Natal goal and roadmap](docs/GOAL.md) / [roadmap](docs/ROADMAP.md) | Current finite delivery and already implemented extras |
+| [Future parity contract](docs/PARITY.md) | Preserved inactive requirements outside the Natal goal |
 | [Completion plan](docs/superpowers/plans/2026-11-06-compiler-finish.md) | Optimization-first execution order, finite release gates and physical acceptance |
 | [Capability inventory](docs/capabilities/README.md) | Implemented coverage, missing families, source conflicts |
 | [SMBP format evidence](docs/FORMAT.md) | Observed serialization, provenance, and unsupported variants |

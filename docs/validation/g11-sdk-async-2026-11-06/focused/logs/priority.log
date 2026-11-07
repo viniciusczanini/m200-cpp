@@ -1,0 +1,13 @@
+runTest (parallel_semantics.test_semantics.semantic_case.<locals>.SemanticCase)
+parallel_semantics.G11_busy_dynamic_buffer_change_does_not_redirect_active_read.vm ... ok
+runTest (parallel_semantics.test_semantics.semantic_case.<locals>.SemanticCase)
+parallel_semantics.G11_busy_dynamic_buffer_change_does_not_redirect_active_read.sdk ... ok
+runTest (parallel_semantics.test_semantics.semantic_case.<locals>.SemanticCase)
+parallel_semantics.G11_abort_prevents_late_response_buffer_mutation.vm ... ok
+runTest (parallel_semantics.test_semantics.semantic_case.<locals>.SemanticCase)
+parallel_semantics.G11_abort_prevents_late_response_buffer_mutation.sdk ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 1.167s
+
+OK

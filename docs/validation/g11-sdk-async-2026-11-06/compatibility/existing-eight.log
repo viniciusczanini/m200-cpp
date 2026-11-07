@@ -1,0 +1,13 @@
+test_no_transport_has_explicit_error_and_reverse_matches_native (test_communication_compiler.CommunicationCompilerTests) ... ok
+test_invalid_modbus_construction_and_update_are_compile_errors (test_communication_compiler.CommunicationCompilerTests) ... ok
+test_reverse_preserves_sparse_native_communication_indices (test_communication_compiler.CommunicationCompilerTests) ... ok
+test_serial_read_generates_typed_fb_ladder_and_roundtrip (test_communication_project.CommunicationProjectTests) ... ok
+test_public_constructor_without_getters_and_reverse_keep_bare_update (test_modbus_bare_abort_native_profile.ModbusBareAbortNativeProfileTests) ... ok
+test_native_sdk_vm_and_reverse_keep_separate_status_reads_without_transport (test_modbus_bare_abort_native_profile.ModbusBareAbortNativeProfileTests) ... ok
+test_public_constructor_reverse_and_export_retain_single_function (test_modbus_single_native_profile.ModbusSingleNativeProfileTests) ... ok
+test_constructor_reverse_and_export_preserve_literal_fields_and_column_one (test_modbus_write_read_native_profile.ModbusWriteReadNativeProfileTests) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 3.364s
+
+OK

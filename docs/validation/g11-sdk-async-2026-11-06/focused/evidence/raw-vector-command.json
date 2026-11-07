@@ -1,0 +1,17 @@
+{
+  "command": [
+    "python3",
+    "-m",
+    "unittest",
+    "-v",
+    "test_modbus_sdk_async"
+  ],
+  "cwd": "repo",
+  "environment_overrides": {
+    "M200_G11_TEST_OUTPUT": "evidence/raw-vector-artifacts",
+    "PYTHONPATH": "repo/tests"
+  },
+  "module_execution_count": 1,
+  "returncode": 1,
+  "seconds": 22.073694
+}

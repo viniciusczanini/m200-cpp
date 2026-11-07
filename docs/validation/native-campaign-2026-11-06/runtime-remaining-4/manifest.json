@@ -1,0 +1,196 @@
+{
+  "format": 1,
+  "created_time_ns": 1794012913912084000,
+  "counts": {
+    "profiles": 4,
+    "panel_observation_points": 65,
+    "output_checks_passed": 40,
+    "output_checks_failed": 0,
+    "Q4_refusal_points": 4,
+    "unique_pngs": 30,
+    "small_panel_pngs": 21,
+    "full_editor_pngs": 9,
+    "png_bytes": 3382129
+  },
+  "total_payload_bytes": 4244494,
+  "manifest_excludes_itself": true,
+  "files": {
+    "SUMMARY.md": {
+      "sha256": "70b6228780d9db365322e3c756ad0c782885a6cd99b57c0d78a5e1561e4b785c",
+      "bytes": 2665
+    },
+    "full-editor-review.json": {
+      "sha256": "96e8ce3942dc2754f072d7e8d7ce70b3da478394459515c0b8952155d491b8a4",
+      "bytes": 1784
+    },
+    "images/166cebd020eff7f07a30cf51f12dff7b904618eb38f1b3794f3136d37dde63fc.png": {
+      "sha256": "166cebd020eff7f07a30cf51f12dff7b904618eb38f1b3794f3136d37dde63fc",
+      "bytes": 18565
+    },
+    "images/1f1c634dcd013f62143cc8249bde50d0f316ef75e9c207af78c52f01bad72077.png": {
+      "sha256": "1f1c634dcd013f62143cc8249bde50d0f316ef75e9c207af78c52f01bad72077",
+      "bytes": 18716
+    },
+    "images/2381b84ec5feb3496db6dcd2561fe6163e8ba27ad58e223ab2503b21c90469d2.png": {
+      "sha256": "2381b84ec5feb3496db6dcd2561fe6163e8ba27ad58e223ab2503b21c90469d2",
+      "bytes": 17981
+    },
+    "images/33a548da75b22cada8a80a08557c4bedbe1402192a11f16a96c2ef96f842a221.png": {
+      "sha256": "33a548da75b22cada8a80a08557c4bedbe1402192a11f16a96c2ef96f842a221",
+      "bytes": 269453
+    },
+    "images/3579f87b23e0b0fdc70d9ca53f193d1f13c6368780a056607b5e9baecbfbb92c.png": {
+      "sha256": "3579f87b23e0b0fdc70d9ca53f193d1f13c6368780a056607b5e9baecbfbb92c",
+      "bytes": 18610
+    },
+    "images/3873f92b7bf3b2e611ae04b819e8548ac9b1406561625edbebd6bcbf6dd53f94.png": {
+      "sha256": "3873f92b7bf3b2e611ae04b819e8548ac9b1406561625edbebd6bcbf6dd53f94",
+      "bytes": 445263
+    },
+    "images/3eeedfebd50b89c0edb7dc1e4a17f9b1045498278414716cf575ea183c3694ee.png": {
+      "sha256": "3eeedfebd50b89c0edb7dc1e4a17f9b1045498278414716cf575ea183c3694ee",
+      "bytes": 18367
+    },
+    "images/42fe1ca018ff93b24a8fe85b5a149f74f2908ba03a2d84f48f148cd4bed7a754.png": {
+      "sha256": "42fe1ca018ff93b24a8fe85b5a149f74f2908ba03a2d84f48f148cd4bed7a754",
+      "bytes": 18595
+    },
+    "images/47ece8a5b49049525f68f44ff41bee65d8d16c059b08c487fa28914dd4b3d4b3.png": {
+      "sha256": "47ece8a5b49049525f68f44ff41bee65d8d16c059b08c487fa28914dd4b3d4b3",
+      "bytes": 267563
+    },
+    "images/50aa4c4e2a3ae5b5cf815b53d816363eaade88d51fb2fdb5737d0265fc35c2ed.png": {
+      "sha256": "50aa4c4e2a3ae5b5cf815b53d816363eaade88d51fb2fdb5737d0265fc35c2ed",
+      "bytes": 18532
+    },
+    "images/57f7bb597b99dbb21c56da7ec6257cd47dc9b3d5f5a1680e9c62dd8d6142e450.png": {
+      "sha256": "57f7bb597b99dbb21c56da7ec6257cd47dc9b3d5f5a1680e9c62dd8d6142e450",
+      "bytes": 18189
+    },
+    "images/58c024b36c75dd490351261c427abd0b7847d7cd896dfe70740a1ad87969f52f.png": {
+      "sha256": "58c024b36c75dd490351261c427abd0b7847d7cd896dfe70740a1ad87969f52f",
+      "bytes": 18801
+    },
+    "images/64d456cbd529c569c5fd928f3671af47470275d1d9eaf76e940c7f97af2c93cb.png": {
+      "sha256": "64d456cbd529c569c5fd928f3671af47470275d1d9eaf76e940c7f97af2c93cb",
+      "bytes": 474970
+    },
+    "images/6c68830fab83f8a98f89a904d65ee83d9af1a99653d8d8b284bc6d82b01f9dfe.png": {
+      "sha256": "6c68830fab83f8a98f89a904d65ee83d9af1a99653d8d8b284bc6d82b01f9dfe",
+      "bytes": 18834
+    },
+    "images/6cbb000e2aad8ca91361d830fe768fd65ca392411c7ab6965c6ee9e6c70ec3a9.png": {
+      "sha256": "6cbb000e2aad8ca91361d830fe768fd65ca392411c7ab6965c6ee9e6c70ec3a9",
+      "bytes": 287510
+    },
+    "images/6f9235c4b2646a1be03234db5df8f22a75aed168a77115bbe3c57724a7dfa888.png": {
+      "sha256": "6f9235c4b2646a1be03234db5df8f22a75aed168a77115bbe3c57724a7dfa888",
+      "bytes": 18728
+    },
+    "images/7a39eb89b89f496c636c35ff2c03b750e9f66299c049c5d576b6e131b8ef788f.png": {
+      "sha256": "7a39eb89b89f496c636c35ff2c03b750e9f66299c049c5d576b6e131b8ef788f",
+      "bytes": 311149
+    },
+    "images/7a92c29f400d85d6d96692cb675a6195d8cd366f9542d0a03ea712e05f154a72.png": {
+      "sha256": "7a92c29f400d85d6d96692cb675a6195d8cd366f9542d0a03ea712e05f154a72",
+      "bytes": 18259
+    },
+    "images/813437ce77d85c511fbbe7cb9c7e08a4ea26c9f903521b4e114004e5fb11bddd.png": {
+      "sha256": "813437ce77d85c511fbbe7cb9c7e08a4ea26c9f903521b4e114004e5fb11bddd",
+      "bytes": 18392
+    },
+    "images/8e22ef20142a3cc09f3cbc4c821f8f70c964e663dc6b8ef0217eb87d81ab2607.png": {
+      "sha256": "8e22ef20142a3cc09f3cbc4c821f8f70c964e663dc6b8ef0217eb87d81ab2607",
+      "bytes": 311118
+    },
+    "images/9894a83ad2ed192fd4142036f29060fa2b38cad622060fb99232683ee500172b.png": {
+      "sha256": "9894a83ad2ed192fd4142036f29060fa2b38cad622060fb99232683ee500172b",
+      "bytes": 18950
+    },
+    "images/98fb691e71f12bc93682add0050875c40421ff9b66e5667cc20593b443094ad9.png": {
+      "sha256": "98fb691e71f12bc93682add0050875c40421ff9b66e5667cc20593b443094ad9",
+      "bytes": 18776
+    },
+    "images/9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026.png": {
+      "sha256": "9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026",
+      "bytes": 18119
+    },
+    "images/9fcb4e6fe1d87adb977b7355c8e005ea3a69247b8b2987e81cedf4b5ff367d2b.png": {
+      "sha256": "9fcb4e6fe1d87adb977b7355c8e005ea3a69247b8b2987e81cedf4b5ff367d2b",
+      "bytes": 313439
+    },
+    "images/b7e5366fdc218d35ecc8af675b1c850303c49d8f7195d1a623d45a3ca004d9d4.png": {
+      "sha256": "b7e5366fdc218d35ecc8af675b1c850303c49d8f7195d1a623d45a3ca004d9d4",
+      "bytes": 18461
+    },
+    "images/be34de8887d2de3c7eb1611adc46d4f8b6ae1921796c7448d5499ff29f848f07.png": {
+      "sha256": "be34de8887d2de3c7eb1611adc46d4f8b6ae1921796c7448d5499ff29f848f07",
+      "bytes": 18320
+    },
+    "images/c4d4e401bd3919815439748bd29884d30cc6a105295198b31ad3695f41cf6c14.png": {
+      "sha256": "c4d4e401bd3919815439748bd29884d30cc6a105295198b31ad3695f41cf6c14",
+      "bytes": 18239
+    },
+    "images/d51424f51eb70f3935d8a20588139e5b87250feb5d20666ab62be0ad45a032bc.png": {
+      "sha256": "d51424f51eb70f3935d8a20588139e5b87250feb5d20666ab62be0ad45a032bc",
+      "bytes": 19027
+    },
+    "images/e0c3581c9a2fc0c8ec1d6fa95224449de3441dbf84833ec7067329ac275596af.png": {
+      "sha256": "e0c3581c9a2fc0c8ec1d6fa95224449de3441dbf84833ec7067329ac275596af",
+      "bytes": 18150
+    },
+    "images/e5b560fbe85d00885afd95203967f9199b1acba6823ce64cedd8f3f1b88ee4ec.png": {
+      "sha256": "e5b560fbe85d00885afd95203967f9199b1acba6823ce64cedd8f3f1b88ee4ec",
+      "bytes": 313053
+    },
+    "input-pins.json": {
+      "sha256": "cb7bda9f011edf34365eb3ada5c12a6d7246de4157285053dce0e1466dfbf1a9",
+      "bytes": 955
+    },
+    "logs/commands.jsonl": {
+      "sha256": "9b8a0a361047eb1576ec564889a4ab6c8c99060efbedbba145d6ae34b0fec80c",
+      "bytes": 331442
+    },
+    "logs/g08-drum-clock-lights-cleanup.json": {
+      "sha256": "83eaffc8c18b520d7078035ac773c5325f7d23d8cfe69ec6bf525e2d0c884f7d",
+      "bytes": 3460
+    },
+    "logs/g08-drum-clock-lights-events.jsonl": {
+      "sha256": "74e1b42b4c9d061c1dd04d70f2de8352724f632ffeb25f9d339e6bbd43f07dd4",
+      "bytes": 98950
+    },
+    "logs/g09-rtc-clock-lights-cleanup.json": {
+      "sha256": "20640400b4b06ea84faed805c9847abf5f371128336afbc76d7b2fdcc01196ca",
+      "bytes": 3459
+    },
+    "logs/g09-rtc-clock-lights-events.jsonl": {
+      "sha256": "393224821343ee53ade50be035c8103b8859d5d48b10cb2f45b615696b8335ae",
+      "bytes": 111185
+    },
+    "logs/g09-schedule-reservation-cleanup.json": {
+      "sha256": "843d014c81d06734dcc5529deec63a7fc112fb4593807a72cb1d2e948b5459a6",
+      "bytes": 3469
+    },
+    "logs/g09-schedule-reservation-events.jsonl": {
+      "sha256": "2b91244f9341b26c5541b0c54551d56dc5e9e1d22fecf0065253ca5775229473",
+      "bytes": 127601
+    },
+    "logs/modbus-no-transport-cleanup.json": {
+      "sha256": "030c46c92c04bab274d55ff41ef260300832594df10109930ea25a76dffd4c64",
+      "bytes": 3458
+    },
+    "logs/modbus-no-transport-events.jsonl": {
+      "sha256": "99d224487d0e4d1e8644e639bdd7dc92e27938859854cd077dfeafdedfccded1",
+      "bytes": 82762
+    },
+    "screenshot-index.json": {
+      "sha256": "42ddbf58fdfaa07f465291bc2727dc9c482c03d3c437be226cf57813507d7cfc",
+      "bytes": 13371
+    },
+    "summary.json": {
+      "sha256": "26b2a8ce21e1139955e0e0841fb89c28b9b55636b77dd62b20578b04b2f49981",
+      "bytes": 77804
+    }
+  },
+  "source_record_sha256": "932380bef8571fe3a668d6204def2607789e95e3408e4852f693188794845d8c"
+}

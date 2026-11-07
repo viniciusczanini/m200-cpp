@@ -1,0 +1,95 @@
+test_all_nine_documented_functions_encode_decode_literal_PDUs (test_modbus_sdk_async.NativeModbusAsync) ... ok
+test_error_mapping_initial_edges_and_missing_transport (test_modbus_sdk_async.NativeModbusAsync) ... ok
+test_malformed_responses_are_atomic_for_all_decode_shapes (test_modbus_sdk_async.NativeModbusAsync) ... ok
+test_outgoing_snapshot_busy_reconfiguration_and_captured_transport (test_modbus_sdk_async.NativeModbusAsync) ... ok
+test_receive_word_barrier_preserves_flags_and_atomic_poison_state (test_modbus_sdk_async.NativeModbusAsync) ... ok
+test_timeout_channel_ownership_and_abort_release (test_modbus_sdk_async.NativeModbusAsync) ... FAIL
+
+======================================================================
+FAIL: test_timeout_channel_ownership_and_abort_release (test_modbus_sdk_async.NativeModbusAsync)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "sources/tests/test_modbus_sdk_async.py", line 160, in test_timeout_channel_ownership_and_abort_release
+    self.check(self.observe(channel), {"request_hexes": ["0300000001", "0300010001"],
+  File "sources/tests/test_modbus_sdk_async.py", line 80, in observe
+    result = run_sequence(request=copy.deepcopy(request), repo=ROOT, work=folder)
+  File "sources/tests/parallel_semantics/g11_sdk_host.py", line 169, in run_sequence
+    raise AssertionError("SDK raw-PDU host compilation failed:\n" + built.stderr)
+AssertionError: SDK raw-PDU host compilation failed:
+objects/5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139.cpp:48:14: error: redefinition of 'first' with a different type: 'plc::ReadVar' vs 'Script'
+   48 | plc::ReadVar first{0,plc::Link::Serial1,1,100,plc::Object::HoldingWords,0,1,100};
+      |              ^
+objects/5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139.cpp:47:47: note: previous definition is here
+   47 | int main(){plc::WordMemory image{8000};Script first,second;
+      |                                               ^
+objects/5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139.cpp:49:14: error: redefinition of 'second' with a different type: 'plc::ReadVar' vs 'Script'
+   49 | plc::ReadVar second{1,plc::Link::Serial1,2,100,plc::Object::HoldingWords,1,1,200};
+      |              ^
+objects/5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139.cpp:47:53: note: previous definition is here
+   47 | int main(){plc::WordMemory image{8000};Script first,second;
+      |                                                     ^
+objects/5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139.cpp:55:7: error: no member named 'update' in 'Script'
+   55 | first.update(false,false);
+      | ~~~~~ ^
+objects/5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139.cpp:56:8: error: no member named 'update' in 'Script'
+   56 | second.update(false,false);
+      | ~~~~~~ ^
+objects/5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139.cpp:59:7: error: no member named 'update' in 'Script'
+   59 | first.update(true,false);
+      | ~~~~~ ^
+objects/5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139.cpp:60:8: error: no member named 'update' in 'Script'
+   60 | second.update(true,false);
+      | ~~~~~~ ^
+objects/5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139.cpp:61:1: error: no matching function for call to 'capture'
+   61 | capture("first",first);
+      | ^~~~~~~
+objects/5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139.cpp:45:6: note: candidate function not viable: no known conversion from 'Script' to 'const plc::Communication' for 2nd argument
+   45 | void capture(const char* name,const plc::Communication& block){snapshots.push_back({name,block.done(),block.busy(),block.aborted(),block.error(),block.comm_error(),block.oper_error()});}
+      |      ^                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+objects/5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139.cpp:62:1: error: no matching function for call to 'capture'
+   62 | capture("second",second);
+      | ^~~~~~~
+objects/5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139.cpp:45:6: note: candidate function not viable: no known conversion from 'Script' to 'const plc::Communication' for 2nd argument
+   45 | void capture(const char* name,const plc::Communication& block){snapshots.push_back({name,block.done(),block.busy(),block.aborted(),block.error(),block.comm_error(),block.oper_error()});}
+      |      ^                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+objects/5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139.cpp:65:7: error: no member named 'update' in 'Script'
+   65 | first.update(true,true);
+      | ~~~~~ ^
+objects/5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139.cpp:66:8: error: no member named 'update' in 'Script'
+   66 | second.update(false,false);
+      | ~~~~~~ ^
+objects/5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139.cpp:69:8: error: no member named 'update' in 'Script'
+   69 | second.update(true,false);
+      | ~~~~~~ ^
+objects/5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139.cpp:72:8: error: no member named 'update' in 'Script'
+   72 | second.update(true,false);
+      | ~~~~~~ ^
+objects/5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139.cpp:75:121: error: no member named 'done' in 'Script'
+   75 | std::printf("\"first\":{\"done\":%s,\"busy\":%s,\"aborted\":%s,\"error\":%s,\"comm_error\":%d,\"oper_error\":%d}",first.done()?"true":"false",first.busy()?"true":"false",first.aborted()?"true":"false",first.error()?"true":"false",(int)first.comm_error(),(int)first.oper_error());
+      |                                                                                                                   ~~~~~ ^
+objects/5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139.cpp:75:149: error: no member named 'busy' in 'Script'
+   75 | std::printf("\"first\":{\"done\":%s,\"busy\":%s,\"aborted\":%s,\"error\":%s,\"comm_error\":%d,\"oper_error\":%d}",first.done()?"true":"false",first.busy()?"true":"false",first.aborted()?"true":"false",first.error()?"true":"false",(int)first.comm_error(),(int)first.oper_error());
+      |                                                                                                                                               ~~~~~ ^
+objects/5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139.cpp:75:177: error: no member named 'aborted' in 'Script'
+   75 | std::printf("\"first\":{\"done\":%s,\"busy\":%s,\"aborted\":%s,\"error\":%s,\"comm_error\":%d,\"oper_error\":%d}",first.done()?"true":"false",first.busy()?"true":"false",first.aborted()?"true":"false",first.error()?"true":"false",(int)first.comm_error(),(int)first.oper_error());
+      |                                                                                                                                                                           ~~~~~ ^
+objects/5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139.cpp:75:208: error: no member named 'error' in 'Script'
+   75 | std::printf("\"first\":{\"done\":%s,\"busy\":%s,\"aborted\":%s,\"error\":%s,\"comm_error\":%d,\"oper_error\":%d}",first.done()?"true":"false",first.busy()?"true":"false",first.aborted()?"true":"false",first.error()?"true":"false",(int)first.comm_error(),(int)first.oper_error());
+      |                                                                                                                                                                                                          ~~~~~ ^
+objects/5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139.cpp:75:242: error: no member named 'comm_error' in 'Script'
+   75 | std::printf("\"first\":{\"done\":%s,\"busy\":%s,\"aborted\":%s,\"error\":%s,\"comm_error\":%d,\"oper_error\":%d}",first.done()?"true":"false",first.busy()?"true":"false",first.aborted()?"true":"false",first.error()?"true":"false",(int)first.comm_error(),(int)first.oper_error());
+      |                                                                                                                                                                                                                                            ~~~~~ ^
+objects/5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139.cpp:75:266: error: no member named 'oper_error' in 'Script'
+   75 | std::printf("\"first\":{\"done\":%s,\"busy\":%s,\"aborted\":%s,\"error\":%s,\"comm_error\":%d,\"oper_error\":%d}",first.done()?"true":"false",first.busy()?"true":"false",first.aborted()?"true":"false",first.error()?"true":"false",(int)first.comm_error(),(int)first.oper_error());
+      |                                                                                                                                                                                                                                                                    ~~~~~ ^
+objects/5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139.cpp:76:124: error: no member named 'done' in 'Script'
+   76 | std::printf(",\"second\":{\"done\":%s,\"busy\":%s,\"aborted\":%s,\"error\":%s,\"comm_error\":%d,\"oper_error\":%d}",second.done()?"true":"false",second.busy()?"true":"false",second.aborted()?"true":"false",second.error()?"true":"false",(int)second.comm_error(),(int)second.oper_error());
+      |                                                                                                                     ~~~~~~ ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+
+
+----------------------------------------------------------------------
+Ran 6 tests in 22.027s
+
+FAILED (failures=1)

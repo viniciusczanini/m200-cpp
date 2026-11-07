@@ -1,0 +1,49 @@
+{
+  "blocks": {
+    "block": {
+      "index_data": 100,
+      "kind": "WRITE_VAR",
+      "obj_type": 5,
+      "quantity": 1
+    }
+  },
+  "events": [
+    {
+      "calls": [
+        {
+          "abort": false,
+          "block": "block",
+          "execute": false
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "abort": false,
+          "block": "block",
+          "execute": true
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "abort": false,
+          "block": "block",
+          "execute": true
+        }
+      ],
+      "poll": {
+        "hex": "0600001234",
+        "kind": "response"
+      }
+    }
+  ],
+  "initial_words": {
+    "100": 4660
+  },
+  "poison_words": {
+    "100": 65535
+  }
+}

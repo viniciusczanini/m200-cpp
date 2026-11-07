@@ -1,0 +1,14 @@
+{
+  "command": [
+    "clang++",
+    "-std=c++17",
+    "-O0",
+    "-I",
+    "repo/sdk",
+    "objects/3af8beeada62ae11feb9db044c7bedb4b513f375ae326a8c18784a2203c58948.cpp",
+    "-o",
+    "work/initial/test_malformed_responses_are_atomic_for_all_decode_shapes-11/host"
+  ],
+  "returncode": 0,
+  "stderr": ""
+}

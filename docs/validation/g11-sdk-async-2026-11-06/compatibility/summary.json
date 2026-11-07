@@ -1,0 +1,69 @@
+{
+  "API_compatibility": "Publicconstructor/enums/config/resultlayouts/nonPLCdeclarations/legacyhook text-equal; sparseIDs7/21 andall3highlevelconstructorscovered.",
+  "changed_from_baseline": {
+    "added": [
+      "sdk/plc_modbus_async.hpp"
+    ],
+    "changed": [
+      "sdk/plc.hpp"
+    ],
+    "removed": []
+  },
+  "commands": "commands.json andnative-emission-command.json",
+  "compiler_sdk_pins": 74,
+  "evidence_hashes": {
+    "API-compatibility.json": "71001337f4bcfb6f12a4f7bbcae624a09371c609be0f12ccc0cfdd282f8c3fbd",
+    "baseline-artifact-pins-after.json": "4ac4aa2f560d534dd91c0e983260b3eb2a7420cf46776146107f4cbb243bdebc",
+    "check_emission.py": "9fbd2b5291e777bd864367e4343293925946e62710f07b7518a2e596abbb930e",
+    "commands.json": "d076d3a66296c5f5d70b2f02d98c3f38ac2a30d94e9099506224465aa6bee69d",
+    "compiler-pins-after.json": "f4b5222fd44a057d7057e757c62526d991ee3907983955f8668aa3cfef00faa7",
+    "existing-eight.log": "4dccd3c6bebefd03e0890ad8e45ffb4167aa32ea1b613af8aa2f358bb66193c6",
+    "freeze.json": "78402787bdbd93edcdb882cc1aee67f0ae24318fe70fce9435db2af955103a7e",
+    "inputs-after.json": "faf46cfe0f2e0d43a4f16999fe9353ccf02ffae28bcd23dd70d482aba9acb4cd",
+    "inputs-before.json": "faf46cfe0f2e0d43a4f16999fe9353ccf02ffae28bcd23dd70d482aba9acb4cd",
+    "legacy-hook-results.json": "04c84e8a0ba193402b2eb0adc904f1876b91647745164c2aef973981a0410f5c",
+    "legacy-hook.log": "204b1302d66bfd0b54dac259056c99cb08fd69b1e61be34fdb41a7d988e420ca",
+    "native-emission-command.json": "4359a58d39fd026e18d207a26065cd2985c481f92f5b57b5a0302f0a4a3f5a95",
+    "native-emission-results.json": "aac6d7b85f16ed809b7bfefca5575abcf678b22467321454713ec30271ce0602",
+    "native-emission-shape.json": "3ed1278596f80448f8a117a7ae755ecb8d45c5f056d5eb04e4741203ec167abf",
+    "native-emission.log": "572c6f389f1ed1a2f05ab832f61130da11ebc39e8d6ef9e65182a4290edced9f",
+    "static-review.json": "c17351798ad58b5b0d55505c76d55be8e96502487ac44b7849fd650426f675bd"
+  },
+  "existing_unittest_methods": {
+    "count": 8,
+    "error": 0,
+    "failure": 0,
+    "skip": 0,
+    "status": "PASS"
+  },
+  "freeze_id": "g11-async-compat-applied-1",
+  "inputs_before_after": {
+    "baseline_native_artifacts_unchanged": true,
+    "paths": 374,
+    "unchanged": true
+  },
+  "legacy_hook": {
+    "ABI_and_capture": "Unchanged callback type; capturedconfig remainsBusyproof inoriginal/reverse SDK.",
+    "case": "G11.integrated.native_callback_snapshot",
+    "frames": 10,
+    "routes": 2,
+    "status": "PASS"
+  },
+  "limits": [
+    "No fullsuite,GUI,benchmark,rootfixor13deferredfamilies",
+    "No physical/network/nativePLC transaction or timing proof",
+    "No broader reset/lifecycle claim frommonotonicclock compatibility",
+    "TESTE1 owns9FC/new2G11async semantic coverage"
+  ],
+  "native_emission": {
+    "actual_native_IL_config_graph_exact_equal_to_pinned_baseline": true,
+    "case": "modbus-default-error",
+    "frames": 10,
+    "local_routes": 7,
+    "status": "PASS",
+    "transport": "NONE;255/15 isfailurecontrol, notsuccessfultransaction",
+    "unchanged_source": "examples/batch_acceptance/modbus.cpp"
+  },
+  "static_review": "static-review.json; no concrete defect found; captured pointers/tokens/bounds/atomicstores inspected; no duplicate newcodec scenario run.",
+  "status": "PASS_FINITE_COMPATIBILITY_GATE_NO_CONCRETE_REVIEW_ISSUES"
+}

@@ -1,6 +1,6 @@
 # Natal integration progress
 
-Status: **2026-11-06 — 1,009 tests passed; eight explicit pending cases; release acceptance incomplete.**
+Status: **2026-11-06 — bounded Natal handoff; historical and final gate results retained separately.**
 
 All seven priority packages are connected in the working candidate. This is
 implementation progress, not an official compatibility or whole-profile claim.
@@ -36,7 +36,7 @@ ownership, generated projects and memory/code-size budgets. Three additional
 sequence observation probes passed project/reverse preparation only; their
 twelve native outcome questions remain pending.
 
-## Final full local gate
+## Earlier full local gate
 
 The single final combined run completed in 300.120 seconds. Its eight raw
 failures comprise six native-oracle cases (SC reset history, edge lifecycle
@@ -71,12 +71,33 @@ descriptor notice/compiler-pin fields did change; the final candidate7 above
 used closed source and test inputs and recorded zero drift. No broad passing
 claim is derived from the earlier run.
 
-## Remaining release gates
+## Natal handoff update
 
-1. Run one finite official editor/simulator campaign on the exact generated
-   projects, recording Ladder display, check, save/reopen and runtime separately.
-2. Publish the scoped experimental source, examples and evidence. Keep physical controller,
-   ports/loads, transfer, retention and real communication acceptance explicit.
+The fourteen-project official editor campaign is complete, including corrections
+for native SW114 literals and omitted SBR/SC defaults. The finite simulator
+campaign now has some runtime evidence for all eleven composed profiles. The
+last four-profile session added 40 matching output checks, without claiming
+complete timing, live reservation M values or successful native Modbus exchange.
+
+The [independent asynchronous SDK backend](G11-SDK-ASYNC-RESULTS.md) closes the
+two earlier G11 SDK-adapter gaps: the original cases passed on VM/SDK, alongside
+43 distinct raw-PDU SDK stimuli and a separate compatibility gate. No original
+oracle or VM-provider bytes were changed. Six unresolved native-oracle cases
+remain explicit failures outside the admitted show profiles.
+
+The [single final SDK integration regression](g11-sdk-async-2026-11-06/full-gate/RESULTS.md)
+ran 1,045 tests: 1,038 PASS, seven FAIL, zero ERROR/SKIP. Six are those known
+native-oracle cases. The other failure was a pinned public corpus omitted from
+the tracked-only snapshot; restoring its verified bytes and rerunning only the
+affected method passed. Raw full exit 2 and all failures remain preserved. All
+74 compiler/SDK pins stayed unchanged; no full retry or new product fix ran.
+
+The [Natal handoff](NATAL-DELIVERY.md) records the final combined regression,
+exact artifacts and supported limits. The current global working scope includes
+Natal and already implemented extras; the full-controller backlog and thirteen
+stopped lanes remain inactive. After publication, pause the older goal record as
+requested. Physical ports/loads, transfer, retention and real peers remain later
+external acceptance work.
 
 The [machine-readable record](NATAL-INTEGRATION-PROGRESS.json) preserves candidate
 hashes, historical results and source-evidence hashes. These local candidate

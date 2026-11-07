@@ -1,0 +1,14 @@
+{
+  "command": [
+    "clang++",
+    "-std=c++17",
+    "-O0",
+    "-I",
+    "repo/sdk",
+    "objects/7e2f05d69c1439ea3ac1238b2f98f7a485d826b396686ea0224b5c164ea61969.cpp",
+    "-o",
+    "work/initial/test_receive_word_barrier_preserves_flags_and_atomic_poison_state-02/host"
+  ],
+  "returncode": 0,
+  "stderr": ""
+}

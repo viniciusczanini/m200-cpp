@@ -1,0 +1,14 @@
+{
+  "command": [
+    "clang++",
+    "-std=c++17",
+    "-O0",
+    "-I",
+    "repo/sdk",
+    "objects/95274853af279921f8f0c88083679e3f5fc0f60dacbcf710188a9f5d2404f992.cpp",
+    "-o",
+    "work/initial/test_all_nine_documented_functions_encode_decode_literal_PDUs-08/host"
+  ],
+  "returncode": 0,
+  "stderr": ""
+}

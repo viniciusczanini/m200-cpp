@@ -1,0 +1,9 @@
+======================================================================
+FAIL: runTest (parallel_semantics.test_semantics.semantic_case.<locals>.SemanticCase)
+parallel_semantics.G08_sc_middle_steps_and_exclusive_reset.vm
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/g11-final-gate-1/source/tests/parallel_semantics/test_semantics.py", line 27, in runTest
+    raise PendingOracleError(case.name+": "+case.oracle_status+"; "+case.basis)
+parallel_semantics.contracts.PendingOracleError: G08_sc_middle_steps_and_exclusive_reset: pending_native_reset_history; PENDING native reset/history qualification; original preliminary oracle retained: Generic pp155-158; middle transitions only, no guessed endpoint or ambiguous one-hot write.
+

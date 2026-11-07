@@ -1,0 +1,24 @@
+{
+  "added_count": 1,
+  "added_paths": [
+    "research/downloads/indexed-sources/didim99__TSTU__425372b07a34.smbp"
+  ],
+  "added_pin": {
+    "bytes": 114221,
+    "sha256": "a4307729f0864133e414517ef49c37e6648f29d7403a8f9737e2f7367461a738",
+    "type": "file"
+  },
+  "base_changed_paths": {},
+  "base_freeze_pin": {
+    "bytes": 1974,
+    "sha256": "a6e0d2cbed93bd7b31d66a8e6a7f7368d189658dba6565c8185ac4855910782c",
+    "type": "file"
+  },
+  "base_input_count": 1076,
+  "base_raw_log_pin": {
+    "bytes": 133599,
+    "sha256": "23083dc2e48b476bb8f9e0f1653e2f056f55547643bb4ea7f1eb65efd567e3d8",
+    "type": "file"
+  },
+  "followup_input_count": 1077
+}

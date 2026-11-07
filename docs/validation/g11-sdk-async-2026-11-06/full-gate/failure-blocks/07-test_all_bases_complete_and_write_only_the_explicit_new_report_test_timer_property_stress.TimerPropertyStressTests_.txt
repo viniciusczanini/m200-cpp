@@ -1,0 +1,37 @@
+======================================================================
+FAIL: test_all_bases_complete_and_write_only_the_explicit_new_report (test_timer_property_stress.TimerPropertyStressTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/g11-final-gate-1/source/tests/test_timer_property_stress.py", line 28, in test_all_bases_complete_and_write_only_the_explicit_new_report
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+AssertionError: 1 != 0 : PASS: Ton_1 / 512 scans
+PASS: Ton_10 / 512 scans
+PASS: Ton_100 / 512 scans
+PASS: Ton_1000 / 512 scans
+PASS: Ton_60000 / 512 scans
+PASS: Tof_1 / 512 scans
+PASS: Tof_10 / 512 scans
+PASS: Tof_100 / 512 scans
+PASS: Tof_1000 / 512 scans
+PASS: Tof_60000 / 512 scans
+PASS: Pulse_1 / 512 scans
+PASS: Pulse_10 / 512 scans
+PASS: Pulse_100 / 512 scans
+PASS: Pulse_1000 / 512 scans
+PASS: Pulse_60000 / 512 scans
+Traceback (most recent call last):
+  File "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/g11-final-gate-1/source/tests/stress/timer_properties.py", line 252, in <module>
+    main()
+  File "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/g11-final-gate-1/source/tests/stress/timer_properties.py", line 222, in main
+    results.append(original_case(work, rng))
+  File "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/g11-final-gate-1/source/tests/stress/timer_properties.py", line 129, in original_case
+    if hashlib.sha256(path.read_bytes()).hexdigest() != entry["sha256"]:
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1249, in read_bytes
+    with self.open(mode='rb') as f:
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1242, in open
+    return io.open(self, mode, buffering, encoding, errors, newline,
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1110, in _opener
+    return self._accessor.open(self, flags, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/g11-final-gate-1/source/research/downloads/indexed-sources/didim99__TSTU__425372b07a34.smbp'
+
+

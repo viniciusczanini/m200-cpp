@@ -1,0 +1,9 @@
+======================================================================
+FAIL: runTest (parallel_semantics.test_semantics.semantic_case.<locals>.SemanticCase)
+parallel_semantics.G08_unresolved_native_domains_remain_visible_gaps.sdk
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/g11-final-gate-1/source/tests/parallel_semantics/test_semantics.py", line 27, in runTest
+    raise PendingOracleError(case.name+": "+case.oracle_status+"; "+case.basis)
+parallel_semantics.contracts.PendingOracleError: G08_unresolved_native_domains_remain_visible_gaps: pending_native_oracle; G08 explicitly retains unmodeled collision/endpoint domains; a refusal is not completed semantic coverage.
+

@@ -1,0 +1,14 @@
+{
+  "command": [
+    "clang++",
+    "-std=c++17",
+    "-O0",
+    "-I",
+    "repo/sdk",
+    "objects/a6905cc693a82a7db29c602988dd13cf7b4442cd647d99a37fd80ac6709d7163.cpp",
+    "-o",
+    "work/initial/test_outgoing_snapshot_busy_reconfiguration_and_captured_transport-01/host"
+  ],
+  "returncode": 0,
+  "stderr": ""
+}

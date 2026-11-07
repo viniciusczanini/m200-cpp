@@ -1,0 +1,82 @@
+[
+  {
+    "block": "failure-blocks/01-parallel_semantics.G08_sc_middle_steps_and_exclusive_reset.vm.txt",
+    "block_sha256": "4f5fc88c0236c3670759c84090f86f1435207c894395a5d72554c09120c22307",
+    "case": "parallel_semantics.G08_sc_middle_steps_and_exclusive_reset.vm",
+    "classification": "native-oracle-pending",
+    "exception": "parallel_semantics.contracts.PendingOracleError: G08_sc_middle_steps_and_exclusive_reset: pending_native_reset_history; PENDING native reset/history qualification; original preliminary oracle retained: Generic pp155-158; middle transitions only, no guessed endpoint or ambiguous one-hot write.",
+    "meaning": "Native oracle remains unqualified; raw FAIL retained, no adapter execution or semantic PASS.",
+    "raw_status": "FAIL"
+  },
+  {
+    "block": "failure-blocks/02-parallel_semantics.G08_sc_middle_steps_and_exclusive_reset.sdk.txt",
+    "block_sha256": "b04d060d3ba17b1cdc17f006e1fef09ae3758b6d75cdfffefdec31977f032266",
+    "case": "parallel_semantics.G08_sc_middle_steps_and_exclusive_reset.sdk",
+    "classification": "native-oracle-pending",
+    "exception": "parallel_semantics.contracts.PendingOracleError: G08_sc_middle_steps_and_exclusive_reset: pending_native_reset_history; PENDING native reset/history qualification; original preliminary oracle retained: Generic pp155-158; middle transitions only, no guessed endpoint or ambiguous one-hot write.",
+    "meaning": "Native oracle remains unqualified; raw FAIL retained, no adapter execution or semantic PASS.",
+    "raw_status": "FAIL"
+  },
+  {
+    "block": "failure-blocks/03-parallel_semantics.G01_edge_cold_warm_stop_RUN_history_is_not_guessed.vm.txt",
+    "block_sha256": "895d0b35596f1db9ecfb88f1a2c93a2e06736e737f23daa906635f1522edd7f8",
+    "case": "parallel_semantics.G01_edge_cold_warm_stop_RUN_history_is_not_guessed.vm",
+    "classification": "native-oracle-pending",
+    "exception": "parallel_semantics.contracts.PendingOracleError: G01_edge_cold_warm_stop_RUN_history_is_not_guessed: pending_contract_or_native_oracle; Native lifecycle equivalence remains pending. CONTRACT/DELIVERY must state the exact local event policy before an oracle is admitted.",
+    "meaning": "Native oracle remains unqualified; raw FAIL retained, no adapter execution or semantic PASS.",
+    "raw_status": "FAIL"
+  },
+  {
+    "block": "failure-blocks/04-parallel_semantics.G01_edge_cold_warm_stop_RUN_history_is_not_guessed.sdk.txt",
+    "block_sha256": "7371b8e7fa66eefe545fb09f4cb0e95bdf41c516a1008194d3b32f05c327d3fe",
+    "case": "parallel_semantics.G01_edge_cold_warm_stop_RUN_history_is_not_guessed.sdk",
+    "classification": "native-oracle-pending",
+    "exception": "parallel_semantics.contracts.PendingOracleError: G01_edge_cold_warm_stop_RUN_history_is_not_guessed: pending_contract_or_native_oracle; Native lifecycle equivalence remains pending. CONTRACT/DELIVERY must state the exact local event policy before an oracle is admitted.",
+    "meaning": "Native oracle remains unqualified; raw FAIL retained, no adapter execution or semantic PASS.",
+    "raw_status": "FAIL"
+  },
+  {
+    "block": "failure-blocks/05-parallel_semantics.G08_unresolved_native_domains_remain_visible_gaps.vm.txt",
+    "block_sha256": "aad8255b9e27dc02aced6e7e48593279edc441d4aa823fbdcbbb5a2e60581664",
+    "case": "parallel_semantics.G08_unresolved_native_domains_remain_visible_gaps.vm",
+    "classification": "native-oracle-pending",
+    "exception": "parallel_semantics.contracts.PendingOracleError: G08_unresolved_native_domains_remain_visible_gaps: pending_native_oracle; G08 explicitly retains unmodeled collision/endpoint domains; a refusal is not completed semantic coverage.",
+    "meaning": "Native oracle remains unqualified; raw FAIL retained, no adapter execution or semantic PASS.",
+    "raw_status": "FAIL"
+  },
+  {
+    "block": "failure-blocks/06-parallel_semantics.G08_unresolved_native_domains_remain_visible_gaps.sdk.txt",
+    "block_sha256": "95c177aa1fb003dee250e2622b1fff4138bf09fe80d9dd678924aa353c72ffbb",
+    "case": "parallel_semantics.G08_unresolved_native_domains_remain_visible_gaps.sdk",
+    "classification": "native-oracle-pending",
+    "exception": "parallel_semantics.contracts.PendingOracleError: G08_unresolved_native_domains_remain_visible_gaps: pending_native_oracle; G08 explicitly retains unmodeled collision/endpoint domains; a refusal is not completed semantic coverage.",
+    "meaning": "Native oracle remains unqualified; raw FAIL retained, no adapter execution or semantic PASS.",
+    "raw_status": "FAIL"
+  },
+  {
+    "block": "failure-blocks/07-test_all_bases_complete_and_write_only_the_explicit_new_report_test_timer_property_stress.TimerPropertyStressTests_.txt",
+    "block_sha256": "e7adc0fb9f5966f6cb6497792a6c6e75df4972b78c2297a87a6f1ead35ad42a5",
+    "case": "test_all_bases_complete_and_write_only_the_explicit_new_report (test_timer_property_stress.TimerPropertyStressTests)",
+    "classification": "missing-local-test-corpus",
+    "exception": null,
+    "followup": {
+      "added_inputs": 1,
+      "command": "followup-missing-corpus/command.json",
+      "full_gate_retry": false,
+      "log": "followup-missing-corpus/unittest.log",
+      "source_or_oracle_edits": 0,
+      "status": "PASS"
+    },
+    "meaning": "Real snapshot/test-input packaging gap: existing untracked public corpus was excluded by the authorized tracked-only selection. No compiler/SDK assertion failed; the original-case read could not begin.",
+    "observed_exception": "FileNotFoundError: research/downloads/indexed-sources/didim99__TSTU__425372b07a34.smbp",
+    "raw_status": "FAIL",
+    "static_evidence": {
+      "corpus_sha256": "a4307729f0864133e414517ef49c37e6648f29d7403a8f9737e2f7367461a738",
+      "manifest": "docs/capabilities/INDEXED-SOURCES.json:I1",
+      "read": "tests/stress/timer_properties.py:125-129",
+      "root_file_matches_manifest": true,
+      "root_file_was_untracked_at_gate_start": true,
+      "test": "tests/test_timer_property_stress.py:17-28"
+    }
+  }
+]

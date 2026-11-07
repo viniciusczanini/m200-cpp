@@ -1,0 +1,182 @@
+{
+  "artifact_sha256": {
+    "command.json": "994fe7e98d4c1fa26803d5a35295b9095ab10d1a4dcb574daae483a16b0ff331",
+    "compiler-sdk-pins.json": "2219a37e532da858b91303b8e3742aa314a6f5cea81554768e825ca110ceea7b",
+    "drift-audit.json": "b5192965f3a9ffcdcb5228af4751b483a6962c200c9ec81c32bab6d9864a0ab8",
+    "freeze.json": "a6e0d2cbed93bd7b31d66a8e6a7f7368d189658dba6565c8185ac4855910782c",
+    "make-check.log": "23083dc2e48b476bb8f9e0f1653e2f056f55547643bb4ea7f1eb65efd567e3d8",
+    "snapshot-input-pins-after.json": "79e257364eb36c98e9a28eeca3b63be95ec04ea6491fcc10fcfaedad3f9e378d",
+    "snapshot-input-pins-before.json": "79e257364eb36c98e9a28eeca3b63be95ec04ea6491fcc10fcfaedad3f9e378d"
+  },
+  "authorized_followup": {
+    "added_inputs": 1,
+    "all_followup_input_drift": 0,
+    "core_sdk_drift": 0,
+    "elapsed_seconds": 35.063321666,
+    "error": 0,
+    "exit_code": 0,
+    "fail": 0,
+    "full_raw_log_unchanged": true,
+    "pass": 1,
+    "run": 1,
+    "skip": 0,
+    "summary": "followup-missing-corpus/summary.json"
+  },
+  "command": {
+    "PYTHONPATH": "unset",
+    "argv": [
+      "make",
+      "check"
+    ],
+    "attempt": 1,
+    "authorized_runs": 1,
+    "cwd": "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/g11-final-gate-1/source",
+    "elapsed_seconds": 334.357529291,
+    "ended_utc": "2026-11-07T01:03:18.055425+00:00",
+    "environment_overrides": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONUNBUFFERED": "1",
+      "TMPDIR": "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/g11-final-gate-1/tmp"
+    },
+    "exit_code": 2,
+    "outputs": "raw log and generated output/TMPDIR outside snapshot",
+    "started_utc": "2026-11-07T00:57:43.695677+00:00",
+    "state": "COMPLETED"
+  },
+  "completed_work": "Finite authorized verification and packaging complete; no additional validation started.",
+  "core_root_drift_count": 0,
+  "core_sdk_count": 74,
+  "counts": {
+    "error": 0,
+    "fail": 7,
+    "known_native_pending_fail": 6,
+    "pass": 1038,
+    "run": 1045,
+    "skip": 0,
+    "unexpected_blocks": 1
+  },
+  "failures": [
+    {
+      "block": "failure-blocks/01-parallel_semantics.G08_sc_middle_steps_and_exclusive_reset.vm.txt",
+      "block_sha256": "4f5fc88c0236c3670759c84090f86f1435207c894395a5d72554c09120c22307",
+      "case": "parallel_semantics.G08_sc_middle_steps_and_exclusive_reset.vm",
+      "classification": "native-oracle-pending",
+      "exception": "parallel_semantics.contracts.PendingOracleError: G08_sc_middle_steps_and_exclusive_reset: pending_native_reset_history; PENDING native reset/history qualification; original preliminary oracle retained: Generic pp155-158; middle transitions only, no guessed endpoint or ambiguous one-hot write.",
+      "meaning": "Native oracle remains unqualified; raw FAIL retained, no adapter execution or semantic PASS.",
+      "raw_status": "FAIL"
+    },
+    {
+      "block": "failure-blocks/02-parallel_semantics.G08_sc_middle_steps_and_exclusive_reset.sdk.txt",
+      "block_sha256": "b04d060d3ba17b1cdc17f006e1fef09ae3758b6d75cdfffefdec31977f032266",
+      "case": "parallel_semantics.G08_sc_middle_steps_and_exclusive_reset.sdk",
+      "classification": "native-oracle-pending",
+      "exception": "parallel_semantics.contracts.PendingOracleError: G08_sc_middle_steps_and_exclusive_reset: pending_native_reset_history; PENDING native reset/history qualification; original preliminary oracle retained: Generic pp155-158; middle transitions only, no guessed endpoint or ambiguous one-hot write.",
+      "meaning": "Native oracle remains unqualified; raw FAIL retained, no adapter execution or semantic PASS.",
+      "raw_status": "FAIL"
+    },
+    {
+      "block": "failure-blocks/03-parallel_semantics.G01_edge_cold_warm_stop_RUN_history_is_not_guessed.vm.txt",
+      "block_sha256": "895d0b35596f1db9ecfb88f1a2c93a2e06736e737f23daa906635f1522edd7f8",
+      "case": "parallel_semantics.G01_edge_cold_warm_stop_RUN_history_is_not_guessed.vm",
+      "classification": "native-oracle-pending",
+      "exception": "parallel_semantics.contracts.PendingOracleError: G01_edge_cold_warm_stop_RUN_history_is_not_guessed: pending_contract_or_native_oracle; Native lifecycle equivalence remains pending. CONTRACT/DELIVERY must state the exact local event policy before an oracle is admitted.",
+      "meaning": "Native oracle remains unqualified; raw FAIL retained, no adapter execution or semantic PASS.",
+      "raw_status": "FAIL"
+    },
+    {
+      "block": "failure-blocks/04-parallel_semantics.G01_edge_cold_warm_stop_RUN_history_is_not_guessed.sdk.txt",
+      "block_sha256": "7371b8e7fa66eefe545fb09f4cb0e95bdf41c516a1008194d3b32f05c327d3fe",
+      "case": "parallel_semantics.G01_edge_cold_warm_stop_RUN_history_is_not_guessed.sdk",
+      "classification": "native-oracle-pending",
+      "exception": "parallel_semantics.contracts.PendingOracleError: G01_edge_cold_warm_stop_RUN_history_is_not_guessed: pending_contract_or_native_oracle; Native lifecycle equivalence remains pending. CONTRACT/DELIVERY must state the exact local event policy before an oracle is admitted.",
+      "meaning": "Native oracle remains unqualified; raw FAIL retained, no adapter execution or semantic PASS.",
+      "raw_status": "FAIL"
+    },
+    {
+      "block": "failure-blocks/05-parallel_semantics.G08_unresolved_native_domains_remain_visible_gaps.vm.txt",
+      "block_sha256": "aad8255b9e27dc02aced6e7e48593279edc441d4aa823fbdcbbb5a2e60581664",
+      "case": "parallel_semantics.G08_unresolved_native_domains_remain_visible_gaps.vm",
+      "classification": "native-oracle-pending",
+      "exception": "parallel_semantics.contracts.PendingOracleError: G08_unresolved_native_domains_remain_visible_gaps: pending_native_oracle; G08 explicitly retains unmodeled collision/endpoint domains; a refusal is not completed semantic coverage.",
+      "meaning": "Native oracle remains unqualified; raw FAIL retained, no adapter execution or semantic PASS.",
+      "raw_status": "FAIL"
+    },
+    {
+      "block": "failure-blocks/06-parallel_semantics.G08_unresolved_native_domains_remain_visible_gaps.sdk.txt",
+      "block_sha256": "95c177aa1fb003dee250e2622b1fff4138bf09fe80d9dd678924aa353c72ffbb",
+      "case": "parallel_semantics.G08_unresolved_native_domains_remain_visible_gaps.sdk",
+      "classification": "native-oracle-pending",
+      "exception": "parallel_semantics.contracts.PendingOracleError: G08_unresolved_native_domains_remain_visible_gaps: pending_native_oracle; G08 explicitly retains unmodeled collision/endpoint domains; a refusal is not completed semantic coverage.",
+      "meaning": "Native oracle remains unqualified; raw FAIL retained, no adapter execution or semantic PASS.",
+      "raw_status": "FAIL"
+    },
+    {
+      "block": "failure-blocks/07-test_all_bases_complete_and_write_only_the_explicit_new_report_test_timer_property_stress.TimerPropertyStressTests_.txt",
+      "block_sha256": "e7adc0fb9f5966f6cb6497792a6c6e75df4972b78c2297a87a6f1ead35ad42a5",
+      "case": "test_all_bases_complete_and_write_only_the_explicit_new_report (test_timer_property_stress.TimerPropertyStressTests)",
+      "classification": "missing-local-test-corpus",
+      "exception": null,
+      "followup": {
+        "added_inputs": 1,
+        "command": "followup-missing-corpus/command.json",
+        "full_gate_retry": false,
+        "log": "followup-missing-corpus/unittest.log",
+        "source_or_oracle_edits": 0,
+        "status": "PASS"
+      },
+      "meaning": "Real snapshot/test-input packaging gap: existing untracked public corpus was excluded by the authorized tracked-only selection. No compiler/SDK assertion failed; the original-case read could not begin.",
+      "observed_exception": "FileNotFoundError: research/downloads/indexed-sources/didim99__TSTU__425372b07a34.smbp",
+      "raw_status": "FAIL",
+      "static_evidence": {
+        "corpus_sha256": "a4307729f0864133e414517ef49c37e6648f29d7403a8f9737e2f7367461a738",
+        "manifest": "docs/capabilities/INDEXED-SOURCES.json:I1",
+        "read": "tests/stress/timer_properties.py:125-129",
+        "root_file_matches_manifest": true,
+        "root_file_was_untracked_at_gate_start": true,
+        "test": "tests/test_timer_property_stress.py:17-28"
+      }
+    }
+  ],
+  "freeze_id": "g11-final-gate-1",
+  "full_gate_status": "RAW_FAIL_6_NATIVE_PENDING_PLUS_1_MISSING_CORPUS",
+  "input_bytes": 114506706,
+  "input_count": 1076,
+  "known_pending_failures": [
+    "parallel_semantics.G01_edge_cold_warm_stop_RUN_history_is_not_guessed.sdk",
+    "parallel_semantics.G01_edge_cold_warm_stop_RUN_history_is_not_guessed.vm",
+    "parallel_semantics.G08_sc_middle_steps_and_exclusive_reset.sdk",
+    "parallel_semantics.G08_sc_middle_steps_and_exclusive_reset.vm",
+    "parallel_semantics.G08_unresolved_native_domains_remain_visible_gaps.sdk",
+    "parallel_semantics.G08_unresolved_native_domains_remain_visible_gaps.vm"
+  ],
+  "limits": [
+    "This is local compiler/VM/SDK/interop verification, not physical/native runtime equivalence.",
+    "Six native oracle failures are retained; no whole-family or full gate PASS.",
+    "No GUI, CI, standalone codec replay, additional benchmark, source or oracle edit, or retry."
+  ],
+  "missing_expected_pending": [],
+  "new_observed_compiler_sdk_defects": 0,
+  "new_observed_defects": 0,
+  "obsolete_assertion_failures": 0,
+  "problems": [
+    "Historical full run includes one missing-local-corpus failure; raw FAIL and exit 2 retained.",
+    "Six native-oracle PendingOracle failures remain unqualified and visible."
+  ],
+  "publication_interpretation": "Full run: 1038 PASS / 7 FAIL. Separate affected-method follow-up: 1 PASS. Remaining semantic gaps are six native pending oracles; no whole/full gate PASS claim.",
+  "raw_unittest_status": "FAILED (failures=7)",
+  "root_doc_drift_paths": [
+    ".gitattributes",
+    "docs/PARITY.md",
+    "docs/ROADMAP.md"
+  ],
+  "root_non_doc_drift": [
+    ".gitattributes"
+  ],
+  "root_non_doc_drift_classification": "Only .gitattributes raw-publication-log preservation rule; recorded separately from source/test/core drift.",
+  "scoped_executable_cases_status": "1038_PASS_IN_FULL_RUN_PLUS_1_PASS_IN_AUTHORIZED_FOLLOWUP",
+  "snapshot_drift_count": 0,
+  "test_input_packaging_gap_count": 1,
+  "unbound_adapter_failures": 0,
+  "unexpected_snapshot_files": [],
+  "unittest_elapsed_seconds": 334.032
+}

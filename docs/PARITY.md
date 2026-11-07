@@ -9,8 +9,10 @@ The user reinforced this requirement on 2026-11-05: every algorithm that can be
 programmed and accepted by the official software for their TM200CE40T must be
 expressible in C++ with this project's library, producing an equivalent project.
 
-This is the final coverage criterion. The subset implemented today is a
-development milestone, not an authorized reduction of that objective.
+This was the original whole-controller criterion. The user subsequently
+replaced the active goal with the bounded Natal delivery plus already implemented
+extras. The requirements below are preserved only for a future version; they do
+not extend the current goal or restart stopped work.
 
 ## Contract
 

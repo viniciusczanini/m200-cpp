@@ -1,0 +1,7 @@
+--- snapshot/.gitattributes
++++ root/.gitattributes
+@@ -7,3 +7,4 @@
+ tests/fixtures/official_tm200ce40t_subroutine_*.smbp -text whitespace=cr-at-eol
+ # Preserve raw unittest output, including whitespace on a failing subtest line.
+ docs/validation/native-campaign-2026-11-06/*.log -text -whitespace
++docs/validation/g11-sdk-async-2026-11-06/**/*.log -text -whitespace

@@ -1,0 +1,45 @@
+[
+  {
+    "label": "existing-eight",
+    "command": [
+      "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+      "-m",
+      "unittest",
+      "test_communication_compiler.CommunicationCompilerTests.test_no_transport_has_explicit_error_and_reverse_matches_native",
+      "test_communication_compiler.CommunicationCompilerTests.test_invalid_modbus_construction_and_update_are_compile_errors",
+      "test_communication_compiler.CommunicationCompilerTests.test_reverse_preserves_sparse_native_communication_indices",
+      "test_communication_project.CommunicationProjectTests.test_serial_read_generates_typed_fb_ladder_and_roundtrip",
+      "test_modbus_bare_abort_native_profile.ModbusBareAbortNativeProfileTests.test_public_constructor_without_getters_and_reverse_keep_bare_update",
+      "test_modbus_bare_abort_native_profile.ModbusBareAbortNativeProfileTests.test_native_sdk_vm_and_reverse_keep_separate_status_reads_without_transport",
+      "test_modbus_single_native_profile.ModbusSingleNativeProfileTests.test_public_constructor_reverse_and_export_retain_single_function",
+      "test_modbus_write_read_native_profile.ModbusWriteReadNativeProfileTests.test_constructor_reverse_and_export_preserve_literal_fields_and_column_one",
+      "-v"
+    ],
+    "cwd": "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/g11-async-compatibility-1/applied-1/source",
+    "started_utc": "2026-11-07T00:47:01.993340+00:00",
+    "state": "complete",
+    "exit": 0,
+    "seconds": 3.518
+  },
+  {
+    "label": "legacy-hook",
+    "command": [
+      "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+      "tests/parallel_interop/run.py",
+      "--run",
+      "--existing-only",
+      "--modbus-g11",
+      "--select",
+      "G11.integrated.native_callback_snapshot",
+      "--freeze-id",
+      "g11-async-compat-applied-1",
+      "--output",
+      "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/g11-async-compatibility-1/applied-1/legacy-hook-results.json"
+    ],
+    "cwd": "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/g11-async-compatibility-1/applied-1/source",
+    "started_utc": "2026-11-07T00:47:05.511639+00:00",
+    "state": "complete",
+    "exit": 0,
+    "seconds": 0.802
+  }
+]

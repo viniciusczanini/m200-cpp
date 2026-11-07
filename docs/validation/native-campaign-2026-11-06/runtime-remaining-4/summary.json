@@ -1,0 +1,2040 @@
+{
+  "scope": "Only the four existing profiles previously NOT_EXECUTED_TIMEBOX; one finite local official simulator pass each",
+  "reported_source_freeze": "1f08aa4 as reported by coordinator; four official native project hashes unchanged from reviewed saves",
+  "all_four_minimal_runs_complete": true,
+  "full_native_parity": false,
+  "case_results": [
+    {
+      "profile": "g08-drum-clock-lights",
+      "official_file": "g08-drum-clock-lights_official.smbp",
+      "sha256": "3f419942e36a51e4716314fa31b4cc4efd74519d306eaa62ccee285f23d06dfb",
+      "run": "EXECUTED_ONE_FINITE_PASS",
+      "observations": [
+        {
+          "time_ns": 1794011906695869000,
+          "step": "request_RUN",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026.png",
+          "screen_sha256": "9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794011911736474000,
+          "step": "confirm_RUN_local_target",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 64,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/3eeedfebd50b89c0edb7dc1e4a17f9b1045498278414716cf575ea183c3694ee.png",
+          "screen_sha256": "3eeedfebd50b89c0edb7dc1e4a17f9b1045498278414716cf575ea183c3694ee",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794011913459456000,
+          "step": "disabled_initial",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": 64,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 64,
+          "status": "PASS",
+          "screen": "images/3eeedfebd50b89c0edb7dc1e4a17f9b1045498278414716cf575ea183c3694ee.png",
+          "screen_sha256": "3eeedfebd50b89c0edb7dc1e4a17f9b1045498278414716cf575ea183c3694ee",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794011918597411000,
+          "step": "enabled_sample_1",
+          "requested_inputs_high": [
+            1
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": [
+            73,
+            74,
+            76,
+            105,
+            106,
+            108
+          ],
+          "expected_status_condition": null,
+          "actual_mask": 74,
+          "status": "PASS",
+          "screen": "images/3579f87b23e0b0fdc70d9ca53f193d1f13c6368780a056607b5e9baecbfbb92c.png",
+          "screen_sha256": "3579f87b23e0b0fdc70d9ca53f193d1f13c6368780a056607b5e9baecbfbb92c",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794011920319565000,
+          "step": "enabled_sample_2",
+          "requested_inputs_high": [
+            1
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": [
+            73,
+            74,
+            76,
+            105,
+            106,
+            108
+          ],
+          "expected_status_condition": null,
+          "actual_mask": 74,
+          "status": "PASS",
+          "screen": "images/3579f87b23e0b0fdc70d9ca53f193d1f13c6368780a056607b5e9baecbfbb92c.png",
+          "screen_sha256": "3579f87b23e0b0fdc70d9ca53f193d1f13c6368780a056607b5e9baecbfbb92c",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794011922062217000,
+          "step": "enabled_sample_3",
+          "requested_inputs_high": [
+            1
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": [
+            73,
+            74,
+            76,
+            105,
+            106,
+            108
+          ],
+          "expected_status_condition": null,
+          "actual_mask": 106,
+          "status": "PASS",
+          "screen": "images/58c024b36c75dd490351261c427abd0b7847d7cd896dfe70740a1ad87969f52f.png",
+          "screen_sha256": "58c024b36c75dd490351261c427abd0b7847d7cd896dfe70740a1ad87969f52f",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794011923772158000,
+          "step": "enabled_sample_4",
+          "requested_inputs_high": [
+            1
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": [
+            73,
+            74,
+            76,
+            105,
+            106,
+            108
+          ],
+          "expected_status_condition": null,
+          "actual_mask": 106,
+          "status": "PASS",
+          "screen": "images/58c024b36c75dd490351261c427abd0b7847d7cd896dfe70740a1ad87969f52f.png",
+          "screen_sha256": "58c024b36c75dd490351261c427abd0b7847d7cd896dfe70740a1ad87969f52f",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794011925529308000,
+          "step": "enabled_sample_5",
+          "requested_inputs_high": [
+            1
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": [
+            73,
+            74,
+            76,
+            105,
+            106,
+            108
+          ],
+          "expected_status_condition": null,
+          "actual_mask": 105,
+          "status": "PASS",
+          "screen": "images/9894a83ad2ed192fd4142036f29060fa2b38cad622060fb99232683ee500172b.png",
+          "screen_sha256": "9894a83ad2ed192fd4142036f29060fa2b38cad622060fb99232683ee500172b",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794011927258475000,
+          "step": "enabled_sample_6",
+          "requested_inputs_high": [
+            1
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": [
+            73,
+            74,
+            76,
+            105,
+            106,
+            108
+          ],
+          "expected_status_condition": null,
+          "actual_mask": 76,
+          "status": "PASS",
+          "screen": "images/6c68830fab83f8a98f89a904d65ee83d9af1a99653d8d8b284bc6d82b01f9dfe.png",
+          "screen_sha256": "6c68830fab83f8a98f89a904d65ee83d9af1a99653d8d8b284bc6d82b01f9dfe",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794011928991744000,
+          "step": "enabled_sample_7",
+          "requested_inputs_high": [
+            1
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": [
+            73,
+            74,
+            76,
+            105,
+            106,
+            108
+          ],
+          "expected_status_condition": null,
+          "actual_mask": 108,
+          "status": "PASS",
+          "screen": "images/d51424f51eb70f3935d8a20588139e5b87250feb5d20666ab62be0ad45a032bc.png",
+          "screen_sha256": "d51424f51eb70f3935d8a20588139e5b87250feb5d20666ab62be0ad45a032bc",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794011930729132000,
+          "step": "enabled_sample_8",
+          "requested_inputs_high": [
+            1
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": [
+            73,
+            74,
+            76,
+            105,
+            106,
+            108
+          ],
+          "expected_status_condition": null,
+          "actual_mask": 74,
+          "status": "PASS",
+          "screen": "images/3579f87b23e0b0fdc70d9ca53f193d1f13c6368780a056607b5e9baecbfbb92c.png",
+          "screen_sha256": "3579f87b23e0b0fdc70d9ca53f193d1f13c6368780a056607b5e9baecbfbb92c",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794011935827496000,
+          "step": "inhibit",
+          "requested_inputs_high": [
+            1,
+            2
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": 80,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 80,
+          "status": "PASS",
+          "screen": "images/98fb691e71f12bc93682add0050875c40421ff9b66e5667cc20593b443094ad9.png",
+          "screen_sha256": "98fb691e71f12bc93682add0050875c40421ff9b66e5667cc20593b443094ad9",
+          "decoder_refusal": "images/98fb691e71f12bc93682add0050875c40421ff9b66e5667cc20593b443094ad9.png: Q4 glyph mismatch(0.895)",
+          "read_method": "manual visual; identical-hash counterpart accepted",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794011937590906000,
+          "step": "inhibit_held",
+          "requested_inputs_high": [
+            1,
+            2
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": 80,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 80,
+          "status": "PASS",
+          "screen": "images/98fb691e71f12bc93682add0050875c40421ff9b66e5667cc20593b443094ad9.png",
+          "screen_sha256": "98fb691e71f12bc93682add0050875c40421ff9b66e5667cc20593b443094ad9",
+          "decoder_refusal": "images/98fb691e71f12bc93682add0050875c40421ff9b66e5667cc20593b443094ad9.png: Q4 glyph mismatch(0.895)",
+          "read_method": "manual visual; identical-hash counterpart accepted",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794011942730269000,
+          "step": "release_inhibit",
+          "requested_inputs_high": [
+            1
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": [
+            73,
+            74,
+            76,
+            105,
+            106,
+            108
+          ],
+          "expected_status_condition": null,
+          "actual_mask": 105,
+          "status": "PASS",
+          "screen": "images/9894a83ad2ed192fd4142036f29060fa2b38cad622060fb99232683ee500172b.png",
+          "screen_sha256": "9894a83ad2ed192fd4142036f29060fa2b38cad622060fb99232683ee500172b",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794011947866471000,
+          "step": "disabled_final",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": 64,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 64,
+          "status": "PASS",
+          "screen": "images/3eeedfebd50b89c0edb7dc1e4a17f9b1045498278414716cf575ea183c3694ee.png",
+          "screen_sha256": "3eeedfebd50b89c0edb7dc1e4a17f9b1045498278414716cf575ea183c3694ee",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794011953208772000,
+          "step": "commissioning_stop",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 64,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/3eeedfebd50b89c0edb7dc1e4a17f9b1045498278414716cf575ea183c3694ee.png",
+          "screen_sha256": "3eeedfebd50b89c0edb7dc1e4a17f9b1045498278414716cf575ea183c3694ee",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        }
+      ],
+      "cleanup": {
+        "time_ns": 1794011977755253000,
+        "no_simulator_window_process_502_listener": true,
+        "commands": [
+          {
+            "command": [
+              "python3",
+              "@control/control.py",
+              "status",
+              "--all"
+            ],
+            "exit": 0,
+            "response": {
+              "lab": "@lab",
+              "windows": [
+                {
+                  "id": 2153,
+                  "pid": 24358,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 39,
+                    "Y": 0,
+                    "Width": 2056
+                  }
+                },
+                {
+                  "id": 2152,
+                  "pid": 24358,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 39,
+                    "Y": 0,
+                    "Width": 2056
+                  }
+                },
+                {
+                  "id": 2151,
+                  "pid": 24358,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 39,
+                    "Y": 0,
+                    "Width": 2056
+                  }
+                },
+                {
+                  "id": 2150,
+                  "pid": 24358,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 39,
+                    "Y": 0,
+                    "Width": 2056
+                  }
+                },
+                {
+                  "id": 2146,
+                  "pid": 24358,
+                  "title": "g08-drum-clock-lights_official - EcoStruxure Machine Expert - Basic",
+                  "onscreen": true,
+                  "bounds": {
+                    "X": -4,
+                    "Height": 1298,
+                    "Y": 35,
+                    "Width": 2064
+                  }
+                },
+                {
+                  "id": 2137,
+                  "pid": 24358,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 64,
+                    "Y": 829,
+                    "Width": 64
+                  }
+                },
+                {
+                  "id": 6251,
+                  "pid": 78776,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 1733,
+                    "Height": 21,
+                    "Y": 130,
+                    "Width": 82
+                  }
+                },
+                {
+                  "id": 1854,
+                  "pid": 78776,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 500,
+                    "Y": 829,
+                    "Width": 500
+                  }
+                },
+                {
+                  "id": 1243,
+                  "pid": 99872,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 500,
+                    "Y": 829,
+                    "Width": 500
+                  }
+                },
+                {
+                  "id": 1855,
+                  "pid": 78773,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 500,
+                    "Y": 829,
+                    "Width": 500
+                  }
+                }
+              ]
+            },
+            "stderr": ""
+          },
+          {
+            "command": [
+              "ps",
+              "-axo",
+              "pid=,comm=,args="
+            ],
+            "exit": 0,
+            "stderr": "",
+            "simulator_processes": []
+          },
+          {
+            "command": [
+              "lsof",
+              "-nP",
+              "-iTCP:502",
+              "-sTCP:LISTEN"
+            ],
+            "exit": 1,
+            "stdout": "",
+            "stderr": ""
+          }
+        ]
+      },
+      "full_native_parity": false,
+      "hypothesis": null,
+      "status": "PASS_MINIMAL_NATIVE_CONTROLS",
+      "enabled_samples": [
+        74,
+        74,
+        106,
+        106,
+        105,
+        76,
+        108,
+        74
+      ],
+      "distinct_observed_cam_masks": [
+        1,
+        2,
+        4
+      ],
+      "distinct_observed_Q5_phases": [
+        false,
+        true
+      ],
+      "timing": "PENDING_NOT_MEASURED; slow GUI samples are not PLC scans or period measurements",
+      "MW10_MW11": "NOT_WATCHED",
+      "events": "logs/g08-drum-clock-lights-events.jsonl",
+      "cleanup_file": "logs/g08-drum-clock-lights-cleanup.json"
+    },
+    {
+      "profile": "g09-rtc-clock-lights",
+      "official_file": "g09-rtc-clock-lights_official.smbp",
+      "sha256": "8698ff1dc82805ecbb3fc065f77059298f6d173c90b4c64ac8891e3e6d809486",
+      "run": "EXECUTED_ONE_FINITE_PASS",
+      "observations": [
+        {
+          "time_ns": 1794012016223727000,
+          "step": "RTC_management_before_RUN",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026.png",
+          "screen_sha256": "9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012039172032000,
+          "step": "request_RUN",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026.png",
+          "screen_sha256": "9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012044246248000,
+          "step": "confirm_RUN_local_target",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 8,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/be34de8887d2de3c7eb1611adc46d4f8b6ae1921796c7448d5499ff29f848f07.png",
+          "screen_sha256": "be34de8887d2de3c7eb1611adc46d4f8b6ae1921796c7448d5499ff29f848f07",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012045967076000,
+          "step": "valid_disabled_initial",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": 8,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 8,
+          "status": "PASS",
+          "screen": "images/be34de8887d2de3c7eb1611adc46d4f8b6ae1921796c7448d5499ff29f848f07.png",
+          "screen_sha256": "be34de8887d2de3c7eb1611adc46d4f8b6ae1921796c7448d5499ff29f848f07",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012051095112000,
+          "step": "enabled_sample_1",
+          "requested_inputs_high": [
+            1
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": [
+            13,
+            14
+          ],
+          "expected_status_condition": null,
+          "actual_mask": 13,
+          "status": "PASS",
+          "screen": "images/1f1c634dcd013f62143cc8249bde50d0f316ef75e9c207af78c52f01bad72077.png",
+          "screen_sha256": "1f1c634dcd013f62143cc8249bde50d0f316ef75e9c207af78c52f01bad72077",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012052818850000,
+          "step": "enabled_sample_2",
+          "requested_inputs_high": [
+            1
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": [
+            13,
+            14
+          ],
+          "expected_status_condition": null,
+          "actual_mask": 14,
+          "status": "PASS",
+          "screen": "images/166cebd020eff7f07a30cf51f12dff7b904618eb38f1b3794f3136d37dde63fc.png",
+          "screen_sha256": "166cebd020eff7f07a30cf51f12dff7b904618eb38f1b3794f3136d37dde63fc",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012054623212000,
+          "step": "enabled_sample_3",
+          "requested_inputs_high": [
+            1
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": [
+            13,
+            14
+          ],
+          "expected_status_condition": null,
+          "actual_mask": 14,
+          "status": "PASS",
+          "screen": "images/166cebd020eff7f07a30cf51f12dff7b904618eb38f1b3794f3136d37dde63fc.png",
+          "screen_sha256": "166cebd020eff7f07a30cf51f12dff7b904618eb38f1b3794f3136d37dde63fc",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012056373208000,
+          "step": "enabled_sample_4",
+          "requested_inputs_high": [
+            1
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": [
+            13,
+            14
+          ],
+          "expected_status_condition": null,
+          "actual_mask": 13,
+          "status": "PASS",
+          "screen": "images/1f1c634dcd013f62143cc8249bde50d0f316ef75e9c207af78c52f01bad72077.png",
+          "screen_sha256": "1f1c634dcd013f62143cc8249bde50d0f316ef75e9c207af78c52f01bad72077",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012058120453000,
+          "step": "enabled_sample_5",
+          "requested_inputs_high": [
+            1
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": [
+            13,
+            14
+          ],
+          "expected_status_condition": null,
+          "actual_mask": 14,
+          "status": "PASS",
+          "screen": "images/166cebd020eff7f07a30cf51f12dff7b904618eb38f1b3794f3136d37dde63fc.png",
+          "screen_sha256": "166cebd020eff7f07a30cf51f12dff7b904618eb38f1b3794f3136d37dde63fc",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012059848636000,
+          "step": "enabled_sample_6",
+          "requested_inputs_high": [
+            1
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": [
+            13,
+            14
+          ],
+          "expected_status_condition": null,
+          "actual_mask": 13,
+          "status": "PASS",
+          "screen": "images/1f1c634dcd013f62143cc8249bde50d0f316ef75e9c207af78c52f01bad72077.png",
+          "screen_sha256": "1f1c634dcd013f62143cc8249bde50d0f316ef75e9c207af78c52f01bad72077",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012061595719000,
+          "step": "enabled_sample_7",
+          "requested_inputs_high": [
+            1
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": [
+            13,
+            14
+          ],
+          "expected_status_condition": null,
+          "actual_mask": 13,
+          "status": "PASS",
+          "screen": "images/1f1c634dcd013f62143cc8249bde50d0f316ef75e9c207af78c52f01bad72077.png",
+          "screen_sha256": "1f1c634dcd013f62143cc8249bde50d0f316ef75e9c207af78c52f01bad72077",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012063328192000,
+          "step": "enabled_sample_8",
+          "requested_inputs_high": [
+            1
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": [
+            13,
+            14
+          ],
+          "expected_status_condition": null,
+          "actual_mask": 13,
+          "status": "PASS",
+          "screen": "images/1f1c634dcd013f62143cc8249bde50d0f316ef75e9c207af78c52f01bad72077.png",
+          "screen_sha256": "1f1c634dcd013f62143cc8249bde50d0f316ef75e9c207af78c52f01bad72077",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012068468867000,
+          "step": "inhibit",
+          "requested_inputs_high": [
+            1,
+            2
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": 24,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 24,
+          "status": "PASS",
+          "screen": "images/6f9235c4b2646a1be03234db5df8f22a75aed168a77115bbe3c57724a7dfa888.png",
+          "screen_sha256": "6f9235c4b2646a1be03234db5df8f22a75aed168a77115bbe3c57724a7dfa888",
+          "decoder_refusal": "images/6f9235c4b2646a1be03234db5df8f22a75aed168a77115bbe3c57724a7dfa888.png: Q4 glyph mismatch(0.895)",
+          "read_method": "manual visual; identical-hash counterpart accepted",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012070195645000,
+          "step": "inhibit_held",
+          "requested_inputs_high": [
+            1,
+            2
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": 24,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 24,
+          "status": "PASS",
+          "screen": "images/6f9235c4b2646a1be03234db5df8f22a75aed168a77115bbe3c57724a7dfa888.png",
+          "screen_sha256": "6f9235c4b2646a1be03234db5df8f22a75aed168a77115bbe3c57724a7dfa888",
+          "decoder_refusal": "images/6f9235c4b2646a1be03234db5df8f22a75aed168a77115bbe3c57724a7dfa888.png: Q4 glyph mismatch(0.895)",
+          "read_method": "manual visual; identical-hash counterpart accepted",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012075300436000,
+          "step": "release_inhibit",
+          "requested_inputs_high": [
+            1
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": [
+            13,
+            14
+          ],
+          "expected_status_condition": null,
+          "actual_mask": 14,
+          "status": "PASS",
+          "screen": "images/166cebd020eff7f07a30cf51f12dff7b904618eb38f1b3794f3136d37dde63fc.png",
+          "screen_sha256": "166cebd020eff7f07a30cf51f12dff7b904618eb38f1b3794f3136d37dde63fc",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012080452337000,
+          "step": "valid_disabled_final",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": 8,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 8,
+          "status": "PASS",
+          "screen": "images/be34de8887d2de3c7eb1611adc46d4f8b6ae1921796c7448d5499ff29f848f07.png",
+          "screen_sha256": "be34de8887d2de3c7eb1611adc46d4f8b6ae1921796c7448d5499ff29f848f07",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012086052875000,
+          "step": "commissioning_stop",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 8,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/be34de8887d2de3c7eb1611adc46d4f8b6ae1921796c7448d5499ff29f848f07.png",
+          "screen_sha256": "be34de8887d2de3c7eb1611adc46d4f8b6ae1921796c7448d5499ff29f848f07",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012091558693000,
+          "step": "connect_page",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 8,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/be34de8887d2de3c7eb1611adc46d4f8b6ae1921796c7448d5499ff29f848f07.png",
+          "screen_sha256": "be34de8887d2de3c7eb1611adc46d4f8b6ae1921796c7448d5499ff29f848f07",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012097053040000,
+          "step": "stop_simulator",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 8,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/be34de8887d2de3c7eb1611adc46d4f8b6ae1921796c7448d5499ff29f848f07.png",
+          "screen_sha256": "be34de8887d2de3c7eb1611adc46d4f8b6ae1921796c7448d5499ff29f848f07",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        }
+      ],
+      "cleanup": {
+        "time_ns": 1794012097913765000,
+        "no_simulator_window_process_502_listener": true,
+        "commands": [
+          {
+            "command": [
+              "python3",
+              "@control/control.py",
+              "status",
+              "--all"
+            ],
+            "exit": 0,
+            "response": {
+              "lab": "@lab",
+              "windows": [
+                {
+                  "id": 2153,
+                  "pid": 24358,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 39,
+                    "Y": 0,
+                    "Width": 2056
+                  }
+                },
+                {
+                  "id": 2152,
+                  "pid": 24358,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 39,
+                    "Y": 0,
+                    "Width": 2056
+                  }
+                },
+                {
+                  "id": 2151,
+                  "pid": 24358,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 39,
+                    "Y": 0,
+                    "Width": 2056
+                  }
+                },
+                {
+                  "id": 2150,
+                  "pid": 24358,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 39,
+                    "Y": 0,
+                    "Width": 2056
+                  }
+                },
+                {
+                  "id": 2146,
+                  "pid": 24358,
+                  "title": "g09-rtc-clock-lights_official - EcoStruxure Machine Expert - Basic",
+                  "onscreen": true,
+                  "bounds": {
+                    "X": -4,
+                    "Height": 1298,
+                    "Y": 35,
+                    "Width": 2064
+                  }
+                },
+                {
+                  "id": 2137,
+                  "pid": 24358,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 64,
+                    "Y": 829,
+                    "Width": 64
+                  }
+                },
+                {
+                  "id": 6251,
+                  "pid": 78776,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 1733,
+                    "Height": 21,
+                    "Y": 130,
+                    "Width": 82
+                  }
+                },
+                {
+                  "id": 1854,
+                  "pid": 78776,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 500,
+                    "Y": 829,
+                    "Width": 500
+                  }
+                },
+                {
+                  "id": 1243,
+                  "pid": 99872,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 500,
+                    "Y": 829,
+                    "Width": 500
+                  }
+                },
+                {
+                  "id": 1855,
+                  "pid": 78773,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 500,
+                    "Y": 829,
+                    "Width": 500
+                  }
+                }
+              ]
+            },
+            "stderr": ""
+          },
+          {
+            "command": [
+              "ps",
+              "-axo",
+              "pid=,comm=,args="
+            ],
+            "exit": 0,
+            "stderr": "",
+            "simulator_processes": []
+          },
+          {
+            "command": [
+              "lsof",
+              "-nP",
+              "-iTCP:502",
+              "-sTCP:LISTEN"
+            ],
+            "exit": 1,
+            "stdout": "",
+            "stderr": ""
+          }
+        ]
+      },
+      "full_native_parity": false,
+      "hypothesis": null,
+      "status": "PASS_MINIMAL_NATIVE_CONTROLS",
+      "RTC_before_RUN_observed": "06/11/2026 21:40:13",
+      "RTC_screen": "images/47ece8a5b49049525f68f44ff41bee65d8d16c059b08c487fa28914dd4b3d4b3.png",
+      "enabled_samples": [
+        13,
+        14,
+        14,
+        13,
+        14,
+        13,
+        13,
+        13
+      ],
+      "distinct_observed_lamp_masks": [
+        1,
+        2
+      ],
+      "timing": "PENDING_NOT_MEASURED; no period claim",
+      "RTC_adjustment": "NONE",
+      "events": "logs/g09-rtc-clock-lights-events.jsonl",
+      "cleanup_file": "logs/g09-rtc-clock-lights-cleanup.json"
+    },
+    {
+      "profile": "g09-schedule-reservation",
+      "official_file": "g09-schedule-reservation-fixed_official.smbp",
+      "sha256": "25d873c056b9609d4384a86831c4f0a464971bf4b4a555ed6aff2df2f709b4ea",
+      "run": "EXECUTED_ONE_FINITE_PASS",
+      "observations": [
+        {
+          "time_ns": 1794012151313771000,
+          "step": "RTC_management_before_RUN",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/2381b84ec5feb3496db6dcd2561fe6163e8ba27ad58e223ab2503b21c90469d2.png",
+          "screen_sha256": "2381b84ec5feb3496db6dcd2561fe6163e8ba27ad58e223ab2503b21c90469d2",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012183543906000,
+          "step": "request_RUN",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/2381b84ec5feb3496db6dcd2561fe6163e8ba27ad58e223ab2503b21c90469d2.png",
+          "screen_sha256": "2381b84ec5feb3496db6dcd2561fe6163e8ba27ad58e223ab2503b21c90469d2",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012188603641000,
+          "step": "confirm_RUN_local_target",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026.png",
+          "screen_sha256": "9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012190320145000,
+          "step": "all_inputs_low",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": 0,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "PASS",
+          "screen": "images/9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026.png",
+          "screen_sha256": "9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012195460677000,
+          "step": "I0_only",
+          "requested_inputs_high": [
+            0
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": 0,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "PASS",
+          "screen": "images/c4d4e401bd3919815439748bd29884d30cc6a105295198b31ad3695f41cf6c14.png",
+          "screen_sha256": "c4d4e401bd3919815439748bd29884d30cc6a105295198b31ad3695f41cf6c14",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012200575442000,
+          "step": "I0_I1",
+          "requested_inputs_high": [
+            0,
+            1
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": 3,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 3,
+          "status": "PASS",
+          "screen": "images/e0c3581c9a2fc0c8ec1d6fa95224449de3441dbf84833ec7067329ac275596af.png",
+          "screen_sha256": "e0c3581c9a2fc0c8ec1d6fa95224449de3441dbf84833ec7067329ac275596af",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012205722507000,
+          "step": "I1_only",
+          "requested_inputs_high": [
+            1
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": 0,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "PASS",
+          "screen": "images/57f7bb597b99dbb21c56da7ec6257cd47dc9b3d5f5a1680e9c62dd8d6142e450.png",
+          "screen_sha256": "57f7bb597b99dbb21c56da7ec6257cd47dc9b3d5f5a1680e9c62dd8d6142e450",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012210847011000,
+          "step": "all_low_before_disable",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": 0,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "PASS",
+          "screen": "images/9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026.png",
+          "screen_sha256": "9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012215982062000,
+          "step": "disable_schedules_I4",
+          "requested_inputs_high": [
+            4
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": 0,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "PASS",
+          "screen": "images/7a92c29f400d85d6d96692cb675a6195d8cd366f9542d0a03ea712e05f154a72.png",
+          "screen_sha256": "7a92c29f400d85d6d96692cb675a6195d8cd366f9542d0a03ea712e05f154a72",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012221332705000,
+          "step": "I4_I7",
+          "requested_inputs_high": [
+            4,
+            7
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": 8,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 8,
+          "status": "PASS",
+          "screen": "images/42fe1ca018ff93b24a8fe85b5a149f74f2908ba03a2d84f48f148cd4bed7a754.png",
+          "screen_sha256": "42fe1ca018ff93b24a8fe85b5a149f74f2908ba03a2d84f48f148cd4bed7a754",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012226664310000,
+          "step": "I7_only",
+          "requested_inputs_high": [
+            7
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": 8,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 8,
+          "status": "PASS",
+          "screen": "images/b7e5366fdc218d35ecc8af675b1c850303c49d8f7195d1a623d45a3ca004d9d4.png",
+          "screen_sha256": "b7e5366fdc218d35ecc8af675b1c850303c49d8f7195d1a623d45a3ca004d9d4",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012231920869000,
+          "step": "all_low_before_enable",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": 0,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "PASS",
+          "screen": "images/9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026.png",
+          "screen_sha256": "9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012237041827000,
+          "step": "enable_schedules_I5",
+          "requested_inputs_high": [
+            5
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": 4,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 4,
+          "status": "PASS",
+          "screen": "images/50aa4c4e2a3ae5b5cf815b53d816363eaade88d51fb2fdb5737d0265fc35c2ed.png",
+          "screen_sha256": "50aa4c4e2a3ae5b5cf815b53d816363eaade88d51fb2fdb5737d0265fc35c2ed",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012242173906000,
+          "step": "all_low_after_enable",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": 0,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "PASS",
+          "screen": "images/9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026.png",
+          "screen_sha256": "9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012257810049000,
+          "step": "expand_Memory_objects_readonly",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026.png",
+          "screen_sha256": "9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012271739882000,
+          "step": "programming_readonly_inspection",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026.png",
+          "screen_sha256": "9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012282558435000,
+          "step": "expand_Memory_objects_after_Programming",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026.png",
+          "screen_sha256": "9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012300900994000,
+          "step": "Memory_bits_readonly_page",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026.png",
+          "screen_sha256": "9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012321671142000,
+          "step": "commissioning_stop",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026.png",
+          "screen_sha256": "9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012327128974000,
+          "step": "connect_page",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026.png",
+          "screen_sha256": "9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        }
+      ],
+      "cleanup": {
+        "time_ns": 1794012333489612000,
+        "no_simulator_window_process_502_listener": true,
+        "commands": [
+          {
+            "command": [
+              "python3",
+              "@control/control.py",
+              "status",
+              "--all"
+            ],
+            "exit": 0,
+            "response": {
+              "lab": "@lab",
+              "windows": [
+                {
+                  "id": 2153,
+                  "pid": 24358,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 39,
+                    "Y": 0,
+                    "Width": 2056
+                  }
+                },
+                {
+                  "id": 2152,
+                  "pid": 24358,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 39,
+                    "Y": 0,
+                    "Width": 2056
+                  }
+                },
+                {
+                  "id": 2151,
+                  "pid": 24358,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 39,
+                    "Y": 0,
+                    "Width": 2056
+                  }
+                },
+                {
+                  "id": 2150,
+                  "pid": 24358,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 39,
+                    "Y": 0,
+                    "Width": 2056
+                  }
+                },
+                {
+                  "id": 2146,
+                  "pid": 24358,
+                  "title": "g09-schedule-reservation-fixed_official - EcoStruxure Machine Expert - Basic",
+                  "onscreen": true,
+                  "bounds": {
+                    "X": -4,
+                    "Height": 1298,
+                    "Y": 35,
+                    "Width": 2064
+                  }
+                },
+                {
+                  "id": 2137,
+                  "pid": 24358,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 64,
+                    "Y": 829,
+                    "Width": 64
+                  }
+                },
+                {
+                  "id": 6251,
+                  "pid": 78776,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 1733,
+                    "Height": 21,
+                    "Y": 130,
+                    "Width": 82
+                  }
+                },
+                {
+                  "id": 1854,
+                  "pid": 78776,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 500,
+                    "Y": 829,
+                    "Width": 500
+                  }
+                },
+                {
+                  "id": 1243,
+                  "pid": 99872,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 500,
+                    "Y": 829,
+                    "Width": 500
+                  }
+                },
+                {
+                  "id": 1855,
+                  "pid": 78773,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 500,
+                    "Y": 829,
+                    "Width": 500
+                  }
+                }
+              ]
+            },
+            "stderr": ""
+          },
+          {
+            "command": [
+              "ps",
+              "-axo",
+              "pid=,comm=,args="
+            ],
+            "exit": 0,
+            "stderr": "",
+            "simulator_processes": []
+          },
+          {
+            "command": [
+              "lsof",
+              "-nP",
+              "-iTCP:502",
+              "-sTCP:LISTEN"
+            ],
+            "exit": 1,
+            "stdout": "",
+            "stderr": ""
+          }
+        ]
+      },
+      "full_native_parity": false,
+      "hypothesis": null,
+      "status": "PASS_Q_CONTROLS__M_LIVE_PENDING",
+      "RTC_before_RUN_observed": "06/11/2026 21:42:29",
+      "RTC_screen": "images/33a548da75b22cada8a80a08557c4bedbe1402192a11f16a96c2ef96f842a221.png",
+      "source_mapping": "Q0=(I0&&I1)!=(I2||I3); Q1=I0&&I1&&!I4; Q2=I2||I3||I5; Q3=(((I0&&I1)!=(I2||I3))&&I6)||I7. I4 disables SW114; I5 enables all.",
+      "expected_M_unverified_at_enabled_maskFFFF": {
+        "M0": true,
+        "M1": false
+      },
+      "actual_M": null,
+      "M_status": "PENDING_NOT_WATCHED; Memory bit properties showed reserved Used M0/M1 but no live values",
+      "M_properties_screen": "images/64d456cbd529c569c5fd928f3671af47470275d1d9eaf76e940c7f97af2c93cb.png",
+      "RTC_adjustment": "NONE",
+      "schedule_activation_or_boundary": "NOT_CLAIMED from Q arithmetic",
+      "events": "logs/g09-schedule-reservation-events.jsonl",
+      "cleanup_file": "logs/g09-schedule-reservation-cleanup.json"
+    },
+    {
+      "profile": "modbus-no-transport",
+      "official_file": "modbus-no-transport_official.smbp",
+      "sha256": "55f9313570ec799b94ee7f693a31979f321c02bf43fa24dd8c49565f00cc9538",
+      "run": "EXECUTED_ONE_FINITE_PASS",
+      "observations": [
+        {
+          "time_ns": 1794012389393885000,
+          "step": "request_RUN",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026.png",
+          "screen_sha256": "9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012394435845000,
+          "step": "confirm_RUN_local_target",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026.png",
+          "screen_sha256": "9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012396161940000,
+          "step": "all_inputs_low_initial",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": 0,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "PASS",
+          "screen": "images/9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026.png",
+          "screen_sha256": "9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012401253196000,
+          "step": "READ_execute_I1_only",
+          "requested_inputs_high": [
+            1
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": {
+            "reader_Done": false,
+            "reader_Busy": false,
+            "reader_Error": true
+          },
+          "actual_mask": 4,
+          "status": "PASS",
+          "screen": "images/813437ce77d85c511fbbe7cb9c7e08a4ea26c9f903521b4e114004e5fb11bddd.png",
+          "screen_sha256": "813437ce77d85c511fbbe7cb9c7e08a4ea26c9f903521b4e114004e5fb11bddd",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012402978896000,
+          "step": "READ_held_refresh_after_timeout",
+          "requested_inputs_high": [
+            1
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": {
+            "reader_Done": false,
+            "reader_Busy": false,
+            "reader_Error": true
+          },
+          "actual_mask": 4,
+          "status": "PASS",
+          "screen": "images/813437ce77d85c511fbbe7cb9c7e08a4ea26c9f903521b4e114004e5fb11bddd.png",
+          "screen_sha256": "813437ce77d85c511fbbe7cb9c7e08a4ea26c9f903521b4e114004e5fb11bddd",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012408333916000,
+          "step": "programming_for_existing_diagnostics",
+          "requested_inputs_high": [
+            1
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 4,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/813437ce77d85c511fbbe7cb9c7e08a4ea26c9f903521b4e114004e5fb11bddd.png",
+          "screen_sha256": "813437ce77d85c511fbbe7cb9c7e08a4ea26c9f903521b4e114004e5fb11bddd",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012432052403000,
+          "step": "existing_diagnostic_rungs_scroll_only",
+          "requested_inputs_high": [
+            1
+          ],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 4,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/813437ce77d85c511fbbe7cb9c7e08a4ea26c9f903521b4e114004e5fb11bddd.png",
+          "screen_sha256": "813437ce77d85c511fbbe7cb9c7e08a4ea26c9f903521b4e114004e5fb11bddd",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012479220233000,
+          "step": "release_READ_execute_cleanup",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026.png",
+          "screen_sha256": "9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012480950581000,
+          "step": "released_stable_observation",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026.png",
+          "screen_sha256": "9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        },
+        {
+          "time_ns": 1794012486539777000,
+          "step": "commissioning_stop",
+          "requested_inputs_high": [],
+          "input_state_basis": "initial panel all low; recorded toggles; key endpoint panels viewed",
+          "expected_mask": null,
+          "expected_mask_set": null,
+          "expected_status_condition": null,
+          "actual_mask": 0,
+          "status": "OBSERVED_ONLY",
+          "screen": "images/9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026.png",
+          "screen_sha256": "9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026",
+          "decoder_refusal": null,
+          "read_method": "strict offline decoder; key endpoint panels also viewed",
+          "hypothesis": null
+        }
+      ],
+      "cleanup": {
+        "time_ns": 1794012492474842000,
+        "no_simulator_window_process_502_listener": true,
+        "commands": [
+          {
+            "command": [
+              "python3",
+              "@control/control.py",
+              "status",
+              "--all"
+            ],
+            "exit": 0,
+            "response": {
+              "lab": "@lab",
+              "windows": [
+                {
+                  "id": 2153,
+                  "pid": 24358,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 39,
+                    "Y": 0,
+                    "Width": 2056
+                  }
+                },
+                {
+                  "id": 2152,
+                  "pid": 24358,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 39,
+                    "Y": 0,
+                    "Width": 2056
+                  }
+                },
+                {
+                  "id": 2151,
+                  "pid": 24358,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 39,
+                    "Y": 0,
+                    "Width": 2056
+                  }
+                },
+                {
+                  "id": 2150,
+                  "pid": 24358,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 39,
+                    "Y": 0,
+                    "Width": 2056
+                  }
+                },
+                {
+                  "id": 2146,
+                  "pid": 24358,
+                  "title": "modbus-no-transport_official - EcoStruxure Machine Expert - Basic",
+                  "onscreen": true,
+                  "bounds": {
+                    "X": -4,
+                    "Height": 1298,
+                    "Y": 35,
+                    "Width": 2064
+                  }
+                },
+                {
+                  "id": 2137,
+                  "pid": 24358,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 64,
+                    "Y": 829,
+                    "Width": 64
+                  }
+                },
+                {
+                  "id": 6251,
+                  "pid": 78776,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 1733,
+                    "Height": 21,
+                    "Y": 130,
+                    "Width": 82
+                  }
+                },
+                {
+                  "id": 1854,
+                  "pid": 78776,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 500,
+                    "Y": 829,
+                    "Width": 500
+                  }
+                },
+                {
+                  "id": 1243,
+                  "pid": 99872,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 500,
+                    "Y": 829,
+                    "Width": 500
+                  }
+                },
+                {
+                  "id": 1855,
+                  "pid": 78773,
+                  "title": "",
+                  "onscreen": false,
+                  "bounds": {
+                    "X": 0,
+                    "Height": 500,
+                    "Y": 829,
+                    "Width": 500
+                  }
+                }
+              ]
+            },
+            "stderr": ""
+          },
+          {
+            "command": [
+              "ps",
+              "-axo",
+              "pid=,comm=,args="
+            ],
+            "exit": 0,
+            "stderr": "",
+            "simulator_processes": []
+          },
+          {
+            "command": [
+              "lsof",
+              "-nP",
+              "-iTCP:502",
+              "-sTCP:LISTEN"
+            ],
+            "exit": 1,
+            "stdout": "",
+            "stderr": ""
+          }
+        ]
+      },
+      "full_native_parity": false,
+      "hypothesis": null,
+      "status": "PASS_NATIVE_READ_ERROR_PATH_OBSERVED",
+      "route": "READ_VAR only, I3=I4=0 and I2=0 throughout; no external client/peer",
+      "read_error_Q_observation": "0 -> 4 (held4) -> 0 on release",
+      "direct_native_Ladder_diagnostics": {
+        "expected_numeric_codes": null,
+        "actual": {
+          "MW10_COMMERROR": 6,
+          "MD12_OPERERROR": 0,
+          "MW20_writer_COMMERROR": 0,
+          "MD22_writer_OPERERROR": 0,
+          "MW30_exchange_COMMERROR": 0,
+          "MD32_exchange_OPERERROR": 0
+        },
+        "screen": "images/3873f92b7bf3b2e611ae04b819e8548ac9b1406561625edbebd6bcbf6dd53f94.png",
+        "method": "Visually read existing online assignment rungs27..32; not source literals or stub values",
+        "expected": null,
+        "cause": "UNKNOWN; no timeout or successful transaction classification"
+      },
+      "limits": [
+        "Meaning of native COMMERROR6 not classified; not called timeout.",
+        "The label after_timeout means elapsed wall time beyond configured1s, not error classification.",
+        "Busy transient, Abort priority/history, buffer retention and successful transport are not qualified."
+      ],
+      "physical_or_external_peer": "NOT_RUN",
+      "events": "logs/modbus-no-transport-events.jsonl",
+      "cleanup_file": "logs/modbus-no-transport-cleanup.json",
+      "transaction_success": "NOT_CLAIMED"
+    }
+  ],
+  "counts": {
+    "profiles_executed": 4,
+    "profiles_not_executed": 0,
+    "checked_output_points_passed": 40,
+    "checked_output_points_failed": 0,
+    "dedicated_enabled_clock_samples_per_profile": 8
+  },
+  "input_integrity": {
+    "saved_official_hashes_checked_before_open": true,
+    "before": {
+      "g08-drum-clock-lights_official.smbp": "3f419942e36a51e4716314fa31b4cc4efd74519d306eaa62ccee285f23d06dfb",
+      "g09-rtc-clock-lights_official.smbp": "8698ff1dc82805ecbb3fc065f77059298f6d173c90b4c64ac8891e3e6d809486",
+      "g09-schedule-reservation-fixed_official.smbp": "25d873c056b9609d4384a86831c4f0a464971bf4b4a555ed6aff2df2f709b4ea",
+      "modbus-no-transport_official.smbp": "55f9313570ec799b94ee7f693a31979f321c02bf43fa24dd8c49565f00cc9538"
+    },
+    "after": {
+      "g08-drum-clock-lights_official.smbp": "3f419942e36a51e4716314fa31b4cc4efd74519d306eaa62ccee285f23d06dfb",
+      "g09-rtc-clock-lights_official.smbp": "8698ff1dc82805ecbb3fc065f77059298f6d173c90b4c64ac8891e3e6d809486",
+      "g09-schedule-reservation-fixed_official.smbp": "25d873c056b9609d4384a86831c4f0a464971bf4b4a555ed6aff2df2f709b4ea",
+      "modbus-no-transport_official.smbp": "55f9313570ec799b94ee7f693a31979f321c02bf43fa24dd8c49565f00cc9538"
+    },
+    "changed": {}
+  },
+  "all_four_cleanup_ok": true,
+  "final_GUI_state": "modbus-no-transport_official; No error / Not Connected visually confirmed; official Stop simulator completed; GUI returned to root",
+  "final_screen": "images/6cbb000e2aad8ca91361d830fe768fd65ca392411c7ab6965c6ee9e6c70ec3a9.png",
+  "prior_timebox_history": "Original timeboxed evidence remains unchanged in the historical campaign; this bundle is an additive follow-up.",
+  "unknown_three_probes": "EXCLUDED_PENDING; no GUI attempt",
+  "physical_PLC": "NOT_RUN",
+  "external_TCP_or_Modbus_peer": "NOT_RUN",
+  "Space_focus_recovery_used": false,
+  "compiler_SDK_or_helper_changes": "NONE",
+  "commands": "logs/commands.jsonl",
+  "hypothesis": null,
+  "publication": {
+    "format": "Content-addressed original PNG bytes; no resizing or threshold change",
+    "observation_points_retained": 65,
+    "host_path_aliases": {
+      "@repo": "Repository root",
+      "@lab": "Existing local PLC lab root",
+      "@shared-projects": "Existing shared campaign project directory mapped by P:",
+      "@control/control.py": "Unchanged schneider-basic-mac skill control helper"
+    },
+    "full_editor_review": "full-editor-review.json",
+    "input_pins": "input-pins.json",
+    "screenshot_index": "screenshot-index.json"
+  }
+}

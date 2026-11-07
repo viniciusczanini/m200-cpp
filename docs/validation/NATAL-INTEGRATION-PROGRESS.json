@@ -1,16 +1,8 @@
 {
   "schema": "m200.natal.integration-progress.v1",
   "date": "2026-11-06",
-  "release_status": "INCOMPLETE; local regression and official acceptance not closed",
-  "scope": [
-    "G01",
-    "G02",
-    "G06",
-    "G07",
-    "G08",
-    "G09",
-    "G11"
-  ],
+  "release_status": "EXPERIMENTAL_NATAL_HANDOFF; supported profiles and native-oracle gaps explicit; full-controller backlog inactive",
+  "scope": "Natal G01/G02/G06/G07/G08/G09/G11 plus already implemented extras; thirteen stopped lanes preserved, not active",
   "current_candidate": {
     "freeze_id": "natal-combined-7",
     "compiler_sdk": {
@@ -337,7 +329,7 @@
     "combined-7/test-interop/full-gate/summary.json": "a02d5bf1451c01e462ca9c298feb285c94a490fbfd1f25bbb558586d9ad6b59f",
     "batch-final-1/test-batch/summary.json": "67871e3bc703d2d326a4e223f252fcde85919f9aa334becce40e420ea244f783"
   },
-  "official_campaign": "not run for these combined candidates; exact generated artifacts still require final batch",
+  "official_campaign": "finite editor/simulator campaign closed;14 selected official saves, some runtime evidence for11 composed profiles,40 additional checks in remaining4 follow-up",
   "physical_controller": "future Windows/SSH and actual TM200CE40T acceptance pending",
   "ci": "all tests local; GitHub Actions stays disabled",
   "reviewed_test_contracts": [
@@ -348,9 +340,9 @@
     "G01 external-image prepared adapter:2VM/SDKchecks+2missingprovidercontrolsPASS on candidate4; mergedregistry retestpending5"
   ],
   "next_actions": [
-    "Publish scopedexperimentalcheckpoint with8rawpendingfailures and exactevidence",
-    "Run finiteofficialeditor/simulator campaign after freshvisibilitycheck",
-    "KeepSDKasync/poison/nativeoracles/physicalacceptance explicit"
+    "Publish final local evidence and source",
+    "Pause older goal record after Natal delivery as requested",
+    "No automatic future backlog or deferred-lane work"
   ],
   "final_local_regression": {
     "classification": "failure-classifications.json",
@@ -523,5 +515,37 @@
       "evidence": "docs/validation/natal-integrated/permanent-sr-regressions/summary.json"
     },
     "source": "Same72compiler/SDK hashes as full7; these14methods are separate additional runs, not part of1017fullgatecount"
+  },
+  "natal_handoff": {
+    "goal": "docs/GOAL.md",
+    "delivery": "docs/validation/NATAL-DELIVERY.md",
+    "independent_async_sdk": {
+      "core_sdk_pins": 74,
+      "report": "docs/validation/G11-SDK-ASYNC-RESULTS.md",
+      "original_G11_VM_SDK_methods_passed": 4,
+      "distinct_raw_SDK_stimuli": 43
+    },
+    "final_gate": "docs/validation/g11-sdk-async-2026-11-06/full-gate/summary.json",
+    "remaining4_native": "docs/validation/native-campaign-2026-11-06/runtime-remaining-4/summary.json",
+    "future_inventory": "docs/FUTURE-PARITY-BACKLOG.md",
+    "pause_after_publication_requested": true,
+    "historical_records_below_preserved": true,
+    "local_regression": {
+      "run": 1045,
+      "pass": 1038,
+      "fail": 7,
+      "error": 0,
+      "skip": 0,
+      "exit": 2,
+      "native_oracle_pending": 6,
+      "missing_corpus_followup": {
+        "run": 1,
+        "pass": 1,
+        "input_added": 1,
+        "full_retry": false
+      },
+      "core_drift": 0,
+      "report": "docs/validation/g11-sdk-async-2026-11-06/full-gate/RESULTS.md"
+    }
   }
 }

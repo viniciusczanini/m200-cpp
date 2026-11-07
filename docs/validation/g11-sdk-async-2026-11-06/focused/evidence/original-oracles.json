@@ -1,0 +1,95 @@
+[
+  {
+    "adapter": "G11_async",
+    "expected": {
+      "configured_index_data": 200,
+      "done": true,
+      "error": false,
+      "request_hex": "0300000002",
+      "words": {
+        "100": 11,
+        "101": 22,
+        "200": 3333,
+        "201": 4444
+      }
+    },
+    "name": "G11_busy_dynamic_buffer_change_does_not_redirect_active_read",
+    "request": {
+      "config": {
+        "first_obj": 0,
+        "id": 1,
+        "index_data": 100,
+        "kind": "READ_VAR",
+        "link": "SL1",
+        "quantity": 2
+      },
+      "events": [
+        {
+          "execute": false
+        },
+        {
+          "execute": true,
+          "transport_pending": true
+        },
+        {
+          "execute": true,
+          "set_property": {
+            "IndexData": 200
+          },
+          "transport_response_hex": "0304000B0016"
+        }
+      ],
+      "initial_words": {
+        "100": 1111,
+        "101": 2222,
+        "200": 3333,
+        "201": 4444
+      },
+      "observe_request_pdu": true,
+      "scenario": "busy_config_snapshot"
+    }
+  },
+  {
+    "adapter": "G11_async",
+    "expected": {
+      "aborted": true,
+      "done": false,
+      "words": {
+        "100": 12345
+      }
+    },
+    "name": "G11_abort_prevents_late_response_buffer_mutation",
+    "request": {
+      "config": {
+        "first_obj": 0,
+        "id": 1,
+        "index_data": 100,
+        "kind": "READ_VAR",
+        "link": "SL1",
+        "quantity": 1
+      },
+      "events": [
+        {
+          "abort": false,
+          "execute": false
+        },
+        {
+          "execute": true,
+          "transport_pending": true
+        },
+        {
+          "abort": true,
+          "execute": true
+        },
+        {
+          "execute": true,
+          "late_response_hex": "03020063"
+        }
+      ],
+      "initial_words": {
+        "100": 12345
+      },
+      "scenario": "abort_late_response"
+    }
+  }
+]

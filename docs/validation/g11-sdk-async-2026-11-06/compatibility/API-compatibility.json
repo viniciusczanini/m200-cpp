@@ -1,0 +1,18 @@
+{
+  "async_header_include_inside_PLC_NATIVE": true,
+  "public_constructors_enums_config_result_layouts_nonPLCdeclarations_legacy_hook_text_equal": true,
+  "signature_lines": [
+    "enum class Link : int { Serial1=1, Ethernet=2 };",
+    "enum class CommProperty : int { Link=0, Id=1, Timeout=2, ObjType=3, FirstObj=4, Quantity=5, IndexData=6, FirstWriteObj=7, WriteQuantity=8, IndexDataOut=9, FirstReadObj=10, ReadQuantity=11, IndexDataIn=12 };",
+    "enum class Object : int { HoldingWords=0, DiscreteInputs=1, Coils=2, InputWords=3, SingleCoil=4, SingleRegister=5 };",
+    "struct CommunicationConfig { int kind,link,id,timeout,obj,first,quantity,index,first_read,read_quantity,index_in; };",
+    "struct CommunicationResult { bool done=false,busy=false,aborted=false,error=false; i16 comm_error=0; i32 oper_error=0; };",
+    "inline CommunicationResult (*communication_hook)(const CommunicationConfig&,int,bool,bool,unsigned long long,unsigned short*) = nullptr;",
+    "struct ReadVar:Communication { ReadVar(Link l,int id,int t,Object o,int f,int q,int d):Communication(0,l,id,t,o,f,q,d){} ReadVar(int n,Link l,int id,int t,Object o,int f,int q,int d):Communication(0,l,id,t,o,f,q,d,0,1,0,n){} };",
+    "struct WriteVar:Communication { WriteVar(Link l,int id,int t,Object o,int f,int q,int d):Communication(1,l,id,t,o,f,q,d){} WriteVar(int n,Link l,int id,int t,Object o,int f,int q,int d):Communication(1,l,id,t,o,f,q,d,0,1,0,n){} };",
+    "struct WriteReadVar:Communication { WriteReadVar(Link l,int id,int t,int f,int q,int d,int rf,int rq,int rd):Communication(2,l,id,t,Object::HoldingWords,f,q,d,rf,rq,rd){} WriteReadVar(int n,Link l,int id,int t,int f,int q,int d,int rf,int rq,int rd):Communication(2,l,id,t,Object::HoldingWords,f,q,d,rf,rq,rd,n){} };",
+    "struct ReadVar { ReadVar(Link,int,int,Object,int,int,int); ReadVar(int,Link,int,int,Object,int,int,int); bool update(bool,bool); bool done()const; bool busy()const; bool aborted()const; bool error()const; i16 property(CommProperty)const; void set_property(CommProperty,i16); i16 comm_error()const; i32 oper_error()const; };",
+    "struct WriteVar { WriteVar(Link,int,int,Object,int,int,int); WriteVar(int,Link,int,int,Object,int,int,int); bool update(bool,bool); bool done()const; bool busy()const; bool aborted()const; bool error()const; i16 property(CommProperty)const; void set_property(CommProperty,i16); i16 comm_error()const; i32 oper_error()const; };",
+    "struct WriteReadVar { WriteReadVar(Link,int,int,int,int,int,int,int,int); WriteReadVar(int,Link,int,int,int,int,int,int,int,int); bool update(bool,bool); bool done()const; bool busy()const; bool aborted()const; bool error()const; i16 property(CommProperty)const; void set_property(CommProperty,i16); i16 comm_error()const; i32 oper_error()const; };"
+  ]
+}

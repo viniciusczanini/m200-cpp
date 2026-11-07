@@ -1,0 +1,34 @@
+{
+  "config": {
+    "first_obj": 0,
+    "id": 1,
+    "index_data": 100,
+    "kind": "READ_VAR",
+    "link": "SL1",
+    "quantity": 2
+  },
+  "events": [
+    {
+      "execute": false
+    },
+    {
+      "execute": true,
+      "transport_pending": true
+    },
+    {
+      "execute": true,
+      "set_property": {
+        "IndexData": 200
+      },
+      "transport_response_hex": "0304000B0016"
+    }
+  ],
+  "initial_words": {
+    "100": 1111,
+    "101": 2222,
+    "200": 3333,
+    "201": 4444
+  },
+  "observe_request_pdu": true,
+  "scenario": "busy_config_snapshot"
+}

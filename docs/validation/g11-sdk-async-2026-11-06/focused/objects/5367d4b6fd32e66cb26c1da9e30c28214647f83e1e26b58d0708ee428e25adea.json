@@ -1,0 +1,12 @@
+{
+  "configured_index_data": 200,
+  "done": true,
+  "error": false,
+  "request_hex": "0300000002",
+  "words": {
+    "100": 11,
+    "101": 22,
+    "200": 3333,
+    "201": 4444
+  }
+}

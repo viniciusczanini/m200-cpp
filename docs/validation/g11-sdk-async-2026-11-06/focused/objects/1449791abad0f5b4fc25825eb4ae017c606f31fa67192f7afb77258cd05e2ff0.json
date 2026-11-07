@@ -1,0 +1,71 @@
+{
+  "cancel_count": 1,
+  "configured_index_data": {
+    "first": 100,
+    "second": 200
+  },
+  "flags": {
+    "S17": false,
+    "S18": false,
+    "SW17": 0
+  },
+  "known_words": {},
+  "poison": {
+    "100": 0,
+    "200": 0
+  },
+  "request_hexes": [
+    "0300000001",
+    "0300010001"
+  ],
+  "request_ids": [
+    1,
+    2
+  ],
+  "request_links": [
+    1,
+    1
+  ],
+  "snapshots": [
+    {
+      "aborted": false,
+      "block": "first",
+      "busy": true,
+      "comm_error": 0,
+      "done": false,
+      "error": false,
+      "oper_error": 0
+    },
+    {
+      "aborted": false,
+      "block": "second",
+      "busy": false,
+      "comm_error": 255,
+      "done": false,
+      "error": true,
+      "oper_error": 11
+    }
+  ],
+  "statuses": {
+    "first": {
+      "aborted": true,
+      "busy": false,
+      "comm_error": 2,
+      "done": false,
+      "error": false,
+      "oper_error": 0
+    },
+    "second": {
+      "aborted": false,
+      "busy": false,
+      "comm_error": 0,
+      "done": true,
+      "error": false,
+      "oper_error": 0
+    }
+  },
+  "words": {
+    "100": 1111,
+    "200": 33
+  }
+}

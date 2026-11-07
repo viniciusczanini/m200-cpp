@@ -7,3 +7,6 @@ tests/fixtures/official_tm200ce40t_register_*.smbp -text whitespace=cr-at-eol
 tests/fixtures/official_tm200ce40t_subroutine_*.smbp -text whitespace=cr-at-eol
 # Preserve raw unittest output, including whitespace on a failing subtest line.
 docs/validation/native-campaign-2026-11-06/*.log -text -whitespace
+docs/validation/g11-sdk-async-2026-11-06/**/*.log -text -whitespace
+# Failure blocks retain the raw unittest separator/blank lines byte-for-byte.
+docs/validation/g11-sdk-async-2026-11-06/full-gate/failure-blocks/*.txt -text -whitespace

@@ -1,0 +1,44 @@
+{
+  "core_root_drift": {},
+  "core_snapshot_drift": {},
+  "root_drift_during_run": {
+    ".gitattributes": {
+      "after": {
+        "bytes": 749,
+        "sha256": "c4d4112094ade23d2f18e5c3fdedc6979a41d73ae387d66b71a142197c6fb429",
+        "type": "file"
+      },
+      "before": {
+        "bytes": 681,
+        "sha256": "8d0897683385925a0e78e1688857b640aeefad1f4f461bcf4e20ab8210203cbf",
+        "type": "file"
+      }
+    },
+    "docs/PARITY.md": {
+      "after": {
+        "bytes": 7485,
+        "sha256": "0bf6214759eab06acbd0472c1d0730ea4b5aa7cf40abf652f1c68fe670d20920",
+        "type": "file"
+      },
+      "before": {
+        "bytes": 7340,
+        "sha256": "e39019a5076003213b13095f7ca5d3cdd89ff1d5be38f6b6a1361379c30a81d3",
+        "type": "file"
+      }
+    },
+    "docs/ROADMAP.md": {
+      "after": {
+        "bytes": 6624,
+        "sha256": "b7d76fe640fafdf474b602359235736032325e4a1b62a225ffc93852ad1e1197",
+        "type": "file"
+      },
+      "before": {
+        "bytes": 10978,
+        "sha256": "ba86ac03b48b00e12bf4b6fcebc7bac6401e5078415af1bf6977bd12e2585a70",
+        "type": "file"
+      }
+    }
+  },
+  "root_note": "Root may update docs/evidence during run; immutable snapshot is execution authority.",
+  "snapshot_drift": {}
+}

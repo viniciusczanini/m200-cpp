@@ -1,0 +1,10 @@
+{
+  "excluded_helper_presence": {
+    "tests/christmas/panel_geometry.json": false,
+    "tests/christmas/read_panel.py": false,
+    "tests/parallel_semantics/g01_fix4_cases.py": false,
+    "tests/parallel_semantics/g01_fix4_report.py": false
+  },
+  "output_symlink": "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/g11-final-gate-1/runtime-output",
+  "unexpected_files": []
+}

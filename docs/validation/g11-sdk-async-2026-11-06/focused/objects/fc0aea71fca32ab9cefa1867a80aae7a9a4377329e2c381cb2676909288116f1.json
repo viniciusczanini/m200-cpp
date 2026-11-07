@@ -1,0 +1,5 @@
+{
+  "returncode": 0,
+  "stderr": "RAW_START\nRAW_START\n",
+  "stdout": "{\"request_hexes\":[\"0300000001\",\"0300010001\"],\"request_ids\":[1,2],\"request_links\":[1,2],\"statuses\":{\"first\":{\"done\":false,\"busy\":false,\"aborted\":true,\"error\":false,\"comm_error\":2,\"oper_error\":0},\"second\":{\"done\":false,\"busy\":false,\"aborted\":true,\"error\":false,\"comm_error\":2,\"oper_error\":0}},\"words\":{\"100\":1111,\"200\":2222},\"poison\":{\"100\":0,\"200\":0},\"cancel_count\":2,\"flags\":{\"S18\":false,\"S17\":false,\"SW17\":0},\"configured_index_data\":{\"first\":100,\"second\":200},\"known_words\":{},\"snapshots\":[{\"block\":\"first\",\"done\":false,\"busy\":true,\"aborted\":false,\"error\":false,\"comm_error\":0,\"oper_error\":0},{\"block\":\"second\",\"done\":false,\"busy\":true,\"aborted\":false,\"error\":false,\"comm_error\":0,\"oper_error\":0}]}\n"
+}

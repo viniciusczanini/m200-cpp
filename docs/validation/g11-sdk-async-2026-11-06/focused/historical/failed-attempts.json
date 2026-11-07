@@ -1,0 +1,24 @@
+[
+  {
+    "actual_kind": "not_executed",
+    "actual_ref": null,
+    "compile_original_file_sha256": "789b7aa9f5095d3a411bb6e92c5e7d4ee1d88a5d8ec4d3f82f040406659ae3f8",
+    "compile_ref": "objects/e63691dd7aac83c9108c12e55b876702ee39f8460c11d873c773bfad5ffcae00.json",
+    "cpp_original_sha256": "5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139",
+    "cpp_ref": "objects/5cadbe850275c3376f0d9d9183a8a59488199dc6e63c50a7bfa08f1780b10139.cpp",
+    "id": "initial/test_timeout_channel_ownership_and_abort_release-03",
+    "kind": "sdk_vector",
+    "outcome": "harness_compile_failure",
+    "path_roots": {
+      "objects": "this package",
+      "repo": "operator-supplied repository",
+      "work": "operator-selected scratch output"
+    },
+    "request_original_file_sha256": "5309de91f4262cd68ba075ba6c7b9ddf8066fc9bb1cebbedb7e43c30c20b8db1",
+    "request_ref": "objects/a2ae4baff3d6c9c6a300e34131548301682722378f9919bea40be6ac25d6a995.json",
+    "request_sha256": "63b48f5a0ca6e36d5291023dce9e31211494cb72c7049146948ec6cfcc3e3212",
+    "run_original_file_sha256": null,
+    "run_ref": null,
+    "stage": "initial"
+  }
+]

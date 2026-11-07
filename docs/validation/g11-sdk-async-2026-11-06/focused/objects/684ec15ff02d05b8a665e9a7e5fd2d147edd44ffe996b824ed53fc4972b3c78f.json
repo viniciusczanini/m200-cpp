@@ -1,0 +1,47 @@
+{
+  "blocks": {
+    "block": {
+      "first_obj": 7,
+      "id": 0,
+      "index_data": 100,
+      "kind": "WRITE_VAR",
+      "obj_type": 5,
+      "quantity": 1
+    }
+  },
+  "events": [
+    {
+      "calls": [
+        {
+          "abort": false,
+          "block": "block",
+          "execute": false
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "abort": false,
+          "block": "block",
+          "execute": true
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "abort": false,
+          "block": "block",
+          "execute": true
+        }
+      ],
+      "poll": {
+        "kind": "broadcast"
+      }
+    }
+  ],
+  "initial_words": {
+    "100": 42
+  }
+}

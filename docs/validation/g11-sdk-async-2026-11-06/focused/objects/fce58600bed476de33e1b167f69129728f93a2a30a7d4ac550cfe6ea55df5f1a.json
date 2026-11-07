@@ -1,0 +1,47 @@
+{
+  "blocks": {
+    "block": {
+      "first_obj": 172,
+      "index_data": 100,
+      "kind": "WRITE_VAR",
+      "obj_type": 4,
+      "quantity": 1
+    }
+  },
+  "events": [
+    {
+      "calls": [
+        {
+          "abort": false,
+          "block": "block",
+          "execute": false
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "abort": false,
+          "block": "block",
+          "execute": true
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "abort": false,
+          "block": "block",
+          "execute": true
+        }
+      ],
+      "poll": {
+        "hex": "0500AC0000",
+        "kind": "response"
+      }
+    }
+  ],
+  "initial_words": {
+    "100": 1
+  }
+}

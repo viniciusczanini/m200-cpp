@@ -1,0 +1,94 @@
+{
+  "missing_input": {
+    "computed_git_blob": "425372b07a34946b6363b78bd15a5fbf8727cc98",
+    "dependency_inventory": "original_case reads only manifest I1; synthetic.smbp and all code dependencies already exist in tracked snapshot.",
+    "local_root_path": "/Users/tommy/Offline/projects/m200-cpp/research/downloads/indexed-sources/didim99__TSTU__425372b07a34.smbp",
+    "manifest_entry": {
+      "bytes": 114221,
+      "commit": "ea8c59ca97fc99d07cc979a2fcb78113c322cf2c",
+      "cpu": "TM221ME16R/G",
+      "evidence_lines": {
+        "catalog_s20": [
+          953
+        ],
+        "index": [
+          533,
+          553,
+          779
+        ],
+        "manual": [
+          791,
+          795
+        ]
+      },
+      "file": "didim99__TSTU__425372b07a34.smbp",
+      "git_blob": "425372b07a34946b6363b78bd15a5fbf8727cc98",
+      "git_blob_checked": true,
+      "id": "I1",
+      "indexed": [
+        "%MW20[%MW10]"
+      ],
+      "indexed_program_uses": [
+        {
+          "comment": "Auto - start moving",
+          "il": [
+            "ELSE0",
+            "AND   %M6",
+            "MPS",
+            "[ %MW2 := %MW0 ]",
+            "[ %MW10 := LW ( ABS ( DWORD ( %MW2 - %MW1 ) ) ) ]",
+            "[ %C0.P := %MW10 ]",
+            "S     %C0",
+            "[ %MW10 := %MW2 - 2 ]",
+            "MRD",
+            "AND   [ %MW2 > %MW1 ]",
+            "[ %TM1.P := %MW20[%MW10] ]",
+            "S     %Q0.0",
+            "MPP",
+            "AND   [ %MW2 < %MW1 ]",
+            "[ INC %MW10 ]",
+            "[ %TM1.P := %MW20[%MW10] ]",
+            "S     %Q0.1"
+          ],
+          "ladder": [],
+          "ladder_selected": "false",
+          "name": "",
+          "rung": 15
+        }
+      ],
+      "management_level": "FunctLevelMan17_0",
+      "metadata_scope": "cpu is Cpu/Reference; ManagementLevel is preserved literally, not mapped to semantic level",
+      "path": "labwork/mps/Lab-07-M221-autoOperator.smbp",
+      "permalink": "https://github.com/didim99/TSTU/blob/ea8c59ca97fc99d07cc979a2fcb78113c322cf2c/labwork/mps/Lab-07-M221-autoOperator.smbp",
+      "project_version": "2.6.0.0",
+      "raw_url": "https://raw.githubusercontent.com/didim99/TSTU/ea8c59ca97fc99d07cc979a2fcb78113c322cf2c/labwork/mps/Lab-07-M221-autoOperator.smbp",
+      "repository": "didim99/TSTU",
+      "s20_program_uses": [],
+      "sha256": "a4307729f0864133e414517ef49c37e6648f29d7403a8f9737e2f7367461a738"
+    },
+    "manifest_path": "docs/capabilities/INDEXED-SOURCES.json",
+    "manifest_pin": {
+      "bytes": 11069,
+      "sha256": "8d9e40c40a2ea1df365bed39b50321aae2370aa3e48f10dab496d7d3c143ad1a",
+      "type": "file"
+    },
+    "root_pin_before": {
+      "bytes": 114221,
+      "sha256": "a4307729f0864133e414517ef49c37e6648f29d7403a8f9737e2f7367461a738",
+      "type": "file"
+    },
+    "scope": "isolated indexed timer-preset assignment from TM221 project; not whole original project or TM200 native validation.",
+    "verification": "Existing local bytes match pinned manifest size/SHA256/Git blob; no download or network verification."
+  },
+  "native_pending_sources": [
+    "tests/parallel_semantics/source_cases.py:12-24,166-172",
+    "tests/parallel_semantics/priority_cases.py:71-74,91-94",
+    "tests/parallel_semantics/test_semantics.py:25-27"
+  ],
+  "no_reexecution": "Static classification plus exactly one authorized affected-method follow-up; full raw log remains unchanged.",
+  "root_metadata_change": {
+    "diff": "root-publication-metadata.diff",
+    "meaning": "Added raw-log whitespace/text preservation rule for docs/validation/g11-sdk-async-2026-11-06/**/*.log after snapshot creation; snapshot bytes unchanged.",
+    "path": ".gitattributes"
+  }
+}

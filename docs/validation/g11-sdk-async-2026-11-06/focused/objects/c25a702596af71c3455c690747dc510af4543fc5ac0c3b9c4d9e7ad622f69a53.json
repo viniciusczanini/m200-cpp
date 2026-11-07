@@ -1,0 +1,49 @@
+{
+  "blocks": {
+    "block": {
+      "first_obj": 1,
+      "index_data": 100,
+      "kind": "READ_VAR",
+      "link": "ETH1",
+      "obj_type": 3,
+      "quantity": 2
+    }
+  },
+  "events": [
+    {
+      "calls": [
+        {
+          "abort": false,
+          "block": "block",
+          "execute": false
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "abort": false,
+          "block": "block",
+          "execute": true
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "abort": false,
+          "block": "block",
+          "execute": true
+        }
+      ],
+      "poll": {
+        "hex": "0404000100FF",
+        "kind": "response"
+      }
+    }
+  ],
+  "initial_words": {
+    "100": 1111,
+    "101": 2222
+  }
+}

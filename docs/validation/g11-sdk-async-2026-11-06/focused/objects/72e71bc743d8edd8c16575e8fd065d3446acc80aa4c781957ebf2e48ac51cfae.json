@@ -1,0 +1,14 @@
+{
+  "command": [
+    "clang++",
+    "-std=c++17",
+    "-O0",
+    "-I",
+    "repo/sdk",
+    "objects/da896ab10ecc78c4947601b3987affcfee0234652d937ca66e3e486fa442f7d7.cpp",
+    "-o",
+    "work/focused/test_timeout_channel_ownership_and_abort_release-01/host"
+  ],
+  "returncode": 0,
+  "stderr": ""
+}

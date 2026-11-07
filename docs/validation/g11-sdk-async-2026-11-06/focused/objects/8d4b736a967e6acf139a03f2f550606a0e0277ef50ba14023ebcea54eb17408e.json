@@ -1,0 +1,62 @@
+{
+  "blocks": {
+    "block": {
+      "first_obj": 0,
+      "id": 1,
+      "index_data": 100,
+      "kind": "READ_VAR",
+      "link": "SL1",
+      "obj_type": 0,
+      "quantity": 2,
+      "timeout_100ms": 1
+    }
+  },
+  "events": [
+    {
+      "calls": [
+        {
+          "abort": false,
+          "block": "block",
+          "execute": false
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "abort": false,
+          "block": "block",
+          "execute": true
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "abort": false,
+          "block": "block",
+          "execute": true
+        }
+      ],
+      "now_ms": 1000
+    },
+    {
+      "calls": [
+        {
+          "abort": false,
+          "block": "block",
+          "execute": true
+        }
+      ],
+      "now_ms": 1010,
+      "poll": {
+        "hex": "0304000B0016",
+        "kind": "response"
+      }
+    }
+  ],
+  "initial_words": {
+    "100": 1111,
+    "101": 2222
+  }
+}

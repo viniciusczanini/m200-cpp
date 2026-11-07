@@ -1,0 +1,6 @@
+test_all_bases_complete_and_write_only_the_explicit_new_report (test_timer_property_stress.TimerPropertyStressTests) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 35.001s
+
+OK

@@ -1,0 +1,18 @@
+{
+  "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/modbus-no-transport/cases.json": {
+    "bytes": 3136,
+    "sha256": "6b27cb12babd1786b0f2b48aa343b3727510425f9cb307658dddc3a068253b06"
+  },
+  "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/modbus-no-transport/generated.smbp": {
+    "bytes": 206154,
+    "sha256": "dc97f8c9cb4132c37aa058461597bffa639543bd1315d03065981135ac6ea562"
+  },
+  "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/modbus-no-transport/modbus.cpp": {
+    "bytes": 1378,
+    "sha256": "3070d6c8efd1be9def5cfb9279ea1ed7af07e5b8d008552a0ad795116b3c5260"
+  },
+  "/Users/tommy/Offline/projects/m200-cpp/output/parallel-implementation-2026-11-06/integration/batch-final-1/test-batch/batch/modbus-no-transport/program.m200.json": {
+    "bytes": 7346,
+    "sha256": "f1df092ea009d58d15d101d51a1d81615c324aa1c7d2935c2c06c25a99fdff98"
+  }
+}

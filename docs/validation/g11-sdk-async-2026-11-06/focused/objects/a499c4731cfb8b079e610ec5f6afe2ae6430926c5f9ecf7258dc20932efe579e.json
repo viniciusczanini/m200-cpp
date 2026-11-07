@@ -1,0 +1,28 @@
+{
+  "cancel_count": 0,
+  "configured_index_data": {
+    "block": 100
+  },
+  "flags": {
+    "S17": false,
+    "S18": false,
+    "SW17": 0
+  },
+  "known_words": {},
+  "poison": {},
+  "request_hexes": [],
+  "request_ids": [],
+  "request_links": [],
+  "snapshots": [],
+  "statuses": {
+    "block": {
+      "aborted": false,
+      "busy": false,
+      "comm_error": 6,
+      "done": false,
+      "error": true,
+      "oper_error": 0
+    }
+  },
+  "words": {}
+}

@@ -1,0 +1,16 @@
+{
+  "command": [
+    "python3",
+    "-m",
+    "unittest",
+    "-v",
+    "test_modbus_sdk_async.NativeModbusAsync.test_timeout_channel_ownership_and_abort_release"
+  ],
+  "cwd": "repo",
+  "environment_overrides": {
+    "M200_G11_TEST_OUTPUT": "evidence/focused-channel-artifacts",
+    "PYTHONPATH": "repo/tests"
+  },
+  "returncode": 0,
+  "seconds": 2.852766916
+}

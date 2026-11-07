@@ -1,13 +1,19 @@
-# Current goal: Natal da Liberdade release
+# Global working goal: Natal da Liberdade release
 
 User scope revision: 2026-11-06. This release goal supersedes the earlier
 requirement to finish whole-controller parity in the current delivery.
-The [full parity contract](PARITY.md) remains a future-version objective.
+The [full parity contract](PARITY.md) is a separate future-version backlog.
+It is not part of the active goal or this delivery's completion criteria.
 
 Deliver a practical restricted-C++ compiler/SDK for the Schneider TM200CE40T
 covering the Natal da Liberdade show. Prioritize correctness, compact Ladder
 and controller memory limits. Use algorithms, loops, clocks, comparisons and
 native blocks rather than expanded tables of application states.
+
+Keep and publish the already implemented capabilities beyond the show's minimum
+needs, with their existing tests and documented limits. Do not remove that work,
+restart stopped implementation lanes or expand acceptance to the full controller
+inventory. Extra work already delivered does not create new release obligations.
 
 ## Included
 
@@ -43,6 +49,13 @@ Completion means the Natal scope is integrated and passes its local and supporte
 official-editor/simulator acceptance cases. A defect that prevents those show
 programs from working remains required work. Other profile families stay in the
 future inventory and do not block this version.
+
+The final handoff must identify the admitted supported profiles, preserve
+unqualified domains as explicit limits, publish the exact local results and stop
+this execution wave. The user requested pausing the tool's older full-parity goal
+record after the Natal delivery; that record cannot be used to restart the future
+backlog automatically. The available goal API cannot replace an active objective's
+text, so this document records the current user-authorized scope.
 
 Windows/USB transfer, the physical TM200CE40T, electrical ports/loads, physical
 timing/communication and retention need the future access described by the user.

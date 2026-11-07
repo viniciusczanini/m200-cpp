@@ -1,0 +1,5 @@
+{
+  "returncode": 0,
+  "stderr": "RAW_START\nRAW_START\n",
+  "stdout": "{\"request_hexes\":[\"0300000002\",\"0300200001\"],\"request_ids\":[1,2],\"request_links\":[1,1],\"statuses\":{\"block\":{\"done\":true,\"busy\":false,\"aborted\":false,\"error\":false,\"comm_error\":0,\"oper_error\":0}},\"words\":{\"100\":11,\"101\":22,\"200\":33},\"poison\":{\"100\":0,\"101\":0,\"200\":0},\"cancel_count\":0,\"flags\":{\"S18\":false,\"S17\":false,\"SW17\":0},\"configured_index_data\":{\"block\":200},\"known_words\":{},\"snapshots\":[]}\n"
+}

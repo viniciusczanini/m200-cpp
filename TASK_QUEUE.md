@@ -1,10 +1,26 @@
-# Active implementation and validation queue
+# Natal delivery queue
 
-**Current user priority:** Natal release with G01/G02/G06/G07/G08/G09/G11 and three test agents. RTC stays active. The other thirteen implementation lanes are stopped with partial work preserved for a future version; do not restart them automatically. Follow [parallel delivery](docs/PARALLEL-DELIVERY.md); the historical serial queue below is superseded. Official simulator/editor work waits for the final batch.
+The global working goal is the **Natal release plus already implemented extras**.
+RTC is retained. Full-controller parity and the thirteen stopped lanes are not
+part of this goal. Existing code and partial work remain preserved.
 
-The current delivered/pending overview is in the [roadmap](docs/ROADMAP.md). Execution order and completion gates are defined in the [compiler completion plan](docs/superpowers/plans/2026-11-06-compiler-finish.md). Optimization is priority 0; the historical lanes below do not override that order.
+| Work | Disposition |
+|---|---|
+| Integrate G01/G02/G06/G07/G08/G09/G11 and retain implemented extras | Delivered; exact supported domains remain documented |
+| Local semantics, reverse conversion and optimization | Recorded; final integration results and explicit pending-oracle limits are in the handoff |
+| Finite official editor/simulator campaign | Closed; fourteen admitted editor saves, some runtime evidence for eleven composed profiles |
+| Publish final source and evidence | Final handoff; after publication pause the old goal record as requested |
 
-The full TM200CE40T parity goal remains active. Work is pulled from this queue whenever its prerequisites are available. Only the GUI lane operates the official editor/simulator. All builds and tests are local; GitHub Actions remains disabled.
+See the [current goal](docs/GOAL.md), [roadmap](docs/ROADMAP.md) and
+[delivery report](docs/validation/NATAL-DELIVERY.md). All tests/builds are local;
+GitHub Actions remains disabled. No new task is pulled automatically after this
+handoff. Physical acceptance and the [future inventory](docs/FUTURE-PARITY-BACKLOG.md)
+remain separate later work.
+
+## Historical queue — superseded, not an active dispatch list
+
+The rows below preserve earlier execution history. Their old “queued” or “next”
+labels do not authorize restarting work or extend the current Natal scope.
 
 | Priority | Task | Lane / owner | State | Next proof |
 |---|---|---|---|---|
@@ -51,9 +67,9 @@ See [official artifact evidence](docs/validation/OFFICIAL-EDITOR-RESULTS.json), 
 - Native FIFO/LIFO: handbuilt diagnostics saved/fresh-reopened and bounded runtime observed, including common I/O requests, 16-item capacity and overflow. FIFO reset/edge-history collisions are recorded separately; LIFO repeats and self-status evaluation are next. Full Register support remains unfinished.
 - Dynamic TOF/TP and combined timer options: prepared paired controls; unobserved contexts remain gated.
 
-## Current execution checkpoint
+## Historical Register execution checkpoint
 
 - Register C++/SDK/VM/configuration/Ladder/reverse integration:799 frozen local tests passed,330 pinned inputs unchanged; independent reviews, examples and ten optimization budgets passed. The unchanged dual example is22rungs/56IL,1M/0MW. [Exact evidence](docs/validation/REGISTER-INTEGRATION-RESULTS.md).
 - Official observations already recorded: exact dual output saved/freshly reopened No error; separate repeated-call FIFO program ran and showed Full, Reset/Empty, Full, then Empty/O11. The dual runtime and broader lifecycle/call contexts move to the final batched campaign.
-- Seven isolated implementation packages continue for the Natal priority release; thirteen are stopped with partial sources preserved. RTC is explicitly retained. Three test agents prepare scoped regression/semantic/interoperability cases. New lane source is unvalidated until integrated and tested; no remaining whole-profile phase is declared complete.
+- At that earlier checkpoint, seven isolated implementation packages continued for the Natal release and thirteen were stopped. This is superseded by the handoff above; all partial sources remain preserved. RTC is explicitly retained. Three test agents prepare scoped regression/semantic/interoperability cases. New lane source is unvalidated until integrated and tested; no remaining whole-profile phase is declared complete.
 - The previous ordinary-constant release remains recorded at741tests,46/103 movement and bounded native simulator controls. Existing native SR/timer/Modbus gates retain their artifact-specific scopes. GitHub Actions remains disabled; only local validation is authorized.

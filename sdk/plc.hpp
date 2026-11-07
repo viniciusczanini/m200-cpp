@@ -567,11 +567,15 @@ inline int communication_counts[3]={};
 // Explicit test transport callback. No device or success is fabricated by default.
 inline CommunicationResult (*communication_hook)(const CommunicationConfig&,int,bool,bool,unsigned long long,unsigned short*) = nullptr;
 }
+#include "plc_modbus_async.hpp"
 class Communication {
     detail::CommunicationConfig config;
     int index;
     int native_link;
     detail::CommunicationConfig active_config{};
+    detail::ModbusExecution async_state{};
+    decltype(detail::communication_hook) legacy_hook=nullptr;
+    bool legacy_active=false;
     detail::CommunicationResult state;
     bool initialized=false,old_execute=false,old_abort=false;
     bool property_allowed(CommProperty field) const {
@@ -580,47 +584,36 @@ class Communication {
         if(f<=3)return true;
         return config.kind==2?f>=7:f<=6;
     }
-    bool parameters_valid() const {
-        if((config.link!=1&&config.link!=2)||config.timeout<0)return false;
-        int minimum=config.kind==1&&config.link==1?0:1;
-        if(config.id<minimum||config.id>(config.link==1?247:16))return false;
-        if(config.first<0||config.first>65535||config.index<0||config.index>7999)return false;
-        int count=config.quantity,words=count;
-        if(config.kind==0) {
-            if(config.obj<0||config.obj>3)return false;
-            int maximum=(config.obj==1||config.obj==2)?2000:125;
-            if(count<1||count>maximum)return false;
-            if(config.obj==1||config.obj==2)words=(count+15)/16;
-        } else if(config.kind==1) {
-            if(config.obj==4||config.obj==5){count=1;words=1;}
-            else {
-                if(config.obj!=0&&config.obj!=2)return false;
-                if(count<1||count>(config.obj==2?1968:123))return false;
-                if(config.obj==2)words=(count+15)/16;
-            }
-        } else {
-            if(config.obj!=0||count<1||count>121)return false;
-            if(config.first_read<0||config.first_read>65535||config.read_quantity<1||config.read_quantity>125||config.first_read+config.read_quantity>65536)return false;
-            if(config.index_in<0||config.index_in+config.read_quantity>8000)return false;
-        }
-        return config.first+count<=65536&&config.index+words<=8000;
-    }
+    bool parameters_valid() const {return detail::modbus_parameters_valid(config);}
 public:
     Communication(int kind,Link link,int id,int timeout,Object obj,int first,int qty,int data,int read_first=0,int read_qty=1,int in_data=0,int native_index=-1)
       :config{kind,(int)link,id,timeout,(int)obj,first,qty,data,read_first,read_qty,in_data},index(native_index<0?detail::communication_counts[kind]++:native_index),native_link(link==Link::Serial1?1:3){if(index<0||index>=32)__builtin_trap();}
+    Communication(const Communication&)=delete;
+    Communication& operator=(const Communication&)=delete;
+    Communication(Communication&&)=delete;
+    Communication& operator=(Communication&&)=delete;
+    ~Communication(){detail::modbus_release(async_state,this,true);}
     bool update(bool execute,bool abort) {
         bool edge=initialized && execute && !old_execute;
         bool cancel=initialized && abort && !old_abort;
-        if(!state.busy&&edge&&!cancel&&!parameters_valid()) {
+        detail::modbus_clock(detail::now_ms);
+        if(async_state.active || (!legacy_active &&
+                (detail::modbus_transport_installed() || !detail::communication_hook))) {
+            state=detail::modbus_update(async_state,this,config,state,execute,edge,
+                cancel,detail::now_ms,detail::words);
+        } else if(!state.busy&&edge&&!cancel&&!parameters_valid()) {
             state={};state.error=true;state.comm_error=6;
-        } else if(detail::communication_hook) {
-            // The adapter sees the captured configuration while Busy, even if
-            // the program writes properties before the next invocation.
-            if(!state.busy) active_config=config;
-            state=detail::communication_hook(active_config,index,execute,abort,detail::now_ms,detail::words);
         } else {
-            if(!execute) state={};
-            if(edge&&!cancel){state={};state.error=true;state.comm_error=255;state.oper_error=15;}
+            // Deprecated status-provider compatibility. Capture both function
+            // and config until it leaves Busy, even if globals are rebound.
+            // Such a rebind cannot turn an active legacy request into raw I/O.
+            if(!legacy_active) {
+                active_config=config;
+                legacy_hook=detail::communication_hook;
+            }
+            state=legacy_hook(active_config,index,execute,abort,detail::now_ms,detail::words);
+            legacy_active=state.busy;
+            if(!legacy_active)legacy_hook=nullptr;
         }
         initialized=true;old_execute=execute;old_abort=abort;return state.done;
     }

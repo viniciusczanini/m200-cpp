@@ -1,0 +1,56 @@
+{
+  "coverage": [
+    "All FC1/2/3/4/5/6/15/16/23 literal request/response payloads and canaries",
+    "SDK-owned outgoing PDU lifetime, busy property/destination capture, next-request reconfigure",
+    "Opaque token0 and captured transport interface on rebind",
+    "Strict malformed function/count/length/padding/echo/exception/oversize atomic refusal",
+    "Abort with late bytes, timeout/zero-timeout, same-link exclusion/release and independent links",
+    "Broadcast/unicast acknowledgement distinctions, transport failure/missing/partial interface, firstTRUE and invalid config",
+    "READ/FC23 destination poison clearing only; malformed/abort preserve raw data+poison; sticky S18/S17/SW17 preserved; poisoned WRITE traps before transport"
+  ],
+  "handoff": {
+    "tests/parallel_semantics/adapters.json": "sources/tests/parallel_semantics/adapters.json",
+    "tests/parallel_semantics/g11_sdk_host.py": "sources/tests/parallel_semantics/g11_sdk_host.py",
+    "tests/test_modbus_sdk_async.py": "sources/tests/test_modbus_sdk_async.py"
+  },
+  "new_tests": {
+    "compile_attempts": 46,
+    "expected_or_oracle_changes": "none",
+    "expected_unknown_outgoing_word_traps": 1,
+    "focused_method_passed": 1,
+    "focused_seconds": 2.852766916,
+    "harness_failure": "One C++ identifier collision, preserved and corrected; only the affected method rerun.",
+    "initial_complete_methods_passed": 5,
+    "initial_seconds": 22.073694,
+    "methods": 6,
+    "product_failures": 0,
+    "unique_SDK_vectors": 43
+  },
+  "original_cases": {
+    "cases": 2,
+    "engines": [
+      "vm",
+      "sdk"
+    ],
+    "literal_oracles_unchanged": true,
+    "methods_passed": 4,
+    "seconds": 1.1714609169999999
+  },
+  "pins": {
+    "core_count": 74,
+    "private_core_changes": [],
+    "private_input_changes": [
+      "tests/parallel_semantics/g11_sdk_host.py"
+    ],
+    "private_input_count": 301,
+    "protected_oracle_and_VM_sources": "unchanged",
+    "root_core_differences": [],
+    "root_registry": "unchanged"
+  },
+  "scope": {
+    "GUI_physical_network_CI_fullsuite": "not_run",
+    "remaining_native_oracles": "not modified or promoted",
+    "root_source_or_registry_edits": "none"
+  },
+  "status": "PASS_SCOPED_ORIGINAL_CASES_AND_FINITE_SDK_RAW_TRANSPORT_VECTORS"
+}

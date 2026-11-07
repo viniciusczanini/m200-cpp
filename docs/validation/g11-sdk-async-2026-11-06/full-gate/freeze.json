@@ -1,0 +1,38 @@
+{
+  "allowed_untracked": [
+    "sdk/plc_modbus_async.hpp",
+    "tests/parallel_semantics/g11_sdk_host.py",
+    "tests/test_modbus_sdk_async.py"
+  ],
+  "bytes": 114506706,
+  "core_count": 74,
+  "created_utc": "2026-11-07T00:57:43.694956+00:00",
+  "excluded_helpers": [
+    "tests/christmas/panel_geometry.json",
+    "tests/christmas/read_panel.py",
+    "tests/parallel_semantics/g01_fix4_cases.py",
+    "tests/parallel_semantics/g01_fix4_report.py"
+  ],
+  "expected_integrated_hashes": {
+    "sdk/plc.hpp": "0ab4b1f538c45282252b80ac4577974ede33b02f423860a40b16c4ed863d0067",
+    "sdk/plc_modbus_async.hpp": "5e1279de801d649a64111b9fdaf4c568d4c00876566bd5716a8946576b06ae98",
+    "tests/parallel_semantics/adapters.json": "f0b3175743ce2ba049bccdf76820650e9a965266a83674312b7b2c6753509ef2",
+    "tests/parallel_semantics/g11_sdk_host.py": "16f14b80797cc87154bea326415aa67b1d23e34ffa6c1ce4a9e8c83de95fea8b",
+    "tests/test_modbus_sdk_async.py": "50891659cf915ea5968f349359d84f6f131aa14256d2adfd9b85bdfac66ae810"
+  },
+  "freeze_id": "g11-final-gate-1",
+  "input_pins_sha256": "79e257364eb36c98e9a28eeca3b63be95ec04ea6491fcc10fcfaedad3f9e378d",
+  "known_pending_failures": [
+    "parallel_semantics.G08_sc_middle_steps_and_exclusive_reset.vm",
+    "parallel_semantics.G08_sc_middle_steps_and_exclusive_reset.sdk",
+    "parallel_semantics.G01_edge_cold_warm_stop_RUN_history_is_not_guessed.vm",
+    "parallel_semantics.G01_edge_cold_warm_stop_RUN_history_is_not_guessed.sdk",
+    "parallel_semantics.G08_unresolved_native_domains_remain_visible_gaps.vm",
+    "parallel_semantics.G08_unresolved_native_domains_remain_visible_gaps.sdk"
+  ],
+  "selected_count": 1076,
+  "selection": "current worktree bytes of git tracked paths plus exactly three untracked exceptions",
+  "snapshot": "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/g11-final-gate-1/source",
+  "source_root": "/Users/tommy/Offline/projects/m200-cpp",
+  "tracked_count": 1073
+}

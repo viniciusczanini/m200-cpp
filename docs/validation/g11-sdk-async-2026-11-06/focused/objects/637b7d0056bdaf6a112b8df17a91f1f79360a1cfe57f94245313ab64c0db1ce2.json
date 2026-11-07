@@ -1,0 +1,76 @@
+{
+  "blocks": {
+    "first": {
+      "first_obj": 0,
+      "id": 1,
+      "index_data": 100,
+      "kind": "READ_VAR",
+      "link": "SL1",
+      "obj_type": 0,
+      "quantity": 1,
+      "timeout_100ms": 100
+    },
+    "second": {
+      "first_obj": 1,
+      "id": 2,
+      "index_data": 200,
+      "kind": "READ_VAR",
+      "link": "ETH1",
+      "obj_type": 0,
+      "quantity": 1,
+      "timeout_100ms": 100
+    }
+  },
+  "events": [
+    {
+      "calls": [
+        {
+          "abort": false,
+          "block": "first",
+          "execute": false
+        },
+        {
+          "abort": false,
+          "block": "second",
+          "execute": false
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "abort": false,
+          "block": "first",
+          "execute": true
+        },
+        {
+          "abort": false,
+          "block": "second",
+          "execute": true
+        }
+      ],
+      "capture": [
+        "first",
+        "second"
+      ]
+    },
+    {
+      "calls": [
+        {
+          "abort": true,
+          "block": "first",
+          "execute": true
+        },
+        {
+          "abort": true,
+          "block": "second",
+          "execute": true
+        }
+      ]
+    }
+  ],
+  "initial_words": {
+    "100": 1111,
+    "200": 2222
+  }
+}

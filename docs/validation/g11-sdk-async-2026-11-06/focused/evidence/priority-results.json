@@ -1,0 +1,41 @@
+{
+  "command": {
+    "cwd": "repo",
+    "engines": [
+      "vm",
+      "sdk"
+    ],
+    "python": "python3",
+    "selection": [
+      "G11_abort_prevents_late_response_buffer_mutation",
+      "G11_busy_dynamic_buffer_change_does_not_redirect_active_read"
+    ]
+  },
+  "errors": [],
+  "executions": [
+    {
+      "case": "G11_busy_dynamic_buffer_change_does_not_redirect_active_read",
+      "engine": "vm",
+      "work": "evidence/priority/G11_busy_dynamic_buffer_change_does_not_redirect_active_read/vm/work"
+    },
+    {
+      "case": "G11_busy_dynamic_buffer_change_does_not_redirect_active_read",
+      "engine": "sdk",
+      "work": "attempt:priority/G11_busy_dynamic_buffer_change_does_not_redirect_active_read/sdk"
+    },
+    {
+      "case": "G11_abort_prevents_late_response_buffer_mutation",
+      "engine": "vm",
+      "work": "evidence/priority/G11_abort_prevents_late_response_buffer_mutation/vm/work"
+    },
+    {
+      "case": "G11_abort_prevents_late_response_buffer_mutation",
+      "engine": "sdk",
+      "work": "attempt:priority/G11_abort_prevents_late_response_buffer_mutation/sdk"
+    }
+  ],
+  "failures": [],
+  "seconds": 1.1714609169999999,
+  "status": "passed_original_four_methods",
+  "tests": 4
+}

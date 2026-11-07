@@ -1,0 +1,9 @@
+======================================================================
+FAIL: runTest (parallel_semantics.test_semantics.semantic_case.<locals>.SemanticCase)
+parallel_semantics.G01_edge_cold_warm_stop_RUN_history_is_not_guessed.vm
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/g11-final-gate-1/source/tests/parallel_semantics/test_semantics.py", line 27, in runTest
+    raise PendingOracleError(case.name+": "+case.oracle_status+"; "+case.basis)
+parallel_semantics.contracts.PendingOracleError: G01_edge_cold_warm_stop_RUN_history_is_not_guessed: pending_contract_or_native_oracle; Native lifecycle equivalence remains pending. CONTRACT/DELIVERY must state the exact local event policy before an oracle is admitted.
+

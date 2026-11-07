@@ -1,0 +1,32 @@
+{
+  "config": {
+    "first_obj": 0,
+    "id": 1,
+    "index_data": 100,
+    "kind": "READ_VAR",
+    "link": "SL1",
+    "quantity": 1
+  },
+  "events": [
+    {
+      "abort": false,
+      "execute": false
+    },
+    {
+      "execute": true,
+      "transport_pending": true
+    },
+    {
+      "abort": true,
+      "execute": true
+    },
+    {
+      "execute": true,
+      "late_response_hex": "03020063"
+    }
+  ],
+  "initial_words": {
+    "100": 12345
+  },
+  "scenario": "abort_late_response"
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "profile": "g09-rtc-clock-lights",
+    "purpose": "Read controller date/time before RUN",
+    "source_capture": "skill-1794012015728287000-2146.png",
+    "image": "images/47ece8a5b49049525f68f44ff41bee65d8d16c059b08c487fa28914dd4b3d4b3.png",
+    "sha256": "47ece8a5b49049525f68f44ff41bee65d8d16c059b08c487fa28914dd4b3d4b3"
+  },
+  {
+    "profile": "g09-schedule-reservation",
+    "purpose": "Read controller date/time before RUN",
+    "source_capture": "skill-1794012151026413000-2146.png",
+    "image": "images/33a548da75b22cada8a80a08557c4bedbe1402192a11f16a96c2ef96f842a221.png",
+    "sha256": "33a548da75b22cada8a80a08557c4bedbe1402192a11f16a96c2ef96f842a221"
+  },
+  {
+    "profile": "g09-schedule-reservation",
+    "purpose": "Confirm reserved Used M0/M1; these are not live values",
+    "source_capture": "skill-1794012300595928000-2146.png",
+    "image": "images/64d456cbd529c569c5fd928f3671af47470275d1d9eaf76e940c7f97af2c93cb.png",
+    "sha256": "64d456cbd529c569c5fd928f3671af47470275d1d9eaf76e940c7f97af2c93cb"
+  },
+  {
+    "profile": "modbus-no-transport",
+    "purpose": "Read existing online rungs27..32: COMMERROR6/OPERERROR0; other writer/exchange diagnostics0",
+    "source_capture": "skill-1794012442241709000-2146.png",
+    "image": "images/3873f92b7bf3b2e611ae04b819e8548ac9b1406561625edbebd6bcbf6dd53f94.png",
+    "sha256": "3873f92b7bf3b2e611ae04b819e8548ac9b1406561625edbebd6bcbf6dd53f94"
+  },
+  {
+    "profile": "modbus-no-transport",
+    "purpose": "Final No error / Not Connected and disabled Stop simulator",
+    "source_capture": "skill-1794012494145771000-2146.png",
+    "image": "images/6cbb000e2aad8ca91361d830fe768fd65ca392411c7ab6965c6ee9e6c70ec3a9.png",
+    "sha256": "6cbb000e2aad8ca91361d830fe768fd65ca392411c7ab6965c6ee9e6c70ec3a9"
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "command": [
+    "clang++",
+    "-std=c++17",
+    "-O0",
+    "-I",
+    "repo/sdk",
+    "objects/41d1e4b720ce08d4bbfb5f535e9024665f30296c6e2e955d88ea81e3a7bbe4ee.cpp",
+    "-o",
+    "work/priority/G11_abort_prevents_late_response_buffer_mutation/sdk/host"
+  ],
+  "returncode": 0,
+  "stderr": ""
+}

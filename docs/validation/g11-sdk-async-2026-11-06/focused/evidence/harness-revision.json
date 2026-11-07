@@ -1,0 +1,7 @@
+{
+  "after_sha256": "16f14b80797cc87154bea326415aa67b1d23e34ffa6c1ce4a9e8c83de95fea8b",
+  "before_sha256": "5341303b6127f89a2e3045b8a68e5ff866dedfb79cb130e0832883e0a4be1ccd",
+  "cause": "The multi-block test names first/second collided with local Script transport-context names; compiler rejected the generated host before SDK execution.",
+  "correction": "Rename only generated transport-context identifiers to natal_raw_primary/natal_raw_alternate; no requests, expected bytes/statuses, product implementation or state logic changed.",
+  "repeat_scope": "Only test_timeout_channel_ownership_and_abort_release; no other five methods or original four inventory methods repeated."
+}

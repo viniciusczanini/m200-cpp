@@ -1,0 +1,437 @@
+[
+  {
+    "image": "images/166cebd020eff7f07a30cf51f12dff7b904618eb38f1b3794f3136d37dde63fc.png",
+    "sha256": "166cebd020eff7f07a30cf51f12dff7b904618eb38f1b3794f3136d37dde63fc",
+    "bytes": 18565,
+    "dimensions": [
+      640,
+      288
+    ],
+    "source_capture_names": [
+      "skill-1794012052615829000-6560.png",
+      "skill-1794012054367235000-6560.png",
+      "skill-1794012057901186000-6560.png",
+      "skill-1794012075073288000-6560.png"
+    ],
+    "purpose": "panel observation/oracle"
+  },
+  {
+    "image": "images/1f1c634dcd013f62143cc8249bde50d0f316ef75e9c207af78c52f01bad72077.png",
+    "sha256": "1f1c634dcd013f62143cc8249bde50d0f316ef75e9c207af78c52f01bad72077",
+    "bytes": 18716,
+    "dimensions": [
+      640,
+      288
+    ],
+    "source_capture_names": [
+      "skill-1794012050875869000-6560.png",
+      "skill-1794012056168324000-6560.png",
+      "skill-1794012059642777000-6560.png",
+      "skill-1794012061377862000-6560.png",
+      "skill-1794012063123612000-6560.png"
+    ],
+    "purpose": "panel observation/oracle"
+  },
+  {
+    "image": "images/2381b84ec5feb3496db6dcd2561fe6163e8ba27ad58e223ab2503b21c90469d2.png",
+    "sha256": "2381b84ec5feb3496db6dcd2561fe6163e8ba27ad58e223ab2503b21c90469d2",
+    "bytes": 17981,
+    "dimensions": [
+      640,
+      288
+    ],
+    "source_capture_names": [
+      "skill-1794012150837008000-6611.png",
+      "skill-1794012183046215000-6611.png"
+    ],
+    "purpose": "panel observation/oracle"
+  },
+  {
+    "image": "images/33a548da75b22cada8a80a08557c4bedbe1402192a11f16a96c2ef96f842a221.png",
+    "sha256": "33a548da75b22cada8a80a08557c4bedbe1402192a11f16a96c2ef96f842a221",
+    "bytes": 269453,
+    "dimensions": [
+      4128,
+      2596
+    ],
+    "source_capture_names": [
+      "skill-1794012151026413000-2146.png"
+    ],
+    "purpose": "target/RTC/word/status full editor evidence"
+  },
+  {
+    "image": "images/3579f87b23e0b0fdc70d9ca53f193d1f13c6368780a056607b5e9baecbfbb92c.png",
+    "sha256": "3579f87b23e0b0fdc70d9ca53f193d1f13c6368780a056607b5e9baecbfbb92c",
+    "bytes": 18610,
+    "dimensions": [
+      640,
+      288
+    ],
+    "source_capture_names": [
+      "skill-1794011918377297000-6515.png",
+      "skill-1794011920116180000-6515.png",
+      "skill-1794011930517884000-6515.png"
+    ],
+    "purpose": "panel observation/oracle"
+  },
+  {
+    "image": "images/3873f92b7bf3b2e611ae04b819e8548ac9b1406561625edbebd6bcbf6dd53f94.png",
+    "sha256": "3873f92b7bf3b2e611ae04b819e8548ac9b1406561625edbebd6bcbf6dd53f94",
+    "bytes": 445263,
+    "dimensions": [
+      4128,
+      2596
+    ],
+    "source_capture_names": [
+      "skill-1794012442241709000-2146.png"
+    ],
+    "purpose": "target/RTC/word/status full editor evidence"
+  },
+  {
+    "image": "images/3eeedfebd50b89c0edb7dc1e4a17f9b1045498278414716cf575ea183c3694ee.png",
+    "sha256": "3eeedfebd50b89c0edb7dc1e4a17f9b1045498278414716cf575ea183c3694ee",
+    "bytes": 18367,
+    "dimensions": [
+      640,
+      288
+    ],
+    "source_capture_names": [
+      "skill-1794011911516653000-6515.png",
+      "skill-1794011913244314000-6515.png",
+      "skill-1794011947651842000-6515.png",
+      "skill-1794011952987342000-6515.png"
+    ],
+    "purpose": "panel observation/oracle"
+  },
+  {
+    "image": "images/42fe1ca018ff93b24a8fe85b5a149f74f2908ba03a2d84f48f148cd4bed7a754.png",
+    "sha256": "42fe1ca018ff93b24a8fe85b5a149f74f2908ba03a2d84f48f148cd4bed7a754",
+    "bytes": 18595,
+    "dimensions": [
+      640,
+      288
+    ],
+    "source_capture_names": [
+      "skill-1794012220824496000-6611.png"
+    ],
+    "purpose": "panel observation/oracle"
+  },
+  {
+    "image": "images/47ece8a5b49049525f68f44ff41bee65d8d16c059b08c487fa28914dd4b3d4b3.png",
+    "sha256": "47ece8a5b49049525f68f44ff41bee65d8d16c059b08c487fa28914dd4b3d4b3",
+    "bytes": 267563,
+    "dimensions": [
+      4128,
+      2596
+    ],
+    "source_capture_names": [
+      "skill-1794012015728287000-2146.png"
+    ],
+    "purpose": "target/RTC/word/status full editor evidence"
+  },
+  {
+    "image": "images/50aa4c4e2a3ae5b5cf815b53d816363eaade88d51fb2fdb5737d0265fc35c2ed.png",
+    "sha256": "50aa4c4e2a3ae5b5cf815b53d816363eaade88d51fb2fdb5737d0265fc35c2ed",
+    "bytes": 18532,
+    "dimensions": [
+      640,
+      288
+    ],
+    "source_capture_names": [
+      "skill-1794012236557570000-6611.png"
+    ],
+    "purpose": "panel observation/oracle"
+  },
+  {
+    "image": "images/57f7bb597b99dbb21c56da7ec6257cd47dc9b3d5f5a1680e9c62dd8d6142e450.png",
+    "sha256": "57f7bb597b99dbb21c56da7ec6257cd47dc9b3d5f5a1680e9c62dd8d6142e450",
+    "bytes": 18189,
+    "dimensions": [
+      640,
+      288
+    ],
+    "source_capture_names": [
+      "skill-1794012205220449000-6611.png"
+    ],
+    "purpose": "panel observation/oracle"
+  },
+  {
+    "image": "images/58c024b36c75dd490351261c427abd0b7847d7cd896dfe70740a1ad87969f52f.png",
+    "sha256": "58c024b36c75dd490351261c427abd0b7847d7cd896dfe70740a1ad87969f52f",
+    "bytes": 18801,
+    "dimensions": [
+      640,
+      288
+    ],
+    "source_capture_names": [
+      "skill-1794011921839497000-6515.png",
+      "skill-1794011923564587000-6515.png"
+    ],
+    "purpose": "panel observation/oracle"
+  },
+  {
+    "image": "images/64d456cbd529c569c5fd928f3671af47470275d1d9eaf76e940c7f97af2c93cb.png",
+    "sha256": "64d456cbd529c569c5fd928f3671af47470275d1d9eaf76e940c7f97af2c93cb",
+    "bytes": 474970,
+    "dimensions": [
+      4128,
+      2596
+    ],
+    "source_capture_names": [
+      "skill-1794012300595928000-2146.png"
+    ],
+    "purpose": "target/RTC/word/status full editor evidence"
+  },
+  {
+    "image": "images/6c68830fab83f8a98f89a904d65ee83d9af1a99653d8d8b284bc6d82b01f9dfe.png",
+    "sha256": "6c68830fab83f8a98f89a904d65ee83d9af1a99653d8d8b284bc6d82b01f9dfe",
+    "bytes": 18834,
+    "dimensions": [
+      640,
+      288
+    ],
+    "source_capture_names": [
+      "skill-1794011927056019000-6515.png"
+    ],
+    "purpose": "panel observation/oracle"
+  },
+  {
+    "image": "images/6cbb000e2aad8ca91361d830fe768fd65ca392411c7ab6965c6ee9e6c70ec3a9.png",
+    "sha256": "6cbb000e2aad8ca91361d830fe768fd65ca392411c7ab6965c6ee9e6c70ec3a9",
+    "bytes": 287510,
+    "dimensions": [
+      4128,
+      2596
+    ],
+    "source_capture_names": [
+      "skill-1794012358724809000-2146.png",
+      "skill-1794012494145771000-2146.png"
+    ],
+    "purpose": "target/RTC/word/status full editor evidence"
+  },
+  {
+    "image": "images/6f9235c4b2646a1be03234db5df8f22a75aed168a77115bbe3c57724a7dfa888.png",
+    "sha256": "6f9235c4b2646a1be03234db5df8f22a75aed168a77115bbe3c57724a7dfa888",
+    "bytes": 18728,
+    "dimensions": [
+      640,
+      288
+    ],
+    "source_capture_names": [
+      "skill-1794012068235644000-6560.png",
+      "skill-1794012069984785000-6560.png"
+    ],
+    "purpose": "panel observation/oracle"
+  },
+  {
+    "image": "images/7a39eb89b89f496c636c35ff2c03b750e9f66299c049c5d576b6e131b8ef788f.png",
+    "sha256": "7a39eb89b89f496c636c35ff2c03b750e9f66299c049c5d576b6e131b8ef788f",
+    "bytes": 311149,
+    "dimensions": [
+      4128,
+      2596
+    ],
+    "source_capture_names": [
+      "skill-1794012010552495000-2146.png"
+    ],
+    "purpose": "target/RTC/word/status full editor evidence"
+  },
+  {
+    "image": "images/7a92c29f400d85d6d96692cb675a6195d8cd366f9542d0a03ea712e05f154a72.png",
+    "sha256": "7a92c29f400d85d6d96692cb675a6195d8cd366f9542d0a03ea712e05f154a72",
+    "bytes": 18259,
+    "dimensions": [
+      640,
+      288
+    ],
+    "source_capture_names": [
+      "skill-1794012215486636000-6611.png"
+    ],
+    "purpose": "panel observation/oracle"
+  },
+  {
+    "image": "images/813437ce77d85c511fbbe7cb9c7e08a4ea26c9f903521b4e114004e5fb11bddd.png",
+    "sha256": "813437ce77d85c511fbbe7cb9c7e08a4ea26c9f903521b4e114004e5fb11bddd",
+    "bytes": 18392,
+    "dimensions": [
+      640,
+      288
+    ],
+    "source_capture_names": [
+      "skill-1794012400763326000-6678.png",
+      "skill-1794012402773239000-6678.png",
+      "skill-1794012407825742000-6678.png",
+      "skill-1794012431540635000-6678.png"
+    ],
+    "purpose": "panel observation/oracle"
+  },
+  {
+    "image": "images/8e22ef20142a3cc09f3cbc4c821f8f70c964e663dc6b8ef0217eb87d81ab2607.png",
+    "sha256": "8e22ef20142a3cc09f3cbc4c821f8f70c964e663dc6b8ef0217eb87d81ab2607",
+    "bytes": 311118,
+    "dimensions": [
+      4128,
+      2596
+    ],
+    "source_capture_names": [
+      "skill-1794012371752509000-2146.png"
+    ],
+    "purpose": "target/RTC/word/status full editor evidence"
+  },
+  {
+    "image": "images/9894a83ad2ed192fd4142036f29060fa2b38cad622060fb99232683ee500172b.png",
+    "sha256": "9894a83ad2ed192fd4142036f29060fa2b38cad622060fb99232683ee500172b",
+    "bytes": 18950,
+    "dimensions": [
+      640,
+      288
+    ],
+    "source_capture_names": [
+      "skill-1794011925310201000-6515.png",
+      "skill-1794011942512300000-6515.png"
+    ],
+    "purpose": "panel observation/oracle"
+  },
+  {
+    "image": "images/98fb691e71f12bc93682add0050875c40421ff9b66e5667cc20593b443094ad9.png",
+    "sha256": "98fb691e71f12bc93682add0050875c40421ff9b66e5667cc20593b443094ad9",
+    "bytes": 18776,
+    "dimensions": [
+      640,
+      288
+    ],
+    "source_capture_names": [
+      "skill-1794011935616928000-6515.png",
+      "skill-1794011937372449000-6515.png"
+    ],
+    "purpose": "panel observation/oracle"
+  },
+  {
+    "image": "images/9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026.png",
+    "sha256": "9b3043e86f32e5eca7f2151defe3d1a34b7a28b0a99872c01a41e70f0e0d2026",
+    "bytes": 18119,
+    "dimensions": [
+      640,
+      288
+    ],
+    "source_capture_names": [
+      "skill-1794011906273468000-6515.png",
+      "skill-1794012015995160000-6560.png",
+      "skill-1794012038948089000-6560.png",
+      "skill-1794012188101404000-6611.png",
+      "skill-1794012190114313000-6611.png",
+      "skill-1794012210344159000-6611.png",
+      "skill-1794012231424828000-6611.png",
+      "skill-1794012241678638000-6611.png",
+      "skill-1794012257288400000-6611.png",
+      "skill-1794012271214223000-6611.png",
+      "skill-1794012282034609000-6611.png",
+      "skill-1794012300389861000-6611.png",
+      "skill-1794012321161919000-6611.png",
+      "skill-1794012326618562000-6611.png",
+      "skill-1794012388693371000-6678.png",
+      "skill-1794012393948301000-6678.png",
+      "skill-1794012395957852000-6678.png",
+      "skill-1794012478721997000-6678.png",
+      "skill-1794012480740919000-6678.png",
+      "skill-1794012486047492000-6678.png"
+    ],
+    "purpose": "panel observation/oracle"
+  },
+  {
+    "image": "images/9fcb4e6fe1d87adb977b7355c8e005ea3a69247b8b2987e81cedf4b5ff367d2b.png",
+    "sha256": "9fcb4e6fe1d87adb977b7355c8e005ea3a69247b8b2987e81cedf4b5ff367d2b",
+    "bytes": 313439,
+    "dimensions": [
+      4128,
+      2596
+    ],
+    "source_capture_names": [
+      "skill-1794011883592423000-2146.png"
+    ],
+    "purpose": "target/RTC/word/status full editor evidence"
+  },
+  {
+    "image": "images/b7e5366fdc218d35ecc8af675b1c850303c49d8f7195d1a623d45a3ca004d9d4.png",
+    "sha256": "b7e5366fdc218d35ecc8af675b1c850303c49d8f7195d1a623d45a3ca004d9d4",
+    "bytes": 18461,
+    "dimensions": [
+      640,
+      288
+    ],
+    "source_capture_names": [
+      "skill-1794012226136274000-6611.png"
+    ],
+    "purpose": "panel observation/oracle"
+  },
+  {
+    "image": "images/be34de8887d2de3c7eb1611adc46d4f8b6ae1921796c7448d5499ff29f848f07.png",
+    "sha256": "be34de8887d2de3c7eb1611adc46d4f8b6ae1921796c7448d5499ff29f848f07",
+    "bytes": 18320,
+    "dimensions": [
+      640,
+      288
+    ],
+    "source_capture_names": [
+      "skill-1794012044012895000-6560.png",
+      "skill-1794012045761189000-6560.png",
+      "skill-1794012080229554000-6560.png",
+      "skill-1794012085835595000-6560.png",
+      "skill-1794012091334495000-6560.png",
+      "skill-1794012096837933000-6560.png"
+    ],
+    "purpose": "panel observation/oracle"
+  },
+  {
+    "image": "images/c4d4e401bd3919815439748bd29884d30cc6a105295198b31ad3695f41cf6c14.png",
+    "sha256": "c4d4e401bd3919815439748bd29884d30cc6a105295198b31ad3695f41cf6c14",
+    "bytes": 18239,
+    "dimensions": [
+      640,
+      288
+    ],
+    "source_capture_names": [
+      "skill-1794012194956743000-6611.png"
+    ],
+    "purpose": "panel observation/oracle"
+  },
+  {
+    "image": "images/d51424f51eb70f3935d8a20588139e5b87250feb5d20666ab62be0ad45a032bc.png",
+    "sha256": "d51424f51eb70f3935d8a20588139e5b87250feb5d20666ab62be0ad45a032bc",
+    "bytes": 19027,
+    "dimensions": [
+      640,
+      288
+    ],
+    "source_capture_names": [
+      "skill-1794011928772729000-6515.png"
+    ],
+    "purpose": "panel observation/oracle"
+  },
+  {
+    "image": "images/e0c3581c9a2fc0c8ec1d6fa95224449de3441dbf84833ec7067329ac275596af.png",
+    "sha256": "e0c3581c9a2fc0c8ec1d6fa95224449de3441dbf84833ec7067329ac275596af",
+    "bytes": 18150,
+    "dimensions": [
+      640,
+      288
+    ],
+    "source_capture_names": [
+      "skill-1794012200072330000-6611.png"
+    ],
+    "purpose": "panel observation/oracle"
+  },
+  {
+    "image": "images/e5b560fbe85d00885afd95203967f9199b1acba6823ce64cedd8f3f1b88ee4ec.png",
+    "sha256": "e5b560fbe85d00885afd95203967f9199b1acba6823ce64cedd8f3f1b88ee4ec",
+    "bytes": 313053,
+    "dimensions": [
+      4128,
+      2596
+    ],
+    "source_capture_names": [
+      "skill-1794012145682608000-2146.png"
+    ],
+    "purpose": "target/RTC/word/status full editor evidence"
+  }
+]

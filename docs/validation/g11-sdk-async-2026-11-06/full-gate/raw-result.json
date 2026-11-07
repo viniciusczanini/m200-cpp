@@ -1,0 +1,33 @@
+{
+  "command": {
+    "PYTHONPATH": "unset",
+    "argv": [
+      "make",
+      "check"
+    ],
+    "attempt": 1,
+    "authorized_runs": 1,
+    "cwd": "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/g11-final-gate-1/source",
+    "elapsed_seconds": 334.357529291,
+    "ended_utc": "2026-11-07T01:03:18.055425+00:00",
+    "environment_overrides": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONUNBUFFERED": "1",
+      "TMPDIR": "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/g11-final-gate-1/tmp"
+    },
+    "exit_code": 2,
+    "outputs": "raw log and generated output/TMPDIR outside snapshot",
+    "started_utc": "2026-11-07T00:57:43.695677+00:00",
+    "state": "COMPLETED"
+  },
+  "freeze": {
+    "bytes": 1974,
+    "sha256": "a6e0d2cbed93bd7b31d66a8e6a7f7368d189658dba6565c8185ac4855910782c",
+    "type": "file"
+  },
+  "log": {
+    "bytes": 133599,
+    "sha256": "23083dc2e48b476bb8f9e0f1653e2f056f55547643bb4ea7f1eb65efd567e3d8",
+    "type": "file"
+  }
+}

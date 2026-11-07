@@ -1,0 +1,14 @@
+{
+  "command": [
+    "clang++",
+    "-std=c++17",
+    "-O0",
+    "-I",
+    "repo/sdk",
+    "objects/cfb3637236f7fe51f9ce18456d6359f0ce2c7e63275c8571e6a58e00d2e57814.cpp",
+    "-o",
+    "work/priority/G11_busy_dynamic_buffer_change_does_not_redirect_active_read/sdk/host"
+  ],
+  "returncode": 0,
+  "stderr": ""
+}

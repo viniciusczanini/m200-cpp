@@ -96,3 +96,12 @@ until their corresponding gates actually run.
 The live dispatch ledger is local under
 `output/parallel-implementation-2026-11-06/`. This document describes execution,
 not completion. GitHub Actions remains disabled; all validation is local.
+
+## Natal handoff boundary
+
+The seven priority packages and already implemented extras are the active goal's
+entire scope. The finite editor/simulator campaign has closed; the final SDK
+integration checks and exact results are in the [delivery report](validation/NATAL-DELIVERY.md).
+The other thirteen implementation lanes stay stopped. After publication the
+user requested pausing the older full-parity goal record. Its historical text
+and the future inventory must not trigger more work automatically.

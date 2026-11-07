@@ -2,7 +2,10 @@
 
 > **Release-goal override, 2026-11-06:** the user moved full parity to a future
 > version. [GOAL.md](../../GOAL.md) defines the Natal delivery and its exit
-> criteria. Deferred work in this full completion plan does not block that release.
+> criteria, retaining already implemented extras. This full plan is preserved
+> history and future backlog, not an active instruction to pull unchecked tasks.
+> The user requested pausing after the Natal handoff. Deferred work does not block
+> that release and must not restart automatically.
 
 > **User execution override, 2026-11-06:** use the
 > [parallel delivery policy](../../PARALLEL-DELIVERY.md): twenty isolated

@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "python3",
+    "-m",
+    "unittest",
+    "-v",
+    "test_timer_property_stress.TimerPropertyStressTests.test_all_bases_complete_and_write_only_the_explicit_new_report"
+  ],
+  "attempt": 1,
+  "authorization": "Parent authorized one missing-corpus addition and one affected-method follow-up; no full gate rerun.",
+  "cwd": "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/g11-final-gate-1/source",
+  "elapsed_seconds": 35.063321666,
+  "ended_utc": "2026-11-07T01:05:35.540382+00:00",
+  "environment_overrides": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/g11-final-gate-1/source/tests",
+    "PYTHONUNBUFFERED": "1",
+    "TMPDIR": "/Users/tommy/Offline/projects/m200-cpp/output/final-native-campaign-2026-11-06-c706f6b/g11-final-gate-1/tmp"
+  },
+  "exit_code": 0,
+  "started_utc": "2026-11-07T01:05:00.476501+00:00",
+  "state": "COMPLETED"
+}

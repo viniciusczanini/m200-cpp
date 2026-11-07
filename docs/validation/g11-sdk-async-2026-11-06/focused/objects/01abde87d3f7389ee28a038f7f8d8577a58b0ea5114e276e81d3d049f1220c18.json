@@ -1,0 +1,14 @@
+{
+  "command": [
+    "clang++",
+    "-std=c++17",
+    "-O0",
+    "-I",
+    "repo/sdk",
+    "objects/0e9a4c1ca2b5d9ca3ac1d296389f413a379149350d95e50a89c2cac69887e5df.cpp",
+    "-o",
+    "work/initial/test_error_mapping_initial_edges_and_missing_transport-02/host"
+  ],
+  "returncode": 0,
+  "stderr": ""
+}
