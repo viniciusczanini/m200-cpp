@@ -17,7 +17,7 @@
   <a href="#documentation">Documentation</a>
 </p>
 
-> **Built for the TM200CE40T.** Write PLC logic in C++, generate a Ladder project, and inspect it in Schneider Electric’s official software. Selected generated projects have been opened and exercised in the official editor and simulator. Other models, project configurations, and physical-controller behavior require separate validation. This independent project is not certified or endorsed by Schneider Electric.
+> **Built for the TM200CE40T.** Write PLC logic in C++, generate a Ladder project, and inspect it in Schneider Electric’s official software. Other models, project configurations, and physical-controller behavior require separate validation. This independent project is not certified or endorsed by Schneider Electric.
 
 *The image above is an AI-generated illustration, not a wiring reference. For the actual device, see the [official TM200CE40T product page](https://www.se.com/in/en/product/TM200CE40T/controller-modicon-m200-40-io-transistor-source-ethernet/).*
 
@@ -80,7 +80,7 @@ This is **restricted C++**, not a general-purpose C++ runtime. The supported lan
 | **Project format** | Supported `.smbp` projects for **EcoStruxure Machine Expert Basic**, generated using an authentic project template for this exact target. |
 | **Other controllers** | Not supported or validated yet, including other M200 variants. Sharing a product family or editor does not establish compatibility. |
 | **Local tools** | Python 3.9+ and Clang with C++17 support. The recorded development environment is macOS with Apple Clang; other environments require their own checks. |
-| **Editor and hardware** | Selected artifacts have editor and simulator evidence. Test the exact generated project, editor version, configuration, and hardware before relying on it. |
+| **Editor and hardware** | Generated projects are intended for inspection in Machine Expert Basic; device behavior depends on the target and configuration. |
 
 Do not change a project file's model name to make another controller appear supported. Inputs, outputs, firmware, resource limits, project format, and behavior must be established for each target. See [supporting another PLC](#contributing-and-supporting-other-plcs).
 
@@ -165,26 +165,6 @@ Timer modes, communication profiles, special I/O, resource allocation, lifecycle
 
 The catalogue also records research and missing capabilities: an item being listed does **not** mean it is implemented or validated.
 
-## Validation
-
-We distinguish four different kinds of evidence:
-
-1. **Local compiler and model tests:** useful for repeatable traces, resource checks, and regression detection.
-2. **Official editor:** whether a particular generated project opens, shows the intended Ladder, checks, saves, and reopens.
-3. **Official simulator:** observed behavior for the particular inputs, outputs, and scenarios exercised.
-4. **Physical PLC:** behavior on the actual hardware, including wiring, timing, communication, and restart behavior.
-
-One level does not automatically prove the next. The [Natal project delivery](docs/validation/NATAL-DELIVERY.md) and [native editor checkpoint](docs/validation/NATAL-NATIVE-CHECKPOINT.md) document the selected projects and their limits. Historical local regression results include unresolved failures; consult the linked evidence rather than treating a historical count as a current passing build. The [validation records](docs/validation/) contain the detailed observations and reproducible artifacts.
-
-```sh
-# Run locally; see the getting-started guide for fixture prerequisites.
-make check
-make examples
-make optimization-stress
-```
-
-Some tests need explicit, hash-pinned public fixtures before running; they are not downloaded automatically. See [local development checks](docs/GETTING_STARTED.md#local-development-checks). **No remote CI is used; keep GitHub Actions disabled.**
-
 ## Contributing and supporting other PLCs
 
 Contributions are welcome, whether you want to improve the existing target, expand its supported subset, add examples, or investigate another PLC. Please start by describing the exact model, editor and firmware versions, the behavior you want, and the evidence available. Small, reproducible examples and clear expected results are especially useful.
@@ -194,7 +174,7 @@ For another controller, a practical contribution would include:
 1. **Document the target:** official model and manuals, I/O and memory limits, editor and firmware versions, project format, and required configuration.
 2. **Establish semantics:** scan order, initialization, timers, counters, communications, and any differences from the existing model. Similar-looking instructions may behave differently.
 3. **Implement explicit target support:** validate resource allocation and project read/write against that target's actual format and official examples; reject unknown forms rather than guessing.
-4. **Test in layers:** add local cases and round trips, then record separate official-editor, simulator, and hardware observations for exact artifacts. Preserve failures and limitations as well as successes.
+4. **Share a complete contribution:** include representative examples, document supported behavior and limitations, and explain the changes clearly.
 
 The current codebase is a starting point for this work, **not a promise that a new target can be enabled by changing a configuration string**. Relevant starting points:
 
@@ -207,14 +187,13 @@ The current codebase is a starting point for this work, **not a promise that a n
 | Examples and tests | [`examples/`](examples/) · [`tests/`](tests/) |
 | Scope, design, and open work | [Architecture](docs/ARCHITECTURE.md) · [Roadmap](docs/ROADMAP.md) · [Full parity goal](docs/PARITY.md) |
 
-Run checks locally, explain what was tested, and distinguish observed results from assumptions. This repository currently has no `LICENSE` file; contact the maintainer about reuse terms until one is published.
+This repository currently has no `LICENSE` file; contact the maintainer about reuse terms until one is published.
 
 ## Documentation
 
 - **New here?** [Getting started](docs/GETTING_STARTED.md) explains installation, commands, examples, and the official-editor handoff.
 - **Want the internals?** [Architecture and semantics](docs/ARCHITECTURE.md), [project format](docs/FORMAT.md), and [optimization](docs/OPTIMIZATION.md) describe the compiler and its constraints.
 - **Looking for a feature?** Browse the [capability inventory](docs/capabilities/README.md), [timers](docs/TIMERS-G07.md), [RTC](docs/RTC.md), and [Modbus](docs/MODBUS.md).
-- **Want the evidence?** Start with the [project delivery](docs/validation/NATAL-DELIVERY.md), [official editor checkpoint](docs/validation/NATAL-NATIVE-CHECKPOINT.md), and [local validation records](docs/validation/LOCAL-RESULTS.md).
 - **Planning future work?** See the [current goal](docs/GOAL.md), [roadmap](docs/ROADMAP.md), and [parity contract](docs/PARITY.md).
 
 Schneider Electric, Modicon, and EcoStruxure are names of their respective owners. This independent project is not affiliated with or endorsed by them.
