@@ -19,7 +19,7 @@
 
 > **Built for the TM200CE40T.** Write PLC logic in C++, generate a Ladder project, and inspect it in Schneider Electric’s official software. Other models, project configurations, and physical-controller behavior require separate validation. This independent project is not certified or endorsed by Schneider Electric.
 
-*The image above is an AI-generated illustration, not a wiring reference. For the actual device, see the [official TM200CE40T product page](https://www.se.com/in/en/product/TM200CE40T/controller-modicon-m200-40-io-transistor-source-ethernet/).*
+[Official TM200CE40T product page](https://www.se.com/in/en/product/TM200CE40T/controller-modicon-m200-40-io-transistor-source-ethernet/)
 
 ## Why this project exists
 
