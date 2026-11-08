@@ -1,6 +1,6 @@
 #include <plc.hpp>
 
-// Local experimental example. SMBP export is gated until FL10.0 mapping is proven.
+// Local example. SMBP export is gated until FL10.0 mapping is proven.
 bool channels[4] = {true};
 
 void scan() {

@@ -23,7 +23,7 @@ Somente registros eliminados sem referências remanescentes são removidos;
 símbolos, aliases e source-map são ajustados juntos. Literais podem aparecer
 diretamente em operações binárias, conforme G53–54; funções que exigem objeto
 mantêm seu snapshot. O budget de construção é 100.000 instruções intermediárias;
-o budget experimental de emissão permanece 10.000 e é conferido após otimizar.
+o limite atual de emissão permanece em 10.000 instruções e é conferido após otimizar.
 Esses números são limites da ferramenta e não uma certificação da capacidade
 de firmware, tempo de scan ou watchdog do PLC.
 

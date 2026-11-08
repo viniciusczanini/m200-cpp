@@ -50,7 +50,7 @@ full log remains exit 2. All 74 source pins were unchanged; no full retry ran.
 These results exercise the real C++ SDK with literal raw-PDU stimuli. They do not
 qualify native PLC transactions, wire framing, physical serial/TCP peers, timing
 or every lifecycle policy. The official simulator's separate READ error-path
-observation is recorded in the [Natal delivery](NATAL-DELIVERY.md); its observed
+observation is recorded in the [priority delivery](NATAL-DELIVERY.md); its observed
 COMMERROR=6 is not assigned a guessed cause or substituted with the SDK's default
 255/15 result. Full-controller parity and physical acceptance remain unfinished.
 

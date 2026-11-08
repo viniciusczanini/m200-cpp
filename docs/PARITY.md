@@ -1,16 +1,16 @@
 # Functional parity with the Schneider TM200CE40T profile
 
 > **Current release scope, revised by the user on 2026-11-06:** the
-> [Natal da Liberdade goal](GOAL.md) defines this delivery. This full parity
+> [priority goal](GOAL.md) defines this delivery. This full parity
 > contract remains the future-version objective; its deferred families do not
-> block the Natal release and are not claimed complete by that release.
+> block the priority release and are not claimed complete by that release.
 
 The user reinforced this requirement on 2026-11-05: every algorithm that can be
 programmed and accepted by the official software for their TM200CE40T must be
 expressible in C++ with this project's library, producing an equivalent project.
 
 This was the original whole-controller criterion. The user subsequently
-replaced the active goal with the bounded Natal delivery plus already implemented
+replaced the active goal with the bounded priority delivery plus already implemented
 extras. The requirements below are preserved only for a future version; they do
 not extend the current goal or restart stopped work.
 
@@ -114,7 +114,7 @@ does not demonstrate this reverse path.
   complete while any native algorithm/feature in the profile lacks a supported
   equivalent expression.
 
-The implementation remains experimental and partial. Local regression evidence,
+The implementation remains provisional and partial. Local regression evidence,
 including [LOCAL-RESULTS.md](validation/LOCAL-RESULTS.md), and the
 [capability inventory and pending work](capabilities/README.md) record progress.
 Official editor validation/save/reopen, official simulator execution, Windows/driver

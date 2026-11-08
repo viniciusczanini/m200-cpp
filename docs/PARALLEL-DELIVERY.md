@@ -2,10 +2,10 @@
 
 Execution policy changed by the user on 2026-11-06. This policy supersedes
 per-family serial execution and simulator gates in the earlier execution plan.
-The evidence requirements remain in force. The later Natal scope revision below
+The evidence requirements remain in force. The later priority scope revision below
 sets the current release boundary.
 
-## Natal da Liberdade priority release
+## Priority release
 
 The user subsequently requested a smaller active set to reduce token use and
 stop work unnecessary for the show. RTC/calendar/schedules were explicitly
@@ -26,7 +26,7 @@ not restarted automatically, and partial source is not merged as validated work.
 ## Work allocation
 
 - The initial dispatch created twenty isolated implementation lanes. Only the
-  seven Natal packages remain eligible for this release; thirteen are stopped.
+  seven priority packages remain eligible for this release; thirteen are stopped.
 - Implementation lanes do not run tests, builds, Wine or the official editor.
   They return actual source changes, an API contract, sources and explicit gaps.
 - Three dedicated test agents prepare independent cases in parallel: composed
@@ -97,7 +97,7 @@ The live dispatch ledger is local under
 `output/parallel-implementation-2026-11-06/`. This document describes execution,
 not completion. GitHub Actions remains disabled; all validation is local.
 
-## Natal handoff boundary
+## Delivery handoff boundary
 
 The seven priority packages and already implemented extras are the active goal's
 entire scope. The finite editor/simulator campaign has closed; the final SDK

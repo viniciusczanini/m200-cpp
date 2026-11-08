@@ -1,6 +1,6 @@
 # Formato e evidência
 
-O guia Schneider EIO0000003281.04 documenta `.smbp` como projeto e a reversibilidade IL/Ladder, incluindo restrições de blocos. Não foi localizado um XSD público suficiente para conferir sozinho todos os requisitos do editor. O backend atual é experimental.
+O guia Schneider EIO0000003281.04 documenta `.smbp` como projeto e a reversibilidade IL/Ladder, incluindo restrições de blocos. Não foi localizado um XSD público suficiente para conferir sozinho todos os requisitos do editor. O backend atual requer validação.
 
 O leitor/escritor foi baseado em propriedades observadas em arquivos originais públicos e na documentação, sem incorporar programas de terceiros. `ProjectDescriptor`, `SoftwareConfiguration/Pous/ProgramOrganizationUnits/Rungs/RungEntity`, `InstructionLines/InstructionLineEntity` e `LadderElements/LadderEntity` foram observados diretamente. Metadados de layout e enumerações não equivalem a um contrato oficial estável.
 

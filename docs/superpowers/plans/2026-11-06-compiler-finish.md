@@ -1,10 +1,10 @@
 # Compiler Completion Implementation Plan
 
 > **Release-goal override, 2026-11-06:** the user moved full parity to a future
-> version. [GOAL.md](../../GOAL.md) defines the Natal delivery and its exit
+> version. [GOAL.md](../../GOAL.md) defines the priority delivery and its exit
 > criteria, retaining already implemented extras. This full plan is preserved
 > history and future backlog, not an active instruction to pull unchecked tasks.
-> The user requested pausing after the Natal handoff. Deferred work does not block
+> The user requested pausing after the priority handoff. Deferred work does not block
 > that release and must not restart automatically.
 
 > **User execution override, 2026-11-06:** use the
@@ -161,4 +161,4 @@ This is a concrete capacity defect under this task's existing exception, not an 
 
 ## Explicitly after this delivery
 
-Additional Christmas effects, benchmark-source redesigns, cosmetic refactors, editor/window/Wine polish and optional size improvements beyond Task 2 are outside the critical path. None may postpone the numbered release gates. A concrete correctness/capacity regression always returns to its owning task.
+Additional lighting effects, benchmark-source redesigns, cosmetic refactors, editor/window/Wine polish and optional size improvements beyond Task 2 are outside the critical path. None may postpone the numbered release gates. A concrete correctness/capacity regression always returns to its owning task.

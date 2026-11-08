@@ -1,7 +1,7 @@
 # Deferred full-controller work
 
-This is a preserved backlog, not the active goal, execution queue or Natal
-release criterion. The user narrowed the global working goal to the Natal
+This is a preserved backlog, not the active goal, execution queue or priority
+release criterion. The user narrowed the global working goal to the priority
 delivery and already implemented extras. No item here restarts automatically.
 
 ## Preserved future inventory
@@ -18,7 +18,7 @@ delivery and already implemented extras. No item here restarts automatically.
 | 8 | Windows and physical TM200CE40T acceptance | Waiting for the future Windows/SSH/controller access described by the user. | Verify transfer, physical ports, timing/watchdog, retention, real communication and configured peripherals against release hashes. |
 
 Future milestones 2–6 contain substantial work beyond this release. They remain
-inactive after the Natal handoff. Windows/controller acceptance requires the
+inactive after the priority handoff. Windows/controller acceptance requires the
 future access described by the user.
 
 

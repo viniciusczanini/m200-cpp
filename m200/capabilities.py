@@ -1,7 +1,7 @@
 """Source-backed TM200CE40T inventory, separate from implementation support.
 
 Research records describe the controller. They do not establish support in this
-experimental toolchain, acceptance by Machine Expert Basic, or physical testing.
+toolchain, acceptance by Machine Expert Basic, or physical testing.
 All implementation stages remain missing until an explicit verified overlay is
 added. Source JSON cannot promote its own validation state.
 """

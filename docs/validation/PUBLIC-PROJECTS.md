@@ -100,7 +100,7 @@ não alterações nem uma importação do projeto original:
 Os oráculos são fórmulas booleanas, contagem, máquina de estados explícita,
 comparações Python e armazenamento IEEE754 independente. Não usam a VM,
 o C++ reconstruído ou a leitura numérica da implementação para calcular as
-saídas esperadas. A execução nativa usa o SDK experimental do projeto;
+saídas esperadas. A execução nativa usa o SDK em validação do projeto;
 a concordância dos três caminhos e do oráculo é evidência local dentro
 desse escopo, sem equivaler à validação oficial ou física.
 

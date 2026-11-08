@@ -1,10 +1,10 @@
 # Native SBR, SC and Drum resources
 
-This experimental pipeline has local compilation, execution and project/reverse
+This provisional pipeline has local compilation, execution and project/reverse
 evidence in the [integration record](validation/NATAL-INTEGRATION-PROGRESS.md).
 Unknown endpoint/collision/lifecycle domains remain explicitly gated; exact
 native acceptance belongs to the final official batch. [The goal](GOAL.md)
-defines the current Natal release; [parity](PARITY.md) is the future contract.
+defines the current priority release; [parity](PARITY.md) is the future contract.
 
 Declare native resources globally with explicit literal identities0..7:
 
@@ -117,4 +117,4 @@ Primary sources: Generic Functions EIO0000003289.04 pp103–104,141–158;
 M100/M200 Programming Guide EIO0000002019.06 pp21,25. Installed authored M200
 example and Entities.dll metadata facts/hashes are recorded in the lane's
 `SOURCES.json`. `examples/native_sequences.cpp` is an API illustration, not a
-validated fixture or any Natal da Liberdade effect.
+validated fixture or any application-specific effect.

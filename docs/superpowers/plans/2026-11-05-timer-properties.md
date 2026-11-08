@@ -17,7 +17,7 @@
 - Não afirmar compatibilidade oficial a partir de XML, testes próprios ou round trip.
 - P é word0..9999; V é word de leitura; Q é BOOL de leitura. Base1ms somente TM0..5; índices0..254.
 - Esta etapa preserva IsDynamicPreset=false e IsRetentive=false. True permanece lacuna explícita, sem mudar a meta integral.
-- Saltos não congelam o estado interno; saída ligada ao bloco só é escrita quando o bloco executa. Relógio local discreto é experimental.
+- Saltos não congelam o estado interno; saída ligada ao bloco só é escrita quando o bloco executa. Relógio local discreto requer validação.
 
 ## Review Focus
 

@@ -1,6 +1,6 @@
-# Natal delivery queue
+# Priority delivery queue
 
-The global working goal is the **Natal release plus already implemented extras**.
+The global working goal is the **priority release plus already implemented extras**.
 RTC is retained. Full-controller parity and the thirteen stopped lanes are not
 part of this goal. Existing code and partial work remain preserved.
 
@@ -20,7 +20,7 @@ remain separate later work.
 ## Historical queue — superseded, not an active dispatch list
 
 The rows below preserve earlier execution history. Their old “queued” or “next”
-labels do not authorize restarting work or extend the current Natal scope.
+labels do not authorize restarting work or extend the current priority scope.
 
 | Priority | Task | Lane / owner | State | Next proof |
 |---|---|---|---|---|
@@ -71,5 +71,5 @@ See [official artifact evidence](docs/validation/OFFICIAL-EDITOR-RESULTS.json), 
 
 - Register C++/SDK/VM/configuration/Ladder/reverse integration:799 frozen local tests passed,330 pinned inputs unchanged; independent reviews, examples and ten optimization budgets passed. The unchanged dual example is22rungs/56IL,1M/0MW. [Exact evidence](docs/validation/REGISTER-INTEGRATION-RESULTS.md).
 - Official observations already recorded: exact dual output saved/freshly reopened No error; separate repeated-call FIFO program ran and showed Full, Reset/Empty, Full, then Empty/O11. The dual runtime and broader lifecycle/call contexts move to the final batched campaign.
-- At that earlier checkpoint, seven isolated implementation packages continued for the Natal release and thirteen were stopped. This is superseded by the handoff above; all partial sources remain preserved. RTC is explicitly retained. Three test agents prepare scoped regression/semantic/interoperability cases. New lane source is unvalidated until integrated and tested; no remaining whole-profile phase is declared complete.
+- At that earlier checkpoint, seven isolated implementation packages continued for the priority release and thirteen were stopped. This is superseded by the handoff above; all partial sources remain preserved. RTC is explicitly retained. Three test agents prepare scoped regression/semantic/interoperability cases. New lane source is unvalidated until integrated and tested; no remaining whole-profile phase is declared complete.
 - The previous ordinary-constant release remains recorded at741tests,46/103 movement and bounded native simulator controls. Existing native SR/timer/Modbus gates retain their artifact-specific scopes. GitHub Actions remains disabled; only local validation is authorized.

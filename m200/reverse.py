@@ -162,7 +162,7 @@ def to_cpp(program, *, _local_context=False):
     else:
         validate(program)
     lines = [
-        "// Reconstructed from ACTUAL IL. Experimental; official validation pending.",
+        "// Reconstructed from ACTUAL IL. Official validation pending.",
         "// Addresses are explicit to preserve memory identity. Original C++ syntax is not recoverable.",
         "#include <plc.hpp>",
         "",

@@ -17,7 +17,7 @@ primárias registrados em `INDEXED-SEMANTICS.md`; não obteve aceitação extern
   elementos anteriores já inicializados.
 - RHS precede o cálculo do lvalue. Leituras indexadas são capturadas no ponto
   da expressão. Ramos inativos e curto-circuito não acessam índices inválidos.
-- Literais fora da faixa falham. Na política experimental para índice runtime
+- Literais fora da faixa falham. Na política em validação para índice runtime
   inválido, um offset sentinel provoca S20/fallback ao elemento0; a flag é
   sticky até limpeza explícita. O C++ desktop tem comportamento indefinido
   para `[]` fora da faixa; não se executa o original nesse domínio nos testes.
@@ -38,7 +38,7 @@ faixa lógica da imagem mesmo com temporários em endereços mais altos.
 |---|---|---|
 | C++ → IL/VM | implementado, testes locais | implementado, testes locais |
 | IL → C++ nativo e recompilação | implementado, testes locais | implementado, testes locais |
-| Projeto XML sintético e leitura de volta | exercitado, experimental | recusado explicitamente |
+| Projeto XML sintético e leitura de volta | exercitado, em validação | recusado explicitamente |
 | Editor oficial / simulador oficial / PLC | pendente | pendente |
 
 O manual documenta bits indexados a partir de nível funcional10.0. Ainda não

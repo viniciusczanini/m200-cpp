@@ -7,7 +7,7 @@ changed or rerun. Implementation remains with the owning lanes/coordinator.
 
 ## Current scope
 
-The user's Natal priority supersedes the initial G01..G10 assignment. Active:
+The user's release priority supersedes the initial G01..G10 assignment. Active:
 G01 Boolean/I/O/edges, G02 integer/flag semantics, G06 useful SR composition,
 G07 timers, G08 counters/Register/SBR/SC/DR, G09 RTC/calendar/schedules and G11
 local Modbus. Previously prepared G03/G04/G05/G10 cases and two new floating
@@ -91,7 +91,7 @@ The complete active suite cannot be called green while those gates remain.
 Snapshots observe raw u16 MW cells, explicit Q bits and selected flags at actual
 source positions. Timestamp/dt is applied after each scan. Float/ASCII future
 cases retain their own literal identities but are deferred; they are not part
-of the Natal success gate. The published ASCII vectors were preserved without
+of the priority success gate. The published ASCII vectors were preserved without
 resolving the manual's byte-order prose conflict by assumption.
 
 ## Explicit pending bindings and semantic gaps

@@ -1,4 +1,4 @@
-# Global working goal: Natal da Liberdade release
+# Global working goal: priority release
 
 User scope revision: 2026-11-06. This release goal supersedes the earlier
 requirement to finish whole-controller parity in the current delivery.
@@ -6,7 +6,7 @@ The [full parity contract](PARITY.md) is a separate future-version backlog.
 It is not part of the active goal or this delivery's completion criteria.
 
 Deliver a practical restricted-C++ compiler/SDK for the Schneider TM200CE40T
-covering the Natal da Liberdade show. Prioritize correctness, compact Ladder
+covering the priority use cases. Prioritize correctness, compact Ladder
 and controller memory limits. Use algorithms, loops, clocks, comparisons and
 native blocks rather than expanded tables of application states.
 
@@ -45,7 +45,7 @@ of equivalent C++ from the actual program/configuration.
    documentation in the personal public Git repository. All tests/builds stay
    local; GitHub Actions remains disabled.
 
-Completion means the Natal scope is integrated and passes its local and supported
+Completion means the priority scope is integrated and passes its local and supported
 official-editor/simulator acceptance cases. A defect that prevents those show
 programs from working remains required work. Other profile families stay in the
 future inventory and do not block this version.
@@ -53,7 +53,7 @@ future inventory and do not block this version.
 The final handoff must identify the admitted supported profiles, preserve
 unqualified domains as explicit limits, publish the exact local results and stop
 this execution wave. The user requested pausing the tool's older full-parity goal
-record after the Natal delivery; that record cannot be used to restart the future
+record after the priority delivery; that record cannot be used to restart the future
 backlog automatically. The available goal API cannot replace an active objective's
 text, so this document records the current user-authorized scope.
 

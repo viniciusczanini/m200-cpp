@@ -1,7 +1,7 @@
 """Conservative SMBP subset reader and template-preserving candidate writer.
 
 No public schema or official-editor verification is available. These outputs are
-experimental, even when their IL/graph representations agree locally.
+subject to validation, even when their IL/graph representations agree locally.
 """
 
 import hashlib
@@ -96,7 +96,7 @@ def element(parent, tag, text=None):
 def parse(path):
     data = Path(path).read_bytes()
     if len(data) > 20_000_000:
-        fail("project exceeds the experimental parser size limit")
+        fail("project exceeds the parser size limit")
     try:
         data.decode("utf-8-sig")
     except UnicodeDecodeError:
@@ -905,7 +905,7 @@ def write_project(program, template, destination):
             sw.remove(old)
     pous = element(sw, "Pous")
     pou = element(pous, "ProgramOrganizationUnits")
-    element(pou, "Name", "Generated C++ - EXPERIMENTAL")
+    element(pou, "Name", "Generated C++")
     element(pou, "SectionNumber", first_section)
     rungs = element(pou, "Rungs")
     for i, lines, full_communication, consumed in communication_serialized_rungs(
@@ -957,7 +957,7 @@ def write_project(program, template, destination):
                 [origin[j] if j < len(origin) else {} for j in range(i, i + consumed)]
             )
             if full_communication is not None and consumed == 5
-            else source + " | Experimental generated logic; official validation pending"
+            else source + " | Generated logic; official validation pending"
         )
         element(r, "MainComment", comment)
         label, _ = split_label(lines)
@@ -996,7 +996,7 @@ def write_project(program, template, destination):
                         full_communication_source_human_comment(view, full_communication)
                         + full_communication_origin_comment(origins)
                         if full_communication is not None and consumed == 5
-                        else "Experimental generated SR; official validation pending"
+                        else "Generated SR; official validation pending"
                         + sr_origin_comment(origins)
                     ),
                 )
@@ -1060,7 +1060,7 @@ def write_project(program, template, destination):
         element(allocation, "ForcedCount", required)
     name = root.find("Name")
     if name is not None:
-        name.text = "m200-cpp EXPERIMENTAL"
+        name.text = "m200-cpp"
     full = root.find("FullName")
     if full is not None:
         full.text = str(Path(destination).name)

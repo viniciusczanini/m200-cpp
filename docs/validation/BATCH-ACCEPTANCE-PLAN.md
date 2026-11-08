@@ -1,11 +1,11 @@
-# Natal integrated batch acceptance plan
+# Integrated batch acceptance plan
 
 **Status:** prepared, not executed. No new test, Clang build, project generation,
 Wine, Schneider editor, simulator, publication or Git action has run for this
 preparation. The existing frozen **799-test PASS** remains historical regression
 evidence; this work does not rerun or replace it.
 
-**Goal:** produce one finite, inspectable acceptance batch for the Natal version,
+**Goal:** produce one finite, inspectable acceptance batch for the priority version,
 using genuine C++ algorithms, compatible resource profiles and independent
 literal observations. Keep all **250 catalogue IDs** visible.
 

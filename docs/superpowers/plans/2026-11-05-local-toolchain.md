@@ -1,14 +1,14 @@
 # Local M200 Toolchain Implementation Plan
 
-> **For agentic workers:** Use superpowers:executing-plans inline. User authorized maximum local experimental work; Windows validation is explicitly deferred.
+> **For agentic workers:** Use superpowers:executing-plans inline. User authorized maximum local provisional work; Windows validation is explicitly deferred.
 
-**Goal:** Deliver a strict experimental C++/IL/SMBP toolchain with reverse C++ and independent native execution checks.
+**Goal:** Deliver a strict provisional C++/IL/SMBP toolchain with reverse C++ and independent native execution checks.
 
 **Architecture:** Clang AST frontend, boolean scan IR lowered to reversible IL, template-preserving XML backend, independent IL executor, native C++ SDK and reverse translator. Unknown syntax/configurations fail. No official-compatibility status may be emitted.
 
 **Tech Stack:** Python standard library, C++17, installed Clang. No remote CI or VM installation.
 
-**Spec:** `docs/superpowers/specs/2026-11-05-m200-cpp-design.md`, including the user's experimental/SSH and reverse-conversion amendments.
+**Spec:** `docs/superpowers/specs/2026-11-05-m200-cpp-design.md`, including the user's local-development, SSH and reverse-conversion amendments.
 
 ## Global Constraints
 
@@ -54,7 +54,7 @@ Files: `m200/project.py`, `m200/__main__.py`, `m200/cli.py`, `tests/fixtures/syn
 Interfaces: `load_project(Path) -> Program`; `write_project(Program, template, destination)`; CLI compile/decompile/check/inspect.
 
 - [x] Add RED tests for target/config rejection, IL/graphic mismatches and preservation of the template's hardware.
-- [x] Implement conservative XML handling and explicit experimental outputs/reports. Refuse certification.
+- [x] Implement conservative XML handling and explicit provisional outputs/reports. Refuse certification.
 - [x] Run full suite plus actual example CLI builds and reverse/native checks.
 
 ### Task 4: Documentation, examples and final review

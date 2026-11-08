@@ -29,7 +29,7 @@ A **PLC** is a small industrial computer that repeatedly reads inputs, runs a co
 
 The tool also has a reverse path: it can read supported project instructions and reconstruct C++ for inspection. It reads the real program, rather than retrieving a copy of the original source hidden in the file.
 
-This started with a real [Natal da Liberdade lighting project](docs/GOAL.md), where readable algorithms and compact generated Ladder mattered. The longer-term aim is broader functional coverage of the same controller, with a foundation that contributors can study and extend.
+The goal is to make PLC logic easier to write, review, and maintain, while expanding support for the controller and providing a foundation that contributors can study and extend.
 
 ## How it works
 

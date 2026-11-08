@@ -1,6 +1,6 @@
-# Modbus — experimental TM200CE40T profile
+# Modbus — TM200CE40T profile
 
-## Natal candidate: dynamic properties and requests
+## Integration candidate: dynamic properties and requests
 
 The integrated candidate adds `block.property(plc::CommProperty::Id)` and
 `block.set_property(plc::CommProperty::Id, value)` alongside the existing
@@ -75,7 +75,7 @@ O caminho inverso usa um construtor adicional com índice nativo como primeiro p
 
 O template deve ser autêntico do seu TM200CE40T e configurar o canal. O compilador não inventa endereços de equipamentos nem ativa uma porta de forma implícita. A SL1 requer o perfil explícito RS485/RTU/master. ETH1 requer um RemoteServer correspondente. A validação de funcionalidade suporta o formato de nível `FunctLevelManN_N`, com 16 instâncias por tipo antes de 10.1 e 32 a partir de 10.1. Nomes legados de nível ainda podem ser recusados.
 
-O XML admitido inclui READ de holding/input words e coils/discrete inputs, WRITE de holding words/coils e single coil/register, além de WRITE_READ_VAR com buffers MW assimétricos. Os perfis adicionais observados usam Man21 e SL1 master estática. READ I, WRITE Q e WRITE_READ MW admitem Execute/Abort com contatos M normais e as formas full-pin de status comprovadas; status parciais, reordenados ou intercalados permanecem rungs separados, na ordem original. Para serial foram observados 9600/19200 baud, ParityEven/ParityNone, DataBits8, StopBits1 e RS485/RTU. Outros canais, propriedades e formas gráficas precisam de seus próprios perfis. O candidato Natal adiciona a API de propriedades dinâmicas descrita acima; os resultados históricos deste parágrafo continuam limitados aos perfis estáticos observados. Os [produtos bare gerados](validation/MODBUS-BARE-ABORT-GENERATED-PROJECT-RESULTS.md) e [full-pin](validation/MODBUS-FULL-PIN-GENERATED-PROJECT-RESULTS.md) passaram save/fresh reopen com No error; isso não registra uma transação nativa bem-sucedida.
+O XML admitido inclui READ de holding/input words e coils/discrete inputs, WRITE de holding words/coils e single coil/register, além de WRITE_READ_VAR com buffers MW assimétricos. Os perfis adicionais observados usam Man21 e SL1 master estática. READ I, WRITE Q e WRITE_READ MW admitem Execute/Abort com contatos M normais e as formas full-pin de status comprovadas; status parciais, reordenados ou intercalados permanecem rungs separados, na ordem original. Para serial foram observados 9600/19200 baud, ParityEven/ParityNone, DataBits8, StopBits1 e RS485/RTU. Outros canais, propriedades e formas gráficas precisam de seus próprios perfis. O candidato de integração adiciona a API de propriedades dinâmicas descrita acima; os resultados históricos deste parágrafo continuam limitados aos perfis estáticos observados. Os [produtos bare gerados](validation/MODBUS-BARE-ABORT-GENERATED-PROJECT-RESULTS.md) e [full-pin](validation/MODBUS-FULL-PIN-GENERATED-PROJECT-RESULTS.md) passaram save/fresh reopen com No error; isso não registra uma transação nativa bem-sucedida.
 
 A configuração .NET é validada por tipo, posição e cardinalidade. Objetos desconhecidos não são instanciados nem ignorados. Alocações manuais precisam cobrir as referências e buffers; também são conferidos limites de bits/timers. Um candidato é relido antes de substituir o destino, preservando o arquivo anterior se a validação falhar. Isso não é uma validação do software oficial.
 

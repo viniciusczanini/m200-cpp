@@ -1,6 +1,6 @@
-# Natal integration progress
+# Integration progress
 
-Status: **2026-11-06 — bounded Natal handoff; historical and final gate results retained separately.**
+Status: **2026-11-06 — bounded delivery handoff; historical and final gate results retained separately.**
 
 All seven priority packages are connected in the working candidate. This is
 implementation progress, not an official compatibility or whole-profile claim.
@@ -71,7 +71,7 @@ descriptor notice/compiler-pin fields did change; the final candidate7 above
 used closed source and test inputs and recorded zero drift. No broad passing
 claim is derived from the earlier run.
 
-## Natal handoff update
+## Delivery handoff update
 
 The fourteen-project official editor campaign is complete, including corrections
 for native SW114 literals and omitted SBR/SC defaults. The finite simulator
@@ -92,9 +92,9 @@ the tracked-only snapshot; restoring its verified bytes and rerunning only the
 affected method passed. Raw full exit 2 and all failures remain preserved. All
 74 compiler/SDK pins stayed unchanged; no full retry or new product fix ran.
 
-The [Natal handoff](NATAL-DELIVERY.md) records the final combined regression,
+The [delivery handoff](NATAL-DELIVERY.md) records the final combined regression,
 exact artifacts and supported limits. The current global working scope includes
-Natal and already implemented extras; the full-controller backlog and thirteen
+priority and already implemented extras; the full-controller backlog and thirteen
 stopped lanes remain inactive. After publication, pause the older goal record as
 requested. Physical ports/loads, transfer, retention and real peers remain later
 external acceptance work.

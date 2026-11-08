@@ -57,7 +57,7 @@ Float32 não finito, SW17 e recuperação de erros de ponto flutuante, BCD/ASCII
 flags de outras instruções e ciclo de vida completo continuam trabalho aberto.
 Não confundir esta etapa de inteiros/shift com cobertura de todos os erros
 aritméticos. Reset/partida e comportamento físico exigem os artefatos exatos
-no editor e no TM200CE40T; tudo permanece experimental, sem atuação automática.
+no editor e no TM200CE40T; tudo permanece em validação, sem atuação automática.
 
 ## Verificação local
 

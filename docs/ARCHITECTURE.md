@@ -91,7 +91,7 @@ See [integer flags](capabilities/INTEGER-FLAGS.md), [conversions](capabilities/C
 
 Fixed-capacity arrays of `bool`, `i16`, `i32`, and `f32` accept literal or computed `bool`/`i16`/`i32` indices. Computed arrays occupy contiguous regions. Partial initializers and `{}` zero the remainder; uninitialized local arrays are refused. Globals initialize on first RUN and persist; locals reinitialize each time their declaration executes.
 
-Out-of-range literal indices fail compilation. For computed out-of-range indices, the experimental model sets sticky S20 and uses the first element as fallback after overflow-safe index validation. This is a tool policy; out-of-range `[]` is undefined in desktop C++, so differential tests do not run the original C++ in that domain. The reverse path recovers real operands and addresses, not necessarily array syntax.
+Out-of-range literal indices fail compilation. For computed out-of-range indices, the provisional model sets sticky S20 and uses the first element as fallback after overflow-safe index validation. This is a tool policy; out-of-range `[]` is undefined in desktop C++, so differential tests do not run the original C++ in that domain. The reverse path recovers real operands and addresses, not necessarily array syntax.
 
 Native indexed word APIs use an explicit global image:
 
@@ -112,7 +112,7 @@ The second argument is the literal **address of the index MW**, not the offset i
 
 Guards preserve the logical `WordMemory` extent even when compiler temporaries occupy higher addresses. The entire image is reserved. The local native model uses the highest directly referenced word as its bound; interactions with manual over-allocation, omitted/default XML allocation, and isolated symbols are not externally resolved. Ambiguous imported indexed profiles are refused.
 
-Raw native AND/OR contacts with indexed comparisons are blocked until their access/error order is established. C++ `&&`/`||` remain supported by emitting a snapshot/branch before the access. Indexed Operation/Comparison serialization is experimental and needs editor/PLC evidence.
+Raw native AND/OR contacts with indexed comparisons are blocked until their access/error order is established. C++ `&&`/`||` remain supported by emitting a snapshot/branch before the access. Indexed Operation/Comparison serialization is provisional and needs editor/PLC evidence.
 
 Computed boolean arrays and raw `read_m_indexed` / `write_m_indexed` work in C++/IL/VM/reverse. Raw access declares global `BitMemory` and `WordMemory` images, with the MW contents interpreted as a bit offset. **Indexed-bit SMBP import/export remains blocked** pending the documented FL10.0 mapping and target-profile evidence.
 

@@ -32,7 +32,7 @@ de vida após o consumidor. O revisor não relatou achados importantes/críticos
 A revisão executou os oito testes focados existentes naquele momento e
 comparou 1.500 programas aleatórios mistos de 8 scans contra a compilação com
 fusão desativada: 12.000 scans extras, conferindo saídas, words explícitos e
-S20. Também conferiu o limite experimental: 10.000 instruções aceitas e
+S20. Também conferiu o limite em validação: 10.000 instruções aceitas e
 10.002 recusadas após otimização. Esse limite não prova capacidade física.
 
 Depois da revisão, o implementador acrescentou um nono teste no IR do Lowerer:

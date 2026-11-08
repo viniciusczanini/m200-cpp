@@ -1,4 +1,4 @@
-"""Experimental local Modbus model; never opens a device connection implicitly.
+"""Local Modbus model; never opens a device connection implicitly.
 
 Configuration, edges, buffer packing and numeric status codes follow Schneider
 EIO0000003289.04 pp171-186,204-205. Wire encoding follows Modbus Application

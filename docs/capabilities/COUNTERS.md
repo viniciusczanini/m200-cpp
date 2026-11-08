@@ -1,4 +1,4 @@
-# Contadores comuns %C — contrato experimental
+# Contadores comuns %C — contrato em validação
 
 Meta integral em `../PARITY.md`; pesquisa e originais fixados em
 `COUNTER-RESEARCH.md` e `COUNTER-SOURCES.json`. Esta etapa acrescenta o recurso
@@ -23,7 +23,7 @@ estado como memória temporária nem alocar words para simular um recurso nativo
 ## Política local explícita, pendente de prova externa
 
 O manual não resolve todas as interações; G120/G122/G123 conflitam sobre E.
-O modelo experimental segue a tabela de operações G122: E marca0->9999 por
+O modelo em validação segue a tabela de operações G122: E marca0->9999 por
 CD e limpa na próxima contagem down; F marca9999->0 por CU e limpa na próxima
 contagem up. A outra direção conserva o flag anterior. Isso é uma hipótese
 local testável, não uma resolução do conflito do M200.

@@ -1,6 +1,6 @@
 # Parallel interop corpus — preparation only
 
-The user narrowed this release to the Christmas requirements on 2026-11-06:
+The user narrowed this release to the priority requirements on 2026-11-06:
 G01/G02/G06/G07/G08/G09/G11 remain active, including RTC. The new corpus is in
 `tests/parallel_interop/`. No test, build, syntax check, GUI, Wine, network access,
 commit or push was performed while preparing it. It does not modify the compiler,

@@ -1,6 +1,6 @@
 #include <plc.hpp>
 
-// Natal Revoada20, 10 outputs, 600ms/unit; formula + real bounded shift loop.
+// Revoada20, 10 outputs, 600ms/unit; formula + real bounded shift loop.
 // No frame table. While-loop position is bounded0..9; output write is packed16.
 // I0 START rising; I1 STOP; I2 RESET. STOP/RESET dominate and switch all Q off.
 // Two 1ms TON windows preserve sampled overshoot before their 9999ms limit.

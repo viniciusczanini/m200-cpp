@@ -78,4 +78,4 @@ opcodes, type/arity errors and invalid literal widths remain errors.
 Primary references: Generic Functions EIO0000003289.04 pp28,54–57,68–72 and
 M100/M200 Programming Guide EIO0000002019.06 pp322–323. Exact candidate tests,
 SDK gaps and native gates are in the
-[Natal integration record](validation/NATAL-INTEGRATION-PROGRESS.md).
+[integration record](validation/NATAL-INTEGRATION-PROGRESS.md).

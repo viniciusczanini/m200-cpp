@@ -439,5 +439,5 @@ class Storage:
             )
             > 10000
         ):
-            fail("experimental instruction budget exceeded after optimization")
+            fail("instruction budget exceeded after optimization")
         return program

@@ -1,8 +1,8 @@
-# Natal native acceptance checkpoint
+# Native acceptance checkpoint
 
 2026-11-06. **The finite editor/simulator campaign is closed with explicit limits.**
-This is an experimental software checkpoint, not a complete-controller or physical
-PLC qualification. The release scope remains [Natal da Liberdade](../GOAL.md).
+This is a software checkpoint with limited validation, not a complete-controller or physical
+PLC qualification. The release scope remains [the priority scope](../GOAL.md).
 
 The fixed batch contains eleven composed project profiles and three sequence
 observation probes. The selected official saves reopened with **No error**.
@@ -83,9 +83,9 @@ passed local raw-PDU snapshot/cancellation/codec checks. Its SDK result is
 separate from the official simulator observations. The exact native Modbus
 emission stayed identical to its pinned baseline.
 
-See the [Natal handoff](NATAL-DELIVERY.md) for the current scope and final local
+See the [delivery handoff](NATAL-DELIVERY.md) for the current scope and final local
 regression evidence. Already implemented extra capabilities are retained;
-deferred full-controller work does not block this experimental delivery.
+deferred full-controller work does not block this provisional delivery.
 
 Windows transfer, physical ports/loads, hardware timing, retention and real
 communication peers remain later external gates. All checks run locally;

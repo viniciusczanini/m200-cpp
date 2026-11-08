@@ -1,6 +1,6 @@
 # Resultado local — 2026-11-05
 
-Estado: protótipo experimental. O usuário autorizou desenvolver e testar localmente agora; Windows com software oficial e CLP será disponibilizado no futuro por SSH.
+Estado: protótipo em validação. O usuário autorizou desenvolver e testar localmente agora; Windows com software oficial e CLP será disponibilizado no futuro por SSH.
 
 ## Verificações executadas
 
@@ -27,7 +27,7 @@ Não houve uma segunda revisão independente; as correções foram verificadas p
 
 ## Decisões e limites mantidos
 
-- **Desenvolvimento antes do Windows:** autorizado pelo usuário. A geração experimental avança, mas a compatibilidade oficial permanece pendente. Custo: ainda não há um projeto comprovado no editor ou no CLP.
+- **Desenvolvimento antes do Windows:** autorizado pelo usuário. A geração em validação avança, mas a compatibilidade oficial permanece pendente. Custo: ainda não há um projeto comprovado no editor ou no CLP.
 - **Subconjunto booleano:** aritmética inteira, loops e demais recursos ainda não implementados são recusados. Custo: programas que o hardware talvez suporte precisam esperar extensão do frontend.
 - **Template exato:** usar um projeto autêntico TM200CE40T. A fixture sintética só testa o parser. Custo: o perfil/defaults reais ainda precisarão ser ajustados e validados quando houver editor.
 - **Base XML de timer de 10 ms:** exportação é recusada porque sua enumeração não foi estabelecida por um exemplo inspecionado. Custo: alguns programas com mais de seis timers de resolução fina só têm IL/modelo local nesta versão.
@@ -136,7 +136,7 @@ continuam no objetivo ativo; editor e PLC permanecem pendentes.
 ## Continuação do objetivo: indexação nativa de words
 
 `plc::WordMemory` e as seis operações read/write de MW/MD/MF indexadas por MW
-foram implementadas em frontend, IL, VM, SDK, reversão e XML experimental. A
+foram implementadas em frontend, IL, VM, SDK, reversão e XML em validação. A
 imagem inteira é reservada, incluindo limites e buffers; guardas preservam o
 limite lógico quando os temporários ficam mais altos. `%S20` é sticky e somente
 R/`clear_index_error()` pode limpá-lo. Índice inválido usa sentinel-32768 para
@@ -326,7 +326,7 @@ pendente e não foi substituída pela API de words explícitos.
 ## Continuação do objetivo: bits de words, grupos e portas digitais
 
 Após `d8b3e5a`, MW:X0..15 e grupos contíguos M/I0/Q0 têm APIs tipadas 16/32,
-IL/VM, SDK, reversão e XML experimental. Escritas preservam vizinhos e aliases
+IL/VM, SDK, reversão e XML em validação. Escritas preservam vizinhos e aliases
 MW/MD/MF; leituras menores preenchem os bits altos com zero. A cópia explícita
 captura snapshot antes da escrita, inclusive com sobreposição. Q usa a imagem
 de saída existente e enxerga escritas anteriores do mesmo scan. Regiões M
@@ -374,7 +374,7 @@ publicação ou transferência/atuação no PLC.
 ## Continuação do objetivo: contatos de borda nativos
 
 Após `292f5a2`, LDR/LDF, ANDR/ANDF, ORR/ORF e XORR/XORF têm suporte em
-I0/M diretos, com quatro APIs bool, IL/VM, SDK, reversão e XML experimental.
+I0/M diretos, com quatro APIs bool, IL/VM, SDK, reversão e XML em validação.
 Eventos são amostrados por endereço antes do CFG, independentemente de
 contatos pulados ou repetidos. M alterado no scan aparece no seguinte;
 pulsos internos entre amostragens não aparecem. Históricos locais começam

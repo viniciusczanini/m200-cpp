@@ -18,7 +18,7 @@
 - Índice é offset físico em words para MW/MD/MF; cada objeto MD/MF usa duas words. Casos de fronteira e a interpretação física precisam de ensaio externo.
 - `%S20` é sticky; usuário limpa com R, sem presumir S/ST permitidos.
 - WordMemory reserva toda a imagem0..count-1; configurações/importações com limites de indexação documentalmente ambíguos devem ser identificadas/recusadas, não aceitas por palpite.
-- Array C++ fora da faixa não tem semântica definida pela linguagem. Literais inválidos falham na compilação; política runtime experimental usa S20/fallback ao primeiro elemento e não é apresentada como garantia de C++ desktop.
+- Array C++ fora da faixa não tem semântica definida pela linguagem. Literais inválidos falham na compilação; política runtime em validação usa S20/fallback ao primeiro elemento e não é apresentada como garantia de C++ desktop.
 
 ## Review Focus
 

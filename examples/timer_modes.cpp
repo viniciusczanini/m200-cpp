@@ -1,7 +1,7 @@
 #include <plc.hpp>
 
 // %TM9: retain elapsed ticks when paused; apply new preset on next timer tick.
-// Experimental local example. SMBP export waits for functional-level mapping.
+// Local example. SMBP export waits for functional-level mapping.
 plc::Ton accumulated{9, 100, 5, true, true};
 
 void scan() {

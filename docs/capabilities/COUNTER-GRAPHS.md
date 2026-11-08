@@ -62,5 +62,5 @@ de alocação omitida para uma identidade esparsa, sem certificar o perfil exato
 
 Importar um rung isolado e comprová-lo localmente não é aceitar o projeto
 estrangeiro inteiro nem reescrever seu CPU. Editor/perfil TM200CE40T, schema e
-hardware continuam pendentes. BDD/roundtrip e o modelo experimental não provam
+hardware continuam pendentes. BDD/roundtrip e o modelo em validação não provam
 compatibilidade oficial ou encerram a biblioteca integral.

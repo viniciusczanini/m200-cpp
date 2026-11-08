@@ -234,7 +234,7 @@ def report(program):
         "tool": "m200-cpp",
         "version": __version__,
         "target": "TM200CE40T",
-        "status": "experimental",
+        "status": "pending_validation",
         "resources": {
             "memory_bits": len(addresses),
             "memory_capacity": 1024,
@@ -250,7 +250,7 @@ def report(program):
             "counters": len(program.counters),
             "required_counter_allocation": max(program.counters, default=-1) + 1,
             "counter_capacity_model": 255,
-            "counter_semantics": "experimental local policy; E conflict, input interactions and lifecycle require external confirmation",
+            "counter_semantics": "local policy; E conflict, input interactions and lifecycle require external confirmation",
             "registers": len(program.registers),
             "register_capacity": 4,
             "required_register_allocation": max(program.registers, default=-1) + 1,
@@ -315,7 +315,7 @@ def report(program):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(
-        description="Experimental C++ / IL / SMBP toolchain for TM200CE40T"
+        description="C++ / IL / SMBP toolchain for TM200CE40T"
     )
     parser.add_argument("--version", action="version", version=__version__)
     sub = parser.add_subparsers(dest="command", required=True)
@@ -354,7 +354,7 @@ def main(argv=None):
                 else capability_summary()
             )
             data["library"] = {
-                "status": "experimental_subset",
+                "status": "limited_subset",
                 "complete": False,
                 "numeric_types": list(TYPES),
                 "numeric_intrinsics": sorted(OPS),
@@ -493,7 +493,7 @@ def main(argv=None):
         if args.command == "decompile":
             decompile_file(args.project, args.output)
             print(
-                "Experimental C++ reconstructed from actual IL; official validation pending."
+                "C++ reconstructed from actual IL; official validation pending."
             )
             return 0
         if args.command == "inspect":

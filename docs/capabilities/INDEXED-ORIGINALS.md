@@ -38,7 +38,7 @@ O `ProjectVersion` abaixo é o campo do arquivo, não uma identificação inferi
 
 **T, testemunha adicional MD e distinção do alvo.** Original CPU=`TM221CE40T`, não CE40T da família M200. O rung ordinal10 contém `%MD10 := %MD10 + 1`, Operation Row0/Column9/`Left` (linha1400), e rungs6/11/16 contêm comparações MD em colunas3/5/7, com ramificações distintas. Demonstra que posição/conexão pertencem ao desenho concreto; não há uma única posição universal de Comparison.
 
-A forma estrutural constatada nos originais é `LadderEntity/ElementType=Operation` com filho `OperationExpression`, ou `ElementType=Comparison` com `ComparisonExpression`; Row, Column e ChosenConnection são irmãos desses campos. Não há prova de um novo enum “IndexedOperation”. A combinação de sintaxe indexada documentada com `OperationExpression` pode fundamentar uma implementação experimental, mas não equivale a um original gráfico indexado aceito pelo editor.
+A forma estrutural constatada nos originais é `LadderEntity/ElementType=Operation` com filho `OperationExpression`, ou `ElementType=Comparison` com `ComparisonExpression`; Row, Column e ChosenConnection são irmãos desses campos. Não há prova de um novo enum “IndexedOperation”. A combinação de sintaxe indexada documentada com `OperationExpression` pode fundamentar uma implementação em validação, mas não equivale a um original gráfico indexado aceito pelo editor.
 
 ## Manual, Automatic e %S20
 

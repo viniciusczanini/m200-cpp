@@ -1,9 +1,9 @@
-# Natal experimental delivery
+# Priority delivery
 
 The restricted-C++ toolchain for **Schneider TM200CE40T** is available for
-experimental testing. The native-project archive is frozen at `77bba32`; the
+provisional testing. The native-project archive is frozen at `77bba32`; the
 subsequent SDK update adds independently tested asynchronous Modbus execution.
-This document records acceptance evidence within the [current Natal goal](../GOAL.md).
+This document records acceptance evidence within the [current priority goal](../GOAL.md).
 It is not a fully qualified release: incomplete acceptance remains explicit.
 
 The [native-project ZIP](native-campaign-2026-11-06/native-projects-77bba32.zip)
@@ -88,8 +88,8 @@ compiler/SDK defect was observed; this is not a green whole-profile suite.
   the user.
 
 These limits are preserved explicitly; they do not restart the thirteen deferred
-packages or require whole-controller parity to close the Natal handoff. The user
+packages or require whole-controller parity to close the priority handoff. The user
 requested pausing the older global goal record after publication.
 
-This experimental delivery does not certify every controller capability.
+This provisional delivery does not certify every controller capability.
 All builds and tests are local. GitHub Actions remains disabled.

@@ -10,7 +10,7 @@ Patch de entrada: `/tmp/m200-goal-language-review.patch` (arrays e fluxo).
 
 **Estado corrigido inspecionado: GO de revisão para o recorte local das tarefas 1/2, sem achados bloqueantes restantes nos caminhos examinados.** As três causas abaixo foram corrigidas pelo agente principal e rechecadas nesta revisão. A rodada completa final do implementador concluiu **195/195 testes locais verdes**, conforme inspeção de `/tmp/m200-goal-final-check.log` nesta revisão complementar. A primeira suíte integrada (190 testes) havia falhado apenas no teste legado que ainda esperava rejeição de `while`; a expectativa foi corrigida antes da rodada final.
 
-**Contrato completo de `docs/PARITY.md`: permanece incompleto/experimental.** Nem esta revisão, os oráculos C++, nem round trips próprios comprovam aceitação no editor, Ladder oficial ou comportamento do TM200CE40T. Permanecem alocação/reuso, indexação dinâmica, recursos seguintes do plano e ensaios externos. A rejeição explícita de uma construção ainda não implementada é adequada para este marco; não reduz a meta de equivalência.
+**Contrato completo de `docs/PARITY.md`: permanece incompleto e sujeito a validação.** Nem esta revisão, os oráculos C++, nem round trips próprios comprovam aceitação no editor, Ladder oficial ou comportamento do TM200CE40T. Permanecem alocação/reuso, indexação dinâmica, recursos seguintes do plano e ensaios externos. A rejeição explícita de uma construção ainda não implementada é adequada para este marco; não reduz a meta de equivalência.
 
 ## Fontes e método
 
@@ -131,4 +131,4 @@ Dez formas malformadas foram recusadas: INC em MF, MD7999/MW8000, endereço não
 - Relatórios existentes registram 2 casos públicos/2048 scans e 12 casos generativos/3072 scans. Conferi que todos os hashes de implementação registrados em `PUBLIC-CONTROL-FLOW-RESULTS.json` e `CONTROL-FLOW-STRESS-RESULTS.json` correspondiam aos arquivos atuais no momento da revisão.
 - Melhoria não bloqueante de rastreabilidade: o relatório público lista hashes de `m200/*.py`, enquanto o generativo inclui também SDK e runner. Registrar no público os hashes de SDK, runner, fetch e manifesto deixaria os bytes dos oráculos explicitamente vinculados ao resultado, conforme o critério de evidência do projeto.
 
-A leitura de `/tmp/m200-goal-final-check.log` confirmou **195 testes em 67.025s, OK**. Não foi necessário executá-los novamente. Nada nesta onda altera o estado experimental ou fecha as pendências do editor oficial e PLC.
+A leitura de `/tmp/m200-goal-final-check.log` confirmou **195 testes em 67.025s, OK**. Não foi necessário executá-los novamente. Nada nesta onda altera o estado em validação ou fecha as pendências do editor oficial e PLC.

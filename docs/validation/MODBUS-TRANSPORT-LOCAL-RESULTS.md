@@ -39,4 +39,4 @@ Changed implementation/test files: `m200/modbus.py`, `tests/test_modbus.py`, `te
 
 ## Evidence limits
 
-These are local Python client/server and compiler-integration results. They do not establish official editor acceptance, M2xxBasicSIM Modbus behavior, RS485, controller scheduling or physical TM200CE40T interoperability. No port502, GUI, Wine, simulator, external Modbus endpoint or physical PLC was accessed. The primary protocol guide was consulted as documentation. The experimental external `getsockopt` guard remains unapplied and is unrelated to this change.
+These are local Python client/server and compiler-integration results. They do not establish official editor acceptance, M2xxBasicSIM Modbus behavior, RS485, controller scheduling or physical TM200CE40T interoperability. No port502, GUI, Wine, simulator, external Modbus endpoint or physical PLC was accessed. The primary protocol guide was consulted as documentation. The provisional external `getsockopt` guard remains unapplied and is unrelated to this change.

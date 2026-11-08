@@ -1,15 +1,15 @@
 # TM200CE40T completion roadmap
 
-Status: **2026-11-06 — working experimental toolchain; full parity unfinished.**
+Status: **2026-11-06 — working provisional toolchain; full parity unfinished.**
 
-**Current delivery goal:** [Natal da Liberdade release](GOAL.md). The user moved
+**Current delivery goal:** [priority release](GOAL.md). The user moved
 whole-controller parity to a future version; it is not the exit criterion for
 this priority release. The full inventory below remains preserved as future work.
 
 The broader original requirements are preserved in the inactive
 [future backlog](FUTURE-PARITY-BACKLOG.md). They do not extend this goal.
 
-**Execution:** twenty lanes were initially dispatched. The seven Natal packages
+**Execution:** twenty lanes were initially dispatched. The seven priority packages
 were integrated; thirteen lanes were stopped and preserved. Implementation agents
 did not run tests. Three dedicated testers split semantic/runtime/compatibility
 checks, followed by a single combined local regression and the finite native
@@ -18,7 +18,7 @@ and ends after publication; it does not restart the deferred lanes.
 
 ## Current checkpoint
 
-- All seven Natal priority packages are integrated and published. Existing
+- All seven priority packages are integrated and published. Existing
   capabilities beyond the show's minimum needs remain part of the repository;
   the thirteen stopped packages are preserved, without new release obligations.
 - The unchanged movement example fell from 122 rungs/261 IL to **46/103**.
@@ -38,7 +38,7 @@ and ends after publication; it does not restart the deferred lanes.
   cases on VM and SDK and 43 distinct SDK raw-PDU stimuli. Existing public API,
   legacy callback behavior and the tested native emission remain compatible.
 - Final local regression and public evidence are recorded in the
-  [experimental Natal handoff](validation/NATAL-DELIVERY.md). The user requested
+  [provisional delivery handoff](validation/NATAL-DELIVERY.md). The user requested
   pausing the old global goal record after that publication.
 
 ## Delivered and working
@@ -62,19 +62,19 @@ does not complete every mode, lifecycle, configuration or transaction case.
 
 ## Ordered work remaining
 
-### Current Natal release
+### Current priority release
 
 | Step | Work | Disposition |
 |---|---|---|
 | 1 | Integrate G01/G02/G06/G07/G08/G09/G11; retain already implemented extras | Done; no deferred lane restarted |
 | 2 | Local semantics, forward/reverse composition and optimization checks | Recorded; final SDK integration regression is part of the handoff, with pending native oracles explicit |
 | 3 | One finite official editor/simulator campaign over the selected batch | Closed; fourteen editor saves and partial runtime evidence for eleven composed profiles |
-| 4 | Publish source, examples, exact results and supported limits | Final experimental handoff; local execution only, Actions disabled |
+| 4 | Publish source, examples, exact results and supported limits | Final provisional handoff; local execution only, Actions disabled |
 | 5 | Stop this execution wave | Pause the old goal record after publication, as requested |
 
 Physical acceptance remains a later external gate. The thirteen stopped packages
 and unqualified domains outside the admitted show profiles do not block this
-experimental Natal handoff. The inventory below is future work, not an active
+provisional priority handoff. The inventory below is future work, not an active
 queue and not a requirement to finish this goal.
 
 ### Preserved future work
@@ -103,5 +103,5 @@ Passed gates are not repeated without changed inputs or a concrete defect.
 Optimization remains a release priority: preserve algorithmic native code and
 the existing budgets, and fix demonstrated correctness or capacity failures.
 
-The active goal ends with the finite Natal handoff in [GOAL.md](GOAL.md).
+The active goal ends with the finite delivery handoff in [GOAL.md](GOAL.md).
 Physical access and the thirteen stopped packages remain later work.
