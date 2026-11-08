@@ -1,40 +1,60 @@
-# m200-cpp
+<p align="center">
+  <img src="docs/assets/tm200ce40t-illustration.png" width="420" alt="Illustration of the target Schneider Electric Modicon M200 PLC">
+</p>
 
-**Write PLC logic in C++. Inspect the generated instructions. Recover C++ from the real program.**
+<h1 align="center">M200 C++ to Ladder</h1>
 
-An experimental C++ → IL → Ladder/SMBP toolchain for the **Schneider Electric TM200CE40T**. It combines a restricted C++ language, a small PLC SDK, automatic resource allocation, a local instruction executor, and a reverse compiler.
+<p align="center">
+  <strong>An experimental C++ to Ladder compiler for the Schneider Electric Modicon M200 TM200CE40T PLC.</strong><br>
+  Write control logic as code, inspect it in the official editor, and explore how a PLC program works.
+</p>
 
-The intended result is a project opened, checked, and transferred by **EcoStruxure Machine Expert Basic**. The reverse path reads the project's actual instructions and configuration; it does not recover a saved copy of the original source.
+<p align="center">
+  <a href="#quick-start">Quick start</a> ·
+  <a href="#how-it-works">How it works</a> ·
+  <a href="#current-coverage">What works today</a> ·
+  <a href="#contributing-and-supporting-other-plcs">Contribute</a> ·
+  <a href="#documentation">Documentation</a>
+</p>
 
-> **Experimental · partial coverage.** Exact generated projects have run in the official local simulator under Wine: memory/digital I/O, array loops, timer/counter logic, a TON/TP/TOF sequence, numeric diagnostics and early `return;`. The sequence was saved, read back and reopened. One separate diagnostic project's simulator startup crashed and remains under investigation; complete editor and physical TM200CE40T compatibility are unfinished. This independent project has no Schneider Electric certification or endorsement.
+> **Experimental software, specific target.** This project targets the **TM200CE40T**, not every M200 or every Schneider PLC. Some generated projects have been opened and exercised in the official editor and simulator; others and physical-controller behavior still need validation. It is an independent project and is not certified or endorsed by Schneider Electric.
 
-[Quick start](#quick-start) · [Workflow](#workflow) · [Current coverage](#current-coverage) · [Validation](#validation) · [Documentation](#documentation)
-
-The current delivery targets the [Natal da Liberdade release](docs/GOAL.md),
-including RTC/scheduling. Whole-controller parity remains a future-version goal.
+*The image above is an AI-generated illustration, not a wiring reference. For the actual device, see the [official TM200CE40T product page](https://www.se.com/in/en/product/TM200CE40T/controller-modicon-m200-40-io-transistor-source-ethernet/).*
 
 ## Why this project exists
 
-PLC programs should be expressible as readable source code while remaining inspectable in the manufacturer's tools. m200-cpp explores that workflow with explicit scan semantics, typed operations, visible resource costs, and reversible native instructions.
+A **PLC** is a small industrial computer that repeatedly reads inputs, runs a control program, and updates outputs. Many PLCs are programmed in **Ladder**, a visual language made of electrical-style diagrams. Ladder is useful for inspection and maintenance, but some algorithms can be easier to write and review as text.
 
-The final goal is **functional equivalence with the identified official TM200CE40T profile**: every algorithm accepted for that profile should have a supported C++ expression and produce an equivalent project. Today's subset is a development milestone. Missing instructions, tasks, peripherals, or exporter features remain toolchain work; they do not establish a limitation of the PLC. See the [full parity contract](docs/PARITY.md). The [completion roadmap](docs/ROADMAP.md) separates delivered milestones, the current local candidate and the remaining work.
+**M200 C++ to Ladder** explores a bridge between the two. You write a supported subset of C++ using a small PLC library; the tool translates it into controller instructions and can place them in a project that opens in **EcoStruxure Machine Expert Basic**, Schneider Electric's programming software. You can then inspect the Ladder and use the official software for the next steps.
 
-## Quick start
+The tool also has a reverse path: it can read supported project instructions and reconstruct C++ for inspection. It reads the real program, rather than retrieving a copy of the original source hidden in the file.
 
-Requirements: **Python 3.9+**, **Clang with C++17 support**, and `make` for the validation targets. The Python implementation uses only the standard library. The recorded development environment uses macOS and Apple Clang 21; other environments need their own validation.
+This started with a real [Natal da Liberdade lighting project](docs/GOAL.md), where readable algorithms and compact generated Ladder mattered. The longer-term aim is broader functional coverage of the same controller, with a foundation that contributors can study and extend.
 
-```sh
-git clone https://github.com/viniciusczanini/m200-cpp.git
-cd m200-cpp
+## How it works
 
-./m200c compile examples/blink.cpp -o output/blink
-./m200c check examples/blink.cpp --trace examples/trace.json
-./m200c simulate output/blink/program.m200.json --trace examples/trace.json
+```text
+ Your C++ + PLC library                  An existing project for the target PLC
+          │                                               │
+          ▼                                               ▼
+  Read and check the code ──► Generate instructions ──► Build a candidate .smbp
+                                        │                         │
+                                        ▼                         ▼
+                              Inspect / simulate locally   Open in Schneider software
+                                                                  │
+                                                                  ▼
+                                                      Inspect Ladder and validate
 ```
 
-No package installation, Windows installation, or PLC connection is needed for these local commands. Set `M200_CLANG` to select a different Clang executable. `python3 -m m200` is equivalent to `./m200c` when run from the repository root.
+1. **Write a scan.** A function named `scan()` describes one pass of the control logic. The PLC repeats that pass as it runs.
+2. **Compile.** Clang reads the C++ structure; the compiler translates the supported parts into PLC instructions, assigns resources, and checks known constraints.
+3. **Explore locally.** Inspect the instructions and reports, run sample input traces, and compare local execution routes.
+4. **Create a project.** With a suitable `.smbp` template, the exporter produces a candidate project containing supported instructions and Ladder graphics.
+5. **Use the official editor.** Open and validate the generated project in Machine Expert Basic. Transfer to a PLC, when appropriate, is performed through that software.
 
-A minimal nonblocking clock:
+A local check is useful evidence, **not a guarantee of behavior on every editor version, configuration, or physical controller**. The CLI does not automatically transfer programs, update firmware, or switch real outputs.
+
+### What a scan looks like
 
 ```cpp
 #include <plc.hpp>
@@ -44,12 +64,64 @@ plc::Clock blink{500};
 void scan() {
     bool on = blink.update(true);
     plc::output(0, on);
+    plc::output(1, !on);
 }
 ```
 
-`scan()` runs once per PLC cycle. This clock starts off and uses two native timers plus state. Its nominal 500 ms half-period is subject to timer resolution and scan latency; local simulation does not establish physical timing.
+This example alternates two outputs. `scan()` is called repeatedly; the clock keeps its state between scans and does not pause the controller while it waits. The 500 ms value is a **nominal half-period**: actual behavior depends on the PLC's timer resolution and scan timing. See the runnable [blink example](examples/blink.cpp).
 
-**Without `--template`, compilation produces local IL, JSON, audit C++, and reports—not an SMBP project.** To exercise the project exporter, supply an authentic project created for the exact TM200CE40T target:
+This is **restricted C++**, not a general-purpose C++ runtime. The supported language, operations, memory, and device resources are deliberately bounded; unsupported constructs should be reported as errors. A compiler limitation does not imply that the physical PLC itself lacks that capability.
+
+## Target and compatibility
+
+| | Current status |
+|---|---|
+| **Controller target** | Schneider Electric **Modicon Easy M200 TM200CE40T**; 24 built-in digital inputs, 16 transistor outputs, Ethernet. [Product details](https://www.se.com/in/en/product/TM200CE40T/controller-modicon-m200-40-io-transistor-source-ethernet/). |
+| **Project format** | Supported `.smbp` projects for **EcoStruxure Machine Expert Basic**, generated using an authentic project template for this exact target. |
+| **Other controllers** | Not supported or validated yet, including other M200 variants. Sharing a product family or editor does not establish compatibility. |
+| **Local tools** | Python 3.9+ and Clang with C++17 support. The recorded development environment is macOS with Apple Clang; other environments require their own checks. |
+| **Editor and hardware** | Selected artifacts have editor and simulator evidence. Test the exact generated project, editor version, configuration, and hardware before relying on it. |
+
+Do not change a project file's model name to make another controller appear supported. Inputs, outputs, firmware, resource limits, project format, and behavior must be established for each target. See [supporting another PLC](#contributing-and-supporting-other-plcs).
+
+## Quick start
+
+### 1. Get the tools
+
+Install **Python 3.9 or newer** and **Clang with C++17 support**. `make` is needed for the repository's local validation targets. The Python toolchain itself uses the standard library.
+
+```sh
+git clone https://github.com/viniciusczanini/m200-cpp.git
+cd m200-cpp
+
+python3 --version
+clang++ --version
+./m200c --help
+```
+
+Run the commands below from the repository root. Use `M200_CLANG=/path/to/clang++` if you need to select a specific Clang executable. No PLC or Windows installation is needed for local compilation and trace checks.
+
+### 2. Compile and try the example locally
+
+```sh
+# Generate instructions, an audit source file, and reports.
+./m200c compile examples/blink.cpp -o output/blink
+
+# Compare original C++, local PLC instructions, and reconstructed C++ on a trace.
+./m200c check examples/blink.cpp --trace examples/trace.json
+
+# Inspect the local model or run the same trace.
+./m200c inspect output/blink/program.m200.json
+./m200c simulate output/blink/program.m200.json --trace examples/trace.json
+```
+
+The output includes `program.il` (readable instructions), `program.m200.json` (the local model), `program.audit.cpp` (reconstructed C++), a source map, and a resource report. **There is no `.smbp` file unless you provide a compatible template**, as shown next.
+
+`check` executes the supplied C++ as native code on your computer; use trusted source. Its trace comparison covers the reported outputs and shares some modeling assumptions with the local executor. It is not a substitute for official simulation or hardware testing.
+
+### 3. Generate a project for the official editor
+
+Start from an authentic TM200CE40T project created in Machine Expert Basic, with the hardware and settings appropriate to your setup. For a first experiment, this repository includes an [editor-created baseline and provenance](tests/fixtures/official_tm200ce40t_memory.provenance.json):
 
 ```sh
 ./m200c compile examples/blink.cpp \
@@ -57,165 +129,92 @@ void scan() {
   -o output/blink-project
 ```
 
-The included [authentic baseline](tests/fixtures/official_tm200ce40t_memory.provenance.json) was created and reopened in Machine Expert Basic 1.4 build 484 in a Wine-hosted lab. The [exact candidate evidence](docs/validation/OFFICIAL-EDITOR-RESULTS.json) records memory and I/O observations, the environment correction, and a rejected invalid-address control. For your application, use a project with the correct hardware, firmware profile, functional level, and communication settings. `tests/fixtures/synthetic.smbp` is only a parser fixture; another CPU's project cannot become a valid template by changing its model name.
+The new file is `output/blink-project/program.smbp`. Open it in Machine Expert Basic, inspect the Ladder, check the controller configuration and messages, and validate the behavior in the official simulator. Use a project matching your own device and installation as the template for your application; the included baseline is an example, not a replacement for your configuration. The input template is not modified.
 
-Follow the [getting started guide](docs/GETTING_STARTED.md) for artifacts, traces, reverse conversion, and the official-editor workflow.
+Preserve a backup of any existing controller program before working with a real installation. Validate the exact candidate and hardware behavior separately before considering a transfer. The [getting started guide](docs/GETTING_STARTED.md) explains the artifacts, trace format, template requirements, and editor workflow.
 
-## Workflow
+### 4. Read a supported project back as C++
 
-```mermaid
-flowchart LR
-    CPP[Restricted C++ + plc.hpp] --> COMP[Clang AST + lowering]
-    COMP --> IL[Validated IL + allocation]
-    IL --> LOCAL[Local execution + differential checks]
-    IL --> EXPORT[Template-based Ladder / SMBP]
-    TEMPLATE[Authentic target project] --> EXPORT
-    EXPORT --> EDITOR[Official editor validation]
-    EDITOR --> PLC[Transfer through official software]
-    SMBP[Supported SMBP / program JSON] --> REVERSE[Read actual IL + configuration]
-    REVERSE --> AUDIT[Equivalent audit C++]
+```sh
+./m200c decompile output/blink-project/program.smbp -o output/project-audit.cpp
 ```
 
-The editor and PLC steps are validation gates. The CLI does not download programs, update firmware, or operate physical outputs automatically.
+The result is **reconstructed audit C++**, not necessarily your original source: names, formatting, and high-level structure may not be recoverable. For `.smbp` input, the command also writes a configuration sidecar; keep it with the reconstructed source. Unsupported project constructs are rejected instead of being silently presented as understood. See [reverse conversion](docs/GETTING_STARTED.md#6-reverse-the-actual-program).
 
 ## Current coverage
 
-These are **locally implemented subsets**, not declarations of complete official support.
-The seven-package Natal candidate has separate [integration evidence](docs/validation/NATAL-INTEGRATION-PROGRESS.md);
-its final regression and expanded official-editor acceptance remain open.
+These are implemented **subsets** with different levels of evidence, not complete support for every option in the editor.
 
-| Area | Available locally | Important boundary |
+| Area | What you can explore | Where to go next |
 |---|---|---|
-| Boolean logic and I/O | State, sequential assignments, conditions, short-circuit logic, 24 embedded inputs, 16 outputs, word-bit aliases, explicit image providers and BooleanStack | Special I/O modes, immediate access, native restart history and physical behavior remain open; see [Boolean semantics](docs/G01-BOOLEAN.md) |
-| Typed numbers | `i16`, `i32`, `f32`, explicit numeric intrinsics, INC/DEC, comparisons, shared MW/MD/MF memory, constants and flags | Ordinary C++ arithmetic/promotions are restricted; destination/copy APIs preserve indeterminate integer state, while primitive SDK value propagation and broader recovery remain incomplete; see [numeric guide](docs/NUMERIC.md) |
-| Arrays and control flow | Fixed-capacity typed arrays, computed indices, `while`/`for`/`do`, `break`, `continue`, labels, `goto`, early `return;` and END-family IL | Returns commit prior output writes; verified native series END graphs can be imported; Jump export and allocation overhead still apply |
-| Timers, edges, counters | TON/TOF/TP, clocks, properties, conditional/repeated updates, documented retentive/dynamic combinations and native counters | Actual template level, identity/base/preset and mode checks apply; native timing/lifecycle qualification remains separate; see [timers](docs/TIMERS-G07.md) |
-| FIFO/LIFO Registers | Four shared native IDs, sixteen i16 words per instance, input/output words, empty/full, per-call updates and actual reverse | Native storage is separate from MW; current Man21 canonical I/M graphs are scoped, broader lifecycle and call profiles need individual qualification; see [Register guide](docs/REGISTERS.md) |
-| Native sequences | Shared SBR/SC/Drum identities, bits/cams/properties, native configuration/graphics and actual reverse, including SR composition | Endpoint/reset/direction/cam collisions and native lifecycle have explicit pending domains; see [sequence guide](docs/NATIVE-SEQUENCES.md) |
-| RTC and schedules | Calendar/system words, staged date updates, snapshots, absolute counter and schedules with shared-output OR | The S/SW/calendar/schedule route exports; the local RTC_EXEC block still lacks a native binding. Boundary/lifecycle and exact editor observations remain scoped; see [RTC guide](docs/RTC.md) |
-| Modbus | READ/WRITE/WRITE_READ models; FC1/2/3/4/5/6/15/16/23; explicit local transports, dynamic properties, request snapshots, abort and channel ownership | Native graph/profile limits apply. Dynamic buffer/count/object writes conservatively require the full word image; SDK asynchronous transport and physical transactions retain separate gates |
-| Subroutines | Multiple SR0..63, shared stateful resources, local loops/labels/returns, native export and actual reverse | Native nested SR calls are prohibited by the target; expanded layouts still need exact editor acceptance; see [SDK guide](docs/SUBROUTINES.md) |
-| Projects and reverse conversion | Conservative SMBP parsing, IL/Ladder consistency checks, source maps, C++ reconstruction | Arbitrary vendor projects are not supported; unknown active constructs fail explicitly |
+| **Digital I/O and logic** | Inputs and outputs, Boolean state, conditions, edges, and supported scan behavior | [Boolean semantics](docs/G01-BOOLEAN.md) |
+| **Numbers and control flow** | Typed numbers, comparisons, fixed arrays, supported loops, branches, and early return | [Architecture and semantics](docs/ARCHITECTURE.md) · [Numeric guide](docs/NUMERIC.md) |
+| **Timers and counters** | TON, TOF, TP, clocks, multiple timers, and native counter subsets | [Timers](docs/TIMERS-G07.md) · [Counters](docs/capabilities/COUNTERS.md) |
+| **Sequences and subroutines** | Supported FIFO/LIFO, shift, step, drum, and subroutine profiles | [Registers](docs/REGISTERS.md) · [Sequences](docs/NATIVE-SEQUENCES.md) · [Subroutines](docs/SUBROUTINES.md) |
+| **RTC and schedules** | Calendar/system-word operations and supported schedule routes | [RTC and scheduling](docs/RTC.md) |
+| **Modbus** | Local models and selected project-export profiles for READ, WRITE, and WRITE_READ operations | [Modbus guide and limitations](docs/MODBUS.md) |
+| **Project inspection and reverse** | Supported `.smbp`/program-model import and reconstruction from actual instructions | [Format evidence](docs/FORMAT.md) · [Getting started](docs/GETTING_STARTED.md#6-reverse-the-actual-program) |
 
-The source language intentionally uses explicit PLC operations:
-
-```cpp
-#include <plc.hpp>
-
-plc::i16 count = 0;
-
-void scan() {
-    count = plc::add_i16(count, 1);
-    if (count >= 50) { count = 0; }
-    plc::write_word(0, count);
-    plc::output(0, count >= 25);
-}
-```
-
-The [architecture and semantics guide](docs/ARCHITECTURE.md) explains memory aliases, scan order, flags, block behavior, and exporter gates. The [capability matrix](docs/capabilities/README.md) assigns scoped evidence and finite remaining work to every inventory ID: **250 documentary records are not 250 implemented features**.
+Timer modes, communication profiles, special I/O, resource allocation, lifecycle behavior, and project configurations have explicit limits. In particular, a locally modeled Modbus operation does not by itself demonstrate a successful physical communication exchange. See the [capability inventory](docs/capabilities/README.md) and the [architecture guide](docs/ARCHITECTURE.md) for the exact boundaries.
 
 ```sh
-./m200c capabilities          # Inventory summary + implemented library subset
+./m200c capabilities          # Inventory summary and implemented subset
 ./m200c capabilities HW.HSC   # One documented capability
-./m200c capabilities --all    # Full source-backed catalogue
+./m200c capabilities --all    # Full documented catalogue
 ```
 
-Generic [compiler optimization](docs/OPTIMIZATION.md) uses native process images, dead private-store elimination, low-address allocation, repeated-guard fusion, proved private no-op cleanup, and native SHORT/OPEN constants. The unchanged clock example now compiles to **46 rungs/103 IL lines**, down from 122/261; seven used words require extent 181 instead of 4006. Source algorithms and loops are preserved. The exact artifact passed official save/fresh reopen with No error and bounded simulator movement/STOP observations. Ten frozen generic benchmarks enforce code-size and memory ceilings; physical timing remains unverified.
+The catalogue also records research and missing capabilities: an item being listed does **not** mean it is implemented or validated.
 
 ## Validation
 
-The recorded **2026-11-06 validation rounds** contain:
+We distinguish four different kinds of evidence:
 
-| Evidence | Recorded result |
-|---|---:|
-| Historical published Register unit/regression checkpoint | 799 passing tests / 220.444 s / zero skips |
-| First seven-package candidate full regression | 1,007 tests; 123 failures, 4 errors, 1 skip; retained while fixes and contract reviews proceed |
-| Historical combined local gate | 1,017 tests: 1,009 passed, eight explicit pending failures, zero errors/skips; exit2, incomplete |
-| Final SDK integration gate | 1,045 tests: 1,038 passed, seven failed; missing-corpus failure resolved by one affected-method PASS; six native-oracle gaps remain, raw full exit2 |
-| Final composed project batch | 24 cases, 201 positions, seven routes: 1,407 matching observations; 11 project profiles |
-| Earlier baseline unit/regression suite | 417 passing tests |
-| Historical stress and public-program traces | 288,372 base scan frames |
-| Combined state/array, timer/counter and numeric candidates | 276 distinct candidate frames |
-| Three-timer sequence and button/priority scenarios | 4,834 distinct candidate frames |
-| Early-return candidate | 114 distinct candidate frames |
-| Separate exhaustive BCD32 SDK oracle | 100,000,000 valid vectors |
+1. **Local compiler and model tests:** useful for repeatable traces, resource checks, and regression detection.
+2. **Official editor:** whether a particular generated project opens, shows the intended Ladder, checks, saves, and reopens.
+3. **Official simulator:** observed behavior for the particular inputs, outputs, and scenarios exercised.
+4. **Physical PLC:** behavior on the actual hardware, including wiring, timing, communication, and restart behavior.
 
-The BCD vectors are **not scans** and are excluded from the scan total. Repeated runs and comparison stages are also excluded. The [local results](docs/validation/LOCAL-RESULTS.md) and [conversion result manifest](docs/validation/CONVERSION-LOCAL-RESULTS.json) record the exact scope, commands, and hashes. These are historical results tied to the recorded files, not an automatically refreshed build badge or proof of universal equivalence.
-
-The [Natal integration record](docs/validation/NATAL-INTEGRATION-PROGRESS.md)
-keeps later composed tests, focused fixes and the failed combined run separate.
-The [native acceptance checkpoint](docs/validation/NATAL-NATIVE-CHECKPOINT.md)
-records the fourteen-project editor batch, two vendor-discovered fixes,
-actual saved-project readback and bounded simulator observations.
-The [experimental Natal handoff](docs/validation/NATAL-DELIVERY.md) now includes
-some runtime evidence for all eleven composed profiles. The four-profile
-follow-up passed 40 output checks and observed DR/RTC phases; precise timing and
-successful native Modbus exchange remain unqualified.
-The [independent Modbus SDK backend](docs/validation/G11-SDK-ASYNC-RESULTS.md)
-passed the original VM/SDK snapshot/abort cases and 43 distinct SDK raw-PDU
-stimuli across nine function codes. Already implemented extra capabilities are
-retained; the thirteen deferred packages do not block this Natal delivery.
-Prepared [native sequence probes](examples/native_validation/README.md) have
-passed local project/reverse preparation; their twelve native outcome questions
-remain pending until the planned official-simulator observations.
-
-Exact [generated single-write products](docs/validation/MODBUS-SINGLE-GENERATED-PROJECT-RESULTS.md), [generated WRITE_READ_VAR product](docs/validation/MODBUS-WRITE-READ-GENERATED-PROJECT-RESULTS.md) and [generated timer products](docs/validation/TIMER-GENERATED-PROJECT-RESULTS.md) have separate official-editor evidence; the saved timer/watch artifact has the runtime observations recorded there. The [integrated FIFO/LIFO checkpoint](docs/validation/REGISTER-INTEGRATION-RESULTS.md) records799 local tests, exact dual output saved/freshly reopened with No error and separate repeated-call FIFO runtime observations; the dual runtime and broader contexts remain pending. Earlier [native diagnostics](docs/validation/REGISTER-NATIVE-OBSERVATIONS.md), [reset/held-request observations](docs/validation/REGISTER-COLLISION-OBSERVATIONS.md) and [self-status trials](docs/validation/REGISTER-SELF-STATUS-OBSERVATIONS.md) retain their distinct hand-built scope and refresh limits.
-
-The [subroutine compiler checkpoint](docs/validation/SUBROUTINE-COMPILER-RESULTS.md) records the preceding 684-test result and a genuine [C++→SMBP example](examples/editor_validation/cpp_subroutine_implicit.cpp) accepted, saved and freshly reopened as Ladder with No error, then run through input 0→1→0 with Q0010→1110→0010 in the official local simulator. C++, SDK, VM, reverse conversion and the one-leaf native export profile are implemented; broader layouts remain compiler work. The [earlier standalone foundation](docs/validation/SUBROUTINE-FOUNDATION-RESULTS.md) remains a historical 628-test checkpoint.
-
-The [native M-contact observations](docs/validation/NATIVE-M-CONTACT-BINDING-OBSERVATIONS.md) qualify actual editor conversion/save/reopen for an M20-controlled SR0 call and an M20/M21/M22-controlled FIFO block. These hand-built diagnostics supply binding evidence for the subroutine and Register exporters; their results remain separate from the later generated-program observations.
-
-Three [genuine bare Execute/Abort Modbus products](docs/validation/MODBUS-BARE-ABORT-GENERATED-PROJECT-RESULTS.md) also passed official save and fresh reopen with No error. Their public C++ examples cover READ discrete inputs, WRITE coils with aliased status stores, and asymmetric WRITE_READ buffers gated by a 10 ms timer. A separate bounded WR simulator launch remained in STOP; native communication transactions and physical interoperability remain unverified.
-
-The [standalone Register graph foundation](docs/validation/REGISTER-GRAPH-FOUNDATION-RESULTS.md) records the earlier 587-test checkpoint and exact FIFO/LIFO graphical fixtures. The later799-test checkpoint integrates whole-project compilation/execution within its documented subset.
-
-The [bare Execute/Abort checkpoint](docs/validation/MODBUS-BARE-ABORT-PROFILE-RESULTS.md) records the earlier 602-test suite and three exact six-line/three-entity native fixtures. Complete ordered M status quartets still prefer the full-pin form; partial, reordered, labelled or interleaved ordinary status rungs remain separate and retain their order. The [native binding observations](docs/validation/MODBUS-BARE-ABORT-NATIVE-OBSERVATIONS.md) record official conversion/save/fresh reopen; generated bare-product editor acceptance and actual communication are separate validation stages.
-
-The [earlier native full-pin checkpoint](docs/validation/MODBUS-FULL-PIN-PROFILE-RESULTS.md) records 568 local tests, including connected Execute/Abort and four ordered status coils in the observed profiles. Exact original IL and graphics are checked before normalization; source origins and human comments are preserved. All three [genuine full-pin CLI products](docs/validation/MODBUS-FULL-PIN-GENERATED-PROJECT-RESULTS.md) subsequently passed official-editor save and fresh reopen; communication execution remains unverified.
-
-The [earlier WRITE_READ_VAR checkpoint](docs/validation/MODBUS-WRITE-READ-PROFILE-RESULTS.md) records544 local tests and the static asymmetric Man21/SL1 binding. It included18 standalone Register configuration tests, one depending on optional local editor saves; those historical codec results precede the integrated799-test checkpoint.
-
-The [earlier single-write Modbus checkpoint](docs/validation/MODBUS-SINGLE-PROFILE-RESULTS.md) records 516 tests and the observed Man21/SL1 FC5/6 profile. The [earlier MastTask profile checkpoint](docs/validation/MAST-TASK-PROFILE-RESULTS.md) records 506 tests and prevents scheduling settings from being silently discarded; periodic scheduling remains unfinished. The [earlier timer/bit integration](docs/validation/TIMER-BIT-INTEGRATION-RESULTS.md) records 496 tests, scoped timer-option admission and bit-object Modbus XML bindings. The [earlier timer-property stress record](docs/validation/TIMER-PROPERTY-10MS-RESULTS.md) records 471 tests and repairs actual 10 ms XML checks; its 8,192 seeded frame evaluations repeat the historical workload. The [inactive pulse-alias integration record](docs/validation/INACTIVE-PULSE-ALIAS-RESULTS.md) records 469 tests and preservation of two inactive descriptor forms; active axes and timer-option gates remain unchanged. The [earlier END/timer record](docs/validation/NATIVE-END-TIMER-10MS-RESULTS.md) preserves the 462-test integration and exact fixtures. The [earlier scan-exit/Modbus record](docs/validation/SCAN-EXIT-INTEGRATION-RESULTS.md) preserves the 441-test checkpoint. The [earlier regression manifest](docs/validation/OFFICIAL-EDITOR-LOCAL-RESULTS.json) records the authentic-profile and memory-only constant fixes. The [combined-program manifest](docs/validation/COMPLEX-LOCAL-RESULTS.json) includes independent expected values and six exact candidates; their official execution is tracked separately. Follow the [complex test walkthrough](examples/editor_validation/README.md) and [three-timer sequence](examples/editor_validation/SEQUENCE_TIMERS.md) to reproduce them locally; [the sequence manifest](docs/validation/SEQUENCE-TIMERS-LOCAL-RESULTS.json) records its separate timing and button traces.
-
-`check` compares the 16-output traces of native original C++, emitted IL, and reconstructed C++ for the supplied inputs and elapsed times. Deeper tests also inspect memory, flags, aliases, and independent oracles. The implementations share parts of the local model, so agreement does not replace official simulation or hardware measurements. `certify` deliberately refuses to claim certification.
-
-Run validation **locally**:
+One level does not automatically prove the next. The [Natal experimental delivery](docs/validation/NATAL-DELIVERY.md) and [native editor checkpoint](docs/validation/NATAL-NATIVE-CHECKPOINT.md) document the selected projects and their limits. Historical local regression results include unresolved failures; consult the linked evidence rather than treating a historical count as a current passing build. The [validation records](docs/validation/) contain the detailed observations and reproducible artifacts.
 
 ```sh
-make public-indexed-fetch # Prepare hash-pinned public fixtures used by timer stress
-make check           # Unit and regression tests
-make examples        # Compile and check the bundled examples
-make optimization-stress # Fixed generic codegen budgets and forward/reverse traces
-make stress          # Local deterministic stress suites
+# Run locally; see the getting-started guide for fixture prerequisites.
+make check
+make examples
+make optimization-stress
 ```
 
-The timer-property regression requires the hash-pinned indexed public fixture;
-prepare its corpus explicitly before `make check`. Tests never download missing
-inputs automatically. Other public-project tests use `make public-fetch` then
-`make public-check`; `make public-flow-fetch` / `make public-flow-check` cover
-the additional control-flow corpus. Downloads are not implicit in check targets.
+Some tests need explicit, hash-pinned public fixtures before running; they are not downloaded automatically. See [local development checks](docs/GETTING_STARTED.md#local-development-checks). **No remote CI is used; keep GitHub Actions disabled.**
 
-**No remote CI is used. GitHub Actions must remain disabled for this repository.** GitHub stores the versioned source; validation runs on the developer's machine.
+## Contributing and supporting other PLCs
+
+Contributions are welcome, whether you want to improve the existing target, expand its supported subset, add examples, or investigate another PLC. Please start by describing the exact model, editor and firmware versions, the behavior you want, and the evidence available. Small, reproducible examples and clear expected results are especially useful.
+
+For another controller, a practical contribution would include:
+
+1. **Document the target:** official model and manuals, I/O and memory limits, editor and firmware versions, project format, and required configuration.
+2. **Establish semantics:** scan order, initialization, timers, counters, communications, and any differences from the existing model. Similar-looking instructions may behave differently.
+3. **Implement explicit target support:** validate resource allocation and project read/write against that target's actual format and official examples; reject unknown forms rather than guessing.
+4. **Test in layers:** add local cases and round trips, then record separate official-editor, simulator, and hardware observations for exact artifacts. Preserve failures and limitations as well as successes.
+
+The current codebase is a starting point for this work, **not a promise that a new target can be enabled by changing a configuration string**. Relevant starting points:
+
+| Part | Location |
+|---|---|
+| C++ frontend and SDK | [`m200/frontend.py`](m200/frontend.py) · [`sdk/`](sdk/) |
+| Translation, allocation, and local execution | [`m200/lower.py`](m200/lower.py) · [`m200/allocation.py`](m200/allocation.py) · [`m200/il.py`](m200/il.py) |
+| Ladder and project format | [`m200/ladder_lowering.py`](m200/ladder_lowering.py) · [`m200/project.py`](m200/project.py) |
+| Reverse conversion | [`m200/reverse.py`](m200/reverse.py) |
+| Examples and tests | [`examples/`](examples/) · [`tests/`](tests/) |
+| Scope, design, and open work | [Architecture](docs/ARCHITECTURE.md) · [Roadmap](docs/ROADMAP.md) · [Full parity goal](docs/PARITY.md) |
+
+Run checks locally, explain what was tested, and distinguish observed results from assumptions. This repository currently has no `LICENSE` file; contact the maintainer about reuse terms until one is published.
 
 ## Documentation
 
-| Guide | Contents |
-|---|---|
-| [Getting started](docs/GETTING_STARTED.md) | Setup, CLI commands, traces, artifacts, reverse conversion, editor handoff |
-| [Compiler optimization](docs/OPTIMIZATION.md) | Same-source size comparison, I/O semantics, allocation and validation |
-| [Architecture and semantics](docs/ARCHITECTURE.md) | Compiler stages, supported language, resource allocation, execution rules, current gates |
-| [Natal goal and roadmap](docs/GOAL.md) / [roadmap](docs/ROADMAP.md) | Current finite delivery and already implemented extras |
-| [Future parity contract](docs/PARITY.md) | Preserved inactive requirements outside the Natal goal |
-| [Completion plan](docs/superpowers/plans/2026-11-06-compiler-finish.md) | Optimization-first execution order, finite release gates and physical acceptance |
-| [Capability inventory](docs/capabilities/README.md) | Implemented coverage, missing families, source conflicts |
-| [SMBP format evidence](docs/FORMAT.md) | Observed serialization, provenance, and unsupported variants |
-| [Subroutine SDK](docs/SUBROUTINES.md) | Descriptor API, shared scan semantics, native export profile and remaining gates |
-| [Modbus](docs/MODBUS.md) | APIs, configuration, status/error semantics, protocol versus exporter coverage |
-| [Early return and END](docs/capabilities/SCAN-EXIT.md) / [Native graph import](docs/capabilities/NATIVE-END-GRAPH-IMPORT.md) | Scan-exit semantics, output commit and verified graph boundaries |
-| [Timer audit](docs/capabilities/TIMER-PARITY-AUDIT.md) / [Modbus audit](docs/capabilities/MODBUS-PARITY-AUDIT.md) | Documented capabilities, implemented domains and precise remaining tests |
-| [Active task queue](TASK_QUEUE.md) | Work lanes, prerequisites and next evidence |
-| [Local validation record](docs/validation/LOCAL-RESULTS.md) | Dated test history and reproducible result manifests |
-| [Official editor evidence](docs/validation/OFFICIAL-EDITOR-RESULTS.json) | Exact candidates, observed results, screenshots, and unresolved failures |
-| [Windows / official validation plan](docs/validation/WINDOWS.md) | Editor, simulator, and physical-controller acceptance steps |
+- **New here?** [Getting started](docs/GETTING_STARTED.md) explains installation, commands, examples, and the official-editor handoff.
+- **Want the internals?** [Architecture and semantics](docs/ARCHITECTURE.md), [project format](docs/FORMAT.md), and [optimization](docs/OPTIMIZATION.md) describe the compiler and its constraints.
+- **Looking for a feature?** Browse the [capability inventory](docs/capabilities/README.md), [timers](docs/TIMERS-G07.md), [RTC](docs/RTC.md), and [Modbus](docs/MODBUS.md).
+- **Want the evidence?** Start with the [experimental delivery](docs/validation/NATAL-DELIVERY.md), [official editor checkpoint](docs/validation/NATAL-NATIVE-CHECKPOINT.md), and [local validation records](docs/validation/LOCAL-RESULTS.md).
+- **Planning future work?** See the [current goal](docs/GOAL.md), [roadmap](docs/ROADMAP.md), and [parity contract](docs/PARITY.md).
 
-The entry guides are in English. Much of the detailed research and historical validation record is currently in Portuguese.
+Schneider Electric, Modicon, and EcoStruxure are names of their respective owners. This independent project is not affiliated with or endorsed by them.
