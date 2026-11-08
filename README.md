@@ -5,7 +5,7 @@
 <h1 align="center">M200 C++ to Ladder</h1>
 
 <p align="center">
-  <strong>An experimental C++ to Ladder compiler for the Schneider Electric Modicon M200 TM200CE40T PLC.</strong><br>
+  <strong>A C++ to Ladder compiler for the Schneider Electric Modicon M200 TM200CE40T PLC.</strong><br>
   Write control logic as code, inspect it in the official editor, and explore how a PLC program works.
 </p>
 
@@ -17,7 +17,7 @@
   <a href="#documentation">Documentation</a>
 </p>
 
-> **Experimental software, specific target.** This project targets the **TM200CE40T**, not every M200 or every Schneider PLC. Some generated projects have been opened and exercised in the official editor and simulator; others and physical-controller behavior still need validation. It is an independent project and is not certified or endorsed by Schneider Electric.
+> **Built for the TM200CE40T.** Write PLC logic in C++, generate a Ladder project, and inspect it in Schneider Electric’s official software. Selected generated projects have been opened and exercised in the official editor and simulator. Other models, project configurations, and physical-controller behavior require separate validation. This independent project is not certified or endorsed by Schneider Electric.
 
 *The image above is an AI-generated illustration, not a wiring reference. For the actual device, see the [official TM200CE40T product page](https://www.se.com/in/en/product/TM200CE40T/controller-modicon-m200-40-io-transistor-source-ethernet/).*
 
@@ -174,7 +174,7 @@ We distinguish four different kinds of evidence:
 3. **Official simulator:** observed behavior for the particular inputs, outputs, and scenarios exercised.
 4. **Physical PLC:** behavior on the actual hardware, including wiring, timing, communication, and restart behavior.
 
-One level does not automatically prove the next. The [Natal experimental delivery](docs/validation/NATAL-DELIVERY.md) and [native editor checkpoint](docs/validation/NATAL-NATIVE-CHECKPOINT.md) document the selected projects and their limits. Historical local regression results include unresolved failures; consult the linked evidence rather than treating a historical count as a current passing build. The [validation records](docs/validation/) contain the detailed observations and reproducible artifacts.
+One level does not automatically prove the next. The [Natal project delivery](docs/validation/NATAL-DELIVERY.md) and [native editor checkpoint](docs/validation/NATAL-NATIVE-CHECKPOINT.md) document the selected projects and their limits. Historical local regression results include unresolved failures; consult the linked evidence rather than treating a historical count as a current passing build. The [validation records](docs/validation/) contain the detailed observations and reproducible artifacts.
 
 ```sh
 # Run locally; see the getting-started guide for fixture prerequisites.
@@ -214,7 +214,7 @@ Run checks locally, explain what was tested, and distinguish observed results fr
 - **New here?** [Getting started](docs/GETTING_STARTED.md) explains installation, commands, examples, and the official-editor handoff.
 - **Want the internals?** [Architecture and semantics](docs/ARCHITECTURE.md), [project format](docs/FORMAT.md), and [optimization](docs/OPTIMIZATION.md) describe the compiler and its constraints.
 - **Looking for a feature?** Browse the [capability inventory](docs/capabilities/README.md), [timers](docs/TIMERS-G07.md), [RTC](docs/RTC.md), and [Modbus](docs/MODBUS.md).
-- **Want the evidence?** Start with the [experimental delivery](docs/validation/NATAL-DELIVERY.md), [official editor checkpoint](docs/validation/NATAL-NATIVE-CHECKPOINT.md), and [local validation records](docs/validation/LOCAL-RESULTS.md).
+- **Want the evidence?** Start with the [project delivery](docs/validation/NATAL-DELIVERY.md), [official editor checkpoint](docs/validation/NATAL-NATIVE-CHECKPOINT.md), and [local validation records](docs/validation/LOCAL-RESULTS.md).
 - **Planning future work?** See the [current goal](docs/GOAL.md), [roadmap](docs/ROADMAP.md), and [parity contract](docs/PARITY.md).
 
 Schneider Electric, Modicon, and EcoStruxure are names of their respective owners. This independent project is not affiliated with or endorsed by them.
